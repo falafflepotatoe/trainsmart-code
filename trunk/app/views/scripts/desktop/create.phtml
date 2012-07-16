@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title><?php echo $this->translation['Application Name'];?></title>
+<?php
+require_once('views/helpers/ScriptContainer.php');
+print ScriptContainer::$instance->renderCSSHead();
+print ScriptContainer::$instance->renderJSHead();
+?>
+
+</head>
+<body class="yui-skin-sam">
+
+<div id="pageHolder">
+
+  <div id="header"><?php require_once('views/scripts/header.phtml');?></div>
+  <div id="content">
+  	
+  <?php if ($this->error_message == "") {  ?>
+  
+  	<?php echo $this->error_message; ?>
+  	
+		If this site has been configured to generate the application on a regular interval, then you do not need to perform this action. <br/><br/>
+		You have requested that the application be packaged now.<br/><br/>
+		The database and offline application have been packaged into a zip file. <br/><br/>
+		Please choose Download Application from the menu to obtain the zip file, or click <a href="download">here</a>.
+	
+	<?php } else { ?>
+	
+		<?php echo $this->error_message; ?>
+	
+	<?php } ?> 
+  </div>
+  <div id="footer"><?php require_once('views/scripts/footer.phtml');?></div>
+
+
+</div>	
+</body>
+</html>

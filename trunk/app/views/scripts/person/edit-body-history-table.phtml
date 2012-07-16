@@ -1,0 +1,22 @@
+<div class="fieldIndentNoMargin"><?php tp('Change History');?></div>
+    <div id="historyinfo"  class="itechTable"></div>
+    
+    <script type="text/javascript">
+    <!--//--><![CDATA[//><!--
+ //   YAHOO.util.Event.onDOMReady(function() {
+    var historyInfoData = [
+        ];
+    
+    
+    var historyColumnDefs = [
+        {key:"timestamp_updated", label: "<?php tp('Date');?>", sortable:false, resizeable:true},
+        {key:"translated_keys", label: "<?php tp('Change');?>", sortable:false, resizeable:true},
+        {key:"translated_values", label: "<?php tp('Previous entry');?>", sortable:false, resizeable:true}
+    ];
+    
+      var haction = '<?php echo $this->base_url;?>/person/history/id/<?php echo $this->person['id'];?>/outputType/json';
+      makeJSONDataTable("historyinfo", null, haction, historyColumnDefs);
+    //  YAHOO.util.Event.addListener("submitPerson", "click", function(){YAHOO.util.Dom.get('historyinfo').initializeTable();return true;});
+ //   });
+    //--><!]]> 
+    </script>

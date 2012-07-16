@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title><?php echo $this->translation['Application Name'];?> | <?php tp('Evaluation Data Entry');?></title>
+<?php
+require_once('views/helpers/ScriptContainer.php');
+print ScriptContainer::$instance->renderCSSHead();
+print ScriptContainer::$instance->renderJSHead();
+
+function renderLikert($qid, $qtext, $idx) {
+	echo "<div class='qtext'>".$qtext."</div><br/>";
+	echo "<div class='likert'><input type='radio' value='1' name='value_".$qid."' /><label>1</label>";
+  echo "<input type='radio' value='2' name='value_".$qid."' /><label>2</label>";
+  echo "<input type='radio' value='3' name='value_".$qid."' /><label>3</label>";
+  echo "<input type='radio' value='4' name='value_".$qid."' /><label>4</label>";
+  echo "<input type='radio' value='5' name='value_".$qid."' /><label>5</label></div>";
+}
+
+function renderText($qid, $qtext, $idx) {
+  echo "<div class='qtext'>".$qtext."</div><br/>";
+  echo "<div class='likert'><textarea cols='80' rows='5' name='value_".$qid."'></textarea></div>";
+}
+
+?>
+
+</head>
+<body class="yui-skin-sam">
+<div id="pageHolder">
+  <div id="header"><?php require_once('views/scripts/header.phtml');?></div>
+  <div id="content">
+
+  <h1><?php tp('Evaluation Data Entry');?></h1>
+  <form name="evaluationForm" id="evaluationForm" method="post" action="">
+
+	<h2><?php echo $this->title;?> - <?php echo $this->course_name;?></h2><br/><br/>
+	<ol>
+	<?php foreach($this->qid as $i=>$qid) {?>
+	<li><label class="qnum"><?php echo $i + 1;?></label><?php ( $this->qtype[$i] == 'Text'? renderText($qid, $this->qtext[$i], $i) :renderLikert($qid, $this->qtext[$i], $i));?></li>
+	<?php } ?>
+	</ol>
+	<br/><br/>
+    <input type="submit" class="submitNoArrow" name="go" value="<?php tp('Save and Exit');?>" />
+    <input type="submit" class="submitNoArrow" name="continue" value="<?php tp('Save and Continue');?>" />
+	<br/><br/>
+	</form>  
+  </div>
+  <div id="footer"><?php require_once('views/scripts/footer.phtml');?></div>
+</div>
+
+</body>
+</html>
