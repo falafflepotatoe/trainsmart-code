@@ -1,0 +1,78 @@
+<script language="javascript">
+function setOrgAccessStatus() {
+		var edCourseRB = YAHOO.util.Dom.get("edit_course");
+				var orgFields = YAHOO.util.Dom.get("orgs").getElementsByTagName('input');
+				for(var i = 0; i < orgFields.length; i++) {
+					var isDisabled = false;
+					if (edCourseRB.checked == false) isDisabled = true;
+					orgFields[i].disabled = isDisabled;
+				}
+		var allOrgsRB = YAHOO.util.Dom.get("training_organizer_option_all");
+		if ( allOrgsRB.checked &&  edCourseRB.checked ) {
+				for(var i = 0; i < orgFields.length; i++) {
+					orgFields[i].checked = true;
+					orgFields[i].disabled = true;
+				}
+
+				allOrgsRB.disabled = false;
+		} else if ( edCourseRB.checked ) {
+				for(var i = 0; i < orgFields.length; i++) {
+					orgFields[i].disabled = false;
+				}
+		}
+}
+YAHOO.util.Event.onDOMReady(setOrgAccessStatus);
+
+</script>
+
+<form action="" id="userForm" method="POST">
+	  <div class="fieldLabel" id="first_name_lbl"><span class="required">*</span><?php echo $this->translation['First Name'];?></div>
+	  <div class="fieldInput"><input type="text" name="first_name" size="32" maxlength="32" value="<?php echo $this->user['first_name'];?>"/></div>
+	  <div class="fieldLabel" id="last_name_lbl"><span class="required">*</span><?php echo $this->translation['Last Name'];?></div>
+	  <div class="fieldInput"><input type="text" name="last_name" size="32" maxlength="32" value="<?php echo $this->user['last_name'];?>"/></div>
+	  <div class="fieldLabel"  id="username_lbl"><span class="required">*</span><?php tp('Login');?></div>
+	  <div class="fieldInput"><input type="text" name="username" size="32" maxlength="32" value="<?php echo $this->user['username'];?>"/></div>
+	  <div class="fieldLabel"  id="password_lbl"><span class="required">*</span><?php tp('Password');?></div>
+	  <div class="fieldInput"><input type="text" name="password" size="32" maxlength="32" value="<?php echo $this->user['password'];?>"/></div>
+ 	  <div class="fieldLabel"  id="email_lbl"><span class="required">*</span><?php tp('E-mail');?></div>
+	  <div class="fieldInput"><input type="text" name="email" size="32" maxlength="256" value="<?php echo $this->user['email'];?>"/></div>
+ 	  <div class="clear"></div>
+ 	  <fieldset ><legend><?php tp('Access Level');?></legend>
+      <div class="fieldLabel"><?php tp('Trainings');?></div>
+          <div class="fieldInput">
+    		<div class="float50"><label for="edit_course"><input type="radio" id="edit_course" name="edit_course" value="edit_course" CHECKED onchange="setOrgAccessStatus();"><?php tp('Add/Edit/Delete');?></input></label></div>
+    		<label for="view_course"><input type="radio" id="view_course" name="edit_course" value="view_course"  onchange="setOrgAccessStatus();"></input><?php tp('View only');?></label>
+    	</div>
+      <div class="fieldLabel"><?php tp('People');?></div>
+          <div class="fieldInput">
+    		<div class="float50"><label for="edit_people"><input type="radio" id="edit_people" name="edit_people" value="edit_people" CHECKED><?php tp('Add/Edit/Delete');?></input></label></div>
+    		<label for="view_people"><input type="radio" id="view_people" name="edit_people" value="view_people"></input><?php tp('View only');?></label>
+    	</div>
+
+      <div class="fieldLabel"><?php tp('Reports');?></div><div class="fieldInput"><div class="float50"><input type="checkbox" id="view_create_reports" name="view_create_reports"  CHECKED /><label for="view_create_reports"><?php tp('View/create reports');?></label></div></div>
+      <div><div class="fieldLabel"><?php tp('Admin');?></div><div class="fieldInput"><div class="float50"><input type="checkbox" id="edit_country_options" name="edit_country_options" /><label for="edit_country_options"><?php tp('Edit country options');?></label></div><input type="checkbox" id="add_edit_users" name="add_edit_users" /><label for="add_edit_users"><?php tp('Add/Edit users');?></label></div></div>
+      <div><div class="fieldLabel"><?php tp('Approval');?></div><div class="fieldInput"><div class="float50"><input type="checkbox" id="approve_trainings" name="approve_trainings" /><label for="approve_trainings"><?php tp('Approve trainings');?></label></div></div></div>
+      <div><div class="fieldLabel"><?php tp('Files');?></div><div class="fieldInput"><div class="float50"><input type="checkbox" id="admin_files" name="admin_files" <?php if ( array_search('admin_files',$this->user['acls']) !== false ) echo 'CHECKED'; ?>/><label for="admin_files"><?php tp('Upload and delete');?></label></div></div></div>
+
+      </fieldset>
+ 	  <fieldset id="orgs" ><legend><?php tp('Organizer access');?></legend>
+						<div><div class="fieldLabel"></div><div class="fieldInput"><div class="float50"><input type="checkbox" name="training_organizer_option_all" id="training_organizer_option_all" value="training_organizer_option_all" CHECKED onchange="setOrgAccessStatus();" /><label for="training_organizer_all"><?php tp('All Training Organizers');?></label></div></div>
+						 <?php
+							foreach( $this->training_organizer as $org ) {
+								echo '<div><div class="fieldLabel"></div><div class="fieldInput"><div class="float50"><input type="checkbox" name="training_organizer_option_id[]" id="training_organizer_option_'.$org['id'].'" value="'.$org['id'].'" '.(@$org['user_id']? 'CHECKED':'').' '.($org['id'] == 999? 'onchange="setOrgAccessStatus();"':'').' /><label for="training_organizer_'.$org['id'].'">'.$org['training_organizer_phrase'].'</label></div></div>';
+							}
+						?>
+
+ 	  </fieldset>
+		<div class="fieldLabel" for="spacer"></div>
+		<div class="fieldInput"><input type="checkbox" id="send_email" name="send_email"  CHECKED /><label for="send_email"><?php tp('Send email with login information');?></label></div>
+    	<div class="fieldLabel" for="spacer"></div>
+    	<input type="submit" value="Next User" title="save and continue" class="submitArrow"/>
+    	<div style="float:right;">&nbsp;</div>
+    	<button type="button" id="Finished" title="save this record" class="submitNoArrow" /><?php tp('Finished');?></button>
+    	<div class="clear"></div>
+
+ 	</form>
+<script type="text/javascript">
+		addAjaxSubmit('Finished','userForm','<?php echo $this->base_url;?>/user/add/outputType/json');
+</script>

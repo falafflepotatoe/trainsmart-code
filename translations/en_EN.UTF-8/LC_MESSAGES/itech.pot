@@ -1,0 +1,2435 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Trainsmart\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-09-20 11:02-0800\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Todd Wallar <todd@fuseiq.com>\n"
+"Language-Team: Fuse IQ <todd@fuseiq.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: English\n"
+"X-Poedit-Country: UNITED STATES\n"
+"X-Poedit-SourceCharset: iso-8859-1\n"
+"X-Poedit-KeywordsList: t;tp\n"
+"X-Poedit-Basepath: /htdocs/itech/app\n"
+"X-Poedit-SearchPath-0: controllers\n"
+"X-Poedit-SearchPath-1: views\n"
+
+#: controllers/AdminController.php:159
+#: controllers/AdminController.php:453
+#: controllers/AdminController.php:709
+#: controllers/AdminController.php:809
+msgid "Your settings have been updated."
+msgstr "Your settings have been updated."
+
+#: controllers/CalendarController.php:92
+msgid "No future trainings found."
+msgstr ""
+
+#: controllers/EditTableController.php:146
+msgid "A record already exists with this value."
+msgstr ""
+
+#: controllers/EvaluationController.php:83
+msgid "The evaluation could not be loaded."
+msgstr ""
+
+#: controllers/EvaluationController.php:99
+#: controllers/EvaluationController.php:170
+#: controllers/EvaluationController.php:180
+msgid "The evaluation could not be saved."
+msgstr ""
+
+#: controllers/EvaluationController.php:157
+msgid "Title"
+msgstr ""
+
+#: controllers/EvaluationController.php:160
+msgid "You must choose a question type for each question."
+msgstr ""
+
+#: controllers/EvaluationController.php:164
+msgid "You must enter question text for each question."
+msgstr ""
+
+#: controllers/EvaluationController.php:177
+msgid "The new evaluation was created."
+msgstr ""
+
+#: controllers/EvaluationController.php:225
+#: controllers/PersonController.php:813
+#, fuzzy
+msgid "The trainings have been assigned."
+msgstr "Your settings have been updated."
+
+#: controllers/EvaluationController.php:260
+msgid "The evaluation has been assigned."
+msgstr ""
+
+#: controllers/ExternalController.php:46
+#: controllers/TrainingController.php:175
+msgid "Training start"
+msgstr ""
+
+#: controllers/ExternalController.php:49
+#: controllers/PersonController.php:204
+msgid "The person could not be saved."
+msgstr ""
+
+#: controllers/ExternalController.php:65
+msgid "The external course could not be saved."
+msgstr ""
+
+#: controllers/FacilityController.php:96
+msgid "That name already exists."
+msgstr ""
+
+#: controllers/FacilityController.php:100
+msgid "Facility type"
+msgstr ""
+
+#: controllers/FacilityController.php:105
+#: controllers/TrainingController.php:971
+msgid "City is required."
+msgstr ""
+
+#: controllers/FacilityController.php:113
+#: controllers/PersonController.php:199
+#: controllers/TrainingController.php:978
+msgid "That city does not appear to be located in the chosen region. If you want to create a new city, check the new city box."
+msgstr ""
+
+#: controllers/FacilityController.php:118
+msgid "The facility could not be saved."
+msgstr ""
+
+#: controllers/FacilityController.php:123
+#: controllers/PersonController.php:210
+#: controllers/TrainingController.php:986
+msgid "Could not save that city."
+msgstr ""
+
+#: controllers/FacilityController.php:143
+msgid "The facility was saved."
+msgstr ""
+
+#: controllers/FacilityController.php:146
+msgid "ERROR: The facility could not be saved."
+msgstr ""
+
+#: controllers/FacilityController.php:249
+msgid "That facility was deleted."
+msgstr ""
+
+#: controllers/FacilityController.php:251
+msgid "That facility could not be found."
+msgstr ""
+
+#: controllers/FacilityController.php:253
+msgid "That facility is in use and could not be deleted."
+msgstr ""
+
+#: controllers/FacilityController.php:277
+msgid "That location was deleted."
+msgstr ""
+
+#: controllers/FacilityController.php:279
+msgid "That location could not be found."
+msgstr ""
+
+#: controllers/FacilityController.php:281
+msgid "That location is in use and could not be deleted."
+msgstr ""
+
+#: controllers/IndexController.php:33
+msgid "Course Name"
+msgstr ""
+
+#: controllers/IndexController.php:33
+msgid "Start Date"
+msgstr ""
+
+#: controllers/IndexController.php:33
+#: controllers/ReportsController.php:3115
+msgid "Training Center"
+msgstr ""
+
+#: controllers/IndexController.php:33
+msgid "Created By"
+msgstr ""
+
+#: controllers/IndexController.php:75
+msgid "Message"
+msgstr ""
+
+#: controllers/ITechController.php:282
+msgid "You do not have access rights to the requested action."
+msgstr ""
+
+#: controllers/PersonController.php:59
+msgid "That person was deleted."
+msgstr ""
+
+#: controllers/PersonController.php:61
+msgid "That person could not be found."
+msgstr ""
+
+#: controllers/PersonController.php:63
+msgid "That person is an active participant or trainer and could not be deleted."
+msgstr ""
+
+#: controllers/PersonController.php:137
+msgid "The person was saved. Refreshing history..."
+msgstr ""
+
+#: controllers/PersonController.php:147
+#: controllers/ReportsController.php:62
+msgid "Gender"
+msgstr ""
+
+#: controllers/PersonController.php:148
+msgid "Professional qualification"
+msgstr ""
+
+#: controllers/PersonController.php:155
+msgid "Birthdate"
+msgstr ""
+
+#: controllers/PersonController.php:159
+msgid "Trainer type"
+msgstr ""
+
+#: controllers/PersonController.php:161
+msgid "Trainer affiliation"
+msgstr ""
+
+#: controllers/PersonController.php:164
+msgid "Trainer skill"
+msgstr ""
+
+#: controllers/PersonController.php:169
+#: controllers/TrainingController.php:709
+#: controllers/TrainingController.php:711
+#: controllers/TrainingController.php:713
+#: controllers/TrainingController.php:1213
+msgid "Facility"
+msgstr ""
+
+#: controllers/PersonController.php:183
+msgid "That facility name could not be found."
+msgstr ""
+
+#: controllers/PersonController.php:246
+msgid "The person was saved. Refreshing change history..."
+msgstr ""
+
+#: controllers/PersonController.php:265
+msgid "The trainer information could not be saved."
+msgstr ""
+
+#: controllers/PersonController.php:303
+msgid "ERROR: The person could not be saved."
+msgstr ""
+
+#: controllers/PersonController.php:816
+msgid "No trainings selected."
+msgstr ""
+
+#: controllers/ReportsController.php:62
+msgid "Count"
+msgstr ""
+
+#: controllers/ReportsController.php:62
+msgid "Language"
+msgstr ""
+
+#: controllers/ReportsController.php:62
+#: controllers/TrainingController.php:1215
+msgid "Location"
+msgstr ""
+
+#: controllers/ReportsController.php:62
+msgid "Date"
+msgstr ""
+
+#: controllers/ReportsController.php:62
+msgid "Training Topic"
+msgstr ""
+
+#: controllers/ReportsController.php:62
+msgid "Funding"
+msgstr ""
+
+#: controllers/ReportsController.php:62
+msgid "TOT"
+msgstr ""
+
+#: controllers/ReportsController.php:62
+msgid "Facility Name"
+msgstr ""
+
+#: controllers/ReportsController.php:62
+msgid "Facility Type"
+msgstr ""
+
+#: controllers/ReportsController.php:62
+msgid "Facility Sponsor"
+msgstr ""
+
+#: controllers/ReportsController.php:62
+msgid "Recommended classes"
+msgstr ""
+
+#: controllers/ReportsController.php:62
+msgid "Recommended"
+msgstr ""
+
+#: controllers/ReportsController.php:62
+#: controllers/ReportsController.php:65
+msgid "Qualification"
+msgstr ""
+
+#: controllers/ReportsController.php:62
+msgid "(primary)"
+msgstr ""
+
+#: controllers/ReportsController.php:62
+msgid "(secondary)"
+msgstr ""
+
+#: controllers/ReportsController.php:62
+msgid "Name"
+msgstr ""
+
+#: controllers/ReportsController.php:62
+#: controllers/UserController.php:379
+msgid "Email"
+msgstr ""
+
+#: controllers/ReportsController.php:62
+msgid "Phone"
+msgstr ""
+
+#: controllers/ReportsController.php:62
+msgid "Category"
+msgstr ""
+
+#: controllers/ReportsController.php:62
+msgid "Type"
+msgstr ""
+
+#: controllers/ReportsController.php:62
+msgid "Skill"
+msgstr ""
+
+#: controllers/ReportsController.php:62
+msgid "Topics Taught"
+msgstr ""
+
+#: controllers/ReportsController.php:62
+msgid "Work Phone"
+msgstr ""
+
+#: controllers/ReportsController.php:62
+msgid "Home Phone"
+msgstr ""
+
+#: controllers/ReportsController.php:62
+msgid "Mobile Phone"
+msgstr ""
+
+#: controllers/ReportsController.php:65
+msgid "Participants"
+msgstr ""
+
+#: controllers/ReportsController.php:65
+msgid "Unique Participants"
+msgstr ""
+
+#: controllers/ReportsController.php:268
+#: controllers/ReportsController.php:272
+#: controllers/ReportsController.php:793
+#: controllers/ReportsController.php:1306
+#: controllers/ReportsController.php:2046
+msgid "Yes"
+msgstr ""
+
+#: controllers/ReportsController.php:268
+#: controllers/ReportsController.php:272
+#: controllers/ReportsController.php:793
+#: controllers/ReportsController.php:1306
+#: controllers/ReportsController.php:2046
+msgid "No"
+msgstr ""
+
+#: controllers/ReportsController.php:3116
+msgid "Dates"
+msgstr ""
+
+#: controllers/ReportsController.php:3117
+msgid "Course Length"
+msgstr ""
+
+#: controllers/ReportsController.php:3133
+msgid "Course Trainers"
+msgstr ""
+
+#: controllers/ReportsController.php:3137
+#: controllers/TrainingController.php:1205
+msgid "Days"
+msgstr ""
+
+#: controllers/ReportsController.php:3160
+msgid "Course Participants"
+msgstr ""
+
+#: controllers/ReportsController.php:3166
+#: controllers/TrainingController.php:709
+#: controllers/TrainingController.php:711
+#: controllers/TrainingController.php:713
+#: controllers/TrainingController.php:1213
+msgid "Date of Birth"
+msgstr ""
+
+#: controllers/ReportsController.php:3172
+msgid "Primary Qualification"
+msgstr ""
+
+#: controllers/ReportsController.php:3173
+msgid "Secondary Qualification"
+msgstr ""
+
+#: controllers/ReportsController.php:3176
+#: controllers/TrainingController.php:738
+msgid "Pre-Test"
+msgstr ""
+
+#: controllers/ReportsController.php:3177
+#: controllers/TrainingController.php:740
+msgid "Post-Test"
+msgstr ""
+
+#: controllers/ReportsController.php:3178
+msgid "Change in Score"
+msgstr ""
+
+#: controllers/TrainingController.php:46
+msgid "Add New Training"
+msgstr ""
+
+#: controllers/TrainingController.php:55
+#: controllers/TrainingController.php:60
+msgid "View/Edit Training"
+msgstr ""
+
+#: controllers/TrainingController.php:67
+#: controllers/TrainingController.php:120
+msgid "View Training"
+msgstr ""
+
+#: controllers/TrainingController.php:144
+msgid "Training Length"
+msgstr ""
+
+#: controllers/TrainingController.php:145
+msgid "Training Interval"
+msgstr ""
+
+#: controllers/TrainingController.php:154
+msgid "Training length is required."
+msgstr ""
+
+#: controllers/TrainingController.php:160
+#: controllers/TrainingController.php:167
+msgid "must be numeric."
+msgstr ""
+
+#: controllers/TrainingController.php:162
+#: controllers/TrainingController.php:169
+msgid "must be between 1-100."
+msgstr ""
+
+#: controllers/TrainingController.php:179
+msgid "Training end"
+msgstr ""
+
+#: controllers/TrainingController.php:184
+msgid "End date must be after start date."
+msgstr ""
+
+#: controllers/TrainingController.php:216
+msgid "Number of days is required."
+msgstr ""
+
+#: controllers/TrainingController.php:240
+#, php-format
+msgid "Total training length is %s, but PEPFAR category total is %d days. "
+msgstr ""
+
+#: controllers/TrainingController.php:240
+msgid "day"
+msgstr ""
+
+#: controllers/TrainingController.php:240
+msgid "days"
+msgstr ""
+
+#: controllers/TrainingController.php:286
+msgid "This training session could not be deleted. Some participants or trainers may still be attached."
+msgstr ""
+
+#: controllers/TrainingController.php:292
+msgid "This training session could not be saved."
+msgstr ""
+
+#: controllers/TrainingController.php:443
+msgid "This training session has been saved."
+msgstr ""
+
+#: controllers/TrainingController.php:515
+msgid "Please enter your new"
+msgstr ""
+
+#: controllers/TrainingController.php:515
+msgid "Insert new"
+msgstr ""
+
+#: controllers/TrainingController.php:742
+msgid "Scores"
+msgstr ""
+
+#: controllers/TrainingController.php:773
+msgid "Training session has been duplicated.<br>You can edit the duplicate session below."
+msgstr ""
+
+#: controllers/TrainingController.php:834
+msgid "already exists"
+msgstr ""
+
+#: controllers/TrainingController.php:886
+msgid "This trainer is already in this training session."
+msgstr ""
+
+#: controllers/TrainingController.php:906
+msgid "Could not update this record."
+msgstr ""
+
+#: controllers/TrainingController.php:923
+msgid "This participant is already in this training session."
+msgstr ""
+
+#: controllers/TrainingController.php:999
+msgid "The training center has been updated."
+msgstr ""
+
+#: controllers/TrainingController.php:1007
+msgid "The training center has been saved."
+msgstr ""
+
+#: controllers/TrainingController.php:1018
+msgid "The training center could not be saved."
+msgstr ""
+
+#: controllers/TrainingController.php:1127
+msgid "Label"
+msgstr ""
+
+#: controllers/TrainingController.php:1127
+msgid "Score"
+msgstr ""
+
+#: controllers/UserController.php:409
+msgid "Password Change Requested"
+msgstr ""
+
+#: controllers/UserController.php:412
+msgid "Your new password has been sent. Please check your email for further instructions."
+msgstr ""
+
+#: controllers/UserController.php:465
+msgid "Login"
+msgstr ""
+
+#: controllers/UserController.php:465
+msgid "Password"
+msgstr ""
+
+#: controllers/UserController.php:466
+msgid "The system could not log you in."
+msgstr ""
+
+#: controllers/UserController.php:484
+msgid "That user account has been disabled."
+msgstr ""
+
+#: controllers/UserController.php:505
+#: controllers/UserController.php:510
+msgid "That username or password is invalid."
+msgstr ""
+
+#: views/helpers/Calendar.php:420
+#: views/helpers/Calendar.php:441
+msgid "Sunday"
+msgstr ""
+
+#: views/helpers/Calendar.php:423
+msgid "Monday"
+msgstr ""
+
+#: views/helpers/Calendar.php:426
+msgid "Tuesday"
+msgstr ""
+
+#: views/helpers/Calendar.php:429
+msgid "Wednesday"
+msgstr ""
+
+#: views/helpers/Calendar.php:432
+msgid "Thursday"
+msgstr ""
+
+#: views/helpers/Calendar.php:435
+msgid "Friday"
+msgstr ""
+
+#: views/helpers/Calendar.php:438
+msgid "Saturday"
+msgstr ""
+
+#: views/helpers/DropDown.php:57
+msgid "select"
+msgstr ""
+
+#: views/helpers/DropDown.php:127
+#: views/helpers/Location.php:50
+msgid "choose"
+msgstr ""
+
+#: views/helpers/DropDown.php:142
+msgid "All"
+msgstr ""
+
+#: views/helpers/FileUpload.php:26
+msgid "Filename"
+msgstr ""
+
+#: views/helpers/FileUpload.php:26
+msgid "Size"
+msgstr ""
+
+#: views/helpers/FileUpload.php:26
+msgid "Author"
+msgstr ""
+
+#: views/helpers/FileUpload.php:26
+msgid "Upload Date"
+msgstr ""
+
+#: views/helpers/FileUpload.php:66
+msgid "Allowed file extensions"
+msgstr ""
+
+#: views/helpers/FileUpload.php:67
+msgid "Max upload size: "
+msgstr ""
+
+#: views/helpers/ITechTranslate.php:104
+#: views/helpers/ITechTranslate_adds.php:24
+msgid "First Name"
+msgstr ""
+
+#: views/helpers/ITechTranslate.php:107
+#: views/helpers/ITechTranslate_adds.php:25
+msgid "Middle Name"
+msgstr ""
+
+#: views/helpers/ITechTranslate.php:110
+#: views/helpers/ITechTranslate_adds.php:26
+msgid "Last Name"
+msgstr ""
+
+#: views/helpers/ITechTranslate.php:113
+msgid "National ID"
+msgstr ""
+
+#: views/helpers/ITechTranslate.php:116
+msgid "File Number"
+msgstr ""
+
+#: views/helpers/ITechTranslate.php:128
+msgid "Phone (work)"
+msgstr ""
+
+#: views/helpers/ITechTranslate.php:131
+msgid "Phone (home)"
+msgstr ""
+
+#: views/helpers/ITechTranslate.php:134
+msgid "Phone (mobile)"
+msgstr ""
+
+#: views/helpers/ITechTranslate.php:137
+msgid "Fax"
+msgstr ""
+
+#: views/helpers/ITechTranslate.php:144
+msgid "Comments"
+msgstr ""
+
+#: views/helpers/ITechTranslate.php:150
+msgid "Deleted"
+msgstr ""
+
+#: views/helpers/ITechTranslate.php:153
+msgid "Active"
+msgstr ""
+
+#: views/helpers/ITechTranslate.php:156
+msgid "Responsibility"
+msgstr ""
+
+#: views/helpers/ITechTranslate.php:164
+msgid "Address"
+msgstr ""
+
+#: views/helpers/ITechTranslate_adds.php:9
+msgid "Department"
+msgstr ""
+
+#: views/helpers/ITechTranslate_adds.php:10
+msgid "City"
+msgstr ""
+
+#: views/helpers/ITechTranslate_adds.php:11
+msgid "Training Name"
+msgstr ""
+
+#: views/helpers/ITechTranslate_adds.php:12
+msgid "Training Organizer"
+msgstr ""
+
+#: views/helpers/ITechTranslate_adds.php:13
+msgid "Training Level"
+msgstr ""
+
+#: views/helpers/ITechTranslate_adds.php:14
+msgid "PEPFAR topic"
+msgstr ""
+
+#: views/helpers/ITechTranslate_adds.php:15
+msgid "Training of Trainers"
+msgstr ""
+
+#: views/helpers/ITechTranslate_adds.php:16
+#: views/helpers/ITechTranslate_adds.php:19
+msgid "Course Objectives"
+msgstr ""
+
+#: views/helpers/ITechTranslate_adds.php:17
+msgid "Pre Test Score"
+msgstr ""
+
+#: views/helpers/ITechTranslate_adds.php:18
+msgid "Post Test Score"
+msgstr ""
+
+#: views/helpers/ITechTranslate_adds.php:20
+msgid "Custom field 1"
+msgstr ""
+
+#: views/helpers/ITechTranslate_adds.php:21
+msgid "Custom field 2"
+msgstr ""
+
+#: views/helpers/ITechTranslate_adds.php:23
+msgid "Is Active"
+msgstr ""
+
+#: views/helpers/ITechTranslate_adds.php:27
+msgid "English"
+msgstr ""
+
+#: views/helpers/ITechTranslate_adds.php:28
+msgid "French"
+msgstr ""
+
+#: views/helpers/PrintAndExport.php:37
+msgid "Print"
+msgstr ""
+
+#: views/helpers/PrintAndExport.php:37
+msgid "Export"
+msgstr ""
+
+#: views/scripts/footer.phtml:12
+msgid "Developed and funded by I-TECH. For questions or help,"
+msgstr ""
+
+#: views/scripts/footer.phtml:12
+msgid "click here"
+msgstr ""
+
+#: views/scripts/header.phtml:12
+msgid "Home"
+msgstr ""
+
+#: views/scripts/header.phtml:20
+#: views/scripts/header.phtml:26
+msgid "Trainings"
+msgstr ""
+
+#: views/scripts/header.phtml:33
+#: views/scripts/header.phtml:39
+#: views/scripts/nav-admin.phtml:27
+msgid "People"
+msgstr ""
+
+#: views/scripts/header.phtml:34
+msgid "View/Edit Person"
+msgstr ""
+
+#: views/scripts/header.phtml:35
+msgid "Add New Person"
+msgstr ""
+
+#: views/scripts/header.phtml:40
+msgid "View person"
+msgstr ""
+
+#: views/scripts/header.phtml:46
+msgid "Places"
+msgstr ""
+
+#: views/scripts/header.phtml:50
+msgid "View/Edit Facility"
+msgstr ""
+
+#: views/scripts/header.phtml:52
+msgid "View facility"
+msgstr ""
+
+#: views/scripts/header.phtml:55
+msgid "Add Facility"
+msgstr ""
+
+#: views/scripts/header.phtml:59
+msgid "View/Edit Training Location"
+msgstr ""
+
+#: views/scripts/header.phtml:61
+msgid "View Training Location"
+msgstr ""
+
+#: views/scripts/header.phtml:64
+msgid "Add Training Location"
+msgstr ""
+
+#: views/scripts/header.phtml:71
+msgid "Reports"
+msgstr ""
+
+#: views/scripts/header.phtml:72
+msgid "Training Reports"
+msgstr ""
+
+#: views/scripts/header.phtml:73
+msgid "Participant Reports"
+msgstr ""
+
+#: views/scripts/header.phtml:74
+msgid "Trainer Reports"
+msgstr ""
+
+#: views/scripts/header.phtml:75
+msgid "Facility Reports"
+msgstr ""
+
+#: views/scripts/header.phtml:76
+msgid "Assessment Reports"
+msgstr ""
+
+#: views/scripts/header.phtml:77
+msgid "Roster Reports"
+msgstr ""
+
+#: views/scripts/header.phtml:78
+msgid "Data Downloads"
+msgstr ""
+
+#: views/scripts/header.phtml:89
+msgid "Evaluations"
+msgstr ""
+
+#: views/scripts/header.phtml:94
+msgid "My Account"
+msgstr ""
+
+#: views/scripts/header.phtml:98
+#: views/scripts/nav-admin.phtml:6
+#: views/scripts/nav-admin.phtml:7
+msgid "Country Setup"
+msgstr ""
+
+#: views/scripts/header.phtml:99
+#: views/scripts/nav-admin.phtml:13
+msgid "Training Settings"
+msgstr ""
+
+#: views/scripts/header.phtml:100
+#: views/scripts/nav-admin.phtml:28
+msgid "People Settings"
+msgstr ""
+
+#: views/scripts/header.phtml:101
+msgid "Facility Settings"
+msgstr ""
+
+#: views/scripts/header.phtml:104
+msgid "Add New User"
+msgstr ""
+
+#: views/scripts/header.phtml:105
+msgid "Edit User"
+msgstr ""
+
+#: views/scripts/header.phtml:111
+msgid "login"
+msgstr ""
+
+#: views/scripts/header.phtml:113
+msgid "logout"
+msgstr ""
+
+#: views/scripts/header.phtml:153
+msgid "Welcome"
+msgstr ""
+
+#: views/scripts/nav-admin.phtml:8
+msgid "Region Setup"
+msgstr ""
+
+#: views/scripts/nav-admin.phtml:9
+msgid "Move Regions"
+msgstr ""
+
+#: views/scripts/nav-admin.phtml:12
+msgid "Training"
+msgstr ""
+
+#: views/scripts/nav-admin.phtml:14
+msgid "Training Category"
+msgstr ""
+
+#: views/scripts/nav-admin.phtml:15
+msgid "Assign Titles"
+msgstr ""
+
+#: views/scripts/nav-admin.phtml:16
+msgid "Training Title"
+msgstr ""
+
+#: views/scripts/nav-admin.phtml:20
+msgid "PEPFAR Category"
+msgstr ""
+
+#: views/scripts/nav-admin.phtml:22
+msgid "Recommended Topic"
+msgstr ""
+
+#: views/scripts/nav-admin.phtml:23
+msgid "Nat. Curriculum"
+msgstr ""
+
+#: views/scripts/nav-admin.phtml:24
+msgid "Training Method"
+msgstr ""
+
+#: views/scripts/nav-admin.phtml:29
+msgid "Qualifications"
+msgstr ""
+
+#: views/scripts/nav-admin.phtml:31
+msgid "Trainer Types"
+msgstr ""
+
+#: views/scripts/nav-admin.phtml:32
+msgid "Trainer Skills"
+msgstr ""
+
+#: views/scripts/nav-admin.phtml:33
+msgid "Languages"
+msgstr ""
+
+#: views/scripts/nav-admin.phtml:34
+msgid "Affiliations"
+msgstr ""
+
+#: views/scripts/nav-admin.phtml:35
+msgid "Titles"
+msgstr ""
+
+#: views/scripts/nav-admin.phtml:36
+msgid "Suffix"
+msgstr ""
+
+#: views/scripts/nav-admin.phtml:37
+msgid "Active Trainer"
+msgstr ""
+
+#: views/scripts/nav-admin.phtml:40
+msgid "Facilities"
+msgstr ""
+
+#: views/scripts/nav-admin.phtml:41
+msgid "Facilities Settings"
+msgstr ""
+
+#: views/scripts/nav-admin.phtml:42
+msgid "Facility Types"
+msgstr ""
+
+#: views/scripts/nav-admin.phtml:43
+msgid "Facility Sponsors"
+msgstr ""
+
+#: views/scripts/nav-admin.phtml:46
+msgid "Users"
+msgstr ""
+
+#: views/scripts/nav-admin.phtml:47
+msgid "Add Users"
+msgstr ""
+
+#: views/scripts/admin/country-region-move.phtml:111
+msgid "Move"
+msgstr ""
+
+#: views/scripts/calendar/index.phtml:19
+msgid "Training Calendar"
+msgstr ""
+
+#: views/scripts/calendar/index.phtml:22
+msgid "Print Calendar"
+msgstr ""
+
+#: views/scripts/data/facilities.phtml:4
+#: views/scripts/data/persons.phtml:4
+#: views/scripts/data/trainings.phtml:4
+msgid "Data"
+msgstr ""
+
+#: views/scripts/data/persons.phtml:4
+msgid "Persons"
+msgstr ""
+
+#: views/scripts/email/html/approved.phtml:1
+#: views/scripts/email/text/approved.phtml:1
+msgid "A training was approved by "
+msgstr ""
+
+#: views/scripts/email/html/forgot.phtml:2
+#: views/scripts/email/text/forgot.phtml:3
+msgid "You have been assigned a new temporary password."
+msgstr ""
+
+#: views/scripts/email/html/forgot.phtml:3
+msgid "Please change your password once you log in"
+msgstr ""
+
+#: views/scripts/email/html/forgot.phtml:3
+msgid "here"
+msgstr ""
+
+#: views/scripts/email/html/forgot.phtml:4
+#: views/scripts/email/html/new_account.phtml:3
+#: views/scripts/email/text/forgot.phtml:8
+msgid "Your login is as follows:"
+msgstr ""
+
+#: views/scripts/email/html/forgot.phtml:5
+#: views/scripts/email/html/new_account.phtml:4
+#: views/scripts/email/text/forgot.phtml:10
+msgid "username:"
+msgstr ""
+
+#: views/scripts/email/html/forgot.phtml:6
+#: views/scripts/email/html/new_account.phtml:5
+#: views/scripts/email/text/forgot.phtml:12
+msgid "password:"
+msgstr ""
+
+#: views/scripts/email/html/new_account.phtml:1
+#: views/scripts/email/text/forgot.phtml:1
+msgid "Dear"
+msgstr ""
+
+#: views/scripts/email/html/new_account.phtml:2
+msgid "Your new account has been created and is ready for use."
+msgstr ""
+
+#: views/scripts/email/html/new_account.phtml:6
+msgid "website:"
+msgstr ""
+
+#: views/scripts/email/html/rejected.phtml:1
+msgid "A training was rejected by "
+msgstr ""
+
+#: views/scripts/email/html/resubmitted.phtml:1
+msgid "A training was resubmitted by "
+msgstr ""
+
+#: views/scripts/email/text/forgot.phtml:5
+msgid "Please change your password once you log in here"
+msgstr ""
+
+#: views/scripts/error/error.phtml:8
+msgid "Oops"
+msgstr ""
+
+#: views/scripts/error/error.phtml:21
+msgid "Sorry. An error just occurred. Please try again, or contact a system administrator."
+msgstr ""
+
+#: views/scripts/evaluation/add-copy.phtml:20
+msgid "Enter title of Evaluation"
+msgstr ""
+
+#: views/scripts/evaluation/add-copy.phtml:23
+msgid "Number"
+msgstr ""
+
+#: views/scripts/evaluation/add-copy.phtml:23
+msgid "Question"
+msgstr ""
+
+#: views/scripts/evaluation/add-copy.phtml:25
+msgid "Likert"
+msgstr ""
+
+#: views/scripts/evaluation/add-copy.phtml:25
+msgid "Text"
+msgstr ""
+
+#: views/scripts/evaluation/add-copy.phtml:29
+msgid "Add Evaluation"
+msgstr ""
+
+#: views/scripts/evaluation/assign-evaluation.phtml:4
+#: views/scripts/evaluation/assign-evaluation.phtml:20
+#: views/scripts/evaluation/assign-training.phtml:4
+#: views/scripts/evaluation/assign-training.phtml:21
+msgid "Assign Evaluation to Training"
+msgstr ""
+
+#: views/scripts/evaluation/assign-evaluation.phtml:43
+#: views/scripts/evaluation/browse.phtml:35
+msgid "Assign"
+msgstr ""
+
+#: views/scripts/evaluation/assign-evaluation.phtml:55
+#: views/scripts/evaluation/assign-training.phtml:32
+msgid "Submit"
+msgstr ""
+
+#: views/scripts/evaluation/browse.phtml:34
+msgid "Copy"
+msgstr ""
+
+#: views/scripts/evaluation/browse.phtml:42
+msgid "Date created"
+msgstr ""
+
+#: views/scripts/evaluation/browse.phtml:50
+msgid "Add New Evaluation"
+msgstr ""
+
+#: views/scripts/evaluation/data.phtml:4
+#: views/scripts/evaluation/data.phtml:32
+#: views/scripts/evaluation/print.phtml:4
+msgid "Evaluation Data Entry"
+msgstr ""
+
+#: views/scripts/evaluation/data.phtml:42
+msgid "Save and Exit"
+msgstr ""
+
+#: views/scripts/evaluation/data.phtml:43
+msgid "Save and Continue"
+msgstr ""
+
+#: views/scripts/external/add.phtml:4
+msgid "Add External Course"
+msgstr ""
+
+#: views/scripts/external/add.phtml:17
+msgid "Add new External Course for "
+msgstr ""
+
+#: views/scripts/external/add.phtml:27
+msgid "Day"
+msgstr ""
+
+#: views/scripts/external/add.phtml:28
+msgid "Month"
+msgstr ""
+
+#: views/scripts/external/add.phtml:29
+msgid "Year"
+msgstr ""
+
+#: views/scripts/external/add.phtml:40
+msgid "Length"
+msgstr ""
+
+#: views/scripts/external/add.phtml:50
+msgid "Who Funded"
+msgstr ""
+
+#: views/scripts/external/add.phtml:57
+msgid "Add Course"
+msgstr ""
+
+#: views/scripts/facility/add-location.phtml:19
+msgid "Please enter training location information"
+msgstr ""
+
+#: views/scripts/facility/add-location.phtml:25
+msgid "Add Location"
+msgstr ""
+
+#: views/scripts/facility/add.phtml:17
+msgid "Add new Facility"
+msgstr ""
+
+#: views/scripts/facility/addfacility-form.phtml:5
+msgid "Address 1"
+msgstr ""
+
+#: views/scripts/facility/addfacility-form.phtml:7
+msgid "Address 2"
+msgstr ""
+
+#: views/scripts/facility/addfacility-form.phtml:22
+msgid "New city"
+msgstr ""
+
+#: views/scripts/facility/addfacility-form.phtml:29
+msgid "Postal code"
+msgstr ""
+
+#: views/scripts/facility/addfacility-form.phtml:44
+msgid "Facility sponsor"
+msgstr ""
+
+#: views/scripts/facility/delete-location.phtml:4
+#: views/scripts/facility/delete-location.phtml:17
+msgid "Delete Location"
+msgstr ""
+
+#: views/scripts/facility/delete.phtml:4
+#: views/scripts/facility/delete.phtml:17
+msgid "Delete Facility"
+msgstr ""
+
+#: views/scripts/facility/edit.phtml:4
+#: views/scripts/facility/edit.phtml:18
+msgid "Edit Facility"
+msgstr ""
+
+#: views/scripts/facility/edit.phtml:35
+msgid "Facility name"
+msgstr ""
+
+#: views/scripts/facility/edit.phtml:38
+msgid "Address "
+msgstr ""
+
+#: views/scripts/facility/edit.phtml:90
+msgid "Save changes"
+msgstr ""
+
+#: views/scripts/facility/edit.phtml:103
+msgid "Are you sure you wish to delete this facility?"
+msgstr ""
+
+#: views/scripts/facility/search-location.phtml:20
+msgid "Search for Training Location"
+msgstr ""
+
+#: views/scripts/facility/search-location.phtml:22
+#: views/scripts/facility/search.phtml:22
+msgid "Select Criteria"
+msgstr ""
+
+#: views/scripts/facility/search-location.phtml:24
+msgid "Training Location Name"
+msgstr ""
+
+#: views/scripts/facility/search-location.phtml:48
+#: views/scripts/facility/search.phtml:67
+msgid "Preview"
+msgstr ""
+
+#: views/scripts/facility/search-location.phtml:53
+msgid "Training locations"
+msgstr ""
+
+#: views/scripts/facility/search-location.phtml:53
+#: views/scripts/facility/search.phtml:72
+#: views/scripts/person/assign-training.phtml:31
+msgid "Results"
+msgstr ""
+
+#: views/scripts/facility/search-location.phtml:54
+msgid "Add new training location"
+msgstr ""
+
+#: views/scripts/facility/search-location.phtml:80
+msgid "Location Name"
+msgstr ""
+
+#: views/scripts/facility/search-location.phtml:94
+#: views/scripts/facility/search.phtml:115
+msgid "Limited to 100 rows"
+msgstr ""
+
+#: views/scripts/facility/search-location.phtml:94
+#: views/scripts/facility/search.phtml:115
+msgid "Full Results"
+msgstr ""
+
+#: views/scripts/facility/search.phtml:20
+msgid "Search Facilities"
+msgstr ""
+
+#: views/scripts/facility/search.phtml:73
+msgid "Add New Facility"
+msgstr ""
+
+#: views/scripts/facility/search.phtml:98
+msgid "ID"
+msgstr ""
+
+#: views/scripts/facility/search.phtml:109
+msgid "Sponsor"
+msgstr ""
+
+#: views/scripts/facility/view-location.phtml:43
+msgid "unknown"
+msgstr ""
+
+#: views/scripts/facility/view-location.phtml:54
+msgid "Save Changes"
+msgstr ""
+
+#: views/scripts/facility/view-location.phtml:73
+msgid "Are you sure you wish to delete this location?"
+msgstr ""
+
+#: views/scripts/facility/view.phtml:4
+#: views/scripts/facility/view.phtml:17
+msgid "View Facility"
+msgstr ""
+
+#: views/scripts/facility/view.phtml:54
+msgid "Postal Code"
+msgstr ""
+
+#: views/scripts/index/index.phtml:19
+msgid "Welcome to"
+msgstr ""
+
+#: views/scripts/index/index.phtml:20
+msgid "Training System Monitoring and Reporting Tool"
+msgstr ""
+
+#: views/scripts/index/index.phtml:23
+msgid "Data Summary"
+msgstr ""
+
+#: views/scripts/index/index.phtml:29
+#: views/scripts/index/index.phtml:30
+msgid "unique"
+msgstr ""
+
+#: views/scripts/index/index.phtml:30
+msgid "Trainers"
+msgstr ""
+
+#: views/scripts/index/index.phtml:37
+#: views/scripts/index/index.phtml:49
+#: views/scripts/index/index.phtml:65
+msgid "Total"
+msgstr ""
+
+#: views/scripts/index/index.phtml:38
+msgid "Fiscal Year"
+msgstr ""
+
+#: views/scripts/index/index.phtml:49
+msgid "Future Trainings"
+msgstr ""
+
+#: views/scripts/index/index.phtml:53
+msgid "View Printable Calendar"
+msgstr ""
+
+#: views/scripts/index/index.phtml:65
+msgid "Incomplete Trainings that already occurred"
+msgstr ""
+
+#: views/scripts/index/index.phtml:75
+msgid "To be Approved"
+msgstr ""
+
+#: views/scripts/index/index.phtml:86
+msgid "Please login below"
+msgstr ""
+
+#: views/scripts/index/index.phtml:89
+msgid "User name"
+msgstr ""
+
+#: views/scripts/index/index.phtml:94
+msgid "Forgot your password?"
+msgstr ""
+
+#: views/scripts/person/add.phtml:4
+msgid "Add Person"
+msgstr ""
+
+#: views/scripts/person/assign-training.phtml:4
+#: views/scripts/person/assign-training.phtml:20
+msgid "Assign Person to Training"
+msgstr ""
+
+#: views/scripts/person/delete.phtml:4
+#: views/scripts/person/delete.phtml:17
+msgid "Delete Person"
+msgstr ""
+
+#: views/scripts/person/edit-body-addtl.phtml:1
+msgid "Current Contact Information"
+msgstr ""
+
+#: views/scripts/person/edit-body-addtl.phtml:27
+msgid "Insert new facility"
+msgstr ""
+
+#: views/scripts/person/edit-body-addtl.phtml:31
+msgid "Address and Phone"
+msgstr ""
+
+#: views/scripts/person/edit-body-addtl.phtml:36
+msgid "Home phone"
+msgstr ""
+
+#: views/scripts/person/edit-body-addtl.phtml:39
+msgid "Work phone"
+msgstr ""
+
+#: views/scripts/person/edit-body-addtl.phtml:41
+msgid "Mobile phone"
+msgstr ""
+
+#: views/scripts/person/edit-body-addtl.phtml:46
+msgid "Email Secondary"
+msgstr ""
+
+#: views/scripts/person/edit-body-addtl.phtml:72
+msgid "Primary responsibility"
+msgstr ""
+
+#: views/scripts/person/edit-body-addtl.phtml:73
+msgid "Secondary responsibility"
+msgstr ""
+
+#: views/scripts/person/edit-body-addtl.phtml:115
+msgid "Trainer Information"
+msgstr ""
+
+#: views/scripts/person/edit-body-addtl.phtml:115
+msgid "Show/Hide"
+msgstr ""
+
+#: views/scripts/person/edit-body-addtl.phtml:118
+msgid "Is person an active trainer?"
+msgstr ""
+
+#: views/scripts/person/edit-body-addtl.phtml:120
+msgid "Active trainer"
+msgstr ""
+
+#: views/scripts/person/edit-body-addtl.phtml:135
+msgid "Trainer Affiliation"
+msgstr ""
+
+#: views/scripts/person/edit-body-addtl.phtml:149
+msgid "Trainer skills"
+msgstr ""
+
+#: views/scripts/person/edit-body-addtl.phtml:151
+#: views/scripts/person/edit-body-addtl.phtml:163
+msgid "check all that apply"
+msgstr ""
+
+#: views/scripts/person/edit-body-addtl.phtml:160
+msgid "Primary language"
+msgstr ""
+
+#: views/scripts/person/edit-body-addtl.phtml:161
+msgid "Secondary languages"
+msgstr ""
+
+#: views/scripts/person/edit-body-class-history.phtml:1
+msgid "Class History"
+msgstr ""
+
+#: views/scripts/person/edit-body-class-history.phtml:3
+msgid "Assign this person to a class"
+msgstr ""
+
+#: views/scripts/person/edit-body-class-history.phtml:25
+msgid "Topics(s)"
+msgstr ""
+
+#: views/scripts/person/edit-body-exclass-history.phtml:1
+msgid "External Class History"
+msgstr ""
+
+#: views/scripts/person/edit-body-exclass-history.phtml:3
+msgid "Add an external class"
+msgstr ""
+
+#: views/scripts/person/edit-body-history-table.phtml:1
+msgid "Change History"
+msgstr ""
+
+#: views/scripts/person/edit-body-history-table.phtml:13
+msgid "Change"
+msgstr ""
+
+#: views/scripts/person/edit-body-history-table.phtml:14
+msgid "Previous entry"
+msgstr ""
+
+#: views/scripts/person/edit-body-rec.phtml:3
+msgid "Recommended Training Topics"
+msgstr ""
+
+#: views/scripts/person/edit-body-rec.phtml:6
+msgid "No recommended classes were found for the above primary qualification"
+msgstr ""
+
+#: views/scripts/person/edit-body-rec.phtml:21
+msgid "Upcoming Trainings"
+msgstr ""
+
+#: views/scripts/person/edit-body-rec.phtml:44
+msgid "Topic(s)"
+msgstr ""
+
+#: views/scripts/person/edit-body.phtml:106
+msgid "Submission failed:"
+msgstr ""
+
+#: views/scripts/person/edit-body.phtml:159
+msgid "No duplicates found."
+msgstr ""
+
+#: views/scripts/person/edit-body.phtml:162
+msgid "If the person already exists, please select their name below."
+msgstr ""
+
+#: views/scripts/person/edit-body.phtml:221
+msgid "Please enter a first and last name."
+msgstr ""
+
+#: views/scripts/person/edit-body.phtml:251
+msgid "Please add or verify the trainer information below."
+msgstr ""
+
+#: views/scripts/person/edit-body.phtml:266
+msgid "Edit person's record"
+msgstr ""
+
+#: views/scripts/person/edit-body.phtml:268
+msgid "Add person's record"
+msgstr ""
+
+#: views/scripts/person/edit-body.phtml:274
+#: views/scripts/person/view.phtml:26
+msgid "Personal Information"
+msgstr ""
+
+#: views/scripts/person/edit-body.phtml:310
+#: views/scripts/person/view.phtml:48
+msgid "Female"
+msgstr ""
+
+#: views/scripts/person/edit-body.phtml:311
+#: views/scripts/person/view.phtml:49
+msgid "Male"
+msgstr ""
+
+#: views/scripts/person/edit-body.phtml:312
+#: views/scripts/person/view.phtml:50
+msgid "Unknown"
+msgstr ""
+
+#: views/scripts/person/edit-body.phtml:314
+#: views/scripts/person/view.phtml:52
+msgid "Birth date"
+msgstr ""
+
+#: views/scripts/person/edit-body.phtml:322
+msgid "Age"
+msgstr ""
+
+#: views/scripts/person/edit-body.phtml:329
+msgid "Duplicate Check"
+msgstr ""
+
+#: views/scripts/person/edit-body.phtml:331
+msgid "Continue"
+msgstr ""
+
+#: views/scripts/person/edit-body.phtml:376
+msgid "Please enter facility information"
+msgstr ""
+
+#: views/scripts/person/edit.phtml:4
+msgid "Edit Person"
+msgstr ""
+
+#: views/scripts/person/history.phtml:4
+#: views/scripts/person/view.phtml:19
+msgid "Created by"
+msgstr ""
+
+#: views/scripts/person/history.phtml:5
+#: views/scripts/person/view.phtml:20
+msgid "Date modified"
+msgstr ""
+
+#: views/scripts/person/history.phtml:6
+#: views/scripts/person/view.phtml:21
+msgid "Modified by"
+msgstr ""
+
+#: views/scripts/person/history.phtml:10
+msgid "Delete this Person"
+msgstr ""
+
+#: views/scripts/person/history.phtml:13
+msgid "Are you sure you wish to delete this person?"
+msgstr ""
+
+#: views/scripts/person/search.phtml:4
+msgid "Person Search"
+msgstr ""
+
+#: views/scripts/person/search.phtml:21
+msgid "People Search"
+msgstr ""
+
+#: views/scripts/person/search.phtml:86
+msgid "Trainers only"
+msgstr ""
+
+#: views/scripts/person/search.phtml:87
+msgid "Participants only"
+msgstr ""
+
+#: views/scripts/person/search.phtml:88
+msgid "Unattached only"
+msgstr ""
+
+#: views/scripts/person/search.phtml:89
+msgid "Everyone"
+msgstr ""
+
+#: views/scripts/person/view.phtml:4
+msgid "View Person"
+msgstr ""
+
+#: views/scripts/person/view.phtml:32
+msgid "First name"
+msgstr ""
+
+#: views/scripts/person/view.phtml:34
+msgid "Middle name"
+msgstr ""
+
+#: views/scripts/person/view.phtml:36
+msgid "Last name"
+msgstr ""
+
+#: views/scripts/person/view.phtml:150
+msgid "Trainer Type"
+msgstr ""
+
+#: views/scripts/person/view.phtml:177
+msgid "Trainer languages"
+msgstr ""
+
+#: views/scripts/person/view.phtml:188
+msgid "Training History"
+msgstr ""
+
+#: views/scripts/reports/evaluations.phtml:5
+#: views/scripts/reports/evaluations.phtml:17
+#: views/scripts/reports/evaluations_results.phtml:4
+msgid "Evaluation Reports"
+msgstr ""
+
+#: views/scripts/reports/evaluations.phtml:21
+msgid "Evaluation"
+msgstr ""
+
+#: views/scripts/reports/evaluations.phtml:35
+#: views/scripts/reports/facilities.phtml:207
+#: views/scripts/reports/participants-by-category.phtml:57
+msgid "Start date"
+msgstr ""
+
+#: views/scripts/reports/evaluations.phtml:46
+#: views/scripts/reports/facilities.phtml:218
+#: views/scripts/reports/participants-by-category.phtml:68
+msgid "End date"
+msgstr ""
+
+#: views/scripts/reports/evaluations.phtml:64
+msgid "Generate Report"
+msgstr ""
+
+#: views/scripts/reports/evaluations_results.phtml:47
+msgid "Evaluation Name"
+msgstr ""
+
+#: views/scripts/reports/evaluations_results.phtml:50
+msgid "Responses"
+msgstr ""
+
+#: views/scripts/reports/facilities.phtml:4
+#: views/scripts/reports/facilities.phtml:36
+msgid "Search"
+msgstr ""
+
+#: views/scripts/reports/facilities.phtml:11
+#: views/scripts/reports/needs-by-person-name.phtml:11
+msgid "show"
+msgstr ""
+
+#: views/scripts/reports/facilities.phtml:13
+#: views/scripts/reports/needs-by-person-name.phtml:13
+msgid "group"
+msgstr ""
+
+#: views/scripts/reports/facilities.phtml:38
+msgid "Select facility report"
+msgstr ""
+
+#: views/scripts/reports/facilities.phtml:41
+msgid "Trainings by Facility Name"
+msgstr ""
+
+#: views/scripts/reports/facilities.phtml:42
+msgid "Trainings by Facility Participant Count"
+msgstr ""
+
+#: views/scripts/reports/facilities.phtml:50
+#: views/scripts/reports/needs-by-person-name.phtml:32
+msgid "filter"
+msgstr ""
+
+#: views/scripts/reports/facilities.phtml:88
+#: views/scripts/reports/facilities.phtml:92
+#: views/scripts/reports/facilities.phtml:98
+#: views/scripts/reports/needs-by-person-name.phtml:33
+#: views/scripts/reports/needs-by-person-name.phtml:37
+#: views/scripts/reports/needs-by-person-name.phtml:42
+msgid "facility"
+msgstr ""
+
+#: views/scripts/reports/facilities.phtml:117
+msgid "Training location"
+msgstr ""
+
+#: views/scripts/reports/facilities.phtml:238
+msgid "Trainings matched with Facilities"
+msgstr ""
+
+#: views/scripts/reports/facilities.phtml:317
+msgid "Training Location"
+msgstr ""
+
+#: views/scripts/reports/facilities.phtml:329
+#: views/scripts/reports/needs-by-person-name.phtml:363
+#: views/scripts/reports/participants-by-category.phtml:14
+msgid "PEPFAR"
+msgstr ""
+
+#: views/scripts/reports/index.phtml:28
+msgid "Report"
+msgstr ""
+
+#: views/scripts/reports/index.phtml:32
+msgid "Select trainer report"
+msgstr ""
+
+#: views/scripts/reports/index.phtml:35
+msgid "Trainers by Skill, Language, and PEPFAR"
+msgstr ""
+
+#: views/scripts/reports/index.phtml:38
+msgid "Select training report"
+msgstr ""
+
+#: views/scripts/reports/index.phtml:41
+msgid "Trainings by Name"
+msgstr ""
+
+#: views/scripts/reports/index.phtml:42
+msgid "Trainings by Participant Count"
+msgstr ""
+
+#: views/scripts/reports/needs-by-person-name.phtml:61
+msgid "primary"
+msgstr ""
+
+#: views/scripts/reports/needs-by-person-name.phtml:72
+msgid "secondary"
+msgstr ""
+
+#: views/scripts/reports/needs-by-person-name.phtml:105
+#: views/scripts/reports/needs-by-person-name.phtml:345
+msgid "Classes taken"
+msgstr ""
+
+#: views/scripts/reports/needs-by-person-name.phtml:116
+#: views/scripts/reports/needs-by-person-name.phtml:357
+msgid "Upcoming classes"
+msgstr ""
+
+#: views/scripts/reports/needs-by-person-name.phtml:130
+msgid "Training topic"
+msgstr ""
+
+#: views/scripts/reports/needs-by-person-name.phtml:160
+msgid "Recommended topics"
+msgstr ""
+
+#: views/scripts/reports/needs-by-person-name.phtml:229
+msgid "Combine First and Last Names"
+msgstr ""
+
+#: views/scripts/reports/needs-by-person-name.phtml:303
+msgid "Person Count"
+msgstr ""
+
+#: views/scripts/reports/needsReportsPicker.phtml:9
+msgid "Select person report"
+msgstr ""
+
+#: views/scripts/reports/needsReportsPicker.phtml:12
+msgid "Needs by Person's Name"
+msgstr ""
+
+#: views/scripts/reports/needsReportsPicker.phtml:13
+msgid "Needs by Person Count"
+msgstr ""
+
+#: views/scripts/reports/participants-by-category.phtml:15
+#: views/scripts/reports/participants-by-category.phtml:19
+msgid "Unique by"
+msgstr ""
+
+#: views/scripts/reports/participants-by-category.phtml:15
+#: views/scripts/reports/participants-by-category.phtml:19
+msgid "and"
+msgstr ""
+
+#: views/scripts/reports/participants-by-category.phtml:15
+#: views/scripts/reports/participants-by-category.phtml:19
+#: views/scripts/reports/participants-by-category.phtml:23
+msgid "Not unique overall."
+msgstr ""
+
+#: views/scripts/reports/participants-by-category.phtml:23
+msgid "Unique by "
+msgstr ""
+
+#: views/scripts/reports/participants-by-category.phtml:42
+#: views/scripts/reports/participants-by-category.phtml:45
+#: views/scripts/reports/participants-by-category.phtml:49
+msgid "facility location"
+msgstr ""
+
+#: views/scripts/reports/participants-by-category.phtml:91
+msgid "Total Participants by"
+msgstr ""
+
+#: views/scripts/reports/participants-by-facility-type.phtml:4
+#: views/scripts/reports/participants-by-training.phtml:4
+#: views/scripts/reports/people-by-facility.phtml:4
+msgid "Participants Report"
+msgstr ""
+
+#: views/scripts/reports/participants-by-facility-type.phtml:167
+#: views/scripts/reports/participants-by-training.phtml:184
+msgid "male"
+msgstr ""
+
+#: views/scripts/reports/participants-by-facility-type.phtml:168
+#: views/scripts/reports/participants-by-training.phtml:185
+msgid "female"
+msgstr ""
+
+#: views/scripts/reports/participants-by-facility-type.phtml:169
+#: views/scripts/reports/participants-by-training.phtml:186
+msgid "na"
+msgstr ""
+
+#: views/scripts/reports/participants-by-facility-type.phtml:176
+#: views/scripts/reports/participants-by-training.phtml:193
+msgid "min"
+msgstr ""
+
+#: views/scripts/reports/participants-by-facility-type.phtml:176
+#: views/scripts/reports/participants-by-training.phtml:193
+msgid "max"
+msgstr ""
+
+#: views/scripts/reports/participants-by-facility-type.phtml:176
+#: views/scripts/reports/participants-by-training.phtml:193
+msgid "clear"
+msgstr ""
+
+#: views/scripts/reports/participants-by-facility-type.phtml:187
+#: views/scripts/reports/participants-by-training.phtml:203
+msgid "active"
+msgstr ""
+
+#: views/scripts/reports/participants-by-facility-type.phtml:188
+#: views/scripts/reports/participants-by-training.phtml:204
+msgid "inactive"
+msgstr ""
+
+#: views/scripts/reports/participants-by-facility-type.phtml:265
+msgid "Note: This report may contain multiple rows for participants who attended multiple trainings"
+msgstr ""
+
+#: views/scripts/reports/participants-by-facility-type.phtml:337
+#: views/scripts/reports/participants-by-training.phtml:420
+#: views/scripts/reports/people-by-facility.phtml:289
+msgid "Participant Count"
+msgstr ""
+
+#: views/scripts/reports/participants-by-training.phtml:242
+msgid "Show post-test scores above"
+msgstr ""
+
+#: views/scripts/reports/participants-by-training.phtml:249
+msgid "Show score increase above"
+msgstr ""
+
+#: views/scripts/reports/participants-by-training.phtml:264
+msgid "Return Unique Participants"
+msgstr ""
+
+#: views/scripts/reports/participants-by-training.phtml:303
+#: views/scripts/reports/people-by-facility.phtml:225
+msgid "Trainings Attended"
+msgstr ""
+
+#: views/scripts/reports/participants-by-training.phtml:497
+msgid "% Change"
+msgstr ""
+
+#: views/scripts/reports/people-by-facility.phtml:108
+msgid "Match primary/secondary"
+msgstr ""
+
+#: views/scripts/reports/people-by-facility.phtml:126
+msgid "Recommended classes (based on topic)"
+msgstr ""
+
+#: views/scripts/reports/peopleReportsPicker.phtml:9
+msgid "Select participant report"
+msgstr ""
+
+#: views/scripts/reports/peopleReportsPicker.phtml:12
+msgid "Unique Participants by "
+msgstr ""
+
+#: views/scripts/reports/peopleReportsPicker.phtml:13
+msgid "Unique Participants by"
+msgstr ""
+
+#: views/scripts/reports/peopleReportsPicker.phtml:14
+msgid "Unique Participants by Qualification"
+msgstr ""
+
+#: views/scripts/reports/peopleReportsPicker.phtml:15
+msgid "Participants Trained"
+msgstr ""
+
+#: views/scripts/reports/peopleReportsPicker.phtml:16
+msgid "Participants by Facility"
+msgstr ""
+
+#: views/scripts/reports/peopleReportsPicker.phtml:17
+msgid "Participants by Name"
+msgstr ""
+
+#: views/scripts/reports/peopleReportsPicker.phtml:18
+msgid "Participants with Scores"
+msgstr ""
+
+#: views/scripts/reports/roster.phtml:60
+msgid "Extended Report with Test Scores"
+msgstr ""
+
+#: views/scripts/reports/roster.phtml:61
+msgid "Extended Report with Regions and Qualification"
+msgstr ""
+
+#: views/scripts/reports/trainers.phtml:4
+msgid "Trainer Report"
+msgstr ""
+
+#: views/scripts/reports/trainers.phtml:52
+msgid "Trainer language"
+msgstr ""
+
+#: views/scripts/reports/trainers.phtml:63
+msgid "Select topic taught"
+msgstr ""
+
+#: views/scripts/reports/trainers.phtml:67
+msgid "Combine first and last names"
+msgstr ""
+
+#: views/scripts/reports/trainings.phtml:53
+#: views/scripts/reports/trainings.phtml:59
+#: views/scripts/reports/trainings.phtml:65
+msgid "training location"
+msgstr ""
+
+#: views/scripts/reports/trainings.phtml:148
+msgid "Min"
+msgstr ""
+
+#: views/scripts/reports/trainings.phtml:150
+msgid "Max"
+msgstr ""
+
+#: views/scripts/reports/trainings.phtml:234
+msgid "Trainings with known participants only"
+msgstr ""
+
+#: views/scripts/reports/trainings.phtml:235
+msgid "Trainings with unknown participants only"
+msgstr ""
+
+#: views/scripts/reports/trainings.phtml:236
+msgid "All trainings"
+msgstr ""
+
+#: views/scripts/reports/trainings.phtml:364
+msgid "Refresher"
+msgstr ""
+
+#: views/scripts/training/_template_editform.phtml:31
+#: views/scripts/training/_template_editform.phtml:523
+#: views/scripts/training/_template_editform.phtml:1057
+msgid "Save Training"
+msgstr ""
+
+#: views/scripts/training/_template_editform.phtml:43
+msgid "Add new Training Location"
+msgstr ""
+
+#: views/scripts/training/_template_editform.phtml:46
+msgid "Please enter training location information:"
+msgstr ""
+
+#: views/scripts/training/_template_editform.phtml:86
+msgid "It looks like the training dates do not match the length. Please double check these fields."
+msgstr ""
+
+#: views/scripts/training/_template_editform.phtml:140
+msgid "Cancel"
+msgstr ""
+
+#: views/scripts/training/_template_editform.phtml:176
+msgid "Date created:"
+msgstr ""
+
+#: views/scripts/training/_template_editform.phtml:177
+msgid "Created by:"
+msgstr ""
+
+#: views/scripts/training/_template_editform.phtml:178
+msgid "Date modified:"
+msgstr ""
+
+#: views/scripts/training/_template_editform.phtml:179
+msgid "Modified by:"
+msgstr ""
+
+#: views/scripts/training/_template_editform.phtml:181
+msgid "View/Print Training Roster"
+msgstr ""
+
+#: views/scripts/training/_template_editform.phtml:184
+msgid "Enter Evaluation Data"
+msgstr ""
+
+#: views/scripts/training/_template_editform.phtml:184
+msgid "View Data"
+msgstr ""
+
+#: views/scripts/training/_template_editform.phtml:184
+msgid "unassigned"
+msgstr ""
+
+#: views/scripts/training/_template_editform.phtml:187
+msgid "Duplicate this Training"
+msgstr ""
+
+#: views/scripts/training/_template_editform.phtml:188
+msgid "Delete this Training"
+msgstr ""
+
+#: views/scripts/training/_template_editform.phtml:246
+msgid "Training start date"
+msgstr ""
+
+#: views/scripts/training/_template_editform.phtml:261
+msgid "Training end date"
+msgstr ""
+
+#: views/scripts/training/_template_editform.phtml:277
+msgid "Training length"
+msgstr ""
+
+#: views/scripts/training/_template_editform.phtml:282
+msgid "hours"
+msgstr ""
+
+#: views/scripts/training/_template_editform.phtml:288
+msgid "weeks"
+msgstr ""
+
+#: views/scripts/training/_template_editform.phtml:329
+msgid "Participants are known"
+msgstr ""
+
+#: views/scripts/training/_template_editform.phtml:386
+#: views/scripts/training/_template_editform.phtml:443
+msgid "Check all that apply below"
+msgstr ""
+
+#: views/scripts/training/_template_editform.phtml:444
+msgid "Please enter the name your new funding item:"
+msgstr ""
+
+#: views/scripts/training/_template_editform.phtml:537
+msgid "Total Trainers:"
+msgstr ""
+
+#: views/scripts/training/_template_editform.phtml:585
+#: views/scripts/training/_template_editform.phtml:779
+msgid "Insert"
+msgstr ""
+
+#: views/scripts/training/_template_editform.phtml:587
+#: views/scripts/training/_template_editform.phtml:781
+msgid "New Person Form"
+msgstr ""
+
+#: views/scripts/training/_template_editform.phtml:679
+msgid ""
+"The entered trainer name could not be found.\\n"
+"\\n"
+"Please select one from the list or add a new person."
+msgstr ""
+
+#: views/scripts/training/_template_editform.phtml:684
+msgid "Please enter the number of days for this trainer."
+msgstr ""
+
+#: views/scripts/training/_template_editform.phtml:689
+msgid ""
+"You must edit this person's trainer profile before adding them to this session.\\n"
+"\\n"
+"Would you like to do this now?"
+msgstr ""
+
+#: views/scripts/training/_template_editform.phtml:735
+msgid "Participant Information"
+msgstr ""
+
+#: views/scripts/training/_template_editform.phtml:735
+msgid "Total Participants:"
+msgstr ""
+
+#: views/scripts/training/_template_editform.phtml:915
+msgid "Course Average Test Scores"
+msgstr ""
+
+#: views/scripts/training/_template_editform.phtml:976
+msgid "You need to choose a qualification for all recorded participants."
+msgstr ""
+
+#: views/scripts/training/_template_editform.phtml:988
+msgid "Participant Qualifications"
+msgstr ""
+
+#: views/scripts/training/_template_editform.phtml:1036
+msgid "Approval Status"
+msgstr ""
+
+#: views/scripts/training/_template_editform.phtml:1066
+msgid "Attached Documents"
+msgstr ""
+
+#: views/scripts/training/_template_editform.phtml:1069
+msgid "Right-click and select \"Save Target As...\" to download."
+msgstr ""
+
+#: views/scripts/training/_template_editform.phtml:1072
+msgid "Document Upload"
+msgstr ""
+
+#: views/scripts/training/_template_locationform.phtml:4
+msgid "Location name"
+msgstr ""
+
+#: views/scripts/training/deleted.phtml:4
+#: views/scripts/training/deleted.phtml:19
+msgid "Training Session Deleted"
+msgstr ""
+
+#: views/scripts/training/deleted.phtml:21
+msgid "This training session has been deleted."
+msgstr ""
+
+#: views/scripts/training/edit-topic.phtml:4
+msgid "Edit Topics"
+msgstr ""
+
+#: views/scripts/training/edit-topic.phtml:18
+msgid "Edit Trainer Topic"
+msgstr ""
+
+#: views/scripts/training/roster.phtml:4
+msgid "Training Roster"
+msgstr ""
+
+#: views/scripts/training/roster.phtml:19
+msgid "Course Roster"
+msgstr ""
+
+#: views/scripts/training/roster.phtml:23
+msgid "Start Date:"
+msgstr ""
+
+#: views/scripts/training/roster.phtml:24
+msgid "End Date:"
+msgstr ""
+
+#: views/scripts/training/roster.phtml:89
+msgid "Return to training"
+msgstr ""
+
+#: views/scripts/training/scores.phtml:21
+msgid "Course"
+msgstr ""
+
+#: views/scripts/training/scores.phtml:24
+msgid "Person"
+msgstr ""
+
+#: views/scripts/training/scores.phtml:34
+msgid "Are you sure you wish to delete this score?"
+msgstr ""
+
+#: views/scripts/training/scores.phtml:43
+msgid "Return to Training Session"
+msgstr ""
+
+#: views/scripts/user/_add_form.phtml:37
+#: views/scripts/user/edit.phtml:52
+#: views/scripts/user/forgot-password.phtml:23
+#: views/scripts/user/myaccount.phtml:27
+msgid "E-mail"
+msgstr ""
+
+#: views/scripts/user/_add_form.phtml:40
+#: views/scripts/user/edit.phtml:59
+msgid "Access Level"
+msgstr ""
+
+#: views/scripts/user/_add_form.phtml:43
+#: views/scripts/user/_add_form.phtml:48
+#: views/scripts/user/edit.phtml:62
+#: views/scripts/user/edit.phtml:67
+msgid "Add/Edit/Delete"
+msgstr ""
+
+#: views/scripts/user/_add_form.phtml:44
+#: views/scripts/user/_add_form.phtml:49
+#: views/scripts/user/edit.phtml:63
+#: views/scripts/user/edit.phtml:68
+msgid "View only"
+msgstr ""
+
+#: views/scripts/user/_add_form.phtml:52
+#: views/scripts/user/edit.phtml:71
+msgid "View/create reports"
+msgstr ""
+
+#: views/scripts/user/_add_form.phtml:53
+msgid "Admin"
+msgstr ""
+
+#: views/scripts/user/_add_form.phtml:53
+#: views/scripts/user/edit.phtml:74
+msgid "Edit country options"
+msgstr ""
+
+#: views/scripts/user/_add_form.phtml:53
+#: views/scripts/user/edit.phtml:78
+msgid "Add/Edit users"
+msgstr ""
+
+#: views/scripts/user/_add_form.phtml:54
+#: views/scripts/user/edit.phtml:80
+msgid "Approval"
+msgstr ""
+
+#: views/scripts/user/_add_form.phtml:54
+#: views/scripts/user/edit.phtml:80
+msgid "Approve trainings"
+msgstr ""
+
+#: views/scripts/user/_add_form.phtml:57
+#: views/scripts/user/edit.phtml:83
+msgid "Organizer access"
+msgstr ""
+
+#: views/scripts/user/_add_form.phtml:58
+#: views/scripts/user/edit.phtml:84
+msgid "All Training Organizers"
+msgstr ""
+
+#: views/scripts/user/_add_form.phtml:67
+msgid "Send email with login information"
+msgstr ""
+
+#: views/scripts/user/_add_form.phtml:71
+msgid "Finished"
+msgstr ""
+
+#: views/scripts/user/activate.phtml:4
+#: views/scripts/user/activate.phtml:17
+msgid "Activate User"
+msgstr ""
+
+#: views/scripts/user/add.phtml:4
+msgid "Add User"
+msgstr ""
+
+#: views/scripts/user/add.phtml:18
+msgid "User Set Up"
+msgstr ""
+
+#: views/scripts/user/delete.phtml:4
+#: views/scripts/user/delete.phtml:17
+msgid "Block User"
+msgstr ""
+
+#: views/scripts/user/edit.phtml:4
+#: views/scripts/user/edit.phtml:43
+msgid "Edit Account"
+msgstr ""
+
+#: views/scripts/user/edit.phtml:54
+#: views/scripts/user/myaccount.phtml:29
+msgid "New password"
+msgstr ""
+
+#: views/scripts/user/edit.phtml:56
+msgid "Confirm new password"
+msgstr ""
+
+#: views/scripts/user/edit.phtml:76
+msgid "Add Training Titles"
+msgstr ""
+
+#: views/scripts/user/edit.phtml:93
+msgid "Block this User"
+msgstr ""
+
+#: views/scripts/user/edit.phtml:96
+msgid "Are you sure you wish to block this user?"
+msgstr ""
+
+#: views/scripts/user/edit.phtml:103
+msgid "Activate this User"
+msgstr ""
+
+#: views/scripts/user/edit.phtml:106
+msgid "Are you sure you wish to activate this user?"
+msgstr ""
+
+#: views/scripts/user/forgot-password.phtml:19
+msgid "Forgot Password"
+msgstr ""
+
+#: views/scripts/user/forgot-password.phtml:22
+msgid "Enter your email address, and a new temporary password will be sent to you."
+msgstr ""
+
+#: views/scripts/user/forgot-password.phtml:26
+msgid "Send Password"
+msgstr ""
+
+#: views/scripts/user/myaccount.phtml:31
+msgid "Confirm New password"
+msgstr ""
+
+#: views/scripts/user/search.phtml:4
+msgid "User List"
+msgstr ""
+
+#: views/scripts/user/search.phtml:15
+msgid "Browse Users"
+msgstr ""
+
+#: views/scripts/user/search.phtml:26
+msgid "blocked"
+msgstr ""
+
+#: views/scripts/user/search.phtml:35
+msgid "First"
+msgstr ""
+
+#: views/scripts/user/search.phtml:36
+msgid "Last"
+msgstr ""
+
+#: views/scripts/user/search.phtml:38
+msgid "Username"
+msgstr ""
+
+#: views/scripts/user/search.phtml:39
+msgid "Status"
+msgstr ""
+

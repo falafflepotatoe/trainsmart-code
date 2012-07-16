@@ -1,0 +1,398 @@
+/***************
+ *  itech CSS  *
+ ***************/
+
+/******************
+ * Type Selectors */
+
+/* body margin and padding off as a foundation for YUI CSS treatments. */
+body { margin-top:20px; padding:0; font-family:verdana; }
+html, body, .yui-skin-sam { background:#3669aa; }
+
+a { color:#3669aa; }
+
+fieldset	{ border:1pt solid;	margin: 1em 5%;  padding: 1em;}
+legend { padding: .5em; }
+label { cursor:pointer; }
+
+h1 { font-size:18px; color:#75ba53; margin-bottom:0.5em; }
+
+input[type='text'], input[type='password'], textarea, select { border:1px solid #7f9db9; padding:1px 2px; font-family:verdana; }
+
+input[readonly], input[readonly='readonly'], textarea[readonly='readonly'], textarea[readonly], .readonly {
+   background: #F0F0F0;
+ }
+input[type='checkbox'] { margin-right: .5em;}
+
+/***************************
+ * Common Elements/Classes */
+.clear { clear:both; margin-top:0px;}
+.errorText, #statusBox.statusError, .required { color: #F22; }
+.hrGrey { background:url(../images/grad_grey.gif) center repeat-x; height:30px; margin-top:5px; }
+.label { font-weight:bold; font-size:90%; color:#696969; }
+
+/* Forms */
+.fieldLabel,.fieldLabelThin { float:left; width:240px; text-align:right; margin-right:1em; margin-bottom:1em; font-size:11px; font-weight:bold; padding-top:0.3em; color:#696969; clear:left; }
+.fieldInput { margin-bottom:1em;}
+.fieldLabelThin { width: 150px;}
+.fieldInput a { font-size:11px; padding-left:0.5em; }
+.fieldInput textarea { width:350px; height:80px; }
+.fieldInput .float50 { float:left; width:50%; margin-bottom:0.5em; }
+.fieldIndent, .fieldIndentNoMargin { margin-left:3em; font-size:11px; font-weight:bold; margin-bottom:1.5em; padding-top:0.3em; color:#444; }
+.fieldIndentNoMargin { margin-left:0px; }
+.fieldIndentNoMargin .total { font-weight:normal; font-style:italic; margin-left:2em; }
+.fieldIndent2 { margin-left:2em; margin-bottom:1.5em; padding-top:0.0em; color:#222; }
+
+.simpleLabel { float:left; width:100px; text-align:right; margin-right:1em; font-weight:bold; color:#696969; clear:left; }
+.simpleValue { float:left; width:470px; margin-bottom:1em; }
+.longerWidth { width:150px; }
+.simpleValueNoMargin { float:left; width:470px; margin-bottom:0.2em; }
+
+.checkBoxes input { border:0px; } /* for IE7 */
+.autoComplete { z-index: 9000}
+.noResults { margin-left:0.5em; color:#555; font-size:11px; }
+
+.dialog .fieldLabel { margin-bottom:.2em; }
+.dialog .fieldInput { margin-bottom:.2em; }
+.dialog h1 { font-size:10px; }
+
+input.submitArrow { background:#6cb647 url(../images/submit_arrow.gif) center right no-repeat; padding-right:20px; color:#fff; text-transform:uppercase; font-weight:bold; border:0px; height:19px; line-height:19px; margin:0px; margin-top:1em; float:right; font-size:11px; cursor:pointer; }
+input.submitNoArrow,  .yui-skin-sam .yui-push-button button { background:#6cb647; color:#fff; text-transform:uppercase; font-weight:bold; border:0px; height:19px; line-height:19px; margin:1em; float:right; font-size:11px; cursor:pointer; min-height:1em; padding:0px 5px; font-family:inherit;}
+.yui-skin-sam .yui-push-button {border-style:none;display:block; background: none;  }
+.yui-skin-sam .yui-push-button .first-child {border-style:none;}
+input.insert { background:#6cb647; padding:2px 4px; color:#fff; font-size:11px; text-transform:uppercase; font-weight:bold; border:0px; cursor:pointer; }
+
+.button-group .yui-button { /* for dialog buttons */
+		display:-moz-inline-box;
+}
+
+.actionBtn {
+ position: relative; 
+ float:right; 
+ z-index: 100;
+ margin-right: 10%; 
+ clear: both;
+}
+
+#contentAdmin .checkboxHelper { overflow:scroll; height:400px; position:relative; }
+.checkboxHelper input { margin-bottom:0.25em; }
+tr.checked td { background:#e7e7e7; }
+
+
+
+/* prevent overflow */
+#select_training_title_option { width: 525px; } /* add */
+#content.edit-training #select_training_title_option { width: 335px; } /* edit */
+
+table.tableChoices td { padding-bottom:0.5em; } /* checkbox choices */
+
+/* Reports */
+#criteria  .leftBorderPad, #criteria  .leftBorder,.criteria-label {
+/*	border-left:1px solid; */
+	float:left;
+	height:2.75em;
+	padding-left:1em;
+	vertical-align:middle;
+}
+#criteria .autoHeight { height: auto; }
+
+#criteria select.fixed {
+  width: 460px;
+}
+
+/* #criteria .fieldInput.bordered { border-left:1px solid; } */
+/* #criteria .fieldInput.bordered .leftBorderPad { border-left:0px; } 
+#criteria .fieldInput select { max-width: 90%;}
+#criteria .fieldInput select#training_title_option_id { width:440px; }
+#criteria .fieldInput select#course_id { width:440px; }
+*/
+#criteria .leftBorder input,#criteria  .leftBorderPad input {
+	margin-top:4px;
+}
+
+#criteria .leftBorderPad  {
+	text-align:center;
+	padding-right:.5em;
+	width: 24px;
+}
+
+#criteria .fieldInput,#criteria .fieldLabel {
+	margin-bottom:0px;
+}
+
+#dividers {
+  background-image: url(../images/report_div.jpg);
+  background-repeat: repeat-y;
+  background-position: -18px 0;
+  overflow: auto;
+  padding:0px;
+  
+}
+
+.criteria-header {
+  background: #ffffff;
+}
+
+.criteria-label {
+  padding: 0px 5px;
+  background: #ffffff;
+  margin-left: -1px;
+}
+
+/* YUI DataTable */
+.yui-dt { font-size:11px; }
+#trainingStats {	font-size:12px;}
+
+
+/* EditTable (YUI DataTable subset)*/
+.editTableLinks { }
+.editTableAdd { margin-top:1.5em; display:block; float:left; }
+.editTableDelete { color:#F22; font-style:italic; padding-left:1em; }
+#editTableSaving { margin-top:0.3em; }
+/* IE7 fix? */
+.yui-dt-editor { margin-top:expression('-35px'); }
+
+/* align with textboxes */
+#trainerTable .yui-dt-col-0 .yui-dt-label,
+#trainerTable .yui-dt-col-1 .yui-dt-label
+{ width:110px; display:block; }
+
+.hidden { display:none; }
+
+#statusBox { color:#222; background:#fef3c7; border:1px dotted #99cc7e; font-weight:bold; font-size:11px; padding:5px 10px; margin-bottom:1em; }
+#statusBox.admin { margin-left: 170px; }
+
+/* ? */
+#toggle { text-align: center; padding: 1em; }
+#toggle a { padding: 0 5px;  border-left: 1px solid black; }
+
+#resp { margin:10px;padding:5px;border:1px solid #ccc;background:#fff;}
+#resp li { font-family:monospace }
+
+/****************
+ * Layout       */
+#pageHolder { min-width: 960px; margin:0px 20px; padding-bottom:20px; text-align:left; }
+
+#content {
+  background:#fff url(../images/grad_yellow.gif) top left repeat-x;
+  padding-top:25px;
+  padding-bottom:20px;
+  padding-left:25px;
+  padding-right:25px;
+}
+
+/* Admin */
+#navAdmin { float:left; width:150px; margin-right:20px; position:relative; left:-40px; }
+#navAdmin a.active, #navAdmin li.active { text-decoration:none; font-weight:bold; color:#294e80; list-style:disc; }
+#navAdmin ul { color:#333; margin-left:0em; padding-left:0px; font-weight:bold; }
+#navAdmin li { margin-bottom:0.3em; }
+#navAdmin ul ul { margin-top:0.3em; font-weight:normal; color:#fed636; }
+#navAdmin ul li ul { margin-left:1.2em; margin-bottom:1em; }
+#navAdmin ul li ul li { list-style:square; }
+#contentAdmin { float:left; width:700px; clear:right; }
+#contentAdmin .fieldLabel { width:125px; text-align:right; margin-right:1em; }
+#contentAdmin #userForm .fieldLabel { width:70px; }
+#contentAdmin .fieldInput { width:360px; }
+
+#content.adminDiv { padding-left: 60px; background:#fff url(../images/grad_grey_vert.gif) 200px repeat-y; }
+
+.history { font-size:.5em; }
+.historyDiv { font-size:.75em; background:#fdfdfd; z-index: 100; float: right; margin-right:5%; margin-top:15px; padding:6px; width:240px; border:1px solid #555; line-height:1.5em; clear: both; }
+.historyDiv b { color:#555; }
+
+/****************
+ * Header       */
+#header { background:#6cb647; }
+#header #headerImg { float:left; margin-top:10px; margin-left:20px; margin-right:20px;}
+#header #headerLinks { float:right; margin:10px;  }
+#header #headerLinks, #header #headerLinks a { color:#fff; font-size:12px; }
+#header #headerLinks a:hover { text-decoration:none; }
+#header #headerLinks .pipe { margin:0em 5px; }
+
+/* Main Navigation */
+#navMain { height:25px; line-height:20px; background:#51965b; margin-top:4px; }
+#navMain a { margin-top:5px; padding-left:8px; display:block; color:#fff; font-weight:bold; font-size:11px; text-transform:uppercase; min-width:105px; text-decoration:none; }
+#navMain a.active, #navMain a.active:hover  { color:#fed636; background:transparent !important; }
+#navMain a.first { margin-left:18px; }
+#navMain a:hover,#navMain a.hover { background:#6cb647; }
+
+#navMain .flydown { float:left; }
+
+/* Flydowns */
+#navMain .flydownItems {
+  position:absolute;
+	visibility:hidden;
+	z-index:1;
+	background:#fed636;
+	padding-bottom:6px;
+}
+#navMain .flydownItems a {
+	margin:0px;
+	border-bottom:1px dotted #fff;
+  line-height:17px; /* vertically centers text */
+  float:none;
+  display:block;
+  position:relative;
+  color:#3669aa;
+  background:#fed636;
+  text-transform:none;
+  font-weight:normal;
+  padding-top:2px;
+  padding-bottom:2px;
+}
+#navMain .flydownItems a:hover {	background-color:#6cb647;	color:#fff; }
+
+/* custom styles for multiple stacked instances */
+.autocomplete {
+   /* z-index:9000; z-index needed on top instance for ie & sf absolute inside relative issue */
+    _position:absolute; /* abs pos needed for ie quirks */
+   background:#e4ebf4 url(../images/ajax_autocomplete_idle.gif) right center no-repeat;
+}
+.ajaxload { background-image:url(../images/ajax_load.gif); background-repeat: no-repeat; }
+
+#uploadFileForm { background-position:right center; }
+
+
+.printAndExport {
+	margin-left: 100px;
+}
+
+a.export { font-weight:bold; background:url(../images/excel.jpg) center right no-repeat; padding-right:20px; }
+a.export.block { display:block; line-height:16px; float:left; }
+
+#footer-by-itech { color:#e7e7e7; font-size:11px; margin-top:0.5em; text-align:center; }
+#footer-by-itech a { color:#e7e7e7; }
+#footer-by-itech a:hover { color:#fff; text-decoration:none; }
+
+/****************
+ * Print CSS    */
+@media print {
+  #content, #pageHolder { margin:0px; padding:0px; width:inherit; }
+
+  h1 { color:#000; }
+  .fieldInput { width:325px; }
+  .historyDiv { margin-left:70%; width:180px; }
+
+  /* Hide these elements */
+  #header, .printAndExport, input.submitNoArrow,
+  .yui-skin-sam .yui-button button, .hideFromPrint
+  { display:none; }
+
+  /* YUI DataTable */
+  .yui-dt { margin-left:1em; }
+  #yui-dt0-headtable, #yui-dt1-headtable, #yui-dt2-headtable { border-bottom:2px solid #000; z-index:9999; position:relative; }
+  .yui-dt td { border-bottom:1px solid #444 !important; }
+  .yui-dt-label { font-weight:bold; white-space:nowrap; }
+  .yui-dt-odd { border-bottom:2px solid #666 !important; }
+
+  .roster .yui-dt-odd {
+	background-color: #eee;
+  }
+
+  #content { padding:1em; } /* fix firefox cutoff (eg calendar) */
+
+}
+
+/****************
+ * Roster Page */
+.roster  table {
+	width: 100%;
+}
+
+.roster .yui-dt-liner {
+	margin:0;
+	padding:4px 10px;
+	overflow: visible;
+}
+
+.roster tr.yui-dt-odd {
+	background-color: #dddddd;
+}
+
+.roster .yui-dt td, .roster .yui-dt th,  .roster .yui-dt-bd table,  .roster .yui-dt-hd table, .roster .yui-dt th {
+	border:none;
+	background-image: none;
+	white-space:nowrap;
+}
+
+.roster .yui-dt-label {
+	font-weight: bold;
+	white-space:nowrap;
+}
+
+/****************
+ * Calendar */
+.calDay { font-weight: bold;}
+
+/**********
+* New Settings pages */
+table.settings {
+	text-align: center;
+}
+
+table.settings thead th  {
+	font-style: italic;
+	padding: 4px;
+
+	border:1px solid #DDDDDD;
+
+}
+
+table.settings td.fieldTitle {
+	font-weight: bold;
+	text-align:right;
+	 color:#696969;
+	 font-size:11px;
+}
+
+table.settings tbody td {
+	padding: 4px;
+	border:1px solid #DDDDDD;
+}
+
+fieldset.settings {
+	border: none;
+	padding: 0px;
+	margin: 1em 0 0 0;
+}
+
+fielset.settings legend, .caption {
+	font-weight: bold;
+	 color:#696969;
+	 font-size:11px;
+}
+
+/*** Evaluations ***/
+#evaluationForm .qnum {
+	margin: 0px 1em 1em 1em;
+	float: left;
+}
+
+#evaluationForm .likert {
+  margin: 0 0 .5em 2.5em;
+}
+#evaluationForm .likert label {
+    margin: 0px 1em 1em 1em;
+}
+
+#evaluationForm .qtext {
+  font-weight:  normal;
+}
+
+#evaluationForm li {
+  margin-bottom: 2em;
+}
+
+#addFacility { background: #ffffff; }
+
+#unapprovedTable #yui-dt2-bdrow0-cell5 {
+  width: 50%;
+}
+
+table {
+  width: 80%;
+}
+
+.checkboxHelper table {
+  width: auto;
+}

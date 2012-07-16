@@ -1,0 +1,73 @@
+<?php
+
+require_once ('app/controllers/sync/set/Simple.php');
+require_once ('app/models/table/Location.php');
+
+class SyncSetLocation extends SyncSetSimple
+{
+	
+	
+	
+	function __construct($sourceDbParams, $syncfile_id)
+	{
+		parent::__construct($sourceDbParams, $syncfile_id, 'location');
+	}
+	
+	
+	protected function getTable($isLeft = true)
+	{
+		if($isLeft) {
+			return new Location($this->sourceDbParams);
+		}
+		return new Location();
+	}
+	
+	protected function getColumns() 
+	{
+		return array( 
+			array('parent_id', 'location'), 
+			'location_name', 
+			'tier'
+			);
+	}
+	
+	
+	public function fetchLeftPool()
+	{
+		
+		
+		//get city tier
+		$settings = System::getAll();
+		$city_tier = 2 + $settings['display_region_c'] + $settings['display_region_b'];
+		
+		
+		//only return cities
+		$rows = $this->getLeftTable()->fetchAll('(timestamp_updated > "' . SyncCompare::$lastSyncCompleted . '") AND tier = '.$city_tier);
+		return $rows;
+	}
+	
+	public function fetchFieldMatch($ld)
+	{
+		$s = trim(strtolower($ld->location_name));
+		//we can match on parent id's here instead of uuids, since parent locations can't be added to the desktop
+		$where = '(parent_id="'. $ld->parent_id .'" AND trim(lcase(location_name))='.$this->quote($s).')';
+		$row = $this->getRightTable()->fetchRow($where);
+		if($row) {
+			return $row;
+		}
+		
+		return null;
+	}
+	
+
+}
+
+
+
+
+
+
+
+
+
+
