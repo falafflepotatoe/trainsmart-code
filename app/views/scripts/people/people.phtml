@@ -1,0 +1,147 @@
+<html>
+	<head>
+		<title><?php echo $this->escape($this->title);?></title>
+		<link href="http://fonts.googleapis.com/css?family=Droid+Sans:400,700" rel="stylesheet" type="text/css">
+	<?php
+    require_once('views/helpers/ScriptContainer.php');
+    print ScriptContainer::$instance->renderCSSHead();
+	print ScriptContainer::$instance->renderJSHead();      ?>
+    
+<script type="text/javascript" src="<?php  echo Settings::$COUNTRY_BASE_URL.'/js/scripts/jquery-1.7.1.min.js'; ?>"></script>
+<script type="text/javascript" src="<?php  echo Settings::$COUNTRY_BASE_URL.'/js/scripts/jquery-ui-1.8.17.custom.min.js'; ?>"></script>
+<script type="text/javascript" language="javascript" src="<?php  echo Settings::$COUNTRY_BASE_URL.'/js/scripts/jquery.dataTables.js'; ?>"></script>
+
+		<script type="text/javascript" charset="utf-8">
+			$(document).ready(function() {
+				/* Add a click handler to the rows - this could be used as a callback */
+				$(".tablegrid tbody").click(function(event) {
+					$(oTable.fnSettings().aoData).each(function (){
+						$(this.nTr).removeClass('row_selected');
+					});
+					$(event.target.parentNode).addClass('row_selected');
+				});
+	 
+				/* Add a click handler for the delete row */
+				$('#delete').click( function() {
+					var anSelected = fnGetSelected( oTable );
+					oTable.fnDeleteRow( anSelected[0] );
+				} );
+	 
+				/* Init the table */
+				oTable = $('.tablegrid').dataTable({
+					"bJQueryUI": true,
+					"sPaginationType": "full_numbers"
+				});
+			} );
+
+			/* Get the rows which are currently selected */
+			function fnGetSelected( oTableLocal ){
+				var aReturn = new Array();
+				var aTrs = oTableLocal.fnGetNodes();
+				 
+				for ( var i=0 ; i<aTrs.length ; i++ ){
+					if ( $(aTrs[i]).hasClass('row_selected') ){
+						aReturn.push( aTrs[i] );
+					}
+				}
+				return aReturn;
+			}
+		</script>
+	</head>
+    
+    <body  class="yui-skin-sam">
+     <div id="pageHolder">
+			 <div id="header"><?php require_once('views/scripts/preheader.phtml');?></div>
+		<div id="content">
+			<?php /*?><div id="headerpad">&nbsp;</div><?php */?>
+			<?php /*?><div id="header"><a href="index.html"><img src="graphics/logo.png" border="0"></a></div>
+			<div id="subheader">
+				<a href="#">Home</a>
+				<a href="#">People</a>
+				<a href="#">Course</a>
+				<a href="#">Cohort</a>
+				<a href="#">Places</a>
+				<a href="#">Reports</a>
+			</div><?php */?>
+                    <form action="../peoplefind/peoplefind" method="post">
+			<div id="subcontent">
+				<div id="contentheader">
+					<h2>People Search</h2><br>
+					<p style="float:left;font-size:13px;">Select criteria</p>
+				</div>
+				<div class="pad50 clear"></div>
+				<div class="mainformholder" style="height:450px;">
+					<label>First name</label>
+					<input type="text" name="firstname">
+
+					<label>Last name</label>
+					<input type="text" name="lastname">
+
+					<label>Cohort</label>
+					<select id="cohort" name="cohort">
+						<option value="0">Select...</option>
+<?php
+	foreach ($this->cohort as $cohort){
+		echo "<option value=\"" . $cohort['id'] . "\">" . $cohort['cohortname'] . "</option>\n";
+	}
+?>
+					</select>
+
+					<label>Student cadre</label>
+					<select id="cadre" name="cadre">
+						<option value="0">Select...</option>
+<?php
+	foreach ($this->cadre as $cadre){
+		echo "<option value=\"" . $cadre['id'] . "\">" . $cadre['cadrename'] . "</option>\n";
+	}
+?>
+					</select>
+
+					<label>Institution</label>
+					<select id="inst" name="inst">
+						<option value="0">Select...</option>
+<?php
+	foreach ($this->institution as $institution){
+		echo "<option value=\"" . $institution['id'] . "\">" . $institution['institutionname'] . "</option>\n";
+	}
+?>
+					</select>
+
+					<label>Facility</label>
+					<select id="fact" name="fact">
+						<option value="0">Select...</option>
+<?php
+	foreach ($this->facility as $facility){
+		echo "<option value=\"" . $facility['id'] . "\">" . $facility['facility_name'] . "</option>\n";
+	}
+?>
+					</select>
+                    
+					<label>Return</label>
+	                <input type="radio" name="type" value="every" style="margin-left : 30px;" checked> Everyone
+                    <p style="padding : 0px; margin : 0px; background-color : #FFFFFF;">&nbsp;</p>
+
+					<label>&nbsp;</label>
+                    <input type="radio" name="type" value="student" style="margin-left : 30px;"> Students
+                    <p style="padding : 0px; margin : 0px; background-color : #FFFFFF;">&nbsp;</p>
+
+                    <label>&nbsp;</label>
+                    <input type="radio" name="type" value="tutor" style="margin-left : 30px;"> Tutor
+                    <p style="padding : 0px; margin : 0px; background-color : #FFFFFF;">&nbsp;</p>
+
+
+					<div class="rightdiv">
+						<input type="submit" name="search" class="tsbutton green large" value="Search &raquo;">
+					</div>
+				</div>
+                   
+			</div>
+                         </form>
+		</div>
+        </div>
+        
+		<?php /*?><div id="footer"><div id="footercontent">Copyright &copy; 2011.</div><?php */?>
+        <div id="footer"><?php require_once('views/scripts/footer.phtml');?></div>
+        </div>
+	</body>
+</html>

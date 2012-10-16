@@ -65,8 +65,6 @@ class SyncCompare
     'facility',
     'person_title_option',
     'person_suffix_option',
-    // Added by Sean Smith on 9/22/11
-    // See also SyncSetFactory.php: line ~124
     'person_primary_responsibility_option', // was person_responsibility_option
     'person_secondary_responsibility_option', // new table added 
 
@@ -78,15 +76,11 @@ class SyncCompare
     'trainer_affiliation_option',
     'trainer_skill_option',
     'trainer_type_option',
-    
-    // Added by Sean Smith on 9/22/11
-    // See also SyncSetFactory.php: line ~124
     'trainer_language_option',
   
-      'trainer',
-      'trainer_to_trainer_skill_option',
-      'trainer_to_trainer_language_option',
-  
+    'trainer',
+    'trainer_to_trainer_skill_option',
+    'trainer_to_trainer_language_option',
     'training_location',
     'training_custom_1_option',
     'training_custom_2_option',
@@ -98,7 +92,7 @@ class SyncCompare
     'training_got_curriculum_option',
     'training_category_option',
     'training_topic_option',
-      'training_title_option',
+    'training_title_option',
     'training_category_option_to_training_title_option', //not assignable in desktop version
     'training',
       

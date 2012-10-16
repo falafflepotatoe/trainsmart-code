@@ -189,10 +189,13 @@ exit;
 		$response = $this->getResponse ();
 		$response->clearHeaders ();
 		//allow cache
-		$response->setHeader ( 'Expires', gmdate ( 'D, d M Y H:i:s', time () + 60 * 60 * 30 ) . ' GMT', true );
-		$response->setHeader ( 'Cache-Control', 'max-age=7200, public', true );
+		#$response->setHeader ( 'Expires', gmdate ( 'D, d M Y H:i:s', time () + 60 * 60 * 30 ) . ' GMT', true );
+		#$response->setHeader ( 'Cache-Control', 'max-age=7200, public', true );
+		#$response->setHeader ( 'Last-Modified', '', true );
+		$response->setHeader ( 'Cache-Control',  "public, must-revalidate, max-age=".(60*60*24*7), true ); // new ver TS 4.0 new JS file,wassup...
 		$response->setHeader ( 'Pragma', 'public', true );
-		$response->setHeader ( 'Last-Modified', '', true );
+		$response->setHeader ( 'Last-Modified',''.date('D, d M Y H:i:s', strtotime('9 September 2012 04:00')).' GMT', true );
+
 	}
 
 }

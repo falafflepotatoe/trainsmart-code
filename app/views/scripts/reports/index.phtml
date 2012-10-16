@@ -1,51 +1,90 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-  <title><?php echo $this->translation['Application Name'];?></title>
+	<head>
+		<title><?php echo $this->translation['Application Name'];?></title>
+		<?php
+		require_once('views/helpers/ScriptContainer.php');
+		print ScriptContainer::$instance->renderCSSHead();
+		print ScriptContainer::$instance->renderJSHead();
+		?>
+
+	</head>
+	<body class="yui-skin-sam">
+
+
+		<script language="javascript">
+			function gotoPage(objId) {
+				var reportSelector = YAHOO.util.Dom.get(objId);
+				if ( reportSelector[reportSelector.selectedIndex].value ) {
+					window.location = '<?php echo $this->base_url;?>' + reportSelector[reportSelector.selectedIndex].value + '?<?php echo $_SERVER['QUERY_STRING'];?>';
+				}
+			}
+		</script>
+		<div id="pageHolder">
+
+			<div id="header"><?php require_once('views/scripts/header.phtml');?></div>
+			<div id="content">
+
+				<h1><?php tp("Report");?></h1>
+				<p></p>
+				<?php require_once('peopleReportsPicker.phtml'); ?><br/><br/>
+				<div class="clear"></div>
+				<div class="fieldLabel" id="trainer_lbl"><?php tp('Select trainer report');?></div>
+				<select id="trainer" name="trainer" onchange="gotoPage('trainer');">
+					<option value="">--<?php tp('choose');?>--</option>
+					<option value="/reports/trainers"><?php tp('Trainers by Skill, Language, and PEPFAR');?></option>
+				</select><br/><br/>
+				<div class="clear"></div>
+				<div class="fieldLabel" id="training_lbl"><?php tp('Select training report');?></div>
+				<select id="training" name="training" onchange="gotoPage('training');">
+					<option value="">--<?php tp('choose');?>--</option>
+					<option value="/reports/trainings"><?php tp('Trainings by Name');?></option>
+					<option value="/reports/trainingByParticipants"><?php tp('Trainings by Participant Count');?></option>
+				</select><br/><br/>
 <?php
-require_once('views/helpers/ScriptContainer.php');
-print ScriptContainer::$instance->renderCSSHead();
-print ScriptContainer::$instance->renderJSHead();
+	if ($this->hasACL('pre_service')){
+/*
+				<div class="clear"></div>
+				<div class="fieldLabel" id="training_lbl"><?php tp('Pre-service reports');?></div>
+				<select id="pstraining" name="pstraining" onchange="gotoPage('pstraining');">
+					<option value="">--<?php tp('choose');?>--</option>
+					<option value="/reports/psTrainingsByName"><?php tp('Trainings by Name');?></option>
+					<option value="/reports/psTrainingByParticipants"><?php tp('Trainings by Participant Count');?></option>
+
+					<option value="/reports/psMissingStudentsTrained"><?php tp('Missing students trained');?></option>
+					<option value="/reports/psMissingStudentsByName"><?php tp('Missing students by name');?></option>
+					<option value="/reports/psMissingGraduatedStudents"><?php tp('Missing graduated students');?></option>
+					<option value="/reports/psMissingCourseByStudentCount"><?php tp('Missing course by student count');?></option>
+					<option value="/reports/psMissingCourseByName"><?php tp('Missing course by name');?></option>
+					<option value="/reports/psMissingCohortByParticipantCount"><?php tp('Missing cohort by participant count');?></option>
+					<option value="/reports/psMissingInstitutionInformation"><?php tp('Missing instituiton information');?></option>
+					<option value="/reports/psMissingTutorByName"><?php tp('Missing tutor by name');?></option>
+					<option value="/reports/psMissingFacilityReport"><?php tp('Missing facility report');?></option>
+				</select>
+*/
 ?>
 
-</head>
-<body class="yui-skin-sam">
+				<div class="clear"></div>
+				<div class="fieldLabel" id="training_lbl"><?php tp('Pre-service reports');?></div>
+				<select id="pstraining" name="pstraining" onchange="gotoPage('pstraining');">
+					<option value="">--<?php tp('choose');?>--</option>
+					<option value="/reports/psStudentsTrained"			><?php tp('Students Trained');?></option>
+					<option value="/reports/psStudentsByName"			><?php tp('Students By Name');?></option>
+					<option value="/reports/psGraduatedStudents"		><?php tp('Graduated Students');?></option>
+					<option value="/reports/psCourseByStudentCount"		><?php tp('Course By Student Count');?></option>
+					<option value="/reports/psCourseByName"				><?php tp('Course By Name');?></option>
+					<option value="/reports/psCohortByParticipantCount"	><?php tp('Cohort By Participant Count');?></option>
+					<option value="/reports/psInstitutionInformation"	><?php tp('Institution Information');?></option>
+					<option value="/reports/psTutorByName"				><?php tp('Tutor By Name');?></option>
+					<option value="/reports/psFacilityReport"			><?php tp('Facility Report');?></option>
+				</select>
 
-
-<script language="javascript">
-	function gotoPage(objId) {
-		var reportSelector = YAHOO.util.Dom.get(objId);
-		if ( reportSelector[reportSelector.selectedIndex].value ) {
-			window.location = '<?php echo $this->base_url;?>' + reportSelector[reportSelector.selectedIndex].value + '?<?php echo $_SERVER['QUERY_STRING'];?>';
-		}
+<?php
 	}
-</script>
-<div id="pageHolder">
+?>
 
-  <div id="header"><?php require_once('views/scripts/header.phtml');?></div>
-  <div id="content">
-
-    <h1><?php tp("Report");?></h1>
-	<p></p>
-    	<?php require_once('peopleReportsPicker.phtml'); ?><br/><br/>
-   	<div class="clear"></div>
-    	<div class="fieldLabel" id="trainer_lbl"><?php tp('Select trainer report');?></div>
-    	<select id="trainer" name="trainer" onchange="gotoPage('trainer');">
-    		<option value="">--<?php tp('choose');?>--</option>
-    		<option value="/reports/trainers"><?php tp('Trainers by Skill, Language, and PEPFAR');?></option>
-   	</select><br/><br/>
-   	<div class="clear"></div>
-    	<div class="fieldLabel" id="training_lbl"><?php tp('Select training report');?></div>
-    	<select id="training" name="training" onchange="gotoPage('training');">
-    		<option value="">--<?php tp('choose');?>--</option>
-    		<option value="/reports/trainings"><?php tp('Trainings by Name');?></option>
-    		<option value="/reports/trainingByParticipants"><?php tp('Trainings by Participant Count');?></option>
-   	</select>
-  </div>
-  <div id="footer"><?php require_once('views/scripts/footer.phtml');?></div>
-
-
-</div>
-
-</body>
+			</div>
+			<div id="footer"><?php require_once('views/scripts/footer.phtml');?></div>
+		</div>
+	</body>
 </html>

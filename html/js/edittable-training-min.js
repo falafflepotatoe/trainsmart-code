@@ -551,18 +551,18 @@ function updateScore(label, pttId, jsonUrl, promptDefault) {
 		score = parseInt(inputScore);
 		if (inputScore != score || score < 1 || score > 100) {
 			alert('That is not a valid score.');
-			updateScore(label, pttId);
+			updateScore(label, pttId,  jsonUrl, promptDefault);
 			return;
 		}
 
 		// perform Ajax to update score
 		ajaxCallback = {
 			success : function(o) {
-				if (typeof personsTable != "undefined") {
-					personsTable.flashRow(pttId);
+				if (typeof ITECH.personsTable != "undefined") {
+					ITECH.personsTable.flashRow(pttId);
 				}
 			},
-			failure : function() {
+			failure : function(e) {
 				// display error message
 			alert("Couldn't save, sorry!");
 			return false;

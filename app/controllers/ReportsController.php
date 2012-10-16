@@ -12,6 +12,7 @@ require_once ('models/table/OptionList.php');
 require_once ('views/helpers/CheckBoxes.php');
 require_once ('models/table/MultiAssignList.php');
 require_once ('models/table/TrainingTitleOption.php');
+require_once ('models/table/Helper.php');
 
 class ReportsController extends ReportFilterHelpers {
 
@@ -23,6 +24,10 @@ class ReportsController extends ReportFilterHelpers {
 	}
 
 	public function indexAction() {
+
+		#		$itc = new ITechController();
+		#		var_dump ($itc);
+		#		$this->view->assign('ps',$this->hasACL('pre_service'));
 	}
 
 	public function preDispatch() {
@@ -58,11 +63,39 @@ class ReportsController extends ReportFilterHelpers {
 		require_once ('models/table/Translation.php');
 		$translation = Translation::getAll ();
 
-		$headers = array (// fieldname => label
-		'id' => 'ID', 'cnt' => t ( 'Count' ), 'active' => @$translation ['Is Active'], 'first_name' => @$translation ['First Name'], 'middle_name' => @$translation ['Middle Name'], 'last_name' => @$translation ['Last Name'], 'training_title' => @$translation ['Training Name'], 'province_name' => @$translation ['Region A (Province)'], 'district_name' => @$translation ['Region B (Health District)'], 'pepfar_category_phrase' => @$translation ['PEPFAR Category'], 'training_organizer_phrase' => @$translation ['Training Organizer'], 'training_level_phrase' => @$translation ['Training Level'], 'trainer_language_phrase' => t ( 'Language' ), 'training_location_name' => t ( 'Location' ), 'training_start_date' => t ( 'Date' ), 'training_topic_phrase' => t ( 'Training Topic' ), 'funding_phrase' => t ( 'Funding' ), 'is_tot' => t ( 'TOT' ), 'facility_name' => t ( 'Facility Name' ), 'facility_type_phrase' => t ( 'Facility Type' ), 'facility_sponsor_phrase' => t ( 'Facility Sponsor' ), 'course_recommended' => t ( 'Recommended classes' ), 'recommended' => t ( 'Recommended' ), 'qualification_phrase' => t ( 'Qualification' ) . ' ' . t ( '(primary)' ), 'qualification_secondary_phrase' => t ( 'Qualification' ) . ' ' . t ( '(secondary)' ), 'gender' => t ( 'Gender' ), 'name' => t ( 'Name' ), 'email' => t ( 'Email' ), 'phone' => t ( 'Phone' ), 'cat' => t ( 'Category' ), 'language_phrase' => t ( 'Language' ), 'trainer_type_phrase' => t ( 'Type' ), 'trainer_skill_phrase' => t ( 'Skill' ), 'trainer_language_phrase' => t ( 'Language' ), 'trainer_topic_phrase' => t ( 'Topics Taught' ), 'phone_work' => t ( 'Work Phone' ), 'phone_home' => t ( 'Home Phone' ), 'phone_mobile' => t ( 'Mobile Phone' ), 'type_option_id' => 'Type' );
+		if ($this->setting('display_mod_skillsmart')){
+			$headers = array (// fieldname => label
+			'id' => 'ID',
+			'pcnt' => 'Participants',
+			'has_known_participants' => 'Known participants',
+			'region_c_name' => 'Sub-district',
+			'training_method_phrase' => 'Training method',
+			'is_refresher' => 'Refresher',
+			'secondary_language_phrase' => 'Secondary language',
+			'primary_language_phrase' => 'Primary language',
+			'got_comments' => 'National curriculum comment',
+			'training_got_curriculum_phrase' => 'National curriculum',
+			'training_category_phrase' => 'Training category',
+			'age' => 'Age',
+			'comments1' => 'Professional registration number',
+			'comments2' => 'Race',
+			'comments3' => 'Experience',
+			'score_pre' => 'Pre-test',
+			'score_post' => 'Post-test',
+			'score_percent_change' => '% change',
+			'custom1_phrase' => 'Professional registration number',
+			'city_name' => 'City',
+			'cnt' => t ( 'Count' ), 'active' => @$translation ['Is Active'], 'first_name' => @$translation ['First Name'], 'middle_name' => @$translation ['Middle Name'], 'last_name' => @$translation ['Last Name'], 'training_title' => @$translation ['Training Name'], 'province_name' => @$translation ['Region A (Province)'], 'district_name' => @$translation ['Region B (Health District)'], 'pepfar_category_phrase' => @$translation ['PEPFAR Category'], 'training_organizer_phrase' => @$translation ['Training Organizer'], 'training_level_phrase' => @$translation ['Training Level'], 'trainer_language_phrase' => t ( 'Language' ), 'training_location_name' => t ( 'Location' ), 'training_start_date' => t ( 'Date' ), 'training_topic_phrase' => t ( 'Training topic' ), 'funding_phrase' => t ( 'Funding' ), 'is_tot' => t ( 'TOT' ), 'facility_name' => t ( 'Facility name' ), 'facility_type_phrase' => t ( 'Facility type' ), 'facility_sponsor_phrase' => t ( 'Facility sponsor' ), 'course_recommended' => t ( 'Recommended classes' ), 'recommended' => t ( 'Recommended' ), 'qualification_phrase' => t ( 'Qualification' ) . ' ' . t ( '(primary)' ), 'qualification_secondary_phrase' => t ( 'Qualification' ) . ' ' . t ( '(secondary)' ), 'gender' => t ( 'Gender' ), 'name' => t ( 'Name' ), 'email' => t ( 'Email' ), 'phone' => t ( 'Phone' ), 'cat' => t ( 'Category' ), 'language_phrase' => t ( 'Language' ), 'trainer_type_phrase' => t ( 'Type' ), 'trainer_skill_phrase' => t ( 'Skill' ), 'trainer_language_phrase' => t ( 'Language' ), 'trainer_topic_phrase' => t ( 'Topics taught' ), 'phone_work' => t ( 'Work phone' ), 'phone_home' => t ( 'Home phone' ), 'phone_mobile' => t ( 'Mobile phone' ), 'type_option_id' => 'Type' );
 
-		// action => array(field => label)
-		$headersSpecific = array ('peopleByFacility' => array ('qualification_phrase' => t ( 'Qualification' ) ), 'participantsByCategory' => array ('cnt' => t ( 'Participants' ), 'person_cnt' => t ( 'Unique Participants' ) ) );
+			// action => array(field => label)
+			$headersSpecific = array ('peopleByFacility' => array ('qualification_phrase' => t ( 'Qualification' ) ), 'participantsByCategory' => array ('cnt' => t ( 'Participants' ), 'person_cnt' => t ( 'Unique participants' ) ) );
+		} else {
+			$headers = array (// fieldname => label
+			'id' => 'ID', 'cnt' => t ( 'Count' ), 'active' => @$translation ['Is Active'], 'first_name' => @$translation ['First Name'], 'middle_name' => @$translation ['Middle Name'], 'last_name' => @$translation ['Last Name'], 'training_title' => @$translation ['Training Name'], 'province_name' => @$translation ['Region A (Province)'], 'district_name' => @$translation ['Region B (Health District)'], 'pepfar_category_phrase' => @$translation ['PEPFAR Category'], 'training_organizer_phrase' => @$translation ['Training Organizer'], 'training_level_phrase' => @$translation ['Training Level'], 'trainer_language_phrase' => t ( 'Language' ), 'training_location_name' => t ( 'Location' ), 'training_start_date' => t ( 'Date' ), 'training_topic_phrase' => t ( 'Training Topic' ), 'funding_phrase' => t ( 'Funding' ), 'is_tot' => t ( 'TOT' ), 'facility_name' => t ( 'Facility Name' ), 'facility_type_phrase' => t ( 'Facility Type' ), 'facility_sponsor_phrase' => t ( 'Facility Sponsor' ), 'course_recommended' => t ( 'Recommended classes' ), 'recommended' => t ( 'Recommended' ), 'qualification_phrase' => t ( 'Qualification' ) . ' ' . t ( '(primary)' ), 'qualification_secondary_phrase' => t ( 'Qualification' ) . ' ' . t ( '(secondary)' ), 'gender' => t ( 'Gender' ), 'name' => t ( 'Name' ), 'email' => t ( 'Email' ), 'phone' => t ( 'Phone' ), 'cat' => t ( 'Category' ), 'language_phrase' => t ( 'Language' ), 'trainer_type_phrase' => t ( 'Type' ), 'trainer_skill_phrase' => t ( 'Skill' ), 'trainer_language_phrase' => t ( 'Language' ), 'trainer_topic_phrase' => t ( 'Topics Taught' ), 'phone_work' => t ( 'Work Phone' ), 'phone_home' => t ( 'Home Phone' ), 'phone_mobile' => t ( 'Mobile Phone' ), 'type_option_id' => 'Type' );
+
+			// action => array(field => label)
+			$headersSpecific = array ('peopleByFacility' => array ('qualification_phrase' => t ( 'Qualification' ) ), 'participantsByCategory' => array ('cnt' => t ( 'Participants' ), 'person_cnt' => t ( 'Unique Participants' ) ) );
+		}
 
 		if ($rowRay) {
 			$keys = array_keys ( reset ( $rowRay ) );
@@ -85,6 +118,903 @@ class ReportsController extends ReportFilterHelpers {
 			return $headers;
 		}
 
+	}
+
+	public function compcsvAction() {
+		$v1=split("~",$this->getSanParam ( 'v1' ));
+		$v2=split("~",$this->getSanParam ( 'v2' ));
+		$p=$this->getSanParam ( 'p' );
+		$d=$this->getSanParam ( 'd' );
+		$s=$this->getSanParam ( 's' );
+		$f=$this->getSanParam ( 'f' );
+		$this->viewAssignEscaped ( 'v1', $v1 );
+		$this->viewAssignEscaped ( 'v2', $v2 );
+		$this->viewAssignEscaped ( 'p',  $p);
+		$this->viewAssignEscaped ( 'd',  $d);
+		$this->viewAssignEscaped ( 's',  $s);
+		$this->viewAssignEscaped ( 'f',  $f);
+	}
+
+	public function profcsvAction() {
+		$v1=split("~",$this->getSanParam ( 'v1' ));
+		$v2=split("~",$this->getSanParam ( 'v2' ));
+		$v3=split("~",$this->getSanParam ( 'v3' ));
+		$v4=split("~",$this->getSanParam ( 'v4' ));
+		$v5=split("~",$this->getSanParam ( 'v5' ));
+		$v6=split("~",$this->getSanParam ( 'v6' ));
+		$p=$this->getSanParam ( 'p' );
+		$d=$this->getSanParam ( 'd' );
+		$s=$this->getSanParam ( 's' );
+		$f=$this->getSanParam ( 'f' );
+		$this->viewAssignEscaped ( 'v1', $v1 );
+		$this->viewAssignEscaped ( 'v2', $v2 );
+		$this->viewAssignEscaped ( 'v3', $v3 );
+		$this->viewAssignEscaped ( 'v4', $v4 );
+		$this->viewAssignEscaped ( 'v5', $v5 );
+		$this->viewAssignEscaped ( 'v6', $v6 );
+		$this->viewAssignEscaped ( 'p',  $p);
+		$this->viewAssignEscaped ( 'd',  $d);
+		$this->viewAssignEscaped ( 's',  $s);
+		$this->viewAssignEscaped ( 'f',  $f);
+	}
+
+	public function detailAction() {
+		if (! $this->hasACL ( 'view_people' ) and ! $this->hasACL ( 'edit_people' )) {
+			$this->doNoAccessError ();
+		}
+		$criteria = array ();
+		list($criteria, $location_tier, $location_id) = $this->getLocationCriteriaValues($criteria);
+		$criteria ['facilityInput'] = $this->getSanParam ( 'facilityInput' );
+		$criteria ['training_title_option_id'] = $this->getSanParam ( 'training_title_option_id' );
+		$criteria ['qualification_id'] = $this->getSanParam ( 'qualification_id' );
+		$criteria ['ques'] = $this->getSanParam ( 'ques' );
+		$criteria ['score_id'] = $this->getSanParam ( 'score_id' );
+		$criteria ['primarypatients'] = $this->getSanParam ( 'primarypatients' );
+		$criteria ['hivInput'] = $this->getSanParam ( 'hivInput' );
+		$criteria ['trainer_type_option_id1'] = $this->getSanParam ( 'trainer_type_option_id1' );
+		$criteria ['grp1'] = $this->getSanParam ( 'grp1' );
+		$criteria ['grp2'] = $this->getSanParam ( 'grp2' );
+		$criteria ['grp3'] = $this->getSanParam ( 'grp3' );
+		$criteria ['go'] = $this->getSanParam ( 'go' );
+		if ($criteria ['go']) {
+			$db = Zend_Db_Table_Abstract::getDefaultAdapter ();
+			$num_locs = $this->setting('num_location_tiers');
+			list($field_name,$location_sub_query) = Location::subquery($num_locs, $location_tier, $location_id);
+			$sql = 'select DISTINCT cmp.person, cmp.question, cmp.option from person as p, person_qualification_option as q, facility as f, ('.$location_sub_query.') as l, comp as cmp, compres as cmpr';
+			if ( $criteria['training_title_option_id'] ) {
+				$sql .= ', person_to_training as ptt ';
+				$sql .= ', training as tr  ';
+			}
+			$where = array('p.is_deleted = 0');
+			$whr = array();
+			$where []= 'cmpr.person = p.id';
+			$where []= 'cmp.person = p.id';
+			$where []= ' p.primary_qualification_option_id = q.id and p.facility_id = f.id and f.location_id = l.id ';
+			if ($criteria ['facilityInput']) {
+				$where []= ' p.facility_id = "' . $criteria ['facilityInput'] . '"';
+			}
+			if ( $criteria['training_title_option_id'] ) {
+				$where []= ' p.id = ptt.person_id AND ptt.training_id = tr.id AND tr.training_title_option_id = ' . ($criteria ['training_title_option_id']) . ' ';
+			}
+			$where []= ' primary_qualification_option_id IN (SELECT id FROM person_qualification_option WHERE parent_id = ' . $criteria ['qualification_id'] . ') ';
+			$where []= 'cmpr.active = \'Y\'';
+			$where []= 'cmpr.res = 1';
+			$where []= 'cmp.active = \'Y\'';
+			if($criteria ['qualification_id']=="6")
+			{
+				$whr []= 'cmp.question IN ('."'".str_replace(",","','",$this->getSanParam ( 'listcq' ))."'".')';
+			}
+			if($criteria ['qualification_id']=="7")
+			{
+				$qs=split(",",$this->getSanParam ( 'ques' ));
+				$nms=split("~",$this->getSanParam ( 'listdq' ));
+				foreach ( $qs as $kys => $vls ) {
+					$whr []= 'cmp.question IN ('."'".str_replace(",","','",$nms[$vls])."'".')';
+				}
+			}
+			if($criteria ['qualification_id']=="8")
+			{
+				$qs=split(",",$this->getSanParam ( 'ques' ));
+				$nms=split("~",$this->getSanParam ( 'listnq' ));
+				foreach ( $qs as $kys => $vls ) {
+					$whr []= 'cmp.question IN ('."'".str_replace(",","','",$nms[$vls])."'".')';
+				}
+			}
+			if($criteria ['qualification_id']=="9")
+			{
+				$whr []= 'cmp.question IN ('."'".str_replace(",","','",$this->getSanParam ( 'listpq' ))."'".')';
+			}
+			$sql .= ' WHERE ' . implode(' AND ', $where);
+			$sql .= ' AND (' . implode(' OR ', $whr) . ')';
+			$rowArray = $db->fetchAll ( $sql );
+			$qss=array();
+			$nmss=array();
+			if($criteria ['qualification_id']=="6")
+			{
+				$qss=split(",",$this->getSanParam ( 'ques' ));
+				$nmss=split("~",$this->getSanParam ( 'listcq' ));
+			}
+			if($criteria ['qualification_id']=="7")
+			{
+				$qss=split(",",$this->getSanParam ( 'ques' ));
+				$nmss=split("~",$this->getSanParam ( 'listdq' ));
+			}
+			if($criteria ['qualification_id']=="8")
+			{
+				$qss=split(",",$this->getSanParam ( 'ques' ));
+				$nmss=split("~",$this->getSanParam ( 'listnq' ));
+			}
+			if($criteria ['qualification_id']=="9")
+			{
+				$qss=split(",",$this->getSanParam ( 'ques' ));
+				$nmss=split("~",$this->getSanParam ( 'listpq' ));
+			}
+			$ct;
+			$ct=0;
+			$rss=array();
+			$ctt;
+			foreach ( $qss as $kys => $vls ) {
+				$rss[$ct]=0;
+				$ctt=0;
+				$wss=split(",",$nmss[$vls]);
+				foreach ( $wss as $kyss => $vlss ) {
+					foreach ( $rowArray as $kss => $vss ) {
+						if($vlss." " == $vss['question']." ")
+						{
+							if($vss['option']=="A")
+							{
+								$rss[$ct]=$rss[$ct]+4;
+							}
+							else
+							{
+								if($vss['option']=="B")
+								{
+									$rss[$ct]=$rss[$ct]+3;
+								}
+								else
+								{
+									if($vss['option']=="C")
+									{
+										$rss[$ct]=$rss[$ct]+2;
+									}
+									else
+									{
+										if($vss['option']=="D")
+										{
+											$rss[$ct]=$rss[$ct]+1;
+										}
+									}
+								}
+							}
+							$ctt=$ctt+1;
+						}
+					}
+				}
+				if($ctt>0)
+				$rss[$ct]=number_format((($rss[$ct]/(4*$ctt))*100),2);
+				$ct=$ct+1;
+			}
+			$this->viewAssignEscaped ( 'results', $rowArray );
+			$this->viewAssignEscaped ( 'rss', $rss );
+		}
+		$this->view->assign ( 'criteria', $criteria );
+		$this->viewAssignEscaped ( 'locations', Location::getAll() );
+		require_once ('models/table/TrainingTitleOption.php');
+		$titleArray = TrainingTitleOption::suggestionList ( false, 10000 );
+		$this->viewAssignEscaped ( 'courses', $titleArray );
+		$qualificationsArray = OptionList::suggestionListHierarchical ( 'person_qualification_option', 'qualification_phrase', false, false );
+		$this->viewAssignEscaped ( 'qualifications', $qualificationsArray );
+		$rowArray = OptionList::suggestionList ( 'facility', array ('facility_name', 'id' ), false, 9999 );
+		$facilitiesArray = array ();
+		foreach ( $rowArray as $key => $val ) {
+			if ($val ['id'] != 0)
+			$facilitiesArray [] = $val;
+		}
+		$this->viewAssignEscaped ( 'facilities', $facilitiesArray );
+	}
+
+	public function compAction() {
+		if (! $this->hasACL ( 'view_people' ) and ! $this->hasACL ( 'edit_people' )) {
+			$this->doNoAccessError ();
+		}
+		$criteria = array ();
+		list($criteria, $location_tier, $location_id) = $this->getLocationCriteriaValues($criteria);
+		$criteria ['facilityInput'] = $this->getSanParam ( 'facilityInput' );
+		$criteria ['qualification_id'] = $this->getSanParam ( 'qualification_id' );
+		$criteria ['ques'] = $this->getSanParam ( 'ques' );
+		$criteria ['go'] = $this->getSanParam ( 'go' );
+		if ($criteria ['go']) {
+			$db = Zend_Db_Table_Abstract::getDefaultAdapter ();
+			$num_locs = $this->setting('num_location_tiers');
+			list($field_name,$location_sub_query) = Location::subquery($num_locs, $location_tier, $location_id);
+			$sql = 'select DISTINCT cmp.person, cmp.question, cmp.option from person as p, person_qualification_option as q, facility as f, ('.$location_sub_query.') as l, comp as cmp, compres as cmpr';
+			$where = array('p.is_deleted = 0');
+			$whr = array();
+			$where []= 'cmpr.person = p.id';
+			$where []= 'cmp.person = p.id';
+			$where []= ' p.primary_qualification_option_id = q.id and p.facility_id = f.id and f.location_id = l.id ';
+			if ($criteria ['facilityInput']) {
+				$where []= ' p.facility_id = "' . $criteria ['facilityInput'] . '"';
+			}
+			$where []= ' primary_qualification_option_id IN (SELECT id FROM person_qualification_option WHERE parent_id = ' . $criteria ['qualification_id'] . ') ';
+			$where []= 'cmpr.active = \'Y\'';
+			$where []= 'cmpr.res = 1';
+			$where []= 'cmp.active = \'Y\'';
+			if($criteria ['qualification_id']=="6")
+			{
+				$whr []= 'cmp.question IN ('."'".str_replace(",","','",$this->getSanParam ( 'listcq' ))."'".')';
+			}
+			if($criteria ['qualification_id']=="7")
+			{
+				$qs=split(",",$this->getSanParam ( 'ques' ));
+				$nms=split("~",$this->getSanParam ( 'listdq' ));
+				foreach ( $qs as $kys => $vls ) {
+					$whr []= 'cmp.question IN ('."'".str_replace(",","','",$nms[$vls])."'".')';
+				}
+			}
+			if($criteria ['qualification_id']=="8")
+			{
+				$qs=split(",",$this->getSanParam ( 'ques' ));
+				$nms=split("~",$this->getSanParam ( 'listnq' ));
+				foreach ( $qs as $kys => $vls ) {
+					$whr []= 'cmp.question IN ('."'".str_replace(",","','",$nms[$vls])."'".')';
+				}
+			}
+			if($criteria ['qualification_id']=="9")
+			{
+				$whr []= 'cmp.question IN ('."'".str_replace(",","','",$this->getSanParam ( 'listpq' ))."'".')';
+			}
+			$sql .= ' WHERE ' . implode(' AND ', $where);
+			$sql .= ' AND (' . implode(' OR ', $whr) . ')';
+			$rowArray = $db->fetchAll ( $sql );
+			$qss=array();
+			$nmss=array();
+			if($criteria ['qualification_id']=="6")
+			{
+				$qss=split(",",$this->getSanParam ( 'ques' ));
+				$nmss=split("~",$this->getSanParam ( 'listcq' ));
+			}
+			if($criteria ['qualification_id']=="7")
+			{
+				$qss=split(",",$this->getSanParam ( 'ques' ));
+				$nmss=split("~",$this->getSanParam ( 'listdq' ));
+			}
+			if($criteria ['qualification_id']=="8")
+			{
+				$qss=split(",",$this->getSanParam ( 'ques' ));
+				$nmss=split("~",$this->getSanParam ( 'listnq' ));
+			}
+			if($criteria ['qualification_id']=="9")
+			{
+				$qss=split(",",$this->getSanParam ( 'ques' ));
+				$nmss=split("~",$this->getSanParam ( 'listpq' ));
+			}
+			$ct;
+			$ct=0;
+			$rss=array();
+			$ctt;
+			foreach ( $qss as $kys => $vls ) {
+				$rss[$ct]=0;
+				$ctt=0;
+				$wss=split(",",$nmss[$vls]);
+				foreach ( $wss as $kyss => $vlss ) {
+					foreach ( $rowArray as $kss => $vss ) {
+						if($vlss." " == $vss['question']." ")
+						{
+							if($vss['option']=="A")
+							{
+								$rss[$ct]=$rss[$ct]+4;
+							}
+							else
+							{
+								if($vss['option']=="B")
+								{
+									$rss[$ct]=$rss[$ct]+3;
+								}
+								else
+								{
+									if($vss['option']=="C")
+									{
+										$rss[$ct]=$rss[$ct]+2;
+									}
+									else
+									{
+										if($vss['option']=="D")
+										{
+											$rss[$ct]=$rss[$ct]+1;
+										}
+									}
+								}
+							}
+							$ctt=$ctt+1;
+						}
+					}
+				}
+				if($ctt>0)
+				$rss[$ct]=number_format((($rss[$ct]/(4*$ctt))*100),2);
+				$ct=$ct+1;
+			}
+			$this->viewAssignEscaped ( 'results', $rowArray );
+			$this->viewAssignEscaped ( 'rss', $rss );
+		}
+		$this->view->assign ( 'criteria', $criteria );
+		$this->viewAssignEscaped ( 'locations', Location::getAll() );
+		$qualificationsArray = OptionList::suggestionListHierarchical ( 'person_qualification_option', 'qualification_phrase', false, false );
+		$this->viewAssignEscaped ( 'qualifications', $qualificationsArray );
+		$rowArray = OptionList::suggestionList ( 'facility', array ('facility_name', 'id' ), false, 9999 );
+		$facilitiesArray = array ();
+		foreach ( $rowArray as $key => $val ) {
+			if ($val ['id'] != 0)
+			$facilitiesArray [] = $val;
+		}
+		$this->viewAssignEscaped ( 'facilities', $facilitiesArray );
+	}
+	public function profAction() {
+		if (! $this->hasACL ( 'view_people' ) and ! $this->hasACL ( 'edit_people' )) {
+			$this->doNoAccessError ();
+		}
+		$criteria = array ();
+		list($criteria, $location_tier, $location_id) = $this->getLocationCriteriaValues($criteria);
+		$criteria ['facilityInput'] = $this->getSanParam ( 'facilityInput' );
+		$criteria ['training_title_option_id'] = $this->getSanParam ( 'training_title_option_id' );
+		$criteria ['qualification_id'] = $this->getSanParam ( 'qualification_id' );
+		$criteria ['ques'] = $this->getSanParam ( 'ques' );
+		$criteria ['go'] = $this->getSanParam ( 'go' );
+		$criteria ['all'] = $this->getSanParam ( 'all' );
+		if ($criteria ['go']) {
+			if ($criteria ['all']) {
+				$db = Zend_Db_Table_Abstract::getDefaultAdapter ();
+				$num_locs = $this->setting('num_location_tiers');
+				list($field_name,$location_sub_query) = Location::subquery($num_locs, $location_tier, $location_id);
+				$sql = 'select DISTINCT cmp.person, cmp.question, cmp.option from person as p, person_qualification_option as q, facility as f, ('.$location_sub_query.') as l, comp as cmp, compres as cmpr';
+				if ( $criteria['training_title_option_id'] ) {
+					$sql .= ', person_to_training as ptt ';
+					$sql .= ', training as tr  ';
+				}
+				$where = array('p.is_deleted = 0');
+				$where []= 'cmpr.person = p.id';
+				$where []= 'cmp.person = p.id';
+				$where []= ' p.primary_qualification_option_id = q.id and p.facility_id = f.id and f.location_id = l.id ';
+				if ($criteria ['facilityInput']) {
+					$where []= ' p.facility_id = "' . $criteria ['facilityInput'] . '"';
+				}
+				if ( $criteria['training_title_option_id'] ) {
+					$where []= ' p.id = ptt.person_id AND ptt.training_id = tr.id AND tr.training_title_option_id = ' . ($criteria ['training_title_option_id']) . ' ';
+				}
+				$where []= ' primary_qualification_option_id IN (SELECT id FROM person_qualification_option WHERE parent_id IN (6, 7, 8, 9) ) ';
+				$where []= 'cmpr.active = \'Y\'';
+				$where []= 'cmpr.res = 1';
+				$where []= 'cmp.active = \'Y\'';
+				$sql .= ' WHERE ' . implode(' AND ', $where);
+				$rowArray = $db->fetchAll ( $sql );
+				$qss=array();
+				$nmss=array();
+				$qss=split(",","0,1,2,3,4,5,6,7");
+				$nmss=split("~","1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,200~01,02,03,04,05,06,07,08,09~31,32,33,34,35,36,37,38~41,42,43,44,45~51,52,53,54,55,56,57,58,59,510,511,512,513,514,515,516,517,518~61,62,63,64,65,66,67~71,72,73,74,75,76,77,78,79,710,711~21,22,23");
+				$ct;
+				$ct=0;
+				$rssA=array();
+				$rssB=array();
+				$rssC=array();
+				$rssD=array();
+				$rssE=array();
+				$ctt;
+				foreach ( $qss as $kys => $vls ) {
+					$rssA[$ct]=0;
+					$rssB[$ct]=0;
+					$rssC[$ct]=0;
+					$rssD[$ct]=0;
+					$rssE[$ct]=0;
+					$ctt=0;
+					$wss=split(",",$nmss[$vls]);
+					foreach ( $wss as $kyss => $vlss ) {
+						foreach ( $rowArray as $kss => $vss ) {
+							if($vlss." " == $vss['question']." ")
+							{
+								if($vss['option']=="A")
+								{
+									$rssA[$ct]=$rssA[$ct]+1;
+								}
+								else
+								{
+									if($vss['option']=="B")
+									{
+										$rssB[$ct]=$rssB[$ct]+1;
+									}
+									else
+									{
+										if($vss['option']=="C")
+										{
+											$rssC[$ct]=$rssC[$ct]+1;
+										}
+										else
+										{
+											if($vss['option']=="D")
+											{
+												$rssD[$ct]=$rssD[$ct]+1;
+											}
+											else
+											{
+												if($vss['option']=="E")
+												{
+													$rssE[$ct]=$rssE[$ct]+1;
+												}
+											}
+										}
+									}
+								}
+								$ctt=$ctt+1;
+							}
+						}
+					}
+					if($ctt>0) {
+						$rssA[$ct]=number_format((($rssA[$ct]/$ctt)*100),2);
+						$rssB[$ct]=number_format((($rssB[$ct]/$ctt)*100),2);
+						$rssC[$ct]=number_format((($rssC[$ct]/$ctt)*100),2);
+						$rssD[$ct]=number_format((($rssD[$ct]/$ctt)*100),2);
+						$rssE[$ct]=number_format((($rssE[$ct]/$ctt)*100),2);
+					}
+					$ct=$ct+1;
+				}
+				$this->viewAssignEscaped ( 'results', $rowArray );
+				$this->viewAssignEscaped ( 'rssA', $rssA );
+				$this->viewAssignEscaped ( 'rssB', $rssB );
+				$this->viewAssignEscaped ( 'rssC', $rssC );
+				$this->viewAssignEscaped ( 'rssD', $rssD );
+				$this->viewAssignEscaped ( 'rssE', $rssE );
+			}
+			else
+			{
+				$db = Zend_Db_Table_Abstract::getDefaultAdapter ();
+				$num_locs = $this->setting('num_location_tiers');
+				list($field_name,$location_sub_query) = Location::subquery($num_locs, $location_tier, $location_id);
+				$sql = 'select DISTINCT cmp.person, cmp.question, cmp.option from person as p, person_qualification_option as q, facility as f, ('.$location_sub_query.') as l, comp as cmp, compres as cmpr';
+				if ( $criteria['training_title_option_id'] ) {
+					$sql .= ', person_to_training as ptt ';
+					$sql .= ', training as tr  ';
+				}
+				$where = array('p.is_deleted = 0');
+				$whr = array();
+				$where []= 'cmpr.person = p.id';
+				$where []= 'cmp.person = p.id';
+				$where []= ' p.primary_qualification_option_id = q.id and p.facility_id = f.id and f.location_id = l.id ';
+				if ($criteria ['facilityInput']) {
+					$where []= ' p.facility_id = "' . $criteria ['facilityInput'] . '"';
+				}
+				if ( $criteria['training_title_option_id'] ) {
+					$where []= ' p.id = ptt.person_id AND ptt.training_id = tr.id AND tr.training_title_option_id = ' . ($criteria ['training_title_option_id']) . ' ';
+				}
+				$where []= ' primary_qualification_option_id IN (SELECT id FROM person_qualification_option WHERE parent_id = ' . $criteria ['qualification_id'] . ') ';
+				$where []= 'cmpr.active = \'Y\'';
+				$where []= 'cmpr.res = 1';
+				$where []= 'cmp.active = \'Y\'';
+				if($criteria ['qualification_id']=="6")
+				{
+					$whr []= 'cmp.question IN ('."'".str_replace(",","','",$this->getSanParam ( 'listcq' ))."'".')';
+				}
+				if($criteria ['qualification_id']=="7")
+				{
+					$qs=split(",",$this->getSanParam ( 'ques' ));
+					$nms=split("~",$this->getSanParam ( 'listdq' ));
+					foreach ( $qs as $kys => $vls ) {
+						$whr []= 'cmp.question IN ('."'".str_replace(",","','",$nms[$vls])."'".')';
+					}
+				}
+				if($criteria ['qualification_id']=="8")
+				{
+					$qs=split(",",$this->getSanParam ( 'ques' ));
+					$nms=split("~",$this->getSanParam ( 'listnq' ));
+					foreach ( $qs as $kys => $vls ) {
+						$whr []= 'cmp.question IN ('."'".str_replace(",","','",$nms[$vls])."'".')';
+					}
+				}
+				if($criteria ['qualification_id']=="9")
+				{
+					$whr []= 'cmp.question IN ('."'".str_replace(",","','",$this->getSanParam ( 'listpq' ))."'".')';
+				}
+				$sql .= ' WHERE ' . implode(' AND ', $where);
+				$sql .= ' AND (' . implode(' OR ', $whr) . ')';
+				$rowArray = $db->fetchAll ( $sql );
+				$qss=array();
+				$nmss=array();
+				if($criteria ['qualification_id']=="6")
+				{
+					$qss=split(",",$this->getSanParam ( 'ques' ));
+					$nmss=split("~",$this->getSanParam ( 'listcq' ));
+				}
+				if($criteria ['qualification_id']=="7")
+				{
+					$qss=split(",",$this->getSanParam ( 'ques' ));
+					$nmss=split("~",$this->getSanParam ( 'listdq' ));
+				}
+				if($criteria ['qualification_id']=="8")
+				{
+					$qss=split(",",$this->getSanParam ( 'ques' ));
+					$nmss=split("~",$this->getSanParam ( 'listnq' ));
+				}
+				if($criteria ['qualification_id']=="9")
+				{
+					$qss=split(",",$this->getSanParam ( 'ques' ));
+					$nmss=split("~",$this->getSanParam ( 'listpq' ));
+				}
+				$ct;
+				$ct=0;
+				$rssA=array();
+				$rssB=array();
+				$rssC=array();
+				$rssD=array();
+				$rssE=array();
+				$ctt;
+				foreach ( $qss as $kys => $vls ) {
+					$rssA[$ct]=0;
+					$rssB[$ct]=0;
+					$rssC[$ct]=0;
+					$rssD[$ct]=0;
+					$rssE[$ct]=0;
+					$ctt=0;
+					$wss=split(",",$nmss[$vls]);
+					foreach ( $wss as $kyss => $vlss ) {
+						foreach ( $rowArray as $kss => $vss ) {
+							if($vlss." " == $vss['question']." ")
+							{
+								if($vss['option']=="A")
+								{
+									$rssA[$ct]=$rssA[$ct]+1;
+								}
+								else
+								{
+									if($vss['option']=="B")
+									{
+										$rssB[$ct]=$rssB[$ct]+1;
+									}
+									else
+									{
+										if($vss['option']=="C")
+										{
+											$rssC[$ct]=$rssC[$ct]+1;
+										}
+										else
+										{
+											if($vss['option']=="D")
+											{
+												$rssD[$ct]=$rssD[$ct]+1;
+											}
+											else
+											{
+												if($vss['option']=="E")
+												{
+													$rssE[$ct]=$rssE[$ct]+1;
+												}
+											}
+										}
+									}
+								}
+								$ctt=$ctt+1;
+							}
+						}
+					}
+					if($ctt>0) {
+						$rssA[$ct]=number_format((($rssA[$ct]/$ctt)*100),2);
+						$rssB[$ct]=number_format((($rssB[$ct]/$ctt)*100),2);
+						$rssC[$ct]=number_format((($rssC[$ct]/$ctt)*100),2);
+						$rssD[$ct]=number_format((($rssD[$ct]/$ctt)*100),2);
+						$rssE[$ct]=number_format((($rssE[$ct]/$ctt)*100),2);
+					}
+					$ct=$ct+1;
+				}
+				$this->viewAssignEscaped ( 'results', $rowArray );
+				$this->viewAssignEscaped ( 'rssA', $rssA );
+				$this->viewAssignEscaped ( 'rssB', $rssB );
+				$this->viewAssignEscaped ( 'rssC', $rssC );
+				$this->viewAssignEscaped ( 'rssD', $rssD );
+				$this->viewAssignEscaped ( 'rssE', $rssE );
+			}
+		}
+		$this->view->assign ( 'criteria', $criteria );
+		$this->viewAssignEscaped ( 'locations', Location::getAll() );
+		require_once ('models/table/TrainingTitleOption.php');
+		$titleArray = TrainingTitleOption::suggestionList ( false, 10000 );
+		$this->viewAssignEscaped ( 'courses', $titleArray );
+		$qualificationsArray = OptionList::suggestionListHierarchical ( 'person_qualification_option', 'qualification_phrase', false, false );
+		$this->viewAssignEscaped ( 'qualifications', $qualificationsArray );
+		$rowArray = OptionList::suggestionList ( 'facility', array ('facility_name', 'id' ), false, 9999 );
+		$facilitiesArray = array ();
+		foreach ( $rowArray as $key => $val ) {
+			if ($val ['id'] != 0)
+			$facilitiesArray [] = $val;
+		}
+		$this->viewAssignEscaped ( 'facilities', $facilitiesArray );
+	}
+	public function compcompAction() {
+		if (! $this->hasACL ( 'view_people' ) and ! $this->hasACL ( 'edit_people' )) {
+			$this->doNoAccessError ();
+		}
+		$criteria = array ();
+		list($criteria, $location_tier, $location_id) = $this->getLocationCriteriaValues($criteria);
+		$criteria ['facilityInput'] = $this->getSanParam ( 'facilityInput' );
+		$criteria ['qualification_id'] = $this->getSanParam ( 'qualification_id' );
+		$criteria ['Questions'] = $this->getSanParam ( 'Questions' );
+		$criteria ['outputType'] = $this->getSanParam ( 'outputType' );
+		$criteria ['go'] = $this->getSanParam ( 'go' );
+		if ($criteria ['go']) {
+			$db = Zend_Db_Table_Abstract::getDefaultAdapter ();
+			$prsns=array();
+			$prsnscnt=0;
+			if($criteria ['qualification_id']=="6")
+			{
+				$sql='SELECT `person`, SUM(-(ASCII(`option`)-69)) `sm` FROM `comp`';
+				$whr = array();
+				$whr []= '`question` IN ('."'".str_replace(",","','",$this->getSanParam ( 'listcq' ))."'".')';
+				$sql .= ' WHERE `active` = \'Y\' AND `option` <> \'E\' AND `option` <> \'F\' AND (' . implode(' OR ', $whr) . ')';
+				$sql .= ' GROUP BY `person`';
+				$rowArray = $db->fetchAll ( $sql );
+				$tlques=split(",",$this->getSanParam ( 'listcq' ));
+				$ttlques=count($tlques);
+				$qs=split('\$',$this->getSanParam ( 'Questions' ));
+				foreach ( $qs as $kys => $vls ) {
+					$fr=split('\^',$vls);
+					$min=0;
+					$max=0;
+					if($fr[2]=="100")
+					{
+						$min=90;
+						$max=100;
+					}
+					else
+					{
+						if($fr[2]=="89")
+						{
+							$min=75;
+							$max=90;
+						}
+						else
+						{
+							if($fr[2]=="74")
+							{
+								$min=60;
+								$max=75;
+							}
+							else
+							{
+								$min=1;
+								$max=60;
+							}
+						}
+					}
+					foreach ( $rowArray as $prsn => $mrk ) {
+						$prcnt=number_format((($mrk['sm']/(4*$ttlques))*100),2);
+						if($prcnt>$min && $prcnt<=$max)
+						{
+							$prsns[$prsnscnt]=$mrk['person'];
+							$prsnscnt=$prsnscnt+1;
+						}
+					}
+				}
+			}
+			if($criteria ['qualification_id']=="7")
+			{
+				$qs=split('\$',$this->getSanParam ( 'Questions' ));
+				$nms=split("~",$this->getSanParam ( 'listdq' ));
+				foreach ( $qs as $kys => $vls ) {
+					$sql='SELECT `person`, SUM(-(ASCII(`option`)-69)) `sm` FROM `comp`';
+					$whr = array();
+					$fr=split('\^',$vls);
+					$whr []= '`question` IN ('."'".str_replace(",","','",$nms[$fr[1]])."'".')';
+					$sql .= ' WHERE `active` = \'Y\' AND `option` <> \'E\' AND `option` <> \'F\' AND (' . implode(' OR ', $whr) . ')';
+					$sql .= ' GROUP BY `person`';
+					$rowArray = $db->fetchAll ( $sql );
+					$tlques=split(",",$nms[$fr[1]]);
+					$ttlques=count($tlques);
+					$min=0;
+					$max=0;
+					if($fr[2]=="100")
+					{
+						$min=90;
+						$max=100;
+					}
+					else
+					{
+						if($fr[2]=="89")
+						{
+							$min=75;
+							$max=90;
+						}
+						else
+						{
+							if($fr[2]=="74")
+							{
+								$min=60;
+								$max=75;
+							}
+							else
+							{
+								$min=1;
+								$max=60;
+							}
+						}
+					}
+					foreach ( $rowArray as $prsn => $mrk ) {
+						$prcnt=number_format((($mrk['sm']/(4*$ttlques))*100),2);
+						if($prcnt>$min && $prcnt<=$max)
+						{
+							$prsns[$prsnscnt]=$mrk['person'];
+							$prsnscnt=$prsnscnt+1;
+						}
+					}
+				}
+			}
+			if($criteria ['qualification_id']=="8")
+			{
+				$qs=split('\$',$this->getSanParam ( 'Questions' ));
+				$nms=split("~",$this->getSanParam ( 'listnq' ));
+				foreach ( $qs as $kys => $vls ) {
+					$sql='SELECT `person`, SUM(-(ASCII(`option`)-69)) `sm` FROM `comp`';
+					$whr = array();
+					$fr=split('\^',$vls);
+					$whr []= '`question` IN ('."'".str_replace(",","','",$nms[$fr[1]])."'".')';
+					$sql .= ' WHERE `active` = \'Y\' AND `option` <> \'E\' AND `option` <> \'F\' AND (' . implode(' OR ', $whr) . ')';
+					$sql .= ' GROUP BY `person`';
+					$rowArray = $db->fetchAll ( $sql );
+					$tlques=split(",",$nms[$fr[1]]);
+					$ttlques=count($tlques);
+					$min=0;
+					$max=0;
+					if($fr[2]=="100")
+					{
+						$min=90;
+						$max=100;
+					}
+					else
+					{
+						if($fr[2]=="89")
+						{
+							$min=75;
+							$max=90;
+						}
+						else
+						{
+							if($fr[2]=="74")
+							{
+								$min=60;
+								$max=75;
+							}
+							else
+							{
+								$min=1;
+								$max=60;
+							}
+						}
+					}
+					foreach ( $rowArray as $prsn => $mrk ) {
+						$prcnt=number_format((($mrk['sm']/(4*$ttlques))*100),2);
+						if($prcnt>$min && $prcnt<=$max)
+						{
+							$prsns[$prsnscnt]=$mrk['person'];
+							$prsnscnt=$prsnscnt+1;
+						}
+					}
+				}
+			}
+			if($criteria ['qualification_id']=="9")
+			{
+				$sql='SELECT `person`, SUM(-(ASCII(`option`)-69)) `sm` FROM `comp`';
+				$whr = array();
+				$whr []= '`question` IN ('."'".str_replace(",","','",$this->getSanParam ( 'listpq' ))."'".')';
+				$sql .= ' WHERE `active` = \'Y\' AND `option` <> \'E\' AND `option` <> \'F\' AND (' . implode(' OR ', $whr) . ')';
+				$sql .= ' GROUP BY `person`';
+				$rowArray = $db->fetchAll ( $sql );
+				$tlques=split(",",$this->getSanParam ( 'listpq' ));
+				$ttlques=count($tlques);
+				$qs=split('\$',$this->getSanParam ( 'Questions' ));
+				foreach ( $qs as $kys => $vls ) {
+					$fr=split('\^',$vls);
+					$min=0;
+					$max=0;
+					if($fr[2]=="100")
+					{
+						$min=90;
+						$max=100;
+					}
+					else
+					{
+						if($fr[2]=="89")
+						{
+							$min=75;
+							$max=90;
+						}
+						else
+						{
+							if($fr[2]=="74")
+							{
+								$min=60;
+								$max=75;
+							}
+							else
+							{
+								$min=1;
+								$max=60;
+							}
+						}
+					}
+					foreach ( $rowArray as $prsn => $mrk ) {
+						$prcnt=number_format((($mrk['sm']/(4*$ttlques))*100),2);
+						if($prcnt>$min && $prcnt<=$max)
+						{
+							$prsns[$prsnscnt]=$mrk['person'];
+							$prsnscnt=$prsnscnt+1;
+						}
+					}
+				}
+			}
+			$num_locs = $this->setting('num_location_tiers');
+			list($field_name,$location_sub_query) = Location::subquery($num_locs, $location_tier, $location_id);
+			$sql = 'SELECT  DISTINCT p.`id`, p.`first_name` ,  p.`last_name` ,  p.`gender` FROM `person` as p, facility as f, ('.$location_sub_query.') as l, `person_qualification_option` as q WHERE p.`primary_qualification_option_id` = q.`id` and p.facility_id = f.id and f.location_id = l.id AND p.`primary_qualification_option_id` IN (SELECT `id` FROM `person_qualification_option` WHERE `parent_id` = ' . $criteria ['qualification_id'] . ') AND p.`is_deleted` = 0 AND p.`id` IN (';
+			if(count($prsns)>0)
+			{
+				foreach ( $prsns as $k => $v ) {
+					$sql = $sql . $v . ',';
+				}
+			}
+			$sql = $sql . '0';
+			if ($criteria ['facilityInput']) {
+				$sql = $sql . ') AND p.facility_id = "' . $criteria ['facilityInput'] . '";';
+			}
+			else {
+				$sql = $sql . ');';
+			}
+			$rowArray = $db->fetchAll ( $sql );
+			if ($criteria ['outputType']) {
+				$this->sendData ( $this->reportHeaders ( false, $rowArray ) );
+			}
+			$this->viewAssignEscaped ( 'results', $rowArray );
+		}
+		$this->view->assign ( 'criteria', $criteria );
+		$this->viewAssignEscaped ( 'locations', Location::getAll() );
+		$qualificationsArray = OptionList::suggestionListHierarchical ( 'person_qualification_option', 'qualification_phrase', false, false );
+		$this->viewAssignEscaped ( 'qualifications', $qualificationsArray );
+		$rowArray = OptionList::suggestionList ( 'facility', array ('facility_name', 'id' ), false, 9999 );
+		$facilitiesArray = array ();
+		foreach ( $rowArray as $key => $val ) {
+			if ($val ['id'] != 0)
+			$facilitiesArray [] = $val;
+		}
+		$this->viewAssignEscaped ( 'facilities', $facilitiesArray );
+	}
+	public function quescompAction() {
+		if (! $this->hasACL ( 'view_people' ) and ! $this->hasACL ( 'edit_people' )) {
+			$this->doNoAccessError ();
+		}
+		$criteria = array ();
+		$criteria ['qualification_id'] = $this->getSanParam ( 'qualification_id' );
+		$criteria ['Questions'] = $this->getSanParam ( 'Questions' );
+		$criteria ['outputType'] = $this->getSanParam ( 'outputType' );
+		$criteria ['go'] = $this->getSanParam ( 'go' );
+		if ($criteria ['go']) {
+			$db = Zend_Db_Table_Abstract::getDefaultAdapter ();
+			$qs=split('\$',$criteria ['Questions']);
+			$sql='SELECT `person` FROM `comp`';
+			$sql .= ' WHERE `active` = \'Y\'';
+			$whr = array();
+			foreach ( $qs as $k => $v ) {
+				$qss=split('\^',$v);
+				$whr[]='(`question`=\''.$qss[2].'\' AND `option`=\''.$qss[3].'\')';
+			}
+			$sql .= ' AND (' . implode(' OR ', $whr) . ')';
+			$rowArray = $db->fetchAll ( $sql );
+			$sql = 'SELECT  DISTINCT p.`id`, p.`first_name` ,  p.`last_name` ,  p.`gender` FROM `person` as p, `person_qualification_option` as q WHERE p.`primary_qualification_option_id` = q.`id` AND p.`primary_qualification_option_id` IN (SELECT `id` FROM `person_qualification_option` WHERE `parent_id` = ' . $criteria ['qualification_id'] . ') AND p.`is_deleted` = 0 AND p.`id` IN (';
+			foreach ( $rowArray as $k => $v ) {
+				$sql = $sql . $v['person'] . ',';
+			}
+			$sql = $sql . '0);';
+			$rowArray = $db->fetchAll ( $sql );
+			if ($criteria ['outputType']) {
+				$this->sendData ( $this->reportHeaders ( false, $rowArray ) );
+			}
+			$this->viewAssignEscaped ( 'results', $rowArray );
+		}
+		$this->view->assign ( 'criteria', $criteria );
+		$qualificationsArray = OptionList::suggestionListHierarchical ( 'person_qualification_option', 'qualification_phrase', false, false );
+		$this->viewAssignEscaped ( 'qualifications', $qualificationsArray );
 	}
 
 	public function trainingsAction() {
@@ -114,6 +1044,10 @@ class ReportsController extends ReportFilterHelpers {
 		$this->_countrySettings = System::getAll();
 
 		$this->_countrySettings['num_location_tiers'] = 2 + $this->_countrySettings['display_region_c'] + $this->_countrySettings['display_region_b']; //including city
+
+		$display_training_partner = false;
+		if ( isset($this->_countrySettings['display_training_partner']) && $this->_countrySettings['display_training_partner'] == 1 )
+		$display_training_partner = true;
 
 		require_once ('models/table/TrainingLocation.php');
 
@@ -170,6 +1104,7 @@ class ReportsController extends ReportFilterHelpers {
 		//$criteria['training_organizer_option_id'] = $this->getSanParam('training_organizer_option_id');
 		$criteria ['training_pepfar_id'] = $this->getSanParam ( 'training_pepfar_id' );
 		$criteria ['training_method_id'] = $this->getSanParam ( 'training_method_id' );
+		$criteria ['mechanism_id'] = $this->getSanParam ( 'mechanism_id' );
 		$criteria ['training_topic_id'] = $this->getSanParam ( 'training_topic_id' );
 		$criteria ['training_level_id'] = $this->getSanParam ( 'training_level_id' );
 		$criteria ['training_primary_language_option_id'] = $this->getSanParam ( 'training_primary_language_option_id' );
@@ -191,14 +1126,15 @@ class ReportsController extends ReportFilterHelpers {
 		$criteria ['showTrainingTitle'] = ($this->getSanParam ( 'showTrainingTitle' ) or ($criteria ['doCount'] and ($criteria ['training_title_option_id'] or $criteria ['training_title_option_id'] === '0')));
 		$criteria ['showLocation'] = ($this->getSanParam ( 'showLocation' ) or ($criteria ['doCount'] and $criteria ['training_location_id']));
 		$criteria ['showOrganizer'] = ($this->getSanParam ( 'showOrganizer' ) or ($criteria ['doCount'] and ($criteria ['training_organizer_id'])));
+		$criteria ['showMechanism'] = ($this->getSanParam ( 'showMechanism' ) or ($criteria ['doCount'] and $criteria ['mechanism_id']));
 
-if ($_SERVER['REMOTE_ADDR'] == "24.18.118.14"){
-#	var_dump ($criteria);
-#	var_dump ($this->getSanParam ( 'showPepfar' ));
-#	var_dump ($criteria ['doCount']);
-#	var_dump ($criteria ['training_pepfar_id']);
-#	var_dump ($criteria ['training_pepfar_id']);
-}
+		if ($_SERVER['REMOTE_ADDR'] == "24.18.118.14"){
+			#	var_dump ($criteria);
+			#	if ($this->getSanParam ( 'showPepfar' ));
+			#	var_dump ($criteria ['doCount']);
+			#	var_dump ($criteria ['training_pepfar_id']);
+			#	var_dump ($criteria ['training_pepfar_id']);
+		}
 
 		$criteria ['showPepfar'] = ($this->getSanParam ( 'showPepfar' ) or ($criteria ['doCount'] and ($criteria ['training_pepfar_id'] or $criteria ['training_pepfar_id'] === '0')));
 		$criteria ['showMethod'] = ($this->getSanParam ( 'showMethod' ) or ($criteria ['doCount'] and ($criteria ['training_method_id'] or $criteria ['training_method_id'] === '0')));
@@ -262,6 +1198,10 @@ if ($_SERVER['REMOTE_ADDR'] == "24.18.118.14"){
 
 			if ($criteria ['showOrganizer']) {
 				$sql .= ', torg.training_organizer_phrase ';
+			}
+
+			if ($criteria ['showMechanism'] && $display_training_partner) {
+				$sql .= ', torg.id, organizer_partners.mechanism_id ';
 			}
 
 			if ($criteria ['showLevel']) {
@@ -334,16 +1274,16 @@ if ($_SERVER['REMOTE_ADDR'] == "24.18.118.14"){
 			if ($criteria ['doCount']) {
 				$sql .= ' FROM (SELECT training.*, pers.person_id as "person_id", tto.training_title_phrase AS training_title, training_location.training_location_name, '.implode(',',$field_name).
 				'       FROM training ' .
-				'         JOIN training_title_option tto ON (`training`.training_title_option_id = tto.id)' .
-				'         JOIN training_location ON training.training_location_id = training_location.id ' .
-				'         JOIN ('.$location_sub_query.') as l ON training_location.location_id = l.id ' .
+				'         LEFT JOIN training_title_option tto ON (`training`.training_title_option_id = tto.id)' .
+				'         LEFT JOIN training_location ON training.training_location_id = training_location.id ' .
+				'         LEFT JOIN ('.$location_sub_query.') as l ON training_location.location_id = l.id ' .
 				'         LEFT JOIN (SELECT person_id,training_id FROM person JOIN person_to_training ON person_to_training.person_id = person.id) as pers ON training.id = pers.training_id WHERE training.is_deleted=0) as pt ';
 			} else {
 				$sql .= ' FROM (SELECT training.*, tto.training_title_phrase AS training_title,training_location.training_location_name, '.implode(',',$field_name).
 				'       FROM training  ' .
-				'         JOIN training_title_option tto ON (`training`.training_title_option_id = tto.id) ' .
-				'         JOIN training_location ON training.training_location_id = training_location.id ' .
-				'         JOIN ('.$location_sub_query.') as l ON training_location.location_id = l.id ' .
+				'         LEFT JOIN training_title_option tto ON (`training`.training_title_option_id = tto.id) ' .
+				'         LEFT JOIN training_location ON training.training_location_id = training_location.id ' .
+				'         LEFT JOIN ('.$location_sub_query.') as l ON training_location.location_id = l.id ' .
 				'  WHERE training.is_deleted=0) as pt ';
 
 				$sql .= ' LEFT JOIN (SELECT COUNT(id) as "pcnt",training_id FROM person_to_training GROUP BY training_id) as ptc ON ptc.training_id = pt.id ';
@@ -356,9 +1296,15 @@ if ($_SERVER['REMOTE_ADDR'] == "24.18.118.14"){
 			$sql .= '	JOIN location_province as tlp ON pt.province_id = tlp.id ';
 			}
 			*/
-			if ($criteria ['showOrganizer'] or $criteria ['training_organizer_id']) {
+			if ($criteria ['showOrganizer'] or $criteria ['training_organizer_id'] || $criteria ['showMechanism']  || $criteria ['mechanism_id']) {
 				$sql .= '	JOIN training_organizer_option as torg ON torg.id = pt.training_organizer_option_id ';
+
 			}
+
+			if ($criteria ['showMechanism']  || $criteria ['mechanism_id']  && $display_training_partner) {
+				$sql .= ' LEFT JOIN organizer_partners ON organizer_partners.organizer_id = torg.id';
+			}
+
 			if ($criteria ['showLevel'] || $criteria ['training_level_id']) {
 				$sql .= '	JOIN training_level_option as tlev ON tlev.id = pt.training_level_option_id ';
 			}
@@ -424,6 +1370,10 @@ if ($_SERVER['REMOTE_ADDR'] == "24.18.118.14"){
 
 			if ($criteria ['training_organizer_id'] or $criteria ['training_organizer_id'] === '0') {
 				$where [] = ' pt.training_organizer_option_id = \'' . $criteria ['training_organizer_id'] . '\'';
+			}
+
+			if ($criteria ['mechanism_id'] or $criteria ['mechanism_id'] === '0' && $display_training_partner) {
+				$where [] = ' organizer_partners.mechanism_id = \'' . $criteria ['mechanism_id'] . '\'';
 			}
 
 			if ($criteria ['training_topic_id'] or $criteria ['training_topic_id'] === '0') {
@@ -501,6 +1451,7 @@ if ($_SERVER['REMOTE_ADDR'] == "24.18.118.14"){
 				if ($criteria ['showRegionC']) $groupBy []=  '  pt.region_c_id';
 				if ($criteria ['showLocation']) $groupBy []=  '  pt.training_location_id';
 				if ($criteria ['showOrganizer']) $groupBy []=  '  pt.training_organizer_option_id';
+				if ($criteria ['showMechanism'] && $display_training_partner) $groupBy []=  '  organizer_partners.mechanism_id';
 				if ($criteria ['showCustom1']) $groupBy []=  '  pt.training_custom_1_option_id';
 				if ($criteria ['showTopic']) $groupBy []=  '  ttopic.training_topic_option_id';
 				if ($criteria ['showLevel']) $groupBy []=  '  pt.training_level_option_id';
@@ -556,8 +1507,8 @@ if ($_SERVER['REMOTE_ADDR'] == "24.18.118.14"){
 		$locations = Location::getAll();
 		$this->viewAssignEscaped('locations', $locations);
 		//course
-		//$courseArray = Course::suggestionList(false,10000);
-		//$this->viewAssignEscaped('courses',$courseArray);
+		$courseArray = TrainingTitleOption::suggestionList ( false, 10000 );
+		$this->viewAssignEscaped ( 'courses', $courseArray );
 		//location
 		// location drop-down
 		$tlocations = TrainingLocation::selectAllLocations ($this->setting('num_location_tiers'));
@@ -609,6 +1560,12 @@ if ($_SERVER['REMOTE_ADDR'] == "24.18.118.14"){
 		$qualsArray = OptionList::suggestionList ( 'person_education_level_option', 'education_level_phrase', false, false, false);
 		$this->viewAssignEscaped ( 'highest_education_level', $qualsArray );
 
+		//mechanisms (aka training partners, organizer_partners table)
+		$mechanismArray = array();
+		if($display_training_partner){
+			$mechanismArray = OptionList::suggestionList ( 'organizer_partners', 'mechanism_id', false, false, false, "mechanism_id != ''");
+		}
+		$this->viewAssignEscaped ( 'mechanisms', $mechanismArray );
 
 		// find category based on title
 		$catId = NULL;
@@ -1396,7 +2353,7 @@ if ($_SERVER['REMOTE_ADDR'] == "24.18.118.14"){
 			$sql .= '    INNER JOIN '.$intersection_table.' ON training.id = '.$intersection_table.'.training_id ';
 			$sql .= '    INNER JOIN person ON person.id = '.$intersection_table.'.'.$intersection_person_id;
 			$sql .= '    INNER JOIN facility ON person.facility_id = facility.id ';
-			$sql .= '    INNER JOIN ('.$location_sub_query.') AS l ON facility.location_id = l.id ';
+			$sql .= '    LEFT JOIN ('.$location_sub_query.') AS l ON facility.location_id = l.id ';
 			$sql .= '    LEFT  JOIN person_suffix_option suffix ON person.suffix_option_id = suffix.id ';
 			$sql .= ') as pt ';
 
@@ -1404,7 +2361,7 @@ if ($_SERVER['REMOTE_ADDR'] == "24.18.118.14"){
 				$sql .= '	JOIN (SELECT training_id, ttpco.training_pepfar_categories_option_id, pepfar_category_phrase FROM training_to_training_pepfar_categories_option as ttpco JOIN training_pepfar_categories_option as tpco ON ttpco.training_pepfar_categories_option_id = tpco.id) as tpep ON tpep.training_id = pt.id ';
 			}
 
-			if ($criteria ['showTopic']) {
+			if ($criteria ['showTopic'] || $criteria ['training_topic_id']) {
 				$sql .= ' LEFT JOIN (SELECT training_id, ttto.training_topic_option_id, training_topic_phrase FROM training_to_training_topic_option as ttto JOIN training_topic_option as tto ON ttto.training_topic_option_id = tto.id) as ttopic ON ttopic.training_id = pt.id ';
 			}
 			/*
@@ -1425,7 +2382,7 @@ if ($_SERVER['REMOTE_ADDR'] == "24.18.118.14"){
 				$sql .= ' LEFT JOIN person_custom_1_option as pqc ON pt.person_custom_1_option_id = pqc.id  ';
 			}
 
-			if ($criteria ['showQualPrim'] || $criteria ['showQualSecond']) {
+			if ($criteria ['showQualPrim'] || $criteria ['showQualSecond'] || $criteria ['qualification_id']  || $criteria ['qualification_secondary_id']) {
 				// primary qualifications
 				$sql .= '
 				LEFT JOIN person_qualification_option as pq ON (
@@ -1703,7 +2660,6 @@ if ($_SERVER['REMOTE_ADDR'] == "24.18.118.14"){
 
 		//trainingTitle
 		$courseArray = TrainingTitleOption::suggestionList ( false, 10000 );
-		;
 		$this->viewAssignEscaped ( 'courses', $courseArray );
 		//topics
 		$topicsArray = OptionList::suggestionList ( 'training_topic_option', 'training_topic_phrase', false, false, false );
@@ -1958,7 +2914,7 @@ if ($_SERVER['REMOTE_ADDR'] == "24.18.118.14"){
 			$sql .= ' INNER JOIN person_to_training ON training.id = person_to_training.training_id ';
 			$sql .= ' INNER JOIN person ON person.id = person_to_training.person_id ';
 			$sql .= ' INNER JOIN facility ON person.facility_id = facility.id ';
-			$sql .= ' INNER JOIN ('.$location_sub_query.') as l ON facility.location_id = l.id';
+			$sql .= ' LEFT JOIN ('.$location_sub_query.') as l ON facility.location_id = l.id';
 			$sql .= ' LEFT  JOIN person_suffix_option suffix ON person.suffix_option_id = suffix.id ';
 			$sql .= ' ) as pt ';
 
@@ -2140,13 +3096,12 @@ if ($_SERVER['REMOTE_ADDR'] == "24.18.118.14"){
 		//locations
 		$locations = Location::getAll();
 		$this->viewAssignEscaped('locations',$locations);
-
+		//courses
+		$courseArray = TrainingTitleOption::suggestionList ( false, 10000 );
+		$this->viewAssignEscaped ( 'courses', $courseArray );
 		//topics
 		$topicsArray = OptionList::suggestionList ( 'training_topic_option', 'training_topic_phrase', false, false, false );
 		$this->viewAssignEscaped ( 'topics', $topicsArray );
-		//topics
-		$qualsArray = OptionList::suggestionList ( 'person_qualification_option', 'qualification_phrase', false, false, false );
-		$this->viewAssignEscaped ( 'qualifications', $qualsArray );
 		//qualifications (primary)
 		$qualsArray = OptionList::suggestionList ( 'person_qualification_option', 'qualification_phrase', false, false, false, 'parent_id IS NULL' );
 		$this->viewAssignEscaped ( 'qualifications_primary', $qualsArray );
@@ -2624,7 +3579,7 @@ if ($_SERVER['REMOTE_ADDR'] == "24.18.118.14"){
 
 		if ($criteria ['go']) {
 
-			$sql = 'SELECT ';
+			$sql = 'SELECT '; //todo test
 
 			if ($criteria ['doCount']) {
 				$sql .= ' COUNT(pt.person_id) as "cnt", pt.facility_name ';
@@ -2892,8 +3847,9 @@ if ($_SERVER['REMOTE_ADDR'] == "24.18.118.14"){
 		$this->viewAssignEscaped ( 'facility_sponsors', $sponsorsArray );
 
 		//course
-		//$courseArray = Course::suggestionList(false,10000);
-		//$this->viewAssignEscaped('courses',$courseArray);
+		$courseArray = TrainingTitleOption::suggestionList ( false, 10000 );
+		$this->viewAssignEscaped ( 'courses', $courseArray );
+
 		//location
 		// location drop-down
 		$tlocations = TrainingLocation::selectAllLocations ($this->setting('num_location_tiers'));
@@ -3379,7 +4335,6 @@ if ($_SERVER['REMOTE_ADDR'] == "24.18.118.14"){
 
 		//course
 		$courseArray = TrainingTitleOption::suggestionList ( false, 10000 );
-		;
 		$this->viewAssignEscaped ( 'courses', $courseArray );
 		//topics
 		$topicsArray = OptionList::suggestionList ( 'training_topic_option', 'training_topic_phrase', false, false, false );
@@ -3990,4 +4945,1062 @@ if ($_SERVER['REMOTE_ADDR'] == "24.18.118.14"){
 
 	}
 
+	public function psTrainingsByNameAction() {
+		$this->view->assign ( 'mode', 'id' );
+		#		return $this->trainingReport ();
+	}
+
+	public function psTrainingByParticipantsAction() {
+		$this->view->assign ( 'mode', 'id' );
+		#		return $this->trainingReport ();
+	}
+
+	public function psMissingStudentsTrainedAction() {
+		$this->view->assign ( 'mode', 'id' );
+		#		return $this->trainingReport ();
+	}
+
+	public function psMissingStudentsByNameAction() {
+		$this->view->assign ( 'mode', 'id' );
+		#		return $this->trainingReport ();
+	}
+
+	public function psMissingGraduatedStudentsAction() {
+		$this->view->assign ( 'mode', 'id' );
+		#		return $this->trainingReport ();
+	}
+
+	public function psMissingCourseByStudentCountAction() {
+		$this->view->assign ( 'mode', 'id' );
+		#		return $this->trainingReport ();
+	}
+
+	public function psMissingCourseByNameAction() {
+		$this->view->assign ( 'mode', 'id' );
+		#		return $this->trainingReport ();
+	}
+
+	public function psMissingCohortByParticipantCountAction() {
+		$this->view->assign ( 'mode', 'id' );
+		#		return $this->trainingReport ();
+	}
+
+	public function psMissingInstitutionInformationAction() {
+		$this->view->assign ( 'mode', 'id' );
+		#		return $this->trainingReport ();
+	}
+
+	public function psMissingTutorByNameAction() {
+		$this->view->assign ( 'mode', 'id' );
+		#		return $this->trainingReport ();
+	}
+
+	public function psMissingFacilityReportAction() {
+		$this->view->assign ( 'mode', 'id' );
+		#		return $this->trainingReport ();
+	}
+
+	public function psStudentsTrainedAction() {
+		$helper = new Helper();
+		$this->view->assign ( 'mode', 'id' );
+		$this->view->assign ( 'institutions', $helper->getInstitutions());
+		$this->view->assign ( 'cadres', $helper->getCadres());
+		$this->view->assign ( 'cohorts', $helper->getCohorts());
+		$this->view->assign ( 'nationalities', $helper->getNationalities());
+		$this->view->assign ( 'funding', $helper->getFunding());
+		$this->view->assign ( 'tutors', $helper->getTutors());
+		$this->view->assign ( 'facilities', $helper->getFacilities());
+		$this->view->assign ( 'coursetypes', $helper->AdminCourseTypes());
+		$this->view->assign ( 'degrees', $helper->getDegrees());
+		if ($this->getSanParam ( 'process' )){
+
+			$maintable = "person p";
+			$select = array();
+			$select[] = "p.id as personid";
+			$select[] = "p.first_name";
+			$select[] = "p.last_name";
+
+			$join = array();
+			$join[] = array(
+			"table" => "student",
+			"abbreviation" => "s",
+			"compare" => "s.personid = p.id",
+			"type" => "inner"
+			);
+
+			$where = array();
+			$where[] = "p.is_deleted = 0";
+
+			$sort = array();
+
+			if ($this->getSanParam ( 'showinstitution' )){
+				$select[] = "i.institutionname";
+
+				$join[] = array(
+				"table" => "link_student_institution",
+				"abbreviation" => "lsi",
+				"compare" => "lsi.id_student = s.id",
+				"type" => "inner"
+				);
+
+				$join[] = array(
+				"table" => "institution",
+				"abbreviation" => "i",
+				"compare" => "i.id = lsi.id_institution",
+				"type" => "inner"
+				);
+				if ($this->getSanParam('institution')){
+					$where[] = "i.id = " . $this->getSanParam('institution');
+				}
+			}
+
+			if ($this->getSanParam ( 'showcohort' )){
+				$select[] = "c.cohortname";
+
+				$join[] = array(
+				"table" => "link_student_cohort",
+				"abbreviation" => "lsc",
+				"compare" => "lsc.id_student = s.id",
+				"type" => "inner"
+				);
+
+				$join[] = array(
+				"table" => "cohort",
+				"abbreviation" => "c",
+				"compare" => "c.id = lsc.id_cohort",
+				"type" => "inner"
+				);
+
+				if ($this->getSanParam('cohort')){
+					$where[] = "c.id = " . $this->getSanParam('cohort');
+				}
+			}
+
+			#			if ($this->getSanParam ( 'showcoursename' )){
+			#				echo "show showcoursename<br>";
+			#			} else {
+			#				echo "do not show showcoursename<br>";
+			#			}
+			#			if ($this->getSanParam ( 'coursename' ));
+
+			#			if ($this->getSanParam ( 'showgrades' )){
+			#				echo "show showgrades<br>";
+			#			} else {
+			#				echo "do not show showgrades<br>";
+			#			}
+			#			if ($this->getSanParam ( 'grades' ));
+
+			#			if ($this->getSanParam ( 'showexams' )){
+			#				echo "show showexams<br>";
+			#			} else {
+			#				echo "do not show showexams<br>";
+			#			}
+			#			if ($this->getSanParam ( 'exams' ));
+
+			if ($this->getSanParam ( 'showcadre' )){
+				$select[] = "ca.cadrename";
+
+				$join[] = array(
+				"table" => "cadres",
+				"abbreviation" => "ca",
+				"compare" => "ca.id = s.cadre",
+				"type" => "inner"
+				);
+
+				if ($this->getSanParam('cadre')){
+					$where[] = "ca.id = " . $this->getSanParam('cadre');
+				}
+			}
+
+			if ($this->getSanParam ( 'showyearinschool' )){
+				# REQUIRES COHORT LINK
+				$found = false;
+				foreach ($join as $j){
+					if ($j['table'] == "cohort"){
+						$found = true;
+					}
+				}
+
+				if (!$found){
+					$join[] = array(
+					"table" => "link_student_cohort",
+					"abbreviation" => "lsc",
+					"compare" => "lsc.id_student = s.id",
+					"type" => "inner"
+					);
+
+					$join[] = array(
+					"table" => "cohort",
+					"abbreviation" => "c",
+					"compare" => "c.id = lsc.id_cohort",
+					"type" => "inner"
+					);
+				}
+				$select[] = "c.startdate";
+				if ($this->getSanParam('yearinschool')){
+					$where[] = "c.startdate LIKE '" . mysql_real_escape_string(substr($this->getSanParam('yearinschool'), 0, 4)) . "%'";
+				}
+			}
+
+			#			if ($this->getSanParam ( 'showcoursetype' )){
+			#				echo "show showcoursetype<br>";
+			#			} else {
+			#				echo "do not show showcoursetype<br>";
+			#			}
+			#			if ($this->getSanParam ( 'coursetype' ));
+
+			#			if ($this->getSanParam ( 'showtopic' )){
+			#				echo "show showtopic<br>";
+			#			} else {
+			#				echo "do not show showtopic<br>";
+			#			}
+			#			if ($this->getSanParam ( 'topic' ));
+
+			#			if ($this->getSanParam ( 'showstudents' )){
+			#				echo "show showstudents<br>";
+			#			} else {
+			#				echo "do not show showstudents<br>";
+			#			}
+			#			if ($this->getSanParam ( 'students' ));
+
+			$query = "SELECT " . implode(", ", $select) . "\n";
+			$query .= " FROM " . $maintable . "\n";
+			if (count ($join) > 0){
+				foreach ($join as $j){
+					$query .= strtoupper($j['type']) . " JOIN " . $j['table'] . " " . $j['abbreviation'] . " ON " . $j['compare'] . "\n";
+				}
+			}
+			if (count ($where) > 0){
+				$query .= "WHERE " . implode(" AND ", $where) . "\n";
+			}
+
+			$db = Zend_Db_Table_Abstract::getDefaultAdapter ();
+			$rowArray = $db->fetchAll ($query);
+			$this->view->assign('output',$rowArray);
+			$this->view->assign('query',$query);
+
+			#			echo $query;
+			#			exit;
+		}
+		#		return $this->trainingReport ();
+	}
+
+	public function psStudentsByNameAction() {
+		$helper = new Helper();
+		$this->view->assign ( 'mode', 'id' );
+		$this->view->assign ( 'institutions', $helper->getInstitutions());
+		$this->view->assign ( 'cadres', $helper->getCadres());
+		$this->view->assign ( 'cohorts', $helper->getCohorts());
+		$this->view->assign ( 'nationalities', $helper->getNationalities());
+		$this->view->assign ( 'funding', $helper->getFunding());
+		$this->view->assign ( 'tutors', $helper->getTutors());
+		$this->view->assign ( 'facilities', $helper->getFacilities());
+		$this->view->assign ( 'coursetypes', $helper->AdminCourseTypes());
+		$this->view->assign ( 'degrees', $helper->getDegrees());
+		#		return $this->trainingReport ();
+
+		if ($this->getSanParam ( 'process' )){
+			/*
+			$maintable = "person p";
+			$select = array();
+			$select[] = "p.id as personid";
+			$select[] = "p.first_name";
+			$select[] = "p.last_name";
+
+			$join = array();
+			$join[] = array(
+			"table" => "student",
+			"abbreviation" => "s",
+			"compare" => "s.personid = p.id",
+			"type" => "inner"
+			);
+
+			$where = array();
+			$where[] = "p.is_deleted = 0";
+
+			$sort = array();
+
+			if ($this->getSanParam ( 'showinstitution' )){
+			$select[] = "i.institutionname";
+
+			$join[] = array(
+			"table" => "link_student_institution",
+			"abbreviation" => "lsi",
+			"compare" => "lsi.id_student = s.id",
+			"type" => "inner"
+			);
+
+			$join[] = array(
+			"table" => "institution",
+			"abbreviation" => "i",
+			"compare" => "i.id = lsi.id_institution",
+			"type" => "inner"
+			);
+			if ($this->getSanParam('institution')){
+			$where[] = "i.id = " . $this->getSanParam('institution');
+			}
+			}
+
+			if ($this->getSanParam ( 'showcohort' )){
+			$select[] = "c.cohortname";
+
+			$join[] = array(
+			"table" => "link_student_cohort",
+			"abbreviation" => "lsc",
+			"compare" => "lsc.id_student = s.id",
+			"type" => "inner"
+			);
+
+			$join[] = array(
+			"table" => "cohort",
+			"abbreviation" => "c",
+			"compare" => "c.id = lsc.id_cohort",
+			"type" => "inner"
+			);
+
+			if ($this->getSanParam('cohort')){
+			$where[] = "c.id = " . $this->getSanParam('cohort');
+			}
+			}
+
+			#			if ($this->getSanParam ( 'showcoursename' )){
+			#				echo "show showcoursename<br>";
+			#			} else {
+			#				echo "do not show showcoursename<br>";
+			#			}
+			#			if ($this->getSanParam ( 'coursename' ));
+
+			#			if ($this->getSanParam ( 'showgrades' )){
+			#				echo "show showgrades<br>";
+			#			} else {
+			#				echo "do not show showgrades<br>";
+			#			}
+			#			if ($this->getSanParam ( 'grades' ));
+
+			#			if ($this->getSanParam ( 'showexams' )){
+			#				echo "show showexams<br>";
+			#			} else {
+			#				echo "do not show showexams<br>";
+			#			}
+			#			if ($this->getSanParam ( 'exams' ));
+
+			if ($this->getSanParam ( 'showcadre' )){
+			$select[] = "ca.cadrename";
+
+			$join[] = array(
+			"table" => "cadres",
+			"abbreviation" => "ca",
+			"compare" => "ca.id = s.cadre",
+			"type" => "inner"
+			);
+
+			if ($this->getSanParam('cadre')){
+			$where[] = "ca.id = " . $this->getSanParam('cadre');
+			}
+			}
+
+			if ($this->getSanParam ( 'showyearinschool' )){
+			# REQUIRES COHORT LINK
+			$found = false;
+			foreach ($join as $j){
+			if ($j['table'] == "cohort"){
+			$found = true;
+			}
+			}
+
+			if (!$found){
+			$join[] = array(
+			"table" => "link_student_cohort",
+			"abbreviation" => "lsc",
+			"compare" => "lsc.id_student = s.id",
+			"type" => "inner"
+			);
+
+			$join[] = array(
+			"table" => "cohort",
+			"abbreviation" => "c",
+			"compare" => "c.id = lsc.id_cohort",
+			"type" => "inner"
+			);
+			}
+			$select[] = "c.startdate";
+			if ($this->getSanParam('yearinschool')){
+			$where[] = "c.startdate LIKE '" . mysql_real_escape_string(substr($this->getSanParam('yearinschool'), 0, 4)) . "%'";
+			}
+			}
+
+			#			if ($this->getSanParam ( 'showcoursetype' )){
+			#				echo "show showcoursetype<br>";
+			#			} else {
+			#				echo "do not show showcoursetype<br>";
+			#			}
+			#			if ($this->getSanParam ( 'coursetype' ));
+
+			#			if ($this->getSanParam ( 'showtopic' )){
+			#				echo "show showtopic<br>";
+			#			} else {
+			#				echo "do not show showtopic<br>";
+			#			}
+			#			if ($this->getSanParam ( 'topic' ));
+
+			#			if ($this->getSanParam ( 'showstudents' )){
+			#				echo "show showstudents<br>";
+			#			} else {
+			#				echo "do not show showstudents<br>";
+			#			}
+			#			if ($this->getSanParam ( 'students' ));
+
+			$query = "SELECT " . implode(", ", $select) . "\n";
+			$query .= " FROM " . $maintable . "\n";
+			if (count ($join) > 0){
+			foreach ($join as $j){
+			$query .= strtoupper($j['type']) . " JOIN " . $j['table'] . " " . $j['abbreviation'] . " ON " . $j['compare'] . "\n";
+			}
+			}
+			if (count ($where) > 0){
+			$query .= "WHERE " . implode(" AND ", $where) . "\n";
+			}
+
+			$db = Zend_Db_Table_Abstract::getDefaultAdapter ();
+			$rowArray = $db->fetchAll ($query);
+			$this->view->assign('output',$rowArray);
+			$this->view->assign('query',$query);
+
+			#			echo $query;
+			#			exit;
+			*/
+			$this->view->assign('output',array());
+			$this->view->assign('query',"");
+		}
+
+	}
+
+	public function psGraduatedStudentsAction() {
+		$helper = new Helper();
+		$this->view->assign ( 'mode', 'id' );
+		$this->view->assign ( 'institutions', $helper->getInstitutions());
+		$this->view->assign ( 'cadres', $helper->getCadres());
+		$this->view->assign ( 'cohorts', $helper->getCohorts());
+		$this->view->assign ( 'nationalities', $helper->getNationalities());
+		$this->view->assign ( 'funding', $helper->getFunding());
+		$this->view->assign ( 'tutors', $helper->getTutors());
+		$this->view->assign ( 'facilities', $helper->getFacilities());
+		$this->view->assign ( 'coursetypes', $helper->AdminCourseTypes());
+		$this->view->assign ( 'degrees', $helper->getDegrees());
+		#		return $this->trainingReport ();
+		if ($this->getSanParam ( 'process' )){
+			/*
+			$maintable = "person p";
+			$select = array();
+			$select[] = "p.id as personid";
+			$select[] = "p.first_name";
+			$select[] = "p.last_name";
+
+			$join = array();
+			$join[] = array(
+			"table" => "student",
+			"abbreviation" => "s",
+			"compare" => "s.personid = p.id",
+			"type" => "inner"
+			);
+
+			$where = array();
+			$where[] = "p.is_deleted = 0";
+
+			$sort = array();
+
+			if ($this->getSanParam ( 'showinstitution' )){
+			$select[] = "i.institutionname";
+
+			$join[] = array(
+			"table" => "link_student_institution",
+			"abbreviation" => "lsi",
+			"compare" => "lsi.id_student = s.id",
+			"type" => "inner"
+			);
+
+			$join[] = array(
+			"table" => "institution",
+			"abbreviation" => "i",
+			"compare" => "i.id = lsi.id_institution",
+			"type" => "inner"
+			);
+			if ($this->getSanParam('institution')){
+			$where[] = "i.id = " . $this->getSanParam('institution');
+			}
+			}
+
+			if ($this->getSanParam ( 'showcohort' )){
+			$select[] = "c.cohortname";
+
+			$join[] = array(
+			"table" => "link_student_cohort",
+			"abbreviation" => "lsc",
+			"compare" => "lsc.id_student = s.id",
+			"type" => "inner"
+			);
+
+			$join[] = array(
+			"table" => "cohort",
+			"abbreviation" => "c",
+			"compare" => "c.id = lsc.id_cohort",
+			"type" => "inner"
+			);
+
+			if ($this->getSanParam('cohort')){
+			$where[] = "c.id = " . $this->getSanParam('cohort');
+			}
+			}
+
+			#			if ($this->getSanParam ( 'showcoursename' )){
+			#				echo "show showcoursename<br>";
+			#			} else {
+			#				echo "do not show showcoursename<br>";
+			#			}
+			#			if ($this->getSanParam ( 'coursename' ));
+
+			#			if ($this->getSanParam ( 'showgrades' )){
+			#				echo "show showgrades<br>";
+			#			} else {
+			#				echo "do not show showgrades<br>";
+			#			}
+			#			if ($this->getSanParam ( 'grades' ));
+
+			#			if ($this->getSanParam ( 'showexams' )){
+			#				echo "show showexams<br>";
+			#			} else {
+			#				echo "do not show showexams<br>";
+			#			}
+			#			if ($this->getSanParam ( 'exams' ));
+
+			if ($this->getSanParam ( 'showcadre' )){
+			$select[] = "ca.cadrename";
+
+			$join[] = array(
+			"table" => "cadres",
+			"abbreviation" => "ca",
+			"compare" => "ca.id = s.cadre",
+			"type" => "inner"
+			);
+
+			if ($this->getSanParam('cadre')){
+			$where[] = "ca.id = " . $this->getSanParam('cadre');
+			}
+			}
+
+			if ($this->getSanParam ( 'showyearinschool' )){
+			# REQUIRES COHORT LINK
+			$found = false;
+			foreach ($join as $j){
+			if ($j['table'] == "cohort"){
+			$found = true;
+			}
+			}
+
+			if (!$found){
+			$join[] = array(
+			"table" => "link_student_cohort",
+			"abbreviation" => "lsc",
+			"compare" => "lsc.id_student = s.id",
+			"type" => "inner"
+			);
+
+			$join[] = array(
+			"table" => "cohort",
+			"abbreviation" => "c",
+			"compare" => "c.id = lsc.id_cohort",
+			"type" => "inner"
+			);
+			}
+			$select[] = "c.startdate";
+			if ($this->getSanParam('yearinschool')){
+			$where[] = "c.startdate LIKE '" . mysql_real_escape_string(substr($this->getSanParam('yearinschool'), 0, 4)) . "%'";
+			}
+			}
+
+			#			if ($this->getSanParam ( 'showcoursetype' )){
+			#				echo "show showcoursetype<br>";
+			#			} else {
+			#				echo "do not show showcoursetype<br>";
+			#			}
+			#			if ($this->getSanParam ( 'coursetype' ));
+
+			#			if ($this->getSanParam ( 'showtopic' )){
+			#				echo "show showtopic<br>";
+			#			} else {
+			#				echo "do not show showtopic<br>";
+			#			}
+			#			if ($this->getSanParam ( 'topic' ));
+
+			#			if ($this->getSanParam ( 'showstudents' )){
+			#				echo "show showstudents<br>";
+			#			} else {
+			#				echo "do not show showstudents<br>";
+			#			}
+			#			if ($this->getSanParam ( 'students' ));
+
+			$query = "SELECT " . implode(", ", $select) . "\n";
+			$query .= " FROM " . $maintable . "\n";
+			if (count ($join) > 0){
+			foreach ($join as $j){
+			$query .= strtoupper($j['type']) . " JOIN " . $j['table'] . " " . $j['abbreviation'] . " ON " . $j['compare'] . "\n";
+			}
+			}
+			if (count ($where) > 0){
+			$query .= "WHERE " . implode(" AND ", $where) . "\n";
+			}
+
+			$db = Zend_Db_Table_Abstract::getDefaultAdapter ();
+			$rowArray = $db->fetchAll ($query);
+			$this->view->assign('output',$rowArray);
+			$this->view->assign('query',$query);
+
+			#			echo $query;
+			#			exit;
+			*/
+			$this->view->assign('output',array());
+			$this->view->assign('query',"");
+		}
+	}
+
+	public function psCourseByStudentCountAction() {
+		$helper = new Helper();
+		$this->view->assign ( 'mode', 'id' );
+		$this->view->assign ( 'institutions', $helper->getInstitutions());
+		$this->view->assign ( 'cadres', $helper->getCadres());
+		$this->view->assign ( 'cohorts', $helper->getCohorts());
+		$this->view->assign ( 'nationalities', $helper->getNationalities());
+		$this->view->assign ( 'funding', $helper->getFunding());
+		$this->view->assign ( 'tutors', $helper->getTutors());
+		$this->view->assign ( 'facilities', $helper->getFacilities());
+		$this->view->assign ( 'coursetypes', $helper->AdminCourseTypes());
+		$this->view->assign ( 'degrees', $helper->getDegrees());
+		#		return $this->trainingReport ();
+		if ($this->getSanParam ( 'process' )){
+			/*
+			$maintable = "person p";
+			$select = array();
+			$select[] = "p.id as personid";
+			$select[] = "p.first_name";
+			$select[] = "p.last_name";
+
+			$join = array();
+			$join[] = array(
+			"table" => "student",
+			"abbreviation" => "s",
+			"compare" => "s.personid = p.id",
+			"type" => "inner"
+			);
+
+			$where = array();
+			$where[] = "p.is_deleted = 0";
+
+			$sort = array();
+
+			if ($this->getSanParam ( 'showinstitution' )){
+			$select[] = "i.institutionname";
+
+			$join[] = array(
+			"table" => "link_student_institution",
+			"abbreviation" => "lsi",
+			"compare" => "lsi.id_student = s.id",
+			"type" => "inner"
+			);
+
+			$join[] = array(
+			"table" => "institution",
+			"abbreviation" => "i",
+			"compare" => "i.id = lsi.id_institution",
+			"type" => "inner"
+			);
+			if ($this->getSanParam('institution')){
+			$where[] = "i.id = " . $this->getSanParam('institution');
+			}
+			}
+
+			if ($this->getSanParam ( 'showcohort' )){
+			$select[] = "c.cohortname";
+
+			$join[] = array(
+			"table" => "link_student_cohort",
+			"abbreviation" => "lsc",
+			"compare" => "lsc.id_student = s.id",
+			"type" => "inner"
+			);
+
+			$join[] = array(
+			"table" => "cohort",
+			"abbreviation" => "c",
+			"compare" => "c.id = lsc.id_cohort",
+			"type" => "inner"
+			);
+
+			if ($this->getSanParam('cohort')){
+			$where[] = "c.id = " . $this->getSanParam('cohort');
+			}
+			}
+
+			#			if ($this->getSanParam ( 'showcoursename' )){
+			#				echo "show showcoursename<br>";
+			#			} else {
+			#				echo "do not show showcoursename<br>";
+			#			}
+			#			if ($this->getSanParam ( 'coursename' ));
+
+			#			if ($this->getSanParam ( 'showgrades' )){
+			#				echo "show showgrades<br>";
+			#			} else {
+			#				echo "do not show showgrades<br>";
+			#			}
+			#			if ($this->getSanParam ( 'grades' ));
+
+			#			if ($this->getSanParam ( 'showexams' )){
+			#				echo "show showexams<br>";
+			#			} else {
+			#				echo "do not show showexams<br>";
+			#			}
+			#			if ($this->getSanParam ( 'exams' ));
+
+			if ($this->getSanParam ( 'showcadre' )){
+			$select[] = "ca.cadrename";
+
+			$join[] = array(
+			"table" => "cadres",
+			"abbreviation" => "ca",
+			"compare" => "ca.id = s.cadre",
+			"type" => "inner"
+			);
+
+			if ($this->getSanParam('cadre')){
+			$where[] = "ca.id = " . $this->getSanParam('cadre');
+			}
+			}
+
+			if ($this->getSanParam ( 'showyearinschool' )){
+			# REQUIRES COHORT LINK
+			$found = false;
+			foreach ($join as $j){
+			if ($j['table'] == "cohort"){
+			$found = true;
+			}
+			}
+
+			if (!$found){
+			$join[] = array(
+			"table" => "link_student_cohort",
+			"abbreviation" => "lsc",
+			"compare" => "lsc.id_student = s.id",
+			"type" => "inner"
+			);
+
+			$join[] = array(
+			"table" => "cohort",
+			"abbreviation" => "c",
+			"compare" => "c.id = lsc.id_cohort",
+			"type" => "inner"
+			);
+			}
+			$select[] = "c.startdate";
+			if ($this->getSanParam('yearinschool')){
+			$where[] = "c.startdate LIKE '" . mysql_real_escape_string(substr($this->getSanParam('yearinschool'), 0, 4)) . "%'";
+			}
+			}
+
+			#			if ($this->getSanParam ( 'showcoursetype' )){
+			#				echo "show showcoursetype<br>";
+			#			} else {
+			#				echo "do not show showcoursetype<br>";
+			#			}
+			#			if ($this->getSanParam ( 'coursetype' ));
+
+			#			if ($this->getSanParam ( 'showtopic' )){
+			#				echo "show showtopic<br>";
+			#			} else {
+			#				echo "do not show showtopic<br>";
+			#			}
+			#			if ($this->getSanParam ( 'topic' ));
+
+			#			if ($this->getSanParam ( 'showstudents' )){
+			#				echo "show showstudents<br>";
+			#			} else {
+			#				echo "do not show showstudents<br>";
+			#			}
+			#			if ($this->getSanParam ( 'students' ));
+
+			$query = "SELECT " . implode(", ", $select) . "\n";
+			$query .= " FROM " . $maintable . "\n";
+			if (count ($join) > 0){
+			foreach ($join as $j){
+			$query .= strtoupper($j['type']) . " JOIN " . $j['table'] . " " . $j['abbreviation'] . " ON " . $j['compare'] . "\n";
+			}
+			}
+			if (count ($where) > 0){
+			$query .= "WHERE " . implode(" AND ", $where) . "\n";
+			}
+
+			$db = Zend_Db_Table_Abstract::getDefaultAdapter ();
+			$rowArray = $db->fetchAll ($query);
+			$this->view->assign('output',$rowArray);
+			$this->view->assign('query',$query);
+
+			#			echo $query;
+			#			exit;
+			*/
+			$this->view->assign('output',array());
+			$this->view->assign('query',"");
+		}
+	}
+
+	public function psCourseByNameAction() {
+		$helper = new Helper();
+		$this->view->assign ( 'mode', 'id' );
+		$this->view->assign ( 'institutions', $helper->getInstitutions());
+		$this->view->assign ( 'cadres', $helper->getCadres());
+		$this->view->assign ( 'cohorts', $helper->getCohorts());
+		$this->view->assign ( 'nationalities', $helper->getNationalities());
+		$this->view->assign ( 'funding', $helper->getFunding());
+		$this->view->assign ( 'tutors', $helper->getTutors());
+		$this->view->assign ( 'facilities', $helper->getFacilities());
+		$this->view->assign ( 'coursetypes', $helper->AdminCourseTypes());
+		$this->view->assign ( 'degrees', $helper->getDegrees());
+
+		#		return $this->trainingReport ();
+		if ($this->getSanParam ( 'process' )){
+			/*
+			$maintable = "person p";
+			$select = array();
+			$select[] = "p.id as personid";
+			$select[] = "p.first_name";
+			$select[] = "p.last_name";
+
+			$join = array();
+			$join[] = array(
+			"table" => "student",
+			"abbreviation" => "s",
+			"compare" => "s.personid = p.id",
+			"type" => "inner"
+			);
+
+			$where = array();
+			$where[] = "p.is_deleted = 0";
+
+			$sort = array();
+
+			if ($this->getSanParam ( 'showinstitution' )){
+			$select[] = "i.institutionname";
+
+			$join[] = array(
+			"table" => "link_student_institution",
+			"abbreviation" => "lsi",
+			"compare" => "lsi.id_student = s.id",
+			"type" => "inner"
+			);
+
+			$join[] = array(
+			"table" => "institution",
+			"abbreviation" => "i",
+			"compare" => "i.id = lsi.id_institution",
+			"type" => "inner"
+			);
+			if ($this->getSanParam('institution')){
+			$where[] = "i.id = " . $this->getSanParam('institution');
+			}
+			}
+
+			if ($this->getSanParam ( 'showcohort' )){
+			$select[] = "c.cohortname";
+
+			$join[] = array(
+			"table" => "link_student_cohort",
+			"abbreviation" => "lsc",
+			"compare" => "lsc.id_student = s.id",
+			"type" => "inner"
+			);
+
+			$join[] = array(
+			"table" => "cohort",
+			"abbreviation" => "c",
+			"compare" => "c.id = lsc.id_cohort",
+			"type" => "inner"
+			);
+
+			if ($this->getSanParam('cohort')){
+			$where[] = "c.id = " . $this->getSanParam('cohort');
+			}
+			}
+
+			#			if ($this->getSanParam ( 'showcoursename' )){
+			#				echo "show showcoursename<br>";
+			#			} else {
+			#				echo "do not show showcoursename<br>";
+			#			}
+			#			if ($this->getSanParam ( 'coursename' ));
+
+			#			if ($this->getSanParam ( 'showgrades' )){
+			#				echo "show showgrades<br>";
+			#			} else {
+			#				echo "do not show showgrades<br>";
+			#			}
+			#			if ($this->getSanParam ( 'grades' ));
+
+			#			if ($this->getSanParam ( 'showexams' )){
+			#				echo "show showexams<br>";
+			#			} else {
+			#				echo "do not show showexams<br>";
+			#			}
+			#			if ($this->getSanParam ( 'exams' ));
+
+			if ($this->getSanParam ( 'showcadre' )){
+			$select[] = "ca.cadrename";
+
+			$join[] = array(
+			"table" => "cadres",
+			"abbreviation" => "ca",
+			"compare" => "ca.id = s.cadre",
+			"type" => "inner"
+			);
+
+			if ($this->getSanParam('cadre')){
+			$where[] = "ca.id = " . $this->getSanParam('cadre');
+			}
+			}
+
+			if ($this->getSanParam ( 'showyearinschool' )){
+			# REQUIRES COHORT LINK
+			$found = false;
+			foreach ($join as $j){
+			if ($j['table'] == "cohort"){
+			$found = true;
+			}
+			}
+
+			if (!$found){
+			$join[] = array(
+			"table" => "link_student_cohort",
+			"abbreviation" => "lsc",
+			"compare" => "lsc.id_student = s.id",
+			"type" => "inner"
+			);
+
+			$join[] = array(
+			"table" => "cohort",
+			"abbreviation" => "c",
+			"compare" => "c.id = lsc.id_cohort",
+			"type" => "inner"
+			);
+			}
+			$select[] = "c.startdate";
+			if ($this->getSanParam('yearinschool')){
+			$where[] = "c.startdate LIKE '" . mysql_real_escape_string(substr($this->getSanParam('yearinschool'), 0, 4)) . "%'";
+			}
+			}
+
+			#			if ($this->getSanParam ( 'showcoursetype' )){
+			#				echo "show showcoursetype<br>";
+			#			} else {
+			#				echo "do not show showcoursetype<br>";
+			#			}
+			#			if ($this->getSanParam ( 'coursetype' ));
+
+			#			if ($this->getSanParam ( 'showtopic' )){
+			#				echo "show showtopic<br>";
+			#			} else {
+			#				echo "do not show showtopic<br>";
+			#			}
+			#			if ($this->getSanParam ( 'topic' ));
+
+			#			if ($this->getSanParam ( 'showstudents' )){
+			#				echo "show showstudents<br>";
+			#			} else {
+			#				echo "do not show showstudents<br>";
+			#			}
+			#			if ($this->getSanParam ( 'students' ));
+
+			$query = "SELECT " . implode(", ", $select) . "\n";
+			$query .= " FROM " . $maintable . "\n";
+			if (count ($join) > 0){
+			foreach ($join as $j){
+			$query .= strtoupper($j['type']) . " JOIN " . $j['table'] . " " . $j['abbreviation'] . " ON " . $j['compare'] . "\n";
+			}
+			}
+			if (count ($where) > 0){
+			$query .= "WHERE " . implode(" AND ", $where) . "\n";
+			}
+
+			$db = Zend_Db_Table_Abstract::getDefaultAdapter ();
+			$rowArray = $db->fetchAll ($query);
+			$this->view->assign('output',$rowArray);
+			$this->view->assign('query',$query);
+
+			#			echo $query;
+			#			exit;
+			*/
+			$this->view->assign('output',array());
+			$this->view->assign('query',"");
+		}
+	}
+
+	public function psCohortByParticipantCountAction() {
+		$helper = new Helper();
+		$this->view->assign ( 'mode', 'id' );
+		$this->view->assign ( 'institutions', $helper->getInstitutions());
+		$this->view->assign ( 'cadres', $helper->getCadres());
+		$this->view->assign ( 'cohorts', $helper->getCohorts());
+		$this->view->assign ( 'nationalities', $helper->getNationalities());
+		$this->view->assign ( 'funding', $helper->getFunding());
+		$this->view->assign ( 'tutors', $helper->getTutors());
+		$this->view->assign ( 'facilities', $helper->getFacilities());
+		$this->view->assign ( 'facilitytypes', $helper->getFacilityTypes());
+		$this->view->assign ( 'sponsors', $helper->getSponsors());
+		$this->view->assign ( 'coursetypes', $helper->AdminCourseTypes());
+		$this->view->assign ( 'degrees', $helper->getDegrees());
+	}
+
+	public function psInstitutionInformationAction() {
+		$helper = new Helper();
+		$this->view->assign ( 'mode', 'id' );
+		$this->view->assign ( 'institutions', $helper->getInstitutions());
+		$this->view->assign ( 'cadres', $helper->getCadres());
+		$this->view->assign ( 'cohorts', $helper->getCohorts());
+		$this->view->assign ( 'nationalities', $helper->getNationalities());
+		$this->view->assign ( 'funding', $helper->getFunding());
+		$this->view->assign ( 'tutors', $helper->getTutors());
+		$this->view->assign ( 'facilities', $helper->getFacilities());
+		$this->view->assign ( 'facilitytypes', $helper->getFacilityTypes());
+		$this->view->assign ( 'sponsors', $helper->getSponsors());
+		$this->view->assign ( 'coursetypes', $helper->AdminCourseTypes());
+		$this->view->assign ( 'degrees', $helper->getDegrees());
+	}
+
+	public function psTutorByNameAction() {
+		$helper = new Helper();
+		$this->view->assign ( 'mode', 'id' );
+		$this->view->assign ( 'institutions', $helper->getInstitutions());
+		$this->view->assign ( 'cadres', $helper->getCadres());
+		$this->view->assign ( 'cohorts', $helper->getCohorts());
+		$this->view->assign ( 'nationalities', $helper->getNationalities());
+		$this->view->assign ( 'funding', $helper->getFunding());
+		$this->view->assign ( 'tutors', $helper->getTutors());
+		$this->view->assign ( 'facilities', $helper->getFacilities());
+		$this->view->assign ( 'facilitytypes', $helper->getFacilityTypes());
+		$this->view->assign ( 'sponsors', $helper->getSponsors());
+		$this->view->assign ( 'coursetypes', $helper->AdminCourseTypes());
+		$this->view->assign ( 'degrees', $helper->getDegrees());
+	}
+
+	public function psFacilityReportAction() {
+		$helper = new Helper();
+		$this->view->assign ( 'mode', 'id' );
+		$this->view->assign ( 'institutions', $helper->getInstitutions());
+		$this->view->assign ( 'cadres', $helper->getCadres());
+		$this->view->assign ( 'cohorts', $helper->getCohorts());
+		$this->view->assign ( 'nationalities', $helper->getNationalities());
+		$this->view->assign ( 'funding', $helper->getFunding());
+		$this->view->assign ( 'tutors', $helper->getTutors());
+		$this->view->assign ( 'facilities', $helper->getFacilities());
+		$this->view->assign ( 'facilitytypes', $helper->getFacilityTypes());
+		$this->view->assign ( 'sponsors', $helper->getSponsors());
+		$this->view->assign ( 'coursetypes', $helper->AdminCourseTypes());
+		$this->view->assign ( 'degrees', $helper->getDegrees());
+	}
 }

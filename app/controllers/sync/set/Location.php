@@ -31,6 +31,10 @@ class SyncSetLocation extends SyncSetSimple
 			);
 	}
 	
+	public function has_uuid_col()
+	{
+		return true; // bugfix, its saying no in location table for some reason
+	}
 	
 	public function fetchLeftPool()
 	{
@@ -58,8 +62,6 @@ class SyncSetLocation extends SyncSetSimple
 		
 		return null;
 	}
-	
-
 }
 
 

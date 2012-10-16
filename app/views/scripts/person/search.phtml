@@ -22,24 +22,21 @@ print ScriptContainer::$instance->renderJSHead();
 	   <form action="" method="get">
    <fieldset><legend><?php tp('Select Criteria');?></legend>
 	 <div class="fieldLabel" id="province_id_lbl"><?php echo (@$this->translation['Region A (Province)']); ?></div>
-  <div class="fieldInput"><?php renderFilter($this->locations, 1, 'province_id', $this->criteria['province_id'], 'district_id');?></div>
+  <div class="fieldInput">
+  	<?php renderFilter($this->locations, 1, 'province_id', $this->criteria['province_id'], 'district_id');?></div>
   <?php if ( $this->setting['display_region_b'] ) { ?>
   <div class="fieldLabel" id="district_id_lbl"><?php echo (@$this->translation['Region B (Health District)']); ?></div>
-  <div class="fieldInput"><?php renderFilter($this->locations, 2, 'district_id', $this->criteria['district_id'], ($this->setting['display_region_c']?'region_c_id':false));?></div>
+  <div class="fieldInput">
+  	<?php renderFilter($this->locations, 2, 'district_id', $this->criteria['district_id'], ($this->setting['display_region_c']?'region_c_id':'facilities'));?></div>
   <?php } ?>
   <?php if ( $this->setting['display_region_c'] ) { ?>
   <div class="fieldLabel" id="region_c_id_lbl"><?php echo (@$this->translation['Region C (Local Region)']); ?></div>
-  <div class="fieldInput"><?php renderFilter($this->locations, 3, 'region_c_id', $this->criteria['region_c_id'], false);?></div>
+  <div class="fieldInput">
+  	<?php renderFilter($this->locations, 3, 'region_c_id', $this->criteria['region_c_id'], 'newformval');?></div>
   <?php } ?>
 
-<div class="fieldLabel"  id="facilityInput_lbl"><?php tp('Facility');?></div><div class="fieldInput"><select id="facilityInput" name="facilityInput" >
-	<option value="">--<?php tp('choose');?>--</option>
-	<?php
-		foreach ( $this->facilities as $vals ) {
-			echo '<option value="'.$vals['id'].'" '.($this->criteria['facilityInput'] == $vals['id']?'SELECTED':'').'>'.$vals['facility_name'].'</option>';
-	}
-	?>
-</select></div>
+<div class="fieldLabel"  id="facilityInput_lbl"><?php tp('Facility');?></div><div class="fieldInput">
+<?php renderFacilityDropDown($this->facilities, $this->criteria['facilityInput']); ?></div>
 	<div class="clear"></div>
 
 <!-- course taken -->

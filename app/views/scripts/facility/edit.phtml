@@ -20,7 +20,7 @@ print ScriptContainer::$instance->renderJSHead();
 
 <div class="fieldLabel" id="facility_name_lbl"><?php tp('Facility');?></div>
 	<form id="change" action="<?php echo $this->base_url;?>/facility/edit" method="GET">
-	<div class="fieldInput"><select name="id"  id="id" onchange="this.form.submit();">
+	<div class="fieldInput"><select name="id"  id="id" onchange="if(this.value != '') this.form.submit();">
 	<option value="">-- <?php tp('choose');?> --</option>
 	<?php foreach ( $this->facilities as $facility) {
 		echo '<option value="'.($facility['id']).'" '.((@$this->facility['id']) == $facility['id']? 'SELECTED':'').' >'.($facility['facility_name']).'</option>';
@@ -82,7 +82,7 @@ print ScriptContainer::$instance->renderJSHead();
 		}
 		?>
 	</select></div>
-	<div class="fieldLabel" id="facility_comments_lbl"><?php tp('Comments');?></div>
+	<div class="fieldLabel" id="facility_comments_lbl"><?php tp('Facility Comments');?></div>
 	<div class="fieldInput"><textarea name="facility_comments" id="facility_comments" size="40" maxlength="40" ><?php echo $this->facility['facility_comments'];?></textarea></div>
 
 

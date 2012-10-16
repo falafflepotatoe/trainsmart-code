@@ -6,6 +6,7 @@ require_once ('app/models/table/OptionList.php');
 class SyncSetSimpleOptionList extends SyncSetSimple
 {
 	
+	public $type = 'optionlist';
 	private $value_col = null;
 	
 	function __construct($sourceDbParams, $syncfile_id, $tableName, $value_col)
@@ -40,7 +41,9 @@ class SyncSetSimpleOptionList extends SyncSetSimple
 	 */
 	public function fetchLeftPool()
 	{
-		$rows = $this->getLeftTable()->fetchAll('(timestamp_updated > "' . SyncCompare::$lastSyncCompleted . '" AND is_created_offline = 1)');
+		//bug fix: we need to check old records in the db now, sometimes titles/options are deleted and used by the app.
+		//$rows = $this->getLeftTable()->fetchAll('(timestamp_updated > "' . SyncCompare::$lastSyncCompleted . '" AND is_created_offline = 1)');
+		$rows = $this->getLeftTable()->fetchAll();
 		return $rows;
 	}
 	

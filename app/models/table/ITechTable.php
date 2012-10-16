@@ -294,5 +294,11 @@ class ITechTable extends Zend_Db_Table_Abstract
     
     return $sorted_data;
   }
-  
+ 
+  function dbfunc(){
+      
+   $db = Zend_Db_Table_Abstract::getDefaultAdapter ();
+   return $db;
+  }
+ 
 }

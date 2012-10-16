@@ -69,18 +69,15 @@
 		      sepPre];
 
 		      for(var i = 1; i <= numExtras; i++) {
-            if (aResultItem.length >= i) {
-	            // match an additional result item (e.g., when searching both last and first names)
-	            if(!spanBegin && sQuery.toUpperCase() == aResultItem[i].substr(0,sQuery.length).toUpperCase()) {
-	              aMarkup [aMarkup.length] = SPAN_BEGIN;
-	              aMarkup [aMarkup.length] = aResultItem[i].substr(0,sQuery.length);
-	              aMarkup [aMarkup.length] = SPAN_END;
-	              aMarkup [aMarkup.length] = aResultItem[i].substr(sQuery.length);
-	            } else {
-			      	  aMarkup [aMarkup.length]= aResultItem[i];
-	            }
+
+            // match an additional result item (e.g., when searching both last and first names)
+            if(!spanBegin && sQuery.toUpperCase() == aResultItem[i].substr(0,sQuery.length).toUpperCase()) {
+              aMarkup [aMarkup.length] = SPAN_BEGIN;
+              aMarkup [aMarkup.length] = aResultItem[i].substr(0,sQuery.length);
+              aMarkup [aMarkup.length] = SPAN_END;
+              aMarkup [aMarkup.length] = aResultItem[i].substr(sQuery.length);
             } else {
-		      	  aMarkup [aMarkup.length]= aResultItem[0];
+		      	  aMarkup [aMarkup.length]= aResultItem[i];
             }
 
 		      	if ( i < numExtras )
@@ -106,22 +103,20 @@
 
 		   var spanInner = '';
 
-		      //for(var i = 1; i <= 3; i++) {
-		      for(var i = 1; i < aResultItem.length; i++)
-		      {
-						if (aMarkup.length > 1)
-							aMarkup [aMarkup.length]= ' ';
-            // match an additional result item (e.g., when searching both last and first names)
-            if(sQuery.toUpperCase() == aResultItem[i].substr(0,sQuery.length).toUpperCase()) 
-            {
-              aMarkup [aMarkup.length] = SPAN_BEGIN;
-              aMarkup [aMarkup.length] = aResultItem[i].substr(0,sQuery.length);
-              aMarkup [aMarkup.length] = SPAN_END;
-              aMarkup [aMarkup.length] = aResultItem[i].substr(sQuery.length);
-            } else {
-		      	  aMarkup [aMarkup.length]= aResultItem[i];
-            }
-          }
+		      for(var i = 1; i <= 3; i++) {
+					if (aMarkup.length > 1)
+						aMarkup [aMarkup.length]= ' ';
+		            // match an additional result item (e.g., when searching both last and first names)
+		            if(sQuery.toUpperCase() == aResultItem[i].substr(0,sQuery.length).toUpperCase()) {
+		              aMarkup [aMarkup.length] = SPAN_BEGIN;
+		              aMarkup [aMarkup.length] = aResultItem[i].substr(0,sQuery.length);
+		              aMarkup [aMarkup.length] = SPAN_END;
+		              aMarkup [aMarkup.length] = aResultItem[i].substr(sQuery.length);
+		            } else {
+				      	  aMarkup [aMarkup.length]= aResultItem[i];
+		            }
+
+		      }
 		      
 		      // birthdate
 		      if(typeof aResultItem[7] != "undefined" && aResultItem[7] != "") {

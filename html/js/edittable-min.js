@@ -42,7 +42,7 @@ function makeEditTable(labelAdd, tableData, columnDefs, noDelete, noEdit) {
 
               switch(target.innerHTML) {
 
-                case "Delete":
+                case tr("Delete"):
 
                   // Don't confirm empty records
                   isEmpty = this.myDataTable.removeEmpty(oRecord);
@@ -56,7 +56,7 @@ function makeEditTable(labelAdd, tableData, columnDefs, noDelete, noEdit) {
                   }
                   break;
 
-                case "Edit":
+                case tr("Edit"):
 
                   el = this.myDataTable.getTdEl({record:oRecord, column:this.myDataTable.getColumn(0)});
                   this.myDataTable.showCellEditor(el);
@@ -192,7 +192,7 @@ function makeEditTable(labelAdd, tableData, columnDefs, noDelete, noEdit) {
             elSaving = oCellEditor.container.appendChild(document.createElement('div'));
             elSaving.id = "editTableSaving";
           }
-          elSaving.innerHTML = "Saving...";
+          elSaving.innerHTML = tr("Saving...");
 
           var nodes = oCellEditor.container.getElementsByTagName('input'); // disable all inputs
           for(i in nodes) {
@@ -219,7 +219,7 @@ function makeEditTable(labelAdd, tableData, columnDefs, noDelete, noEdit) {
                 // user trying to add a value that is flagged as deleted in the database
                 if(status.insert != null && status.insert == -2) {
                   if(confirm(status.error)) { // undelete
-                    elSaving.innerHTML = '<span class="errorText">Undeleting...</span>';
+                    elSaving.innerHTML = '<span class="errorText">' + tr('Undeleting...') + '</span>';
                     queryString = "id=" + oCellEditor.record.getData("id") + "&" + oCellEditor.column.key + "=" + encodeURIComponent(newData) + "&undelete=1";
                     cObj = YAHOO.util.Connect.asyncRequest('POST', document.location + "/outputType/json", ajaxCallback, queryString);
                   } else {

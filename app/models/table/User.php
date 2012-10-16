@@ -80,6 +80,17 @@ class User extends ITechTable
 		return $rtn;
  	}
 
+ 	public function hasPS($userid) {
+		$db = Zend_Db_Table_Abstract::getDefaultAdapter (); 
+		$select = $db->query("select * from user_to_acl WHERE user_id = " . $userid . " AND acl_id = 'pre_service'");
+		$row = $select->fetch();
+		if ($row !== false){
+			return true;
+		} else {
+			return false;
+		}
+ 	}
+
  	/**
  	 * Called by ITechController
  	 * To view ACLs in an action function use Zend_Auth::getInstance()->getIdentity()->acls; or ITechController::_getACLs();

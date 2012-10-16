@@ -8,9 +8,25 @@ if ( $this->tier > 1) {
   print '<br/>';
 }
 if ( $this->tier > 2)  {
+  if($this->setting['display_region_b']) // bugfix (if theres no 2nd region show 'city')
   print '<label>Filter by  '.@$this->translation['Region B (Health District)'].'</label>'; 
-  renderFilter($this->locations, 2, 'district_id', $this->district_id, false);
-
+  else
+    print '<label>Filter by '.t('City or Town').'</label>'; 
+  renderFilter($this->locations, 2, 'district_id', $this->district_id, 'region_c_id');
+  print '<br/>';
+}
+if ( $this->tier > 3) {
+  if($this->setting['display_region_c']) // bugfix
+  print '<label>Filter by '.@$this->translation['Region C (Local Region)'].'</label>'; 
+  else
+    print '<label>Filter by '.t('City or Town').'</label>'; 
+  renderFilter($this->locations, 3, 'region_c_id', $this->region_c_id, 'city_id');
+  print '<br/>';
+}
+if ( $this->tier > 4) {
+  print '<label>Filter by '. t('City or Town').'</label>'; 
+  renderFilter($this->locations, 4, 'city_id', $this->city_id, false);
+  print '<br/>';
 }
 $filters = ob_get_contents(); ob_end_clean();
 
@@ -28,9 +44,12 @@ YAHOO.util.Event.onDOMReady(function () {
   
   YAHOO.util.Event.addListener(YAHOO.util.Dom.get("province_id"), "change", change_location, YAHOO.util.Dom.get("province_id"));
   YAHOO.util.Event.addListener(YAHOO.util.Dom.get("district_id"), "change", change_location, YAHOO.util.Dom.get("district_id"));
+  YAHOO.util.Event.addListener(YAHOO.util.Dom.get("region_c_id"), "change", change_location, YAHOO.util.Dom.get("region_c_id"));
+  YAHOO.util.Event.addListener(YAHOO.util.Dom.get("city_id"), "change", change_location, YAHOO.util.Dom.get("city_id"));
   YAHOO.util.Event.addListener(YAHOO.util.Dom.get("t1"), "click", change_tier,YAHOO.util.Dom.get("t1"));
   YAHOO.util.Event.addListener(YAHOO.util.Dom.get("t2"), "click", change_tier,YAHOO.util.Dom.get("t2"));
   YAHOO.util.Event.addListener(YAHOO.util.Dom.get("t3"), "click", change_tier,YAHOO.util.Dom.get("t3"));
+  YAHOO.util.Event.addListener(YAHOO.util.Dom.get("t4"), "click", change_tier,YAHOO.util.Dom.get("t4"));
      
 });
 
@@ -42,10 +61,11 @@ Enter locations for this country or import a CSV file.<br/><br/>
 <input type="file" name="import" /> <input type="submit" value="Import" />
 <hr/>
 Select the Region below to add values<br/><ul>';
-for($i = 1; $i < $this->setting['num_location_tiers']; $i++) {
-	if ( $i == 1) $formPrefix .= "<li><input type='radio' id='t1' name='tier' value='1' ".($this->tier == 1?"checked='checked'":"")." /><label>".$this->translation['Region A (Province)']."</label></li>";
-  if ( $i == 2) $formPrefix .= "<li><input type='radio' id='t2' name='tier' value='2' ".($this->tier == 2?"checked='checked'":"")." /><label>".$this->translation['Region B (Health District)']."</label></li>";
-  if ( $i == 3) $formPrefix .= "<li><input type='radio' id='t3' name='tier' value='3' ".($this->tier == 3?"checked='checked'":"")." /><label>".$this->translation['Region C (Local Region)']."</label></li>";
+for($i = 1; $i < $this->setting['num_location_tiers']+1; $i++) {
+  if ( $i == 1) $formPrefix .= "<li><input type='radio' id='t1' name='tier' value='1' ".($this->tier == 1?"checked='checked'":"")." /><label>".$this->translation['Region A (Province)']."</label></li>";
+  if ( $i == 2) $formPrefix .= "<li><input type='radio' id='t2' name='tier' value='2' ".($this->tier == 2?"checked='checked'":"")." /><label>".($this->setting['display_region_b'] ? $this->translation['Region B (Health District)'] : t('City or Town'))."</label></li>";
+  if ( $i == 3) $formPrefix .= "<li><input type='radio' id='t3' name='tier' value='3' ".($this->tier == 3?"checked='checked'":"")." /><label>".($this->setting['display_region_c'] ? $this->translation['Region C (Local Region)'] : t('City or Town'))."</label></li>";
+  if ( $i == 4) $formPrefix .= "<li><input type='radio' id='t4' name='tier' value='4' ".($this->tier == 4?"checked='checked'":"")." /><label>".t('City or Town')."</label></li>";
 }
 $formPrefix .= '</ul>
 <br/>

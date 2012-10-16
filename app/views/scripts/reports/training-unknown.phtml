@@ -297,9 +297,9 @@ foreach($this->results as $row) {
 		$isFirstRow = false;
 		echo '[';
 		if (array_key_exists('cnt', $row) !== false )
-		  echo '"'.( $row['cnt'] ? $row['cnt'] :0 ).'"';
+		  echo ( $row['cnt'] ? $row['cnt'] : 0 ) ;
     if (isset($row['id'] ) )
-      echo ((array_key_exists('cnt', $row) !== false )? ',"'.$row['id'].'"': '"'.$row['id'].'"');
+      echo ((array_key_exists('cnt', $row) !== false )? ','.$row['id']: $row['id']);
 		if ( isset($row['id']) )
 			echo ',"'.$row['training_start_date'].'"';
     if ( $this->criteria['showEndDate'] )
@@ -344,7 +344,7 @@ foreach($this->results as $row) {
 		if ( $this->criteria['showRefresher'] )
 			echo ',"'.$row['is_refresher'].'"';
 		if ( $this->criteria['showGotComment'] )
-			echo ',"'.$row['got_comments'].'"';
+			echo ',"'.str_replace(array("\r\n", "\n","\r"), '<br />',htmlspecialchars($row['got_comments'])).'"';
     if ( $this->criteria['showPrimaryLanguage'] )
       echo ',"'.$row['primary_language_phrase'].'"';
     if ( $this->criteria['showSecondaryLanguage'] )
@@ -354,7 +354,7 @@ foreach($this->results as $row) {
     if ( $this->criteria['showCustom1'] )
       echo ',"'.$row['custom1_phrase'].'"';
 		if (array_key_exists('pcnt', $row) !== false )
-      echo ',"'.( $row['pcnt'] ).'"';
+      echo ','.( $row['pcnt'] );
 		echo "]";
 		$cnt++;
 }}

@@ -53,6 +53,7 @@ YAHOO.util.Event.onDOMReady(setOrgAccessStatus);
       <div><div class="fieldLabel"><?php tp('Admin');?></div><div class="fieldInput"><div class="float50"><input type="checkbox" id="edit_country_options" name="edit_country_options" /><label for="edit_country_options"><?php tp('Edit country options');?></label></div><input type="checkbox" id="add_edit_users" name="add_edit_users" /><label for="add_edit_users"><?php tp('Add/Edit users');?></label></div></div>
       <div><div class="fieldLabel"><?php tp('Approval');?></div><div class="fieldInput"><div class="float50"><input type="checkbox" id="approve_trainings" name="approve_trainings" /><label for="approve_trainings"><?php tp('Approve trainings');?></label></div></div></div>
       <div><div class="fieldLabel"><?php tp('Files');?></div><div class="fieldInput"><div class="float50"><input type="checkbox" id="admin_files" name="admin_files" <?php if ( array_search('admin_files',$this->user['acls']) !== false ) echo 'CHECKED'; ?>/><label for="admin_files"><?php tp('Upload and delete');?></label></div></div></div>
+      <div><div class="fieldLabel"><?php tp('Pre-Service');?></div><div class="fieldInput"><div class="float50"><input type="checkbox" name="pre_service" id="pre_service" value="pre_service" <?php if ( array_search('pre_service',$this->user['acls']) !== false ) echo 'CHECKED'; ?> /><label for="pre_service"><?php tp('Pre-service access');?></label></div></div>
 
       </fieldset>
  	  <fieldset id="orgs" ><legend><?php tp('Organizer access');?></legend>

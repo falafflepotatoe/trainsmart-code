@@ -94,6 +94,7 @@ class ITechTranslate extends Zend_Translate {
 
 		return array(
 			'en_EN.UTF-8' => 'English',
+			'nl_NL.UTF-8' => 'Dutch',
 			'fr_FR.UTF-8' => 'French',
 			'ru_RU.UTF-8' => 'Russian',
 			'uk_UK.UTF-8' => 'Ukrainian'

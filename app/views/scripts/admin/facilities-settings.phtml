@@ -18,59 +18,64 @@ ob_end_clean();
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <title><?php echo $this->translation['Application Name'];?> | <?php echo $pageTitle; ?></title>
-<?php
-require_once('views/helpers/ScriptContainer.php');
-print ScriptContainer::$instance->renderCSSHead();
-print ScriptContainer::$instance->renderJSHead();
-?>
+	<title><?php echo $this->translation['Application Name'];?> | <?php echo $pageTitle; ?></title>
+	<?php
+	require_once('views/helpers/ScriptContainer.php');
+	print ScriptContainer::$instance->renderCSSHead();
+	print ScriptContainer::$instance->renderJSHead();
+	?>
 </head>
 <body  class="yui-skin-sam">
-<div id="pageHolder">
-  <div id="header"><?php echo $header; ?></div>
-  <div id="content" class="adminDiv">
+	<div id="pageHolder">
+		<div id="header"><?php echo $header; ?></div>
+		<div id="content" class="adminDiv">
 
-    <form method="post" name="adminForm">
+			<form method="post" name="adminForm">
 
-    <div id="navAdmin"><?php echo $nav;?></div>
+			<div id="navAdmin"><?php echo $nav;?></div>
 
-    <div id="contentAdmin">
-    <h1><?php echo $pageTitle; ?></h1>
+			<div id="contentAdmin">
+				<h1><?php echo $pageTitle; ?></h1>
 
-    <table class="settings">
-    <thead>
-    <tr><th>Field</th><th>Display</th><th>Label</th><th>Options</th></tr>
-    </thead>
-   <tr><td class="fieldTitle">Facility</td>
-   	<td></td>
-   	<td><input type="text" name="label_facility" value="<?php echo $this->label_facility; ?>"></td>
-   	<td></td>
-   </tr>
-  <tr><td class="fieldTitle">Facility Types</td>
-  	<td></td>
-  	<td></td>
-  	<td><a href="<?php echo $this->base_url;?>/admin/facilities-types" onclick="return submitAdminForm(this);">Add/Edit</a></td>
-  </tr>
- <tr><td class="fieldTitle">Facility Sponsors</td>
-  	<td></td>
-  	<td></td>
-  	<td><a href="<?php echo $this->base_url;?>/admin/facilities-sponsors" onclick="return submitAdminForm(this);">Add/Edit</a></td>
-  </tr>
+			<table class="settings">
+				<thead>
+					<tr><th>Field</th><th>Display</th><th>Label</th><th>Options</th></tr>
+				</thead>
+				<tr><td class="fieldTitle">Facility</td>
+					<td></td>
+					<td><input type="text" name="label_facility" value="<?php echo $this->label_facility; ?>"></td>
+					<td></td>
+				</tr>
+				<tr><td class="fieldTitle">Facility Types</td>
+					<td></td>
+					<td></td>
+					<td><a href="<?php echo $this->base_url;?>/admin/facilities-types" onclick="return submitAdminForm(this);">Add/Edit</a></td>
+				</tr>
+				<tr><td class="fieldTitle">Facility Sponsors</td>
+					<td></td>
+					<td></td>
+					<td><a href="<?php echo $this->base_url;?>/admin/facilities-sponsors" onclick="return submitAdminForm(this);">Add/Edit</a></td>
+				</tr>
+				<tr><td class="fieldTitle">Comments</td>
+					<td></td>
+					<td><input type="text" name="label_comments" value="<?php echo $this->label_comments; ?>"></td>
+					<td></td>
+				</tr>
 
-</table>
+			</table>
 
-    <input type="hidden" name="redirect" value="<?php echo Settings::$COUNTRY_BASE_URL . '/admin/' . $nextUri; ?>">
-    <input type="submit" value="Save" name="saveonly" class="submitNoArrow" onclick="document.adminForm.redirect.value=''" style="margin-right:1em;">
-    </form>
+			<input type="hidden" name="redirect" value="<?php echo Settings::$COUNTRY_BASE_URL . '/admin/' . $nextUri; ?>">
+			<input type="submit" value="Save" name="saveonly" class="submitNoArrow" onclick="document.adminForm.redirect.value=''" style="margin-right:1em;">
+			</form>
 
 
-    </div>
+			</div>
 
-    <div class="clear"></div>
+			<div class="clear"></div>
 
+		</div>
+		<div id="footer"><?php require_once('views/scripts/footer.phtml');?></div>
 	</div>
-<div id="footer"><?php require_once('views/scripts/footer.phtml');?></div>
-</div>
 
 </body>
 </html>

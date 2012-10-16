@@ -262,7 +262,7 @@ YAHOO.util.Event.onDOMReady(init);
  <div class="fieldInput" id="enddate">
     <?php tp('Day');?> <input id="end-day" class="dayfield" type="text" name="end-day" maxlength="2" value="<?php echo $this->row['end-day']; ?>"  <?php echo $this->viewonly; ?>>
     / <?php tp('Month');?> <input id="end-month" class="monthfield" type="text" name="end-month" maxlength="2" value="<?php echo $this->row['end-month']; ?>"  <?php echo $this->viewonly; ?>>
-    / <?php tp('Year');?> <input id="end-year" class="yearfield" type="text" name="end-year" maxlength="4" value="<?php if($this->row['end-year']) echo $this->row['start-year']; else echo date('Y'); ?>"  <?php echo $this->viewonly; ?>>
+    / <?php tp('Year');?> <input id="end-year" class="yearfield" type="text" name="end-year" maxlength="4" value="<?php if(!empty($this->row['end-year']) && $this->row['end-year'] != '0000') echo $this->row['end-year']; else echo date('Y'); ?>"  <?php echo $this->viewonly; ?>>
 
     <?php if(!$this->viewonly) : ?>
       <script  type="text/javascript">
@@ -492,7 +492,7 @@ YAHOO.util.Event.onDOMReady(init);
 
 
 
-  <div class="fieldLabel"><?php echo (@$this->translation['Comments']); ?></div>
+  <div class="fieldLabel"><?php echo (@$this->translation['Training Comments']); ?></div>
   <div class="fieldInput">
     <textarea name="comments"><?php echo $this->row['comments']; ?></textarea>
   </div><br/>
@@ -582,7 +582,7 @@ if ( $this->row['has_known_participants'] ) :
       &nbsp;&nbsp;&nbsp;
       <input type="hidden" id="trainer_id" value="0">
       <input type="hidden" id="is_trainer" value="0">
-      <input type="button" value="<? tp('Insert');?>" class="insert" onclick="addTrainer(this);return false;">
+      <input type="button" value="<?php tp('Insert'); ?>" class="insert" onclick="addTrainer(this);return false;">
       &nbsp;&nbsp;&nbsp;
       <a href="javascript:submitThenRedirect('<?php echo $this->base_url;?>/person/add/trainingredirect/<?php echo $this->row['id']; ?>/maketrainer/1');"><?php tp('New Person Form');?></a>
 <!--      <a href="<?php echo $this->base_url;?>/person/add/trainingredirect/<?php echo $this->row['id']; ?>/maketrainer/1"><?php tp('New Person Form');?></a> -->
@@ -1101,16 +1101,14 @@ YAHOO.util.Event.on(window, 'load', initUploadButton);
   <?php endif; ?>
 
 
-	// submit form, then redirect
 // submit form, then redirect
 function submitThenRedirect(url) {
-	var fld = document.getElementById('redirectUrl');
-	fld.value = url;
-//	document.getElementById('personForm').submit();
-//var redirectEl = YAHOO.util.Dom.get('redirectUrl');
-//redirectEl.value = url;
-//YAHOO.util.Dom.get('personForm').submit();
-window.location = url;
+  var fld = document.getElementById('redirectUrl');
+  fld.value = url;
+  if (confirm("You are moving to a new page, do you wish to save the changes you\'ve made?"))
+    submitForm();
+  else
+    window.location = url;
 }
 
   // delete training
@@ -1138,19 +1136,80 @@ window.location = url;
 
   // submit form via ajax
   function submitForm() {
-    var buttonEl = YAHOO.util.Dom.get('submitTraining');
-
-    if(buttonEl) { // fire mouse click event
-      if(document.createEvent) {
-        var evt = document.createEvent("MouseEvents");
-        evt.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
-        buttonEl.dispatchEvent(evt);
-      } else if( document.createEventObject ) {
-        buttonEl.fireEvent('onclick');
-      }
+  <?php if ( $this->mode != 'add') { 
+      echo 'var postUrl = "'. $this->base_url . '/training/edit/id/'.$this->row['id'].'/outputType/json"';
     } else {
-      document.location.href = YAHOO.util.Dom.get('redirectUrl').value;
+      echo 'var postUrl = "' . $this->base_url . '/training/add/outputType/json"';
+    } ?>
+
+  var buttonId = 'submitTraining';
+  var formId = 'trainingForm';
+  (function() {
+    //var _button = new YAHOO.widget.Button(buttonId);
+    var handleSuccess = function(o) {
+      try {
+        var response = o.responseText;
+        
+        var responseObj = YAHOO.lang.JSON.parse(response);
+        displayStatus(responseObj.status);
+        var allGood = true;
+        if ( responseObj.messages ) {
+          for (var key in responseObj.messages) {
+            displayErrorMessage(key,responseObj.messages[key]);
+            allGood = false;
+          }
+        }
+        if(!allGood) {
+          setStatusBoxError();
+        }
+        
+        if ( responseObj.obj_id ) {
+          var new_obj_field =  YAHOO.util.Dom.get('obj_id');
+          if ( new_obj_field ) {
+            new_obj_field.value = responseObj.obj_id;
+          }
+        }
+        
+        var redir = document.getElementById('redirectUrl');
+        if(redir.value != ''){
+          window.location =  redir.value;
+        } else if ( responseObj.redirect ) {
+          window.location = responseObj.redirect;
+        }
+      }
+      catch (x) {
+        alert("ITech script error: " + x);
+        alert(response);
+        return;
+      }
+  
+      document.body.style.cursor = "auto";
+  
     }
+    var handleFailure = function(o) {
+      alert("Submission failed with code: " + o.status + ". The error text is: " + o.statusText);
+      document.body.style.cursor = "auto";
+    }
+
+    var callback = {
+      success: handleSuccess,
+      failure: handleFailure
+    };
+
+      window.setTimeout(function() {
+
+        //document.body.style.cursor = "wait";
+  
+        //clear error text
+        var els = YAHOO.util.Dom.getElementsByClassName('errorText');
+        if ( els.length )
+          YAHOO.util.Dom.setStyle(els, 'display', 'none');
+        var formObject = document.getElementById(formId);
+        YAHOO.util.Connect.setForm(formObject);
+        var request = YAHOO.util.Connect.asyncRequest('POST', postUrl, callback);
+      }, 200);
+
+  })();
   }
 
 

@@ -70,7 +70,7 @@ print ScriptContainer::$instance->renderJSHead();
 			if ((@$this->facility['sponsor_option_id']) == $vals['id']) echo $vals['facility_sponsor_phrase'];
 		}
 		?>" /></div>
-	<div class="fieldLabel" id="facility_comments_lbl"><?php tp('Comments');?></div>
+	<div class="fieldLabel" id="facility_comments_lbl"><?php tp('Facility Comments');?></div>
 	<div class="fieldInput"><textarea name="facility_comments" readonly="readonly"  id="facility_comments" size="40" maxlength="40" ><?php echo $this->facility['facility_comments'];?></textarea></div>
 <?php } ?>
 
