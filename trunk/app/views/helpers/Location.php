@@ -1,4 +1,5 @@
 <?php 
+require_once('views/helpers/ITechTranslate.php');
 /*<script type="text/javascript">
 <!--//--><![CDATA[//><!--
 
@@ -110,4 +111,81 @@ function renderCityAutocomplete($prefix, $container, $data_url, $num_tiers) {
 
 
 <?php 	
+}
+
+function renderFacilityDropDown($facilities, $selected_index)
+{
+  $db = Zend_Db_Table_Abstract::getDefaultAdapter ();
+  $sql = 'SELECT DISTINCT
+       f.id as id,
+       f.location_id AS "zone1",
+       l2.id as "zone2",
+       l2.parent_id AS "zone3"
+      FROM facility f
+      LEFT JOIN location l1 ON f.location_id = l1.id
+      LEFT JOIN location l2 ON l1.parent_id = l2.id
+      ';
+  $rowArray = $db->fetchAll($sql); // get 3 tiers of parent ids
+  $location_classes = array();
+  foreach($rowArray as $row){
+    // store parent location ids in a hash. hash[id] = "zone1id zone2id zone3id"
+    $location_classes[$row['id']] = trim($row['zone1'].' '.$row['zone2'].' '.$row['zone3']);
+  }
+  $dupe = '';
+  // lets build a visible <select> and also a display:none <select> with all locations
+  echo '<select id="facilityInput" name="facilityInput">';
+  echo '<option class="defaultval" value="">--'.t('choose').'--</option>';
+  foreach ( $facilities as $vals ) {
+    echo '<option class="'.$location_classes[$vals['id']].'" value="'.$vals['id'].'" '.($selected_index == $vals['id']?'SELECTED':'').'>'.$vals['facility_name'].'</option>';
+    $dupe .= '<option class="'.$location_classes[$vals['id']].'" value="'.$vals['id'].'" '.($selected_index == $vals['id']?'SELECTED':'').'>'.$vals['facility_name'].'</option>';
+  }
+  echo '</select>';
+  echo '<div style="display:none;">';
+  echo '<select id="facilityInputHidden" name="facilityInputHidden" style="display:none;visibility:hidden;">';
+  echo '<option class="defaultval" value="">--'.t('choose').'--</option>';
+  echo $dupe;
+  echo '</select>';
+  echo '</div>';
+  
+  // selects have a value attribute "region1_region2_region3", ie: 555_423_1
+  // lets filter facility list by the last value when the user chooses something
+  $js = '
+      YAHOO.util.Event.onDOMReady(function () {
+        var regionSelectElements = YAHOO.util.Dom.get(["province_id","district_id","region_c_id"]);
+        for(index in regionSelectElements){
+          YAHOO.util.Event.addListener(regionSelectElements[index], "change", function () {
+            var compare_id = "";
+            if (this.value != ""){
+              classes = this.value.split("_");
+              compare_id = classes[classes.length-1];
+            } else {
+              var district_id = YAHOO.util.Dom.get("district_id");
+              if(district_id.value != ""){
+                classes = district_id.value.split("_");
+              } else {
+                classes = YAHOO.util.Dom.get("province_id").value.split("_");
+              }
+              compare_id = classes[classes.length-1];
+            }
+
+            allFacilities = YAHOO.util.Dom.get("facilityInputHidden");
+            cnt = allFacilities.length;
+            facilityInput = YAHOO.util.Dom.get("facilityInput");
+            facilityInput.innerHTML = "";
+
+            for(i = 0; i < cnt; i++){
+              row = allFacilities[i];
+
+              if(compare_id == "" || YAHOO.util.Dom.hasClass(row, compare_id) || YAHOO.util.Dom.hasClass(row, "defaultval")){
+                facilityInput.innerHTML += row.outerHTML;
+              }
+
+            }
+          });
+        }
+      });
+  ';
+  echo '<script type="Text/JavaScript">'.$js.'</script>';
+
+
 }

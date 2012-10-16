@@ -26,6 +26,8 @@ print ScriptContainer::$instance->renderJSHead();
 		<option value="">--<?php tp('All');?>--</option>
 		<?php
 			foreach ( $this->location_names as $vals ) {
+				if(trim($vals['training_location_name']) == '')
+					continue;
 				echo '<option value="'.htmlspecialchars($vals['training_location_name']).'" '.((@$this->criteria['training_location_name']) == $vals['training_location_name']? 'SELECTED':'').' >'.$vals['training_location_name'].'</option>';
 		}
 		?>

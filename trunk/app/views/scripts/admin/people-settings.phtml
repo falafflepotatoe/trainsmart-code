@@ -158,6 +158,11 @@ print ScriptContainer::$instance->renderJSHead();
    	<td><a href="<?php echo $this->base_url;?>/admin/people-highestedulevel" onclick="return submitAdminForm(this);">Add/Edit</a></td>
  </tr>
 
+ <tr><td class="fieldTitle">Comments</td>
+    <td></td>
+    <td><input type="text" name="label_comments" value="<?php echo $this->label_comments; ?>"></td>
+    <td></td>
+ </tr>
    
  <tr><td class="fieldTitle">Recommended topics</td>
    	<td></td>
@@ -167,7 +172,7 @@ print ScriptContainer::$instance->renderJSHead();
  <tr><td class="fieldTitle">Responsibility</td>
    	<td></td>
    	<td></td>
-   	<td><a href="<?php echo $this->base_url;?>/admin/people-responsibility" onclick="return submitAdminForm(this);">Add/Edit</a></td>
+   	<td><a href="<?php echo $this->base_url;?>/admin/people-primaryresp" onclick="return submitAdminForm(this);">Add/Edit</a></td>
    </tr>
  <tr><td class="fieldTitle">Custom field 1</td>
    	<td><input type="checkbox" name="check_people_custom1" <?php if($this->check_people_custom1) echo 'checked'; ?> id="check_people_custom1"></td>

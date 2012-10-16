@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title><?php echo $this->translation['Application Name'];?> | <?php tp('Course By Student Count Report');?></title>
+		<?php
+		require_once('views/helpers/Location.php');
+		require_once('views/helpers/ScriptContainer.php');
+		print ScriptContainer::$instance->renderCSSHead();
+		print ScriptContainer::$instance->renderJSHead();
+
+		?>
+
+	</head>
+	<body class="yui-skin-sam" >
+
+		<div id="pageHolder">
+
+			<div id="header"><?php require_once('views/scripts/header.phtml');?></div>
+			<div id="content">
+
+				<h1><?php tp('Course By Student Count');?></h1>
+				<form action="" method="get">
+					<input type="hidden" name="process" id="process" value="1">
+					<fieldset><legend><?php tp('Select Criteria');?></legend>
+
+						<div class="fieldLabel">Institution</div>
+						<div class="fieldInput"><input type="checkbox" name="showinstitution" id="showinstitution" value="1"<?php echo $_GET['showcoursename'] ? " checked" : "" ?>><br><select name="institution" id="institution" style="width : 150px;" size="10">
+<?php
+	foreach ($this->institutions as $item){
+		echo "<option value=\"" . $item['id'] . "\">" . $item['institutionname'] . "</option>\n";
+	}
+?>
+						</select></div>
+
+						<div class="fieldLabel">Cohort</div>
+						<div class="fieldInput"><input type="checkbox" name="showcohort" id="showcohort" value="1"<?php echo $_GET['showcohort'] ? " checked" : "" ?>><br><select name="cohort" id="cohort" style="width : 150px;" size="10">
+<?php
+	foreach ($this->cohorts as $item){
+		echo "<option value=\"" . $item['id'] . "\">" . $item['cohortname'] . "</option>\n";
+	}
+?>
+						</select></div>
+
+						<div class="fieldLabel">Course Name</div>
+						<div class="fieldInput"><input type="checkbox" name="showcoursename" id="showcoursename" value="1"<?php echo $_GET['showcoursename'] ? " checked" : "" ?>> <input type="text" name="coursename" id="coursename" value="" style="width : 150px;"></div>
+
+						<div class="fieldLabel">Grades</div>
+						<div class="fieldInput"><input type="checkbox" name="showgrades" id="showgrades" value="1"<?php echo $_GET['showgrades'] ? " checked" : "" ?>> <input type="text" name="grades" id="grades" value="" style="width : 150px;"></div>
+
+						<div class="fieldLabel">Cadre</div>
+						<div class="fieldInput"><input type="checkbox" name="showcadre" id="showcadre" value="1"<?php echo $_GET['showcadre'] ? " checked" : "" ?>><br><select name="cadre" id="cadre" style="width : 150px;" size="10">
+<?php
+	foreach ($this->cadres as $item){
+		echo "<option value=\"" . $item['id'] . "\">" . $item['cadrename'] . "</option>\n";
+	}
+?>
+						</select></div>
+
+						<div class="fieldLabel">Year In School</div>
+						<div class="fieldInput"><input type="checkbox" name="showyearinschool" id="showyearinschool" value="1"<?php echo $_GET['showyearinschool'] ? " checked" : "" ?>> <input type="text" name="yearinschool" id="yearinschool" value="" style="width : 150px;"></div>
+
+						<div class="fieldLabel">Course Type</div>
+						<div class="fieldInput"><input type="checkbox" name="showcoursetype" id="showcoursetype" value="1"<?php echo $_GET['showcoursetype'] ? " checked" : "" ?>><br><select name="coursetype" id="coursetype" style="width : 150px;" size="10">
+<?php
+	foreach ($this->coursetypes as $item){
+		echo "<option value=\"" . $item['id'] . "\">" . $item['coursetype'] . "</option>\n";
+	}
+?>
+						</select></div>
+
+						<div class="fieldLabel">Topic</div>
+						<div class="fieldInput"><input type="checkbox" name="showtopic" id="showtopic" value="1"<?php echo $_GET['showtopic'] ? " checked" : "" ?>> <input type="text" name="topic" id="topic" value="" style="width : 150px;"></div>
+
+						<input type="submit" class="submitNoArrow" name="go" value="<?php tp('Preview');?>" />
+					</fieldset>
+				</form>
+				<?php
+				if (isset($this->output)) {
+					if (count ($this->output) == 0){
+						echo "				<table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" class=\"display tablegrid\" id=\"\" style=\"width:100%\">\n";
+						echo "					<thead>\n";
+						echo "						<tr>\n";
+						echo "							<th>Output</th>\n";
+						echo "						</tr>\n";
+						echo "					</thead>\n";
+						echo "					<tbody>\n";
+						echo "						<tr>\n";
+						echo "							<td>Your search criteria returned no results</td>\n";
+						echo "						</tr>\n";
+						echo "					</tbody>\n";
+						echo "				</table>\n";
+					} else {
+				?>
+
+				<br>
+				<table cellpadding="0" cellspacing="0" border="0" class="display tablegrid" id="" style="width:100%">
+					<thead>
+						<tr>
+<?php
+	$header = $this->output[0];
+	foreach ($header as $key=>$value){
+		echo "							<th>" . $value . "</th>\n";
+	}
+?>
+						</tr>
+					</thead>
+					<tbody>
+<?php
+	foreach ($this->output as $row){
+		echo "						<tr style=\"cursor : pointer;\" class=\"GradeA\">\n";
+		foreach ($row as $key=>$value){
+			echo "				   			<td>" . $value . "</td>\n";
+		}
+		echo "						</tr>\n";
+	}
+?>
+					</tbody>
+				</table>
+
+					<?php
+					}
+				}
+				?>
+			</div>
+			<div id="footer"><?php require_once('views/scripts/footer.phtml');?></div>
+
+
+		</div>
+
+	</body>
+</html>

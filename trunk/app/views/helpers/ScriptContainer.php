@@ -30,8 +30,14 @@ class ScriptContainer {
 			$this->addCSSLink('/js/yui/build/calendar/assets/skins/sam/calendar.css');
 			$this->addCSSLink('/js/yui/build/container/assets/skins/sam/container.css');
 			$this->addCSSLink('/js/yui/build/datatable/assets/skins/sam/datatable.css');
+			
       $this->addCSSLink('/css/style.css');
       $this->addCSSLink('/css/calendar.css');
+	  $this->addCSSLink('/css/media/demo_page.css');
+      $this->addCSSLink('/css/media/demo_table_jui.css');
+	  $this->addCSSLink('/css/media/jquery-ui-1.8.17.custom.css');
+//	  $this->addCSSLink('/css/trainsmart/ts.css');
+//	  $this->addCSSLink('/css/media/trainsmart.css');
 
       $url_parts = explode('.', $_SERVER['HTTP_HOST']);
       if ( @$url_parts[0] == 'eventsmart' OR (isset($url_parts[1]) && (@$url_parts[1] == 'eventsmart')) ) {
@@ -46,6 +52,20 @@ class ScriptContainer {
       	
       $this->addJSLink('/js/itech-namespace.js');
       
+			$this->addJSLink('/js/scripts/jquery-1.7.1-min.js');
+			$this->addJSLink('/js/scripts/jquery.dataTables.min.js');
+#			$this->addJSLink('/js/scripts/jquery.js');
+			$this->addJSLink('/js/scripts/jquery-ui-1.8.17.custom-min.js');	
+
+			# PRESERVICE VALIDATION LINK
+			$this->addJSLink('/js/scripts/validate/jquery.validate.js');
+
+			# PRESERVICE VALIDATION LINK
+			$this->addJSLink('/js/scripts/jquery.comboedit.js');
+
+			# PRESERVICE OTHER SCRIPTS
+			$this->addJSLink('/js/scripts/preservice.js');
+
 			$this->addJSLink('/js/yui/build/yahoo-dom-event/yahoo-dom-event.js');
 			$this->addJSLink('/js/yui/build/connection/connection.js');
 			$this->addJSLink('/js/yui/build/animation/animation.js');
@@ -67,9 +87,11 @@ class ScriptContainer {
 			$this->addJSLink('/js/datatable.js');
 			$this->addJSLink('/js/edittable.js');
 			$this->addJSLink('/js/edittable-training.js');
-      $this->addJSLink('/js/fileupload.js');
+      		$this->addJSLink('/js/fileupload.js');
 			$this->addJSLink('/js/itech.js');
+			
 
+			
 			$burl = Settings::$COUNTRY_BASE_URL;
 
 			if (substr($burl, -1) != '/' && substr($burl, -1) != '\\')
@@ -81,14 +103,16 @@ class ScriptContainer {
 	}
 
 	public function addJSLink($filename) {
-		$test = strstr($filename, 'translation-');
+		$test = (strstr($filename, 'translation-') || strstr($filename, '/scripts/'));
 		if ($test===false)
 		{
 			//self::$jsfiles []= (self::$debug?str_replace('.js','-min.js',$filename):$filename); //.'?_yuiversion=2.5.0';
+#			echo "including " . str_replace('.js','-min.js',$filename) . "<br>";
 			self::$jsfiles []= str_replace('.js','-min.js',$filename);
 		}
 		else 
 		{
+#			echo "including " . $filename . "<br>";
 			self::$jsfiles []= $filename;
 		}
 		//if ( $test !== false )

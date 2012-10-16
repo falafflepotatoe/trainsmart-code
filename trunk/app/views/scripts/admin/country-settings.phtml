@@ -128,6 +128,9 @@ YAHOO.util.Event.on(window, 'load', initSettingsUploadButton);
 <div class="fieldInput"><div class="fieldLabel">Unknown Participants</div>
         <input type="checkbox" name="check_mod_unknown" <?php if($this->check_mod_unknown) echo 'checked'; ?> id="check_mod_unknown"><label for="check_mod_unknown">Enable</label>
       </div>
+<div class="fieldInput"><div class="fieldLabel">Training Organizer Partners</div>
+        <input type="checkbox" name="display_training_partner" <?php if($this->display_training_partner == 1) echo 'checked'; ?>><label for="display_training_partner">Enable</label>
+      </div>
  </fieldset>
 
   <fieldset class="settings"><legend>Languages</legend><br/>

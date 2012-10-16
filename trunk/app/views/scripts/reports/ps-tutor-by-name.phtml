@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title><?php echo $this->translation['Application Name'];?> | <?php tp('Missing Tutor By Name Report');?></title>
+		<?php
+		require_once('views/helpers/Location.php');
+		require_once('views/helpers/ScriptContainer.php');
+		print ScriptContainer::$instance->renderCSSHead();
+		print ScriptContainer::$instance->renderJSHead();
+
+		?>
+
+	</head>
+	<body class="yui-skin-sam" >
+
+		<div id="pageHolder">
+
+			<div id="header"><?php require_once('views/scripts/header.phtml');?></div>
+			<div id="content">
+
+				<h1><?php tp('Missing Tutor By Name');?></h1>
+				<form action="" method="get">
+					<fieldset><legend><?php tp('Select Criteria');?></legend>
+
+						<div class="fieldLabel">Facility</div>
+						<div class="fieldInput"><input type="checkbox" name="showfacility" id="showfacility" value="1"<?php echo $_GET['showfacility'] ? " checked" : "" ?>><br><select name="facility" id="facility" style="width : 150px;" size="10">
+<?php
+	foreach ($this->facilities as $item){
+		echo "<option value=\"" . $item['id'] . "\">" . $item['facility_name'] . "</option>\n";
+	}
+?>
+						</select></div>
+
+						<div class="fieldLabel" id="province_id_lbl"><?php echo (@$this->translation['Region A (Province)']); ?> (<?php tp('training location');?>)</div>
+						<div class="fieldInput"><div class="leftBorderPad"><input type="checkbox" name="showProvince" <?php  if ($this->criteria['showProvince']) echo 'checked="checked"';?> /></div><label for="showProvince" ></label>
+							<div  class="leftBorder autoHeight">
+								<?php renderFilter($this->locations, 1, 'province_id', $this->criteria['province_id'], 'district_id', true); ?>
+								<p>&nbsp;</p>
+							</div>
+						</div>
+						<?php
+							if ( $this->setting['display_region_b'] ) {
+						?>
+							<div class="fieldLabel" id="district_id_lbl"><?php echo (@$this->translation['Region B (Health District)']); ?> (<?php tp('training location');?>)</div>
+							<div class="fieldInput"><div  class="leftBorderPad"><input type="checkbox" name="showDistrict"   <?php  if ($this->criteria['showDistrict']) echo 'checked="checked"';?> /></div><label for="showDistrict" ></label>
+
+							<div  class="leftBorder autoHeight"><?php renderFilter($this->locations, 2, 'district_id', $this->criteria['district_id'], ($this->setting['display_region_c']?'region_c_id':false), true); ?><p>&nbsp;</p></div></div>
+						<?php
+							}
+							if ( $this->setting['display_region_c'] ) {
+						?>
+							<div class="fieldLabel" id="region_c_lbl"><?php echo (@$this->translation['Region C (Local Region)']); ?> (<?php tp('training location');?>)</div>
+							<div class="fieldInput"><div  class="leftBorderPad"><input type="checkbox" name="showRegionC"   <?php  if ($this->criteria['showRegionC']) echo 'checked="checked"';?> /></div><label for="showRegionC" ></label>
+
+							<div  class="leftBorder autoHeight"><?php renderFilter($this->locations, 3, 'region_c_id', $this->criteria['region_c_id'], false, true); ?><p>&nbsp;</p></div></div>
+						<?php
+							}
+						?>
+
+						<div class="fieldLabel">Facility type</div>
+						<div class="fieldInput"><input type="checkbox" name="showfacilitytype" id="showfacilitytype" value="1"<?php echo $_GET['showfacilitytype'] ? " checked" : "" ?>><br><select name="facilitytype" id="facilitytype" style="width : 150px;" size="10">
+<?php
+	foreach ($this->facilitytypes as $item){
+		echo "<option value=\"" . $item['id'] . "\">" . $item['facilitytypename'] . "</option>\n";
+	}
+?>
+						</select></div>
+
+						<div class="fieldLabel">Facility sponsor</div>
+						<div class="fieldInput"><input type="checkbox" name="showsponsor" id="showsponsor" value="1"<?php echo $_GET['showsponsor'] ? " checked" : "" ?>><br><select name="sponsor" id="sponsor" style="width : 150px;" size="10">
+<?php
+	foreach ($this->sponsors as $item){
+		echo "<option value=\"" . $item['id'] . "\">" . $item['sponsorname'] . "</option>\n";
+	}
+?>
+						</select></div>
+
+						<div class="fieldLabel">Cadre</div>
+						<div class="fieldInput"><input type="checkbox" name="showcadre" id="showcadre" value="1"<?php echo $_GET['showcadre'] ? " checked" : "" ?>><br><select name="cadre" id="cadre" style="width : 150px;" size="10">
+<?php
+	foreach ($this->cadres as $item){
+		echo "<option value=\"" . $item['id'] . "\">" . $item['cadrename'] . "</option>\n";
+	}
+?>
+						</select></div>
+
+						<div class="fieldLabel"># of Graduates</div>
+						<div class="fieldInput"><input type="checkbox" name="showgraduates" id="showgraduates" value="1"<?php echo $_GET['showgraduates'] ? " checked" : "" ?>> <input type="text" name="graduates" id="graduates" value="" style="width : 150px;"></div>
+
+						<div class="fieldLabel">Year of Graduates</div>
+						<div class="fieldInput"><input type="checkbox" name="showgraduatesyear" id="showgraduatesyear" value="1"<?php echo $_GET['showgraduatesyear'] ? " checked" : "" ?>> <input type="text" name="graduatesyear" id="graduatesyear" value="" style="width : 150px;"></div>
+
+						<div class="fieldLabel"># of Patients</div>
+						<div class="fieldInput"><input type="checkbox" name="showpatients" id="showpatients" value="1"<?php echo $_GET['showpatients'] ? " checked" : "" ?>> <input type="text" name="patients" id="patients" value="" style="width : 150px;"></div>
+
+						<div class="fieldLabel">Start between</div>
+						<div class="fieldInput"><input type="text" name="datestart" id="datestart" value="" style="width : 150px;" class="calendarbox "><br><input type="text" name="dateend" id="dateend" value="" style="width : 150px; margin-top : 15px;" class="calendarbox "><br></div>
+
+						<input type="submit" class="submitNoArrow" name="go" value="<?php tp('Preview');?>" />
+					</fieldset>
+				</form>
+				<?php
+				if (isset($this->output)) {
+					if (count ($this->output) == 0){
+						echo "				<table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" class=\"display tablegrid\" id=\"\" style=\"width:100%\">\n";
+						echo "					<thead>\n";
+						echo "						<tr>\n";
+						echo "							<th>Output</th>\n";
+						echo "						</tr>\n";
+						echo "					</thead>\n";
+						echo "					<tbody>\n";
+						echo "						<tr>\n";
+						echo "							<td>Your search criteria returned no results</td>\n";
+						echo "						</tr>\n";
+						echo "					</tbody>\n";
+						echo "				</table>\n";
+					} else {
+				?>
+
+				<br>
+				<table cellpadding="0" cellspacing="0" border="0" class="display tablegrid" id="" style="width:100%">
+					<thead>
+						<tr>
+<?php
+	$header = $this->output[0];
+	foreach ($header as $key=>$value){
+		echo "							<th>" . $value . "</th>\n";
+	}
+?>
+						</tr>
+					</thead>
+					<tbody>
+<?php
+	foreach ($this->output as $row){
+		echo "						<tr style=\"cursor : pointer;\" class=\"GradeA\">\n";
+		foreach ($row as $key=>$value){
+			echo "				   			<td>" . $value . "</td>\n";
+		}
+		echo "						</tr>\n";
+	}
+?>
+					</tbody>
+				</table>
+
+					<?php
+					}
+				}
+				?>
+			</div>
+			<div id="footer"><?php require_once('views/scripts/footer.phtml');?></div>
+
+
+		</div>
+
+	</body>
+</html>

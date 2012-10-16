@@ -6,6 +6,9 @@
  *  Fuse IQ -- todd@fuseiq.com
  *
  */
+function no_soft_space_str($v){
+  return str_replace(' ', '&nbsp;', $v);
+}
 
 $navMain = array( // directory => array of nav items
   'index' => array(
@@ -63,7 +66,6 @@ if ( $this->isLoggedIn() ) {
       if (   $this->hasACL('edit_course')) {
       	$navMain['facility']['addLocation']  = t('Add Training Location');
       }
-
   }
 
   if ( $this->hasACL('view_create_reports')) {
@@ -89,6 +91,13 @@ if ( $this->isLoggedIn() ) {
 	      'index' => t('Evaluations')
 	   );
    }
+
+	// FACILITY LINK
+	if ( $this->hasACL('pre_service') or $this->hasACL('admin_preservice') ) {
+		$navMain['dash'] = array(
+			'index' => t('Pre-service')
+		);
+	}
    
   $navMain['user'] = array(
     'index' => t('My Account'),
@@ -100,14 +109,20 @@ if ( $this->isLoggedIn() ) {
   	$navMain['user']['../admin/people-settings'] = t('People Settings');
   	$navMain['user']['../admin/facilities-settings'] = t('Facility Settings');
   }
+  if ( isset($this->setting['display_training_partner']) && $this->setting['display_training_partner'] == 1 ) {
+    if ( $this->hasACL('edit_country_options') ) {
+      $navMain['user']['../training-partner/search']  = no_soft_space_str( t('Training Partners') );
+    }
+  }
   if ( $this->hasACL('add_edit_users')) {
   	$navMain['user']['add'] = t('Add New User');
   	$navMain['user']['search'] = t('Edit User');
   }
-  if ( $this->hasACL('edit_country_options') || $this->hasACL('use_offline_app')) {
+
+if ( $this->hasACL('edit_country_options') || $this->hasACL('use_offline_app')) {
    	$navMain['user'][''] = '---------------';
-    $navMain['user']['../desktop/create'] = t('Create App Now');
-    $navMain['user']['../desktop/download'] = t('Download Application');
+    $navMain['user']['../desktop/create'] = no_soft_space_str( t('Create App Now') );
+    $navMain['user']['../desktop/download'] = no_soft_space_str( t('Download Application') );
   	$navMain['user']['../sync/upload'] = t('Upload Data');
   }
 }

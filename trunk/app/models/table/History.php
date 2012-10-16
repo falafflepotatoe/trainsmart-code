@@ -35,7 +35,7 @@ class History extends ITechTable {
       //special case for trainer history which uses person_id as the key
       $tableinfo = $source_table->info();
 			if ( $tableinfo['name'] == 'trainer') {
-			   $sql = 'INSERT into ' . $this->_name . ' (' . implode ( ',', $data ) . ', pvid, timestamp_created) SELECT ' . implode ( ',', $data ) . ', ' . $id . ', timestamp_updated FROM trainer WHERE person_id = (SELECT person_id FROM person_history WHERE vid = ' . $id . ')';
+			   $sql = 'INSERT into ' . $this->_name . ' (' . implode ( ',', $data ) . ', vid, pvid, timestamp_created) SELECT ' . implode ( ',', $data ) . ', null, ' . $id . ', timestamp_updated FROM trainer WHERE person_id = (SELECT person_id FROM person_history WHERE vid = ' . $id . ')';
 			} else {
           $sql = 'INSERT into ' . $this->_name . ' (' . implode ( ',', $data ) . ', ' . $this->_parent_table . '_id, timestamp_created) SELECT ' . implode ( ',', $data ) . ', ' . $id . ', timestamp_updated FROM ' . $this->_parent_table . ' WHERE ' . $this->_parent_table . '.id = ' . $id;
 			}
@@ -53,7 +53,6 @@ class History extends ITechTable {
 		$rtn = array ();
 		
 		if ($id) {
-			
 			//this is all person specific stuff, will need to be modified for other tables
 			
 			$select = $this->select ()->from ( $this->_name, array ( 'person_history.*' ))->where ( $this->_parent_table."_history.".$this->_parent_table . "_id = ?", $id )->order ( 'person_history.vid ASC' );
@@ -74,7 +73,7 @@ class History extends ITechTable {
 				$select->joinLeft ( array ('pr2' => 'person_secondary_responsibility_option' ), "secondary_responsibility_option_id = pr2.id", array ("secondary responsibility" => 'responsibility_phrase'  ) );
 			}
 
-			$select->joinLeft ( array ('tr' => 'trainer_history' ), "tr.pvid = person_history.vid" );
+			$select->joinLeft ( array ('tr' => 'trainer_history' ), "tr.pvid = person_history.vid", array('ifnull(tr.timestamp_updated,person_history.timestamp_created) as timestamp_updated'));
         $select->setIntegrityCheck ( false );
         $select->joinLeft ( array ('ato' => 'person_active_trainer_option' ), "active_trainer_option_id = ato.id", array ("active trainer" => 'active_trainer_phrase'  ) );
      $select->joinLeft ( array ('tao' => 'trainer_affiliation_option' ), "affiliation_option_id = tao.id", array ("affilition" => 'trainer_affiliation_phrase'  ) );
@@ -106,7 +105,7 @@ class History extends ITechTable {
       $select->joinLeft ( array ('tao' => 'trainer_affiliation_option' ), "affiliation_option_id = tao.id", array ("affilition" => 'trainer_affiliation_phrase'  ) );
       
      $currentRow = parent::fetchAll ( $select )->current();
- 			
+										
 			$previous = null;
 			while($rows->next()) {;}
 			$rowArray = $rows->toArray();
@@ -119,7 +118,6 @@ class History extends ITechTable {
 							$delta ['timestamp_updated'] = $previous ['timestamp_created'];
 							$delta ['modified_by'] = $previous ['modified_by'];
 							$delta ['changes'] = $diff;
-							
 							$rtn [] = $delta;
 						}
 					}
@@ -128,7 +126,7 @@ class History extends ITechTable {
 				$previous = $change;
 			}
 		}
-		
+
 		return $rtn;
 	}
 

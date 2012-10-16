@@ -14,6 +14,8 @@ require_once ('models/table/Facility.php');
 require_once ('models/table/Training.php');
 require_once ('models/table/TrainingRecommend.php');
 require_once ('models/table/Trainer.php');
+require_once ('Zend/Validate/EmailAddress.php');
+require_once ('Zend/Mail.php');
 
 class PersonController extends ReportFilterHelpers {
 	
@@ -147,6 +149,7 @@ class PersonController extends ReportFilterHelpers {
 					$status->setRedirect ( '/person/edit/id/' . $dupe_id . '/trainingredirect/' . $this->getSanParam ( 'trainingredirect' ) . '/maketrainer/1' );
 				} else if ($this->_getParam ( 'trainingredirect' )) {
 					$status->setStatusMessage ( t ( 'The person was saved. Refreshing history...' ) );
+					$_SESSION['status'] = t ( 'The person was saved.' );
 					$this->trainingRedirect ( $dupe_id );
 				} else {
 					$status->setRedirect ( '/person/edit/id/' . $dupe_id );
@@ -290,8 +293,30 @@ class PersonController extends ReportFilterHelpers {
 				
 				if ($personrow->save ()) {
 					$status->setStatusMessage ( t ( 'The person was saved. Refreshing change history...' ) );
+					$_SESSION['status'] = t ( 'The person was saved.' );
 					
 					$person_id = $personrow->id;
+					
+					if($this->view->mode == 'add') {
+						$email = $this->getSanParam ( 'email' );
+						if (trim($email) != '') {
+							$view = new Zend_View ( );
+							$view->setScriptPath ( Globals::$BASE_PATH . '/app/views/scripts/email' );
+							$view->assign ( 'first_name', $this->getSanParam ( 'first_name' ) );
+							$view->assign ( 'username', $this->getSanParam ( 'username' ) );
+							$view->assign ( 'password', $this->getSanParam ( 'password' ) );
+							$text = $view->render ( 'text/new_account.phtml' );
+							$html = $view->render ( 'html/new_account.phtml' );
+							
+							$mail = new Zend_Mail ( );
+							$mail->setBodyText ( $text );
+							$mail->setBodyHtml ( $html );
+							$mail->setFrom ( Settings::$EMAIL_ADDRESS, Settings::$EMAIL_NAME );
+							$mail->addTo ( $this->getSanParam ( 'email' ), $this->getSanParam ( 'first_name' ) . " " . $this->getSanParam ( 'last_name' ) );
+							$mail->setSubject ( 'New Account Created' );
+							$mail->send ();
+						}
+					}
 					
 					//get trainer information
 					$trainerTable = new Trainer ( );
@@ -843,7 +868,9 @@ class PersonController extends ReportFilterHelpers {
 		
 		$rowArray = Person::suggestionFindDupes ( $this->_getParam ( 'last_name' ), 50, $this->setting ( 'display_middle_name_last' ), $fieldAnd );
 		//$rowArray = Person::suggestionQuery($this->_getParam('last'),100,'last_name',array('p.last_name'))->toArray();
+		
 		foreach ( $rowArray as $key => $row ) {
+			//$rowArray [$key] = array_merge ( array ('input' => '<a href="'.Settings::$COUNTRY_BASE_URL.'/person/edit/id/'.$rowArray [$key] ['id'].'">'.$rowArray[$key]['id'].'</a>' ), $row );
 			$rowArray [$key] = array_merge ( array ('input' => '<input type="radio" name="dupe_id" value="' . $rowArray [$key] ['id'] . '">' ), $row );
 		}
 		
@@ -913,9 +940,6 @@ class PersonController extends ReportFilterHelpers {
 			}
 			
 			$this->sendData ( $status );
-			//print_r($training_ids);
-		//exit;
-		
 
 		}
 	}

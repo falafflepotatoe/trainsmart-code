@@ -130,6 +130,15 @@ class FileController extends ITechController
       header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
       header("Cache-Control: private",false);
       header("Content-Transfer-Encoding: binary");
+
+      // Optional cache if not changed -- new, testing this
+      header('Last-Modified: '.gmdate('D, d M Y H:i:s', strtotime($file->timestamp_updated)).' GMT');
+      // Optional send not modified -- new, testing this..
+      if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) and 
+          strtotime($file->timestamp_updated) == strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']))
+      {
+          header('HTTP/1.1 304 Not Modified');
+      }
       
       header('Content-type: application/force-download');
       header('Content-type: ' . $file->filemime);

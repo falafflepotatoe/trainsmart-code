@@ -7,7 +7,7 @@
  *
  */
 
-require_once ('ZendFramework/library/Zend/Auth.php');
+//require_once ('ZendFramework/library/Zend/Auth.php');
 //require_once ('app/models/Session.php');
 
 

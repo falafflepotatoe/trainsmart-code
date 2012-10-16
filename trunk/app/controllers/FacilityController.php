@@ -54,7 +54,7 @@ class FacilityController extends ReportFilterHelpers {
 		
 		if ($request->isPost ()) {
 			$facilityObj = new Facility ( );
-			$obj_id = $this->validateAndSave ( $facilityObj->createRow (), true );
+			$obj_id = $this->validateAndSave ( $facilityObj->createRow (), false );
 			
 			//validate
 			$status = ValidationContainer::instance ();
@@ -140,12 +140,9 @@ class FacilityController extends ReportFilterHelpers {
 						$location_id = $parts[count($parts) - 1];
 					}
 			}
-			
 			if ($location_id) {
-				
 				//map db field names to FORM field names
-				if ($checkName)
-					$facilityRow->facility_name = $this->getSanParam ( 'facility_name' );
+				$facilityRow->facility_name = $this->getSanParam ( 'facility_name' );
 				$facilityRow->location_id = $location_id;
 				$facilityRow->type_option_id = ($this->getSanParam ( 'facility_type_id' ) ? $this->getSanParam ( 'facility_type_id' ) : null);
 				$facilityRow->facility_comments = $this->_getParam ( 'facility_comments' );
@@ -156,11 +153,16 @@ class FacilityController extends ReportFilterHelpers {
 				$facilityRow->fax = $this->getSanParam ( 'facility_fax' );
 				$facilityRow->sponsor_option_id = ($this->getSanParam ( 'facility_sponsor_id' ) ? $this->getSanParam ( 'facility_sponsor_id' ) : null);
 				
+				$_SESSION['status'] =  t ( 'The facility was saved.' );
+				
 				$obj_id = $facilityRow->save ();
 				if ($obj_id) {
 					$status->setStatusMessage ( t ( 'The facility was saved.' ) );
+					$_SESSION['status'] = t ( 'The facility was saved.' );
+					$status->setRedirect ( '/facility/view/id/' . $obj_id );
 					return $obj_id;
 				} else {
+					unset($_SESSION['status']);
 					$status->setStatusMessage ( t ( 'ERROR: The facility could not be saved.' ) );
 				}
 			}
@@ -202,10 +204,11 @@ class FacilityController extends ReportFilterHelpers {
 		
 		if ($validateOnly)
 			$this->setNoRenderer ();
-		
+
 		if ($request->isPost ()) {
-			$rslt = $this->validateAndSave ( $facilityRow, (($this->getSanParam ( 'facility_name' ) != $facilityRow->facility_name) ? true : false) );
-			
+			$rslt = $this->validateAndSave ( $facilityRow, false );
+			//$rslt = $this->validateAndSave ( $facilityRow, (($this->getSanParam ( 'facility_name' ) != $facilityRow->facility_name) ? true : false) ); // checkName from _request, we dont need this anymore [bugfix/feature request]
+
 			//validate
 			$status = ValidationContainer::instance ();
 			if ($validateOnly) {

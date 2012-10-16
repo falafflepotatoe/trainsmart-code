@@ -102,7 +102,10 @@ function setDistrictStatus(selectedIndex)  {
 		<option value="">--<?php tp('All');?>--</option>
 		<?php
 			foreach ( $this->courses as $vals ) {
-				echo '<option value="'.$vals['training_title_option_id'].'" '.((@$this->criteria['training_title_id']) == $vals['training_title_option_id']? 'SELECTED':'').' >'.$this->truncate($vals['training_title']).'</option>';
+				echo '<option value="'.$vals['id'].'" 
+				     '.((@$this->criteria['training_title_id']) == $vals['id']? 'SELECTED':'').' >'
+				     .$this->truncate($vals['training_title_phrase']).'</option>';
+
 		}
 		?>
 	</select></div></div>

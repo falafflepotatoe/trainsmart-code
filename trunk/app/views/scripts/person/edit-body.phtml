@@ -136,15 +136,30 @@ function init() {
   // Render the Dialog
   YAHOO.example.container.addFacility.render();
 
+  // Show dialog and initialize region selects
   YAHOO.util.Event.addListener("show", "click", YAHOO.example.container.addFacility.show, YAHOO.example.container.addFacility, true);
-}
+
+ }
 
 YAHOO.util.Event.onDOMReady(init);
 
 <?php if($this->mode == 'add') : ?>
+var formatViewUrl = function(elCell, oRecord, oColumn, sData) {
+  var tredirect = '';
+<?php if($this->trainingredirect) { ?>  
+  tredirect = "/trainingredirect/<?php echo $this->trainingredirect; ?>";
+<?php } ?>
+<?php if($this->maketrainer) { ?>
+  tredirect = tredirect + "/maketrainer/1";
+<?php } ?>
+  if ( (sData == null) || (sData.length == 0) )
+    sData = '&nbsp;&nbsp;&nbsp;';
+    elCell.innerHTML = "<a href='<?php echo $this->base_url;?>/person/edit/id/" + oRecord.getData("id") + tredirect + "' >" + sData + "</a>";
+}
+
 var dupeColDefs =
-[ {key:"id", hidden:"true", width:"0", label:"", className:"hidden"},
-{key:"input", width:15, resizeable:true , label:""},
+[ {key:"id", label: "ID", sortable:false, resizable:false, formatter: formatViewUrl},
+{key:"input", width:15, resizeable:true , label:"", hidden:"true", width:"0", className:"hidden"},
 {key:"first_name", width:60, resizeable:true , label:"<?php tp("First Name"); ?>"},
 <?php if ( !$this->setting['display_middle_name_last'] ) { ?>
 {key:"middle_name", width:66, resizeable:true , label:"<?php echo (@$this->translation['Middle Name']); ?>"},

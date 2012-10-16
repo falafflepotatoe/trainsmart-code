@@ -17,7 +17,7 @@ class EditTableHelper {
 
 	// Generate HTML & JavaScript for our EditTable
 	public static function generateHtml($label, array $rowRay, array $colDefs, array $customColDefs = array(), array $noDelete = array(), $noEdit = false) {
-
+		
 		// Format column defs
 		foreach($colDefs as $key => $lbl) {
 			$def = 'key:"' . htmlspecialchars($key) . '", label:"' . htmlspecialchars($lbl) . '"';

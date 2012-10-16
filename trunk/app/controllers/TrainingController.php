@@ -220,7 +220,7 @@ class TrainingController extends ReportFilterHelpers {
 						$daysRay [$key] = $value; //set the days key to  the pepfar id
 						$pepfarTotal += $value;
 
-						if ($this->NUM_PEPFAR != 1 && ! $value) {
+						if ($pepfarCount > 1 && ! $value) {
 							$status->addError ( 'training_pepfar_categories_option', t ( 'Number of days is required.' ) );
 						}
 
@@ -244,7 +244,7 @@ class TrainingController extends ReportFilterHelpers {
 					}
 
 					// do days add up to match training length?
-					if ($days != $pepfarTotal) {
+					if ($days != $pepfarTotal && $pepfarCount > 1) {
 						$status->addError ( 'training_pepfar_categories_option', sprintf ( t ( "Total training length is %s, but PEPFAR category total is %d days. " ), (($days == 1) ? $days . ' ' . t ( 'day' ) : $days . ' ' . t ( 'days' )), $pepfarTotal ) );
 					}
 
@@ -1035,11 +1035,13 @@ class TrainingController extends ReportFilterHelpers {
 					if ($this->_getParam ( 'update' )) {
 						$data = array ();
 						$data ['location_id'] = $location_id;
+						$data ['training_location_name'] = $location;
 
 						$tableObj = new TrainingLocation ( );
 						$tableObj->update ( $data, "id = " . $this->_getParam ( 'update' ) );
 
 						$status->setStatusMessage ( t ( 'The training center has been updated.' ) );
+						$_SESSION['status'] = t ( 'The training center has been updated.' );
 
 						//refresh the page, so the picker dropdown is refreshed as well
 						$status->setRedirect ( '/facility/view-location/id/' . $this->_getParam ( 'update' ) );
@@ -1048,6 +1050,8 @@ class TrainingController extends ReportFilterHelpers {
 
 						if ($this->_getParam ( 'info' ) == 'extra') {
 							$status->setStatusMessage ( t ( 'The training center has been saved.' ) );
+							$_SESSION['status'] = t ( 'The training center has been saved.' );
+							$status->setRedirect ( '/facility/view-location/id/' . $id );
 						}
 					}
 
@@ -1073,7 +1077,11 @@ class TrainingController extends ReportFilterHelpers {
 				list ( $city_name, $prov_id, $dist_id, $regc_id ) = Location::getCityInfo ( $row ['location_id'], $num_tiers );
 				$rowArray [$id] ['province_name'] = $locations [$prov_id] ['name'];
 				$rowArray [$id] ['district_name'] = $locations [$dist_id] ['name'];
-				$rowArray [$id] ['region_c_name'] = $locations [$regc_id] ['name'];
+				if (isset ($locations [$regc_id])){
+					$rowArray [$id] ['region_c_name'] = $locations [$regc_id] ['name'];
+				} else {
+					$rowArray [$id] ['region_c_name'] = "";
+				}
 			}
 		}
 
@@ -1190,6 +1198,8 @@ class TrainingController extends ReportFilterHelpers {
 		$value = $this->getSanParam ( 'value' );
 
 		Training::updateScore ( $ptt_id, $label, $value );
+		$status = ValidationContainer::instance ();
+		$this->sendData('');
 	}
 
 	public function indexAction() {
