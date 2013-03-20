@@ -5205,16 +5205,14 @@ CREATE TABLE IF NOT EXISTS `_system` (
   `display_highest_ed_level` tinyint(1) NOT NULL default '0',
   `display_attend_reason` tinyint(1) NOT NULL default '0',
   `display_primary_responsibility` tinyint(1) NOT NULL default '0',
-  `display_secondary_responsibility` tinyint(1) NOT NULL default '0',
-  `display_training_partner` tinyint(1) default NULL
+  `display_secondary_responsibility` tinyint(1) NOT NULL default '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- Data exporting was unselected.
 
 
 /* ======================================================== */
 /* ======================================================== */
-/* Money Rich Grillz.com bug fixes and tanzania stuff                             */
+/* 4.01 features, bug fixes and tanzania changes            */
 /* ======================================================== */
 /* ======================================================== */
 
@@ -5253,5 +5251,367 @@ INSERT INTO  `translation` VALUES (NULL , NULL ,  'Training Comments',  'Trainin
 #remove unique requirement of facility_name column
 ALTER TABLE `facility` DROP INDEX `facility_name`, ADD INDEX `facility_name`(facility_name, location_id);
 #  add system settings for new training partner module
-ALTER TABLE `_system` ADD COLUMN `display_training_partner` tinyint(1);
-UPDATE  `_system` SET `display_training_partner` = 0 WHERE 1;
+ALTER TABLE `_system` ADD COLUMN `display_training_partner` tinyint(1) NOT NULL DEFAULT '0';
+
+ALTER TABLE `facility` DROP INDEX  `facility_name` , ADD UNIQUE  `facility_name` (  `facility_name` ,  `location_id` );
+
+/* change refresher course to multi select value */
+ALTER TABLE  `_system`
+  ADD  `multi_opt_refresher_course` TINYINT( 1 ) NOT NULL DEFAULT '0';
+ALTER TABLE `training`
+  ADD `training_refresher_option_id` INT(11) NULL DEFAULT NULL;
+/* tables */
+DROP TABLE IF EXISTS `training_refresher_option`;
+CREATE TABLE `training_refresher_option` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `refresher_phrase_option` varchar(128) NOT NULL DEFAULT '',
+  `is_default` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `modified_by` int(11) DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  `is_deleted` tinyint(1) NOT NULL DEFAULT '0',
+  `timestamp_updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `timestamp_created` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name_unique` (`refresher_phrase_option`),
+  KEY `created_by` (`created_by`),
+  KEY `modified_by` (`modified_by`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+DROP TABLE IF EXISTS `training_to_training_refresher_option`;
+CREATE TABLE `training_to_training_refresher_option` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `training_id` int(11) NOT NULL,
+  `training_refresher_option_id` int(11) NOT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  `timestamp_created` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_training_cat` (`training_refresher_option_id`,`training_id`),
+  KEY `training_id` (`training_id`),
+  KEY `created_by` (`created_by`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+ALTER TABLE `training_refresher_option` ADD COLUMN `uuid` char(36) AFTER `id`;
+ALTER TABLE `training_refresher_option` ADD UNIQUE `uuid_idx`(uuid);
+ALTER TABLE `training_refresher_option` CHANGE COLUMN `uuid` `uuid` char(36) DEFAULT NULL;
+ALTER TABLE `training_to_training_refresher_option` ADD COLUMN `uuid` char(36) AFTER `id`;
+ALTER TABLE `training_to_training_refresher_option` ADD UNIQUE `uuid_idx`(uuid);
+ALTER TABLE `training_to_training_refresher_option` CHANGE COLUMN `uuid` `uuid` char(36) DEFAULT NULL;
+
+DELIMITER ;;
+CREATE TRIGGER `training_to_training_refresher_option_insert` BEFORE INSERT ON `training_to_training_refresher_option` FOR EACH ROW BEGIN
+  SET NEW.`uuid` = IFNULL(NEW.`uuid`,UUID());
+  END;;
+CREATE TRIGGER `training_refresher_option_insert` BEFORE INSERT ON `training_refresher_option` FOR EACH ROW BEGIN
+  SET NEW.`uuid` = IFNULL(NEW.`uuid`,UUID());
+  END;;
+DELIMITER ;
+
+/*UPDATE training_to_training_refresher_option SET uuid = UUID(); */
+/*UPDATE training_refresher_option SET uuid = UUID(); */
+/* end live refresher update */
+
+/* Skillsmart changes */
+DROP TABLE IF EXISTS `comp`;
+CREATE TABLE `comp` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `person` int(11) NOT NULL,
+  `question` varchar(3) DEFAULT NULL,
+  `option` varchar(128) DEFAULT NULL,
+  `active` char(1) NOT NULL DEFAULT 'N',
+  PRIMARY KEY (`id`),
+  KEY `person` (`person`,`active`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `competencies`;
+CREATE TABLE `competencies` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `competencyname` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `status` tinyint(4) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  KEY `idx2` (`competencyname`,`status`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+DROP TABLE IF EXISTS `competencies_answers`;
+CREATE TABLE `competencies_answers` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `competencyid` int(10) unsigned NOT NULL DEFAULT '0',
+  `personid` int(10) unsigned NOT NULL DEFAULT '0',
+  `questionid` int(10) unsigned NOT NULL DEFAULT '0',
+  `answer` char(1) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'F',
+  `answertext` text COLLATE utf8_unicode_ci NOT NULL,
+  `addedon` varchar(20) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `status` tinyint(4) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  KEY `idx2` (`personid`,`competencyid`,`questionid`,`answer`,`addedon`,`status`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+DROP TABLE IF EXISTS `competencies_questions`;
+CREATE TABLE `competencies_questions` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `competencyid` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `question` text COLLATE utf8_unicode_ci NOT NULL,
+  `itemorder` int(11) NOT NULL DEFAULT '1',
+  `itemtype` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'question',
+  `status` tinyint(4) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  KEY `idx2` (`itemtype`,`competencyid`,`itemorder`,`status`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+DROP TABLE IF EXISTS `compres`;
+CREATE TABLE `compres` (
+  `SNo` bigint(20) NOT NULL AUTO_INCREMENT,
+  `person` int(11) NOT NULL,
+  `res` int(11) NOT NULL,
+  `active` char(1) NOT NULL DEFAULT 'N',
+  PRIMARY KEY (`SNo`),
+  KEY `person` (`person`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `facs`;
+CREATE TABLE `facs` (
+  `sno` bigint(20) NOT NULL AUTO_INCREMENT,
+  `person` int(11) NOT NULL,
+  `facility` int(11) NOT NULL,
+  `facstring` varchar(1024) NOT NULL,
+  `active` char(1) NOT NULL DEFAULT 'N',
+  PRIMARY KEY (`sno`),
+  KEY `person` (`person`,`facility`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `helper`;
+CREATE TABLE `helper` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+DROP TABLE IF EXISTS `jobtitles`;
+CREATE TABLE `jobtitles` (
+  `Title` varchar(45) DEFAULT NULL,
+  `Option` varchar(12) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `link_institution_degrees`;
+CREATE TABLE `link_institution_degrees` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id_institution` int(10) unsigned NOT NULL DEFAULT '0',
+  `id_degree` int(10) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `idx2` (`id_institution`,`id_degree`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `link_occupational_competencies`;
+CREATE TABLE `link_occupational_competencies` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `competencyid` int(10) unsigned NOT NULL DEFAULT '0',
+  `occupationalid` int(10) unsigned NOT NULL DEFAULT '0',
+  `status` tinyint(3) unsigned NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  KEY `idx2` (`competencyid`,`occupationalid`,`status`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+DROP TABLE IF EXISTS `link_person_training`;
+CREATE TABLE `link_person_training` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `personid` int(10) unsigned NOT NULL DEFAULT '0',
+  `trainingid` int(10) unsigned NOT NULL DEFAULT '0',
+  `year` varchar(10) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `institution` varchar(150) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `othername` varchar(150) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  KEY `idx2` (`personid`,`trainingid`,`year`),
+  KEY `institution` (`institution`),
+  KEY `othername` (`othername`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+DROP TABLE IF EXISTS `link_qualification_competency`;
+CREATE TABLE `link_qualification_competency` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `competencyid` int(10) unsigned NOT NULL DEFAULT '0',
+  `qualificationid` int(10) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `idx2` (`competencyid`,`qualificationid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+DROP TABLE IF EXISTS `link_user_institution`;
+CREATE TABLE `link_user_institution` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `userid` int(10) unsigned NOT NULL DEFAULT '0',
+  `institutionid` int(10) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `idx2` (`userid`,`institutionid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+DROP TABLE IF EXISTS `lookup_skillsmart`;
+CREATE TABLE `lookup_skillsmart` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `lookupgroup` varchar(150) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `lookupvalue` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `status` int(10) unsigned NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  KEY `idx2` (`status`),
+  KEY `idx3` (`lookupgroup`),
+  KEY `idx4` (`lookupvalue`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+DROP TABLE IF EXISTS `occupational_categories`;
+CREATE TABLE `occupational_categories` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uuid` char(36) DEFAULT NULL,
+  `parent_id` int(11) DEFAULT NULL,
+  `category_phrase` varchar(128) NOT NULL DEFAULT '',
+  `is_default` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `modified_by` int(11) DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  `is_deleted` tinyint(1) NOT NULL DEFAULT '0',
+  `timestamp_updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `timestamp_created` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name_unique` (`category_phrase`),
+  UNIQUE KEY `uuid_idx` (`uuid`),
+  KEY `modified_by` (`modified_by`),
+  KEY `created_by` (`created_by`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `person_responsibility_option`;
+CREATE TABLE `person_responsibility_option` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `responsibility_phrase` varchar(128) NOT NULL DEFAULT '',
+  `modified_by` int(11) DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  `is_deleted` tinyint(1) NOT NULL DEFAULT '0',
+  `timestamp_updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `timestamp_created` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name_unique` (`responsibility_phrase`),
+  KEY `created_by` (`created_by`),
+  KEY `modified_by` (`modified_by`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `sheet1`;
+CREATE TABLE `sheet1` (
+  `Province` varchar(7) DEFAULT NULL,
+  `Persal_No` int(8) DEFAULT NULL,
+  `First_Name` varchar(16) DEFAULT NULL,
+  `Middle_Name` varchar(25) DEFAULT NULL,
+  `Last_Name` varchar(19) DEFAULT NULL,
+  `RACE` varchar(8) DEFAULT NULL,
+  `GENDER` varchar(6) DEFAULT NULL,
+  `Disabled` varchar(3) DEFAULT NULL,
+  `Job_Title` varchar(31) DEFAULT NULL,
+  `District` varchar(12) DEFAULT NULL,
+  `Sub_District` varchar(18) DEFAULT NULL,
+  `Facility_Name` varchar(45) DEFAULT NULL,
+  `Facility_Type` varchar(25) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `tracking`;
+CREATE TABLE `tracking` (
+  `UID` int(11) NOT NULL,
+  `URL` text NOT NULL,
+  `On` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  KEY `IDX` (`UID`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `trans`;
+CREATE TABLE `trans` (
+  `sno` bigint(20) NOT NULL AUTO_INCREMENT,
+  `person` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
+  `chk` varchar(10) NOT NULL,
+  `yr` varchar(10) NOT NULL,
+  `transstring` varchar(256) NOT NULL,
+  `active` char(1) NOT NULL DEFAULT 'N',
+  PRIMARY KEY (`sno`),
+  KEY `person` (`person`,`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `user_to_acl_province`;
+CREATE TABLE `user_to_acl_province` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `location_id` int(11) NOT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  `timestamp_created` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `created_by` (`created_by`),
+  KEY `user_id` (`user_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+ALTER TABLE `student`
+  ADD COLUMN `institutionid` int(10) unsigned NULL DEFAULT '0';
+
+ALTER TABLE `tutor`
+  ADD COLUMN `institutionid` int(10) unsigned NULL DEFAULT '0';
+
+ALTER TABLE `user_to_acl`
+  CHANGE COLUMN `acl_id` `acl_id` enum('edit_course','view_course','edit_people','view_people','view_create_reports','edit_country_options','add_edit_users','training_organizer_option_all','training_title_option_all','approve_trainings','admin_files','use_offline_app','pre_service','in_service','edit_institution','view_institution') NOT NULL DEFAULT 'view_course';
+
+ALTER TABLE `_system`
+  ADD COLUMN `display_mod_skillsmart` tinyint(1) NOT NULL DEFAULT '1',
+  ADD COLUMN `display_occupational_category` tinyint(1) NOT NULL DEFAULT '1',
+  ADD COLUMN `display_government_employee` tinyint(1) NOT NULL DEFAULT '1',
+  ADD COLUMN `display_professional_bodies` tinyint(1) NOT NULL DEFAULT '1',
+  ADD COLUMN `display_race` tinyint(1) NOT NULL DEFAULT '1',
+  ADD COLUMN `display_disability` tinyint(1) NOT NULL DEFAULT '1',
+  ADD COLUMN `display_nurse_trainer_type` tinyint(1) NOT NULL DEFAULT '1',
+  ADD COLUMN `display_provider_start` tinyint(1) NOT NULL DEFAULT '1',
+  ADD COLUMN `display_rank_groups` tinyint(1) NOT NULL DEFAULT '1',
+  ADD COLUMN `display_supervised` tinyint(1) NOT NULL DEFAULT '1',
+  ADD COLUMN `display_training_received` tinyint(1) NOT NULL DEFAULT '1',
+  ADD COLUMN `display_facility_department` tinyint(1) NOT NULL DEFAULT '1';
+
+ALTER TABLE `person`
+  ADD COLUMN `multi_facility_ids` varchar(255) NULL,
+  ADD COLUMN `home_city` varchar(255) NULL DEFAULT '',
+  ADD COLUMN `highest_level_option_id` int(11) NULL,
+  ADD COLUMN `govemp_option_id` tinyint(4) NULL DEFAULT '0',
+  ADD COLUMN `occupational_category_id` int(10) unsigned NULL,
+  ADD COLUMN `persal_number` int(10) unsigned NULL,
+  ADD COLUMN `bodies_id` int(10) unsigned NULL,
+  ADD COLUMN `race_option_id` int(10) unsigned NULL,
+  ADD COLUMN `disability_option_id` int(10) unsigned NULL,
+  ADD COLUMN `professional_reg_number` int(10) unsigned NULL,
+  ADD COLUMN `nationality_id` int(10) unsigned NULL,
+  ADD COLUMN `nurse_training_id` int(10) unsigned NULL,
+  ADD COLUMN `care_start_year` int(10) unsigned NULL,
+  ADD COLUMN `timespent_rank_pregnant` int(10) unsigned NULL,
+  ADD COLUMN `timespent_rank_adults` int(10) unsigned NULL,
+  ADD COLUMN `timespent_rank_children` int(10) unsigned NULL,
+  ADD COLUMN `timespent_rank_pregnant_pct` int(10) unsigned NULL,
+  ADD COLUMN `timespent_rank_adults_pct` int(10) unsigned NULL,
+  ADD COLUMN `timespent_rank_children_pct` int(10) unsigned NULL,
+  ADD COLUMN `supervised_id` int(10) unsigned NULL,
+  ADD COLUMN `supervision_frequency_id` int(10) unsigned NULL,
+  ADD COLUMN `supervisors_profession` varchar(255) NULL,
+  ADD COLUMN `training_recieved_data` text NULL,
+  ADD COLUMN `facilitydepartment_id` int(10) unsigned NULL;
+
+ALTER TABLE `person`
+  CHANGE `multi_facility_ids` `multi_facility_ids` varchar(255) NULL DEFAULT NULL,
+  CHANGE `home_city` `home_city` varchar(255) NULL DEFAULT '',
+  CHANGE `highest_level_option_id` `highest_level_option_id` int(11) NULL DEFAULT NULL,
+  CHANGE `govemp_option_id` `govemp_option_id` tinyint(4) NULL DEFAULT '0',
+  CHANGE `occupational_category_id` `occupational_category_id` int(10) unsigned NULL DEFAULT NULL,
+  CHANGE `persal_number` `persal_number` int(10) unsigned NULL DEFAULT NULL,
+  CHANGE `bodies_id` `bodies_id` int(10) unsigned NULL DEFAULT NULL,
+  CHANGE `race_option_id` `race_option_id` int(10) unsigned NULL DEFAULT NULL,
+  CHANGE `disability_option_id` `disability_option_id` int(10) unsigned NULL DEFAULT NULL,
+  CHANGE `professional_reg_number` `professional_reg_number` int(10) unsigned NULL DEFAULT NULL,
+  CHANGE `nationality_id` `nationality_id` int(10) unsigned NULL DEFAULT NULL,
+  CHANGE `nurse_training_id` `nurse_training_id` int(10) unsigned NULL DEFAULT NULL,
+  CHANGE `care_start_year` `care_start_year` int(10) unsigned NULL DEFAULT NULL,
+  CHANGE `timespent_rank_pregnant` `timespent_rank_pregnant` int(10) unsigned NULL DEFAULT NULL,
+  CHANGE `timespent_rank_adults` `timespent_rank_adults` int(10) unsigned NULL DEFAULT NULL,
+  CHANGE `timespent_rank_children` `timespent_rank_children` int(10) unsigned NULL DEFAULT NULL,
+  CHANGE `timespent_rank_pregnant_pct` `timespent_rank_pregnant_pct` int(10) unsigned NULL DEFAULT NULL,
+  CHANGE `timespent_rank_adults_pct` `timespent_rank_adults_pct` int(10) unsigned NULL DEFAULT NULL,
+  CHANGE `timespent_rank_children_pct` `timespent_rank_children_pct` int(10) unsigned NULL DEFAULT NULL,
+  CHANGE `supervised_id` `supervised_id` int(10) unsigned NULL DEFAULT NULL,
+  CHANGE `supervision_frequency_id` `supervision_frequency_id` int(10) unsigned NULL DEFAULT NULL,
+  CHANGE `supervisors_profession` `supervisors_profession` varchar(255) NULL DEFAULT NULL,
+  CHANGE `training_recieved_data` `training_recieved_data` text NULL DEFAULT NULL,
+  CHANGE `facilitydepartment_id` `facilitydepartment_id` int(10) unsigned NULL DEFAULT NULL;
+
+INSERT INTO `acl`         VALUES ('in_service',  'in_service' );
+INSERT INTO `acl`         VALUES ('pre_service', 'pre_service');
+
+INSERT INTO `user_to_acl` VALUES (null,'in_service',  1, 1, NOW());
+INSERT INTO `user_to_acl` VALUES (null,'pre_service', 1, 1, NOW());
