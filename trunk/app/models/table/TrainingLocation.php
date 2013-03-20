@@ -35,15 +35,26 @@ public static function isReferenced($id) {
 	 */
 	public static function selectAllLocations($num_tiers = 4) {
     $db = Zend_Db_Table_Abstract::getDefaultAdapter ();
-		
+		$num_tiers=3;
     list($field_name,$location_sub_query) = Location::subquery($num_tiers, false, false);
+		
+    $orderBy = array();
+    if ($num_tiers > 1) $orderBy[] = 'province_name';
+    if ($num_tiers > 2) $orderBy[] = 'district_name';
+    if ($num_tiers > 3) $orderBy[] = 'region_c_name';
+    if ($num_tiers > 4) $orderBy[] = 'region_d_name';
+    if ($num_tiers > 5) $orderBy[] = 'region_e_name';
+    if ($num_tiers > 6) $orderBy[] = 'region_f_name';
+    if ($num_tiers > 7) $orderBy[] = 'region_g_name';
+    if ($num_tiers > 8) $orderBy[] = 'region_h_name';
+    $orderByClause = count($orderBy) ? implode(',', $orderBy) . ',' : '';
            
       $sql = 'SELECT training_location.id ,
                 training_location.training_location_name,
                  '.implode(',',$field_name).'
               FROM training_location JOIN ('.$location_sub_query.') as l ON training_location.location_id = l.id 
-              WHERE training_location.is_deleted = 0 ORDER BY province_name'.($num_tiers > 2?', district_name':'').', training_location_name';
-    
+              WHERE training_location.is_deleted = 0
+              ORDER BY '.$orderByClause.' training_location_name';
     return $db->fetchAll($sql);  
   }
   

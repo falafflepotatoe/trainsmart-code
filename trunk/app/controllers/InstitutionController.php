@@ -16,6 +16,8 @@ class InstitutionController extends ITechController
 		parent::preDispatch ();
 		if (! $this->isLoggedIn ())
 			$this->doNoAccessError ();
+		if (empty($this->view->title))
+			$this->view->assign('title', $this->view->translation['Application Name']);
 	}
 
 	public function indexAction() {
@@ -24,7 +26,6 @@ class InstitutionController extends ITechController
 
 
 	public function institutionAction() {
-		$this->view->title = 'Trainsmart';
 
 		# CREATING HELPER
 		$helper = new Helper();
@@ -42,6 +43,10 @@ class InstitutionController extends ITechController
 		if(isset($_POST['submit'])){
 			$institute = new Institution();
 			$newid = $institute->Addinstitution($_POST);
+			
+			$helper = new Helper();
+			$helper->addUserInstitutionRights($helper->myid,$newid);
+
 #			$instituteid = ($_POST[edittable])?$_POST['editid']:$institute->Addinstitution($_POST);
 			$this->_redirect(Settings::$COUNTRY_BASE_URL . "/institution/institutionedit/id/" . $newid);
 #			echo ("<script language=\"JavaScript\">location.replace('institutionedit/id/" . $instituteid . "');</script>\n");
@@ -59,7 +64,6 @@ class InstitutionController extends ITechController
 		$types = $helper->getInstitutionTypes();
 		$this->view->assign('institutiontypes',$types);
 		
-		$this->view->assign('title','Trainsmart');
 		$this->viewAssignEscaped ('locations', Location::getAll() );
 		$this->view->assign('action','');
 
@@ -67,14 +71,13 @@ class InstitutionController extends ITechController
 		$this->view->assign('lookupsponsors',$sponsors);
 
 		# GETTING LOOKUPS
-		$this->view->assign('lookupdegrees',$helper->getDegreeTypes());
+		$this->view->assign('lookupdegrees',$helper->getDegrees());
 	}
 
 	public function institutioneditAction(){
 
 		require_once ('models/table/Tutoredit.php');
 
-		$this->view->assign('title','Trainsmart');
 		$this->viewAssignEscaped ('locations', Location::getAll() );
 
 		if(isset($_POST['update'])){
@@ -94,7 +97,6 @@ class InstitutionController extends ITechController
 		# PULLING STAFF LISTING FOR THIS INSTITUTION
 		$staff = $ins->listStaff($instituteid);
 	
-		$this->view->assign('title','Trainsmart');
 		$this->view->assign('fetchins',$staff);
 
 		# CREATING HELPER
@@ -140,7 +142,14 @@ class InstitutionController extends ITechController
 		$this->view->assign('studbeds',$details['bedcount']);
 		$this->view->assign('comments',$details['comments']);
 		$this->view->assign('year',$details['yearfounded']);
-		$this->view->assign('degree',$details['degreetypeid']);
+
+		$degreeselect = $helper->getInstitutionDegrees($request->getParam('id'));
+
+		$_ds = array();
+		foreach ($degreeselect as $deg){
+			$_ds[] = $deg['id'];
+		}
+		$this->view->assign('degree',$_ds);
 
 		$sponsors = $helper->getSponsors();
 		$this->view->assign('lookupsponsors',$sponsors);
@@ -154,7 +163,7 @@ class InstitutionController extends ITechController
 
 
 		# GETTING LOOKUPS
-		$this->view->assign('lookupdegrees',$helper->getDegreeTypes());
+		$this->view->assign('lookupdegrees',$helper->getDegrees());
 
 #		$degrees = $helper->getInstitutionDegrees($instituteid);
 #		$_deg = array();
@@ -170,12 +179,22 @@ class InstitutionController extends ITechController
 		$this->view->assign('students',$studentcount);
 	}
 
-	public function institutionsearchAction(){
-		$ins = new Institution();
-		$inssearch = $ins->InstitutionSearch($_POST);	
+	public function institutionsearchAction(){ 
 		
-		$this->view->assign('title','Trainsmart');
+		$ins = new Institution();
+		$criteria = $this->sanitize($_POST);
+		$inssearch = $ins->InstitutionSearch($criteria);
+		
 		$this->view->assign('institute',$inssearch);
+		$this->view->assign('geo1', $criteria['geo1']);
+		$this->view->assign('geo2', $criteria['geo2']);
+		$this->view->assign('geo3', $criteria['geo3']);
+		$this->view->assign('geo4', $criteria['geo4']);
+		$this->view->assign('geo5', $criteria['geo5']);
+		$this->view->assign('geo6', $criteria['geo6']);
+		$this->view->assign('geo7', $criteria['geo7']);
+		$this->view->assign('geo8', $criteria['geo8']);
+		$this->view->assign('geo9', $criteria['geo9']);
 
 		# CREATING HELPER
 		$helper = new Helper();
@@ -206,7 +225,6 @@ class InstitutionController extends ITechController
 		# PULLING STAFF LISTING FOR THIS INSTITUTION
 		$staff = $helper->getAllTutors();
 	
-		$this->view->assign('title','Trainsmart');
 		$this->view->assign('tutors',$staff);
 		$this->view->assign('id',$instituteid);
 

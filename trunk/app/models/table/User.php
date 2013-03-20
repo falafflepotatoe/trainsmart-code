@@ -81,8 +81,21 @@ class User extends ITechTable
  	}
 
  	public function hasPS($userid) {
+ 		// CHECK IF USER HAS PRE-SERVICE ACCESS
 		$db = Zend_Db_Table_Abstract::getDefaultAdapter (); 
 		$select = $db->query("select * from user_to_acl WHERE user_id = " . $userid . " AND acl_id = 'pre_service'");
+		$row = $select->fetch();
+		if ($row !== false){
+			return true;
+		} else {
+			return false;
+		}
+ 	}
+
+ 	public function hasIS($userid) {
+ 		// CHECK IF USER HAS IN-SERVICE ACCESS
+		$db = Zend_Db_Table_Abstract::getDefaultAdapter (); 
+		$select = $db->query("select * from user_to_acl WHERE user_id = " . $userid . " AND acl_id = 'in_service'");
 		$row = $select->fetch();
 		if ($row !== false){
 			return true;

@@ -1,4 +1,7 @@
-<?php require_once('ITechTable.php');
+<?php
+
+require_once('ITechTable.php');
+require_once('Helper.php');
 
 class Tutoredit extends ITechTable
 {

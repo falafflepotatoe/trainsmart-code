@@ -40,7 +40,9 @@ input[type='text'], input[type='password'], textarea, select { border:1px solid 
 select { max-width: 450px; }
 
 
-input[readonly], input[readonly='readonly'], textarea[readonly='readonly'], textarea[readonly], .readonly {
+input[readonly], input[readonly='readonly'], textarea[readonly='readonly'], textarea[readonly], .readonly
+select[readonly], select[readonly='readonly']
+{
 
    background: #F0F0F0;
 
@@ -86,6 +88,7 @@ input[type='checkbox'] { margin-right: .5em;}
 
 .fieldIndent2 { margin-left:2em; margin-bottom:1.5em; padding-top:0.0em; color:#222; }
 
+.width100 { clear:right; display:block; overflow:hidden; }
 
 
 .simpleLabel { float:left; width:100px; text-align:right; margin-right:1em; font-weight:bold; color:#696969; clear:left; }
@@ -190,7 +193,9 @@ table.tableChoices td { padding-bottom:0.5em; } /* checkbox choices */
 
 }
 
-#criteria .autoHeight { height: auto; }
+#criteria .autoHeight { height: auto; padding-bottom:1em; }
+
+#criteria.multiselect_report .leftBorder { height:auto; padding-bottom:1em; }
 
 
 
@@ -388,7 +393,9 @@ table.tableChoices td { padding-bottom:0.5em; } /* checkbox choices */
 
 #contentAdmin .fieldInput { width:360px; }
 
+#region_move label, #region_move_rightbox label, .rgmovelbl { display: block; width: 140px; float:left; clear:left; }
 
+#region_move select, #region_move_rightbox select { width:130px;float:left; }
 
 #content.adminDiv { padding-left: 60px; background:#fff url(../images/grad_grey_vert.gif) 200px repeat-y; }
 
@@ -504,7 +511,7 @@ table.tableChoices td { padding-bottom:0.5em; } /* checkbox choices */
 
 #uploadFileForm { background-position:right center; }
 #uploadButton { padding: 1px 6px; }
-
+.importBtn { padding: 1px 6px; }
 
 
 
@@ -529,6 +536,54 @@ a.export.block { display:block; line-height:16px; float:left; }
 
 #footer-by-itech a:hover { color:#fff; text-decoration:none; }
 
+/****************
+
+ * Facilities   */
+
+.sponsorDates { display:block; overflow:hidden; }
+
+input.datepicker { width:120px; }
+
+
+/*bugfix training form addlocation as widget */
+
+#addLocation .fieldLabel { width: 150px; }
+
+
+/* drop down styles select2 plugin */
+.select2-container  { min-width: 400px; width:400px; text-align: left; }
+.select2-results li { text-align: left; }
+
+
+/****************
+
+ * Admin pages  */
+
+.personUnapproved { max-width:780px; display:block; overflow:visible; }
+
+#personUnapproved .dupeMenu { display:block; position:absolute; }
+
+.facilityUnapproved { max-width:780px; display:block; overflow:visible; }
+
+#facilityUnapproved .dupeMenu { display:block; position:absolute; }
+
+.dupeMenu li:hover { background-color: #CCCCCC; }
+
+#contentAdmin #personSearchWrapper .fieldInput, #contentAdmin #facilitySearchWrapper .fieldInput { width: auto; max-width: 100%; }
+
+#adminApprovers.controls { vertical-align: middle; height:100%; padding:10px; }
+
+#adminApprovers.sidebyside { min-height: 180px; }
+
+.sidebyside select { min-width: 160px; }
+
+.sidebyside button { border: 1px solid black;	padding: 6px;	margin: 8px;	font-size: .9em;	width: 140px; }
+
+#adminApprovers ul { min-width: 175px; min-height: 160px; border:1px solid black; }
+
+.sidebyside { float:left; display:block; overflow: hidden }
+
+#regionRadio li { margin-right:1em; margin-bottom:1em; padding-top:0.3em; }
 
 
 /****************
@@ -649,7 +704,19 @@ a.export.block { display:block; line-height:16px; float:left; }
 
 .calDay { font-weight: bold;}
 
+div.calendar-gui-btn { position: absolute; display:block; right:0px; bottom:0px; }
 
+@media print {
+  .calender-gui-btn { display:none; }
+}
+
+.calendar-gui-btn button { color:blue; font-weight: bold }
+
+.trainingPopup { display:none; position:absolute; left:45%; top:200px; background: white; }
+
+.trainOld { background:#EDF5FF; }
+
+.trainNew { background:#fffed2; }
 
 /**********
 
@@ -715,7 +782,7 @@ fieldset.settings {
 
 
 
-fielset.settings legend, .caption {
+fieldset.settings legend, .caption {
 
 	font-weight: bold;
 
@@ -773,11 +840,12 @@ fielset.settings legend, .caption {
 
 
 
+/*
 #unapprovedTable #yui-dt2-bdrow0-cell5 {
 
   width: 50%;
 
-}
+}*/
 
 
 
@@ -1145,3 +1213,105 @@ table {
 
 }
 
+
+.fieldquestion {
+	display 				: block;
+	float 					: left;
+	width 					: 300px;
+	text-align 				: right;
+}
+
+.fieldshow {
+	display 				: block;
+	float 					: left;
+	width 					: 40px;
+	text-align 				: right;
+}
+
+.fieldselect {
+	display 				: block;
+	float 					: left;
+	width 					: 250px;
+	text-align 				: left;
+}
+
+.fieldselect input {
+	width 					: 100%;
+	height					: 25px;
+	-moz-border-radius		: 3px; 
+	-webkit-border-radius	: 3px;
+	border					: 1px solid #85b1de;
+	background-image		: url(../images/trainsmart-gradient.gif);
+	margin-bottom			: 10px;
+	margin-left				: 5px !important;
+}
+
+.fieldselect select {
+	width 					: 100%;
+	height					: 100px;
+	-moz-border-radius		: 3px; 
+	-webkit-border-radius	: 3px;
+	border					: 1px solid #85b1de;
+	background-image		: url(../images/trainsmart-gradient.gif);
+	margin-bottom			: 10px;
+	margin-left				: 5px !important;
+}
+
+.fieldselect textarea {
+	width 					: 100%;
+	height					: 100px;
+	-moz-border-radius		: 3px; 
+	-webkit-border-radius	: 3px;
+	border					: 1px solid #85b1de;
+	background-image		: url(../images/trainsmart-gradient.gif);
+	background-repeat		: no-repeat;
+	margin-bottom			: 10px;
+	margin-left				: 5px !important;
+}
+
+/********************/
+/*  employee module */
+/********************/
+
+.form_employee select, .form_employee input:not([type="submit"]),
+.form_styled   select, .form_styled   input:not([type="submit"])
+ {
+	border-radius           : 3px;
+	-moz-border-radius		: 3px; 
+	-webkit-border-radius	: 3px;
+}
+
+.form_styled input {
+	min-width:250px;
+	max-width:250px;
+}
+
+.form_employee input:not([type="submit"]),.form_styled input:not([type="submit"]) {
+	min-width:250px;
+	max-width:250px;
+}
+
+.form_employee #hours_min, .form_employee #hours_max,
+.form_employee #cost_min,  .form_employee #cost_max,
+.form_employee #start_date,.form_employee #end_date {
+	width:100px;
+}
+
+.calenderbtn img { vertical-align: bottom; }
+
+.subpartner_id_display {width:30px; float:left;}
+
+.subpartners_wrapper { width:600px;display:block;overflow:hidden; }
+
+#subpartners_table { clear:none; border: 0px; float:left; }
+#subpartners_table tr,td { margin: 10px; }
+
+
+/*** 
+  skillsmart
+
+ ***/
+
+.nwtxtbig {font-size:11px;font-weight:bold;color:#696969;margin:4px}
+.nwtxt    {font-size:11px;color:#696969;margin:4px}
+.nwtxthead{font-size:11px;font-weight:bold;color:#444;margin:4px}

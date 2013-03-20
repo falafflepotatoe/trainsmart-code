@@ -6,11 +6,12 @@
 	<?php
     require_once('views/helpers/ScriptContainer.php');
     print ScriptContainer::$instance->renderCSSHead();
-	print ScriptContainer::$instance->renderJSHead();      ?>
+	print ScriptContainer::$instance->renderJSHead();
+	?>
     
-<script type="text/javascript" src="<?php  echo Settings::$COUNTRY_BASE_URL.'/js/scripts/jquery-1.7.1.min.js'; ?>"></script>
-<script type="text/javascript" src="<?php  echo Settings::$COUNTRY_BASE_URL.'/js/scripts/jquery-ui-1.8.17.custom.min.js'; ?>"></script>
-<script type="text/javascript" language="javascript" src="<?php  echo Settings::$COUNTRY_BASE_URL.'/js/scripts/jquery.dataTables.js'; ?>"></script>
+
+
+
 		<script type="text/javascript" charset="utf-8">
 			$(document).ready(function() {
 				$( ".calendarbox" ).datepicker({
@@ -59,7 +60,7 @@
             <div id="content">
 			<div id="subcontent">
 				<div id="contentheader">
-					<h2>Graduation Requirements</h2>
+					<h2><?php echo t('Graduation Requirements'); ?></h2>
 					<br>
 			
 				</div>
@@ -69,26 +70,26 @@
                <?php echo $this->escape($this->cohortid);?>
 				<div class="mainformholder">
                     
-               <p style="padding-left:105px;font-weight:bold;">Select Criteria</p><br>
+               <p style="padding-left:105px;font-weight:bold;"><?php echo t('Select Criteria'); ?></p><br>
                		
- 					<label>Requirement</label>
+ 					<label><?php echo t('Requirement'); ?></label>
 					<input type="text" name="requirement" size="32" maxlength="32">
 
-					<label>Year</label>
+					<label><?php echo t('Year'); ?></label>
 					<input type="text" name="requirementyear" size="32" maxlength="32">
 
                 </div>
                 
          <div  style="margin:-170px 0 0 400px;">
-        <a href="<?php echo Settings::$COUNTRY_BASE_URL.'/cohort/cohortedit' ?>" class="tsbutton green large">Go back &raquo;</a> 
+        <a href="<?php echo Settings::$COUNTRY_BASE_URL.'/cohort/cohortedit' ?>" class="tsbutton green large"><?php echo t('Go back'); ?> &raquo;</a> 
         
         <?php /*?><form action="sadsadasd" method="post" id="practicum">
         <input type="hidden" name="id" value="<?php echo $this->escape($this->id);?>" class="tsbutton green large">
         <input type="hidden" name="edittable" value="1" />
-        <input type="submit" name="update" value="Go back &raquo;" class="tsbutton green large">
+        <input type="submit" name="update" value="<?php echo t('Go back'); ?> &raquo;" class="tsbutton green large">
         </form><?php */?>
         
-		<input type="submit" name="add" value="Add &raquo;" class="tsbutton green large">
+		<input type="submit" name="add" value="<?php echo t('Add'); ?> &raquo;" class="tsbutton green large">
 					</div>
                 </form>
 

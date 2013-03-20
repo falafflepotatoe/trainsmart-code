@@ -12,12 +12,13 @@ class CohortsearchController extends ITechController {
 	
 	public function cohortsearchAction()
 	{
-		
-	$cohort = new CohortSearch();
-	$cohorts = $cohort->SearchCohort($_POST);	
 	
-	$this->view->assign('title','Trainsmart');
-	$this->view->assign('getcohort',$cohorts);
+		$cohort = new CohortSearch();
+		$cohorts = $cohort->SearchCohort($_POST);	
+		
+		$this->view->assign('title',$this->view->translation['Application Name']);
+
+		$this->view->assign('getcohort',$cohorts);
 	}
 	
 }

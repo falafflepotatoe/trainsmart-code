@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <title><?php echo $this->translation['Application Name'];?> | <?php tp('Training Roster');?></title>
+  <title><?php echo $this->translation['Application Name'];?> | <?php echo t('Training').' '.t('Roster');?></title>
 <?php
 require_once('views/helpers/ScriptContainer.php');
 print ScriptContainer::$instance->renderCSSHead();
@@ -31,7 +31,7 @@ print ScriptContainer::$instance->renderJSHead();
       <a href="<?php echo $this->base_url . '/training/view/id/' . $this->row['id']; ?>"><?php echo $this->row['training_title']; ?></a>
     </div>
 
-    <div class="simpleLabel longerWidth"><?php tp('Training Center');?></div>
+    <div class="simpleLabel longerWidth"><?php echo t('Training').' '.t('Location');?></div>
     <div class="simpleValueNoMargin">
       <?php echo $this->row['training_location_name']; ?>
     </div>
@@ -64,11 +64,11 @@ print ScriptContainer::$instance->renderJSHead();
 
       <hr/>
 
-    <div class="fieldIndentNoMargin"><?php tp('Course Trainers');?> </div>
+    <div class="fieldIndentNoMargin"><?php echo t('Course').' '.t('Trainers');?> </div>
     <div class="fieldIndent2">
       <div class="roster">
    	  <div id="trainerTable"></div>
-   	  <span class="total"><?php tp('Total Trainers:');?> <span id="trainer_total">0</span></span>
+   	  <span class="total"><?php echo t('Total').' '.t('Trainers:');?> <span id="trainer_total">0</span></span>
       <?php echo $this->tableTrainers; ?>
 
 
@@ -76,7 +76,7 @@ print ScriptContainer::$instance->renderJSHead();
 
 
 
-    <div class="fieldIndentNoMargin"><?php tp('Course Participants');?></div>
+    <div class="fieldIndentNoMargin"><?php echo t('Course').' '.t('Participants');?></div>
     <div class="fieldIndent2">
       <div class="roster">
    	  <div id="personsTable"></div>
@@ -86,9 +86,7 @@ print ScriptContainer::$instance->renderJSHead();
     </div></div>
 
     <br />
-    <a class="hideFromPrint" href="<?php echo $this->base_url . '/training/view/id/' . $this->row['id']; ?>"><?php print t('Return to training'); ?></a>
-
-
+    <a class="hideFromPrint" href="<?php echo $this->base_url . '/training/view/id/' . $this->row['id']; ?>"><?php print t('Return to').' '.t('Training'); ?></a>
 
 
   </div>

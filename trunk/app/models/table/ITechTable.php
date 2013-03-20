@@ -52,6 +52,18 @@ class ITechTable extends Zend_Db_Table_Abstract
       return false;
 	}
 	
+  public function get_uuid($pkOrID)
+  {
+    $db = $this->dbfunc();
+    $col = $this->PK();
+    if ( is_array($pkOrID) ) {
+    	$pkOrID = implode(',', $pkOrID);
+    }
+    if ( !$db || empty($col) || empty($pkOrID) || empty($this->_name))
+    	return null;
+    return $db->fetchCol("SELECT uuid FROM {$this->_name} WHERE $col IN ($pkOrID)"); // select uuid from _table_ where id = $pkOrID
+  }
+	
 	/**
  	 * Return a single row or create a brand new one.
  	 * This allows us to call -->save() on the row object.
@@ -81,6 +93,24 @@ class ITechTable extends Zend_Db_Table_Abstract
       ->order($column);
     return $this->fetchAll($select);
   }
+
+	public function insert(array $data) {
+		require_once('models/Session.php');
+
+		if(in_array('timestamp_created', $this->_cols)) { $data['timestamp_created'] = $this->now_expr(); }
+		if(in_array('created_by', $this->_cols)) { $data['created_by'] = Session::getCurrentUserId(); }
+		if(in_array('is_deleted', $this->_cols)) { $data['is_deleted'] = 0; }
+
+		return parent::insert($data);
+	}
+
+	public function update(array $data,$where) {
+		require_once('models/Session.php');
+		if(in_array('timestamp_updated', $this->_cols)) { $data['timestamp_updated'] = $this->now_expr(); }
+		if(in_array('modified_by', $this->_cols)) { $data['modified_by'] = Session::getCurrentUserId(); }
+
+		return parent::update($data,$where);
+	}
 
 	/**
    * Override to use is_deleted field
@@ -160,24 +190,6 @@ class ITechTable extends Zend_Db_Table_Abstract
  		return new Zend_Db_Expr('NOW()');
  	}
  	
-	public function insert(array $data) {
-	    require_once('models/Session.php');
-	    
-	    if(in_array('timestamp_created', $this->_cols)) { $data['timestamp_created'] = $this->now_expr(); }
-	    if(in_array('created_by', $this->_cols)) { $data['created_by'] = Session::getCurrentUserId(); }
-	    if(in_array('is_deleted', $this->_cols)) { $data['is_deleted'] = 0; }
-
-      return parent::insert($data);
-	}
-
-	public function update(array $data,$where) {
-	    require_once('models/Session.php');
-	 	if(in_array('timestamp_updated', $this->_cols)) { $data['timestamp_updated'] = $this->now_expr(); }
-      	if(in_array('modified_by', $this->_cols)) { $data['modified_by'] = Session::getCurrentUserId(); }
-
-      	return parent::update($data,$where);
-	}
-
 	public static function getCustomValue($table, $phrase_col, $id) {
 		if ( !$id )
 			return null;
@@ -242,20 +254,23 @@ class ITechTable extends Zend_Db_Table_Abstract
         ->where("$id_col != 0");
 
     $rows = $this->fetchAll($select);
+    
     $topic = array();
+
     foreach($rows as $r) {
       if (!isset($topic[$r->id]) )
         $topic[$r->id] = $r->$value_col;
       else
-         $topic[$r->id] = $topic[$r->id].', '.$r->$value_col;
-     
+        $topic[$r->id] = $topic[$r->id].', '.$r->$value_col;
     }
+    
     foreach($sorted_data as $t=>$r) {
       if(!isset($topic[$t])) 
        $sorted_data[$t][$value_col] = 'n/a';
       else
        $sorted_data[$t][$value_col] = $topic[$t];
-       if  ($remove_id)
+
+      if ($remove_id)
         unset($sorted_data[$t][$id_col]);
     }
     
@@ -273,25 +288,49 @@ class ITechTable extends Zend_Db_Table_Abstract
    * @return unknown
    */
   public function _fill_intersection_related($sorted_data, $option_table, $intersection_table, $id_col, $value_col) {
-   // get training topic(s)
+   
+    $selectCols = array('training_id');
+    if ($option_table == 'training_funding_option'){
+      // and select extra cols from multioptlist's
+      $selectCols = array('training_id', "funding_amount");
+      $extraCol = 'funding_amount';
+    }
+    elseif ($option_table == 'training_pepfar_categories_option') {
+      $selectCols = array('training_id', "duration_days");
+      $extraCol = 'duration_days';
+    }
+
+    // get training topic(s)
     $select = $this->select()
-        ->from($intersection_table, array('training_id'))
+        ->from($intersection_table, $selectCols)
         ->setIntegrityCheck(false)
         ->join(array('tp' => $option_table), "$intersection_table.$id_col = tp.id",$value_col)
         ->where("$id_col != 0");
 
     $rows = $this->fetchAll($select);
-    $topic = array();
+    $topic = array(); $extra = array();
     foreach($rows as $r) {
+      if (!isset($topic[$r->training_id])) $topic[$r->training_id] = array();
+      if (!isset($extra[$r->training_id])) $extra[$r->training_id] = array();
       $topic[$r->training_id][] = $r->$value_col;
+      if ($extraCol)
+        $extra[$r->training_id][] = $r->{$extraCol};
     }
+
+    if($extraCol == 'duration_days' && $option_table == 'training_pepfar_categories_option')
+      $extraCol = 'pepfar_duration_days';
+
     foreach($sorted_data as $t=>$r) {
       if(!isset($topic[$t])) 
        $sorted_data[$t][$value_col] = array('n/a');
       else
        $sorted_data[$t][$value_col] = implode(', ', $topic[$t]);
+
+      if ($extraCol)
+        $sorted_data[$t][$extraCol]   = isset($extra[$t]) ? implode(', ', $extra[$t]) : array('n/a');
+
     }
-    
+
     return $sorted_data;
   }
  

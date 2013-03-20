@@ -8,9 +8,6 @@
     print ScriptContainer::$instance->renderCSSHead();
 	print ScriptContainer::$instance->renderJSHead();      ?>
     
-<script type="text/javascript" src="<?php  echo Settings::$COUNTRY_BASE_URL.'file:///js/scripts/jquery-1.7.1.min.js'; ?>"></script>
-<script type="text/javascript" src="<?php  echo Settings::$COUNTRY_BASE_URL.'file:///js/scripts/jquery-ui-1.8.17.custom.min.js'; ?>"></script>
-<script type="text/javascript" language="javascript" src="<?php  echo Settings::$COUNTRY_BASE_URL.'file:///js/scripts/jquery.dataTables.js'; ?>"></script>
 		<script type="text/javascript" charset="utf-8">
 			$(document).ready(function() {
 				$( ".calendarbox" ).datepicker({
@@ -59,7 +56,7 @@
             <div id="content">
 			<div id="subcontent">
 				<div id="contentheader">
-					<h2>Students associated with the cohort</h2>
+					<h2><?php echo t('Students associated with the cohort'); ?></h2>
 					<br>
 			
 				</div>
@@ -67,30 +64,30 @@
 				<form  action="<?php echo $this->escape($this->action); ?>" id="peopleadd" method="post">
 				<div class="mainformholder">
                     
-               <p style="padding-left:105px;font-weight:bold;">Enter Criteria</p><br>
+               <p style="padding-left:105px;font-weight:bold;"><?php echo t('Enter Criteria'); ?></p><br>
                		
                 
                		
- 					<label> ID</label>
+ 					<label><?php echo t('ID'); ?></label>
 					<input type="text" name="cohortid" size="32" maxlength="32">
 
-					<label>Name</label>
+					<label><?php echo t('Name'); ?></label>
 					<input type="text" name="cohortstart" size="32" maxlength="32">
 
-					<label>Gender</label>
+					<label><?php echo t('Gender'); ?></label>
 					<input type="text" name="cohortgraduation" size="32" maxlength="32"  >
                     
-                    <label>Date of birth	</label>
+                    <label><?php echo t('Date of birth	'); ?></label>
 					<input type="text" name="cohortparticipant" size="32" maxlength="32">
                     
-                     <label>Status</label>
+                     <label><?php echo t('Status'); ?></label>
 					<input type="text" name="cohortseprated" size="32" maxlength="32">
                     
     
 
 
          <div class="rightdiv" style="margin:5px 0 0 400px;">
-		<input type="submit" name="update" value="Add Student &raquo;" class="tsbutton green large">
+		<input type="submit" name="update" value="<?php echo t('Add Student'); ?> &raquo;" class="tsbutton green large">
 					</div>
 
 

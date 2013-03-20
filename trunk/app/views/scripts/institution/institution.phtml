@@ -8,9 +8,9 @@
     print ScriptContainer::$instance->renderCSSHead();
 	print ScriptContainer::$instance->renderJSHead();      ?>
     
-<script type="text/javascript" src="<?php  echo Settings::$COUNTRY_BASE_URL.'/js/scripts/jquery-1.7.1.min.js'; ?>"></script>
-<script type="text/javascript" src="<?php  echo Settings::$COUNTRY_BASE_URL.'/js/scripts/jquery-ui-1.8.17.custom.min.js'; ?>"></script>
-<script type="text/javascript" language="javascript" src="<?php  echo Settings::$COUNTRY_BASE_URL.'/js/scripts/jquery.dataTables.js'; ?>"></script>
+
+
+
 
 		<script type="text/javascript" charset="utf-8">
 			$(document).ready(function() {
@@ -58,13 +58,13 @@
             
 			<div id="subcontent">
 				<div id="contentheader">
-					<h2>Institution Search</h2><br>
-					<p style="float:left;font-size:13px;">Select criteria</p>
+					<h2><?php echo t('Institution Search'); ?></h2><br>
+					<p style="float:left;font-size:13px;"><?php echo t('Select criteria'); ?></p>
 				</div>
 				<div class="pad50 clear"></div>
 				<form  action="./institutionsearch" id="peopleadd" method="post">
 				<div class="mainformholder" style="height:450px;">
- 					<label>Institution Name</label>
+ 					<label><?php echo t('Institution Name'); ?></label>
 					<input type="text" name="name" size="32" maxlength="32" value="<?php echo $this->escape($_POST['name']);?>">
 
 <!--
@@ -102,7 +102,7 @@
 	}
 ?>
 
-                     <label>Institution Sponsor</label>
+                     <label><?php echo t('Institution Sponsor'); ?></label>
 					<select name="sponsor">
 <?php
 	echo "<option value=\"0\">Any</option>\n";
@@ -112,9 +112,9 @@
 ?>
 					</select>
                      
-					<label>Institution Type</label>
+					<label><?php echo t('Institution Type'); ?></label>
 					<select name="instype" id="instype">
-						<option value="0">Select...</option>
+						<option value="0"><?php echo t('Select...'); ?></option>
 <?php
 	foreach ($this->institutiontypes as $instype){
 ?>
@@ -125,7 +125,7 @@
 					</select>
                     
 					<div class="rightdiv" style="margin-top:20px;">
-	                    <input type="submit" name="submit" value="Search &raquo;" class="tsbutton green large"></div>
+	                    <input type="submit" name="submit" value="<?php tp('Search'); ?> &raquo;" class="tsbutton green large"></div>
 					</div>
 				</div>
 				<form>

@@ -25,7 +25,7 @@ print ScriptContainer::$instance->renderJSHead();
 
 	<div class="fieldLabel" id="training_organizer_id_lbl"><?php echo (@$this->translation['Training Organizer']); ?></div>
 	<div class="fieldInput">
-	 <select name="training_organizer_id">
+	  <select name="training_organizer_id[]" multiple="multiple" size="10">
 		<option value="">&mdash;<?php tp('select');?>&mdash;</option>
 		<?php
 			foreach ( $this->organizers as $vals ) {
@@ -33,7 +33,18 @@ print ScriptContainer::$instance->renderJSHead();
 		}
 		?>
 	</select>
+	</div>
 
+	<div class="fieldLabel" id="training_title_id_lbl"><?php echo (@$this->translation['Training Name']); ?></div>
+	<div class="fieldInput">
+	  <select name="training_title_id[]" multiple="multiple" size="10">
+		<option value="">&mdash;<?php tp('All');?>&mdash;</option>
+		<?php
+			foreach ( $this->titles as $vals ) {
+				echo '<option value="'.$vals['id'].'" '.((@$this->criteria['training_title_id']) == $vals['id']? 'SELECTED="selected"':'').' >'.($vals['training_title_phrase']).'</option>';
+		}
+		?>
+	  </select>
   </div>
 
 	<div class="clear"></div>
@@ -63,6 +74,9 @@ print ScriptContainer::$instance->renderJSHead();
 <div class="fieldLabel" style="padding-top:1em;"></div>
 <div class="fieldInput" id="enddate" style="margin-top:1em;">
 <input type="checkbox" id="is_extended" name="is_extended" value="1"><label for="is_extended"><?php tp('Extended Report with Test Scores');?></label><br/>
+</div>
+<div class="fieldLabel" style="padding-top:1em;"></div>
+<div class="fieldInput" id="enddate" style="margin-top:1em;">
 <input type="checkbox" id="add_additional" name="add_additional" value="1"><label for="add_additional"><?php tp('Extended Report with Regions and Qualification');?></label><br/>
 </div>
 

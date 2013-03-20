@@ -222,7 +222,7 @@ function setDistrictStatus(selected="selected"Index)  {
    </form>
 <?php if ( $this->criteria['go'] ) { ?>
 <div class="hrGrey"></div>
-    <div class="fieldIndentNoMargin"><?php tp('Participants');?> <span class="total"><?php echo $this->count;?> <?php tp('Trainings Attended');?></span><?php echo $this->printAndExport();?></div>
+    <div class="fieldIndentNoMargin"><?php tp('Participants');?> <span class="total"><?php echo $this->count;?> <?php echo t('Trainings').' '.t('Attended');?></span><?php echo $this->printAndExport();?></div>
 
     <div id="trainings"  class="itechTable"></div>
     <script type="text/javascript">

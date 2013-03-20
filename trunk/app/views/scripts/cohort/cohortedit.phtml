@@ -25,6 +25,10 @@
 					modal: true,
 					buttons: {
 						"Update": function() {
+							$('#dialog-form-student select[name="_length"]')
+								.append('<option value="1000">1000</option>')
+								.val(1000)
+								.change();
 							document.getElementById('studentform').submit();
 						},
 						Cancel: function() {
@@ -64,7 +68,7 @@
 				$( "#licensepopupbutton" )
 					.button()
 					.click(function() {
-						$('#dialog-form-license').dialog('option', 'title', 'Add a license');
+						$('#dialog-form-license').dialog('option', 'title', '<?php echo t('Add a license'); ?>');
 						$("#licenseid").val("0");
 
 						$("#licensename").val("");
@@ -81,7 +85,7 @@
 					buttons: {
 						"Update": function() {
 							document.getElementById('classform').submit();
-						},
+						},	
 						Cancel: function() {
 							$( this ).dialog( "close" );
 						}
@@ -119,7 +123,7 @@
 				$( "#practicumpopupbutton" )
 					.button()
 					.click(function() {
-						$('#dialog-form-practicum').dialog('option', 'title', 'Add a practicum');
+						$('#dialog-form-practicum').dialog('option', 'title', '<?php echo t('Add a practicum'); ?>');
 						$("#practicumid").val("0");
 
 						$("#practicumname").val("");
@@ -134,7 +138,7 @@
 
 			});
 			function licenseedititem(iid,nm,dt){
-				$('#dialog-form-license').dialog('option', 'title', 'Update a license');
+				$('#dialog-form-license').dialog('option', 'title', '<?php echo t('Update a license'); ?>');
 				$("#licenseid").val(iid);
 
 				$("#licensename").val(nm);
@@ -143,7 +147,7 @@
 				$( "#dialog-form-license" ).dialog( "open" );
 			}
 			function practicumedititem(iid,nm,dt,fid,aid,hreq,hfin){
-				$('#dialog-form-practicum').dialog('option', 'title', 'Update a practicum');
+				$('#dialog-form-practicum').dialog('option', 'title', '<?php echo t('Update a practicum'); ?>');
 				$("#practicumid").val(iid);
 
 				$("#practicumname").val(nm);
@@ -209,34 +213,33 @@
 		<table cellpadding="0" cellspacing="0" border="0" class="display tablegrid" id="" style="width:100%">
 			<thead>
 				<tr>
-					<th>Student Id</th>
-					<th>Name</th>
-					<th>Gender</th>
-					<th>DOB</th>
+					<th><?php echo t('Student Id'); ?></th>
+					<th><?php echo t('Name'); ?></th>
+					<th><?php echo t('Gender'); ?></th>
+					<th><?php echo t('DOB'); ?></th>
 				</tr>
 			</thead>
 			<tbody>
-<?php
-
-foreach ($this->allStudents as $row){
-	$found = false;
-	$sid = 0;
-	foreach ($this->cohortStudents as $subrow){
-		if ($subrow['id'] == $row['id']){
-			$sid = $subrow['studentid'];
-			$found = true;
-		}
-	}
-?>
-				<tr class="GradeA">
-					<td><input type="checkbox" name="students[]" id="students[]" value="<?php echo $row['sid']; ?>"<?php echo ($found ? " checked" : "") ?>> <?php echo $row['id']; ?></td>
-					<td class=""><?php echo $row['first_name'] . " " . $row['last_name']; ?></td>
-					<td class=""><?php echo $row['gender']; ?></td>
-					<td class=""><?php echo trim($row['birthdate']) != "" ? date("m/d/Y", strtotime($row['birthdate'])) : "N/A"; ?></td>
-				</tr>
-<?php
-}
-?>
+				<?php
+				foreach ($this->allStudents as $row){
+					$found = false;
+					$sid = 0;
+					foreach ($this->cohortStudents as $subrow){
+						if ($subrow['id'] == $row['id']){
+							$sid = $subrow['studentid'];
+							$found = true;
+						}
+					}
+					?>
+					<tr class="GradeA">
+						<td><input type="checkbox" name="students[<?php echo($row['sid']);?>]" id="students[<?php echo($row['sid']);?>]" value="<?php echo $row['sid']; ?>"<?php echo ($found ? " checked" : "") ?>> <?php echo $row['id']; ?></td>
+						<td class=""><?php echo $row['first_name'] . " " . $row['last_name']; ?></td>
+						<td class=""><?php echo $row['gender']; ?></td>
+						<td class=""><?php echo trim($row['birthdate']) != "" ? date("m/d/Y", strtotime($row['birthdate'])) : "N/A"; ?></td>
+					</tr>
+					<?php
+				}
+				?>
 			</tbody>
 		</table>
 	</form>
@@ -246,13 +249,13 @@ foreach ($this->allStudents as $row){
 	<form method="post" name="licenseform" id="licenseform">
 		<input type="hidden" name="licenseaction" id="licenseaction" value="license">
 		<input type="hidden" name="licenseid" id="licenseid" value="<?php echo $this->id; ?>">
-	<p class="validateTips">All form fields are required.</p>
+	<p class="validateTips"><?php echo t('All form fields are required.'); ?></p>
 
 	<form method="post">
 		<fieldset>
-			<label for="name">Name</label>
+			<label for="name"><?php echo t('Name'); ?></label>
 			<input type="text" name="licensename" id="licensename" class="text ui-widget-content ui-corner-all" />
-			<label for="name">Date</label>
+			<label for="name"><?php echo t('Date'); ?></label>
 			<input type="text" name="licensedate" id="licensedate" class="calendarbox text ui-widget-content ui-corner-all" />
 		</fieldset>
 	</form>
@@ -266,31 +269,31 @@ foreach ($this->allStudents as $row){
 		<table cellpadding="0" cellspacing="0" border="0" class="display tablegrid" id="" style="width:100%">
 			<thead>
 				<tr>
-					<th>Class name</th>
-					<th>Instructor</th>
-					<th>Start date</th>
-					<th>End date</th>
+					<th><?php echo t('Class name'); ?></th>
+					<th><?php echo t('Instructor'); ?></th>
+					<th><?php echo t('Start date'); ?></th>
+					<th><?php echo t('End date'); ?></th>
 				</tr>
 			</thead>
 			<tbody>
-<?php
-	foreach ($this->fetchclasses as $classes){
-		$found = false;
-		foreach ($this->fetchcurrentclasses as $current){
-			if ($current['id'] == $classes['id']){
-				$found = true;
-			}
-		}
-?>
-				<tr class="GradeA">
-					<td><input type="checkbox" name="class[<?php echo $classes['id']; ?>][id]" id="class[<?php echo $classes['id']; ?>][id]" value="<?php echo $classes['id']; ?>"<?php echo ($found ? " checked" : "") ?>> <?php echo $classes['classname']; ?></td>
-					<td class=""><?php echo $classes['first_name'] . " " . $classes['last_name']; ?></td>
-					<td class=""><?php echo date("m/d/Y", strtotime($classes['startdate'])); ?></td>
-					<td class=""><?php echo date("m/d/Y", strtotime($classes['enddate'])); ?></td>
-				</tr>
-<?php
-	}
-?>
+				<?php
+					foreach ($this->fetchclasses as $classes){
+						$found = false;
+						foreach ($this->fetchcurrentclasses as $current){
+							if ($current['id'] == $classes['id']){
+								$found = true;
+							}
+						}
+						?>
+						<tr class="GradeA">
+							<td><input type="checkbox" name="class[<?php echo $classes['id']; ?>][id]" id="class[<?php echo $classes['id']; ?>][id]" value="<?php echo $classes['id']; ?>"<?php echo ($found ? " checked" : "") ?>> <?php echo $classes['classname']; ?></td>
+							<td class=""><?php echo $classes['first_name'] . " " . $classes['last_name']; ?></td>
+							<td class=""><?php echo date("m/d/Y", strtotime($classes['startdate'])); ?></td>
+							<td class=""><?php echo date("m/d/Y", strtotime($classes['enddate'])); ?></td>
+						</tr>
+						<?php
+					}
+				?>
 			</tbody>
 		</table>
 	</form>
@@ -300,17 +303,17 @@ foreach ($this->allStudents as $row){
 	<form method="post" name="practicumform" id="practicumform">
 		<input type="hidden" name="practicumaction" id="practicumaction" value="practicumaction">
 		<input type="hidden" name="practicumid" id="practicumid" value="0">
-	<p class="validateTips">All form fields are required.</p>
+	<p class="validateTips"><?php echo t('All form fields are required.'); ?></p>
 
 	<form method="post">
 		<fieldset>
-			<label for="name">Name</label>
+			<label for="name"><?php echo t('Name'); ?></label>
 			<input type="text" name="practicumname" id="practicumname" class="text ui-widget-content ui-corner-all" />
-			<label for="name">Date</label>
+			<label for="name"><?php echo t('Date'); ?></label>
 			<input type="text" name="practicumdate" id="practicumdate" class="calendarbox text ui-widget-content ui-corner-all" />
-			<label for="name">Facility</label>
+			<label for="name"><?php echo t('Facility'); ?></label>
 			<select name="facilityid" id="facilityid" class="text ui-widget-content ui-corner-all" />
-				<option value="0">Select</option>
+				<option value="0"><?php echo t('Select'); ?></option>
 <?php
 	foreach ($this->facilities as $facility){
 ?>
@@ -319,9 +322,9 @@ foreach ($this->allStudents as $row){
 	}
 ?>
 			</select>
-			<label for="name">Advisor</label>
+			<label for="name"><?php echo t('Advisor'); ?></label>
 			<select name="advisorid" id="advisorid" class="text ui-widget-content ui-corner-all" />
-				<option value="0">Select</option>
+				<option value="0"><?php echo t('Select'); ?></option>
 <?php
 	foreach ($this->advisors as $advisor){
 ?>
@@ -330,7 +333,7 @@ foreach ($this->allStudents as $row){
 	}
 ?>
 			</select>
-			<label for="name">Hours required</label>
+			<label for="name"><?php echo t('Hours required'); ?></label>
 			<input type="text" name="hoursrequired" id="hoursrequired" class="text ui-widget-content ui-corner-all" />
 		</fieldset>
 	</form>
@@ -343,60 +346,72 @@ foreach ($this->allStudents as $row){
 			<div id="content">
 				<div id="subcontent">
 					<div id="contentheader">
-						<h2>Edit/View Cohort Record</h2>
+						<h2><?php echo t('Edit/View Cohort Record'); ?></h2>
 					</div>
 					<div class="pad50 clear"></div>
 					<form  id="cohortedit" method="post" class="formvalidate">
 						<input type="hidden" name="id" value="<?php echo $this->escape($this->id);?>">
 						<div class="mainformholder">
-							<p style="">Cohort details</p><br>
+							<p style=""><?php echo t('Cohort details'); ?></p><br>
 
-							<label>Cohort ID</label>
+							<label><?php echo t('Cohort ID'); ?></label>
 							<input type="text" class="required" name="cohortid" readonly  value="<?php echo $this->escape($this->cohortid);?>">	
 							
-							<label>Cohort name</label>
+							<label><?php echo t('Cohort name'); ?></label>
 							<input type="text" class="required" name="cohortname"  value="<?php echo $this->escape($this->cohortname);?>">	
 							
-							<label>Degree Information</label>
+							<label><?php echo t('Degree Information'); ?></label>
 							<select name="degreeinfo" class="comboeditable">
-								<option value="0">Select...</option>
-<?php
-	foreach ($this->lookupdegrees as $degree){
-?>
-								<option value="<?php echo $degree['id']; ?>"<?php echo $degree['id'] == $this->escape($this->degree) ? " selected" : ""; ?>><?php echo $degree['degree']; ?></option>
-<?php
-	}
-?>
+								<option value="0"><?php echo t('Select...'); ?></option>
+								<?php
+									foreach ($this->lookupdegrees as $degree){
+									?>
+										<option value="<?php echo $degree['id']; ?>"<?php echo $degree['id'] == $this->escape($this->degree) ? " selected" : ""; ?>><?php echo $degree['degree']; ?></option>
+									<?php
+										}
+								?>
 							</select>
 							
-							<label>Institution</label>
-							<select name="institution" id="institution">
-<?php
-	foreach ($this->institutions as $institution){
-?>
-								<option value="<?php echo $institution['id']; ?>"<?php echo $institution['id'] == $this->institution ? " selected" : ""; ?>><?php echo $institution['institutionname']; ?></option>
-<?php
-	}
-?>
+							<label><?php echo t('Institution'); ?></label>
+							<select name="institution" id="institution" disabled="true">
+								<?php
+									foreach ($this->institutions as $institution){
+									?>
+										<option value="<?php echo $institution['id']; ?>"<?php echo $institution['id'] == $this->institution ? " selected" : ""; ?>><?php echo $institution['institutionname']; ?></option>
+									<?php
+										}
+								?>
 							</select>
 
-							<label>Cohort Start Date</label>
+							<label><?php echo t('Cadre'); ?></label>
+							<select name="cadre" id="cadre">
+								<?php
+								foreach ($this->institution_cadres as $cadre){
+									?>
+									<option value="<?php echo $cadre['id_cadre']; ?>"<?php echo ($cadre['id_cadre'] == $this->institution_cadre_id) ? " SELECTED" : ""; ?>><?php echo $cadre['cadrename']; ?></option>
+									<?php
+								}
+								?>
+							</select>							
+
+							<label><?php echo t('Cohort Start Date'); ?></label>
 							<input type="text" name="cohortstart" class="calendarbox required" value="<?php echo $this->escape($this->startname);?>">
 							
-							<label>Cohort Graduation Date</label>
+							<label><?php echo t('Cohort Graduation Date'); ?></label>
 							<input type="text" name="cohortgrade" class="calendarbox required" value="<?php echo $this->escape($this->graddate);?>">
 							
-							<label>Cohort Participants at Start</label>
+							<label><?php echo t('Cohort Participants at Start'); ?></label>
 							<input type="text" name="startdate" readonly value="<?php echo $this->escape($this->studentsatstart);?>">
 							
-							<label>Cohort Participants Separated</label>
+							<label><?php echo t('Cohort Participants Dropped Out'); ?></label>
 							<input type="text" name="sepratedate" readonly value="<?php echo $this->escape($this->studentsseparated);?>">
 							
-							<label>Cohort Current or Graduating Number</label>
+							<label><?php echo t('Cohort Current or Graduating Number'); ?></label>
 							<input type="text" name="graddate" readonly value="<?php echo $this->escape($this->studentsgraduating);?>">
 
-							<div class="rightdiv" style="">
-								<input type="submit" name="updatecohort" value="Update Cohort &raquo;" class="tsbutton green large">
+							<div class="rightdiv" style="margin-top:10px; margin-right:12px;">
+								<input type="submit" name="deletecohort" value="<?php echo t('Delete'); ?>" class="tsbutton green large" style="display:none;">
+								<input type="submit" name="updatecohort" value="<?php echo t('Update'); ?> &raquo;" class="tsbutton green large">
 							</div>
 						</div>
 					</form>
@@ -404,17 +419,17 @@ foreach ($this->allStudents as $row){
 					<div class="clear50"></div>
 
 					<div class="pad20 clear"></div>
-					<p style="float:left;font-size:14px; font-weight:bold;">Students associated with the cohort</p>
+					<p style="float:left;font-size:14px; font-weight:bold; margin:40px 0 0 0;"><?php echo t('Students associated with the cohort'); ?></p>
 
 					<div style="width : 100%;">
 						<table cellpadding="0" cellspacing="0" border="0" class="display tablegrid" id="" style="width:100%">
 							<thead>
 								<tr>
-									<th>Student Id</th>
-									<th>Name</th>
-									<th>Gender</th>
-									<th>DOB</th>
-									<th>Status</th>
+									<th><?php echo t('Student Id'); ?></th>
+									<th><?php echo t('Name'); ?></th>
+									<th><?php echo t('Gender'); ?></th>
+									<th><?php echo t('DOB'); ?></th>
+									<th><?php echo t('Status'); ?></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -428,11 +443,11 @@ foreach ($this->allStudents as $row){
 									<td class="" style="width : 120px;"><?php echo trim($row['birthdate']) != "" ? date("m/d/Y", strtotime($row['birthdate'])) : "N/A"; ?></td>
 									<td class="" style="width : 120px;"><?php
 										if ($row['isgraduated']){
-											echo "Graduated";
+											echo t("Graduated");
 										} elseif ($row['dropdate'] != "0000-00-00"){
-											echo "Dropped";
+											echo t("Dropped");
 										} else {
-											echo "Active";
+											echo t("Active");
 										}
 									?></td>
 								</tr>
@@ -443,7 +458,7 @@ foreach ($this->allStudents as $row){
 						</table>
 						<div style="text-align : right;">
 							<br>
-							<input type="submit" name="studentpopupbutton" id="studentpopupbutton" value="Update associated students" class="tsbutton green large">
+							<input type="submit" name="studentpopupbutton" id="studentpopupbutton" value="<?php echo t('Update associated students'); ?>" class="tsbutton green large">
 						</div>
 					</div>
 <?php
@@ -452,14 +467,14 @@ foreach ($this->allStudents as $row){
 #					</div>
 ?>
 					<div class="pad50 clear"></div>
-					<p style="float:left;font-size:14px; font-weight:bold;">License / Registration</p>
+					<p style="float:left;font-size:14px; font-weight:bold;"><?php echo t('License / Registration'); ?></p>
 
 					<div style="width : 100%;">
 						<table cellpadding="0" cellspacing="0" border="0" class="display tablegrid" id="" style="width:100%">
 							<thead>
 								<tr>
-									<th>Name</th>
-									<th>Date</th>
+									<th><?php echo t('Name'); ?></th>
+									<th><?php echo t('Date'); ?></th>
 									<th>&nbsp;</th>
 								</tr>
 							</thead>
@@ -478,7 +493,7 @@ foreach ($this->allStudents as $row){
 							</tbody>
 						</table>
 						<div style="text-align : right;">
-							<input type="submit" name="licensepopupbutton" id="licensepopupbutton" value="Add a license" class="tsbutton green large">
+							<input type="submit" name="licensepopupbutton" id="licensepopupbutton" value="<?php echo t('Add a license'); ?>" class="tsbutton green large">
 						</div>
 					</div>
 <?php
@@ -487,33 +502,35 @@ foreach ($this->allStudents as $row){
 #					</div>
 ?>
 					<div class="pad50 clear"></div>
-					<p style="float:left;font-size:14px; font-weight:bold;">Classes associated with the Cohort</p>
+					<p style="float:left;font-size:14px; font-weight:bold;"><?php echo t('Classes associated with the Cohort'); ?></p>
 
 					<div style="width : 100%;">
 						<table cellpadding="0" cellspacing="0" border="0" class="display tablegrid" id="" style="width:100%">
 							<thead>
 								<tr>
-									<th>Class Name</th>
-									<th>Tutor</th>
-									<th>Start date</th>
-									<th>End date</th>
+									<th><?php echo t('Class Name'); ?></th>
+									<th><?php echo t('Tutor'); ?></th>
+									<th><?php echo t('Start date'); ?></th>
+									<th><?php echo t('End date'); ?></th>
 								</tr>
 							</thead>
 							<tbody>
-<?php
-	foreach ($this->fetchcurrentclasses as $classes){
-?>
-								<tr class="GradeA">
-									<td class=""><?php echo $classes['classname'];?></td>
-									<td class="" style=" width : 160px;"><?php echo $classes['first_name'] . " " . $classes['last_name'];?></td>
-									<td class="" style=" width : 120px;"><?php echo date("m/d/Y", strtotime($classes['startdate']));?></td>
-									<td class="" style=" width : 120px;"><?php echo date("m/d/Y", strtotime($classes['enddate']));?></td>
-								</tr>
-<?php } ?>
+							<?php
+								foreach ($this->fetchcurrentclasses as $classes){
+									?>
+									<tr class="GradeA">
+										<td class=""><?php echo $classes['classname'];?></td>
+										<td class="" style=" width : 160px;"><?php echo $classes['first_name'] . " " . $classes['last_name'];?></td>
+										<td class="" style=" width : 120px;"><?php echo date("m/d/Y", strtotime($classes['startdate']));?></td>
+										<td class="" style=" width : 120px;"><?php echo date("m/d/Y", strtotime($classes['enddate']));?></td>
+									</tr>
+									<?php 
+								} 
+							?>
 							</tbody>
 						</table>
 						<div style="text-align : right;">
-							<input type="submit" name="classpopupbutton" id="classpopupbutton" value="Update associated classes" class="tsbutton green large">
+							<input type="submit" name="classpopupbutton" id="classpopupbutton" value="<?php echo t('Update associated classes'); ?>" class="tsbutton green large">
 						</div>
 					</div>
 <?php
@@ -522,17 +539,17 @@ foreach ($this->allStudents as $row){
 #					</div>
 ?>
 					<div class="pad50 clear"></div>
-					<p style="float:left;font-size:14px; font-weight:bold;">Clinical Allocation</p>
+					<p style="float:left;font-size:14px; font-weight:bold;"><?php echo t('Clinical Allocation'); ?></p>
 
 					<div style="width : 100%;">
 						<table cellpadding="0" cellspacing="0" border="0" class="display tablegrid" id="" style="width:100%">
 							<thead>
 								<tr>
-									<th>Name</th>
-									<th>Date</th>
-									<th>Facility</th>
-									<th>Advisor</th>
-									<th>Hours Required</th>
+									<th><?php echo t('Name'); ?></th>
+									<th><?php echo t('Date'); ?></th>
+									<th><?php echo t('Facility'); ?></th>
+									<th><?php echo t('Advisor'); ?></th>
+									<th><?php echo t('Hours Required'); ?></th>
 									<th>&nbsp;</th>
 								</tr>
 							</thead>
@@ -554,17 +571,17 @@ foreach ($this->allStudents as $row){
 							</tbody>
 						</table>
 						<div style="text-align : right;">
-							<input type="submit" name="practicumpopupbutton" id="practicumpopupbutton" value="Add a practicum" class="tsbutton green large">
+							<input type="submit" name="practicumpopupbutton" id="practicumpopupbutton" value="<?php echo t('Add a practicum'); ?>" class="tsbutton green large">
 						</div>
 					</div>
 <?php
 #					<div class="rightdiv" style="">
-#						<a href="../cohort/cohortasspracticum/cohortid/< ? php echo $this->escape($this->id);? >" class="tsbutton green large">Add a Practicum &raquo;</a>
+#						<a href="../cohort/cohortasspracticum/cohortid/< ? php echo $this->escape($this->id);? >" class="tsbutton green large"><?php echo t('Add a Practicum'); ?> &raquo;</a>
 #					</div>
 ?>
 					<div class="pad50 clear"></div>
 <!--
-					<p style="float:left;font-size:14px; font-weight:bold;">Assessment associated with Cohort</p>
+					<p style="float:left;font-size:14px; font-weight:bold;"><?php echo t('Assessment associated with Cohort'); ?></p>
 
 					<div style="width : 100%;">
 						<table cellpadding="0" cellspacing="0" border="0" class="display tablegrid" id="" style="width:100%">

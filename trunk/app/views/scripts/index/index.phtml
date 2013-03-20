@@ -1,17 +1,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
+	<head>
   <title><?php echo $this->translation['Application Name'];?></title>
-<?php
-require_once('views/helpers/ScriptContainer.php');
-print ScriptContainer::$instance->renderCSSHead();
-print ScriptContainer::$instance->renderJSHead();
-?>
+		<?php
+		require_once('views/helpers/ScriptContainer.php');
+		print ScriptContainer::$instance->renderCSSHead();
+		print ScriptContainer::$instance->renderJSHead();
+		?>
 
-</head>
-<body class="yui-skin-sam">
+	</head>
+	<body class="yui-skin-sam">
 
-<div id="pageHolder">
+		<div id="pageHolder">
 
   <div id="header"><?php require_once('views/scripts/header.phtml');?></div>
   <div id="content">
@@ -19,11 +19,12 @@ print ScriptContainer::$instance->renderJSHead();
     <h1><?php print t('Welcome to').' '.$this->translation['Application Name'];?></h1>
 	<h2><?php tp('Training System Monitoring and Reporting Tool');?></h2><br/>
   	<?php if ($this->isLoggedIn()) { ?>
-<?php if (isset($this->unique_participants)) { ?>
+				<?php if (isset($this->unique_participants)) { ?>
  <div class="fieldIndentNoMargin"><?php tp('Data Summary');?></div>
 	<div class="fieldIndent2">
-	<div id="trainingStats"></div>
+		<div id="trainingStats"></div>
 	</div>
+	
 	<script type="text/javascript">
  var statsData = [
 		['<?php tp('Participants');?>&nbsp;(<?php echo $this->unique_participants.' '.t('unique');?>)','<?php echo $this->attendees;?>','<?php echo $this->attendees_ytd;?>'],
@@ -35,18 +36,48 @@ print ScriptContainer::$instance->renderJSHead();
 		var statsColumnDefs = [
 		    {key:"name", label: "<?php echo $this->min_date;?>&nbsp;to&nbsp;<?php echo $this->max_date;?>", sortable:false, resizeable:true},
 		    {key:"total", label: "<?php tp('Total');?>", sortable:false, resizeable:true},
-		    {key:"ytd", label: "<?php tp('Fiscal Year');?>&nbsp;(since&nbsp;<?php echo $this->ytdStart;?>)", sortable:false, resizeable:true}
+			{key:"ytd", label: "<?php tp('Fiscal Year');?> (since&nbsp;<?php echo $this->ytdStart;?>)", sortable:false, resizeable:true}
 		];
 
 		makeDataTable("trainingStats", null, statsData, statsColumnDefs);
 	</script>
-<?php } ?>
-<div class="clear"></div>
+				<?php } ?>
+				<div class="clear"></div>
+
+<?php
+	if (isset($this->setting['display_mod_skillsmart']) && ($this->setting['display_mod_skillsmart'] == 1)){
+?>
+				<div class="fieldIndent2">
+					<div id="workerStats"></div>
+				</div>
+				<script type="text/javascript">
+					var workerData = [
+					<?php
+					foreach ($this->rowy as $row) {
+						if($row['qualification_phrase'] == "Nurse") {
+							echo '[\''.$row['qualification_phrase'].' (Nurse Initiating ART: '.$this->NIMART.')\',\''.$row['CNT'].'\'],';
+						}
+						else {
+							echo '[\''.$row['qualification_phrase'].'\',\''.$row['CNT'].'\'],';
+						}
+					}
+					?>
+					];
+
+					var workerColumnDefs = [
+					{key:"qualification_phrase", label: "Occupational category", sortable:false, resizeable:true},
+					{key:"CNT", label: "Count", sortable:false, resizeable:true}
+					];
+
+					makeDataTable("workerStats", null, workerData, workerColumnDefs);
+				</script>
+				<div class="clear"></div>
+<?php
+	}
+?>
 
 
-
-
-			<div class="fieldIndentNoMargin"><?php tp('Future Trainings');?>: <span class="total"><?php tp('Total');?>: <span id="trainingfuture_total">0</span></span>      </div>
+			<div class="fieldIndentNoMargin"><?php echo t('Future').' '.t('Trainings');?>: <span class="total"><?php tp('Total');?>: <span id="trainingfuture_total">0</span></span>      </div>
 
 			<div class="fieldIndent2">
 
@@ -59,17 +90,17 @@ print ScriptContainer::$instance->renderJSHead();
 			</div>
 
 
-		  <!-- show incomplete trainings -->
+			<!-- show incomplete trainings -->
 			<?php if($this->tableTrainingPast) : ?>
 
-			<div class="fieldIndentNoMargin"><?php tp('Incomplete Trainings that already occurred');?>: <span class="total"><?php tp('Total');?>: <span id="trainingpast_total">0</span></span></div>
+			<div class="fieldIndentNoMargin"><?php echo t('Incomplete').' '.t('Trainings').' '.t('that already occurred');?>: <span class="total"><?php tp('Total');?>: <span id="trainingpast_total">0</span></span></div>
 			<div class="fieldIndent2">
 			<div id="trainingpastTable"></div>
 			  <?php echo $this->tableTrainingPast; ?>
 			</div>
 			<?php endif; ?>
 
-					  <!-- show unapproved trainings -->
+			<!-- show unapproved trainings -->
 			<?php if($this->tableUnapproved) : ?>
 
 			<div class="fieldIndentNoMargin"><?php tp('To be Approved');?></div>
@@ -121,7 +152,7 @@ print ScriptContainer::$instance->renderJSHead();
   <div id="footer"><?php require_once('views/scripts/footer.phtml');?></div>
 
 
-</div>
+		</div>
 
-</body>
+	</body>
 </html>

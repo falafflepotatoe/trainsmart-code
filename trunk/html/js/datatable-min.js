@@ -77,7 +77,7 @@ function makeJSONDataTable(tableDivId, captionText, action, columnDefs) {
 			}
 
 
-	        this.myDataTable = new YAHOO.widget.DataTable(tableDivId, columnDefs,
+	        ITECH[tableDivId] = new YAHOO.widget.DataTable(tableDivId, columnDefs,
 	                this.myDataSource, {caption:captionText, initialRequest:''});
 
 	     };

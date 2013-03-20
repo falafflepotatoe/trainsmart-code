@@ -18,7 +18,7 @@ ob_end_clean();
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title><?php echo $this->translation['Application Name'];?> | <?php echo $pageTitle; ?></title>
+	<title><?php echo $this->translation['Application Name'];?> | <?php echo $this->pageTitle; ?></title>
 	<?php
 	require_once('views/helpers/ScriptContainer.php');
 	print ScriptContainer::$instance->renderCSSHead();
@@ -35,7 +35,7 @@ ob_end_clean();
 			<div id="navAdmin"><?php echo $nav;?></div>
 
 			<div id="contentAdmin">
-				<h1><?php echo $pageTitle; ?></h1>
+				<h1><?php echo $this->pageTitle; ?></h1>
 
 			<table class="settings">
 				<thead>
@@ -56,12 +56,26 @@ ob_end_clean();
 					<td></td>
 					<td><a href="<?php echo $this->base_url;?>/admin/facilities-sponsors" onclick="return submitAdminForm(this);">Add/Edit</a></td>
 				</tr>
+				<tr><td class="fieldTitle">Allow Multiple Facility Sponsors</td>
+					<td></td>
+					<td></td>
+					<td><input type="checkbox" name="check_multi_sponsors" <?php if($this->check_multi_sponsors) echo 'checked'; ?> id="check_multi_sponsors"><label for="check_multi_sponsors">Enabled</label></td>
+				</tr>
+				<tr><td class="fieldTitle">Sponsor Dates</td>
+					<td><input type="checkbox" name="check_display_dates" <?php if($this->check_display_dates) echo 'checked'; ?> id="check_display_dates"></td>
+					<td></td>
+					<td><input type="checkbox" name="check_require_dates" <?php if($this->check_require_dates) echo 'checked'; ?> id="check_require_dates"><label for="check_require_dates">Required</label></td>
+				</tr>
 				<tr><td class="fieldTitle">Comments</td>
 					<td></td>
 					<td><input type="text" name="label_comments" value="<?php echo $this->label_comments; ?>"></td>
 					<td></td>
 				</tr>
-
+				<tr><td class="fieldTitle">Approval Mod</td>
+					<td></td>
+					<td></td>
+					<td><input type="checkbox" name="check_approval_mod" <?php if($this->check_approval_mod) echo 'checked'; ?> id="check_approval_mod"><label for="check_approval_mod">Enabled</label></td>
+				</tr>
 			</table>
 
 			<input type="hidden" name="redirect" value="<?php echo Settings::$COUNTRY_BASE_URL . '/admin/' . $nextUri; ?>">

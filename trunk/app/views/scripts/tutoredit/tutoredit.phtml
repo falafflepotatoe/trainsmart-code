@@ -58,7 +58,7 @@
 			<div id="content">
 				<div id="subcontent">
 					<div id="contentheader">
-						<h2>Edit/View Tutor's Record</h2><br>
+						<h2><?php echo t("Edit/View Tutor's Record"); ?></h2><br>
 					</div>
 					<form  action="" id="peopleadd" method="post">
 						<div class="mainformholder">
@@ -66,31 +66,31 @@
 							<input type="hidden" name="id" value="<?php echo $this->escape($this->id);?>">
 							<input type="hidden" name="tutorid" value="<?php echo $this->escape($this->tutuotid);?>">
 							
-							<p>Personal Information</p>
+							<p><?php echo t('Personal Information'); ?></p>
 		
-		 					<label>Title</label>
+		 					<label><?php echo t('Title'); ?></label>
 							<select name="title" >
-								<option value="0">Select...</option>
+								<option value="0"><?php echo t('Select...'); ?></option>
 							<?php foreach ($this->gettitle as $fetchtitle){ ?>
 								<option value="<?php echo $fetchtitle[id]; ?>"<?php echo ($this->escape($this->selid) == $fetchtitle[id] ? " selected" : "") ?>><?php echo $fetchtitle[title_phrase]; ?></option>
 							<?php } ?>
 							</select>
 		
-							<label>First name</label>
+							<label><?php echo t('First name'); ?></label>
 							<input type="text" name="firstname" value="<?php echo $this->escape($this->firstname);?>">
 						
-							<label>Middle name</label>
+							<label><?php echo t('Middle name'); ?></label>
 							 <input type="text" name="middlename" value="<?php echo $this->escape($this->middlename);?>">
 		
-							<label>Last name</label>
+							<label><?php echo t('Last name'); ?></label>
 							<input type="text" name="lastname" value="<?php echo $this->escape($this->lastname);?>">
 							
-							<label>National Id</label>
+							<label><?php echo t('National Id'); ?></label>
 							<input type="text" name="nationalid" value="<?php echo $this->escape($this->nationalid);?>">
 							
-							<label>Nationality </label>
+							<label><?php echo t('Nationality'); ?></label>
 							<select name="nationality">
-								<option value="0">Select...</option>
+								<option value="0"><?php echo t('Select...'); ?></option>
 <?php
 	foreach ($this->lookupnationalities as $nationality){
 ?>
@@ -100,70 +100,41 @@
 ?>
 							</select>
 		
-							<label>Gender</label>
+							<label><?php echo t('Gender'); ?></label>
 							<select name="gender">
-								<option value="na">Select...</option>
-								<option value="male"<?php echo ($this->escape($this->gender) == "male" ? " selected" : "");?>>Male</option>
-								<option value="female"<?php echo ($this->escape($this->gender) == "female" ? " selected" : "");?>>Female</option>
+								<option value="na"><?php echo t('Select...'); ?></option>
+								<option value="male"<?php echo ($this->escape($this->gender) == "male" ? " selected" : "");?>><?php echo t('Male'); ?></option>
+								<option value="female"<?php echo ($this->escape($this->gender) == "female" ? " selected" : "");?>><?php echo t('Female'); ?></option>
 							</select>
 		
-							<label>Date of birth</label>
+							<label><?php echo t('Date of birth'); ?></label>
 							<input type="text" class="calendarbox" name="dob" id="dob" value="<?php echo $this->escape($this->dob);?>">
 		
 							<div class="pad20 clear"></div>
-							<p style="float:left;font-size:14px;">Permanent Address</p>
+							<p style="float:left;font-size:14px;"><?php echo t('Permanent Address'); ?></p>
 							<div class="pad20 clear"></div>
 		
-							<label id="province_id_lbl"><?php echo (@$this->translation['Region A (Province)']); ?></label>
-<?php
-	renderFilter($this->locations, 1, 'permanent-geo1', $this->escape($this->permanentgeo1), 'permanent-geo2');
-	if ( $this->setting['display_region_b'] ) {
-?>
-							<label id="district_id_lbl"><?php echo (@$this->translation['Region B (Health District)']); ?></label>
-<?php
-	renderFilter($this->locations, 2, 'permanent-geo2', $this->escape($this->permanentgeo2), ($this->setting['display_region_c']?'permanent-geo3':false));
-	}
-	if ( $this->setting['display_region_c'] ) {
-?>
-							<label id="region_c_id_lbl"><?php echo (@$this->translation['Region C (Local Region)']); ?></label>
-<?php
-	renderFilter($this->locations, 3, 'permanent-geo3', $this->escape($this->permanentgeo3), false);
-	}
-?>
+<?php  region_filters_dropdown_ps($this, 'permanent');  ?>
 
-							<label>Address 1</label>
+							<label><?php echo t('Address 1'); ?></label>
 							<input type="text" name="permanent-address1" value="<?php echo $this->escape($this->permanentaddress1);?>">
 		
-							<label>Address 2</label>
+							<label><?php echo t('Address 2'); ?></label>
 							<input type="text" name="permanent-address2" value="<?php echo $this->escape($this->permanentaddress2);?>" >
 							
 						  
-							<label>City</label>
+							<label><?php echo t('City'); ?></label>
 							<input type="text" name="permanent-city" value="<?php echo $this->escape($this->permanentcity);?>" >
 					
-							<label>Postal code / ZIP</label>
+							<label><?php echo t('Postal code / ZIP'); ?></label>
 							<input type="text" name="permanent-postalcode" value="<?php echo $this->escape($this->permanentzip);?>">					
 							
 							<div class="pad20 clear"></div>
-							<p style="float:left;font-size:14px;">Facility Information</p>
+							<p style="float:left;font-size:14px;"><?php echo t('Facility Information'); ?></p>
 							<div class="pad20 clear"></div>
 							
-							<label id="province_id_lbl"><?php echo (@$this->translation['Region A (Province)']); ?></label>
-<?php
-	renderFilter($this->locations, 1, 'local-geo1', $this->escape($this->localgeo1), 'local-geo2');
-	if ( $this->setting['display_region_b'] ) {
-?>
-							<label id="district_id_lbl"><?php echo (@$this->translation['Region B (Health District)']); ?> </label>
-<?php
-	renderFilter($this->locations, 2, 'local-geo2', $this->escape($this->localgeo2), ($this->setting['display_region_c']?'local-geo3':false));
-	}
-	if ( $this->setting['display_region_c'] ) {
-?>
-							<label id="region_c_id_lbl"><?php echo (@$this->translation['Region C (Local Region)']); ?></label>
-<?php
-	renderFilter($this->locations, 3, 'local-geo3', $this->escape($this->localgeo3), false);
-	}
-?>
+<?php  region_filters_dropdown_ps($this, 'local');  ?>
+
 							<label>Facility</label>
 							<select name="facilityid">
 	<?php
@@ -176,7 +147,7 @@
 	<!--						<option value="<?php echo $this->escape($this->facid);?>" selected><?php echo $this->escape($this->facility);?></option>	 -->
 							</select>
 		
-							<label>Cadre</label>
+							<label><?php echo t('Cadre'); ?></label>
 							<select name="cadreid">
 	<?php
 		foreach ($this->getcadre as $cadre){
@@ -187,9 +158,9 @@
 	?>
 							</select>
 							
-							<label>Tutor Since</label>
+							<label><?php echo t('Tutor Since'); ?></label>
 							<select name="tutorsince">
-								<option value="0">Select...</option>
+								<option value="0"><?php echo t('Select...'); ?></option>
 <?php
 for ($i = date("Y"); $i >= (date("Y") - 100); $i--){
 	echo "<option value=\"" . $i . "\"" . ($i == $this->tutorsince ? " selected" : "") . ">" . $i . "</option>\n";
@@ -197,7 +168,7 @@ for ($i = date("Y"); $i >= (date("Y") - 100); $i--){
 ?>
 							</select>
 							
-							<label>Tutor Type</label>
+							<label><?php echo t('Tutor Type'); ?></label>
 							<div style="overflow : auto; float : left; width : 250px; height : 100px; border : 1px solid #CCCCCC; border-radius : 3px; margin-left : 25px; -moz-border-radius : 3px; -webkit-border-radius : 3px; border : 1px solid #85B1DE; background-image : url(/html/images/trainsmart-gradient.gif); background-repeat : repeat-x; margin-bottom : 10px;">
 <?php
 	foreach ($this->lookuptutortypes as $tutortype){
@@ -210,9 +181,9 @@ for ($i = date("Y"); $i >= (date("Y") - 100); $i--){
 ?>
 							</div>
 
-							<label>Tutor at this Inst. Since</label>
+							<label><?php echo t('Tutor at this Inst. Since'); ?></label>
 							<select name="tutortimehere">
-								<option value="0">Select...</option>
+								<option value="0"><?php echo t('Select...'); ?></option>
 <?php
 for ($i = date("Y"); $i >= (date("Y") - 100); $i--){
 	echo "<option value=\"" . $i . "\"" . ($i == $this->tutortimehere ? " selected" : "") . ">" . $i . "</option>\n";
@@ -220,12 +191,12 @@ for ($i = date("Y"); $i >= (date("Y") - 100); $i--){
 ?>
 							</select>
 							
-							<label>Degree Institution</label>
+							<label><?php echo t('Degree Institution'); ?></label>
 							<input type="text" name="degreeinst" value="<?php echo $this->escape($this->degreeinst);?>">
 							
-							<label>Degree</label>
+							<label><?php echo t('Degree'); ?></label>
 							<select name="degree" class="comboeditable">
-								<option value="0">Select...</option>
+								<option value="0"><?php echo t('Select...'); ?></option>
 <?php
 	foreach ($this->lookupdegrees as $degree){
 ?>
@@ -235,10 +206,10 @@ for ($i = date("Y"); $i >= (date("Y") - 100); $i--){
 ?>
 							</select>
 							
-							<label>Year</label>
+							<label><?php echo t('Year'); ?></label>
 							<input type="text" name="degreeyear" value="<?php echo $this->escape($this->degreeyear);?>">
 							
-							<label>Languages Spoken</label>
+							<label><?php echo t('Languages Spoken'); ?></label>
 							<div style="overflow : auto; float : left; width : 250px; height : 100px; border : 1px solid #CCCCCC; border-radius : 3px; margin-left : 25px; -moz-border-radius : 3px; -webkit-border-radius : 3px; border : 1px solid #85B1DE; background-image : url(/html/images/trainsmart-gradient.gif); background-repeat : repeat-x; margin-bottom : 10px;">
 <?php
 	foreach ($this->tutorlanguages as $language){
@@ -255,70 +226,84 @@ for ($i = date("Y"); $i >= (date("Y") - 100); $i--){
 			
 					<div class="clear pad50"></div>
 					<div style="clear width :100%;">
-						<p style="">Students Advised</p>
+						<p style=""><?php echo t('Students Advised'); ?></p>
 						<table cellpadding="0" cellspacing="0" border="0" class="display tablegrid" id="" style="width:100%">
 							<thead>
 								<tr>
-									<th>Student Id</th>
-									<th>Student Name</th>
-									<th>Year of Graduation</th>
-									<th>Cohort</th>
+									<th><?php echo t('Student Id'); ?></th>
+									<th><?php echo t('Student Name'); ?></th>
+									<th><?php echo t('Year of Graduation'); ?></th>
+									<th><?php echo t('Cohort'); ?></th>
 								</tr>
 							</thead>
 							<tbody>
-<!--
-								<tr class="GradeA">
-									<td>123</td>
-									<td class="">John Doe</td>
-									<td class="">M</td>
-									<td class="">Institution</td>
-								</tr>
--->
+								<?php
+									foreach ($this->students as $student){
+									?>
+									<tr class="GradeA">
+										<td><?php echo $student['id'] ?></td>
+										<td class=""><?php echo $student['first_name'] . " " . $student['last_name'] ?></td>
+										<td class="">-</td>
+										<td class="">-</td>
+									</tr>
+									<?php
+								}
+								?>
 							</tbody>
 						</table>
 					</div>
 	
 					<div class="pad50"></div>
 					<div style="width : 100%;">
-						<p style="">Courses Taught</p>	
+						<p style=""><?php echo t('Courses Taught'); ?></p>	
 						<table cellpadding="0" cellspacing="0" border="0" class="display tablegrid" id="" style="width:100%;">
 							<thead>
 								<tr>
-									<th>Course Id</th>
-									<th>Course Name</th>
-									<th>Date</th>
-									<th>Cohort</th>
+									<th><?php echo t('Course Id'); ?></th>
+									<th><?php echo t('Course Name'); ?></th>
+									<th><?php echo t('Date'); ?></th>
+									<th><?php echo t('Cohort'); ?></th>
 								</tr>
 							</thead>
 							<tbody>
-<!--
+								<?php
+									foreach ($this->classes as $class){
+									?>
+									<tr class="GradeA">
+										<td><?php echo $class['coursetopic'] ?></td>
+										<td class=""><?php echo $class['coursetypeid']; ?></td>
+										<td class=""><?php echo $class['startdate']; ?> - <?php echo $class['enddate']; ?></td>
+										<td class=""><?php echo $class['cohortname']; ?></td>
+									</tr>
+									<?php
+								}
+								?>
+								<!--
 								<tr class="GradeA">
 									<td>123</td>
 									<td class="">John Doe</td>
 									<td class="">M</td>
 									<td class="">Institution</td>
 								</tr>
--->
-							
-							
+								-->
 							</tbody>
 						</table>
 					</div>
 					<div class="mainformholder">
 							<div class="clear"></div>
-							<p>Other</p>
+							<p><?php echo t('Other'); ?></p>
 
-							<label style="text-align : left;">Positions held (committees, etc.)</label>
+							<label style="text-align : left;"><?php echo t('Positions held (committees, etc.)'); ?></label>
 							<textarea name="position" ><?php echo $this->escape($this->positionsheld);?></textarea>
 							
 							<div class="clear"></div>
 
-							<label style="text-align : left;">Comments</label>
+							<label style="text-align : left;"><?php echo t('Comments'); ?></label>
 							<textarea name="comments" ><?php echo $this->escape($this->comments);?></textarea>
 							
 							<div class="rightdiv">
 								<div class="pad20"></div>
-								<input type="submit" name="update" value="Update Tutor &raquo;" class="tsbutton green large">
+								<input type="submit" name="update" value="<?php echo t('Update Tutor'); ?> &raquo;" class="tsbutton green large">
 							</div>
 							<div class="clear"></div>
 					</div>

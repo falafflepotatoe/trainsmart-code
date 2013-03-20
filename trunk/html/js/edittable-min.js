@@ -28,8 +28,8 @@ function makeEditTable(labelAdd, tableData, columnDefs, noDelete, noEdit) {
           autoTabOnSubmit: false
         }
         
-		//for some reason, this function never return, so set our global table objects here
-       ITECH[ITECH.curtablecontainer] = this;
+		   //for some reason, this function never return, so set our global table objects here
+       //ITECH.curtablecontainer = this;
 
         // Dynamic edit links onClick event handled here
         this.onTableClick = function(type, args, me) {

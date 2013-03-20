@@ -1,5 +1,6 @@
 <?php 
 require_once('ITechTable.php');
+require_once('Helper.php');
 
 class CohortSearch extends ITechTable{
 	//protected $_primary = 'id';

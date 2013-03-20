@@ -36,10 +36,7 @@ class EvaluationController extends ITechController {
 
 	protected function _fetchQuestions($evaluation_id = false) {
 		
-		if ( $evaluation_id )
-		  $id = $evaluation_id;
-		else 
-		  $id = $this->getSanParam ( 'id' );
+		$id = $evaluation_id ? $evaluation_id : $this->getSanParam ( 'id' );
 		
 		if ($id) {
 			$ev = new Evaluation ( );
@@ -73,6 +70,7 @@ class EvaluationController extends ITechController {
 		$this->view->assign ( 'qid', $qid );
 
 	}
+
 	public function dataAction() {
 		$request = $this->getRequest ();
 		$id = $this->getSanParam ( 'id' );
@@ -111,6 +109,8 @@ class EvaluationController extends ITechController {
 					$qr_table = new ITechTable ( array ('name' => 'evaluation_response' ) );
 					$qr_row = $qr_table->createRow ();
 					$qr_row->evaluation_to_training_id = $id;
+					$qr_row->trainer_person_id = $this->getSanParam ( 'trainer_id' ) ? $this->getSanParam( 'trainer_id' ) : null;
+
 					$qr_id = $qr_row->save ();
 
 					//save question rows
@@ -141,9 +141,14 @@ class EvaluationController extends ITechController {
 		$this->view->assign ( 'qtype', $qtype );
 		$this->view->assign ( 'qid', $qid );
 
+		// list of trainers
+		require_once( 'models/table/TrainingToTrainer.php' );
+		$this->view->assign('trainers', TrainingToTrainer::getTrainers ( $training_id )->toArray () );
 	}
 
 	public function addCopyAction() {
+		if(! $this->hasACL('edit_evaluations') )
+			$this->doNoAccessError();
 
 		$request = $this->getRequest ();
 
@@ -155,16 +160,16 @@ class EvaluationController extends ITechController {
 			//validate
 			$status = ValidationContainer::instance ();
 			$status->checkRequired ( $this, 'title', t ( 'Title' ) );
-      foreach($qtext as $i=>$t) {
-      	if ( $t and !$qtype[$i] ) {
-      		$status->addError('qtype', t('You must choose a question type for each question.'));
-      		break;
-       	}
-        if ( !$t and $qtype[$i] ) {
-          $status->addError('qtype', t('You must enter question text for each question.'));
-          break;
-        }
-      }
+			foreach($qtext as $i=>$t) {
+				if ( $t and !$qtype[$i] ) {
+					$status->addError('qtype', t('You must choose a question type for each question.'));
+					break;
+				}
+				if ( !$t and $qtype[$i] ) {
+					$status->addError('qtype', t('You must enter question text for each question.'));
+					break;
+				}
+			}
 			
 			if ($status->hasError ()) {
 				$status->setStatusMessage ( t ( 'The evaluation could not be saved.' ) );
@@ -189,7 +194,81 @@ class EvaluationController extends ITechController {
 		$this->view->assign ( 'title', $title );
 		$this->view->assign ( 'qtext', $qtext );
 		$this->view->assign ( 'qtype', $qtype );
+	}
 
+	public function editAction() {
+		if(! $this->hasACL('edit_evaluations') )
+			$this->doNoAccessError();
+
+		$request = $this->getRequest ();
+
+		$qid =   $this->getSanParam ( 'qid' );
+		$qtext = $this->getSanParam ( 'qtext' );
+		$qtype = $this->getSanParam ( 'qtype' );
+		$title = $this->getSanParam ( 'title' );
+
+		if ($request->isPost ()) {
+			//validate
+			$status = ValidationContainer::instance ();
+			$status->checkRequired ( $this, 'title', t ( 'Title' ) );
+			foreach($qtext as $i=>$t) {
+				if ( $t and !$qtype[$i] ) {
+					$status->addError('qtype', t('You must choose a question type for each question.'));
+					break;
+				}
+				if ( !$t and $qtype[$i] ) {
+					$status->addError('qtype', t('You must enter question text for each question.'));
+					break;
+				}
+			}
+			
+			if ($status->hasError ()) {
+				$status->setStatusMessage ( t ( 'The evaluation could not be saved.' ) );
+			} else {
+				$ev = new Evaluation ( );
+				$ev_row = $ev->find($this->getSanParam('id'))->current();
+				$ev_row->title = $title;
+
+				if ($id = $ev_row->save ()) {
+					$ev->updateQuestions ( $id, $qtext, $qtype, $qid ) or $status->setStatusMessage(t('Error saving questions.'));
+					$status->setStatusMessage ( t ( 'The evaluation was saved.' ) );
+					$this->_redirect ( 'evaluation/browse' );
+				} else {
+					$status->setStatusMessage ( t ( 'The evaluation could not be saved.' ) );
+				}
+			}
+
+		} else if ($id = $this->getSanParam ( 'id' )) {
+			list ( $title, $qtext, $qtype, $qid ) = $this->_fetchQuestions ();
+		}
+
+		$this->view->assign ( 'title', $title );
+		$this->view->assign ( 'qid',   $qid );
+		$this->view->assign ( 'qtext', $qtext );
+		$this->view->assign ( 'qtype', $qtype );
+	}
+
+	public function deleteAction() {
+		if(! $this->hasACL('edit_evaluations') )
+			$this->doNoAccessError();
+		$id = $this->getSanParam('id');
+		$status = ValidationContainer::instance ();
+		if (! $this->hasACL('edit_evaluations') && ! $this->hasACL('edit_country_options')){
+			$this->doNoAccessError();
+			return;
+		}
+		
+		try {
+			$row = new Evaluation();
+			$row = $row->find( $id )->current();
+			$row->delete();
+			$status->setStatusMessage(t('This evaluation has been deleted.'));
+		}
+		catch(Exception $e) {
+			$status->setStatusMessage(t('This evaluation could not be deleted.'));
+		}
+		// done
+		$this->_redirect('evaluation/browse');
 	}
 
 	public function assignEvaluationAction() {
@@ -201,9 +280,21 @@ class EvaluationController extends ITechController {
 		$row = $rows->current ();
 		$this->view->assign ( 'evaluation', $row );
 
+		// restricted access?? only show trainings we have the ACL to view
+		require_once('views/helpers/TrainingViewHelper.php');
+		$orgWhere = '';
+		$org_allowed_ids = allowed_organizer_access($this);
+		if ($org_allowed_ids) { // doesnt have acl 'training_organizer_option_all'
+			$org_allowed_ids = implode(',', $org_allowed_ids);
+			$orgWhere = " training_organizer_option_id in ($org_allowed_ids) ";
+		}
+		// restricted access?? only show organizers that belong to this site if its a multi org site
+		$site_orgs = allowed_organizer_in_this_site($this); // for sites to host multiple training organizers on one domain
+		$allowedWhereClause .= $site_orgs ? " AND training_organizer_option_id in ($site_orgs) " : "";
+
 		require_once 'models/table/Training.php';
 		$tableObj = new Training ( );
-		$trainings = $tableObj->getTrainings();
+		$trainings = $tableObj->getTrainings($orgWhere);
 		$assigned = $evaluation->fetchAssignments($id);
 
 		foreach ( $trainings as $k => $r ) {
@@ -222,18 +313,16 @@ class EvaluationController extends ITechController {
 			require_once('models/table/MultiOptionList.php');
 			MultiOptionList::updateOptions('evaluation_to_training', 'training', 'evaluation_id', $id, 'training_id', $adjusted);
 
-			$_SESSION['status'] = ( 'The trainings have been assigned.' );
-			$status->setStatusMessage ( t ( 'The trainings have been assigned.' ) );
+			$_SESSION['status'] = t('The').' '.t('Trainings').' '.t('have been assigned.');
+			$status->setStatusMessage ( t('The').' '.t('Trainings').' '.t('have been assigned.') );
 
 		      $status->setRedirect ( '/evaluation/browse' );
 
 			$this->sendData ( $status );
-
-
 		}
 	}
 
-		public function assignTrainingAction() {
+	public function assignTrainingAction() {
 		$id = $this->getSanParam ( 'id' );
 		$this->view->assign ( 'id', $id );
 
@@ -249,10 +338,11 @@ class EvaluationController extends ITechController {
 		$this->view->assign ( 'evaluations', $evaluations );
 
 		//find currently selected
-     		$evalTable = new OptionList(array('name' => 'evaluation_to_training'));
-    	       $select = $evalTable->select()->from('evaluation_to_training',array('evaluation_id'))->where('training_id = '.$id);
-    	       $row = $evalTable->fetchRow($select);
-    	       if ( $row ) $this->view->assign('evaluation_id',$row->evaluation_id);
+ 		$evalTable = new OptionList(array('name' => 'evaluation_to_training'));
+		$select = $evalTable->select()->from('evaluation_to_training',array('evaluation_id'))->where('training_id = '.$id);
+		$row = $evalTable->fetchRow($select);
+		if ( $row )
+			$this->view->assign('evaluation_id',$row->evaluation_id);
 
 		$request = $this->getRequest ();
 		if ($request->isPost ()) {

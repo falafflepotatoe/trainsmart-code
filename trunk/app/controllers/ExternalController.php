@@ -43,7 +43,7 @@ class ExternalController extends ITechController
 			$status->checkRequired($this, 'title',$this->tr('Title'));
 			$training_start_date = (@$this->getSanParam('start-year')).'-'.(@$this->getSanParam('start-month')).'-'.(@$this->getSanParam('start-day'));
 			if ( $training_start_date !== '--' and $training_start_date !== '0000-00-00')
-				$status->isValidDate($this, 'start-day' , t('Training start'), $training_start_date );
+				$status->isValidDate($this, 'start-day' , t('Training').' '.t('start'), $training_start_date );
 	 		
 			if ( $status->hasError() ) {
      			$status->setStatusMessage(t('The person could not be saved.'));

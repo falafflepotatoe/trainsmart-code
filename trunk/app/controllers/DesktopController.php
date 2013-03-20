@@ -37,12 +37,20 @@ class DesktopController extends ITechController {
 	
 	}
 	
+	public function downloadDotNetAction() {
+		$this->init();
+		$go = $this->getSanParam('go');
+		if ($go == 1) {
+			header("Location: " . Settings::$COUNTRY_BASE_URL . "/dotnetfx.zip");
+			exit;
+		}
+	}
+
 	// Sean Smith 10/20/11: Package and download actions split out to separate "actions"
 	// for slow net link users. Server set up to cron this action every hour, so that users
 	// only have to download the app.
 	public function createAction() {
-
-		ini_set ( "memory_limit", "256M" );
+		//ini_set ( "memory_limit", "256M" );
 		
 		// Sean Smith: 10/26/2011 - Reworked app packaging to handle multiple 
 		// sites calling this function at once
@@ -243,7 +251,7 @@ class DesktopController extends ITechController {
 		$this->init();
 		
 		try {
-      if ($fd = fopen($this->package_dir.'/'.$this->zip_name, 'rb')) {
+      if ($fd = @fopen($this->package_dir.'/'.$this->zip_name, 'rb')) {
 				// Sean Smith: 10/26/2011 - Had to rework. Wasn't working in production. Super paranoid mode on.
 				ini_set('magic_quotes_runtime', 0);
 		    ob_end_clean();
@@ -263,7 +271,7 @@ class DesktopController extends ITechController {
         }
         fclose($fd);
       } else {
-      	$this->view->assign ( 'error_message', 'Could not open file '.$this->package_dir.'/'.$this->zip_name .' +. ' );
+      	$this->view->assign ( 'error_message', 'Could not open file '.$this->package_dir.'/'.$this->zip_name .'. ' );
       	return;
       }
       exit(); 

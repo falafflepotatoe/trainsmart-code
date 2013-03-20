@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <title><?php echo $this->translation['Application Name'];?> | <?php tp('View Training Location');?></title>
+  <title><?php echo $this->translation['Application Name'];?> | <?php echo t('View').' '.t('Training').' '.t('Location');?></title>
 <?php
 require_once('views/helpers/Location.php');
 require_once('views/helpers/ScriptContainer.php');
@@ -15,33 +15,17 @@ print ScriptContainer::$instance->renderJSHead();
   <div id="header"><?php require_once('views/scripts/header.phtml');?></div>
   <div id="content">
 
-		<h1><?php tp('View Training Location');?></h1>
+		<h1><?php echo t('View').' '.t('Training').' '.t('Location');?></h1>
 
 		<div class="fieldLabel">
 		<?php tp('Location');?>
 		</div>
 		<div class="fieldInput">
 
-    <select name="training_location_id" id="select_training_location" onchange="window.location = '<?php echo $this->base_url;?>/facility/view-location/id/' + this.value;" <?php echo $this->viewonly; ?>>
-    <option value="">&mdash; <?php tp('select');?> &mdash;</option>
     <?php
-    foreach($this->tlocations as $r) {
-
-      // province_name
-      if(!isset($lastProv) || $lastProv != $r['province_name']) {
-        if(!isset($lastProv)) echo '</optgroup>';
-        echo '<optgroup label="'.$r['province_name'].'">';
-        $lastProv = $r['province_name'];
-      }
-
-      echo '<option value="'.$r['id'].'"'.(($this->id == $r['id']) ? ' selected' : '').'>';
-      if($this->setting['display_region_b']  and $r['district_name'] ) echo $r['district_name'] . ' &mdash; ';
-      if($this->setting['display_region_c']  and $r['region_c_name'] ) echo $r['region_c_name'] . ' &mdash; ';
-      echo $r['training_location_name'];
-    }
+			$jsnippet = "window.location = '$this->base_url/facility/view-location/id/' + this.value;";
+			training_location_dropdown( $this->tlocations, $this->id, 'name="training_location_id" id="select_training_location" onchange="'.$jsnippet.'"'.space.$this->viewonly);
     ?>
-    <option value="0"><?php tp('unknown');?>
-    </select>
   </div>
 
     <?php if($this->id) : ?>

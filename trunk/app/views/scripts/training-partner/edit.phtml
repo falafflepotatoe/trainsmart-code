@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <title><?php echo $this->translation['Application Name'];?> | <?php tp('Edit Training Partner');?></title>
+  <title><?php echo $this->translation['Application Name'];?> | <?php echo t('Edit').' '.t('Training').' '.t('Partner');?></title>
 <?php
 require_once('views/helpers/ScriptContainer.php');
 print ScriptContainer::$instance->renderCSSHead();
@@ -17,9 +17,9 @@ print ScriptContainer::$instance->renderJSHead();
 		<h1><?php 
 
 		if ($this->mode == 'add')
-			tp('Add new Training Partner');
+			echo t('Add').' '.t('new').' '.t('Training').' '.t('Partner');
 		else
-			tp('Edit Training Partner');
+			echo t('Edit').' '.t('Training').' '.t('Partner');
 		?></h1>
 
 		<form id="edit" action="<?php echo $this->base_url; ?>/training-partner/edit" method="post">
@@ -30,7 +30,7 @@ print ScriptContainer::$instance->renderJSHead();
 		    <?php echo $this->dropDownOrg; ?>
 		  </div>
 		  
-		<div class="fieldLabel" id="partner_subpartner_lbl"><?php tp('Training Sub Partner');?></div>
+		<div class="fieldLabel" id="partner_subpartner_lbl"><?php echo t('Training').' '.t('Sub Partner');?></div>
 		  <div class="fieldInput"><input type="text" name="partner_subpartner" id="partner_subpartner" value="<?php echo $this->partner['subpartner']; ?>" size="40" maxlength="64"/></div>
 		
 		<div class="fieldLabel" id="partner_mechanism_id_lbl"><?php tp('Mechanism ID');?></div>

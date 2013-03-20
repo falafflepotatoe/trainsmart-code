@@ -178,6 +178,22 @@ class MultiOptionList extends ITechTable
    		 }
   }
 
+  	// get a array of option id's attached to a record
+    // example: MultiOptionList::getLinkedOptions($id, 'training_id', 'training_to_training_topic', 'training_topic_option_id')
+    // returns: [1, 4, 3, 11]
+	public function getLinkedOptions($id, $idCol, $table, $desiredCol){
+		try {
+			
+			$db = Zend_Db_Table_Abstract::getDefaultAdapter();
+			$sel = $db->select(array($desiredCol))->from($table)->where("$idCol = ?", $id);
+			$res = $db->fetchCol($sel);
+			return $res ? $res : null;
+		} catch (Exception $e) {
+			//echo $e->getMessage();
+			return null;
+		}
+	}
+
 }
 
 ?>

@@ -1,20 +1,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<title><?php echo $this->translation['Application Name'];?> | <?php tp('Training');?> <?php echo ($this->mode != 'search'? t('Reports'):t('Search') );  ?></title>
+		<title><?php echo $this->translation['Application Name'];?> | <?php echo ($this->identity->locale == 'nl_NL.UTF-8' ? t('Training Search') : ($this->mode != 'search'? t('Training').' '.t('Reports'):t('Training').' '.t('Search') )); ?></title>
 		<?php
 		require_once('views/helpers/Location.php');
 		require_once('views/helpers/DropDown.php');
+		require_once('views/helpers/TrainingViewHelper.php');
 		require_once('views/helpers/ScriptContainer.php');
 		print ScriptContainer::$instance->renderCSSHead();
 		print ScriptContainer::$instance->renderJSHead();
 
-		$checkLabel = t('show');
-
-		if ( $this->mode == 'count' ) {
-			$checkLabel = t('group');
-		}
-
+		$checkLabel = ( $this->mode == 'count' ) ? t('group') : t('show');
 
 		?>
 
@@ -32,46 +28,50 @@
 		<div id="pageHolder">
 
 			<div id="header"><?php require_once('views/scripts/header.phtml');?></div>
+			
 			<div id="content">
+				<h1><?php echo ($this->identity->locale == 'nl_NL.UTF-8' ? t('Training Search') : ($this->mode != 'search'? t('Training').' '.t('Reports'):t('Training').' '.t('Search') ));  ?></h1>
 
-				<h1><?php tp('Training');?> <?php echo ($this->mode != 'search'? t('Reports'):t('Search') );  ?></h1>
 				<?php if ($this->mode != 'search' ) { ?>
-				<div class="fieldLabel" style="width: auto;"><?php tp('Select training report');?></div>
+				<div class="fieldLabel" style="width: auto;"><?php echo t('Select').' '.t('training').' '.t('report');?></div>
 				<select id="training" name="training" onchange="gotoPage('training');">
 					<option value="">--<?php tp('choose');?>--</option>
-					<option value="/reports/trainings" <?php if ($this->mode == 'id') echo 'selected="selected"';?>><?php tp('Trainings by Name');?></option>
-					<option value="/reports/trainingByParticipants" <?php if ($this->mode == 'count') echo 'selected="selected"';?>><?php tp('Trainings by Participant Count');?></option>
+					<option value="/reports/trainings" <?php if ($this->mode == 'id') echo 'selected="selected"';?>><?php echo t('Trainings').' '.t('by').' '.t('Name');?></option>
+					<option value="/reports/trainingByTitle" <?php if ($this->expand_lists) echo 'selected="selected"';?>><?php echo t('Trainings').' '.t('by').' '.t('Multiple Names');?></option>
+					<option value="/reports/trainingByParticipants" <?php if ($this->mode == 'count') echo 'selected="selected"';?>><?php echo t('Trainings').' '.t('by').' '.t('Participant Count');?></option>
 					<?php if ($this->setting['module_unknown_participants_enabled']) { ?>
-					<option value="/reports/trainingUnknown" <?php if ($this->mode == 'unknown') echo 'selected="selected"';?>><?php tp('Trainings with Unknown Participants');?></option>
+					<option value="/reports/trainingUnknown" <?php if ($this->mode == 'unknown') echo 'selected="selected"';?>><?php echo t('Trainings').' '.t('with').' '.t('Unknown Participants');?></option>
+					<option value="/reports/trainingsMissingInformation" <?php if ($this->missing_info) echo 'selected="selected"';?>><?php echo t('Trainings').' '.t('with').' '.t('missing information');?></option>
 					<?php } ?>
 				</select>
 				<?php } ?>
-				<form action="" method="get">
-					<fieldset <?php if( $checkLabel) echo 'id="criteria"'; ?> ><legend><?php tp('Select Criteria');?></legend>
+				<form id="trainingreport" action="" method="get">
+					<?php if( $this->missing_info == '1') { ?>
+					<fieldset ><legend><?php tp('Return trainings with NULL values in these fields');?></legend>
+						<div class="fieldLabel" id="searchflds_lbl"><?php echo t('Report on Missing Data Fields'); ?></div>
+						<div class="leftBorder autoHeight">
+							<select id="searchflds" name="searchflds[]" class="fixed" multiple="multiple" size="20">
+							<?php
+								echo '<option value="">--' . t ( 'All' ) . '--</option>\n';
+
+								foreach ($this->flds as $tr => $value) {
+									$sel = ( is_array($this->criteria['searchflds']) && array_search($value, $this->criteria['searchflds']) !== false ) ? ' selected' : '';
+									echo '<option value="'.$value.'"'.$sel.'>'.t( $tr ).'</option>'.PHP_EOL;
+								}
+							?>
+							</select>
+						<p>&nbsp;</p>
+					</div>
+					</fieldset>
+					<?php } ?>
+					<fieldset <?php if( $checkLabel) echo 'id="criteria"'; if ($this->expand_lists) echo ' class="multiselect_report"'; ?> ><legend><?php tp('Select Criteria');?></legend>
 						<div id="dividers" >
 							<?php if ($checkLabel) { ?>
 							<div class="fieldLabel" ></div>
 							<div class="fieldInput criteria-header"><div  class="criteria-label" ><?php echo $checkLabel;?></div><div  class="criteria-label" style="padding-left: 20px;"><?php tp('filter');?></div></div>
 							<?php } ?>
-							<div class="fieldLabel" id="province_id_lbl"><?php echo (@$this->translation['Region A (Province)']); ?> (<?php tp('training location');?>)</div>
-							<div class="fieldInput"><div class="leftBorderPad"><input type="checkbox" name="showProvince"    <?php  if ($this->criteria['showProvince']) echo 'checked="checked"';?> /></div><label for="showProvince" ></label>
-								<div  class="leftBorder autoHeight">
-									<?php renderFilter($this->locations, 1, 'province_id', $this->criteria['province_id'], 'district_id', true); ?>
-								<p>&nbsp;</p></div></div>
-									<?php if ( $this->setting['display_region_b'] ) { ?>
-									<div class="fieldLabel" id="district_id_lbl"><?php echo (@$this->translation['Region B (Health District)']); ?> (<?php tp('training location');?>)</div>
-									<div class="fieldInput"><div  class="leftBorderPad"><input type="checkbox" name="showDistrict"   <?php  if ($this->criteria['showDistrict']) echo 'checked="checked"';?> /></div><label for="showDistrict" ></label>
 
-									<div  class="leftBorder autoHeight"><?php renderFilter($this->locations, 2, 'district_id', $this->criteria['district_id'], ($this->setting['display_region_c']?'region_c_id':false), true); ?><p>&nbsp;</p></div></div>
-										<?php } ?>
-										<?php if ( $this->setting['display_region_c'] ) { ?>
-										<div class="fieldLabel" id="region_c_lbl"><?php echo (@$this->translation['Region C (Local Region)']); ?> (<?php tp('training location');?>)</div>
-										<div class="fieldInput"><div  class="leftBorderPad"><input type="checkbox" name="showRegionC"   <?php  if ($this->criteria['showRegionC']) echo 'checked="checked"';?> /></div><label for="showRegionC" ></label>
-
-										<div  class="leftBorder autoHeight"><?php renderFilter($this->locations, 3, 'region_c_id', $this->criteria['region_c_id'], false, true); ?><p>&nbsp;</p></div></div>
-											<?php } ?>
-
-
+											<?php region_filters_dropdown($this, $this->locations, $this->criteria, true, true); ?>
 											<?php
 											echo DropDown::render_report_filter('training_category', 'showCategory', @$this->translation['Training Category'], $this->category, 'training_category_phrase', @$this->criteria['training_category_id'], $this->criteria['showCategory']);
 
@@ -79,12 +79,13 @@
 
 											<div class="fieldLabel" id="training_title_option_id_lbl"><?php echo (@$this->translation['Training Name']); ?></div>
 											<div class="fieldInput"><div class="leftBorderPad" ><input type="checkbox" name="showTrainingTitle"  <?php  if ($this->criteria['showTrainingTitle']) echo 'checked="checked"';?> /></div><label for="showTrainingTitle" ></label>
-												<div  class="leftBorder"><select class="fixed" id="select_training_title_option" name="training_category_and_title_id" >
+												<div  class="leftBorder"><select <?php echo ($this->expand_lists?'multiple="multiple" size="10"':'class="fixed"'); ?> id="select_training_title_option" name="training_category_and_title_id" >
 													<option value="">--<?php tp('All');?>--</option>
 													<?php
 													$lastId = NULL;
 													foreach ( $this->categoryTitle as $vals ) {
 														$isselected = ($vals['id'] === @$this->criteria['training_title_option_id']) ? ' selected="selected"' : '';
+														if ('_'.$vals['id'] == $this->criteria['training_title_option_id']) $isselected = 'selected="selected"'; // bugfix
 
 														// Also list empty prefix to allow all titles to be displayed
 														if($vals['training_category_option_id'] && $vals['id'] != $lastId) {
@@ -107,31 +108,16 @@
 												</script>
 
 
-												<div class="fieldLabel" id="training_location_id_lbl"><?php tp('Training location');?></div>
+												<div class="fieldLabel" id="training_location_id_lbl"><?php echo t('Training').' '.t('location');?></div>
 												<div class="fieldInput"><div  class="leftBorderPad"><input type="checkbox" name="showLocation"  <?php  if ($this->criteria['showLocation']) echo 'checked="checked"';?> /></div><label for="showLocation" ></label>
 
-													<div  class="leftBorder">    <select name="training_location_id" id="select_training_location" >
-														<option value="">&mdash; <?php tp('select');?> &mdash;</option>
+													<div  class="leftBorder"> 
 														<?php
-														foreach($this->tlocations as $r) {
-
-															// province_name
-															if(!isset($lastProv) || $lastProv != $r['province_name']) {
-																if (isset($lastProv)) echo '</optgroup>';
-																echo '<optgroup label="'.$r['province_name'].'">';
-																$lastProv = $r['province_name'];
-
-															}
-
-															echo '<option value="'.$r['id'].'"'.((@$this->criteria['training_location_id'] == $r['id']) ? ' selected="selected"' : '').'>';
-															echo $this->truncate(($this->setting['display_region_b']  and $r['district_name']) ? $r['district_name'] . ' &mdash; ' .$r['training_location_name'] : $r['training_location_name'] ).'</option>';
-														}
-													?></optgroup>
-													<option value="0"><?php tp('unknown');?></option>
-												</select>
+			training_location_dropdown( $this->tlocations, @$this->criteria['training_location_id'], 'name="training_location_id" id="select_training_location"');
+		?>
 											</div></div>
 											<?php
-											echo DropDown::render_report_filter('training_organizer','showOrganizer',(@$this->translation['Training Organizer']),$this->organizers,'training_organizer_phrase',$this->criteria['training_organizer_id'],$this->criteria['showOrganizer']);
+											echo DropDown::render_report_filter('training_organizer','showOrganizer',(@$this->translation['Training Organizer']),$this->organizers,'training_organizer_phrase',$this->criteria['training_organizer_id'],$this->criteria['showOrganizer'],false,false,($this->expand_lists?true:false));
 											?>
 											<?php if ( ! isset($this->setting['display_training_partner']) ) { $this->setting['display_training_partner'] = false; } ?>
 											<?php if ($this->setting['display_training_partner'] ) { ?>
@@ -151,13 +137,10 @@
 
 											<?php
 											if ( $this->setting['display_training_topic'] ) {
-												echo DropDown::render_report_filter('training_topic', 'showTopic', @$this->translation['Training Topic'], $this->topics, 'training_topic_phrase', @$this->criteria['training_topic_id'], $this->criteria['showTopic'],false, true);
+												echo DropDown::render_report_filter('training_topic', 'showTopic', @$this->translation['Training Topic'], $this->topics, 'training_topic_phrase', @$this->criteria['training_topic_id'], $this->criteria['showTopic'],false, true,($this->expand_lists?true:false));
 											}
 
 											echo DropDown::render_report_filter('training_level', 'showLevel', @$this->translation['Training Level'], $this->levels, 'training_level_phrase', @$this->criteria['training_level_id'], $this->criteria['showLevel']);
-
-#var_dump ($this);
-
 											echo DropDown::render_report_filter('training_pepfar', 'showPepfar', @$this->translation['PEPFAR Category'], $this->pepfars, 'pepfar_category_phrase', @$this->criteria['training_pepfar_id'], $this->criteria['showPepfar']);
 
 											if ( $this->setting['display_training_method'] && $this->mode != 'search') {
@@ -191,10 +174,14 @@
 												<?php } ?>
 
 												<?php if ( $this->setting['display_training_refresher'] && $this->mode != 'search') { ?>
+											<?php if ( $this->setting['multi_opt_refresher_course'] && $this->refresherArray ) { ?>
+											<?php echo DropDown::render_report_filter('training_refresher', 'showPepfar', @$this->translation['Refresher Course'], $this->refresherArray, 'refresher_phrase_option', @$this->criteria['refresher_id'], $this->criteria['showRefresher']); ?>
+											<?php } else { ?>
 												<div class="fieldLabel" id="is_refresher_lbl"><?php echo (@$this->translation['Refresher Course']); ?></div>
 												<div class="fieldInput"><div  class="leftBorderPad"><input type="checkbox" name="showRefresher"   <?php  if ($this->criteria['showRefresher']) echo 'checked="checked"';?> /></div><label for="showRefresher" ></label>
 												<div class="leftBorder"></div></div>
 													<?php } ?>
+											<?php } ?>
 
 													<?php if ( $this->setting['display_training_got_curric'] && $this->mode != 'search') {
 														echo DropDown::render_report_filter('training_got_curric', 'showGotCurric', @$this->translation['GOT Curriculum'], $this->gotcurric, 'training_got_curriculum_phrase', @$this->criteria['training_got_curric_id'], $this->criteria['showGotCurric']);
@@ -227,6 +214,75 @@
 																?>
 															</select></div></div>
 															<?php } ?>
+														<?php if ( $this->setting['display_training_custom2'] ) { ?>
+														<div class="fieldLabel" id="training_custom2_lbl"><?php print $this->translation['Training Custom 2']; ?></div>
+														<div class="fieldInput"><div  class="leftBorderPad" ><input type="checkbox" name="showCustom2"   <?php  if ($this->criteria['showCustom2']) echo 'CHECKED';?> /></div><label for="showCustom2" ></label>
+															<div  class="leftBorder">
+																<select id="custom_2_id" name="custom_2_id" >
+																	<option value="">--<?php tp('All');?>--</option>
+																	<?php
+																	foreach ( $this->custom2 as $vals ) {
+																		echo '<option value="'.$vals['id'].'" '.((@$this->criteria['custom_2_id']) == $vals['id']? 'SELECTED="selected"':'').' >'.($this->truncate($vals['custom2_phrase'],45)).'</option>';
+																	} ?>
+																</select>
+															</div></div>
+														<?php } ?>
+														<?php if ( $this->setting['display_training_custom3'] ) { ?>
+														<div class="fieldLabel" id="training_custom3_lbl"><?php print $this->translation['Training Custom 3']; ?></div>
+														<div class="fieldInput"><div  class="leftBorderPad" ><input type="checkbox" name="showCustom3"   <?php  if ($this->criteria['showCustom3']) echo 'CHECKED';?> /></div><label for="showCustom3" ></label>
+															<div  class="leftBorder">
+																<select id="custom_3_id" name="custom_3_id" >
+																	<option value="">--<?php tp('All');?>--</option>
+																	<?php
+																	foreach ( $this->custom3 as $vals ) {
+																		if(!trim($vals['custom_3'])){ continue; }
+																		echo '<option value="'.$vals['custom_3'].'" '.((@$this->criteria['custom_3_id']) == $vals['custom_3']? 'SELECTED="selected"':'').' >'.($this->truncate($vals['custom_3'],45)).'</option>';
+																	} ?>
+																</select>
+															</div></div>
+														<?php } ?>
+														<?php if ( $this->setting['display_training_custom4'] ) { ?>
+														<div class="fieldLabel" id="training_custom4_lbl"><?php print $this->translation['Training Custom 4']; ?></div>
+														<div class="fieldInput"><div  class="leftBorderPad" ><input type="checkbox" name="showCustom4"   <?php  if ($this->criteria['showCustom4']) echo 'CHECKED';?> /></div><label for="showCustom4" ></label>
+															<div  class="leftBorder">
+																<select id="custom_4_id" name="custom_4_id" >
+																	<option value="">--<?php tp('All');?>--</option>
+																	<?php
+																	foreach ( $this->custom4 as $vals ) {
+																		if(!trim($vals['custom_4'])){ continue; }
+																		echo '<option value="'.$vals['custom_4'].'" '.((@$this->criteria['custom_4_id']) == $vals['custom_4']? 'SELECTED="selected"':'').' >'.($this->truncate($vals['custom_4'],45)).'</option>';
+																	} ?>
+																</select>
+															</div></div>
+														<?php } ?>
+														<?php if ($this->mode != 'search' ) { ?>
+														<div class="fieldLabel" id="training_created_by_lbl"><?php tp('Created By'); ?></div>
+														<div class="fieldInput"><div  class="leftBorderPad" ><input type="checkbox" name="showCreatedBy" <?php  if ($this->criteria['showCreatedBy']) echo 'CHECKED';?> /></div><label for="showCreatedBy" ></label>
+															<div  class="leftBorder">
+																<select id="created_by" name="created_by"  <?php echo ($this->expand_lists?'multiple="multiple" size="10"':'class="fixed"'); ?> >
+																	<option value="">--<?php tp('All');?>--</option>
+																	<?php
+																	foreach ( $this->createdBy as $vals ) {
+																		if(!trim($vals['name'])){ continue; }
+																		echo '<option value="'.$vals['id'].'" '.((@$this->criteria['created_by']) == $vals['id']? 'SELECTED="selected"':'').' >'.$vals['name'].'</option>';
+																	} ?>
+																</select>
+															</div></div>
+														<div class="fieldLabel" id="training_creation_dates_lbl"><?php tp('Date Added'); ?></div>
+														<div class="fieldInput"><div  class="leftBorderPad" ><input type="checkbox" name="showCreationDate"   <?php  if ($this->criteria['showCreationDate']) echo 'CHECKED';?> /></div><label for="showCreationDate" ></label>
+															<div  class="leftBorder">
+																<span><input type="text" id="creation_dates1" name="creation_dates[]" class="trainingReportCreationDate datepicker" value="<?php echo (isset($this->criteria['creation_dates']) && is_array($this->criteria['creation_dates'])) ? $this->criteria['creation_dates'][0] : '' ?>"><a class="calenderbtn" href="#"><img src="<?php echo $this->base_url; ?>/js/yui/assets/calbtn.gif"></a></span>&nbsp;&nbsp;<label class="label"><?php tp('to'); ?></label>&nbsp;&nbsp;
+																<span><input type="text" id="creation_dates2" name="creation_dates[]" class="trainingReportCreationDate datepicker" value="<?php echo (isset($this->criteria['creation_dates']) && is_array($this->criteria['creation_dates'])) ? @$this->criteria['creation_dates'][1] : '' ?>"><a class="calenderbtn" href="#"><img src="<?php echo $this->base_url; ?>/js/yui/assets/calbtn.gif"></a></span>
+															</div>
+															<input type="hidden" name="date_localtime" id="date_localtime">
+															<script type="text/javascript">
+																$('#trainingreport').submit(function (e) {
+																	d = new Date();
+																	$('#date_localtime').val(d.toLocaleDateString() + ' ' + d.toLocaleTimeString());
+																});
+															</script>
+														</div>
+														<?php } ?>
 															<?php if ( $this->setting['display_end_date'] && $this->mode != 'search' && $this->mode != 'count') { ?>
 															<div class="fieldLabel" id="show_end_lbl"><?php tp('End date'); ?></div>
 															<div class="fieldInput"><div  class="leftBorderPad"><input type="checkbox" name="showEndDate"   <?php  if ($this->criteria['showEndDate']) echo 'checked="checked"';?> /></div><label for="showEndDate" ></label>
@@ -235,6 +291,48 @@
 																</div>
 															</div>
 																<?php } ?>
+														<?php if($this->mode == 'count') { ?>
+															<div class="fieldLabel" id="training_gender_lbl"><?php tp('Gender');?></div>
+															<div class="fieldInput">
+															<div  class="leftBorderPad"><input type="checkbox" name="showGender" <?php  if ($this->criteria['showGender']) echo 'CHECKED';?> /></div>
+														  	<div  class="leftBorder">
+															<select id="training_gender" name="training_gender" >
+																<option value="">--<?php tp('All');?>--</option>
+																<option value="male" <?php echo (@$this->criteria['training_gender'] == 'male'? 'SELECTED':''); ?> ><?php tp('male');?></option>
+																<option value="female"  <?php echo (@$this->criteria['training_gender'] == 'female'? 'SELECTED':''); ?> ><?php tp('female');?></option>
+																<option value="na"  <?php echo (@$this->criteria['training_gender'] == 'na'? 'SELECTED':''); ?> ><?php tp('na');?></option>
+															</select></div></div>
+															<?php if ( $this->setting['display_people_age'] ) { ?>
+															<div class="fieldLabel" id="training_age_lbl"><?php tp('Age');?></div>
+															<div class="fieldInput">
+															<div  class="leftBorderPad"><input type="checkbox" name="showAge" <?php  if ($this->criteria['showAge']) echo 'CHECKED';?> /></div>
+															<div  class="leftBorder">
+															<?php tp('min');?> <input type="text" id="age_min" name="age_min" size="4" value="<?php echo ( $this->criteria['age_min'] ? $this->criteria['age_min'] : '0');?>" /> <?php tp('max');?> <input type="text"  size="4" name="age_max" id="age_max" value="<?php echo ( $this->criteria['age_max'] ? $this->criteria['age_max'] : '');?>" /> <a href="#" id="clear_age" onclick="return clearAge();" ><?php tp('clear');?></a>
+															</div></div>
+															<?php } ?>
+															<div class="fieldLabel" id="district_id_lbl"><?php tp('Qualification'); ?> (<?php tp('primary');?>)</div><div class="fieldInput">
+															<div  class="leftBorderPad"><input type="checkbox" name="showQualPrim" <?php  if ($this->criteria['showQualPrim']) echo 'CHECKED';?> /></div>
+														  	<div  class="leftBorder"><select id="qualification_id" name="qualification_id">
+																<option value="">--<?php tp('All');?>--</option>
+																<?php
+																	foreach ( $this->qualifications_primary as $vals ) {
+																		echo '<option value="'.$vals['id'].'" '.((@$this->criteria['qualification_id']) == $vals['id'] ? 'SELECTED':'').' >'.$vals['qualification_phrase'].'</option>';
+																}
+																?>
+															</select></div></div>
+
+															<div class="fieldLabel" id="district_id_lbl"><?php tp('Qualification'); ?> (<?php tp('secondary');?>)</div><div class="fieldInput">
+															<div  class="leftBorderPad"><input type="checkbox" name="showQualSecond" <?php  if ($this->criteria['showQualSecond']) echo 'CHECKED';?> /></div>
+														  	<div  class="leftBorder"><select id="qualification_secondary_id" name="qualification_secondary_id">
+																<option value="">--<?php tp('All');?>--</option>
+																<?php
+																	foreach ( $this->qualifications_secondary as $vals ) {
+																		echo '<option value="'.$vals['id'].'" '.((@$this->criteria['qualification_secondary_id']) == $vals['id'] ? 'SELECTED':'').' >'.$vals['qualification_phrase'].'</option>';
+																}
+																?>
+															</select></div></div>
+														<?php } ?>
+
 															</div>
 															<div class="clear"></div><br/><br/>
 															<div class="fieldLabel"><?php tp('Start date');?></div>
@@ -263,9 +361,9 @@
 															<?php if ( $this->mode == 'search') {?>
 															<div class="clear"></div>
 															<br/>
-															<div class="fieldLabel"></div><div class="fieldInput" ><input type="radio" id="has_known_participants" value="has_known_participants" name="training_participants_type" <?php if ( $this->criteria['training_participants_type'] == 'has_known_participants') echo 'CHECKED'; ?> />&nbsp;<?php tp('Trainings with known participants only');?></div>
-															<div class="fieldLabel"></div><div class="fieldInput" ><input type="radio" id="has_unknown_participants" value="has_unknown_participants" name="training_participants_type" <?php if ( $this->criteria['training_participants_type'] == 'has_unknown_participants' ) echo 'CHECKED'; ?> />&nbsp;<?php tp('Trainings with unknown participants only');?></div>
-															<div class="fieldLabel"></div><div class="fieldInput" ><input type="radio" id="has_known_participants" value="has_everyone" name="training_participants_type" <?php if ( $this->criteria['training_participants_type'] == 'has_everyone' ) echo 'CHECKED'; ?> />&nbsp;<?php tp('All trainings');?></div>
+															<div class="fieldLabel"></div><div class="fieldInput" ><input type="radio" id="has_known_participants" value="has_known_participants" name="training_participants_type" <?php if ( $this->criteria['training_participants_type'] == 'has_known_participants') echo 'CHECKED'; ?> />&nbsp;<label for="has_known_participants"><?php tp('Trainings with known participants only');?></label></div>
+															<div class="fieldLabel"></div><div class="fieldInput" ><input type="radio" id="has_unknown_participants" value="has_unknown_participants" name="training_participants_type" <?php if ( $this->criteria['training_participants_type'] == 'has_unknown_participants' ) echo 'CHECKED'; ?> />&nbsp;<label for="has_unknown_participants"><?php tp('Trainings with unknown participants only');?></label></div>
+															<div class="fieldLabel"></div><div class="fieldInput" ><input type="radio" id="has_known_participants2" value="has_everyone" name="training_participants_type" <?php if ( $this->criteria['training_participants_type'] == 'has_everyone' ) echo 'CHECKED'; ?> />&nbsp;<label for="has_known_participants2"><?php tp('All trainings');?></label></div>
 															<?php }?>
 															<div class="clear"></div>
 															<input type="hidden" name="limit" id="limit" value="1" />
@@ -274,9 +372,9 @@
 													</form>
 													<?php if ( $this->criteria['go'] ) { ?>
 													<div class="hrGrey"></div>
-													<div class="fieldIndentNoMargin"><?php tp('Trainings');?> <span class="total"><?php echo $this->count;?> <?php if ( $this->mode == 'count' ) echo t('Participants'); else echo '';?></span><?php echo $this->printAndExport();?></div>
+													<div class="fieldIndentNoMargin"><?php tp('Trainings');?> <span class="total"><?php echo $this->count;?> <?php if ( $this->mode == 'count' ) echo t('Participants'); else echo '';?></span><?php echo $this->printAndExport();?><span class="datadownload" style="float:right;"><?php if(count($this->results)) { ?><a href="<?php echo $this->base_url; ?>/data/trainings/outputType/csv/<?php echo implode_ids($this->results); ?>"><?php tp('Download Complete Excel Data for these trainings'); ?></a><?php } ?></span></div>
 														<?php if ($this->mode == 'search' ) { ?>
-														<a href="<?php echo $this->base_url;?>/training/add"><?php tp('Add New Training');?></a><br/><br/>
+														<a href="<?php echo $this->base_url;?>/training/add"><?php echo t('Add').' '.t('New').' '.t('Training');?></a><br/><br/>
 														<?php } ?>
 														<div id="trainings" class="itechTable"></div>
 														<script type="text/javascript">
@@ -307,6 +405,18 @@
 																	echo ',"'.$row['district_name'].'"';
 																	if ( $this->criteria['showRegionC'] )
 																	echo ',"'.$row['region_c_name'].'"';
+																	if ( $this->criteria['showRegionD'] )
+																	echo ',"'.$row['region_d_name'].'"';
+																	if ( $this->criteria['showRegionE'] )
+																	echo ',"'.$row['region_e_name'].'"';
+																	if ( $this->criteria['showRegionF'] )
+																	echo ',"'.$row['region_f_name'].'"';
+																	if ( $this->criteria['showRegionG'] )
+																	echo ',"'.$row['region_g_name'].'"';
+																	if ( $this->criteria['showRegionH'] )
+																	echo ',"'.$row['region_h_name'].'"';
+																	if ( $this->criteria['showRegionI'] )
+																	echo ',"'.$row['region_i_name'].'"';
 																	if ( $this->criteria['showCategory'])
 																	echo ',"'.$row['training_category_phrase'].'"';
 																	if ( $this->criteria['showTrainingTitle'])
@@ -341,8 +451,27 @@
 																	echo ',"'.$row['training_got_curriculum_phrase'].'"';
 																	if ( $this->criteria['showCustom1'] )
 																	echo ',"'.$row['custom1_phrase'].'"';
+																	if ( $this->criteria['showCustom2'] )
+																	echo ',"'.$row['custom2_phrase'].'"';
+																	if ( $this->criteria['showCustom3'] )
+																	echo ',"'.$row['custom_3'].'"';
+																	if ( $this->criteria['showCustom4'] )
+																	echo ',"'.$row['custom_4'].'"';
 																	if (array_key_exists('pcnt', $row) !== false )
 																	echo ','.( ($row['has_known_participants']? ($row['pcnt'] ? $row['pcnt'] :0):'"-"') );
+																	if ( $this->criteria['showCreatedBy'] )
+																	echo ',"'.$row['created_by_user'].'"';
+																	if ( $this->criteria['showCreationDate'] )
+																	echo ',"'.$row['created_date'].'"';
+																	if ( $this->criteria ['showAge'] )
+																	echo ','.$row['age']    ;
+																	if ( $this->criteria ['showGender'] )
+																	echo ',"'.$row['gender'].'"';
+																	if ( $this->criteria ['showQualPrim'] )
+																	echo ',"'.$row['qualification_phrase'].'"';
+																	if ( $this->criteria ['showQualSecond'] )
+																	echo ',"'.$row['qualification_secondary_phrase'].'"';
+
 																	echo "]";
 																	$cnt++;
 																}}
@@ -368,6 +497,24 @@
 																<?php } ?>
 																<?php if ( $this->criteria['showRegionC'] ) { ?>
 																	,{key:"region_c_name", label: "<?php echo (@$this->translation['Region C (Local Region)']); ?>", sortable:true, resizeable:true}
+																<?php } ?>
+																<?php if ( $this->criteria['showRegionD'] ) { ?>
+																	,{key:"region_d_name", label: "<?php echo t('Region D'); ?>", sortable:true, resizeable:true}
+																<?php } ?>
+																<?php if ( $this->criteria['showRegionE'] ) { ?>
+																	,{key:"region_e_name", label: "<?php echo t('Region E'); ?>", sortable:true, resizeable:true}
+																<?php } ?>
+																<?php if ( $this->criteria['showRegionF'] ) { ?>
+																	,{key:"region_f_name", label: "<?php echo t('Region F'); ?>", sortable:true, resizeable:true}
+																<?php } ?>
+																<?php if ( $this->criteria['showRegionG'] ) { ?>
+																	,{key:"region_g_name", label: "<?php echo t('Region G'); ?>", sortable:true, resizeable:true}
+																<?php } ?>
+																<?php if ( $this->criteria['showRegionH'] ) { ?>
+																	,{key:"region_h_name", label: "<?php echo t('Region H'); ?>", sortable:true, resizeable:true}
+																<?php } ?>
+																<?php if ( $this->criteria['showRegionI'] ) { ?>
+																	,{key:"region_i_name", label: "<?php echo t('Region I'); ?>", sortable:true, resizeable:true}
 																<?php } ?>
 																<?php if ( $this->criteria['showCategory']) { ?>
 																	,{key:"training_category_phrase", label: "<?php echo (@$this->translation['Training Category']); ?>", sortable:true, resizeable:true}
@@ -420,8 +567,35 @@
 																<?php   if ( $this->criteria['showCustom1'] ) { ?>
 																	,{key:"custom1_phrase", label: "<?php echo (@$this->translation['Training Custom 1']); ?>", sortable:true, resizeable:true}
 																<?php } ?>
+																<?php   if ( $this->criteria['showCustom2'] ) { ?>
+																	,{key:"custom2_phrase", label: "<?php echo (@$this->translation['Training Custom 2']); ?>", sortable:true, resizeable:true}
+																<?php } ?>
+																<?php   if ( $this->criteria['showCustom3'] ) { ?>
+																	,{key:"custom3_phrase", label: "<?php echo (@$this->translation['Training Custom 3']); ?>", sortable:true, resizeable:true}
+																<?php } ?>
+																<?php   if ( $this->criteria['showCustom4'] ) { ?>
+																	,{key:"custom4_phrase", label: "<?php echo (@$this->translation['Training Custom 4']); ?>", sortable:true, resizeable:true}
+																<?php } ?>
 																<?php if (array_key_exists('pcnt', $this->results[0]) !== false) { ?>
 																	,{key:"pcnt", label: "<?php tp('Participants');?>", sortable:true, resizeable:true}
+																<?php } ?>
+																<?php   if ( $this->criteria['showCreatedBy'] ) { ?>
+																	,{key:"created_by", label: "<?php tp('Created By'); ?>", sortable:true, resizeable:true}
+																<?php } ?>
+																<?php   if ( $this->criteria['showCreationDate'] ) { ?>
+																	,{key:"created_date", label: "<?php tp('Created'); ?>", sortable:true, resizeable:true}
+																<?php } ?>
+																<?php   if ( $this->criteria['showAge'] ) { ?>
+																	,{key:"age", label: "<?php tp('Age'); ?>", sortable:true, resizeable:true}
+																<?php } ?>
+																<?php   if ( $this->criteria['showGender'] ) { ?>
+																	,{key:"gender", label: "<?php tp('Gender'); ?>", sortable:true, resizeable:true}
+																<?php } ?>
+																<?php   if ( $this->criteria['showQualPrim'] ) { ?>
+																	,{key:"qualification_phrase", label: "<?php tp('Qualification'); tp('primary'); ?>", sortable:true, resizeable:true}
+																<?php } ?>
+																<?php   if ( $this->criteria['showQualSecond'] ) { ?>
+																	,{key:"qualification_secondary_phrase", label: "<?php tp('Qualification'); tp('secondary');?>", sortable:true, resizeable:true}
 																<?php } ?>
 																];
 
@@ -434,6 +608,14 @@
 															<?php } ?>
 															<?php } ?>
 														</div>
+
+<script type="text/javascript">
+$(document).ready( function	() {
+	$('.trainingReportCreationDate').datepicker({dateFormat: 'mm/dd/yy'});
+	$('.calenderbtn').click(openNearestDatePicker);
+});
+</script>
+
 														<div id="footer"><?php require_once('views/scripts/footer.phtml');?></div>
 
 

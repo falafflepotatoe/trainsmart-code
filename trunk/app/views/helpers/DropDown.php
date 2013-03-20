@@ -75,7 +75,9 @@ class DropDown {
 		// add edit link
 		if ($jsonUrl && ! $disabled) {
 			$fieldlabel = explode ( '_', str_replace ( '_phrase', '', $column ) );
-			$label = $fieldlabel [0] . ' ' . $fieldlabel [1];
+			$label = $fieldlabel [0];
+			if(isset($fieldlabel[1])){ $label .= ' ' . $fieldlabel [1]; }
+
 			
 			//$label = substr($column, strpos($column, '_'));
 			//$label = str_replace('phrase', '', $label);
@@ -133,12 +135,12 @@ class DropDown {
 		return $html;
 	}
 	
-	function render_report_filter($id, $show_id, $label, $options, $value_key, $selected_id, $show_selected, $set_default = false, $fixedWidth = false) {
+	function render_report_filter($id, $show_id, $label, $options, $value_key, $selected_id, $show_selected, $set_default = false, $fixedWidth = false, $multiple = false) {
 		$html = "<div class='fieldLabel' id='" . $id . "_lbl'>$label</div>\n";
 		$html .= "<div class='fieldInput'><div  class='leftBorderPad'>\n";
 		$html .= "<input type='checkbox' name='$show_id' " . ($show_selected ? 'checked="checked"' : '') . " />\n";
 		$html .= "</div><label for='$show_id' ></label><div  class='leftBorder'>\n";
-		$html .= "<select id='" . $id . "_id' name='" . $id . "_id' ".($fixedWidth?"class='fixed'":'')." >\n";
+		$html .= "<select id='" . $id . "_id' name='" . $id . "_id' ".($fixedWidth?'class="fixed" ':'').($multiple?'multiple="multiple" size="10" ':'').">\n";
 		$html .= "<option value=''>--" . t ( 'All' ) . "--</option>\n";
 		
 		//look for default
@@ -155,6 +157,26 @@ class DropDown {
 		$html .= "</select></div></div>\n";
 		
 		return $html;
+	}
+
+	public static function qualificationsDropDown($name, $selectedVal)
+	{
+		$o = array();
+		$o[] = '<select id="'.$name.'" name="'.$name.'">';
+		$o[] = '<option value="">--'.t('choose').'--</option>';
+		$lastParent = null;
+		require_once 'models/table/OptionList.php';
+		$qualificationsArray = OptionList::suggestionListHierarchical ( 'person_qualification_option', 'qualification_phrase', false, false, array ('0 AS is_default', 'child.is_default' ) );
+		foreach ( $qualificationsArray as $vals ) {
+			if ( !$vals['id'] ) {
+				$lastParent = ($vals['parent_phrase']);
+				$o[] = '<option value="'.$vals['parent_id'].'" '.($selectedVal == $vals['parent_id'] ?'selected="selected"':'').'>'.htmlspecialchars($vals['parent_phrase']).'</option>';
+			} else {
+				$o[] = '<option value="'.$vals['id'].'" '.($selectedVal == $vals['id'] ?'selected="selected"':'').'>&nbsp;&nbsp;'. htmlspecialchars($vals['qualification_phrase']).'</option>';
+			}
+		}
+		$o[] = '</select>';
+		return implode(PHP_EOL, $o);
 	}
 
 }

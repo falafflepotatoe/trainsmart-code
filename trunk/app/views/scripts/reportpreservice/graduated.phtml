@@ -8,9 +8,9 @@
     print ScriptContainer::$instance->renderCSSHead();
 	print ScriptContainer::$instance->renderJSHead();      ?>
     
-<script type="text/javascript" src="<?php  echo Settings::$COUNTRY_BASE_URL.'/js/scripts/jquery-1.7.1.min.js'; ?>"></script>
-<script type="text/javascript" src="<?php  echo Settings::$COUNTRY_BASE_URL.'/js/scripts/jquery-ui-1.8.17.custom.min.js'; ?>"></script>
-<script type="text/javascript" language="javascript" src="<?php  echo Settings::$COUNTRY_BASE_URL.'/js/scripts/jquery.dataTables.js'; ?>"></script>
+
+
+
 		<script type="text/javascript" charset="utf-8">
 			$(document).ready(function() {
 				$( ".calendarbox" ).datepicker({
@@ -61,7 +61,7 @@
             <div id="content">
 			<div id="subcontent">
 				<div id="contentheader">
-					<h2>Reports</h2>
+					<h2><?php echo t('Reports'); ?></h2>
 					<br>
 			
 				</div>
@@ -69,12 +69,12 @@
 				<form  action="" id="peopleadd" method="post">
 				<div class="mainformholder" style="height:1000px;">
                     
-               <p style="padding-left:105px;font-weight:bold;">Students Trained</p><br>
+               <p style="padding-left:105px;font-weight:bold;"><?php echo t('Students Trained'); ?></p><br>
                
-               <p style="padding-left:230px;font-weight:bold;">Group</p><br>
+               <p style="padding-left:230px;font-weight:bold;"><?php echo t('Group'); ?></p><br>
                		
                  
-                   <p> <span style="margin-left:40px;">Institution</span>
+                   <p> <span style="margin-left:40px;"><?php echo t('Institution'); ?></span>
                    <span style="margin-left:136px;"><input type="checkbox" ></span>
                    <span style="padding-left:80px; position:absolute;"><input type="text"></span>
                    </p>
@@ -82,7 +82,7 @@
                    <p>&nbsp;</p>
                       <p>&nbsp;</p>
                    
-                   <p> <span style="margin-left:40px;">	Cadre	</span>
+                   <p> <span style="margin-left:40px;">	<?php echo t('Cadre'); ?>	</span>
                    <span style="margin-left:166px;"><input type="checkbox"></span>
                    <span style="padding-left:80px; position:absolute;"><input type="text"></span>
                    </p>
@@ -92,7 +92,7 @@
                   <p>&nbsp;</p>
                      <p>&nbsp;</p>
                      
-                       <p> <span style="margin-left:40px;">	Cohort	</span>
+                       <p> <span style="margin-left:40px;">	<?php echo t('Cohort'); ?>	</span>
                    <span style="margin-left:160px;"><input type="checkbox"></span>
                    <span style="padding-left:80px; position:absolute;"><input type="text"></span>
                    </p>
@@ -101,7 +101,7 @@
                      <p>&nbsp;</p>
                      <p>&nbsp;</p>
                      
-                       <p> <span style="margin-left:40px;">	Degree	</span>
+                       <p> <span style="margin-left:40px;">	<?php echo t('Degree'); ?>	</span>
                    <span style="margin-left:160px;"><input type="checkbox"></span>
                    <span style="padding-left:80px; position:absolute;"><input type="text"></span>
                    </p>
@@ -110,7 +110,7 @@
                   <p>&nbsp;</p>
                      <p>&nbsp;</p>
                      
-                       <p> <span style="margin-left:40px;">	Gender	</span>
+                       <p> <span style="margin-left:40px;">	<?php echo t('Gender'); ?>	</span>
                    <span style="margin-left:157px;"><input type="checkbox"></span>
                    <span style="padding-left:80px; position:absolute;"><input type="text"></span>
                    </p>
@@ -120,14 +120,14 @@
                   <p>&nbsp;</p>
                      <p>&nbsp;</p>
                      
-                       <p> <span style="margin-left:40px;">Nationality	</span>
+                       <p> <span style="margin-left:40px;"><?php echo t('Nationality'); ?>	</span>
                    <span style="margin-left:132px;"><input type="checkbox"></span>
                    </p>
                  				
                   <p>&nbsp;</p>
                      <p>&nbsp;</p>
                      
-                        <p> <span style="margin-left:40px;">Age	</span>
+                        <p> <span style="margin-left:40px;"><?php echo t('Age'); ?>	</span>
                    <span style="margin-left:175px;"><input type="checkbox"></span>
                    <span style="padding-left:80px; position:absolute;"><input type="text"><input type="text"></span>
                    </p>
@@ -138,7 +138,7 @@
                  				
                   
                   
-                   <p> <span style="margin-left:40px;">Graduation Date	</span>
+                   <p> <span style="margin-left:40px;"><?php echo t('Graduation Date'); ?>	</span>
                    <span style="margin-left:16px;"><input type="checkbox"></span>
                    </p>
                  				
@@ -147,7 +147,7 @@
                   <p>&nbsp;</p>
                      <p>&nbsp;</p>
                      
-                      <p> <span style="margin-left:40px;">	Facility @ Graduation	</span>
+                      <p> <span style="margin-left:40px;">	<?php echo t('Facility @ Graduation'); ?>	</span>
                    <span style="margin-left:62px;"><input type="checkbox"></span>
                    <span style="padding-left:120px; position:absolute;"><input type="text"></span>
                    </p>
@@ -157,7 +157,7 @@
                   <p>&nbsp;</p>
                      <p>&nbsp;</p>
                      
-                        <p> <span style="margin-left:40px;">	Tutor Advisor	</span>
+                        <p> <span style="margin-left:40px;">	<?php echo t('Tutor Advisor'); ?>	</span>
                    <span style="margin-left:115px;"><input type="checkbox"></span>
                    <span style="padding-left:120px; position:absolute;"><input type="text"></span>
                    </p>
@@ -170,12 +170,12 @@
                        
                  
                      
-                          <span style="padding-left:80px; position:absolute;">Graduation Date Between</span>
+                          <span style="padding-left:80px; position:absolute;"><?php echo t('Graduation Date Between'); ?></span>
                   <p>&nbsp;</p>
                      <p>&nbsp;</p>
 
                      
-             <p> <span style="margin-left:40px;">	Day	</span>
+             <p> <span style="margin-left:40px;">	<?php echo t('Day'); ?>	</span>
              <span style="padding-left:10px; position:absolute;">
              <input type="text"><input type="text"><input type="text"></span>
                   </p>
@@ -183,7 +183,7 @@
                   <p>&nbsp;</p>
                    <p>&nbsp;</p>
                    
-              <p> <span style="margin-left:40px;">	Day	</span>
+              <p> <span style="margin-left:40px;">	<?php echo t('Day'); ?>	</span>
                <span style="padding-left:10px; position:absolute;"><input type="text"><input type="text"><input type="text"></span>
                    </p>
                  				
@@ -191,7 +191,7 @@
                      <p>&nbsp;</p>
                   
                    <div class="rightdiv" style="margin-top:20px;">
-		<input type="submit" name="update" value="Report" class="tsbutton green large">
+		<input type="submit" name="update" value="<?php echo t('Report'); ?>" class="tsbutton green large">
 					</div>
 
                       

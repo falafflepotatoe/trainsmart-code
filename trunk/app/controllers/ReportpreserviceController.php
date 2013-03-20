@@ -58,7 +58,7 @@ class ReportpreserviceController extends ReportFilterHelpers {
 
 	public function reportstudentstrainedAction()
 	{
-	$this->view->assign('title','Trainsmart');
+		$this->view->assign('title',$this->view->translation['Application Name']);
 	}
 	public function studentnameAction()
 	{
@@ -67,25 +67,25 @@ class ReportpreserviceController extends ReportFilterHelpers {
 	$tutoredit = new Tutoredit();
 	$listcadre = $tutoredit->ListCadre();
 	$this->view->assign('getcadre',$listcadre); 
-	$this->view->assign('title','Trainsmart');
+	$this->view->assign('title',$this->view->translation['Application Name']);
 	$this->view->assign ( 'mode', 'count' );
 	$this->facilityReport ();
 	}
 	
 	public function graduatedAction()
 	{
-	$this->view->assign('title','Trainsmart');
+		$this->view->assign('title',$this->view->translation['Application Name']);
 	}
 	
 	
 	public function coursebystudentAction()
 	{
-	$this->view->assign('title','Trainsmart');
+		$this->view->assign('title',$this->view->translation['Application Name']);
 	}
 
     public function coursebynameAction()
 	{
-	$this->view->assign('title','Trainsmart');
+		$this->view->assign('title',$this->view->translation['Application Name']);
 	}
 	
 	public function facilityReport() {

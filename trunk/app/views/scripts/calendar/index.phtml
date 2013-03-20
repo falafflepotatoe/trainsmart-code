@@ -18,7 +18,7 @@ print ScriptContainer::$instance->renderJSHead();
 
     <h1><?php print t('Training Calendar');?></h1>
 
-  <div class="hideFromPrint" style="font-weight:bold; margin-bottom:1em; ">
+  <div class="calenderLinks hideFromPrint" style="font-weight:bold; margin-bottom:1em; ">
     <a href="#" onclick="window.print(); return false; "><?php tp('Print Calendar');?></a>
   </div>
 
@@ -28,7 +28,45 @@ print ScriptContainer::$instance->renderJSHead();
   </div>
   <div id="footer"><?php require_once('views/scripts/footer.phtml');?></div>
 
+<script type="text/javascript">
 
+<?php 
+	if($this->calMonth) echo "var calMonth = $this->calMonth;" . PHP_EOL;
+	if($this->calYear) echo "var calYear = $this->calYear;" . PHP_EOL;
+?>
+
+function showControls () {
+	var btns = '<div class="hideFromPrint"><div class="calendar-gui-btn"><button>+</button></div></div>';
+	var tds = $('#content table td div').parents('td');
+	tds.append(btns).wrapInner('<div style="position:relative;display:block;height:100%;width:100%;">');
+	$('#content table button').click(function () {
+			location.href= '<?php echo $this->base_url; ?>/training/add/?start-date='+$(this).parents('td').find('.calDay').html()+'/'+calMonth+'/'+calYear;
+		});
+	return false;
+}
+
+$(document).ready( function () {
+	// show controls link
+	var link1 = '<br/><a href="#" onclick="return showControls();"><?php tp("Add trainings"); ?></a>';
+	$('.calenderLinks').append(link1);
+
+	// compare dates and style calender
+	var tds = $('#content table td div').parent('td');
+	tds.each(function () {
+		if (!calMonth && !calYear)
+			return;
+
+		var me = $(this);
+		if(me.find('.calDay').length)
+			calDay = me.find('.calDay').html();
+		if(calDay && new Date() < new Date(calYear,calMonth-1,calDay))
+			me.addClass('trainOld');
+		if(calDay && new Date() > new Date(calYear,calMonth-1,calDay))
+	 		me.addClass('trainNew');
+	});
+});
+
+</script>
 </div>
 
 </body>

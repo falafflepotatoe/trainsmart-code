@@ -10,6 +10,10 @@ class SelectController extends ITechController {
 	}
 	
 	public function init() {
+		if($this->hasACL('edit_employee')){
+			if($this->hasACL('in-service') == false && $this->hasACL('pre-service') == false)
+				$this->_redirect('/employee');
+		}
 	}
 	
 	public function selectAction(){

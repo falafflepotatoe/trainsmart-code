@@ -21,13 +21,13 @@ class SyncSetLocation extends SyncSetSimple
 		}
 		return new Location();
 	}
-	
+
 	protected function getColumns() 
 	{
 		return array( 
 			array('parent_id', 'location'), 
 			'location_name', 
-			'tier'
+			'tier' 
 			);
 	}
 	
@@ -35,7 +35,7 @@ class SyncSetLocation extends SyncSetSimple
 	{
 		return true; // bugfix, its saying no in location table for some reason
 	}
-	
+
 	public function fetchLeftPool()
 	{
 		
@@ -63,13 +63,3 @@ class SyncSetLocation extends SyncSetSimple
 		return null;
 	}
 }
-
-
-
-
-
-
-
-
-
-

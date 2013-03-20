@@ -10,6 +10,7 @@ body { margin-top: 0px; padding:0; font-family:verdana; } /* TDV: reduced margin
 html, body, .yui-skin-sam { background: #3a0000; } /* TDV: changed background color to closely match textured bkgd on web site */
 h1 { font-size:18px; color:#e17000; margin-bottom:0.5em; } /* TDV: changed color to orange */
 #header { background:#e3e1d5; } /* TDV: changed to beige */
+#header { background:#e3e1d5 url('../images/weave.jpg') repeat fixed center; }
 #header #headerLinks, #header #headerLinks a { color:#000; font-size:12px; } /* TDV: changed link color to black */
 #header div span { color:#555; } /* TDV: added to adjust internal title color */
 #navMain { height:30px; line-height:20px; background:#275937; margin-top:4px; } /* TDV: changed color to darker green, height to 30px */

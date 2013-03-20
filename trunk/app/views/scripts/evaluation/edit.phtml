@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title><?php echo $this->translation['Application Name'];?> | <?php tp('Evaluations');?></title>
+<?php
+require_once('views/helpers/ScriptContainer.php');
+print ScriptContainer::$instance->renderCSSHead();
+print ScriptContainer::$instance->renderJSHead();
+?>
+
+<script type="text/javascript">
+function add20evaluations() {
+	$rows = $('.settings tr');
+	$template = $($rows[1]).clone();
+	cnt = $rows.length;
+	$template.find('option:selected').attr('selected', null);
+	$template.find('select,input').val('');
+	for(var i = 0; i < 20; i++){
+		$template.find('td').first().html(cnt+i);
+		$('.settings').append($template.clone());
+	}
+
+}
+</script>
+
+</head>
+<body class="yui-skin-sam">
+<div id="pageHolder">
+  <div id="header"><?php require_once('views/scripts/header.phtml');?></div>
+  <div id="content">
+
+  <h1><?php tp('Evaluations');?></h1>
+  <form name="evaluationForm" id="evaluationForm" method="post" action="">
+
+	<label><?php tp('Enter title of Evaluation');?></label>  <input type="text" name="title" maxlength="255" size="40" value="<?php echo $this->title;?>" /><br/><br/>
+	<table class="settings">
+	<thead>
+	<tr><th><?php tp('Number');?></th><th><?php tp('Question');?></th><th><?php tp('Type');?></th></tr></thead>
+	<?php 
+		$num_rows = 20;
+		if(is_array($this->qtext)){
+			$num_rows = count($this->qtext);
+		}
+		for($i = 0; $i < $num_rows; $i++) {
+	?>
+	<tr><td><?php echo $i+1;?></td><td><input type="hidden" name="qid[]" value="<?php echo (isset($this->qid[$i]) ? $this->qid[$i] : '-1'); ?>"><input type="text" name="qtext[]" maxlength="255" size="50" value="<?php if ( is_array($this->qtext) ) echo $this->qtext[$i];?>"  ></input></td><td><select name="qtype[]"><option value="">&mdash; <?php tp('select');?> &mdash;</option><option value="Likert" <?php if ( is_array($this->qtype) ) echo ($this->qtype[$i] == 'Likert'?'selected':'');?>><?php tp('Likert');?></option><option value="LikertNA" <?php if ( is_array($this->qtype) ) echo ($this->qtype[$i] == 'LikertNA'?'selected':'');?>><?php tp('Likert');?> + N/A</option><option value="Likert3" <?php if ( is_array($this->qtype) ) echo ($this->qtype[$i] == 'Likert3'?'selected':'');?>><?php tp('Likert');?> (1-3)</option><option value="Likert3NA" <?php if ( is_array($this->qtype) ) echo ($this->qtype[$i] == 'Likert3NA'?'selected':'');?>><?php tp('Likert');?> (1-3) + N/A</option><option value="Text" <?php if ( is_array($this->qtype) ) echo  ($this->qtype[$i] == 'Text'?'selected':'');?>><?php tp('Text');?></option></select></td></tr>
+	<?php } ?>
+	</table>
+	<br/><a href="#" onclick="add20evaluations();return false;"><?php tp('Add 20 more rows'); ?></a>
+	<br/><br/>
+    <input type="submit" class="submitNoArrow" name="go" value="<?php tp('SAVE');?>" />
+	<br/><br/>
+	</form>
+  </div>
+  <div id="footer"><?php require_once('views/scripts/footer.phtml');?></div>
+</div>
+
+</body>
+</html>

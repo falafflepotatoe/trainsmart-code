@@ -139,15 +139,15 @@ print ScriptContainer::$instance->renderJSHead();
 	}
 </script>
 
- <div class="fieldIndentNoMargin"><?php tp('Trainer Information');?> <a href="javascript:toggleDiv('trainingInfo','placeholderTraining');"><?php tp('Show/Hide');?></a></div>
+ <div class="fieldIndentNoMargin"><?php echo t('Trainer').' '.t('Information');?> <a href="javascript:toggleDiv('trainingInfo','placeholderTraining');"><?php tp('Show/Hide');?></a></div>
 
 
 <div id="trainingInfo" style="<?php echo ($this->person['trainer_is_active'] ? 'display:block;' : 'display:none;');?>"><br/>
 	<div class="fieldInput"><input type="checkbox" disabled="disabled" id="is_trainer" name="is_trainer" <?php if ($this->person['trainer_is_active']) echo 'CHECKED ';?>/><label for="is_trainer">Is person an active trainer?</label></div>
   <?php 
-  print DropDown::render('active_trainer_option_id', t('Active trainer'), $this->active_trainer,'active_trainer_phrase','id', $this->person['active_trainer_option_id'],false,false, false  );
+  print DropDown::render('active_trainer_option_id', t('Active').' '.t('trainer'), $this->active_trainer,'active_trainer_phrase','id', $this->person['active_trainer_option_id'],false,false, false  );
   ?>
-  	<div class="fieldLabel" ><?php tp('Trainer Type');?></div>
+  	<div class="fieldLabel" ><?php echo t('Trainer').' '.t('Type');?></div>
 	<div class="fieldInput"><input readonly="readonly" type="text" size="40" maxlength="128" value="<?php
 			foreach ( $this->trainer_types as $vals ) {
 				if ( $this->person['trainer_type_option_id'] == $vals['id'] )
@@ -155,7 +155,7 @@ print ScriptContainer::$instance->renderJSHead();
 		}
 		?>" /></div>
 	<?php if ($this->setting['display_trainer_affiliations'] ) { ?>
-	<div class="fieldLabel" ><?php tp('Trainer Affiliation');?></div>
+	<div class="fieldLabel" ><?php echo t('Trainer').' '.t('Affiliation');?></div>
 	<div class="fieldInput"><input readonly="readonly" type="text" size="40" maxlength="128" value="<?php
 			foreach ( $this->trainer_affiliations as $vals ) {
 				if ( $this->person['trainer_affiliation_option_id'] == $vals['id'] )
@@ -164,7 +164,7 @@ print ScriptContainer::$instance->renderJSHead();
 		?>" /></div>
 	<?php } ?>
 <div class="clear" ></div>
-	<div class="fieldLabel" ><?php tp('Trainer skills');?></div>
+	<div class="fieldLabel" ><?php echo t('Trainer').' '.t('skills');?></div>
 	<div class="fieldInput">
 	       <span class="checkBoxes">
 	 <?php
@@ -174,7 +174,7 @@ print ScriptContainer::$instance->renderJSHead();
 	?>      </span></div>
 
 <div class="clear" ></div>
-	<div class="fieldLabel" ><?php tp('Trainer languages');?></div>
+	<div class="fieldLabel" ><?php echo t('Trainer').' '.t('languages');?></div>
 		<div class="fieldInput">
 	      <span class="checkBoxes">
 	 	<?php
@@ -185,7 +185,7 @@ print ScriptContainer::$instance->renderJSHead();
 </div>
 <?php if ($this->hasTrainerHistory) { ?>
 	<div class="clear" ></div>
-	<div class="fieldIndentNoMargin"><?php tp('Training History');?></div>
+	<div class="fieldIndentNoMargin"><?php echo t('Training').' '.t('History');?></div>
 	<div id="trainerInfo"></div>
 	<script type="text/javascript">
 		var trainerColumnDefs = [

@@ -15,6 +15,8 @@ print ScriptContainer::$instance->renderJSHead();
 
   <div id="header"><?php require_once('views/scripts/header.phtml');?></div>
   <div id="content">
+
+  <h1>Desktop Download</h1>
   	
   <?php if ($this->error_message == "") {  ?>
   
@@ -23,8 +25,13 @@ print ScriptContainer::$instance->renderJSHead();
 		If this site has been configured to generate the application on a regular interval, then you do not need to perform this action. <br/><br/>
 		You have requested that the application be packaged now.<br/><br/>
 		The database and offline application have been packaged into a zip file. <br/><br/>
-		Please choose Download Application from the menu to obtain the zip file, or click <a href="download">here</a>.
-	
+		Please choose Download Application from the menu to obtain the zip file, or click <a href="download">here</a>.<br/><br/>
+		If you plan to redistribute the application (e.g. on a CD), please redistribute it with the .NET 2.0 installer.<br/><br/>
+		<b>New in TrainSMART 4.0</b><br/><br/>
+		To reduce download size we have packaged the required .NET 2.0 installer seperately from TrainSMART.<br/><br/>
+		If you have never run TrainSMART or don't have .NET installed, make sure you run the required .NET 2.0 installer if the application crashes upon starting. (Required for Windows XP and any OS older than Windows Vista or Windows Server 2003)<br/><br/>
+		Download the required .NET 2.0 installer click <a href="download-dotnet">here</a>.<br/><br/>
+		
 	<?php } else { ?>
 	
 		<?php echo $this->error_message; ?>
