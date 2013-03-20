@@ -14,7 +14,7 @@ print ScriptContainer::$instance->renderJSHead();
   <div id="header"><?php require_once('views/scripts/header.phtml');?></div>
   <div id="content">
 
-		<h1><?php tp('Add new External Course for '.$this->person['first_name'].'&nbsp;'.$this->person['last_name']);?></h1>
+		<h1><?php echo t('Add new External Course for ').' '.$this->person['first_name'].'&nbsp;'.$this->person['last_name'];?></h1>
 
 		<form id="add" action="" method="POST">
 		  <div class="fieldLabel" id="title_lbl"><?php tp('Title');?><span class="required">*</span></div>

@@ -1,33 +1,30 @@
 function tr(phrase) {
-	return phrase;
 	switch (phrase) {
 		case 'Remove':
-			return 'Supprimer';
+			return 'Verwijder';
 		case 'Deleting...':
-			return 'Suppression';
+			return 'Verwijder...';
 		case 'Are you sure you want to remove':
-			return 'Êtes-vous sûr de vouloir supprimer';
+			return 'Verwijder';
 		case 'Undeleting...':
 			return 'Undeleting...';
 		case 'Saving...':
-			return "D'épargne";
+			return "Aan het opslaan...";
 		case 'Edit':
-			return 'Modifier';
+			return 'Bewerken';
 		case 'Delete':
-			return 'Supprimer';
+			return 'Verwijderen';
 		case 'Are you sure you want to delete':
-			return 'Êtes-vous sûr de vouloir supprimer';
+			return 'Weet u zeker dat u wilt verwijderen';
 		case 'Pick a Date':
-			return 'Choisissez une date';
+			return 'Kies een datum';
 		case 'No records found.':
-			return 'Aucun enregistrement trouvé.';
+			return 'Geen invoeringen gevonden.';
 		case 'Loading...':
-			return 'Chargement...';
+			return 'Aan het laden';
 		case 'You have not selected a training category for your new title.':
-			return "Vous n\'avez pas sélectionné une catégorie de formation pour votre nouveau titre.";
+			return "U heeft geen training categorie gekozen voor uw nieuwe naam.";
 		case 'Do you still wish to add a title without a training category associated with it?':
-			return 'Désirez-vous encore d\'ajouter un titre sans une catégorie de formation qui lui est associé?';
+			return 'Wilt u nog steeds een naan toevoegen zonder een training categorie eraan verbonden?';
 	}
-
-	return phrase;
 }

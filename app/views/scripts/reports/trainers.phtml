@@ -1,4 +1,4 @@
-  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <title><?php echo $this->translation['Application Name'];?> | <?php tp('Trainer Report');?></title>
@@ -18,21 +18,15 @@ print ScriptContainer::$instance->renderJSHead();
   <div id="header"><?php require_once('views/scripts/header.phtml');?></div>
   <div id="content">
 
-    <h1><?php tp('Trainer Report');?></h1>
+    <h1><?php echo t('Trainer').' '.t('Report');?></h1>
       <?php require_once('trainerReportsPicker.phtml'); ?>
 	   <form action="" method="get">
    <fieldset><legend><?php tp('Select Criteria');?></legend>
-	<div class="fieldLabel" id="province_id_lbl"><?php echo (@$this->translation['Region A (Province)']); ?> (<?php tp('facility');?>)</div>
-	<div class="fieldInput"><?php renderFilter($this->locations, 1, 'province_id', $this->criteria['province_id'], 'district_id', false); ?></div>
- 	<?php if ( $this->setting['display_region_b'] ) { ?>
- 	<div class="fieldLabel" id="district_id_lbl"><?php echo (@$this->translation['Region B (Health District)']); ?> (<?php tp('facility');?>)</div>
-	<div class="fieldInput"><?php renderFilter($this->locations, 2, 'district_id', $this->criteria['district_id'], ($this->setting['display_region_c']?'region_c_id':false), false); ?></div>
-	<?php } ?>
-  <?php if ( $this->setting['display_region_c'] ) { ?>
-  <div class="fieldLabel" id="region_c_id_lbl"><?php echo (@$this->translation['Region C (Local Region)']); ?> (<?php tp('facility');?>)</div>
-  <div class="fieldInput"><?php renderFilter($this->locations, 3, 'region_c_id', $this->criteria['region_c_id'], false, false); ?></div>
-  <?php } ?>
-	<div class="fieldLabel" id="trainer_type_id_lbl"><?php tp('Trainer type');?></div>
+
+
+	<?php region_filters_dropdown($this, $this->locations, $this->criteria, false, false); ?>
+	
+	<div class="fieldLabel" id="trainer_type_id_lbl"><?php echo t('Trainer').' '.t('type');?></div>
 	<div class="fieldInput"><select id="trainer_type_id" name="trainer_type_id">
 		<option value="">--<?php tp('All');?>--</option>
 		<?php
@@ -41,7 +35,7 @@ print ScriptContainer::$instance->renderJSHead();
 		}
 		?>
 	</select></div>
- 	<div class="fieldLabel" id="trainer_skill_id_lbl"><?php tp('Trainer skill');?></div>
+ 	<div class="fieldLabel" id="trainer_skill_id_lbl"><?php echo t('Trainer').' '.t('skill');?></div>
 	<div class="fieldInput"><select id="trainer_skill_id" name="trainer_skill_id[]" multiple="multiple" size="10">
 		<option value="">--<?php tp('All');?>--</option>
 		<?php
@@ -50,7 +44,7 @@ print ScriptContainer::$instance->renderJSHead();
 		}
 		?>
 	</select></div>
-	<div class="fieldLabel" id="trainer_language_id_lbl"><?php tp('Trainer language');?></div>
+	<div class="fieldLabel" id="trainer_language_id_lbl"><?php echo t('Trainer').' '.t('language');?></div>
 	<div class="fieldInput"><select id="trainer_language_id" name="trainer_language_id">
 		<option value="">--<?php tp('All');?>--</option>
 		<?php
@@ -61,7 +55,7 @@ print ScriptContainer::$instance->renderJSHead();
 	</select></div>
 
   <?php if ( $this->setting['display_training_topic'] ) { ?>
-	<div class="fieldLabel" id="trainer_language_id_lbl"><?php echo t('Select topic taught');?></div>
+	<div class="fieldLabel" id="trainer_language_id_lbl"><?php echo t('Training Topic'); ?></div>
 	<div class="fieldInput"><?php echo $this->topic_checkboxes; ?></div>
 
 	<div class="fieldLabel"></div>

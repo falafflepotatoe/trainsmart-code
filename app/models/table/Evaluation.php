@@ -27,9 +27,44 @@ class Evaluation extends ITechTable
   	  }
   }
 
+  public static function updateQuestions($parent_id, $text_array, $type_array, $id_array = null) {
+      $q_table = new ITechTable(array('name'=>'evaluation_question'));
+      $existing = $q_table->fetchAll($q_table->select()->where("evaluation_id = $parent_id"));
+   	  foreach($text_array as $i => $q) {
+  	  	if ( !empty($text_array[$i]) && !empty($type_array[$i])) {
+  	  		// find row
+          $q_row = null;
+  	  		if ($id_array[$i] && $id_array[$i] != -1) {
+  	  			$q_row = $q_table->find($id_array[$i])->current();
+          }
+  	  		if ($q_row == null){
+	   	  		$q_row = $q_table->createRow();
+          }
+	   	  	// populate and save
+	   	  	$q_row->evaluation_id = $parent_id;
+	   	  	$q_row->question_text = $text_array[$i];
+	   	  	$q_row->question_type = $type_array[$i];
+	   	  	$q_row->weight = $i;
+	  	  	$q_row->save();
+  	  	}
+  	  	else{
+  	  		// delete (empty text, and an id, should delete this question)
+  	  		if ($id_array[$i] && $id_array[$i] != -1)
+  	  			$q_table->find($id_array[$i])->current()->delete();
+  	  	}
+  	  }
+  	  return true;
+  }
+
   public static function fetchAllQuestions($parent_id) {
   	    $question_table = new ITechTable ( array ('name' => 'evaluation_question' ) );
         return $question_table->fetchAll('evaluation_id = '.$parent_id);
+
+  }
+
+  public static function fetchResponseAnswers($evaluation_response_id) {
+  	    $question_table = new ITechTable ( array ('name' => 'evaluation_question_response' ) );
+        return $question_table->fetchAll('evaluation_response_id = '.$evaluation_response_id);
 
   }
 

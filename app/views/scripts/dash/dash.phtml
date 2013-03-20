@@ -53,19 +53,10 @@
 			<div id="header"><?php require_once('views/scripts/preheader.phtml');?></div>
 			<div id="content">
 			<div id="headerpad">&nbsp;</div>
-			<?php /*?><div id="header"><a href="index.html"><img src="graphics/logo.png" border="0"></a></div>
-			<div id="subheader">
-				<a href="#">Home</a>
-				<a href="#">People</a>
-				<a href="#">Course</a>
-				<a href="#">Cohort</a>
-				<a href="#">Places</a>
-				<a href="#">Reports</a>
-			</div><?php */?>
 			<div id="subcontent">
 				<div id="contentheader">
-					<h2>Welcome to TrainSmart</h2><br>
-					<p style="float:left;font-size:13px;">Training System Monitoring and Reporting Tool</p>
+					<h2><?php echo t("Welcome to").space.$this->translation['Application Name']; ?></h2><br>
+					<p style="float:left;font-size:13px;"><?php echo t("Training System Monitoring and Reporting Tool"); ?></p>
 				</div>
 				<div class="pad50 clear"></div>
 
@@ -73,12 +64,12 @@
 				<table cellpadding="0" cellspacing="0" border="0" class="display tablegrid" id="" style="width:100%">
 					<thead>
 						<tr>
-							<th>Training institution</th>
-							<th width="135"># of students</th>
-							<th width="135"># of tutors</th>
-							<th width="120">Ratio</th>
-							<th width="120"># of grads</th>
-							<th width="170">Early terminations</th>
+							<th><?php echo t("Training institution"); ?></th>
+							<th width="135"><?php echo t("# of students"); ?></th>
+							<th width="135"><?php echo t("# of tutors"); ?></th>
+							<th width="180"><?php echo t("Student/Tutor Ratio"); ?></th>
+							<th width="120"><?php echo t("# of grads"); ?></th>
+							<th width="170"><?php echo t("Early terminations"); ?></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -102,11 +93,11 @@
 				<div style="line-height:50px;">&nbsp;</div>
 
 				<div class="rightdiv" style="float:right;">
-					<a href="<?php  echo Settings::$COUNTRY_BASE_URL.'/institution/institution'; ?>" class="tsbutton green large">Institutions &raquo;</a>
-					<a href="<?php  echo Settings::$COUNTRY_BASE_URL.'/cohort/cohortsearch'; ?>" class="tsbutton green large">Cohorts &raquo;</a>
-					<a href="<?php  echo Settings::$COUNTRY_BASE_URL.'/people/people'; ?>" class="tsbutton green large">People &raquo;</a>
-					<a href="<?php  echo Settings::$COUNTRY_BASE_URL.'/facility/search'; ?>" class="tsbutton green large">Facilities &raquo;</a>
-					<a href="<?php  echo Settings::$COUNTRY_BASE_URL.'/Reportpreservice/studentname'; ?>" class="tsbutton green large">Reports &raquo;</a>
+					<a href="<?php  echo Settings::$COUNTRY_BASE_URL.'/institution/institution'; ?>" class="tsbutton green large"><?php echo t('Institutions'); ?> &raquo;</a>
+					<a href="<?php  echo Settings::$COUNTRY_BASE_URL.'/cohort/cohortsearch'; ?>" class="tsbutton green large"><?php echo t('Cohorts'); ?> &raquo;</a>
+					<a href="<?php  echo Settings::$COUNTRY_BASE_URL.'/people/people'; ?>" class="tsbutton green large"><?php echo t('People'); ?> &raquo;</a>
+					<a href="<?php  echo Settings::$COUNTRY_BASE_URL.'/facility/search'; ?>" class="tsbutton green large"><?php echo t('Facilities'); ?> &raquo;</a>
+					<a href="<?php  echo Settings::$COUNTRY_BASE_URL.'/Reportpreservice/studentname'; ?>" class="tsbutton green large"><?php echo t('Reports'); ?> &raquo;</a>
 				</div>
 
 			</div>

@@ -342,8 +342,45 @@ function setSelected(widget_id, option_id) {
 
 
 function setTrainingTitle(selectedIndex, categoryId, titleId)  {
-	var catObj = YAHOO.util.Dom.get(categoryId);
+	var catObj = YAHOO.util.Dom.get(categoryId), titleObj = YAHOO.util.Dom.get(titleId);
+  var selectedItem = titleObj.value;
 	if ( catObj ) {
     filterSubTypeOptions(categoryId, titleId);
 	}
+
+  if ( selectedItem ) { //restore last choice (bugfix)
+    $('#'+titleId).val(selectedItem);
+  }
+}
+
+
+function openNearestDatePicker() {
+	$(this).siblings('input.datepicker').first().datepicker("show");
+  return false;
+}
+
+/**** some facility functions ****/
+function addSponsorRow(event)
+{
+	template = $('#facility_sponsor_id_lbl,#facility_sponsor_wrapper').clone().attr('id', null);
+	template.find('#sponsor_add').remove();
+	// reset form
+	template.find('option').attr('selected', null);
+	template.find('input,select').val(null);
+	template.find('input,a').removeClass('hasDatepicker');
+	// append
+	$('#facility_comments_lbl').before(template);
+	// bind datepicker control
+	template.find('.datepicker').attr('id', null).datepicker();
+	template.find('.calenderbtn').click(openNearestDatePicker);
+	return false;
+}
+
+function showSponsorDates(obj)
+{
+	obj = $(obj);
+	obj.siblings('.sponsorDates').toggle(1000);
+	obj.toggle();
+	$('.sponsorDates input').datepicker();
+	return false;
 }

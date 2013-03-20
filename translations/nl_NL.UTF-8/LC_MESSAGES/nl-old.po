@@ -1,0 +1,4021 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: 12.2.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-09-13 14:35-0800\n"
+"PO-Revision-Date: 2012-09-17 14:44-0800\n"
+"Last-Translator: nicole66 <nicole66@uw.edu>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: t;tp\n"
+"X-Poedit-Basepath: html\n"
+"X-Generator: Poedit 1.5.3\n"
+"X-Poedit-SearchPath-0: app\n"
+"X-Poedit-SearchPath-1: html\n"
+
+#: app/controllers/AdminController.php:319
+#: app/controllers/AdminController.php:905
+#: app/controllers/AdminController.php:1425
+#: app/controllers/AdminController.php:1646
+msgid "Your settings have been updated."
+msgstr "Uw instellingen zijn bijgewerkt."
+
+#: app/controllers/CalendarController.php:92
+msgid "No future trainings found."
+msgstr "Geen toekomstige trainingen gevonden."
+
+#: app/controllers/EditTableController.php:146
+msgid "A record already exists with this value."
+msgstr "Er bestaat al een vermelding met deze waarde."
+
+#: app/controllers/EvaluationController.php:83
+msgid "The evaluation could not be loaded."
+msgstr "De evaluatie kon niet worden geladen."
+
+#: app/controllers/EvaluationController.php:99
+#: app/controllers/EvaluationController.php:170
+#: app/controllers/EvaluationController.php:180
+msgid "The evaluation could not be saved."
+msgstr "De evaluatie kon niet worden opgeslagen."
+
+#: app/controllers/EvaluationController.php:157
+#: app/views/scripts/evaluation/browse.phtml:41
+#: app/views/scripts/external/add.phtml:20
+msgid "Title"
+msgstr "Titel"
+
+#: app/controllers/EvaluationController.php:160
+msgid "You must choose a question type for each question."
+msgstr "U moet een vraagsoort kiezen voor elke vraag."
+
+#: app/controllers/EvaluationController.php:164
+msgid "You must enter question text for each question."
+msgstr "U moet een vraagtekst invoeren voor elke vraag."
+
+#: app/controllers/EvaluationController.php:177
+msgid "The new evaluation was created."
+msgstr "De nieuwe evaluatie is aangemaakt.       "
+
+#: app/controllers/EvaluationController.php:226
+#: app/controllers/PersonController.php:936
+msgid "The trainings have been assigned."
+msgstr "De trainingen zijn toegewezen."
+
+#: app/controllers/EvaluationController.php:261
+msgid "The evaluation has been assigned."
+msgstr "De evaluatie is toegewezen."
+
+#: app/controllers/ExternalController.php:46
+#: app/controllers/TrainingController.php:183
+msgid "Training start"
+msgstr "Begin training"
+
+#: app/controllers/ExternalController.php:49
+#: app/controllers/PersonController.php:239
+msgid "The person could not be saved."
+msgstr "Deze persoon kan niet worden opgeslagen."
+
+#: app/controllers/ExternalController.php:65
+msgid "The external course could not be saved."
+msgstr "De externe cursus kan niet worden opgeslagen."
+
+#: app/controllers/FacilityController.php:96
+#: app/controllers/PsfacilityController.php:96
+msgid "That name already exists."
+msgstr "Deze naam komt reeds voor."
+
+#: app/controllers/FacilityController.php:100
+#: app/controllers/PsfacilityController.php:100
+#: app/views/scripts/facility/addfacility-form.phtml:35
+#: app/views/scripts/facility/edit.phtml:66
+#: app/views/scripts/facility/view.phtml:60
+#: app/views/scripts/psfacility/addfacility-form.phtml:35
+#: app/views/scripts/psfacility/edit.phtml:66
+#: app/views/scripts/psfacility/view.phtml:60
+msgid "Facility type"
+msgstr "Type faciliteit"
+
+#: app/controllers/FacilityController.php:115
+#: app/controllers/PersonController.php:234
+#: app/controllers/PsfacilityController.php:115
+#: app/controllers/TrainingController.php:1005
+msgid ""
+"That city does not appear to be located in the chosen region. If you want to "
+"create a new city, check the new city box."
+msgstr ""
+"Deze stad lijkt niet in de gekozen regio voor te komen. Als u een nieuwe "
+"stad wilt aanmaken, gebruik het veld nieuwe stad."
+
+#: app/controllers/FacilityController.php:120
+#: app/controllers/PsfacilityController.php:120
+msgid "The facility could not be saved."
+msgstr "De faciliteit kon niet worden opgeslagen."
+
+#: app/controllers/FacilityController.php:126
+#: app/controllers/PersonController.php:246
+#: app/controllers/PsfacilityController.php:126
+#: app/controllers/TrainingController.php:1014
+msgid "Could not save that city."
+msgstr "Kon deze stad niet opslaan."
+
+#: app/controllers/FacilityController.php:156
+#: app/controllers/FacilityController.php:160
+#: app/controllers/FacilityController.php:161
+#: app/controllers/PsfacilityController.php:161
+msgid "The facility was saved."
+msgstr "De faciliteit is opgeslagen."
+
+#: app/controllers/FacilityController.php:166
+#: app/controllers/PsfacilityController.php:164
+msgid "ERROR: The facility could not be saved."
+msgstr "FOUT: De faciliteit kan niet worden opgeslagen."
+
+#: app/controllers/FacilityController.php:270
+#: app/controllers/PsfacilityController.php:267
+msgid "That facility was deleted."
+msgstr "Die faciliteit is verwijderd."
+
+#: app/controllers/FacilityController.php:272
+#: app/controllers/PsfacilityController.php:269
+msgid "That facility could not be found."
+msgstr "Die faciliteit kon niet worden gevonden."
+
+#: app/controllers/FacilityController.php:274
+#: app/controllers/PsfacilityController.php:271
+msgid "That facility is in use and could not be deleted."
+msgstr "Die faciliteit is in gebruik en kan niet worden verwijderd."
+
+#: app/controllers/FacilityController.php:298
+#: app/controllers/PsfacilityController.php:295
+msgid "That location was deleted."
+msgstr "Deze locatie is verwijderd."
+
+#: app/controllers/FacilityController.php:300
+#: app/controllers/PsfacilityController.php:297
+msgid "That location could not be found."
+msgstr "Deze locatie kon niet worden gevonden. "
+
+#: app/controllers/FacilityController.php:302
+#: app/controllers/PsfacilityController.php:299
+msgid "That location is in use and could not be deleted."
+msgstr "Deze locatie is in gebruik en kan niet worden verwijderd."
+
+#: app/controllers/IndexController.php:38
+#: app/views/scripts/training/roster.phtml:29
+msgid "Course Name"
+msgstr "Naam cursus."
+
+#: app/controllers/IndexController.php:38
+#: app/views/scripts/evaluation/assign-evaluation.phtml:47
+#: app/views/scripts/person/assign-training.phtml:55
+#: app/views/scripts/person/edit-body-addtl.phtml:222
+#: app/views/scripts/person/edit-body-bad.phtml:430
+#: app/views/scripts/person/edit-body-bad.phtml:484
+#: app/views/scripts/person/edit-body-bad.phtml:528
+#: app/views/scripts/person/edit-body-class-history.phtml:23
+#: app/views/scripts/person/edit-body-exclass-history.phtml:13
+#: app/views/scripts/person/edit-body-rec.phtml:42
+#: app/views/scripts/person/view.phtml:193
+#: app/views/scripts/person/view.phtml:221
+#: app/views/scripts/reportpreservice/coursebyname.phtml:335
+#: app/views/scripts/reports/training-unknown.phtml:370
+#: app/views/scripts/reports/trainings.phtml:338
+msgid "Start Date"
+msgstr "Begindatum"
+
+#: app/controllers/IndexController.php:38
+#: app/controllers/ReportsController.php:3778
+#: app/views/scripts/training/roster.phtml:34
+msgid "Training Center"
+msgstr "Training Centrum."
+
+#: app/controllers/IndexController.php:38
+msgid "Created By"
+msgstr "Aangemaakt door"
+
+#: app/controllers/IndexController.php:80
+msgid "Message"
+msgstr "Boodschap"
+
+#: app/controllers/ITechController.php:299
+msgid "You do not have access rights to the requested action."
+msgstr "U heeft geen toegangsrechten tot de gevraagde handeling."
+
+#: app/controllers/PersonController.php:61
+msgid "That person was deleted."
+msgstr "Die persoon is verwijderd."
+
+#: app/controllers/PersonController.php:63
+msgid "That person could not be found."
+msgstr "Die persoon kon niet worden gevonden."
+
+#: app/controllers/PersonController.php:65
+msgid ""
+"That person is an active participant or trainer and could not be deleted."
+msgstr ""
+"Die persoon is een actieve participant of trainer en kan niet worden gewist."
+
+#: app/controllers/PersonController.php:151
+msgid "The person was saved. Refreshing history..."
+msgstr "De persoon is opgeslagen. Geschiedenis wordt verversd..."
+
+#: app/controllers/PersonController.php:152
+#: app/controllers/PersonController.php:296
+msgid "The person was saved."
+msgstr "De persoon is opgeslagen."
+
+#: app/controllers/PersonController.php:162
+#: app/controllers/ReportpreserviceController.php:31
+#: app/controllers/ReportsController.php:67
+#: app/views/helpers/ITechTranslate.php:132
+#: app/views/scripts/person/edit-body-bad.phtml:56
+#: app/views/scripts/person/edit-body-bad.phtml:92
+#: app/views/scripts/person/edit-body.phtml:169
+#: app/views/scripts/person/edit-body.phtml:328
+#: app/views/scripts/person/search.phtml:141
+#: app/views/scripts/person/view.phtml:47
+#: app/views/scripts/reports/needs-by-person-name.phtml:332
+#: app/views/scripts/reports/participants-by-facility-type.phtml:164
+#: app/views/scripts/reports/participants-by-facility-type.phtml:364
+#: app/views/scripts/reports/participants-by-training.phtml:256
+#: app/views/scripts/reports/participants-by-training.phtml:548
+#: app/views/scripts/reports/people-by-facility.phtml:313
+#: app/views/scripts/reports/training-unknown.phtml:154
+msgid "Gender"
+msgstr "Geslacht"
+
+#: app/controllers/PersonController.php:163
+#: app/views/scripts/person/edit-body-addtl.phtml:58
+#: app/views/scripts/person/edit-body-bad.phtml:297
+#: app/views/scripts/person/view.phtml:88
+msgid "Professional qualification"
+msgstr "Professionele bevoegdheid"
+
+#: app/controllers/PersonController.php:170
+#: app/views/helpers/ITechTranslate.php:129
+#: app/views/scripts/person/search.phtml:142
+#: app/views/scripts/training/_template_editform.phtml:751
+msgid "Birthdate"
+msgstr "Geboortedatum"
+
+#: app/controllers/PersonController.php:174
+#: app/views/scripts/person/edit-body-addtl.phtml:165
+#: app/views/scripts/person/edit-body-bad.phtml:380
+#: app/views/scripts/reports/trainers.phtml:35
+msgid "Trainer type"
+msgstr "Type trainer"
+
+#: app/controllers/PersonController.php:180
+#: app/views/scripts/reports/trainers.phtml:44
+msgid "Trainer skill"
+msgstr "Vaardigheid trainer"
+
+#: app/controllers/PersonController.php:193
+msgid "Enter a reason, or select a different reason above."
+msgstr "Voer een reden in of kies een andere reden hierboven."
+
+#: app/controllers/PersonController.php:197
+msgid "You can not type in a reason with the reason selected above."
+msgstr "U kan geen reden invoeren met de hierboven geselecteerde reden."
+
+#: app/controllers/PersonController.php:204
+#: app/controllers/TrainingController.php:735
+#: app/controllers/TrainingController.php:737
+#: app/controllers/TrainingController.php:739
+#: app/controllers/TrainingController.php:1264
+#: app/views/helpers/ITechTranslate.php:126
+#: app/views/scripts/facility/addfacility-form.phtml:2
+#: app/views/scripts/facility/edit.phtml:21
+#: app/views/scripts/person/edit-body-addtl.phtml:3
+#: app/views/scripts/person/edit-body-addtl.phtml:16
+#: app/views/scripts/person/edit-body-bad.phtml:193
+#: app/views/scripts/person/edit-body.phtml:170
+#: app/views/scripts/person/search.phtml:38
+#: app/views/scripts/person/view.phtml:66
+#: app/views/scripts/psfacility/addfacility-form.phtml:2
+#: app/views/scripts/psfacility/edit.phtml:21
+#: app/views/scripts/reports/facilities.phtml:4
+#: app/views/scripts/reports/facilities.phtml:36
+#: app/views/scripts/reports/facilities.phtml:53
+#: app/views/scripts/reports/needs-by-person-name.phtml:47
+#: app/views/scripts/reports/needs-by-person-name.phtml:347
+#: app/views/scripts/reports/participants-by-facility-type.phtml:63
+#: app/views/scripts/reports/participants-by-facility-type.phtml:382
+#: app/views/scripts/reports/participants-by-training.phtml:52
+#: app/views/scripts/reports/participants-by-training.phtml:566
+#: app/views/scripts/reports/people-by-facility.phtml:70
+#: app/views/scripts/reports/people-by-facility.phtml:325
+#: app/views/scripts/training/_template_editform.phtml:752
+msgid "Facility"
+msgstr "Faciliteit"
+
+#: app/controllers/PersonController.php:218
+msgid "That facility name could not be found."
+msgstr "Die faciliteitsnaam kon niet worden gevonden."
+
+#: app/controllers/PersonController.php:295
+msgid "The person was saved. Refreshing change history..."
+msgstr "De persoon is opgeslagen. Vervangingsgeschiedenis wordt verversd...."
+
+#: app/controllers/PersonController.php:316
+#: app/controllers/UserController.php:100
+msgid "New Account Created"
+msgstr "Nieuw account aangemaakt"
+
+#: app/controllers/PersonController.php:336
+msgid "The trainer information could not be saved."
+msgstr "De informatie voor de trainer kon niet worden opgeslagen."
+
+#: app/controllers/PersonController.php:374
+msgid "ERROR: The person could not be saved."
+msgstr "FOUT: De persoon kon niet worden opgeslagen."
+
+#: app/controllers/PersonController.php:939
+msgid "No trainings selected."
+msgstr "Geen trainingen geslecteerd."
+
+#: app/controllers/ReportpreserviceController.php:31
+#: app/controllers/ReportsController.php:67
+#: app/views/scripts/reportpreservice/coursebyname.phtml:330
+#: app/views/scripts/reports/training-unknown.phtml:365
+#: app/views/scripts/reports/trainings.phtml:333
+msgid "Count"
+msgstr "Aantallen"
+
+#: app/controllers/ReportpreserviceController.php:31
+#: app/controllers/ReportsController.php:67
+#: app/views/scripts/reports/trainers.phtml:152
+msgid "Language"
+msgstr "Taal"
+
+#: app/controllers/ReportpreserviceController.php:31
+#: app/controllers/ReportsController.php:67
+#: app/controllers/TrainingController.php:1266
+#: app/views/scripts/evaluation/assign-evaluation.phtml:49
+#: app/views/scripts/external/add.phtml:45
+#: app/views/scripts/facility/view-location.phtml:21
+#: app/views/scripts/person/assign-training.phtml:57
+#: app/views/scripts/person/edit-body-addtl.phtml:224
+#: app/views/scripts/person/edit-body-bad.phtml:432
+#: app/views/scripts/person/edit-body-bad.phtml:531
+#: app/views/scripts/person/edit-body-class-history.phtml:26
+#: app/views/scripts/person/edit-body-exclass-history.phtml:15
+#: app/views/scripts/person/view.phtml:195
+#: app/views/scripts/person/view.phtml:223
+#: app/views/scripts/psfacility/view-location.phtml:21
+#: app/views/scripts/reportpreservice/coursebyname.phtml:356
+#: app/views/scripts/reports/training-unknown.phtml:391
+#: app/views/scripts/reports/trainings.phtml:359
+msgid "Location"
+msgstr "Locatie"
+
+#: app/controllers/ReportpreserviceController.php:31
+#: app/controllers/ReportsController.php:67
+#: app/views/helpers/ITechTranslate.php:154
+#: app/views/scripts/external/add.phtml:25
+#: app/views/scripts/person/edit-body-history-table.phtml:12
+#: app/views/scripts/reportpreservice/studentname.phtml:309
+#: app/views/scripts/reports/facilities.phtml:312
+#: app/views/scripts/reports/participants-by-facility-type.phtml:392
+#: app/views/scripts/reports/participants-by-training.phtml:545
+#: app/views/scripts/reports/people-by-facility.phtml:310
+msgid "Date"
+msgstr "Datum"
+
+#: app/controllers/ReportpreserviceController.php:31
+#: app/controllers/ReportsController.php:67
+#: app/views/scripts/nav-admin.phtml:20 app/views/scripts/nav-admin.phtml:85
+#: app/views/scripts/reports/needs-by-person-name.phtml:359
+#: app/views/scripts/reports/people-by-facility.phtml:334
+msgid "Training Topic"
+msgstr "Onderwerp training"
+
+#: app/controllers/ReportpreserviceController.php:31
+#: app/controllers/ReportsController.php:67
+#: app/views/scripts/nav-admin.phtml:22 app/views/scripts/nav-admin.phtml:51
+#: app/views/scripts/nav-admin.phtml:87
+#: app/views/scripts/reportpreservice/coursebyname.phtml:148
+#: app/views/scripts/reportpreservice/coursebyname.phtml:374
+#: app/views/scripts/reports/participants-by-facility-type.phtml:149
+#: app/views/scripts/reports/participants-by-training.phtml:227
+#: app/views/scripts/reports/participants-by-training.phtml:607
+#: app/views/scripts/reports/training-unknown.phtml:175
+#: app/views/scripts/reports/training-unknown.phtml:421
+#: app/views/scripts/reports/trainings.phtml:150
+#: app/views/scripts/reports/trainings.phtml:377
+#: app/views/scripts/training/_template_editform.phtml:439
+msgid "Funding"
+msgstr "Financiering"
+
+#: app/controllers/ReportpreserviceController.php:31
+#: app/controllers/ReportsController.php:67
+#: app/views/scripts/reportpreservice/coursebyname.phtml:377
+#: app/views/scripts/reportpreservice/studentname.phtml:351
+#: app/views/scripts/reports/facilities.phtml:351
+#: app/views/scripts/reports/participants-by-facility-type.phtml:408
+#: app/views/scripts/reports/participants-by-training.phtml:613
+#: app/views/scripts/reports/training-unknown.phtml:424
+#: app/views/scripts/reports/trainings.phtml:380
+msgid "TOT"
+msgstr "Training voor Trainers"
+
+#: app/controllers/ReportpreserviceController.php:31
+#: app/controllers/ReportsController.php:67
+#: app/views/scripts/facility/search.phtml:24
+#: app/views/scripts/facility/search.phtml:100
+#: app/views/scripts/psfacility/search.phtml:24
+#: app/views/scripts/psfacility/search.phtml:100
+#: app/views/scripts/reportpreservice/studentname.phtml:312
+#: app/views/scripts/reports/facilities.phtml:315
+msgid "Facility Name"
+msgstr "Naam Faciliteit"
+
+#: app/controllers/ReportpreserviceController.php:31
+#: app/controllers/ReportsController.php:67
+#: app/views/scripts/facility/search.phtml:44
+#: app/views/scripts/psfacility/search.phtml:44
+#: app/views/scripts/reportpreservice/studentname.phtml:315
+#: app/views/scripts/reports/facilities.phtml:66
+#: app/views/scripts/reports/facilities.phtml:318
+#: app/views/scripts/reports/participants-by-facility-type.phtml:76
+msgid "Facility Type"
+msgstr "Type Faciliteit"
+
+#: app/controllers/ReportpreserviceController.php:31
+#: app/controllers/ReportsController.php:67
+#: app/views/scripts/facility/search.phtml:54
+#: app/views/scripts/psfacility/search.phtml:54
+#: app/views/scripts/reportpreservice/studentname.phtml:318
+#: app/views/scripts/reports/facilities.phtml:77
+#: app/views/scripts/reports/facilities.phtml:321
+#: app/views/scripts/reports/participants-by-facility-type.phtml:87
+msgid "Facility Sponsor"
+msgstr "Sponsor Faciliteit"
+
+#: app/controllers/ReportpreserviceController.php:31
+#: app/controllers/ReportsController.php:67
+#: app/views/scripts/reports/needs-by-person-name.phtml:145
+msgid "Recommended classes"
+msgstr "Aanbevolen lessen"
+
+#: app/controllers/ReportpreserviceController.php:31
+#: app/controllers/ReportsController.php:67
+#: app/views/scripts/reports/needs-by-person-name.phtml:365
+#: app/views/scripts/reports/people-by-facility.phtml:337
+msgid "Recommended"
+msgstr "Aanbevolen"
+
+#: app/controllers/ReportpreserviceController.php:31
+#: app/controllers/ReportpreserviceController.php:34
+#: app/controllers/ReportsController.php:67
+#: app/controllers/ReportsController.php:70
+#: app/views/helpers/ITechTranslate.php:166
+#: app/views/scripts/person/search.phtml:55
+#: app/views/scripts/person/search.phtml:143
+#: app/views/scripts/reports/needs-by-person-name.phtml:61
+#: app/views/scripts/reports/needs-by-person-name.phtml:72
+#: app/views/scripts/reports/needs-by-person-name.phtml:353
+#: app/views/scripts/reports/needs-by-person-name.phtml:356
+#: app/views/scripts/reports/participants-by-category.phtml:22
+#: app/views/scripts/reports/participants-by-training.phtml:82
+#: app/views/scripts/reports/participants-by-training.phtml:95
+#: app/views/scripts/reports/participants-by-training.phtml:106
+#: app/views/scripts/reports/participants-by-training.phtml:572
+#: app/views/scripts/reports/participants-by-training.phtml:575
+#: app/views/scripts/reports/participants-by-training.phtml:578
+#: app/views/scripts/reports/people-by-facility.phtml:95
+#: app/views/scripts/reports/people-by-facility.phtml:331
+#: app/views/scripts/reports/training-unknown.phtml:136
+#: app/views/scripts/reports/training-unknown.phtml:400
+msgid "Qualification"
+msgstr "Bevoegdheid"
+
+#: app/controllers/ReportpreserviceController.php:31
+#: app/controllers/ReportsController.php:67
+#: app/views/scripts/reports/needs-by-person-name.phtml:353
+#: app/views/scripts/reports/participants-by-training.phtml:575
+msgid "(primary)"
+msgstr "(primaire)"
+
+#: app/controllers/ReportpreserviceController.php:31
+#: app/controllers/ReportsController.php:67
+#: app/views/scripts/reports/needs-by-person-name.phtml:356
+#: app/views/scripts/reports/participants-by-training.phtml:578
+msgid "(secondary)"
+msgstr "(secundaire)"
+
+#: app/controllers/ReportpreserviceController.php:31
+#: app/controllers/ReportsController.php:67
+#: app/views/scripts/person/edit-body-addtl.phtml:223
+#: app/views/scripts/person/edit-body-bad.phtml:431
+#: app/views/scripts/person/edit-body-bad.phtml:485
+#: app/views/scripts/person/edit-body-bad.phtml:529
+#: app/views/scripts/person/edit-body-class-history.phtml:24
+#: app/views/scripts/person/edit-body-exclass-history.phtml:12
+#: app/views/scripts/person/edit-body-rec.phtml:43
+#: app/views/scripts/person/view.phtml:194
+#: app/views/scripts/person/view.phtml:222
+#: app/views/scripts/reports/needs-by-person-name.phtml:321
+#: app/views/scripts/reports/participants-by-facility-type.phtml:354
+#: app/views/scripts/reports/participants-by-training.phtml:537
+#: app/views/scripts/reports/people-by-facility.phtml:302
+#: app/views/scripts/reports/trainers.phtml:148
+msgid "Name"
+msgstr "Naam"
+
+#: app/controllers/ReportpreserviceController.php:31
+#: app/controllers/ReportsController.php:67
+#: app/controllers/UserController.php:410
+#: app/views/helpers/ITechTranslate.php:148
+#: app/views/scripts/person/edit-body-addtl.phtml:43
+#: app/views/scripts/person/edit-body-bad.phtml:210
+#: app/views/scripts/person/view.phtml:77
+#: app/views/scripts/reports/needs-by-person-name.phtml:213
+#: app/views/scripts/reports/needs-by-person-name.phtml:324
+#: app/views/scripts/reports/participants-by-facility-type.phtml:195
+#: app/views/scripts/reports/participants-by-facility-type.phtml:357
+#: app/views/scripts/reports/participants-by-training.phtml:297
+#: app/views/scripts/reports/participants-by-training.phtml:540
+#: app/views/scripts/reports/people-by-facility.phtml:176
+#: app/views/scripts/reports/people-by-facility.phtml:305
+#: app/views/scripts/user/search.phtml:37
+msgid "Email"
+msgstr "Email"
+
+#: app/controllers/ReportpreserviceController.php:31
+#: app/controllers/ReportsController.php:67
+#: app/views/scripts/facility/addfacility-form.phtml:31
+#: app/views/scripts/facility/edit.phtml:62
+#: app/views/scripts/facility/view.phtml:56
+#: app/views/scripts/psfacility/addfacility-form.phtml:31
+#: app/views/scripts/psfacility/edit.phtml:62
+#: app/views/scripts/psfacility/view.phtml:56
+#: app/views/scripts/reports/needs-by-person-name.phtml:218
+#: app/views/scripts/reports/needs-by-person-name.phtml:327
+#: app/views/scripts/reports/participants-by-facility-type.phtml:200
+#: app/views/scripts/reports/participants-by-facility-type.phtml:360
+#: app/views/scripts/reports/participants-by-training.phtml:302
+#: app/views/scripts/reports/participants-by-training.phtml:543
+#: app/views/scripts/reports/people-by-facility.phtml:181
+#: app/views/scripts/reports/people-by-facility.phtml:308
+msgid "Phone"
+msgstr "Telefoon"
+
+#: app/controllers/ReportpreserviceController.php:31
+#: app/controllers/ReportsController.php:67
+#: app/views/scripts/reports/participants-by-category.phtml:122
+msgid "Category"
+msgstr "Categorie"
+
+#: app/controllers/ReportpreserviceController.php:31
+#: app/controllers/ReportsController.php:67
+#: app/views/scripts/evaluation/add-copy.phtml:23
+#: app/views/scripts/facility/search.phtml:108
+#: app/views/scripts/psfacility/search.phtml:108
+#: app/views/scripts/reports/evaluations_results.phtml:49
+#: app/views/scripts/reports/participants-by-facility-type.phtml:385
+#: app/views/scripts/reports/trainers.phtml:150
+msgid "Type"
+msgstr "Type"
+
+#: app/controllers/ReportpreserviceController.php:31
+#: app/controllers/ReportsController.php:67
+#: app/views/scripts/reports/trainers.phtml:151
+msgid "Skill"
+msgstr "Vaardigheid"
+
+#: app/controllers/ReportpreserviceController.php:31
+#: app/controllers/ReportsController.php:67
+#: app/views/scripts/reports/trainers.phtml:159
+msgid "Topics Taught"
+msgstr "Onderwezen onderwerpen "
+
+#: app/controllers/ReportpreserviceController.php:31
+#: app/controllers/ReportsController.php:67
+msgid "Work Phone"
+msgstr "Telefoon Werk"
+
+#: app/controllers/ReportpreserviceController.php:31
+#: app/controllers/ReportsController.php:67
+msgid "Home Phone"
+msgstr "Telefoon Thuis"
+
+#: app/controllers/ReportpreserviceController.php:31
+#: app/controllers/ReportsController.php:67
+msgid "Mobile Phone"
+msgstr "Telefoon Mobiel"
+
+#: app/controllers/ReportpreserviceController.php:34
+#: app/controllers/ReportsController.php:70
+#: app/views/scripts/index/index.phtml:29
+#: app/views/scripts/reportpreservice/coursebyname.phtml:256
+#: app/views/scripts/reportpreservice/coursebyname.phtml:398
+#: app/views/scripts/reportpreservice/studentname.phtml:252
+#: app/views/scripts/reports/facilities.phtml:257
+#: app/views/scripts/reports/participants-by-category.phtml:123
+#: app/views/scripts/reports/participants-by-facility-type.phtml:267
+#: app/views/scripts/reports/people-by-facility.phtml:225
+#: app/views/scripts/reports/training-unknown.phtml:280
+#: app/views/scripts/reports/training-unknown.phtml:445
+#: app/views/scripts/reports/trainings.phtml:259
+#: app/views/scripts/reports/trainings.phtml:401
+msgid "Participants"
+msgstr "Participanten"
+
+#: app/controllers/ReportpreserviceController.php:34
+#: app/controllers/ReportsController.php:70
+#: app/views/scripts/reports/participants-by-category.phtml:124
+msgid "Unique Participants"
+msgstr "Eenmalige participanten"
+
+#: app/controllers/ReportpreserviceController.php:231
+#: app/controllers/ReportsController.php:301
+#: app/controllers/ReportsController.php:305
+#: app/controllers/ReportsController.php:815
+#: app/controllers/ReportsController.php:819
+#: app/controllers/ReportsController.php:1315
+#: app/controllers/ReportsController.php:1933
+#: app/controllers/ReportsController.php:2697
+msgid "Yes"
+msgstr "Ja"
+
+#: app/controllers/ReportpreserviceController.php:231
+#: app/controllers/ReportsController.php:301
+#: app/controllers/ReportsController.php:305
+#: app/controllers/ReportsController.php:815
+#: app/controllers/ReportsController.php:819
+#: app/controllers/ReportsController.php:1315
+#: app/controllers/ReportsController.php:1933
+#: app/controllers/ReportsController.php:2697
+msgid "No"
+msgstr "Nee"
+
+#: app/controllers/ReportsController.php:1134
+#: app/views/scripts/person/edit-body-bad.phtml:59
+#: app/views/scripts/person/edit-body.phtml:331
+#: app/views/scripts/person/view.phtml:50
+#: app/views/scripts/reports/training-unknown.phtml:396
+#: app/views/scripts/training/_template_editform.phtml:1003
+msgid "Unknown"
+msgstr "Onbekend"
+
+#: app/controllers/ReportsController.php:1135
+#: app/views/scripts/person/edit-body-bad.phtml:57
+#: app/views/scripts/person/edit-body.phtml:329
+#: app/views/scripts/person/view.phtml:48
+#: app/views/scripts/reports/training-unknown.phtml:394
+#: app/views/scripts/training/_template_editform.phtml:1002
+msgid "Female"
+msgstr "Vrouwelijk"
+
+#: app/controllers/ReportsController.php:1136
+#: app/views/scripts/person/edit-body-bad.phtml:58
+#: app/views/scripts/person/edit-body.phtml:330
+#: app/views/scripts/person/view.phtml:49
+#: app/views/scripts/reports/training-unknown.phtml:395
+#: app/views/scripts/training/_template_editform.phtml:1001
+msgid "Male"
+msgstr "Mannelijk"
+
+#: app/controllers/ReportsController.php:3779
+msgid "Dates"
+msgstr "Data"
+
+#: app/controllers/ReportsController.php:3780
+#: app/views/scripts/training/roster.phtml:38
+msgid "Course Length"
+msgstr "Lengte cursus"
+
+#: app/controllers/ReportsController.php:3796
+#: app/views/scripts/training/roster.phtml:67
+msgid "Course Trainers"
+msgstr "Cursus trainers"
+
+#: app/controllers/ReportsController.php:3800
+#: app/controllers/TrainingController.php:1256
+msgid "Days"
+msgstr "Dagen"
+
+#: app/controllers/ReportsController.php:3823
+#: app/views/scripts/training/roster.phtml:79
+msgid "Course Participants"
+msgstr "Cursus participanten"
+
+#: app/controllers/ReportsController.php:3829
+#: app/controllers/TrainingController.php:735
+#: app/controllers/TrainingController.php:737
+#: app/controllers/TrainingController.php:739
+#: app/controllers/TrainingController.php:1264
+#: app/views/scripts/person/edit-body-bad.phtml:91
+#: app/views/scripts/person/edit-body.phtml:168
+msgid "Date of Birth"
+msgstr "Geboortedatum"
+
+#: app/controllers/ReportsController.php:3835
+#: app/views/scripts/reports/training-unknown.phtml:399
+msgid "Primary Qualification"
+msgstr "Primaire bevoegdheid"
+
+#: app/controllers/ReportsController.php:3836
+msgid "Secondary Qualification"
+msgstr "Secundaire bevoegdheid"
+
+#: app/controllers/ReportsController.php:3839
+#: app/controllers/TrainingController.php:764
+#: app/views/scripts/reports/participants-by-training.phtml:616
+msgid "Pre-Test"
+msgstr "Pre-test"
+
+#: app/controllers/ReportsController.php:3840
+#: app/controllers/TrainingController.php:766
+#: app/views/scripts/reports/participants-by-training.phtml:617
+msgid "Post-Test"
+msgstr "Post-test"
+
+#: app/controllers/ReportsController.php:3841
+msgid "Change in Score"
+msgstr "Verandering in resultaat"
+
+#: app/controllers/SyncController.php:73
+msgid "There was a problem with file types <code>"
+msgstr "Er was een probleem met bestandstypen <code>"
+
+#: app/controllers/SyncController.php:80
+msgid "There was a problem creating <code>"
+msgstr "Er was een probleem met aanmaken <code>"
+
+#: app/controllers/SyncController.php:85
+msgid "There was a problem moving files <code>"
+msgstr "Er was een pobleem met het verplaasten van bestanden <code>"
+
+#: app/controllers/SyncController.php:132
+msgid "Sync database file uploaded."
+msgstr "Gesynchroniseerd database bestand upgeload"
+
+#: app/controllers/SyncController.php:137
+msgid "Invalid desktop database file"
+msgstr "Ongeldig desktop database bestand "
+
+#: app/controllers/SyncController.php:152
+#: app/controllers/SyncController.php:195
+msgid "Please upload a file to continue"
+msgstr "Upload een bestand om door te gaan, aub"
+
+#: app/controllers/SyncController.php:265
+msgid "Done"
+msgstr "Klaar"
+
+#: app/controllers/TrainingController.php:51 app/views/scripts/header.phtml:22
+#: app/views/scripts/reportpreservice/coursebyname.phtml:258
+#: app/views/scripts/reports/training-unknown.phtml:282
+#: app/views/scripts/reports/trainings.phtml:261
+msgid "Add New Training"
+msgstr "Voeg nieuwe training toe"
+
+#: app/controllers/TrainingController.php:60
+#: app/controllers/TrainingController.php:65 app/views/scripts/header.phtml:21
+msgid "View/Edit Training"
+msgstr "Bekijk/Bewerk Training"
+
+#: app/controllers/TrainingController.php:72
+#: app/controllers/TrainingController.php:125
+#: app/views/scripts/header.phtml:27
+msgid "View Training"
+msgstr "Bekijk training"
+
+#: app/controllers/TrainingController.php:152
+msgid "Training Length"
+msgstr "Lengte Training"
+
+#: app/controllers/TrainingController.php:153
+msgid "Training Interval"
+msgstr "Training Interval"
+
+#: app/controllers/TrainingController.php:162
+msgid "Training length is required."
+msgstr "Lengte training is verplicht"
+
+#: app/controllers/TrainingController.php:168
+#: app/controllers/TrainingController.php:175
+msgid "must be numeric."
+msgstr "moet een nummer zijn"
+
+#: app/controllers/TrainingController.php:170
+#: app/controllers/TrainingController.php:177
+msgid "must be between 1-100."
+msgstr "moet tussen 1-100 zijn"
+
+#: app/controllers/TrainingController.php:187
+msgid "Training end"
+msgstr "Einde training"
+
+#: app/controllers/TrainingController.php:192
+msgid "End date must be after start date."
+msgstr "Einddatum moet na begindatum komen"
+
+#: app/controllers/TrainingController.php:224
+msgid "Number of days is required."
+msgstr "Aantal dagen is verplicht"
+
+#: app/controllers/TrainingController.php:248
+#, php-format
+msgid "Total training length is %s, but PEPFAR category total is %d days. "
+msgstr "Totale lengte training is %s, maar totaal PEPFAR categorie is %d dagen "
+
+#: app/controllers/TrainingController.php:248
+msgid "day"
+msgstr "dag"
+
+#: app/controllers/TrainingController.php:248
+#: app/views/scripts/external/add.phtml:42
+#: app/views/scripts/training/_template_editform.phtml:285
+#: app/views/scripts/training/_template_editform.phtml:362
+#: app/views/scripts/training/_template_editform.phtml:581
+msgid "days"
+msgstr "dagen"
+
+#: app/controllers/TrainingController.php:294
+msgid ""
+"This training session could not be deleted. Some participants or trainers "
+"may still be attached."
+msgstr ""
+"Deze trainingsessie kon niet worden verwijderd. Sommige participanten of "
+"trainers zijn nog steeds aan de training verbonden."
+
+#: app/controllers/TrainingController.php:300
+msgid "This training session could not be saved."
+msgstr "Deze trainingsessie kon niet worden opgeslagen."
+
+#: app/controllers/TrainingController.php:460
+msgid "This training session has been saved."
+msgstr "Deze trainingsessie is opgeslagen."
+
+#: app/controllers/TrainingController.php:533
+#: app/views/helpers/DropDown.php:101
+msgid "Please enter your new"
+msgstr "Voer aub in uw nieuwe"
+
+#: app/controllers/TrainingController.php:533
+#: app/views/helpers/DropDown.php:101
+#: app/views/scripts/training/_template_editform.phtml:319
+#: app/views/scripts/training/_template_editform.phtml:387
+#: app/views/scripts/training/_template_editform.phtml:444
+msgid "Insert new"
+msgstr "Voeg in nieuw"
+
+#: app/controllers/TrainingController.php:768
+#: app/views/scripts/training/scores.phtml:27
+msgid "Scores"
+msgstr "Resultaten"
+
+#: app/controllers/TrainingController.php:799
+msgid ""
+"Training session has been duplicated.<br>You can edit the duplicate session "
+"below."
+msgstr ""
+"De training sessie is opnieuw ingevoerd. <br> U kan de duplicaat sessie "
+"hieronder bewerken."
+
+#: app/controllers/TrainingController.php:860
+msgid "already exists"
+msgstr "bestaat al"
+
+#: app/controllers/TrainingController.php:912
+msgid "This trainer is already in this training session."
+msgstr "Deze trainer is al in deze trainingsessie"
+
+#: app/controllers/TrainingController.php:932
+msgid "Could not update this record."
+msgstr "Kon deze vermelding niet updaten."
+
+#: app/controllers/TrainingController.php:949
+msgid "This participant is already in this training session."
+msgstr "Deze participant is al in deze trainingsessie"
+
+#: app/controllers/TrainingController.php:1043
+#: app/controllers/TrainingController.php:1044
+msgid "The training center has been updated."
+msgstr "Het trainingscentrum is bijgewerkt."
+
+#: app/controllers/TrainingController.php:1052
+#: app/controllers/TrainingController.php:1053
+msgid "The training center has been saved."
+msgstr "Het trainingscentrum is opgeslagen."
+
+#: app/controllers/TrainingController.php:1065
+msgid "The training center could not be saved."
+msgstr "Het trainingscentrum kon niet worden opgeslagen."
+
+#: app/controllers/TrainingController.php:1178
+msgid "Label"
+msgstr "Label"
+
+#: app/controllers/TrainingController.php:1178
+msgid "Score"
+msgstr "Resultaat"
+
+#: app/controllers/TrainingController.php:1337
+#: app/views/helpers/DropDown.php:57
+#: app/views/scripts/evaluation/add-copy.phtml:25
+#: app/views/scripts/facility/view-location.phtml:26
+#: app/views/scripts/psfacility/view-location.phtml:26
+#: app/views/scripts/reportpreservice/coursebyname.phtml:115
+#: app/views/scripts/reports/evaluations.phtml:24
+#: app/views/scripts/reports/facilities.phtml:124
+#: app/views/scripts/reports/roster.phtml:29
+#: app/views/scripts/reports/training-unknown.phtml:114
+#: app/views/scripts/reports/trainings.phtml:114
+#: app/views/scripts/training/_template_editform.phtml:202
+#: app/views/scripts/training/_template_editform.phtml:300
+msgid "select"
+msgstr "kies"
+
+#: app/controllers/TrainingPartnerController.php:109
+#: app/controllers/TrainingPartnerController.php:202
+msgid "That partner could not be found."
+msgstr "Die partner kon niet worden gevonden."
+
+#: app/controllers/TrainingPartnerController.php:130
+#: app/controllers/TrainingPartnerController.php:134
+msgid "The partner was saved."
+msgstr "De partner is opgeslagen."
+
+#: app/controllers/TrainingPartnerController.php:138
+#: app/controllers/TrainingPartnerController.php:167
+msgid "ERROR: The partner could not be saved."
+msgstr "FOUT: De partner kon niet worden opgeslagen."
+
+#: app/controllers/TrainingPartnerController.php:200
+msgid "That partner was deleted."
+msgstr "Die partner is verwijderd."
+
+#: app/controllers/TrainingPartnerController.php:204
+msgid "That partner is in use and could not be deleted."
+msgstr "Die partner is in gebruik en kan niet worden gewist."
+
+#: app/controllers/UserController.php:291
+msgid "Password Changed"
+msgstr "Wachtwoord veranderd"
+
+#: app/controllers/UserController.php:407
+msgid "Starting..."
+msgstr "Beginnend...."
+
+#: app/controllers/UserController.php:449
+msgid "Password Change Requested"
+msgstr "Verandering Wachtwoord Verzocht "
+
+#: app/controllers/UserController.php:512 app/views/scripts/user/edit.phtml:50
+#: app/views/scripts/user/forgot-password.phtml:4
+#: app/views/scripts/user/login.phtml:4 app/views/scripts/user/login.phtml:18
+#: app/views/scripts/user/myaccount.phtml:25
+#: app/views/scripts/user/_add_form.phtml:33
+msgid "Login"
+msgstr "Inloggen"
+
+#: app/controllers/UserController.php:512
+#: app/views/scripts/index/index.phtml:110
+#: app/views/scripts/user/login.phtml:23
+#: app/views/scripts/user/_add_form.phtml:35
+msgid "Password"
+msgstr "Wachtwoord"
+
+#: app/controllers/UserController.php:513
+msgid "The system could not log you in."
+msgstr "Het systeem kon u niet inloggen"
+
+#: app/controllers/UserController.php:535
+msgid "That user account has been disabled."
+msgstr "Dit gebruikers account is onklaar gemaakt."
+
+#: app/controllers/UserController.php:556
+#: app/controllers/UserController.php:561
+msgid "That username or password is invalid."
+msgstr "Gebruikersnaam of wachtwoord ongeldig"
+
+#: app/models/ValidationContainer.php:40
+msgid "required"
+msgstr "verplicht"
+
+#: app/models/ValidationContainer.php:70
+msgid "is not a valid date"
+msgstr "is geen geldige datum"
+
+#: app/models/table/TrainingApprovalHistory.php:64
+msgid "Training Approved"
+msgstr "Training goedgekeurd"
+
+#: app/models/table/TrainingApprovalHistory.php:69
+msgid "Training Rejected"
+msgstr "Training Afgekeurd"
+
+#: app/models/table/TrainingApprovalHistory.php:74
+msgid "Training Resubmitted"
+msgstr "Training Weer Gestuurd"
+
+#: app/views/helpers/Calendar.php:420 app/views/helpers/Calendar.php:441
+msgid "Sunday"
+msgstr "Zondag"
+
+#: app/views/helpers/Calendar.php:423
+msgid "Monday"
+msgstr "Maandag"
+
+#: app/views/helpers/Calendar.php:426
+msgid "Tuesday"
+msgstr "Dinsdag"
+
+#: app/views/helpers/Calendar.php:429
+msgid "Wednesday"
+msgstr "Woensdag"
+
+#: app/views/helpers/Calendar.php:432
+msgid "Thursday"
+msgstr "Donderdag"
+
+#: app/views/helpers/Calendar.php:435
+msgid "Friday"
+msgstr "Vrijdag"
+
+#: app/views/helpers/Calendar.php:438
+msgid "Saturday"
+msgstr "Zaterdag"
+
+#: app/views/helpers/DropDown.php:127 app/views/helpers/Location.php:51
+#: app/views/helpers/Location.php:137 app/views/helpers/Location.php:145
+#: app/views/scripts/admin/people-qual.phtml:7
+#: app/views/scripts/facility/addfacility-form.phtml:37
+#: app/views/scripts/facility/addfacility-form.phtml:47
+#: app/views/scripts/facility/edit.phtml:24
+#: app/views/scripts/facility/edit.phtml:68
+#: app/views/scripts/facility/edit.phtml:78
+#: app/views/scripts/facility/view.phtml:22
+#: app/views/scripts/person/edit-body-addtl.phtml:17
+#: app/views/scripts/person/edit-body-addtl.phtml:59
+#: app/views/scripts/person/edit-body-addtl.phtml:168
+#: app/views/scripts/person/edit-body-addtl.phtml:180
+#: app/views/scripts/person/edit-body-bad.phtml:194
+#: app/views/scripts/person/edit-body-bad.phtml:298
+#: app/views/scripts/person/edit-body-bad.phtml:312
+#: app/views/scripts/person/edit-body-bad.phtml:320
+#: app/views/scripts/person/edit-body-bad.phtml:382
+#: app/views/scripts/person/edit-body-bad.phtml:392
+#: app/views/scripts/person/edit-body-bad.phtml:455
+#: app/views/scripts/person/edit-body-rec.phtml:11
+#: app/views/scripts/psfacility/addfacility-form.phtml:37
+#: app/views/scripts/psfacility/addfacility-form.phtml:47
+#: app/views/scripts/psfacility/edit.phtml:24
+#: app/views/scripts/psfacility/edit.phtml:68
+#: app/views/scripts/psfacility/edit.phtml:78
+#: app/views/scripts/psfacility/view.phtml:22
+#: app/views/scripts/reports/facilities.phtml:40
+#: app/views/scripts/reports/facilities.phtml:57
+#: app/views/scripts/reports/index.phtml:34
+#: app/views/scripts/reports/index.phtml:40
+#: app/views/scripts/reports/index.phtml:70
+#: app/views/scripts/reports/needs-by-person-name.phtml:51
+#: app/views/scripts/reports/needsReportsPicker.phtml:11
+#: app/views/scripts/reports/participants-by-facility-type.phtml:67
+#: app/views/scripts/reports/participants-by-training.phtml:56
+#: app/views/scripts/reports/people-by-facility.phtml:74
+#: app/views/scripts/reports/peopleReportsPicker.phtml:11
+#: app/views/scripts/reports/trainerReportsPicker.phtml:13
+#: app/views/scripts/reports/training-unknown.phtml:41
+#: app/views/scripts/reports/training-unknown.phtml:138
+#: app/views/scripts/reports/trainings.phtml:41
+msgid "choose"
+msgstr "kies"
+
+#: app/views/helpers/DropDown.php:142
+#: app/views/scripts/facility/search-location.phtml:26
+#: app/views/scripts/facility/search.phtml:26
+#: app/views/scripts/facility/search.phtml:47
+#: app/views/scripts/facility/search.phtml:57
+#: app/views/scripts/person/search.phtml:46
+#: app/views/scripts/person/search.phtml:57
+#: app/views/scripts/psfacility/search-location.phtml:26
+#: app/views/scripts/psfacility/search.phtml:26
+#: app/views/scripts/psfacility/search.phtml:47
+#: app/views/scripts/psfacility/search.phtml:57
+#: app/views/scripts/reportpreservice/coursebyname.phtml:84
+#: app/views/scripts/reportpreservice/coursebyname.phtml:202
+#: app/views/scripts/reports/facilities.phtml:70
+#: app/views/scripts/reports/facilities.phtml:81
+#: app/views/scripts/reports/facilities.phtml:107
+#: app/views/scripts/reports/facilities.phtml:148
+#: app/views/scripts/reports/facilities.phtml:163
+#: app/views/scripts/reports/facilities.phtml:175
+#: app/views/scripts/reports/facilities.phtml:186
+#: app/views/scripts/reports/facilities.phtml:198
+#: app/views/scripts/reports/facilities.phtml:213
+#: app/views/scripts/reports/needs-by-person-name.phtml:64
+#: app/views/scripts/reports/needs-by-person-name.phtml:75
+#: app/views/scripts/reports/needs-by-person-name.phtml:109
+#: app/views/scripts/reports/needs-by-person-name.phtml:120
+#: app/views/scripts/reports/needs-by-person-name.phtml:135
+#: app/views/scripts/reports/needs-by-person-name.phtml:150
+#: app/views/scripts/reports/needs-by-person-name.phtml:165
+#: app/views/scripts/reports/needs-by-person-name.phtml:181
+#: app/views/scripts/reports/needs-by-person-name.phtml:193
+#: app/views/scripts/reports/needs-by-person-name.phtml:204
+#: app/views/scripts/reports/participants-by-facility-type.phtml:80
+#: app/views/scripts/reports/participants-by-facility-type.phtml:91
+#: app/views/scripts/reports/participants-by-facility-type.phtml:102
+#: app/views/scripts/reports/participants-by-facility-type.phtml:125
+#: app/views/scripts/reports/participants-by-facility-type.phtml:139
+#: app/views/scripts/reports/participants-by-facility-type.phtml:153
+#: app/views/scripts/reports/participants-by-facility-type.phtml:169
+#: app/views/scripts/reports/participants-by-facility-type.phtml:189
+#: app/views/scripts/reports/participants-by-facility-type.phtml:215
+#: app/views/scripts/reports/participants-by-training.phtml:72
+#: app/views/scripts/reports/participants-by-training.phtml:86
+#: app/views/scripts/reports/participants-by-training.phtml:98
+#: app/views/scripts/reports/participants-by-training.phtml:109
+#: app/views/scripts/reports/participants-by-training.phtml:122
+#: app/views/scripts/reports/participants-by-training.phtml:136
+#: app/views/scripts/reports/participants-by-training.phtml:158
+#: app/views/scripts/reports/participants-by-training.phtml:177
+#: app/views/scripts/reports/participants-by-training.phtml:204
+#: app/views/scripts/reports/participants-by-training.phtml:218
+#: app/views/scripts/reports/participants-by-training.phtml:231
+#: app/views/scripts/reports/participants-by-training.phtml:245
+#: app/views/scripts/reports/participants-by-training.phtml:261
+#: app/views/scripts/reports/participants-by-training.phtml:280
+#: app/views/scripts/reports/participants-by-training.phtml:317
+#: app/views/scripts/reports/people-by-facility.phtml:50
+#: app/views/scripts/reports/people-by-facility.phtml:61
+#: app/views/scripts/reports/people-by-facility.phtml:87
+#: app/views/scripts/reports/people-by-facility.phtml:99
+#: app/views/scripts/reports/people-by-facility.phtml:117
+#: app/views/scripts/reports/people-by-facility.phtml:131
+#: app/views/scripts/reports/people-by-facility.phtml:145
+#: app/views/scripts/reports/people-by-facility.phtml:157
+#: app/views/scripts/reports/people-by-facility.phtml:168
+#: app/views/scripts/reports/trainers.phtml:37
+#: app/views/scripts/reports/trainers.phtml:46
+#: app/views/scripts/reports/trainers.phtml:55
+#: app/views/scripts/reports/training-unknown.phtml:83
+#: app/views/scripts/reports/training-unknown.phtml:226
+#: app/views/scripts/reports/trainings.phtml:83
+#: app/views/scripts/reports/trainings.phtml:204
+#: app/views/scripts/trainingpartner/search-partner.phtml:25
+#: app/views/scripts/trainingpartner/search-partner.phtml:36
+msgid "All"
+msgstr "Alle"
+
+#: app/views/helpers/FileUpload.php:28
+msgid "Filename"
+msgstr "Bestandsnaam"
+
+#: app/views/helpers/FileUpload.php:28
+msgid "Size"
+msgstr "Grootte"
+
+#: app/views/helpers/FileUpload.php:28
+msgid "Author"
+msgstr "Auteur"
+
+#: app/views/helpers/FileUpload.php:28
+msgid "Upload Date"
+msgstr "Opslagdatum"
+
+#: app/views/helpers/FileUpload.php:68
+msgid "Allowed file extensions"
+msgstr "Toegestane bestandsextensies"
+
+#: app/views/helpers/FileUpload.php:69
+msgid "Max upload size: "
+msgstr "Maximale upload grootte: "
+
+#: app/views/helpers/ITechTranslate.php:111
+#: app/views/helpers/ITechTranslate_adds.php:24
+#: app/views/scripts/person/edit-body-bad.phtml:86
+#: app/views/scripts/person/edit-body.phtml:163
+msgid "First Name"
+msgstr "Voornaam"
+
+#: app/views/helpers/ITechTranslate.php:114
+#: app/views/helpers/ITechTranslate_adds.php:25
+msgid "Middle Name"
+msgstr "Tweede naam"
+
+#: app/views/helpers/ITechTranslate.php:117
+#: app/views/helpers/ITechTranslate_adds.php:26
+msgid "Last Name"
+msgstr "Achternaam"
+
+#: app/views/helpers/ITechTranslate.php:120
+msgid "National ID"
+msgstr "Nationale ID"
+
+#: app/views/helpers/ITechTranslate.php:123
+msgid "File Number"
+msgstr "Bestandsnummer"
+
+#: app/views/helpers/ITechTranslate.php:135
+msgid "Phone (work)"
+msgstr "Telefoon (werk)"
+
+#: app/views/helpers/ITechTranslate.php:138
+msgid "Phone (home)"
+msgstr "Telefoon (thuis)"
+
+#: app/views/helpers/ITechTranslate.php:141
+msgid "Phone (mobile)"
+msgstr "Telefoon (mobiel)"
+
+#: app/views/helpers/ITechTranslate.php:144
+#: app/views/scripts/facility/addfacility-form.phtml:33
+#: app/views/scripts/facility/edit.phtml:64
+#: app/views/scripts/facility/view.phtml:58
+#: app/views/scripts/person/edit-body-addtl.phtml:50
+#: app/views/scripts/person/edit-body-bad.phtml:212
+#: app/views/scripts/person/view.phtml:80
+#: app/views/scripts/psfacility/addfacility-form.phtml:33
+#: app/views/scripts/psfacility/edit.phtml:64
+#: app/views/scripts/psfacility/view.phtml:58
+msgid "Fax"
+msgstr "Fax"
+
+#: app/views/helpers/ITechTranslate.php:151
+#: app/views/scripts/psfacility/addfacility-form.phtml:56
+#: app/views/scripts/psfacility/edit.phtml:85
+#: app/views/scripts/psfacility/view.phtml:73
+#: app/views/scripts/training/_template_editform.phtml:1052
+msgid "Comments"
+msgstr "Opmerkingen"
+
+#: app/views/helpers/ITechTranslate.php:157
+msgid "Deleted"
+msgstr "Verwijderd"
+
+#: app/views/helpers/ITechTranslate.php:160
+msgid "Active"
+msgstr "Actief"
+
+#: app/views/helpers/ITechTranslate.php:163
+#: app/views/scripts/nav-admin.phtml:31 app/views/scripts/nav-admin.phtml:96
+msgid "Responsibility"
+msgstr " Verantwoordelijkheid"
+
+#: app/views/helpers/ITechTranslate.php:171
+msgid "Address"
+msgstr "Adres"
+
+#: app/views/helpers/ITechTranslate_adds.php:9
+msgid "Department"
+msgstr "Afdeling"
+
+#: app/views/helpers/ITechTranslate_adds.php:10
+#: app/views/scripts/admin/country-region-move.phtml:59
+msgid "City"
+msgstr "Stad"
+
+#: app/views/helpers/ITechTranslate_adds.php:11
+msgid "Training Name"
+msgstr "Naam Training"
+
+#: app/views/helpers/ITechTranslate_adds.php:12
+#: app/views/scripts/nav-admin.phtml:18 app/views/scripts/nav-admin.phtml:83
+#: app/views/scripts/person/edit-body-bad.phtml:488
+#: app/views/scripts/person/edit-body-rec.phtml:46
+msgid "Training Organizer"
+msgstr "Organisator Training"
+
+#: app/views/helpers/ITechTranslate_adds.php:13
+#: app/views/scripts/nav-admin.phtml:19 app/views/scripts/nav-admin.phtml:84
+#: app/views/scripts/training/roster.phtml:46
+msgid "Training Level"
+msgstr "Niveau Training"
+
+#: app/views/helpers/ITechTranslate_adds.php:14
+msgid "PEPFAR topic"
+msgstr "PEPFAR onderwerp"
+
+#: app/views/helpers/ITechTranslate_adds.php:15
+msgid "Training of Trainers"
+msgstr "Training voor Trainers"
+
+#: app/views/helpers/ITechTranslate_adds.php:16
+#: app/views/helpers/ITechTranslate_adds.php:19
+msgid "Course Objectives"
+msgstr "Cursusdoelen"
+
+#: app/views/helpers/ITechTranslate_adds.php:17
+msgid "Pre Test Score"
+msgstr "Pre Test Resultaat"
+
+#: app/views/helpers/ITechTranslate_adds.php:18
+msgid "Post Test Score"
+msgstr "Post Test Resultaat"
+
+#: app/views/helpers/ITechTranslate_adds.php:20
+msgid "Custom field 1"
+msgstr "Speciaal aangemaakt veld 1"
+
+#: app/views/helpers/ITechTranslate_adds.php:21
+msgid "Custom field 2"
+msgstr "Speciaal aangemaakt veld 2"
+
+#: app/views/helpers/ITechTranslate_adds.php:23
+msgid "Is Active"
+msgstr "Is Actief"
+
+#: app/views/helpers/ITechTranslate_adds.php:27
+msgid "English"
+msgstr "Engels"
+
+#: app/views/helpers/ITechTranslate_adds.php:28
+msgid "French"
+msgstr "Frans"
+
+#: app/views/helpers/PrintAndExport.php:37
+#: app/views/scripts/evaluation/browse.phtml:36
+#: app/views/scripts/training/roster.phtml:18
+msgid "Print"
+msgstr "Print"
+
+#: app/views/helpers/PrintAndExport.php:37
+msgid "Export"
+msgstr "Exporteer"
+
+#: app/views/scripts/footer.phtml:12
+msgid "Developed and funded by I-TECH. For questions or help,"
+msgstr "Ontwikkeld en gefinancieerd door I-TECH. Voor vragen en hulp, "
+
+#: app/views/scripts/footer.phtml:12
+msgid "click here"
+msgstr "klik hier"
+
+#: app/views/scripts/header.phtml:12 app/views/scripts/preheader.phtml:12
+msgid "Home"
+msgstr "Begin"
+
+#: app/views/scripts/header.phtml:20 app/views/scripts/header.phtml:26
+#: app/views/scripts/index/index.phtml:31
+#: app/views/scripts/reportpreservice/coursebyname.phtml:256
+#: app/views/scripts/reports/data.phtml:25
+#: app/views/scripts/reports/training-unknown.phtml:4
+#: app/views/scripts/reports/training-unknown.phtml:280
+#: app/views/scripts/reports/trainings.phtml:259
+#: app/views/scripts/user/edit.phtml:60
+#: app/views/scripts/user/_add_form.phtml:41
+msgid "Trainings"
+msgstr "Trainingen"
+
+#: app/views/scripts/header.phtml:33 app/views/scripts/header.phtml:39
+#: app/views/scripts/nav-admin.phtml:28 app/views/scripts/nav-admin.phtml:93
+#: app/views/scripts/preheader.phtml:47 app/views/scripts/preheader.phtml:53
+#: app/views/scripts/person/assign-training.phtml:31
+#: app/views/scripts/person/search.phtml:93
+#: app/views/scripts/reports/data.phtml:23
+#: app/views/scripts/reports/needs-by-person-name.phtml:238
+#: app/views/scripts/user/edit.phtml:65
+#: app/views/scripts/user/_add_form.phtml:46
+msgid "People"
+msgstr "Personen"
+
+#: app/views/scripts/header.phtml:34
+msgid "View/Edit Person"
+msgstr "Bekijk/Bewerk Persoon"
+
+#: app/views/scripts/header.phtml:35
+#: app/views/scripts/person/assign-training.phtml:32
+#: app/views/scripts/person/search.phtml:94
+msgid "Add New Person"
+msgstr "Voeg nieuw persoon toe"
+
+#: app/views/scripts/header.phtml:40 app/views/scripts/preheader.phtml:26
+#: app/views/scripts/preheader.phtml:40
+msgid "View person"
+msgstr "Bekijk persoon"
+
+#: app/views/scripts/header.phtml:46
+msgid "Places"
+msgstr "Plaatsen"
+
+#: app/views/scripts/header.phtml:50 app/views/scripts/preheader.phtml:64
+msgid "View/Edit Facility"
+msgstr "Bekijk/Bewerk Ffaciliteit"
+
+#: app/views/scripts/header.phtml:52 app/views/scripts/preheader.phtml:66
+msgid "View facility"
+msgstr "Bekijk faciliteit"
+
+#: app/views/scripts/header.phtml:55 app/views/scripts/preheader.phtml:69
+#: app/views/scripts/facility/add.phtml:4
+#: app/views/scripts/facility/add.phtml:23
+#: app/views/scripts/psfacility/add.phtml:4
+#: app/views/scripts/psfacility/add.phtml:23
+msgid "Add Facility"
+msgstr "Wijzig faciliteit"
+
+#: app/views/scripts/header.phtml:59 app/views/scripts/preheader.phtml:73
+msgid "View/Edit Training Location"
+msgstr "Bekijk/Bewerk Training Locatie"
+
+#: app/views/scripts/header.phtml:61 app/views/scripts/preheader.phtml:75
+#: app/views/scripts/facility/view-location.phtml:4
+#: app/views/scripts/facility/view-location.phtml:18
+#: app/views/scripts/psfacility/view-location.phtml:4
+#: app/views/scripts/psfacility/view-location.phtml:18
+msgid "View Training Location"
+msgstr "Bekijk Training Locatie"
+
+#: app/views/scripts/header.phtml:64 app/views/scripts/preheader.phtml:78
+#: app/views/scripts/facility/add-location.phtml:4
+#: app/views/scripts/facility/add-location.phtml:17
+#: app/views/scripts/psfacility/add-location.phtml:4
+#: app/views/scripts/psfacility/add-location.phtml:17
+msgid "Add Training Location"
+msgstr "Voeg Training Locatie Toe"
+
+#: app/views/scripts/header.phtml:73
+msgid "View/Edit Training Partner"
+msgstr "Bekijk/Bewerk Training Partner"
+
+#: app/views/scripts/header.phtml:75
+#: app/views/scripts/trainingpartner/view-partner.phtml:4
+#: app/views/scripts/trainingpartner/view-partner.phtml:17
+msgid "View Training Partner"
+msgstr "Bekijk Training Partner"
+
+#: app/views/scripts/header.phtml:78
+msgid "Add New Training Partner"
+msgstr "Voeg Nieuwe Training Partner Toe"
+
+#: app/views/scripts/header.phtml:86 app/views/scripts/preheader.phtml:86
+#: app/views/scripts/reportpreservice/coursebyname.phtml:4
+#: app/views/scripts/reportpreservice/coursebyname.phtml:37
+#: app/views/scripts/reports/facilities.phtml:4
+#: app/views/scripts/reports/facilities.phtml:36
+#: app/views/scripts/reports/training-unknown.phtml:37
+#: app/views/scripts/reports/trainings.phtml:4
+#: app/views/scripts/reports/trainings.phtml:37
+#: app/views/scripts/user/_add_form.phtml:52
+msgid "Reports"
+msgstr "Rapporten"
+
+#: app/views/scripts/header.phtml:87
+msgid "Training Reports"
+msgstr "Training Rapporten"
+
+#: app/views/scripts/header.phtml:88
+#: app/views/scripts/reports/participants-by-category.phtml:37
+#: app/views/scripts/reports/participants-by-facility-type.phtml:41
+#: app/views/scripts/reports/participants-by-training.phtml:26
+msgid "Participant Reports"
+msgstr "Participant Rapporten"
+
+#: app/views/scripts/header.phtml:89
+msgid "Trainer Reports"
+msgstr "Trainer Rapporten"
+
+#: app/views/scripts/header.phtml:90
+msgid "Facility Reports"
+msgstr "Faciliteit Rapporten"
+
+#: app/views/scripts/header.phtml:91
+#: app/views/scripts/reports/needs-by-person-name.phtml:4
+#: app/views/scripts/reports/needs-by-person-name.phtml:26
+msgid "Assessment Reports"
+msgstr "Voortoets Rapporten"
+
+#: app/views/scripts/header.phtml:92 app/views/scripts/reports/roster.phtml:4
+#: app/views/scripts/reports/roster.phtml:22
+msgid "Roster Reports"
+msgstr "Rooster Rapporten"
+
+#: app/views/scripts/header.phtml:93 app/views/scripts/reports/data.phtml:21
+msgid "Data Downloads"
+msgstr "Data download"
+
+#: app/views/scripts/header.phtml:104
+#: app/views/scripts/evaluation/add-copy.phtml:4
+#: app/views/scripts/evaluation/add-copy.phtml:17
+#: app/views/scripts/evaluation/assign-training.phtml:29
+#: app/views/scripts/evaluation/browse.phtml:4
+#: app/views/scripts/evaluation/browse.phtml:17
+msgid "Evaluations"
+msgstr "Evaluaties"
+
+#: app/views/scripts/header.phtml:111
+msgid "Pre-service"
+msgstr "Pre-service"
+
+#: app/views/scripts/header.phtml:116 app/views/scripts/preheader.phtml:96
+#: app/views/scripts/user/myaccount.phtml:4
+#: app/views/scripts/user/myaccount.phtml:18
+msgid "My Account"
+msgstr "Mijn account"
+
+#: app/views/scripts/header.phtml:120 app/views/scripts/nav-admin.phtml:7
+#: app/views/scripts/nav-admin.phtml:8 app/views/scripts/nav-admin.phtml:72
+#: app/views/scripts/nav-admin.phtml:73 app/views/scripts/preheader.phtml:113
+msgid "Country Setup"
+msgstr "Land instelling"
+
+#: app/views/scripts/header.phtml:121 app/views/scripts/nav-admin.phtml:14
+#: app/views/scripts/nav-admin.phtml:79 app/views/scripts/preheader.phtml:114
+msgid "Training Settings"
+msgstr "Training Instellingen"
+
+#: app/views/scripts/header.phtml:122 app/views/scripts/nav-admin.phtml:29
+#: app/views/scripts/nav-admin.phtml:94 app/views/scripts/preheader.phtml:115
+msgid "People Settings"
+msgstr "Personen Instellingen"
+
+#: app/views/scripts/header.phtml:123 app/views/scripts/preheader.phtml:116
+msgid "Facility Settings"
+msgstr "Faciliteit Instellingen"
+
+#: app/views/scripts/header.phtml:126 app/views/scripts/preheader.phtml:119
+msgid "Add New User"
+msgstr "Voeg Nieuwe Gebruiker Toe"
+
+#: app/views/scripts/header.phtml:127 app/views/scripts/preheader.phtml:120
+msgid "Edit User"
+msgstr "Bewerk Gebruiker"
+
+#: app/views/scripts/header.phtml:131 app/views/scripts/preheader.phtml:124
+msgid "Create App Now"
+msgstr "Maak App Nu Aan"
+
+#: app/views/scripts/header.phtml:132 app/views/scripts/preheader.phtml:125
+msgid "Download Application"
+msgstr "Download Applicatie"
+
+#: app/views/scripts/header.phtml:133 app/views/scripts/preheader.phtml:126
+#: app/views/scripts/sync/upload.phtml:16
+msgid "Upload Data"
+msgstr "Uploaden Data"
+
+#: app/views/scripts/header.phtml:139 app/views/scripts/preheader.phtml:132
+msgid "login"
+msgstr "inloggen"
+
+#: app/views/scripts/header.phtml:141 app/views/scripts/preheader.phtml:134
+msgid "logout"
+msgstr "uitloggen"
+
+#: app/views/scripts/header.phtml:181 app/views/scripts/preheader.phtml:174
+msgid "Welcome"
+msgstr "Welkom"
+
+#: app/views/scripts/nav-admin.phtml:9 app/views/scripts/nav-admin.phtml:74
+msgid "Region Setup"
+msgstr "Regio Instelling"
+
+#: app/views/scripts/nav-admin.phtml:10 app/views/scripts/nav-admin.phtml:75
+msgid "Move Regions"
+msgstr "Verplaats Regios"
+
+#: app/views/scripts/nav-admin.phtml:13 app/views/scripts/nav-admin.phtml:78
+#: app/views/scripts/data/trainings.phtml:4
+#: app/views/scripts/reportpreservice/coursebyname.phtml:4
+#: app/views/scripts/reports/training-unknown.phtml:37
+#: app/views/scripts/reports/trainings.phtml:4
+#: app/views/scripts/reports/trainings.phtml:37
+msgid "Training"
+msgstr "Training"
+
+#: app/views/scripts/nav-admin.phtml:15 app/views/scripts/nav-admin.phtml:80
+msgid "Training Category"
+msgstr "Training Categorie"
+
+#: app/views/scripts/nav-admin.phtml:16 app/views/scripts/nav-admin.phtml:81
+msgid "Assign Titles"
+msgstr "Namen toewijzen"
+
+#: app/views/scripts/nav-admin.phtml:17 app/views/scripts/nav-admin.phtml:82
+msgid "Training Title"
+msgstr "Training Naam"
+
+#: app/views/scripts/nav-admin.phtml:21 app/views/scripts/nav-admin.phtml:86
+msgid "PEPFAR Category"
+msgstr "PEPFAR categorie"
+
+#: app/views/scripts/nav-admin.phtml:23 app/views/scripts/nav-admin.phtml:88
+msgid "Recommended Topic"
+msgstr "Aanbevolen onderwerp"
+
+#: app/views/scripts/nav-admin.phtml:24 app/views/scripts/nav-admin.phtml:89
+msgid "Nat. Curriculum"
+msgstr "Nationaal curriculum"
+
+#: app/views/scripts/nav-admin.phtml:25 app/views/scripts/nav-admin.phtml:90
+msgid "Training Method"
+msgstr "Training Methode"
+
+#: app/views/scripts/nav-admin.phtml:30 app/views/scripts/nav-admin.phtml:95
+#: app/views/scripts/person/edit-body-addtl.phtml:57
+#: app/views/scripts/person/edit-body-bad.phtml:296
+#: app/views/scripts/person/view.phtml:87
+msgid "Qualifications"
+msgstr "Bevoegdheden"
+
+#: app/views/scripts/nav-admin.phtml:32 app/views/scripts/nav-admin.phtml:97
+msgid "Trainer Types"
+msgstr "Trainer Soorten"
+
+#: app/views/scripts/nav-admin.phtml:33 app/views/scripts/nav-admin.phtml:98
+msgid "Trainer Skills"
+msgstr "Trainer Vaardigheden"
+
+#: app/views/scripts/nav-admin.phtml:34 app/views/scripts/nav-admin.phtml:53
+#: app/views/scripts/nav-admin.phtml:99
+msgid "Languages"
+msgstr "Talen"
+
+#: app/views/scripts/nav-admin.phtml:35 app/views/scripts/nav-admin.phtml:100
+msgid "Affiliations"
+msgstr "Instituten waaraan verbonden "
+
+#: app/views/scripts/nav-admin.phtml:36 app/views/scripts/nav-admin.phtml:101
+msgid "Titles"
+msgstr "Titels"
+
+#: app/views/scripts/nav-admin.phtml:37 app/views/scripts/nav-admin.phtml:102
+msgid "Suffix"
+msgstr "Navoegsel"
+
+#: app/views/scripts/nav-admin.phtml:38 app/views/scripts/nav-admin.phtml:103
+msgid "Active Trainer"
+msgstr "Actieve Trainer"
+
+#: app/views/scripts/nav-admin.phtml:41 app/views/scripts/nav-admin.phtml:106
+#: app/views/scripts/preheader.phtml:60
+#: app/views/scripts/data/facilities.phtml:4
+#: app/views/scripts/facility/search.phtml:72
+#: app/views/scripts/psfacility/search.phtml:72
+#: app/views/scripts/reports/data.phtml:24
+msgid "Facilities"
+msgstr "Faciliteiten"
+
+#: app/views/scripts/nav-admin.phtml:42 app/views/scripts/nav-admin.phtml:107
+msgid "Facilities Settings"
+msgstr "Faciliteiten Instellingen"
+
+#: app/views/scripts/nav-admin.phtml:43 app/views/scripts/nav-admin.phtml:108
+msgid "Facility Types"
+msgstr "Faciliteit Soorten"
+
+#: app/views/scripts/nav-admin.phtml:44 app/views/scripts/nav-admin.phtml:109
+msgid "Facility Sponsors"
+msgstr "Faciliteit Sponsors"
+
+#: app/views/scripts/nav-admin.phtml:47
+msgid "Preservice"
+msgstr "Preservice"
+
+#: app/views/scripts/nav-admin.phtml:48
+msgid "Classes"
+msgstr "Lessen"
+
+#: app/views/scripts/nav-admin.phtml:49
+msgid "Cadres"
+msgstr "Kaders"
+
+#: app/views/scripts/nav-admin.phtml:50
+msgid "Degrees"
+msgstr "Titel"
+
+#: app/views/scripts/nav-admin.phtml:52
+msgid "Institution types"
+msgstr "Insitituut types"
+
+#: app/views/scripts/nav-admin.phtml:54
+msgid "Nationalities"
+msgstr "Nationaliteiten"
+
+#: app/views/scripts/nav-admin.phtml:55
+msgid "Join & drop reasons"
+msgstr "Redenen voor inschrijven en laten vallen"
+
+#: app/views/scripts/nav-admin.phtml:56
+msgid "Sponsors"
+msgstr "Sponsors"
+
+#: app/views/scripts/nav-admin.phtml:58
+msgid "Tutor types"
+msgstr "Soorten tutor"
+
+#: app/views/scripts/nav-admin.phtml:59
+msgid "Religious denominations"
+msgstr "Religieuze denominaties"
+
+#: app/views/scripts/nav-admin.phtml:62 app/views/scripts/nav-admin.phtml:112
+msgid "Users"
+msgstr "Gebruikers"
+
+#: app/views/scripts/nav-admin.phtml:63 app/views/scripts/nav-admin.phtml:113
+msgid "Add Users"
+msgstr "Voeg Gebruikers Toe"
+
+#: app/views/scripts/preheader.phtml:19
+msgid "Institutions"
+msgstr "Instituten"
+
+#: app/views/scripts/preheader.phtml:20
+msgid "Institution Search"
+msgstr "Zoeken naar instituten"
+
+#: app/views/scripts/preheader.phtml:21
+msgid "Add New Institution"
+msgstr "Voeg nieuw instituut toe"
+
+#: app/views/scripts/preheader.phtml:25
+#: app/views/scripts/reportpreservice/coursebyname.phtml:37
+#: app/views/scripts/training/scores.phtml:21
+msgid "Course"
+msgstr "Les"
+
+#: app/views/scripts/preheader.phtml:33
+msgid "Cohorts"
+msgstr "Cohorten"
+
+#: app/views/scripts/preheader.phtml:34
+msgid "Cohort Search"
+msgstr "Zoek cohort"
+
+#: app/views/scripts/preheader.phtml:35
+msgid "Add New Cohort"
+msgstr "Voeg Nieuw Cohort Toe"
+
+#: app/views/scripts/preheader.phtml:39
+msgid "Cohort"
+msgstr "Cohort"
+
+#: app/views/scripts/preheader.phtml:48
+#: app/views/scripts/person/search.phtml:21
+msgid "People Search"
+msgstr "Zoeken naar personen"
+
+#: app/views/scripts/preheader.phtml:49
+msgid "Add People"
+msgstr "Voeg Personen Toe"
+
+#: app/views/scripts/preheader.phtml:87
+#: app/views/scripts/reports/index.phtml:71
+#: app/views/scripts/reports/ps-students-trained.phtml:31
+msgid "Students Trained"
+msgstr "Getrainde studenten"
+
+#: app/views/scripts/preheader.phtml:88
+#: app/views/scripts/reports/index.phtml:72
+#: app/views/scripts/reports/ps-students-by-name.phtml:21
+msgid "Students By Name"
+msgstr "Studenten op Naam"
+
+#: app/views/scripts/preheader.phtml:89
+#: app/views/scripts/reports/index.phtml:73
+#: app/views/scripts/reports/ps-graduated-students.phtml:21
+msgid "Graduated Students"
+msgstr "Afgestudeerde studenten"
+
+#: app/views/scripts/preheader.phtml:90
+msgid "Course by Student Count"
+msgstr "Les op student aantallen"
+
+#: app/views/scripts/preheader.phtml:91
+msgid "Course by Name"
+msgstr "Cursus op naam."
+
+#: app/views/scripts/preheader.phtml:101
+msgid "PS Classes"
+msgstr "Preservice lessen"
+
+#: app/views/scripts/preheader.phtml:102
+msgid "PS Degrees"
+msgstr "Preservice diplomas"
+
+#: app/views/scripts/preheader.phtml:103
+msgid "PS Funding"
+msgstr "Preservice Financiering"
+
+#: app/views/scripts/preheader.phtml:104
+msgid "PS Institution Types"
+msgstr "Soorten Preservice Instituten"
+
+#: app/views/scripts/preheader.phtml:105
+msgid "PS Join & Drop Reasons"
+msgstr "Redenen voor inschrijven en laten vallen Preservice "
+
+#: app/views/scripts/preheader.phtml:106
+msgid "PS Languages"
+msgstr "Preservice Talen"
+
+#: app/views/scripts/preheader.phtml:107
+msgid "PS Nationalities"
+msgstr "Preservice Nationaliteiten"
+
+#: app/views/scripts/preheader.phtml:108
+msgid "PS Sponsors"
+msgstr "Preservice Sponsors"
+
+#: app/views/scripts/preheader.phtml:109
+msgid "PS Student Types"
+msgstr "Soorten Studenten Preservice"
+
+#: app/views/scripts/preheader.phtml:110
+msgid "PS Tutor Types"
+msgstr "Soorten Preservice Tutors"
+
+#: app/views/scripts/admin/country-region-move.phtml:111
+msgid "Move"
+msgstr "Verplaats"
+
+#: app/views/scripts/calendar/index.phtml:19
+msgid "Training Calendar"
+msgstr "Training Kalender"
+
+#: app/views/scripts/calendar/index.phtml:22
+msgid "Print Calendar"
+msgstr "Print Kalender Uit"
+
+#: app/views/scripts/data/facilities.phtml:4
+#: app/views/scripts/data/persons.phtml:4
+#: app/views/scripts/data/trainings.phtml:4
+#: app/views/scripts/reports/data.phtml:4
+#: app/views/scripts/reports/data.phtml:23
+#: app/views/scripts/reports/data.phtml:24
+#: app/views/scripts/reports/data.phtml:25
+msgid "Data"
+msgstr "data"
+
+#: app/views/scripts/data/persons.phtml:4
+msgid "Persons"
+msgstr "Personen"
+
+#: app/views/scripts/desktop/db.phtml:4
+msgid "Database Export"
+msgstr "Exporteren Database"
+
+#: app/views/scripts/email/html/approved.phtml:1
+#: app/views/scripts/email/text/approved.phtml:1
+msgid "A training was approved by "
+msgstr "Een training is goedgekeurd door "
+
+#: app/views/scripts/email/html/forgot.phtml:2
+#: app/views/scripts/email/text/forgot.phtml:3
+msgid "You have been assigned a new temporary password."
+msgstr "Er is u een nieuw tijdelijk wachtwoord toegewezen"
+
+#: app/views/scripts/email/html/forgot.phtml:3
+msgid "Please change your password once you log in"
+msgstr "Verander uw wachtwoord na inloggen, aub"
+
+#: app/views/scripts/email/html/forgot.phtml:3
+msgid "here"
+msgstr "hier"
+
+#: app/views/scripts/email/html/forgot.phtml:4
+#: app/views/scripts/email/html/new_account.phtml:3
+#: app/views/scripts/email/text/forgot.phtml:8
+#: app/views/scripts/email/text/new_account.phtml:5
+msgid "Your login is as follows:"
+msgstr "Uw inloginformatie is als volgt:"
+
+#: app/views/scripts/email/html/forgot.phtml:5
+#: app/views/scripts/email/html/new_account.phtml:4
+#: app/views/scripts/email/html/password_changed.phtml:3
+#: app/views/scripts/email/text/forgot.phtml:10
+#: app/views/scripts/email/text/new_account.phtml:7
+#: app/views/scripts/email/text/password_changed.phtml:5
+msgid "username:"
+msgstr "gebruikersnaam:"
+
+#: app/views/scripts/email/html/forgot.phtml:6
+#: app/views/scripts/email/html/new_account.phtml:5
+#: app/views/scripts/email/text/forgot.phtml:12
+#: app/views/scripts/email/text/new_account.phtml:9
+msgid "password:"
+msgstr "wachtwoord:"
+
+#: app/views/scripts/email/html/new_account.phtml:1
+#: app/views/scripts/email/html/password_changed.phtml:1
+#: app/views/scripts/email/text/forgot.phtml:1
+#: app/views/scripts/email/text/new_account.phtml:1
+#: app/views/scripts/email/text/password_changed.phtml:1
+msgid "Dear"
+msgstr "Beste"
+
+#: app/views/scripts/email/html/new_account.phtml:2
+#: app/views/scripts/email/text/new_account.phtml:3
+msgid "Your new account has been created and is ready for use."
+msgstr "Uw nieuwe account is aangemaakt en is klaar voor gebruik"
+
+#: app/views/scripts/email/html/new_account.phtml:6
+#: app/views/scripts/email/text/new_account.phtml:11
+msgid "website:"
+msgstr "website:"
+
+#: app/views/scripts/email/html/password_changed.phtml:2
+#: app/views/scripts/email/text/password_changed.phtml:3
+msgid "Your password has been changed as requested."
+msgstr "Uw wachtwoord is veranderd op verzoek."
+
+#: app/views/scripts/email/html/password_changed.phtml:4
+msgid "You can log into our website at: "
+msgstr "U kunt inloggen voor onze website bij: "
+
+#: app/views/scripts/email/html/rejected.phtml:1
+#: app/views/scripts/email/text/rejected.phtml:1
+msgid "A training was rejected by "
+msgstr "Een training is afgekeurd door "
+
+#: app/views/scripts/email/html/resubmitted.phtml:1
+#: app/views/scripts/email/text/resubmitted.phtml:1
+msgid "A training was resubmitted by "
+msgstr "Een training is opnieuw voorgelegd door "
+
+#: app/views/scripts/email/text/forgot.phtml:5
+msgid "Please change your password once you log in here"
+msgstr "Wijzig aub uw wachtwoord nadat u hier ingelogd heeft"
+
+#: app/views/scripts/email/text/password_changed.phtml:7
+msgid "You can log into our website at:"
+msgstr "U kunt inloggen voor onze website bij:"
+
+#: app/views/scripts/error/error.phtml:8
+msgid "Oops"
+msgstr "Oops"
+
+#: app/views/scripts/error/error.phtml:21
+msgid ""
+"Sorry. An error just occurred. Please try again, or contact a system "
+"administrator."
+msgstr ""
+"Sorry. Er is een fout opgetreden. Probeert u het nogmaals of neem contact op "
+"met een systeem administrator."
+
+#: app/views/scripts/evaluation/add-copy.phtml:20
+msgid "Enter title of Evaluation"
+msgstr "Voer de naam van de evaluatie in"
+
+#: app/views/scripts/evaluation/add-copy.phtml:23
+msgid "Number"
+msgstr "Aantal"
+
+#: app/views/scripts/evaluation/add-copy.phtml:23
+#: app/views/scripts/reports/evaluations_results.phtml:48
+msgid "Question"
+msgstr "Vraag"
+
+#: app/views/scripts/evaluation/add-copy.phtml:25
+msgid "Likert"
+msgstr "Likert"
+
+#: app/views/scripts/evaluation/add-copy.phtml:25
+msgid "Text"
+msgstr "Tekst"
+
+#: app/views/scripts/evaluation/add-copy.phtml:29
+msgid "Add Evaluation"
+msgstr "Voeg evaluatie toe"
+
+#: app/views/scripts/evaluation/assign-evaluation.phtml:4
+#: app/views/scripts/evaluation/assign-evaluation.phtml:20
+#: app/views/scripts/evaluation/assign-training.phtml:4
+#: app/views/scripts/evaluation/assign-training.phtml:21
+#: app/views/scripts/training/_template_editform.phtml:183
+msgid "Assign Evaluation to Training"
+msgstr "Wijs Evaluatie aan Training toe"
+
+#: app/views/scripts/evaluation/assign-evaluation.phtml:43
+#: app/views/scripts/evaluation/browse.phtml:35
+#: app/views/scripts/person/assign-training.phtml:51
+msgid "Assign"
+msgstr "Wijs toe"
+
+#: app/views/scripts/evaluation/assign-evaluation.phtml:55
+#: app/views/scripts/evaluation/assign-training.phtml:32
+#: app/views/scripts/person/assign-training.phtml:63
+#: app/views/scripts/training/_template_editform.phtml:139
+msgid "Submit"
+msgstr "Stuur"
+
+#: app/views/scripts/evaluation/browse.phtml:34
+msgid "Copy"
+msgstr "Kopieer"
+
+#: app/views/scripts/evaluation/browse.phtml:42
+#: app/views/scripts/person/edit-body-bad.phtml:7
+#: app/views/scripts/person/history.phtml:3
+#: app/views/scripts/person/view.phtml:18
+msgid "Date created"
+msgstr "Datum aangemaakt"
+
+#: app/views/scripts/evaluation/browse.phtml:50
+msgid "Add New Evaluation"
+msgstr "Voeg nieuwe evaluatie toe"
+
+#: app/views/scripts/evaluation/data.phtml:4
+#: app/views/scripts/evaluation/data.phtml:32
+#: app/views/scripts/evaluation/print.phtml:4
+msgid "Evaluation Data Entry"
+msgstr "Evaluatie Data Invoer"
+
+#: app/views/scripts/evaluation/data.phtml:42
+msgid "Save and Exit"
+msgstr "Opslaan en sluiten"
+
+#: app/views/scripts/evaluation/data.phtml:43
+#: app/views/scripts/training/_template_editform.phtml:341
+msgid "Save and Continue"
+msgstr "Opslaan en doorgaan"
+
+#: app/views/scripts/external/add.phtml:4
+msgid "Add External Course"
+msgstr "Voeg externe cursus toe"
+
+#: app/views/scripts/external/add.phtml:17
+msgid "Add new External Course for "
+msgstr "Voeg nieuwe cursus toe voor"
+
+#: app/views/scripts/external/add.phtml:27
+#: app/views/scripts/person/edit-body-bad.phtml:63
+#: app/views/scripts/person/edit-body.phtml:335
+#: app/views/scripts/person/view.phtml:55
+#: app/views/scripts/reportpreservice/coursebyname.phtml:221
+#: app/views/scripts/reportpreservice/coursebyname.phtml:232
+#: app/views/scripts/reports/evaluations.phtml:37
+#: app/views/scripts/reports/evaluations.phtml:48
+#: app/views/scripts/reports/facilities.phtml:228
+#: app/views/scripts/reports/facilities.phtml:239
+#: app/views/scripts/reports/participants-by-category.phtml:59
+#: app/views/scripts/reports/participants-by-category.phtml:70
+#: app/views/scripts/reports/participants-by-facility-type.phtml:230
+#: app/views/scripts/reports/participants-by-facility-type.phtml:241
+#: app/views/scripts/reports/participants-by-training.phtml:358
+#: app/views/scripts/reports/participants-by-training.phtml:369
+#: app/views/scripts/reports/people-by-facility.phtml:194
+#: app/views/scripts/reports/people-by-facility.phtml:205
+#: app/views/scripts/reports/roster.phtml:42
+#: app/views/scripts/reports/roster.phtml:53
+#: app/views/scripts/reports/training-unknown.phtml:245
+#: app/views/scripts/reports/training-unknown.phtml:256
+#: app/views/scripts/reports/trainings.phtml:224
+#: app/views/scripts/reports/trainings.phtml:235
+#: app/views/scripts/training/_template_editform.phtml:248
+#: app/views/scripts/training/_template_editform.phtml:263
+msgid "Day"
+msgstr "Dag"
+
+#: app/views/scripts/external/add.phtml:28
+#: app/views/scripts/person/edit-body-bad.phtml:64
+#: app/views/scripts/person/edit-body.phtml:336
+#: app/views/scripts/person/view.phtml:56
+#: app/views/scripts/reportpreservice/coursebyname.phtml:222
+#: app/views/scripts/reportpreservice/coursebyname.phtml:233
+#: app/views/scripts/reports/evaluations.phtml:38
+#: app/views/scripts/reports/evaluations.phtml:49
+#: app/views/scripts/reports/facilities.phtml:229
+#: app/views/scripts/reports/facilities.phtml:240
+#: app/views/scripts/reports/participants-by-category.phtml:60
+#: app/views/scripts/reports/participants-by-category.phtml:71
+#: app/views/scripts/reports/participants-by-facility-type.phtml:231
+#: app/views/scripts/reports/participants-by-facility-type.phtml:242
+#: app/views/scripts/reports/participants-by-training.phtml:359
+#: app/views/scripts/reports/participants-by-training.phtml:370
+#: app/views/scripts/reports/people-by-facility.phtml:195
+#: app/views/scripts/reports/people-by-facility.phtml:206
+#: app/views/scripts/reports/roster.phtml:43
+#: app/views/scripts/reports/roster.phtml:54
+#: app/views/scripts/reports/training-unknown.phtml:246
+#: app/views/scripts/reports/training-unknown.phtml:257
+#: app/views/scripts/reports/trainings.phtml:225
+#: app/views/scripts/reports/trainings.phtml:236
+#: app/views/scripts/training/_template_editform.phtml:249
+#: app/views/scripts/training/_template_editform.phtml:264
+msgid "Month"
+msgstr "Maand"
+
+#: app/views/scripts/external/add.phtml:29
+#: app/views/scripts/person/edit-body-bad.phtml:65
+#: app/views/scripts/person/edit-body.phtml:337
+#: app/views/scripts/person/view.phtml:57
+#: app/views/scripts/reportpreservice/coursebyname.phtml:223
+#: app/views/scripts/reportpreservice/coursebyname.phtml:234
+#: app/views/scripts/reports/evaluations.phtml:39
+#: app/views/scripts/reports/evaluations.phtml:50
+#: app/views/scripts/reports/facilities.phtml:230
+#: app/views/scripts/reports/facilities.phtml:241
+#: app/views/scripts/reports/participants-by-category.phtml:61
+#: app/views/scripts/reports/participants-by-category.phtml:72
+#: app/views/scripts/reports/participants-by-facility-type.phtml:232
+#: app/views/scripts/reports/participants-by-facility-type.phtml:243
+#: app/views/scripts/reports/participants-by-training.phtml:360
+#: app/views/scripts/reports/participants-by-training.phtml:371
+#: app/views/scripts/reports/people-by-facility.phtml:196
+#: app/views/scripts/reports/people-by-facility.phtml:207
+#: app/views/scripts/reports/roster.phtml:44
+#: app/views/scripts/reports/roster.phtml:55
+#: app/views/scripts/reports/training-unknown.phtml:247
+#: app/views/scripts/reports/training-unknown.phtml:258
+#: app/views/scripts/reports/trainings.phtml:226
+#: app/views/scripts/reports/trainings.phtml:237
+#: app/views/scripts/training/_template_editform.phtml:250
+#: app/views/scripts/training/_template_editform.phtml:265
+msgid "Year"
+msgstr "Jaar"
+
+#: app/views/scripts/external/add.phtml:40
+#: app/views/scripts/person/edit-body-exclass-history.phtml:14
+msgid "Length"
+msgstr "Lengte"
+
+#: app/views/scripts/external/add.phtml:50
+#: app/views/scripts/person/edit-body-exclass-history.phtml:16
+msgid "Who Funded"
+msgstr "Wie gefinancieerd"
+
+#: app/views/scripts/external/add.phtml:57
+msgid "Add Course"
+msgstr "Voeg cursus toe"
+
+#: app/views/scripts/facility/add-location.phtml:19
+#: app/views/scripts/psfacility/add-location.phtml:19
+msgid "Please enter training location information"
+msgstr "Voer aub training locatie in"
+
+#: app/views/scripts/facility/add-location.phtml:25
+#: app/views/scripts/psfacility/add-location.phtml:25
+msgid "Add Location"
+msgstr "Voeg locatie toe"
+
+#: app/views/scripts/facility/add.phtml:17
+#: app/views/scripts/psfacility/add.phtml:17
+msgid "Add new Facility"
+msgstr "Voeg nieuwe faciliteit toe"
+
+#: app/views/scripts/facility/addfacility-form.phtml:5
+#: app/views/scripts/facility/view.phtml:34
+#: app/views/scripts/person/edit-home-address.phtml:2
+#: app/views/scripts/psfacility/addfacility-form.phtml:5
+#: app/views/scripts/psfacility/view.phtml:34
+msgid "Address 1"
+msgstr "Adres 1"
+
+#: app/views/scripts/facility/addfacility-form.phtml:7
+#: app/views/scripts/facility/edit.phtml:40
+#: app/views/scripts/facility/view.phtml:36
+#: app/views/scripts/person/edit-home-address.phtml:4
+#: app/views/scripts/psfacility/addfacility-form.phtml:7
+#: app/views/scripts/psfacility/edit.phtml:40
+#: app/views/scripts/psfacility/view.phtml:36
+msgid "Address 2"
+msgstr "Adres 2"
+
+#: app/views/scripts/facility/addfacility-form.phtml:22
+#: app/views/scripts/facility/edit.phtml:55
+#: app/views/scripts/person/edit-home-address.phtml:19
+#: app/views/scripts/psfacility/addfacility-form.phtml:22
+#: app/views/scripts/psfacility/edit.phtml:55
+#: app/views/scripts/training/_template_locationform.phtml:22
+msgid "New city"
+msgstr "Nieuwe stad"
+
+#: app/views/scripts/facility/addfacility-form.phtml:29
+#: app/views/scripts/facility/edit.phtml:60
+#: app/views/scripts/person/edit-home-address.phtml:25
+#: app/views/scripts/psfacility/addfacility-form.phtml:29
+#: app/views/scripts/psfacility/edit.phtml:60
+msgid "Postal code"
+msgstr "Postcode"
+
+#: app/views/scripts/facility/addfacility-form.phtml:44
+#: app/views/scripts/facility/edit.phtml:75
+#: app/views/scripts/facility/view.phtml:66
+#: app/views/scripts/psfacility/addfacility-form.phtml:44
+#: app/views/scripts/psfacility/edit.phtml:75
+#: app/views/scripts/psfacility/view.phtml:66
+msgid "Facility sponsor"
+msgstr "Faciliteit sponsor"
+
+#: app/views/scripts/facility/addfacility-form.phtml:56
+#: app/views/scripts/facility/edit.phtml:85
+#: app/views/scripts/facility/view.phtml:73
+msgid "Facility Comments"
+msgstr "Faciliteit Opmerkingen"
+
+#: app/views/scripts/facility/delete-location.phtml:4
+#: app/views/scripts/facility/delete-location.phtml:17
+#: app/views/scripts/psfacility/delete-location.phtml:4
+#: app/views/scripts/psfacility/delete-location.phtml:17
+msgid "Delete Location"
+msgstr "Verwijder locatie"
+
+#: app/views/scripts/facility/delete.phtml:4
+#: app/views/scripts/facility/delete.phtml:17
+#: app/views/scripts/psfacility/delete.phtml:4
+#: app/views/scripts/psfacility/delete.phtml:17
+msgid "Delete Facility"
+msgstr "Verwijder faciliteit"
+
+#: app/views/scripts/facility/edit.phtml:4
+#: app/views/scripts/facility/edit.phtml:18
+#: app/views/scripts/psfacility/edit.phtml:4
+#: app/views/scripts/psfacility/edit.phtml:18
+msgid "Edit Facility"
+msgstr "Bewerk faciliteit"
+
+#: app/views/scripts/facility/edit.phtml:35
+#: app/views/scripts/psfacility/edit.phtml:35
+msgid "Facility name"
+msgstr "Naam faciliteit "
+
+#: app/views/scripts/facility/edit.phtml:38
+#: app/views/scripts/psfacility/edit.phtml:38
+msgid "Address "
+msgstr "Adres "
+
+#: app/views/scripts/facility/edit.phtml:90
+#: app/views/scripts/person/edit-body-bad.phtml:181
+#: app/views/scripts/person/edit-body-bad.phtml:551
+#: app/views/scripts/person/edit-body.phtml:281
+#: app/views/scripts/person/edit-body.phtml:380
+#: app/views/scripts/psfacility/edit.phtml:90
+#: app/views/scripts/trainingpartner/edit-partner.phtml:48
+#: app/views/scripts/user/edit.phtml:117
+#: app/views/scripts/user/myaccount.phtml:34
+msgid "Save changes"
+msgstr "Sla wijzigingen op"
+
+#: app/views/scripts/facility/edit.phtml:103
+#: app/views/scripts/psfacility/edit.phtml:103
+msgid "Are you sure you wish to delete this facility?"
+msgstr "Weet u zeker dat u deze faciliteit wil verwijderen?"
+
+#: app/views/scripts/facility/search-location.phtml:20
+#: app/views/scripts/psfacility/search-location.phtml:20
+msgid "Search for Training Location"
+msgstr "Zoek training locatie"
+
+#: app/views/scripts/facility/search-location.phtml:22
+#: app/views/scripts/facility/search.phtml:22
+#: app/views/scripts/person/search.phtml:23
+#: app/views/scripts/psfacility/search-location.phtml:22
+#: app/views/scripts/psfacility/search.phtml:22
+#: app/views/scripts/reportpreservice/coursebyname.phtml:50
+#: app/views/scripts/reports/facilities.phtml:47
+#: app/views/scripts/reports/needs-by-person-name.phtml:29
+#: app/views/scripts/reports/participants-by-category.phtml:41
+#: app/views/scripts/reports/participants-by-facility-type.phtml:44
+#: app/views/scripts/reports/participants-by-training.phtml:33
+#: app/views/scripts/reports/people-by-facility.phtml:43
+#: app/views/scripts/reports/ps-course-by-name.phtml:24
+#: app/views/scripts/reports/ps-course-by-student-count.phtml:24
+#: app/views/scripts/reports/ps-graduated-students.phtml:24
+#: app/views/scripts/reports/ps-missing-cohort-by-participant-count.phtml:23
+#: app/views/scripts/reports/ps-missing-course-by-name.phtml:23
+#: app/views/scripts/reports/ps-missing-course-by-student-count.phtml:23
+#: app/views/scripts/reports/ps-missing-facility-report.phtml:23
+#: app/views/scripts/reports/ps-missing-graduated-students.phtml:23
+#: app/views/scripts/reports/ps-missing-institution-information.phtml:23
+#: app/views/scripts/reports/ps-missing-students-by-name.phtml:23
+#: app/views/scripts/reports/ps-missing-students-trained.phtml:23
+#: app/views/scripts/reports/ps-missing-tutor-by-name.phtml:23
+#: app/views/scripts/reports/ps-students-by-name.phtml:24
+#: app/views/scripts/reports/ps-students-trained.phtml:34
+#: app/views/scripts/reports/ps-training-by-participants.phtml:23
+#: app/views/scripts/reports/ps-trainings-by-name.phtml:23
+#: app/views/scripts/reports/trainers.phtml:24
+#: app/views/scripts/reports/training-unknown.phtml:50
+#: app/views/scripts/reports/trainings.phtml:50
+#: app/views/scripts/trainingpartner/search-partner.phtml:21
+msgid "Select Criteria"
+msgstr "Selecteer criteria"
+
+#: app/views/scripts/facility/search-location.phtml:24
+#: app/views/scripts/psfacility/search-location.phtml:24
+msgid "Training Location Name"
+msgstr "Naam training locatie"
+
+#: app/views/scripts/facility/search-location.phtml:48
+#: app/views/scripts/facility/search.phtml:67
+#: app/views/scripts/person/search.phtml:88
+#: app/views/scripts/psfacility/search-location.phtml:48
+#: app/views/scripts/psfacility/search.phtml:67
+#: app/views/scripts/reportpreservice/coursebyname.phtml:251
+#: app/views/scripts/reports/facilities.phtml:252
+#: app/views/scripts/reports/participants-by-facility-type.phtml:256
+#: app/views/scripts/reports/ps-course-by-name.phtml:80
+#: app/views/scripts/reports/ps-course-by-student-count.phtml:74
+#: app/views/scripts/reports/ps-graduated-students.phtml:106
+#: app/views/scripts/reports/ps-students-by-name.phtml:129
+#: app/views/scripts/reports/ps-students-trained.phtml:90
+#: app/views/scripts/reports/training-unknown.phtml:275
+#: app/views/scripts/reports/trainings.phtml:254
+#: app/views/scripts/trainingpartner/search-partner.phtml:48
+msgid "Preview"
+msgstr "Preview"
+
+#: app/views/scripts/facility/search-location.phtml:53
+#: app/views/scripts/psfacility/search-location.phtml:53
+msgid "Training locations"
+msgstr "Training locaties"
+
+#: app/views/scripts/facility/search-location.phtml:53
+#: app/views/scripts/facility/search.phtml:72
+#: app/views/scripts/person/assign-training.phtml:31
+#: app/views/scripts/person/search.phtml:93
+#: app/views/scripts/psfacility/search-location.phtml:53
+#: app/views/scripts/psfacility/search.phtml:72
+#: app/views/scripts/reports/participants-by-category.phtml:91
+#: app/views/scripts/reports/participants-by-category.phtml:96
+#: app/views/scripts/reports/trainers.phtml:78
+#: app/views/scripts/trainingpartner/search-partner.phtml:56
+msgid "Results"
+msgstr "Resultaten"
+
+#: app/views/scripts/facility/search-location.phtml:54
+#: app/views/scripts/psfacility/search-location.phtml:54
+msgid "Add new training location"
+msgstr "Voeg nieuwe training locatie toe"
+
+#: app/views/scripts/facility/search-location.phtml:80
+#: app/views/scripts/psfacility/search-location.phtml:80
+msgid "Location Name"
+msgstr "Naam Locatie"
+
+#: app/views/scripts/facility/search-location.phtml:94
+#: app/views/scripts/facility/search.phtml:115
+#: app/views/scripts/person/search.phtml:150
+#: app/views/scripts/psfacility/search-location.phtml:94
+#: app/views/scripts/psfacility/search.phtml:115
+#: app/views/scripts/reportpreservice/coursebyname.phtml:407
+#: app/views/scripts/reportpreservice/studentname.phtml:358
+#: app/views/scripts/reports/facilities.phtml:358
+#: app/views/scripts/reports/needs-by-person-name.phtml:375
+#: app/views/scripts/reports/participants-by-facility-type.phtml:416
+#: app/views/scripts/reports/participants-by-training.phtml:629
+#: app/views/scripts/reports/people-by-facility.phtml:348
+#: app/views/scripts/reports/trainers.phtml:167
+#: app/views/scripts/reports/training-unknown.phtml:454
+#: app/views/scripts/reports/trainings.phtml:410
+#: app/views/scripts/trainingpartner/search-partner.phtml:95
+msgid "Limited to 100 rows"
+msgstr "Beperkt tot 100 regels"
+
+#: app/views/scripts/facility/search-location.phtml:94
+#: app/views/scripts/facility/search.phtml:115
+#: app/views/scripts/person/search.phtml:150
+#: app/views/scripts/psfacility/search-location.phtml:94
+#: app/views/scripts/psfacility/search.phtml:115
+#: app/views/scripts/reportpreservice/coursebyname.phtml:407
+#: app/views/scripts/reportpreservice/studentname.phtml:358
+#: app/views/scripts/reports/facilities.phtml:358
+#: app/views/scripts/reports/needs-by-person-name.phtml:375
+#: app/views/scripts/reports/participants-by-facility-type.phtml:416
+#: app/views/scripts/reports/participants-by-training.phtml:629
+#: app/views/scripts/reports/people-by-facility.phtml:348
+#: app/views/scripts/reports/trainers.phtml:167
+#: app/views/scripts/reports/training-unknown.phtml:454
+#: app/views/scripts/reports/trainings.phtml:410
+#: app/views/scripts/trainingpartner/search-partner.phtml:95
+msgid "Full Results"
+msgstr "Volledige resulaten"
+
+#: app/views/scripts/facility/search.phtml:20
+#: app/views/scripts/psfacility/search.phtml:20
+msgid "Search Facilities"
+msgstr "Zoek in faciliteiten"
+
+#: app/views/scripts/facility/search.phtml:73
+#: app/views/scripts/person/edit-body-bad.phtml:572
+#: app/views/scripts/person/edit-body.phtml:394
+#: app/views/scripts/psfacility/search.phtml:73
+msgid "Add New Facility"
+msgstr "Voeg nieuwe faciliteit toe"
+
+#: app/views/scripts/facility/search.phtml:98
+#: app/views/scripts/person/history.phtml:2
+#: app/views/scripts/psfacility/search.phtml:98
+#: app/views/scripts/training/_template_editform.phtml:176
+msgid "ID"
+msgstr "ID"
+
+#: app/views/scripts/facility/search.phtml:109
+#: app/views/scripts/psfacility/search.phtml:109
+#: app/views/scripts/reports/participants-by-facility-type.phtml:388
+msgid "Sponsor"
+msgstr "Sponsor"
+
+#: app/views/scripts/facility/view-location.phtml:43
+#: app/views/scripts/psfacility/view-location.phtml:43
+#: app/views/scripts/reportpreservice/coursebyname.phtml:131
+#: app/views/scripts/reports/facilities.phtml:139
+#: app/views/scripts/reports/facilities.phtml:154
+#: app/views/scripts/reports/training-unknown.phtml:130
+#: app/views/scripts/reports/trainings.phtml:130
+#: app/views/scripts/training/_template_editform.phtml:316
+msgid "unknown"
+msgstr "onbekend"
+
+#: app/views/scripts/facility/view-location.phtml:54
+#: app/views/scripts/psfacility/view-location.phtml:54
+#: app/views/scripts/trainingpartner/add-partner.phtml:41
+msgid "Save Changes"
+msgstr "Sla wijzigingen op"
+
+#: app/views/scripts/facility/view-location.phtml:73
+#: app/views/scripts/psfacility/view-location.phtml:73
+msgid "Are you sure you wish to delete this location?"
+msgstr "Weet u zeker dat u deze locatie wilt verwijderen?"
+
+#: app/views/scripts/facility/view.phtml:4
+#: app/views/scripts/facility/view.phtml:17
+#: app/views/scripts/psfacility/view.phtml:4
+#: app/views/scripts/psfacility/view.phtml:17
+msgid "View Facility"
+msgstr "Bekijk faciliteit"
+
+#: app/views/scripts/facility/view.phtml:54
+#: app/views/scripts/psfacility/view.phtml:54
+msgid "Postal Code"
+msgstr "Postcode"
+
+#: app/views/scripts/index/index.phtml:19
+msgid "Welcome to"
+msgstr "Welkom bij"
+
+#: app/views/scripts/index/index.phtml:20
+msgid "Training System Monitoring and Reporting Tool"
+msgstr "Instrument om Training Systemen te Monitoren en over te Rapporteren"
+
+#: app/views/scripts/index/index.phtml:23
+msgid "Data Summary"
+msgstr "Data samenvatting"
+
+#: app/views/scripts/index/index.phtml:29
+#: app/views/scripts/index/index.phtml:30
+msgid "unique"
+msgstr "eenmalig"
+
+#: app/views/scripts/index/index.phtml:30
+#: app/views/scripts/reports/trainers.phtml:78
+msgid "Trainers"
+msgstr "trainers"
+
+#: app/views/scripts/index/index.phtml:37
+#: app/views/scripts/index/index.phtml:49
+#: app/views/scripts/index/index.phtml:65
+msgid "Total"
+msgstr "totaal"
+
+#: app/views/scripts/index/index.phtml:38
+msgid "Fiscal Year"
+msgstr "fiscaal jaar"
+
+#: app/views/scripts/index/index.phtml:49
+msgid "Future Trainings"
+msgstr "Toekomstige trainingen"
+
+#: app/views/scripts/index/index.phtml:53
+msgid "View Printable Calendar"
+msgstr "Bekijk printbare kalender"
+
+#: app/views/scripts/index/index.phtml:65
+msgid "Incomplete Trainings that already occurred"
+msgstr "Onvolledige trainingen die al plaats hebben gevonden"
+
+#: app/views/scripts/index/index.phtml:75
+msgid "To be Approved"
+msgstr "Goed te keuren"
+
+#: app/views/scripts/index/index.phtml:86
+#: app/views/scripts/training/_template_editform.phtml:1073
+msgid "Attached Documents"
+msgstr "Bijgevoegde documenten"
+
+#: app/views/scripts/index/index.phtml:89
+#: app/views/scripts/training/_template_editform.phtml:1076
+msgid "Right-click and select \"Save Target As...\" to download."
+msgstr ""
+"Klik op de rechterknop en select \"Sla Doel Op Als...\" om te downloaden"
+
+#: app/views/scripts/index/index.phtml:92
+#: app/views/scripts/training/_template_editform.phtml:1079
+msgid "Document Upload"
+msgstr "Document Uploaden"
+
+#: app/views/scripts/index/index.phtml:105
+msgid "Please login below"
+msgstr "Aub beneden inloggen"
+
+#: app/views/scripts/index/index.phtml:108
+#: app/views/scripts/user/login.phtml:21
+msgid "User name"
+msgstr "Gebruikersnaam"
+
+#: app/views/scripts/index/index.phtml:113
+#: app/views/scripts/user/login.phtml:26
+msgid "Forgot your password?"
+msgstr "Wachtwoord vergeten?"
+
+#: app/views/scripts/person/add.phtml:4
+msgid "Add Person"
+msgstr "Voeg persoon toe"
+
+#: app/views/scripts/person/assign-training.phtml:4
+#: app/views/scripts/person/assign-training.phtml:20
+msgid "Assign Person to Training"
+msgstr "Wijs persoon aan training toe"
+
+#: app/views/scripts/person/delete.phtml:4
+#: app/views/scripts/person/delete.phtml:17
+msgid "Delete Person"
+msgstr "Verwijder persoon"
+
+#: app/views/scripts/person/edit-body-addtl.phtml:1
+#: app/views/scripts/person/edit-body-bad.phtml:192
+#: app/views/scripts/person/view.phtml:64
+msgid "Current Contact Information"
+msgstr "Huidige persoonsgegevens"
+
+#: app/views/scripts/person/edit-body-addtl.phtml:27
+#: app/views/scripts/person/edit-body-bad.phtml:200
+msgid "Insert new facility"
+msgstr "Voer nieuwe faciliteit in"
+
+#: app/views/scripts/person/edit-body-addtl.phtml:31
+msgid "Address and Phone"
+msgstr "Adres en telefoon"
+
+#: app/views/scripts/person/edit-body-addtl.phtml:36
+#: app/views/scripts/person/edit-body-bad.phtml:204
+#: app/views/scripts/person/view.phtml:70
+msgid "Home phone"
+msgstr "Telefoon thuis"
+
+#: app/views/scripts/person/edit-body-addtl.phtml:39
+#: app/views/scripts/person/edit-body-bad.phtml:206
+#: app/views/scripts/person/view.phtml:73
+msgid "Work phone"
+msgstr "Telefoon Werk"
+
+#: app/views/scripts/person/edit-body-addtl.phtml:41
+#: app/views/scripts/person/edit-body-bad.phtml:208
+#: app/views/scripts/person/view.phtml:75
+msgid "Mobile phone"
+msgstr "Telefoon Mobiel"
+
+#: app/views/scripts/person/edit-body-addtl.phtml:46
+msgid "Email Secondary"
+msgstr "Secundaire email"
+
+#: app/views/scripts/person/edit-body-addtl.phtml:97
+msgid "Reason (if 'Other' selected above)"
+msgstr "Reden (als \"Ander\" hierboven is geselecteerd)"
+
+#: app/views/scripts/person/edit-body-addtl.phtml:135
+#: app/views/scripts/person/edit-body-bad.phtml:354
+#: app/views/scripts/person/view.phtml:121
+msgid "Qualification Comments"
+msgstr "Bevoegdheden Opmerkingen"
+
+#: app/views/scripts/person/edit-body-addtl.phtml:158
+#: app/views/scripts/person/edit-body-bad.phtml:377
+#: app/views/scripts/person/view.phtml:142
+#: app/views/scripts/training/_template_editform.phtml:537
+msgid "Trainer Information"
+msgstr "Trainer informatie"
+
+#: app/views/scripts/person/edit-body-addtl.phtml:158
+#: app/views/scripts/person/edit-body-bad.phtml:377
+#: app/views/scripts/person/view.phtml:142
+msgid "Show/Hide"
+msgstr "Wijs/verberg"
+
+#: app/views/scripts/person/edit-body-addtl.phtml:161
+#: app/views/scripts/person/edit-body-bad.phtml:379
+msgid "Is person an active trainer?"
+msgstr "Is persoon een actieve trainer?"
+
+#: app/views/scripts/person/edit-body-addtl.phtml:163
+#: app/views/scripts/person/view.phtml:148
+msgid "Active trainer"
+msgstr "Actieve trainer"
+
+#: app/views/scripts/person/edit-body-addtl.phtml:178
+#: app/views/scripts/person/edit-body-bad.phtml:390
+#: app/views/scripts/person/view.phtml:158
+msgid "Trainer Affiliation"
+msgstr "Instituut waaraan trainer verbonden is"
+
+#: app/views/scripts/person/edit-body-addtl.phtml:192
+#: app/views/scripts/person/edit-body-bad.phtml:401
+#: app/views/scripts/person/view.phtml:167
+msgid "Trainer skills"
+msgstr "Trainer vaardigheden"
+
+#: app/views/scripts/person/edit-body-addtl.phtml:194
+#: app/views/scripts/person/edit-body-addtl.phtml:206
+#: app/views/scripts/person/edit-body-bad.phtml:403
+#: app/views/scripts/person/edit-body-bad.phtml:414
+msgid "check all that apply"
+msgstr "kies alles wat van toepassing is"
+
+#: app/views/scripts/person/edit-body-addtl.phtml:203
+msgid "Primary language"
+msgstr "Eerste taal"
+
+#: app/views/scripts/person/edit-body-addtl.phtml:204
+msgid "Secondary languages"
+msgstr "Tweede talen"
+
+#: app/views/scripts/person/edit-body-bad.phtml:8
+#: app/views/scripts/person/history.phtml:4
+#: app/views/scripts/person/view.phtml:19
+msgid "Created by"
+msgstr "Aangemaakt door"
+
+#: app/views/scripts/person/edit-body-bad.phtml:9
+#: app/views/scripts/person/history.phtml:5
+#: app/views/scripts/person/view.phtml:20
+msgid "Date modified"
+msgstr "Datum aangepast"
+
+#: app/views/scripts/person/edit-body-bad.phtml:10
+#: app/views/scripts/person/history.phtml:6
+#: app/views/scripts/person/view.phtml:21
+msgid "Modified by"
+msgstr "Aangepast door"
+
+#: app/views/scripts/person/edit-body-bad.phtml:14
+#: app/views/scripts/person/history.phtml:10
+msgid "Delete this Person"
+msgstr "Verwijder deze persoon"
+
+#: app/views/scripts/person/edit-body-bad.phtml:17
+#: app/views/scripts/person/history.phtml:13
+msgid "Are you sure you wish to delete this person?"
+msgstr "Weet u zeker dat u deze persoon wilt verwijderen?"
+
+#: app/views/scripts/person/edit-body-bad.phtml:29
+#: app/views/scripts/person/edit-body.phtml:285
+msgid "Edit person's record"
+msgstr "Bewerk gegevens persoon"
+
+#: app/views/scripts/person/edit-body-bad.phtml:31
+#: app/views/scripts/person/edit-body.phtml:287
+msgid "Add person's record"
+msgstr "Voeg gegevens persoon toe"
+
+#: app/views/scripts/person/edit-body-bad.phtml:34
+#: app/views/scripts/person/edit-body.phtml:293
+#: app/views/scripts/person/view.phtml:26
+msgid "Personal Information"
+msgstr "Persoonlijke informatie"
+
+#: app/views/scripts/person/edit-body-bad.phtml:61
+#: app/views/scripts/person/edit-body.phtml:333
+#: app/views/scripts/person/view.phtml:52
+msgid "Birth date"
+msgstr "Geboortedatum"
+
+#: app/views/scripts/person/edit-body-bad.phtml:72
+#: app/views/scripts/person/edit-body.phtml:348
+msgid "Duplicate Check"
+msgstr "Check voor duplicaten"
+
+#: app/views/scripts/person/edit-body-bad.phtml:76
+#: app/views/scripts/person/edit-body.phtml:350
+msgid "Continue"
+msgstr "Ga door"
+
+#: app/views/scripts/person/edit-body-bad.phtml:104
+#: app/views/scripts/person/edit-body.phtml:181
+msgid "If the person already exists, please select their name below."
+msgstr "Als de persoon reeds bestaat, selecteer aub hun naam hieronder."
+
+#: app/views/scripts/person/edit-body-bad.phtml:154
+#: app/views/scripts/person/edit-body.phtml:240
+msgid "Please enter a first and last name."
+msgstr "Voer aub een voor en achternaam in."
+
+#: app/views/scripts/person/edit-body-bad.phtml:259
+#: app/views/scripts/person/edit-body.phtml:110
+msgid "Submission failed:"
+msgstr "Sturen mislukt:"
+
+#: app/views/scripts/person/edit-body-bad.phtml:311
+#: app/views/scripts/person/view.phtml:99
+msgid "Primary responsibility"
+msgstr "Eerste verantwoordelijkheid."
+
+#: app/views/scripts/person/edit-body-bad.phtml:319
+#: app/views/scripts/person/view.phtml:105
+msgid "Secondary responsibility"
+msgstr "Tweede verantwoordelijkheid"
+
+#: app/views/scripts/person/edit-body-bad.phtml:412
+#: app/views/scripts/person/view.phtml:177
+msgid "Trainer languages"
+msgstr "Talen trainer"
+
+#: app/views/scripts/person/edit-body-bad.phtml:447
+#: app/views/scripts/person/edit-body-rec.phtml:3
+msgid "Recommended Training Topics"
+msgstr "Aanbevolen training onderwerpen"
+
+#: app/views/scripts/person/edit-body-bad.phtml:450
+#: app/views/scripts/person/edit-body-rec.phtml:6
+msgid "No recommended classes were found for the above primary qualification"
+msgstr ""
+"Er zijn geen aanbevolen lessen gevonden voor de eerste verantwoordelijkheid."
+
+#: app/views/scripts/person/edit-body-bad.phtml:465
+#: app/views/scripts/person/edit-body-rec.phtml:21
+msgid "Upcoming Trainings"
+msgstr "Toekomstige trainingen"
+
+#: app/views/scripts/person/edit-body-bad.phtml:486
+#: app/views/scripts/person/edit-body-rec.phtml:44
+msgid "Topic(s)"
+msgstr "Onderwerp(en)"
+
+#: app/views/scripts/person/edit-body-bad.phtml:510
+#: app/views/scripts/person/edit-body-class-history.phtml:1
+#: app/views/scripts/person/view.phtml:205
+msgid "Class History"
+msgstr "Overzicht lessen"
+
+#: app/views/scripts/person/edit-body-bad.phtml:530
+#: app/views/scripts/person/edit-body-class-history.phtml:25
+msgid "Topics(s)"
+msgstr "Onderwerp(en)"
+
+#: app/views/scripts/person/edit-body-bad.phtml:567
+#: app/views/scripts/person/edit-body.phtml:270
+msgid "Please add or verify the trainer information below."
+msgstr "Voeg aub de trainer informatie toe hieronder of verifieer deze."
+
+#: app/views/scripts/person/edit-body-bad.phtml:574
+#: app/views/scripts/person/edit-body.phtml:396
+msgid "Please enter facility information"
+msgstr "Voer aub de informatie voor de faciliteit in"
+
+#: app/views/scripts/person/edit-body-class-history.phtml:3
+#: app/views/scripts/person/history.phtml:22
+msgid "Assign this person to a class"
+msgstr "Wijs deze persoon toe aan een klas."
+
+#: app/views/scripts/person/edit-body-exclass-history.phtml:1
+msgid "External Class History"
+msgstr "Overzicht externe lessen "
+
+#: app/views/scripts/person/edit-body-exclass-history.phtml:3
+msgid "Add an external class"
+msgstr "Voeg een externe les toe"
+
+#: app/views/scripts/person/edit-body-history-table.phtml:1
+msgid "Change History"
+msgstr "Wijzig geschiedenis"
+
+#: app/views/scripts/person/edit-body-history-table.phtml:13
+msgid "Change"
+msgstr "Wijzig"
+
+#: app/views/scripts/person/edit-body-history-table.phtml:14
+msgid "Previous entry"
+msgstr "Vorige entry"
+
+#: app/views/scripts/person/edit-body.phtml:178
+msgid "No duplicates found."
+msgstr "Geen duplicaten gevonden."
+
+#: app/views/scripts/person/edit-body.phtml:341
+#: app/views/scripts/reports/participants-by-facility-type.phtml:175
+#: app/views/scripts/reports/participants-by-facility-type.phtml:367
+#: app/views/scripts/reports/participants-by-training.phtml:267
+#: app/views/scripts/reports/participants-by-training.phtml:551
+msgid "Age"
+msgstr "Leeftijd"
+
+#: app/views/scripts/person/edit.phtml:4
+msgid "Edit Person"
+msgstr "Bewerk persoon"
+
+#: app/views/scripts/person/search.phtml:4
+msgid "Person Search"
+msgstr "Zoeken naar persoon"
+
+#: app/views/scripts/person/search.phtml:83
+msgid "Trainers only"
+msgstr "Slechts trainers"
+
+#: app/views/scripts/person/search.phtml:84
+msgid "Participants only"
+msgstr "Slechts participanten"
+
+#: app/views/scripts/person/search.phtml:85
+msgid "Unattached only"
+msgstr "Alleen ongebonden"
+
+#: app/views/scripts/person/search.phtml:86
+msgid "Everyone"
+msgstr "Iedereen"
+
+#: app/views/scripts/person/view.phtml:4
+msgid "View Person"
+msgstr "Bekijk persoon"
+
+#: app/views/scripts/person/view.phtml:32
+msgid "First name"
+msgstr "Voornaam"
+
+#: app/views/scripts/person/view.phtml:34
+msgid "Middle name"
+msgstr "Tweede naam"
+
+#: app/views/scripts/person/view.phtml:36
+msgid "Last name"
+msgstr "Achternaam"
+
+#: app/views/scripts/person/view.phtml:150
+msgid "Trainer Type"
+msgstr "Soort Trainer "
+
+#: app/views/scripts/person/view.phtml:188
+msgid "Training History"
+msgstr "Training Overzicht"
+
+#: app/views/scripts/reportpreservice/coursebyname.phtml:4
+#: app/views/scripts/reportpreservice/coursebyname.phtml:37
+#: app/views/scripts/reports/facilities.phtml:4
+#: app/views/scripts/reports/facilities.phtml:36
+#: app/views/scripts/reports/training-unknown.phtml:37
+#: app/views/scripts/reports/trainings.phtml:4
+#: app/views/scripts/reports/trainings.phtml:37
+msgid "Search"
+msgstr "Zoek"
+
+#: app/views/scripts/reportpreservice/coursebyname.phtml:12
+#: app/views/scripts/reportpreservice/studentname.phtml:12
+#: app/views/scripts/reports/facilities.phtml:11
+#: app/views/scripts/reports/needs-by-person-name.phtml:11
+#: app/views/scripts/reports/participants-by-training.phtml:11
+#: app/views/scripts/reports/people-by-facility.phtml:10
+#: app/views/scripts/reports/training-unknown.phtml:12
+#: app/views/scripts/reports/trainings.phtml:12
+msgid "show"
+msgstr "toon"
+
+#: app/views/scripts/reportpreservice/coursebyname.phtml:15
+#: app/views/scripts/reportpreservice/studentname.phtml:14
+#: app/views/scripts/reports/facilities.phtml:13
+#: app/views/scripts/reports/needs-by-person-name.phtml:13
+#: app/views/scripts/reports/participants-by-training.phtml:13
+#: app/views/scripts/reports/people-by-facility.phtml:12
+#: app/views/scripts/reports/training-unknown.phtml:15
+#: app/views/scripts/reports/trainings.phtml:15
+msgid "group"
+msgstr "groep"
+
+#: app/views/scripts/reportpreservice/coursebyname.phtml:111
+msgid "course name"
+msgstr "Naam cursus"
+
+#: app/views/scripts/reportpreservice/coursebyname.phtml:152
+#: app/views/scripts/reports/training-unknown.phtml:180
+#: app/views/scripts/reports/trainings.phtml:154
+msgid "Min"
+msgstr "Min"
+
+#: app/views/scripts/reportpreservice/coursebyname.phtml:154
+#: app/views/scripts/reports/training-unknown.phtml:182
+#: app/views/scripts/reports/trainings.phtml:156
+msgid "Max"
+msgstr "max"
+
+#: app/views/scripts/reportpreservice/coursebyname.phtml:211
+#: app/views/scripts/reportpreservice/coursebyname.phtml:230
+#: app/views/scripts/reports/evaluations.phtml:46
+#: app/views/scripts/reports/facilities.phtml:237
+#: app/views/scripts/reports/participants-by-category.phtml:68
+#: app/views/scripts/reports/participants-by-facility-type.phtml:239
+#: app/views/scripts/reports/participants-by-training.phtml:367
+#: app/views/scripts/reports/people-by-facility.phtml:203
+#: app/views/scripts/reports/roster.phtml:51
+#: app/views/scripts/reports/training-unknown.phtml:235
+#: app/views/scripts/reports/training-unknown.phtml:254
+#: app/views/scripts/reports/trainings.phtml:213
+#: app/views/scripts/reports/trainings.phtml:233
+msgid "End date"
+msgstr "Einddatum"
+
+#: app/views/scripts/reportpreservice/coursebyname.phtml:219
+#: app/views/scripts/reports/evaluations.phtml:35
+#: app/views/scripts/reports/facilities.phtml:226
+#: app/views/scripts/reports/participants-by-category.phtml:57
+#: app/views/scripts/reports/participants-by-facility-type.phtml:228
+#: app/views/scripts/reports/participants-by-training.phtml:356
+#: app/views/scripts/reports/people-by-facility.phtml:192
+#: app/views/scripts/reports/roster.phtml:40
+#: app/views/scripts/reports/training-unknown.phtml:243
+#: app/views/scripts/reports/trainings.phtml:222
+msgid "Start date"
+msgstr "Begindatum"
+
+#: app/views/scripts/reportpreservice/coursebyname.phtml:245
+#: app/views/scripts/reports/training-unknown.phtml:269
+#: app/views/scripts/reports/trainings.phtml:248
+msgid "Trainings with known participants only"
+msgstr "Trainingen met slechts bekende participanten"
+
+#: app/views/scripts/reportpreservice/coursebyname.phtml:246
+#: app/views/scripts/reports/training-unknown.phtml:270
+#: app/views/scripts/reports/trainings.phtml:249
+msgid "Trainings with unknown participants only"
+msgstr "Trainingen met slechts onbekende participanten"
+
+#: app/views/scripts/reportpreservice/coursebyname.phtml:247
+#: app/views/scripts/reports/training-unknown.phtml:271
+#: app/views/scripts/reports/trainings.phtml:250
+msgid "All trainings"
+msgstr "Alle trainingen"
+
+#: app/views/scripts/reportpreservice/coursebyname.phtml:338
+#: app/views/scripts/reports/training-unknown.phtml:373
+#: app/views/scripts/reports/trainings.phtml:341
+msgid "End Date"
+msgstr "Eind datum"
+
+#: app/views/scripts/reportpreservice/coursebyname.phtml:380
+#: app/views/scripts/reports/training-unknown.phtml:427
+#: app/views/scripts/reports/trainings.phtml:383
+msgid "Refresher"
+msgstr "Opfrissing"
+
+#: app/views/scripts/reportpreservice/studentname.phtml:86
+#: app/views/scripts/reportpreservice/studentname.phtml:93
+#: app/views/scripts/reportpreservice/studentname.phtml:102
+#: app/views/scripts/reports/facilities.phtml:88
+#: app/views/scripts/reports/facilities.phtml:92
+#: app/views/scripts/reports/facilities.phtml:98
+#: app/views/scripts/reports/needs-by-person-name.phtml:33
+#: app/views/scripts/reports/needs-by-person-name.phtml:37
+#: app/views/scripts/reports/needs-by-person-name.phtml:42
+#: app/views/scripts/reports/participants-by-facility-type.phtml:49
+#: app/views/scripts/reports/participants-by-facility-type.phtml:53
+#: app/views/scripts/reports/participants-by-facility-type.phtml:58
+#: app/views/scripts/reports/participants-by-training.phtml:37
+#: app/views/scripts/reports/participants-by-training.phtml:41
+#: app/views/scripts/reports/participants-by-training.phtml:46
+#: app/views/scripts/reports/people-by-facility.phtml:47
+#: app/views/scripts/reports/people-by-facility.phtml:58
+#: app/views/scripts/reports/trainers.phtml:25
+#: app/views/scripts/reports/trainers.phtml:28
+#: app/views/scripts/reports/trainers.phtml:32
+msgid "facility"
+msgstr "faciliteit"
+
+#: app/views/scripts/reportpreservice/studentname.phtml:252
+#: app/views/scripts/reports/facilities.phtml:257
+msgid "Trainings matched with Facilities"
+msgstr "Trainingen gematched met faciliteiten"
+
+#: app/views/scripts/reportpreservice/studentname.phtml:336
+#: app/views/scripts/reports/facilities.phtml:336
+msgid "Training Location"
+msgstr "Locatie training"
+
+#: app/views/scripts/reportpreservice/studentname.phtml:348
+#: app/views/scripts/reports/facilities.phtml:348
+#: app/views/scripts/reports/needs-by-person-name.phtml:368
+#: app/views/scripts/reports/participants-by-category.phtml:14
+#: app/views/scripts/reports/participants-by-facility-type.phtml:405
+#: app/views/scripts/reports/participants-by-training.phtml:604
+#: app/views/scripts/reports/people-by-facility.phtml:341
+msgid "PEPFAR"
+msgstr "PEPFAR"
+
+#: app/views/scripts/reports/evaluations.phtml:5
+#: app/views/scripts/reports/evaluations.phtml:17
+#: app/views/scripts/reports/evaluations_results.phtml:4
+msgid "Evaluation Reports"
+msgstr "Evaluatie Rapporten"
+
+#: app/views/scripts/reports/evaluations.phtml:21
+msgid "Evaluation"
+msgstr "Evaluatie"
+
+#: app/views/scripts/reports/evaluations.phtml:64
+#: app/views/scripts/reports/roster.phtml:71
+msgid "Generate Report"
+msgstr "Genereer rapport"
+
+#: app/views/scripts/reports/evaluations_results.phtml:47
+msgid "Evaluation Name"
+msgstr "Naam Evaluatie"
+
+#: app/views/scripts/reports/evaluations_results.phtml:50
+msgid "Responses"
+msgstr "Antwoorden"
+
+#: app/views/scripts/reports/facilities.phtml:38
+msgid "Select facility report"
+msgstr "Selecteer rapport faciliteit "
+
+#: app/views/scripts/reports/facilities.phtml:41
+msgid "Trainings by Facility Name"
+msgstr "Trainingen op naam faciliteit"
+
+#: app/views/scripts/reports/facilities.phtml:42
+msgid "Trainings by Facility Participant Count"
+msgstr "Trainingen op aantal participanten per faciliteit"
+
+#: app/views/scripts/reports/facilities.phtml:50
+#: app/views/scripts/reports/needs-by-person-name.phtml:32
+#: app/views/scripts/reports/participants-by-facility-type.phtml:48
+#: app/views/scripts/reports/participants-by-training.phtml:36
+#: app/views/scripts/reports/people-by-facility.phtml:46
+#: app/views/scripts/reports/training-unknown.phtml:54
+#: app/views/scripts/reports/trainings.phtml:54
+msgid "filter"
+msgstr "filter"
+
+#: app/views/scripts/reports/facilities.phtml:120
+#: app/views/scripts/reports/training-unknown.phtml:110
+#: app/views/scripts/reports/trainings.phtml:110
+#: app/views/scripts/training/_template_editform.phtml:297
+msgid "Training location"
+msgstr "Locatie training"
+
+#: app/views/scripts/reports/facilities.phtml:144
+#: app/views/scripts/trainingpartner/add-partner.phtml:24
+#: app/views/scripts/trainingpartner/edit-partner.phtml:31
+#: app/views/scripts/trainingpartner/search-partner.phtml:85
+#: app/views/scripts/trainingpartner/view-partner.phtml:34
+msgid "Training Partner"
+msgstr "Training Partner"
+
+#: app/views/scripts/reports/index.phtml:28
+msgid "Report"
+msgstr "Rapport"
+
+#: app/views/scripts/reports/index.phtml:32
+#: app/views/scripts/reports/trainerReportsPicker.phtml:11
+msgid "Select trainer report"
+msgstr "Selecteer rapport op trainer "
+
+#: app/views/scripts/reports/index.phtml:35
+msgid "Trainers by Skill, Language, and PEPFAR"
+msgstr "Trainers op vaardigheid, taal en PEPFAR"
+
+#: app/views/scripts/reports/index.phtml:38
+#: app/views/scripts/reports/training-unknown.phtml:39
+#: app/views/scripts/reports/trainings.phtml:39
+msgid "Select training report"
+msgstr "Selecteer rapport op training"
+
+#: app/views/scripts/reports/index.phtml:41
+#: app/views/scripts/reports/training-unknown.phtml:42
+#: app/views/scripts/reports/trainings.phtml:42
+msgid "Trainings by Name"
+msgstr "Trainingen op Naam"
+
+#: app/views/scripts/reports/index.phtml:42
+#: app/views/scripts/reports/training-unknown.phtml:43
+#: app/views/scripts/reports/trainings.phtml:43
+msgid "Trainings by Participant Count"
+msgstr "Trainingen op Aantal Participanten"
+
+#: app/views/scripts/reports/index.phtml:68
+msgid "Pre-service reports"
+msgstr "Preservice Rapporten"
+
+#: app/views/scripts/reports/index.phtml:74
+#: app/views/scripts/reports/ps-course-by-student-count.phtml:21
+msgid "Course By Student Count"
+msgstr "Les op student aantallen"
+
+#: app/views/scripts/reports/index.phtml:75
+#: app/views/scripts/reports/ps-course-by-name.phtml:21
+msgid "Course By Name"
+msgstr "Cursus Op Naam."
+
+#: app/views/scripts/reports/needs-by-person-name.phtml:61
+#: app/views/scripts/reports/participants-by-training.phtml:95
+msgid "primary"
+msgstr "primaire"
+
+#: app/views/scripts/reports/needs-by-person-name.phtml:72
+#: app/views/scripts/reports/participants-by-training.phtml:106
+msgid "secondary"
+msgstr "secundaire"
+
+#: app/views/scripts/reports/needs-by-person-name.phtml:105
+#: app/views/scripts/reports/needs-by-person-name.phtml:350
+msgid "Classes taken"
+msgstr "Gevolgde lessen"
+
+#: app/views/scripts/reports/needs-by-person-name.phtml:116
+#: app/views/scripts/reports/needs-by-person-name.phtml:362
+msgid "Upcoming classes"
+msgstr "Toekomstige lessen"
+
+#: app/views/scripts/reports/needs-by-person-name.phtml:130
+#: app/views/scripts/reports/people-by-facility.phtml:112
+#: app/views/scripts/training/roster.phtml:41
+msgid "Training topic"
+msgstr "Training onderwerp"
+
+#: app/views/scripts/reports/needs-by-person-name.phtml:160
+msgid "Recommended topics"
+msgstr "Aanbevolen onderwerpen"
+
+#: app/views/scripts/reports/needs-by-person-name.phtml:229
+#: app/views/scripts/reports/participants-by-facility-type.phtml:252
+#: app/views/scripts/reports/participants-by-training.phtml:380
+#: app/views/scripts/reports/people-by-facility.phtml:216
+msgid "Combine First and Last Names"
+msgstr "Combineer voor- en achternamen"
+
+#: app/views/scripts/reports/needs-by-person-name.phtml:305
+msgid "Person Count"
+msgstr "Aantal Personen"
+
+#: app/views/scripts/reports/needsReportsPicker.phtml:9
+msgid "Select person report"
+msgstr "Selecteer rapport op persoon"
+
+#: app/views/scripts/reports/needsReportsPicker.phtml:12
+msgid "Needs by Person's Name"
+msgstr "Nodig op naam persoon"
+
+#: app/views/scripts/reports/needsReportsPicker.phtml:13
+msgid "Needs by Person Count"
+msgstr "Nodig op Aantal Personen"
+
+#: app/views/scripts/reports/participants-by-category.phtml:15
+#: app/views/scripts/reports/participants-by-category.phtml:19
+msgid "Unique by"
+msgstr "Eenmalig op"
+
+#: app/views/scripts/reports/participants-by-category.phtml:15
+#: app/views/scripts/reports/participants-by-category.phtml:19
+msgid "and"
+msgstr "en"
+
+#: app/views/scripts/reports/participants-by-category.phtml:15
+#: app/views/scripts/reports/participants-by-category.phtml:19
+#: app/views/scripts/reports/participants-by-category.phtml:23
+msgid "Not unique overall."
+msgstr "Niet algeheel eenmalig"
+
+#: app/views/scripts/reports/participants-by-category.phtml:23
+msgid "Unique by "
+msgstr "Eenmalig op"
+
+#: app/views/scripts/reports/participants-by-category.phtml:42
+#: app/views/scripts/reports/participants-by-category.phtml:45
+#: app/views/scripts/reports/participants-by-category.phtml:49
+msgid "facility location"
+msgstr "locatie faciliteit"
+
+#: app/views/scripts/reports/participants-by-category.phtml:91
+msgid "Total Participants by"
+msgstr "Totaal Participanten op"
+
+#: app/views/scripts/reports/participants-by-facility-type.phtml:4
+#: app/views/scripts/reports/participants-by-training.phtml:4
+#: app/views/scripts/reports/people-by-facility.phtml:4
+msgid "Participants Report"
+msgstr "Participanten Rapport"
+
+#: app/views/scripts/reports/participants-by-facility-type.phtml:170
+#: app/views/scripts/reports/participants-by-training.phtml:262
+msgid "male"
+msgstr "mannelijk"
+
+#: app/views/scripts/reports/participants-by-facility-type.phtml:171
+#: app/views/scripts/reports/participants-by-training.phtml:263
+msgid "female"
+msgstr "vrouwelijk"
+
+#: app/views/scripts/reports/participants-by-facility-type.phtml:172
+#: app/views/scripts/reports/participants-by-training.phtml:264
+msgid "na"
+msgstr "nvt"
+
+#: app/views/scripts/reports/participants-by-facility-type.phtml:179
+#: app/views/scripts/reports/participants-by-training.phtml:271
+msgid "min"
+msgstr "min"
+
+#: app/views/scripts/reports/participants-by-facility-type.phtml:179
+#: app/views/scripts/reports/participants-by-training.phtml:271
+msgid "max"
+msgstr "max"
+
+#: app/views/scripts/reports/participants-by-facility-type.phtml:179
+#: app/views/scripts/reports/participants-by-training.phtml:271
+msgid "clear"
+msgstr "wis"
+
+#: app/views/scripts/reports/participants-by-facility-type.phtml:190
+#: app/views/scripts/reports/participants-by-training.phtml:281
+#: app/views/scripts/user/search.phtml:28
+msgid "active"
+msgstr "actief"
+
+#: app/views/scripts/reports/participants-by-facility-type.phtml:191
+#: app/views/scripts/reports/participants-by-training.phtml:282
+msgid "inactive"
+msgstr "inactief"
+
+#: app/views/scripts/reports/participants-by-facility-type.phtml:268
+msgid ""
+"Note: This report may contain multiple rows for participants who attended "
+"multiple trainings"
+msgstr ""
+"Noot: Dit rapport kan meerdere rijen hebben voor participanten die meer dan "
+"een training hebben gevolgd"
+
+#: app/views/scripts/reports/participants-by-facility-type.phtml:340
+#: app/views/scripts/reports/participants-by-training.phtml:520
+#: app/views/scripts/reports/people-by-facility.phtml:289
+msgid "Participant Count"
+msgstr "Aantal Participanten"
+
+#: app/views/scripts/reports/participants-by-training.phtml:29
+#: app/views/scripts/reports/trainerReportsPicker.phtml:14
+msgid "Trainers by Name"
+msgstr "Trainers op Naam"
+
+#: app/views/scripts/reports/participants-by-training.phtml:329
+msgid "Show post-test scores above"
+msgstr "Geef post-test resultaten hierboven weer"
+
+#: app/views/scripts/reports/participants-by-training.phtml:336
+msgid "Show score increase above"
+msgstr "Geef toename in resultaat hierboven weer"
+
+#: app/views/scripts/reports/participants-by-training.phtml:351
+msgid "Return Unique Participants"
+msgstr "Geef eenmalige participanten weer"
+
+#: app/views/scripts/reports/participants-by-training.phtml:390
+#: app/views/scripts/reports/people-by-facility.phtml:225
+msgid "Trainings Attended"
+msgstr "Gevolgde Trainingen"
+
+#: app/views/scripts/reports/participants-by-training.phtml:618
+msgid "% Change"
+msgstr "% Wijziging"
+
+#: app/views/scripts/reports/people-by-facility.phtml:108
+msgid "Match primary/secondary"
+msgstr " Match primaire/secundaire"
+
+#: app/views/scripts/reports/people-by-facility.phtml:126
+msgid "Recommended classes (based on topic)"
+msgstr "Aanbevolen lessen (gebaseerd op onderwerp)"
+
+#: app/views/scripts/reports/peopleReportsPicker.phtml:9
+msgid "Select participant report"
+msgstr "Selecteer participanten rapport"
+
+#: app/views/scripts/reports/peopleReportsPicker.phtml:12
+msgid "Unique Participants by "
+msgstr "Eenmalige participanten op "
+
+#: app/views/scripts/reports/peopleReportsPicker.phtml:13
+msgid "Unique Participants by"
+msgstr "Eenmalige participanten op"
+
+#: app/views/scripts/reports/peopleReportsPicker.phtml:14
+msgid "Unique Participants by Qualification"
+msgstr "Eenmalige participanten op bevoegdheden"
+
+#: app/views/scripts/reports/peopleReportsPicker.phtml:15
+msgid "Participants Trained"
+msgstr "Getrainde participanten"
+
+#: app/views/scripts/reports/peopleReportsPicker.phtml:16
+msgid "Participants by Facility"
+msgstr "Participanten op faciliteit"
+
+#: app/views/scripts/reports/peopleReportsPicker.phtml:17
+msgid "Participants by Name"
+msgstr "Participanten op Naam"
+
+#: app/views/scripts/reports/peopleReportsPicker.phtml:18
+msgid "Participants with Scores"
+msgstr "Participanten met Resultaten"
+
+#: app/views/scripts/reports/ps-course-by-name.phtml:4
+msgid "Course By Name Report"
+msgstr "Rapport cursus op naam."
+
+#: app/views/scripts/reports/ps-course-by-student-count.phtml:4
+msgid "Course By Student Count Report"
+msgstr "Rapport voor cursus op student aantallen"
+
+#: app/views/scripts/reports/ps-graduated-students.phtml:4
+msgid "Graduated Students Report"
+msgstr "Rapport afgestudeerde studenten"
+
+#: app/views/scripts/reports/ps-missing-cohort-by-participant-count.phtml:4
+msgid "Missing Cohort By Participant Count Report"
+msgstr "Rapport Cohort op Aantal Participanten ontbreekt"
+
+#: app/views/scripts/reports/ps-missing-cohort-by-participant-count.phtml:21
+msgid "Missing Cohort By Participant Count"
+msgstr "Cohort op Aantal Participanten ontbreekt"
+
+#: app/views/scripts/reports/ps-missing-course-by-name.phtml:4
+msgid "Missing Course By Name Report"
+msgstr "Rapport voor cursus op naam ontbreekt"
+
+#: app/views/scripts/reports/ps-missing-course-by-name.phtml:21
+msgid "Missing Course By Name"
+msgstr "Cursus op naam ontbreekt."
+
+#: app/views/scripts/reports/ps-missing-course-by-student-count.phtml:4
+msgid "Missing Course By Student Count Report"
+msgstr "Rapport voor cursus op student aantallen ontbreekt"
+
+#: app/views/scripts/reports/ps-missing-course-by-student-count.phtml:21
+msgid "Missing Course By Student Count"
+msgstr "Cursus op student aantallen ontbreekt"
+
+#: app/views/scripts/reports/ps-missing-facility-report.phtml:4
+msgid "Missing Facility Report Report"
+msgstr "Rapport Faciliteit ontbreekt"
+
+#: app/views/scripts/reports/ps-missing-facility-report.phtml:21
+msgid "Missing Facility Report"
+msgstr "Rapport Faciliteit ontbreekt"
+
+#: app/views/scripts/reports/ps-missing-graduated-students.phtml:4
+msgid "Missing Graduated Students Report"
+msgstr "Rapport voor afgestudeerde studenten ontbreekt"
+
+#: app/views/scripts/reports/ps-missing-graduated-students.phtml:21
+msgid "Missing Graduated Students"
+msgstr "Afgestudeerde studenten ontbreekt"
+
+#: app/views/scripts/reports/ps-missing-institution-information.phtml:4
+msgid "Missing Institution Information Report"
+msgstr "Rapport voor informatie instituut ontbreekt"
+
+#: app/views/scripts/reports/ps-missing-institution-information.phtml:21
+msgid "Missing Institution Information"
+msgstr "Informatie instituut ontbreekt"
+
+#: app/views/scripts/reports/ps-missing-students-by-name.phtml:4
+msgid "Missing Students By Name Report"
+msgstr "Rapport voor studenten op naam ontbreekt"
+
+#: app/views/scripts/reports/ps-missing-students-by-name.phtml:21
+msgid "Missing Students By Name"
+msgstr "Studenten op naam ontbreekt"
+
+#: app/views/scripts/reports/ps-missing-students-trained.phtml:4
+msgid "Missing Students Trained Report"
+msgstr "Rapport voor getrainde studenten ontbreekt"
+
+#: app/views/scripts/reports/ps-missing-students-trained.phtml:21
+msgid "Missing Students Trained"
+msgstr "Getrainde studenten ontbreekt"
+
+#: app/views/scripts/reports/ps-missing-tutor-by-name.phtml:4
+msgid "Missing Tutor By Name Report"
+msgstr "Rapport voor tutor op naam ontbreekt"
+
+#: app/views/scripts/reports/ps-missing-tutor-by-name.phtml:21
+msgid "Missing Tutor By Name"
+msgstr "Tutor op naam ontbreekt"
+
+#: app/views/scripts/reports/ps-students-by-name.phtml:4
+msgid "Students By Name Report"
+msgstr "Rapport voor studenten op naam"
+
+#: app/views/scripts/reports/ps-students-by-name.phtml:26
+#: app/views/scripts/reports/ps-students-by-name.phtml:36
+#: app/views/scripts/reports/ps-students-by-name.phtml:44
+#: app/views/scripts/reports/training-unknown.phtml:56
+#: app/views/scripts/reports/training-unknown.phtml:62
+#: app/views/scripts/reports/training-unknown.phtml:68
+#: app/views/scripts/reports/trainings.phtml:56
+#: app/views/scripts/reports/trainings.phtml:62
+#: app/views/scripts/reports/trainings.phtml:68
+msgid "training location"
+msgstr "training locatie"
+
+#: app/views/scripts/reports/ps-students-trained.phtml:4
+msgid "Students Trained Report"
+msgstr "Rapport Getrainde Studenten"
+
+#: app/views/scripts/reports/ps-training-by-participants.phtml:4
+msgid "Trainings By Participants Report"
+msgstr "Rapport Trainingen op Participanten"
+
+#: app/views/scripts/reports/ps-training-by-participants.phtml:21
+msgid "Trainings By Participants"
+msgstr "Trainingen op Participanten"
+
+#: app/views/scripts/reports/ps-trainings-by-name.phtml:4
+msgid "Trainings By Name Report"
+msgstr "Rapport Trainingen op Naam"
+
+#: app/views/scripts/reports/ps-trainings-by-name.phtml:21
+msgid "Trainings By Name"
+msgstr "Trainingen op Naam"
+
+#: app/views/scripts/reports/roster.phtml:65
+msgid "Extended Report with Test Scores"
+msgstr "Uitgebreid Rapport met Test Resultaten"
+
+#: app/views/scripts/reports/roster.phtml:66
+msgid "Extended Report with Regions and Qualification"
+msgstr "Uitgebreid Rapport met Regios en Bevoegdheden"
+
+#: app/views/scripts/reports/trainerReportsPicker.phtml:15
+#: app/views/scripts/reports/trainers.phtml:4
+#: app/views/scripts/reports/trainers.phtml:21
+msgid "Trainer Report"
+msgstr "Trainer Rapport"
+
+#: app/views/scripts/reports/trainers.phtml:53
+msgid "Trainer language"
+msgstr "Trainer taal"
+
+#: app/views/scripts/reports/trainers.phtml:64
+msgid "Select topic taught"
+msgstr "Selecteer onderwerp les"
+
+#: app/views/scripts/reports/trainers.phtml:68
+msgid "Combine first and last names"
+msgstr "Combineer voor- en achternamen"
+
+#: app/views/scripts/reports/training-unknown.phtml:4
+msgid "with Unknown Participants"
+msgstr "met Onbekende Participanten"
+
+#: app/views/scripts/reports/training-unknown.phtml:45
+#: app/views/scripts/reports/trainings.phtml:45
+msgid "Trainings with Unknown Participants"
+msgstr "Trainingen met Onbekende Participanten"
+
+#: app/views/scripts/reports/training-unknown.phtml:152
+#: app/views/scripts/reports/training-unknown.phtml:403
+#: app/views/scripts/training/_template_editform.phtml:996
+msgid "Age Range"
+msgstr "Leeftijdscategorie"
+
+#: app/views/scripts/sync/commit.phtml:4 app/views/scripts/sync/index.phtml:4
+#: app/views/scripts/sync/review.phtml:4 app/views/scripts/sync/search.phtml:4
+#: app/views/scripts/sync/upload.phtml:4
+msgid "Data Synchronization"
+msgstr "Data synchronisatie"
+
+#: app/views/scripts/sync/review.phtml:15
+msgid "Uploaded Data"
+msgstr "Upgeloade data"
+
+#: app/views/scripts/sync/review.phtml:15
+msgid "Existing Data"
+msgstr "Bestaande data"
+
+#: app/views/scripts/sync/review.phtml:15
+msgid "Conflict(s)"
+msgstr "Conflict(en)"
+
+#: app/views/scripts/sync/review.phtml:15
+msgid "Resolution"
+msgstr "Oplossing"
+
+#: app/views/scripts/sync/review.phtml:71
+msgid "Preview Upload Data"
+msgstr "Voorbezichtig upgeloade data"
+
+#: app/views/scripts/sync/review.phtml:72
+msgid "Import Summary"
+msgstr "Importeer samenvatting"
+
+#: app/views/scripts/sync/review.phtml:75
+msgid "Record"
+msgstr "Gegevens"
+
+#: app/views/scripts/sync/review.phtml:75
+msgid "Additions"
+msgstr "Toevoegingen"
+
+#: app/views/scripts/sync/review.phtml:75
+msgid "Modifications"
+msgstr "Wijzigingen"
+
+#: app/views/scripts/sync/review.phtml:75
+msgid "Deletions"
+msgstr "Verwijderingen"
+
+#: app/views/scripts/sync/review.phtml:75
+msgid "Add Alias (Duplicate)"
+msgstr "Voeg alias toe (duplicaat)"
+
+#: app/views/scripts/sync/review.phtml:75
+msgid "Conflicts"
+msgstr "Conflicten"
+
+#: app/views/scripts/sync/review.phtml:91
+msgid "Training Conflicts"
+msgstr "Training Conflicten"
+
+#: app/views/scripts/sync/review.phtml:93
+msgid "People Conflicts"
+msgstr "Personen Conflicten"
+
+#: app/views/scripts/sync/review.phtml:95
+msgid "Facility Conflicts"
+msgstr "Faciliteit Conflicten"
+
+#: app/views/scripts/sync/review.phtml:97
+msgid "Training Location Conflicts"
+msgstr "Training Locatie Conflicten"
+
+#: app/views/scripts/sync/upload.phtml:17
+msgid ""
+"Select the file that contains the exported data (*.sqlite database) you want "
+"to import."
+msgstr ""
+"Selecteer het bestand met de gexporteerde gegevens (*.sqlite database) die u "
+"wilt importeren."
+
+#: app/views/scripts/sync/upload.phtml:21
+msgid "File to upload"
+msgstr "Bestand om op te loaden"
+
+#: app/views/scripts/training/deleted.phtml:4
+#: app/views/scripts/training/deleted.phtml:19
+msgid "Training Session Deleted"
+msgstr "Training Sessie Verwijderd"
+
+#: app/views/scripts/training/deleted.phtml:21
+msgid "This training session has been deleted."
+msgstr "Deze training sesssie is verwijderd"
+
+#: app/views/scripts/training/edit-topic.phtml:4
+msgid "Edit Topics"
+msgstr "Bewerk onderwerpen"
+
+#: app/views/scripts/training/edit-topic.phtml:18
+msgid "Edit Trainer Topic"
+msgstr "Bewerk Trainer Onderwerpen"
+
+#: app/views/scripts/training/roster.phtml:4
+msgid "Training Roster"
+msgstr "Training Rooster"
+
+#: app/views/scripts/training/roster.phtml:19
+msgid "Course Roster"
+msgstr "Les Rooster"
+
+#: app/views/scripts/training/roster.phtml:23
+msgid "Start Date:"
+msgstr "Begindatum:"
+
+#: app/views/scripts/training/roster.phtml:24
+msgid "End Date:"
+msgstr "Einddatum:"
+
+#: app/views/scripts/training/roster.phtml:71
+#: app/views/scripts/training/_template_editform.phtml:537
+msgid "Total Trainers:"
+msgstr "Trainers totaal:"
+
+#: app/views/scripts/training/roster.phtml:83
+#: app/views/scripts/training/_template_editform.phtml:736
+msgid "Total Participants:"
+msgstr "Participanten Totaal: "
+
+#: app/views/scripts/training/roster.phtml:89
+msgid "Return to training"
+msgstr "Ga terug naar training"
+
+#: app/views/scripts/training/scores.phtml:24
+msgid "Person"
+msgstr "Persoon"
+
+#: app/views/scripts/training/scores.phtml:34
+msgid "Are you sure you wish to delete this score?"
+msgstr "Weet u zeker dat u dit resultaat wilt verwijderen?"
+
+#: app/views/scripts/training/scores.phtml:43
+msgid "Return to Training Session"
+msgstr "Ga Terug naar Training Sessie"
+
+#: app/views/scripts/training/_template_editform.phtml:31
+#: app/views/scripts/training/_template_editform.phtml:523
+#: app/views/scripts/training/_template_editform.phtml:1064
+msgid "Save Training"
+msgstr "Bewaar Training"
+
+#: app/views/scripts/training/_template_editform.phtml:43
+msgid "Add new Training Location"
+msgstr "Voeg nieuwe Training Locatie Toe"
+
+#: app/views/scripts/training/_template_editform.phtml:46
+msgid "Please enter training location information:"
+msgstr "Voer aub training locatie informatie in:"
+
+#: app/views/scripts/training/_template_editform.phtml:86
+msgid ""
+"It looks like the training dates do not match the length. Please double "
+"check these fields."
+msgstr ""
+"Het lijkt erop dat de training data niet overeenkomen met de lengte van de "
+"training. Verifieer deze velden."
+
+#: app/views/scripts/training/_template_editform.phtml:140
+msgid "Cancel"
+msgstr "Annuleer"
+
+#: app/views/scripts/training/_template_editform.phtml:176
+msgid "Date created:"
+msgstr "Datum aangemaakt:"
+
+#: app/views/scripts/training/_template_editform.phtml:177
+msgid "Created by:"
+msgstr "Aangemaakt door:"
+
+#: app/views/scripts/training/_template_editform.phtml:178
+msgid "Date modified:"
+msgstr "Datum gewijzigd:"
+
+#: app/views/scripts/training/_template_editform.phtml:179
+msgid "Modified by:"
+msgstr "Gewijzigd door:"
+
+#: app/views/scripts/training/_template_editform.phtml:181
+msgid "View/Print Training Roster"
+msgstr "Bekijk/Print Training Rooster"
+
+#: app/views/scripts/training/_template_editform.phtml:184
+msgid "Enter Evaluation Data"
+msgstr "Voer Evalautie Data in"
+
+#: app/views/scripts/training/_template_editform.phtml:184
+msgid "View Data"
+msgstr "Bekijk Data"
+
+#: app/views/scripts/training/_template_editform.phtml:184
+msgid "unassigned"
+msgstr "niet toegewezen"
+
+#: app/views/scripts/training/_template_editform.phtml:187
+msgid "Duplicate this Training"
+msgstr "Voer deze training nogmaals in"
+
+#: app/views/scripts/training/_template_editform.phtml:188
+msgid "Delete this Training"
+msgstr "Verwijder deze training"
+
+#: app/views/scripts/training/_template_editform.phtml:246
+msgid "Training start date"
+msgstr "Begindatum training "
+
+#: app/views/scripts/training/_template_editform.phtml:261
+msgid "Training end date"
+msgstr "Einddatum training"
+
+#: app/views/scripts/training/_template_editform.phtml:277
+msgid "Training length"
+msgstr "Lengte Training"
+
+#: app/views/scripts/training/_template_editform.phtml:282
+msgid "hours"
+msgstr "uren"
+
+#: app/views/scripts/training/_template_editform.phtml:288
+msgid "weeks"
+msgstr "weken"
+
+#: app/views/scripts/training/_template_editform.phtml:329
+msgid "Participants are known"
+msgstr "Participanten zijn bekend"
+
+#: app/views/scripts/training/_template_editform.phtml:386
+#: app/views/scripts/training/_template_editform.phtml:443
+msgid "Check all that apply below"
+msgstr "Kruis beneden aan alles wat in aanmerking komt"
+
+#: app/views/scripts/training/_template_editform.phtml:444
+msgid "Please enter the name your new funding item:"
+msgstr "Voer aub de naam in van uw nieuwe sponsor:"
+
+#: app/views/scripts/training/_template_editform.phtml:585
+#: app/views/scripts/training/_template_editform.phtml:780
+msgid "Insert"
+msgstr "Voer in"
+
+#: app/views/scripts/training/_template_editform.phtml:587
+#: app/views/scripts/training/_template_editform.phtml:588
+#: app/views/scripts/training/_template_editform.phtml:782
+#: app/views/scripts/training/_template_editform.phtml:783
+msgid "New Person Form"
+msgstr "Formulier Nieuw Persoon"
+
+#: app/views/scripts/training/_template_editform.phtml:680
+msgid ""
+"The entered trainer name could not be found.\\n\\nPlease select one from the "
+"list or add a new person."
+msgstr ""
+"De ingevoerde naam trainer is niet gevonden.\\n\\nSelecteer aub van de lijst "
+"of voeg een nieuwe persoon toe."
+
+#: app/views/scripts/training/_template_editform.phtml:685
+msgid "Please enter the number of days for this trainer."
+msgstr "Voer aub het aantal dagen in voor deze trainer."
+
+#: app/views/scripts/training/_template_editform.phtml:690
+msgid ""
+"You must edit this person's trainer profile before adding them to this "
+"session.\\n\\nWould you like to do this now?"
+msgstr ""
+"U moet het trainer profiel van deze persoon bewerken voor u hen kan "
+"toevoegen aan deze training.\\n\\nWilt u dit nu doen?"
+
+#: app/views/scripts/training/_template_editform.phtml:736
+msgid "Participant Information"
+msgstr "Informatie participant"
+
+#: app/views/scripts/training/_template_editform.phtml:917
+msgid "Course Average Test Scores"
+msgstr "Gemiddelde Testresultaten Les"
+
+#: app/views/scripts/training/_template_editform.phtml:978
+msgid "You need to choose a qualification for all recorded participants."
+msgstr "U moet een bevoegdheid kiezen voor alle ingevoerde participanten."
+
+#: app/views/scripts/training/_template_editform.phtml:990
+msgid "Participant Qualifications"
+msgstr "Bevoegdheden participant"
+
+#: app/views/scripts/training/_template_editform.phtml:1043
+msgid "Approval Status"
+msgstr "Goedkeuring status"
+
+#: app/views/scripts/training/_template_locationform.phtml:4
+msgid "Location name"
+msgstr "Naam locatie"
+
+#: app/views/scripts/trainingpartner/add-partner.phtml:4
+#: app/views/scripts/trainingpartner/add-partner.phtml:17
+#: app/views/scripts/trainingpartner/edit-partner.phtml:20
+#: app/views/scripts/trainingpartner/search-partner.phtml:57
+msgid "Add new Training Partner"
+msgstr "Voeg Nieuwe Training Partner Toe"
+
+#: app/views/scripts/trainingpartner/add-partner.phtml:21
+#: app/views/scripts/trainingpartner/edit-partner.phtml:28
+#: app/views/scripts/trainingpartner/search-partner.phtml:23
+#: app/views/scripts/trainingpartner/search-partner.phtml:84
+#: app/views/scripts/trainingpartner/view-partner.phtml:31
+msgid "Training Partner Name"
+msgstr "Naam training partner"
+
+#: app/views/scripts/trainingpartner/add-partner.phtml:27
+#: app/views/scripts/trainingpartner/edit-partner.phtml:34
+#: app/views/scripts/trainingpartner/search-partner.phtml:86
+#: app/views/scripts/trainingpartner/view-partner.phtml:37
+msgid "Training Sub Partner"
+msgstr "Training Subpartner"
+
+#: app/views/scripts/trainingpartner/add-partner.phtml:30
+#: app/views/scripts/trainingpartner/edit-partner.phtml:37
+#: app/views/scripts/trainingpartner/search-partner.phtml:87
+#: app/views/scripts/trainingpartner/view-partner.phtml:40
+msgid "Mechanism ID"
+msgstr "Mechanisme ID"
+
+#: app/views/scripts/trainingpartner/add-partner.phtml:33
+#: app/views/scripts/trainingpartner/edit-partner.phtml:40
+#: app/views/scripts/trainingpartner/search-partner.phtml:88
+#: app/views/scripts/trainingpartner/view-partner.phtml:43
+msgid "Funder Name"
+msgstr "Naam Financieerder"
+
+#: app/views/scripts/trainingpartner/add-partner.phtml:36
+#: app/views/scripts/trainingpartner/edit-partner.phtml:43
+#: app/views/scripts/trainingpartner/search-partner.phtml:89
+#: app/views/scripts/trainingpartner/view-partner.phtml:46
+msgid "Funder ID"
+msgstr "Financieerder ID"
+
+#: app/views/scripts/trainingpartner/delete-partner.phtml:4
+#: app/views/scripts/trainingpartner/delete-partner.phtml:17
+msgid "Delete Training Partner"
+msgstr "Verwijder Training Partner"
+
+#: app/views/scripts/trainingpartner/edit-partner.phtml:4
+#: app/views/scripts/trainingpartner/edit-partner.phtml:22
+msgid "Edit Training Partner"
+msgstr "Bewerk Training Partner"
+
+#: app/views/scripts/trainingpartner/edit-partner.phtml:64
+msgid "Are you sure you wish to delete this partner?"
+msgstr "Weet u zeker dat u deze partner wilt verwijderen?"
+
+#: app/views/scripts/trainingpartner/search-partner.phtml:18
+msgid "Search for Training Partner"
+msgstr "Zoek training partner"
+
+#: app/views/scripts/trainingpartner/search-partner.phtml:34
+msgid "Funder"
+msgstr "Financieerder"
+
+#: app/views/scripts/trainingpartner/search-partner.phtml:56
+msgid "Training Partners"
+msgstr "Training Partners"
+
+#: app/views/scripts/user/activate.phtml:4
+#: app/views/scripts/user/activate.phtml:17
+msgid "Activate User"
+msgstr "Activeer gebruiker"
+
+#: app/views/scripts/user/add.phtml:4
+msgid "Add User"
+msgstr "Voeg gebruiker toe"
+
+#: app/views/scripts/user/add.phtml:18
+msgid "User Set Up"
+msgstr "Gebruiker instellen"
+
+#: app/views/scripts/user/delete.phtml:4
+#: app/views/scripts/user/delete.phtml:17
+msgid "Block User"
+msgstr "Blokkeer gebruiker"
+
+#: app/views/scripts/user/edit.phtml:4 app/views/scripts/user/edit.phtml:43
+msgid "Edit Account"
+msgstr "Bewerk account"
+
+#: app/views/scripts/user/edit.phtml:52
+#: app/views/scripts/user/forgot-password.phtml:23
+#: app/views/scripts/user/myaccount.phtml:27
+#: app/views/scripts/user/_add_form.phtml:37
+msgid "E-mail"
+msgstr "Email"
+
+#: app/views/scripts/user/edit.phtml:54
+#: app/views/scripts/user/myaccount.phtml:29
+msgid "New password"
+msgstr "Nieuw wachtwoord"
+
+#: app/views/scripts/user/edit.phtml:56
+msgid "Confirm new password"
+msgstr "Bevestig nieuw wachtwoord"
+
+#: app/views/scripts/user/edit.phtml:59
+#: app/views/scripts/user/_add_form.phtml:40
+msgid "Access Level"
+msgstr "Toegangsniveau"
+
+#: app/views/scripts/user/edit.phtml:62 app/views/scripts/user/edit.phtml:67
+#: app/views/scripts/user/_add_form.phtml:43
+#: app/views/scripts/user/_add_form.phtml:48
+msgid "Add/Edit/Delete"
+msgstr "Voeg toe/Bewerk/Verwijder"
+
+#: app/views/scripts/user/edit.phtml:63 app/views/scripts/user/edit.phtml:68
+#: app/views/scripts/user/_add_form.phtml:44
+#: app/views/scripts/user/_add_form.phtml:49
+msgid "View only"
+msgstr "Alleen bekijken"
+
+#: app/views/scripts/user/edit.phtml:71
+#: app/views/scripts/user/_add_form.phtml:52
+msgid "View/create reports"
+msgstr "Rapporten bekijken/aanmaken"
+
+#: app/views/scripts/user/edit.phtml:74
+#: app/views/scripts/user/_add_form.phtml:53
+msgid "Edit country options"
+msgstr "Landen opties bewerken"
+
+#: app/views/scripts/user/edit.phtml:76
+msgid "Add Training Titles"
+msgstr "Namen training toevoegen"
+
+#: app/views/scripts/user/edit.phtml:78
+msgid "Use Offline Application"
+msgstr "Gebruik de offline applicatie"
+
+#: app/views/scripts/user/edit.phtml:80
+#: app/views/scripts/user/_add_form.phtml:53
+msgid "Add/Edit users"
+msgstr "Voeg toe/ bewerk gebruikers"
+
+#: app/views/scripts/user/edit.phtml:82
+#: app/views/scripts/user/_add_form.phtml:54
+msgid "Approval"
+msgstr "Goedkeuring"
+
+#: app/views/scripts/user/edit.phtml:82
+#: app/views/scripts/user/_add_form.phtml:54
+msgid "Approve trainings"
+msgstr "Keur trainingen goed"
+
+#: app/views/scripts/user/edit.phtml:83
+#: app/views/scripts/user/_add_form.phtml:55
+msgid "Files"
+msgstr "Bestanden"
+
+#: app/views/scripts/user/edit.phtml:83
+#: app/views/scripts/user/_add_form.phtml:55
+msgid "Upload and delete"
+msgstr "Upload en verwijder"
+
+#: app/views/scripts/user/edit.phtml:87
+#: app/views/scripts/user/_add_form.phtml:58
+msgid "Organizer access"
+msgstr "Toegang Organisator "
+
+#: app/views/scripts/user/edit.phtml:88
+#: app/views/scripts/user/_add_form.phtml:59
+msgid "All Training Organizers"
+msgstr "Alle training organisatoren"
+
+#: app/views/scripts/user/edit.phtml:97
+msgid "Block this User"
+msgstr "Blokkeer deze gebruiker"
+
+#: app/views/scripts/user/edit.phtml:100
+msgid "Are you sure you wish to block this user?"
+msgstr "Weet u zeker dat u deze gebruiker wilt blokkeren?"
+
+#: app/views/scripts/user/edit.phtml:107
+msgid "Activate this User"
+msgstr "Activeer deze gebruiker"
+
+#: app/views/scripts/user/edit.phtml:110
+msgid "Are you sure you wish to activate this user?"
+msgstr "Weet u zeker dat u deze gebruiker wilt activeren?"
+
+#: app/views/scripts/user/forgot-password.phtml:19
+msgid "Forgot Password"
+msgstr "Wachtwoord vergeten"
+
+#: app/views/scripts/user/forgot-password.phtml:22
+msgid ""
+"Enter your email address, and a new temporary password will be sent to you."
+msgstr ""
+"Voer uw email adres in en een nieuw tijdelijk wachtwoord wordt u toegezonden."
+
+#: app/views/scripts/user/forgot-password.phtml:26
+msgid "Send Password"
+msgstr "Stuur wachtwoord"
+
+#: app/views/scripts/user/myaccount.phtml:31
+msgid "Confirm New password"
+msgstr "Bevestig nieuw wachtwoord"
+
+#: app/views/scripts/user/search.phtml:4
+msgid "User List"
+msgstr "Lijst gebruikers"
+
+#: app/views/scripts/user/search.phtml:15
+msgid "Browse Users"
+msgstr "Bekijk Users"
+
+#: app/views/scripts/user/search.phtml:26
+msgid "blocked"
+msgstr "geblokkeerd"
+
+#: app/views/scripts/user/search.phtml:35
+msgid "First"
+msgstr "Voornaam"
+
+#: app/views/scripts/user/search.phtml:36
+msgid "Last"
+msgstr "Achternaam"
+
+#: app/views/scripts/user/search.phtml:38
+msgid "Username"
+msgstr "Gebruikersnaam"
+
+#: app/views/scripts/user/search.phtml:39
+msgid "Status"
+msgstr "Status"
+
+#: app/views/scripts/user/_add_form.phtml:53
+msgid "Admin"
+msgstr "Admin"
+
+#: app/views/scripts/user/_add_form.phtml:68
+msgid "Send email with login information"
+msgstr "Stuur email met inlog-informatie"
+
+#: app/views/scripts/user/_add_form.phtml:72
+msgid "Finished"
+msgstr "Klaar"
+
+msgid "Are you sure wish to create this user?"
+msgstr "Weet U zeker dat u deze gebruiker wil aanmaken?"

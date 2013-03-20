@@ -1,30 +1,100 @@
 <div class="fieldIndentNoMargin"><?php tp('Current Contact Information');?></div>
 <fieldset>
+	
+<div id="facwrapper">
+	 
 <legend><?php tp('Facility');?></legend>
- <div class="fieldLabel" id="location_province_id_lbl"><?php echo (@$this->translation['Region A (Province)']); ?></div>
-  <div class="fieldInput"><?php renderFilter($this->locations, 1, 'person_facility_province_id', @$this->person['province_id'], ($this->setting['display_region_b']?'person_facility_district_id':'facilityInput'));?></div>
-  <?php if ( $this->setting['display_region_b'] ) { ?>
-  <div class="fieldLabel" id="district_id_lbl"><?php echo (@$this->translation['Region B (Health District)']); ?></div>
-  <div class="fieldInput"><?php renderFilter($this->locations, 2, 'person_facility_district_id', @$this->person['district_id'], ($this->setting['display_region_c']?'person_facility_region_c_id':'facilityInput'));?></div>
-  <?php } ?>
-  <?php if ( $this->setting['display_region_c'] ) { ?>
-  <div class="fieldLabel" id="region_c_id_lbl"><?php echo (@$this->translation['Region C (Local Region)']); ?></div>
-  <div class="fieldInput"><?php renderFilter($this->locations, 3, 'person_facility_region_c_id', @$this->person['region_c_id'], 'facilityInput');?></div>
-  <?php } ?>
 
- 
-<div class="fieldLabel"  id="facilityInput_lbl"><span class="required">*</span><?php tp('Facility');?></div><div class="fieldInput"><select id="facilityInput" name="facilityInput">
+<?php region_filters_dropdown ($this, $this->locations, $this->person, false, false, 'person_facility'); ?>
+
+  <!-- filter the facility drop down by region -->
+<script type="text/javascript">
+	$(document).ready(function () {
+		var sels = $('#facwrapper select').not('#facilityInput'); // all selects
+    $('#facilityInput').filterFacilityByText(sels, true);                 // filter by value on change
+	});
+</script> 
+
+
+  <!-- facility dropdown -->
+<div class="fieldLabel"  id="facilityInput_lbl"><span class="required">*</span><?php tp('Facility');?></div>
+<div class="fieldInput">
+<?php
+
+if ($this->setting['display_mod_skillsmart']) { 
+   $multi_fac_ids = json_decode(html_entity_decode($this->person['multi_facility_ids']));
+		if(count($multi_fac_ids) >= 2){ ?>
+     <select id="facilityInput" name="facilityInput[]" multiple="multiple">
+			  <option value="">--<?php tp('choose');?>--</option>
+			  <?php
+				foreach ( $this->facilities as $vals ) {
+								$non_city_parent = $vals['location_id'];
+								if ($this->locations[$non_city_parent]['tier'] == $this->setting['num_location_tiers']) $non_city_parent = $this->locations[$vals['location_id']]['parent_id'];
+								$value = buildId($this->setting['num_location_tiers'] - 1, $this->locations, $non_city_parent).'_'.$vals['id'];
+								//$value = $vals['province_id'].'_'.$vals['id'];
+					echo '<option value="'.$value.'" '.( in_array($vals['id'], $multi_fac_ids) ? 'selected="selected"' : '' ).'>' . $vals['facility_name'] . '</option>';
+				}
+			  ?>
+			</select>			
+		<?php } else { ?>
+			<select id="facilityInput" name="facilityInput[]" multiple="multiple">
+			  <option value="">--<?php tp('choose');?>--</option>
+			  <?php
+			    foreach ( $this->facilities as $vals ) {
+					$non_city_parent = $vals['location_id'];
+					if ($this->locations[$non_city_parent]['tier'] == $this->setting['num_location_tiers']) $non_city_parent = $this->locations[$vals['location_id']]['parent_id'];
+					$value = buildId($this->setting['num_location_tiers'] - 1, $this->locations, $non_city_parent).'_'.$vals['id'];
+					//$value = $vals['province_id'].'_'.$vals['id'];
+					echo '<option value="'.$value.'" '.($this->person['facility']['id'] == $vals['id']?'selected="selected"':'').'>' . $vals['facility_name'] . '</option>';
+				}
+			  ?>
+			</select>
+<?php 
+		}
+} else {
+	
+	// ! skillsmart
+
+?>
+  <select id="facilityInput" name="facilityInput">
   <option value="">--<?php tp('choose');?>--</option>
-  <?php
+<?php
     foreach ( $this->facilities as $vals ) {
-    	$non_city_parent = $vals['location_id'];
-    	if ($this->locations[$non_city_parent]['tier'] == $this->setting['num_location_tiers']) $non_city_parent = $this->locations[$vals['location_id']]['parent_id'];
+      $non_city_parent = $vals['location_id'];
+      if ($this->locations[$non_city_parent]['tier'] == $this->setting['num_location_tiers']) $non_city_parent = $this->locations[$vals['location_id']]['parent_id'];
       $value = buildId($this->setting['num_location_tiers'] - 1, $this->locations, $non_city_parent).'_'.$vals['id'];
       //$value = $vals['province_id'].'_'.$vals['id'];
       echo '<option value="'.$value.'" '.($this->person['facility']['id'] == $vals['id']?'selected="selected"':'').'>'.$vals['facility_name'].'</option>';
   }
-  ?>
-</select><a href="#" id="show"><?php print str_replace(' ','&nbsp;',t('Insert new facility'));?></a></div>
+?>
+</select>
+<?php
+}
+  if (! @$this->setting['desktop_disable_people_insert_facility'])   // tanzania request - only their DB's will have this, but anyone could add this setting to _system
+    #echo $this->insertFacilityLink;		
+    echo '<a href="#" id="show">' . str_replace(' ','&nbsp;',t('Insert new facility')) . '</a>';
+?>
+</div>
+	
+		
+	</div>
+	
+	<?php if ($this->setting['display_mod_skillsmart']) { ?>
+		<div class="fieldLabel" id="facilitydepartment_id_lbl"><?php tp('If facility is a hospital, please click specific department');?></div>
+		<div class="fieldInput">
+			<select id="facilitydepartment_id" name="facilitydepartment_id">
+				<option value="">--<?php tp('choose');?>--</option>
+				<?php
+					if (isset ($this->skillsmart['facilitydepartment'])){
+						foreach ($this->skillsmart['facilitydepartment'] as $ss){
+							echo "<option value=\"" . $ss['id'] . "\"" . (($this->person['facilitydepartment_id'] == $ss['id']) ? " selected=\"selected\"" : "") . ">" . $ss['label'] . "</option>\n";
+						}
+					}
+				?>
+			</select>
+		</div>
+	<?php } ?>
+	
 </fieldset>
 
 <fieldset>
@@ -97,8 +167,6 @@
 	  <div class="fieldLabel" ><?php tp('Reason (if \'Other\' selected above)');?></div>
 	  <div class="fieldInput"><input type="text" id="attend_reason_other" name="attend_reason_other" size="32" maxlength="100" onfocus="initReasonOtherField();" value="<?php echo $this->person['attend_reason_other'];?>"/> </div>
 		
-  <?php }?>
-  
 <script type="text/javascript">
   function initReasonOtherField(init) {
     var selectField = YAHOO.util.Dom.get("attend_reason_option_id");
@@ -114,6 +182,7 @@
   }
   initReasonOtherField(true);
 </script>  
+  <?php }?>
 
   <?php if ( $this->setting['display_people_custom1'] ) { ?>
   <div id="custom1AutoComplete" >
@@ -126,6 +195,7 @@
   </div><br/>
   <?php } ?>
         
+          
           
   <?php if ( $this->setting['display_highest_ed_level']  ) { ?>
 		<?php echo DropDown::render('highest_edu_level_option_id', $this->translation['Highest Education Level'], $this->educationlevels, 'education_level_phrase', 'id', $this->person['highest_edu_level_option_id']); ?><br/>
@@ -155,14 +225,14 @@
   <div class="hrGrey"></div>
   <div class="clear"></div>
   <a name="training"></a>
- <div class="fieldIndentNoMargin"><?php tp('Trainer Information');?> <a href="javascript:toggleDiv('trainingInfo','placeholderTraining');"><?php tp('Show/Hide');?></a></div>
+ <div class="fieldIndentNoMargin"><?php tp('Trainer').' '.t('Information');?> <a href="javascript:toggleDiv('trainingInfo','placeholderTraining');"><?php tp('Show/Hide');?></a></div>
 
 <div id="trainingInfo" style="<?php echo (($this->person['active_trainer_option_id'] || $this->maketrainer) ? 'display:block;' : 'display:none;');?>"><br/>
-  <div class="fieldInput"> <input type="hidden" id="is_trainer" name="is_trainer" <?php if (@$this->person['trainer_is_active']) echo 'checked="checked" ';?>/><label for="is_trainer"><?php tp('Is person an active trainer?');?></label></div>
+  <div class="fieldInput"> <input type="hidden" id="is_trainer" name="is_trainer" <?php if (@$this->person['trainer_is_active']) echo 'checked="checked" ';?>/><label for="is_trainer"><?php echo t('Is person an').' '.t('active').' '.t('trainer?');?></label></div>
   <?php
   print DropDown::render('active_trainer_option_id', t('Active trainer'), $this->active_trainer,'active_trainer_phrase','id', $this->person['active_trainer_option_id']  );
   ?>
-  <div class="fieldLabel" id="trainer_type_option_id_lbl"><span class="required">*</span><?php tp('Trainer type');?></div>
+  <div class="fieldLabel" id="trainer_type_option_id_lbl"><span class="required">*</span><?php echo t('Trainer').' '.t('type');?></div>
   <div class="fieldInput">
   <select id="trainer_type_option_id" name="trainer_type_option_id" >
     <option value="">--<?php tp('choose');?>--</option>
@@ -175,7 +245,7 @@
   </div>
   
   <?php if ($this->setting['display_trainer_affiliations'] ) { ?>
-  <div class="fieldLabel"  id="trainer_affiliation_option_id_lbl"><?php tp('Trainer Affiliation');?></div>
+  <div class="fieldLabel"  id="trainer_affiliation_option_id_lbl"><?php echo t('Trainer').' '.t('Affiliation');?></div>
   <div class="fieldInput"><select id="trainer_affiliation_option_id" name="trainer_affiliation_option_id" >
     <option value="">--<?php tp('choose');?>--</option>
     <?php
@@ -189,7 +259,7 @@
   
 <div class="clear" ></div>
 
-  <div class="fieldLabel"  id="trainer_skill_id_lbl"><span class="required">*</span><?php tp('Trainer skills');?></div>
+  <div class="fieldLabel"  id="trainer_skill_id_lbl"><span class="required">*</span><?php echo t('Trainer').' '.t('skills');?></div>
   <div class="fieldInput">
         (<?php tp('check all that apply');?>)<br/><br/>
          <div class="checkBoxes">

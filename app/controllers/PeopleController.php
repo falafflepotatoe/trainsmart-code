@@ -17,10 +17,10 @@ class PeopleController extends ITechController {
 		
 		$cohort = $helper->getCohorts();
 		$cadre = $helper->getCadres();
-		$institution = $helper->getInstitutions();
+		$institution = $helper->getInstitutions(false);
 		$facility = $helper->getFacilities();
 				
-		$this->view->assign('title','Trainsmart');
+		$this->view->assign('title',$this->view->translation['Application Name']);
 		$this->view->assign('cohort',$cohort);
 		$this->view->assign('cadre',$cadre);
 		$this->view->assign('institution',$institution);

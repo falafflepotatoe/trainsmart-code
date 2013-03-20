@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <title><?php echo $this->translation['Application Name'];?> | <?php tp('View Training Partner');?></title>
+  <title><?php echo $this->translation['Application Name'];?> | <?php echo t('View').' '.t('Training').' '.t('Partner');?></title>
 <?php
 require_once('views/helpers/ScriptContainer.php');
 print ScriptContainer::$instance->renderCSSHead();
@@ -14,7 +14,7 @@ print ScriptContainer::$instance->renderJSHead();
   <div id="header"><?php require_once('views/scripts/header.phtml');?></div>
   <div id="content">
 
-		<h1><?php tp('View Training Partner'); ?></h1>
+		<h1><?php echo t('View').' '.t('Training').' '.t('Partner'); ?></h1>
 
 		<form id="change" action="<?php echo $this->base_url;?>/training-partner/view" method="GET">
 		<div class="fieldInput"><select name="id"  id="id" onchange="this.form.submit();">
@@ -31,7 +31,7 @@ print ScriptContainer::$instance->renderJSHead();
 		<div class="fieldLabel" id="partner_name_lbl"><?php tp('Training organizer');?></div>
 		  <div class="fieldInput"><input type="text" readonly="readonly" name="organizer_id" id="organizer_id" value="<?php echo $this->partner['training_organizer_phrase']; ?>" size="40" maxlength="64"/></div>
 
-		<div class="fieldLabel" id="partner_subpartner_lbl"><?php tp('Training Sub Partner');?></div>
+		<div class="fieldLabel" id="partner_subpartner_lbl"><?php echo t('Training').' '.t('Sub').' '.t('Partner');?></div>
 		  <div class="fieldInput"><input type="text" readonly="readonly" name="partner_subpartner" id="partner_subpartner" value="<?php echo $this->partner['subpartner']; ?>" size="40" maxlength="64"/></div>
 		
 		<div class="fieldLabel" id="partner_mechanism_id_lbl"><?php tp('Mechanism ID');?></div>

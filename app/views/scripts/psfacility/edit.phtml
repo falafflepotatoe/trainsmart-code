@@ -5,6 +5,8 @@
 <?php
 require_once('views/helpers/Location.php');
 require_once('views/helpers/ScriptContainer.php');
+require_once('views/helpers/TrainingViewHelper.php');
+require_once('views/helpers/FormHelper.php');
 print ScriptContainer::$instance->renderCSSHead();
 print ScriptContainer::$instance->renderJSHead();
 ?>
@@ -20,7 +22,7 @@ print ScriptContainer::$instance->renderJSHead();
 
 <div class="fieldLabel" id="facility_name_lbl"><?php tp('Facility');?></div>
 	<form id="change" action="<?php echo $this->base_url;?>/facility/edit" method="GET">
-	<div class="fieldInput"><select name="id"  id="id" onchange="this.form.submit();">
+	<div class="fieldInput"><select name="id"  id="id" onchange="if(this.value != '') this.form.submit();">
 	<option value="">-- <?php tp('choose');?> --</option>
 	<?php foreach ( $this->facilities as $facility) {
 		echo '<option value="'.($facility['id']).'" '.((@$this->facility['id']) == $facility['id']? 'SELECTED':'').' >'.($facility['facility_name']).'</option>';
@@ -59,6 +61,10 @@ print ScriptContainer::$instance->renderJSHead();
 
 	<div class="fieldLabel" id="facility_postal_code_lbl"><?php tp('Postal code');?></div>
 	  <div class="fieldInput"><input type="text" name="facility_postal_code" id="facility_postal_code" value="<?php echo $this->facility['postal_code'];?>" size="40" maxlength="40"/></div>
+	<div class="fieldLabel" id="facility_latitude_lbl"><?php tp('Latitude');?></div>
+	  <div class="fieldInput"><input type="text" name="facility_latitude" id="facility_latitude" value="<?php echo $this->facility['lat'];?>" size="40" maxlength="11"/></div>
+	<div class="fieldLabel" id="facility_longitude_lbl"><?php tp('Longitude');?></div>
+	  <div class="fieldInput"><input type="text" name="facility_longitude" id="facility_longitude" value="<?php echo $this->facility['long'];?>" size="40" maxlength="11"/></div>
 	<div class="fieldLabel" id="facility_phone_lbl"><?php tp('Phone');?></div>
 	  <div class="fieldInput"><input type="text" name="facility_phone" id="facility_phone" value="<?php echo $this->facility['phone'];?>" size="40" maxlength="40"/></div>
 	<div class="fieldLabel" id="facility_fax_lbl"><?php tp('Fax');?></div>
@@ -72,23 +78,40 @@ print ScriptContainer::$instance->renderJSHead();
 		}
 		?>
 	</select></div>
-	<div class="fieldLabel" id="facility_sponsor_id_lbl"><?php tp('Facility sponsor');?></div>
-	<div class="fieldInput">
-	<select id="facility_sponsor_id" name="facility_sponsor_id">
+<?php foreach($this->sponsor_data as $i => $sponsorRow) { ?>
+	<div class="fieldLabel" id="<?php if ($i==0) echo 'facility_sponsor_id_lbl'; ?>"><?php tp('Facility'); echo ' '; tp('sponsor');?></div>
+	  <div class="fieldInput" id="<?php if ($i==0) echo 'facility_sponsor_wrapper'; ?>">
+		<select id="facility_sponsor_id" name="facility_sponsor_id[]">
 		<option value="">--<?php tp('choose');?>--</option>
 		<?php
+			  if ( @$this->facility_sponsors ) {
 			foreach ( $this->facility_sponsors as $vals ) {
-				echo '<option value="'.$vals['id'].'"  '.((@$this->facility['sponsor_option_id']) == $vals['id']? 'SELECTED':'').' >'.$vals['facility_sponsor_phrase'].'</option>';
+							$sel = ($vals['id'] == $sponsorRow['facility_sponsor_phrase_id'] ? 'selected' : '');
+							echo '<option value="'.$vals['id'].'" '.$sel.' >'.$vals['facility_sponsor_phrase'].'</option>';
+					}
 		}
 		?>
-	</select></div>
+		</select>
+		<?php if ( $this->hasACL( 'acl_editor_facility_sponsors' ) && $i==0 ) { echo '<a href="#" onclick="addToSelect(\''.t('Please enter your new').' '.t('Facility sponsor').':'.'\', \'facility_sponsor_id\', \''.Settings::$COUNTRY_BASE_URL.'/training/insert-table/table/facility_sponsor_option/column/facility_sponsor_phrase/outputType/json\'); return false;">'.t('Insert New').'</a>'; } ?>
+		<?php if ( @$this->setting['allow_multi_sponsors'] && $i==0 ) {         echo '<a id="sponsor_add" href="#" onclick="addSponsorRow();return false;">'.t('Add another sponsor to this Facility').'</a>'; } ?>
+		<?php echo hasACLEdit( 'acl_editor_facility_sponsors', 'admin/facilities-sponsors' , $this ); ?>
+	</div>
+<?php if ( @$this->setting['display_sponsor_dates'] ) { ?>
+	<div class="fieldLabel" id="<?php if ($i==0) echo 'facility_sponsor_id_lbl'; ?>"><?php if( @$this->setting['require_sponsor_dates'] ) echo '<span class="required">*</span>'; ?><?php tp('Sponsor Date');?></div>
+	<div class="fieldInput sponsorDates" id="<?php if ($i==0) echo 'facility_sponsor_wrapper'; ?>">
+		<span><input class="datepicker" type="text" name="sponsor_start_date[]" value="<?php echo formhelperdate($sponsorRow['start_date']); ?>" /><a class="calenderbtn" href="#"><img src="<?php echo $this->base_url; ?>/js/yui/assets/calbtn.gif"></a></span>&nbsp;&nbsp;
+		<?php if( @$this->setting['require_sponsor_dates'] ) echo '<span class="required">*</span>'; ?><label class="label"><?php tp('to'); ?></label>
+		<span><input class="datepicker" type="text" name="sponsor_end_date[]" value="<?php echo formhelperdate($sponsorRow['end_date']); ?>" /><a class="calenderbtn" href="#"><img src="<?php echo $this->base_url; ?>/js/yui/assets/calbtn.gif"></a></span>
+	</div>
+<?php } ?>
+<?php } ?>
 	<div class="fieldLabel" id="facility_comments_lbl"><?php tp('Comments');?></div>
 	<div class="fieldInput"><textarea name="facility_comments" id="facility_comments" size="40" maxlength="40" ><?php echo $this->facility['facility_comments'];?></textarea></div>
 
 
 <div class="clear" ></div>
 		<button type="button" id="submitFacility" class="submitNoArrow"><?php tp('Save changes');?></button>
-    	<div style="float:right;">&nbsp;</div><?php if ($this->okToDelete) { ?><input type="button" id="deleteFacility" name="deleteFacility" value="Delete" class="submitNoArrow"  onclick="doDelete();" /><?php } ?>
+    	<div style="float:right;">&nbsp;</div><?php if ($this->okToDelete) { ?><input type="button" id="deleteFacility" name="deleteFacility" value="<?php echo t('Delete'); ?>" class="submitNoArrow"  onclick="doDelete();" /><?php } ?>
 		<script type="text/javascript">
 			addAjaxSubmit('submitFacility','edit','<?php echo $this->base_url;?>/facility/edit/outputType/json');
 		</script>

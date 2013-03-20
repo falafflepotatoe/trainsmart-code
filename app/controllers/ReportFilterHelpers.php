@@ -19,65 +19,53 @@ class ReportFilterHelpers extends ITechController {
 	 */
   protected function getLocationCriteriaValues($criteria = array(), $prefix = '') {
   	if ( $prefix != '' ) $prefix .= '_';
-    $provinces = $this->getSanParam ( $prefix.'province_id' );
-    $districts = $this->getSanParam ( $prefix.'district_id' );
-    $region_cs = $this->getSanParam ( $prefix.'region_c_id' );
-    $criteria [$prefix.'city'] = $this->getSanParam ( $prefix.'city' );
-
-    $criteria [$prefix.'province_id'] = $provinces;
-    if (is_array ( $provinces ) ) {
-    	 if ( $provinces [0] === "") { // "All"
-        $criteria [$prefix.'province_id'] = array ();
-    	 }
-    }
-    if (is_array ( $districts ) ) {
-       if ( $districts [0] === "") { // "All"
-        $criteria [$prefix.'district_id'] = array ();
+    
+		$criteria [$prefix.'city'] = $this->getSanParam ( $prefix.'city' ); // set city
+		$rgns = array('province_id', 'district_id','region_c_id','region_d_id','region_e_id','region_f_id','region_g_id','region_h_id','region_i_id');
+		// get value from each region sent by form
+		foreach($rgns as $rgn_name) {
+			$tmp = $this->getSanParam($prefix.$rgn_name);
+			if (is_array ( $tmp ) ) {
+				if ( $tmp [0] === "") { // "All"
+					$criteria [$prefix.$rgn_name] = array ();
        } else {
-        foreach($districts as $did => $d) {
-          if (strstr ( $d, '_' ) !== false) {
-              $parts = explode ( '_', $d );
-              $districts [$did] = $parts [1];
+					foreach($tmp as $key => $val) {
+						if (strstr ( $val, '_' ) !== false) {
+							$parts = explode ( '_', $val );
+							#$tmp [$key] = $parts [count($parts)-1];
+							$tmp [$key] = array_pop($parts);
           }
         }
-        $criteria [$prefix.'district_id'] = $districts;
+					$criteria [$prefix.$rgn_name] = $tmp;
        }
     } else {
-         if (strstr ( $districts, '_' ) !== false) {
-              $parts = explode ( '_', $districts );
-              $districts = $parts [1];
+				if (strstr ( $tmp, '_' ) !== false) {
+					$parts = explode ( '_', $tmp );
+					$tmp = array_pop($parts);
+				}
+				$criteria [$prefix.$rgn_name] = $tmp;
           }
-      $criteria [$prefix.'district_id'] = $districts;
     }
     
-    if (is_array ( $region_cs ) ) {
-       if ( $region_cs [0] === "") { // "All"
-        $criteria [$prefix.'region_c_id'] = array ();
-       } else {
-        foreach($region_cs as $did => $d) {
-          if (strstr ( $d, '_' ) !== false) {
-              $parts = explode ( '_', $d );
-              $region_cs [$did] = $parts [2];
-          }
-        }
-        $criteria [$prefix.'region_c_id'] = $region_cs;
-       }
-    } else {
-         if (strstr ( $region_cs, '_' ) !== false) {
-              $parts = explode ( '_', $region_cs );
-              $region_cs = $parts [2];
-          }
-      $criteria [$prefix.'region_c_id'] = $region_cs;
-    }
-    
-    
-    $city_parent_id = 0;
-    if ( $this->setting ( 'display_region_c' ) ) {
-      $city_parent_id = $region_cs;
+		$city_parent_id = 0; // todo: small bug here, on receiving array input for region_ids, city_parent_id returns an array of ids, possibly even wrong ids -- probably ok - its not used in reports anyway...
+		if ( $this->setting ( 'display_region_i' ) ) {
+			$city_parent_id = $criteria[$prefix.'region_i_id'];
+		} else if ( $this->setting ( 'display_region_h' ) ) {
+			$city_parent_id = $criteria[$prefix.'region_h_id'];
+		} else if ( $this->setting ( 'display_region_g' ) ) {
+			$city_parent_id = $criteria[$prefix.'region_g_id'];
+		} else if ( $this->setting ( 'display_region_f' ) ) {
+			$city_parent_id = $criteria[$prefix.'region_f_id'];
+		} else if ( $this->setting ( 'display_region_e' ) ) {
+			$city_parent_id = $criteria[$prefix.'region_e_id'];
+		} else if ( $this->setting ( 'display_region_d' ) ) {
+			$city_parent_id = $criteria[$prefix.'region_d_id'];
+		} else if ( $this->setting ( 'display_region_c' ) ) {
+			$city_parent_id = $criteria[$prefix.'region_c_id'];
     } else if ( $this->setting ( 'display_region_b' ) ) {
-      $city_parent_id = $districts;
+			$city_parent_id = $criteria[$prefix.'region_b_id'];
     } else {
-      $city_parent_id = $provinces;
+			$city_parent_id = $criteria['_id'];
     }
     $criteria [$prefix.'city_parent_id'] = $city_parent_id;
     
@@ -92,10 +80,54 @@ class ReportFilterHelpers extends ITechController {
       $location_id = $criteria [$prefix.'region_c_id'];
       $location_tier = 3;
     } 
+		if ( $criteria [$prefix.'region_d_id'] ) {
+			$location_id = $criteria [$prefix.'region_d_id'];
+			$location_tier = 4;
+		} 
+		if ( $criteria [$prefix.'region_e_id'] ) {
+			$location_id = $criteria [$prefix.'region_e_id'];
+			$location_tier = 5;
+		} 
+		if ( $criteria [$prefix.'region_f_id'] ) {
+			$location_id = $criteria [$prefix.'region_f_id'];
+			$location_tier = 6;
+		} 
+		if ( $criteria [$prefix.'region_g_id'] ) {
+			$location_id = $criteria [$prefix.'region_g_id'];
+			$location_tier = 7;
+		} 
+		if ( $criteria [$prefix.'region_h_id'] ) {
+			$location_id = $criteria [$prefix.'region_h_id'];
+			$location_tier = 8;
+		} 
+		if ( $criteria [$prefix.'region_i_id'] ) {
+			$location_id = $criteria [$prefix.'region_i_id'];
+			$location_tier = 9;
+		} 
     
     return array($criteria, $location_tier, $location_id);
   }
-	
+
+	// helper to generate a where clause based on 9 available levels of regions in $criteria
+	// return value: " `$tablePrefix`.region_X_id IN (val, val, val) ";
+	protected function getLocationCriteriaWhereClause(&$criteria, $prefix = '', $tablePrefix = '') {
+
+		$tableCols = array('', 'province_id', 'district_id', 'region_c_id','region_d_id','region_e_id','region_f_id','region_g_id','region_h_id','region_i_id');
+		list($crit, $tier, $location_id) = $this->getLocationCriteriaValues($criteria, $prefix, $tablePrefix);
+
+		if ($prefix)
+			$prefix = $prefix . "_";
+
+		$tableString = $tablePrefix ? "$tablePrefix." : '';
+
+		if ($location_id)
+			$location_id = $this->_array_me($location_id); // sometimes $location_id is a string because it comes from a form input[]
+
+		if ($tier && !empty ( $location_id ))
+			return " " . $tableString . $tableCols[$tier] . " IN ( " . implode(',', $location_id) . " ) ";
+
+		return false;
+	}
 }
 
 ?>

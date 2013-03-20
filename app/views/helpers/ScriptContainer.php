@@ -23,6 +23,7 @@ class ScriptContainer {
 		if ( self::$instance == null ) {
 			self::$instance = $this;
 
+			# CSS YUI
 			$this->addCSSLink('/js/yui/build/reset-fonts-grids/reset-fonts-grids.css');
 			$this->addCSSLink('/js/yui/build/resize/assets/skins/sam/resize.css');
 			$this->addCSSLink('/js/yui/build/button/assets/skins/sam/button.css');
@@ -31,41 +32,40 @@ class ScriptContainer {
 			$this->addCSSLink('/js/yui/build/container/assets/skins/sam/container.css');
 			$this->addCSSLink('/js/yui/build/datatable/assets/skins/sam/datatable.css');
 			
-      $this->addCSSLink('/css/style.css');
-      $this->addCSSLink('/css/calendar.css');
-	  $this->addCSSLink('/css/media/demo_page.css');
-      $this->addCSSLink('/css/media/demo_table_jui.css');
-	  $this->addCSSLink('/css/media/jquery-ui-1.8.17.custom.css');
-//	  $this->addCSSLink('/css/trainsmart/ts.css');
-//	  $this->addCSSLink('/css/media/trainsmart.css');
+			#CSS 
+			$this->addCSSLink('/css/style.css');
+			$this->addCSSLink('/css/calendar.css');
+			$this->addCSSLink('/css/media/demo_page.css');
+			$this->addCSSLink('/css/media/demo_table_jui.css');
+			$this->addCSSLink('/css/media/jquery-ui-1.8.17.custom.css');
+			//	$this->addCSSLink('/css/trainsmart/ts.css');
+			//	$this->addCSSLink('/css/media/trainsmart.css');
 
-      $url_parts = explode('.', $_SERVER['HTTP_HOST']);
-      if ( @$url_parts[0] == 'eventsmart' OR (isset($url_parts[1]) && (@$url_parts[1] == 'eventsmart')) ) {
-        $this->addCSSLink('/css/style-engender.css');
-      }
-      
-      $local = ITechTranslate::getLocale();
-      $local_empty = ($local===null);
-      if (!$local_empty) {
-      	$this->addJSLink('/js/translation-'.$local.'.js');
-      }
-      	
-      $this->addJSLink('/js/itech-namespace.js');
-      
+			$url_parts = explode('.', $_SERVER['HTTP_HOST']);
+			if ( @$url_parts[0] == 'eventsmart' OR (isset($url_parts[1]) && (@$url_parts[1] == 'eventsmart')) ) {
+				$this->addCSSLink('/css/style-engender.css');
+			}
+
+			# TransLations
+			$locale = ITechTranslate::getLocale();
+			if ( $locale !== null ) {
+				$this->addJSLink('/js/translation-'.$locale.'.js');
+			}
+
+			# Javascript
+			$this->addJSLink('/js/itech-namespace.js');
+
+			# jQuery
 			$this->addJSLink('/js/scripts/jquery-1.7.1-min.js');
 			$this->addJSLink('/js/scripts/jquery.dataTables.min.js');
-#			$this->addJSLink('/js/scripts/jquery.js');
 			$this->addJSLink('/js/scripts/jquery-ui-1.8.17.custom-min.js');	
 
-			# PRESERVICE VALIDATION LINK
+			# Javascript - PRESERVICE
 			$this->addJSLink('/js/scripts/validate/jquery.validate.js');
-
-			# PRESERVICE VALIDATION LINK
 			$this->addJSLink('/js/scripts/jquery.comboedit.js');
-
-			# PRESERVICE OTHER SCRIPTS
 			$this->addJSLink('/js/scripts/preservice.js');
 
+			# Javascript - YUI
 			$this->addJSLink('/js/yui/build/yahoo-dom-event/yahoo-dom-event.js');
 			$this->addJSLink('/js/yui/build/connection/connection.js');
 			$this->addJSLink('/js/yui/build/animation/animation.js');
@@ -78,6 +78,8 @@ class ScriptContainer {
 			$this->addJSLink('/js/yui/build/calendar/calendar.js');
 			$this->addJSLink('/js/yui/build/element/element-beta.js');
 			$this->addJSLink('/js/yui/build/json/json.js');
+
+			# Javascript - TrainSMART
 			$this->addJSLink('/js/flydown.js');
 			$this->addJSLink('/js/yui/build/container/container.js'); //add me last
 			$this->addJSLink('/js/statusbox.js');
@@ -87,17 +89,16 @@ class ScriptContainer {
 			$this->addJSLink('/js/datatable.js');
 			$this->addJSLink('/js/edittable.js');
 			$this->addJSLink('/js/edittable-training.js');
-      		$this->addJSLink('/js/fileupload.js');
+			$this->addJSLink('/js/fileupload.js');
 			$this->addJSLink('/js/itech.js');
+			$this->addJSLink('/js/dropdown.js');
 			
 
-			
 			$burl = Settings::$COUNTRY_BASE_URL;
 
 			if (substr($burl, -1) != '/' && substr($burl, -1) != '\\')
 				$burl = $burl . '/';
 
-				
 			self::$jsincludes []= '<script src="'. $burl . 'index/js-aggregate" type="text/javascript"></script>';
 		}
 	}

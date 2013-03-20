@@ -114,11 +114,21 @@ class History extends ITechTable {
 				if ($previous != null) {
 					if ($diff = array_diff_assoc ( $previous, $change )) {
             if ($diff) {
+							unset($diff['person_id']);
+							unset($diff['training_id']); // we dont need to see these
+							unset($diff['uuid']);
+							$tmp = $diff;                // dont alter the data used for compare
+							unset($tmp['vid']);
+							unset($tmp['timestamp_updated']);
+							unset($tmp['timestamp_created']);
+							if (count($tmp)) {
+								// old method was just these 4 lines>>
 							$delta = array ();
 							$delta ['timestamp_updated'] = $previous ['timestamp_created'];
 							$delta ['modified_by'] = $previous ['modified_by'];
 							$delta ['changes'] = $diff;
 							$rtn [] = $delta;
+							}
 						}
 					}
 				}

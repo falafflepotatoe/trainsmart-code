@@ -1,5 +1,6 @@
 <?php 
 require_once('ITechTable.php');
+require_once('Helper.php');
 
 class Peoplefind extends ITechTable
 {
@@ -7,7 +8,9 @@ class Peoplefind extends ITechTable
 	protected $_name = 'person';
 	
 	public function peoplesearch($param) {
+		$helper = new Helper();
 		$return = array();
+
 		switch ($param['type']){
 			case "every":
 				$query = $this->buildquery($param,"student");
@@ -20,6 +23,11 @@ class Peoplefind extends ITechTable
 					}
 					$newrow['type'] = "student";
 					$newrow['link'] = Settings::$COUNTRY_BASE_URL . "/studentedit/personview/id/" . $row['id'];
+
+					list ($cohort,$institution) = $helper->getCohortInstitution($row['subid'],"student");
+					$newrow['cohort'] = $cohort;
+					$newrow['institution'] = $institution;
+
 					$return[] = $newrow;
 				}
 
@@ -33,11 +41,17 @@ class Peoplefind extends ITechTable
 					}
 					$newrow['type'] = "tutor";
 					$newrow['link'] = Settings::$COUNTRY_BASE_URL . "/tutoredit/tutoredit/id/" . $row['id'];
+
+					list ($cohort,$institution) = $helper->getCohortInstitution($row['subid'],"tutor");
+					$newrow['cohort'] = $cohort;
+					$newrow['institution'] = $institution;
+
 					$return[] = $newrow;
 				}
 
 			break;
 			case "student":
+
 				$query = $this->buildquery($param,"student");
 				$select = $this->dbfunc()->query($query);
 				$result = $select->fetchAll();
@@ -48,8 +62,14 @@ class Peoplefind extends ITechTable
 					}
 					$newrow['type'] = "student";
 					$newrow['link'] = Settings::$COUNTRY_BASE_URL . "/studentedit/personview/id/" . $row['id'];
+
+					list ($cohort,$institution) = $helper->getCohortInstitution($row['subid'],"student");
+					$newrow['cohort'] = $cohort;
+					$newrow['institution'] = $institution;
+
 					$return[] = $newrow;
 				}
+#die ($query);
 			break;
 			case "tutor":
 				$query = $this->buildquery($param,"tutor");
@@ -62,6 +82,11 @@ class Peoplefind extends ITechTable
 					}
 					$newrow['type'] = "tutor";
 					$newrow['link'] = Settings::$COUNTRY_BASE_URL . "/tutoredit/tutoredit/id/" . $row['id'];
+
+					list ($cohort,$institution) = $helper->getCohortInstitution($row['subid'],"tutor");
+					$newrow['cohort'] = $cohort;
+					$newrow['institution'] = $institution;
+
 					$return[] = $newrow;
 				}
 			break;
@@ -82,8 +107,13 @@ class Peoplefind extends ITechTable
 			case"tutor":
 				$jointutor = true;
 			break;
-		}	 
+		}
 		
+		$helper = new Helper();
+		$ins = $helper->getUserInstitutions($helper->myid(),false);
+		
+		#var_dump ($ins);
+
 		foreach ($param as $key=>$value){
 			if (trim ($value) != ""){
 				switch ($key){
@@ -127,8 +157,8 @@ class Peoplefind extends ITechTable
 							if ($output == "student"){
 								$where[] = "i.id = " . addslashes($value) . "";
 								$joinstudent = true;
-								$joins[] = "INNER JOIN link_student_institution lsi ON lsi.id_student = s.id";
-								$joins[] = "INNER JOIN institution i ON i.id = lsi.id_institution";
+#								$joins[] = "INNER JOIN link_student_institution lsi ON lsi.id_student = s.id";
+								$joins[] = "INNER JOIN institution i ON i.id = s.institutionid";
 							} elseif ($output == "tutor"){
 								$where[] = "i.institutionname LIKE '%" . addslashes($value) . "%'";
 								$jointutor = true;
@@ -151,11 +181,14 @@ class Peoplefind extends ITechTable
 			}
 		}
 
-		$query = "SELECT p.* FROM person p ";
 		if ($joinstudent){
+			$query = "SELECT p.*, s.id AS subid FROM person p ";
 			$query .= " INNER JOIN student s ON s.personid = p.id ";
 		} elseif ($jointutor){
+			$query = "SELECT p.*, t.id AS subid FROM person p ";
 			$query .= " INNER JOIN tutor t ON t.personid = p.id ";
+		} else {
+			$query = "SELECT p.* FROM person p ";
 		}
 		if (count ($joins) > 0){
 			$query .= implode ("\n", $joins);
@@ -165,7 +198,7 @@ class Peoplefind extends ITechTable
 		}
 		$query .= " ORDER BY last_name, first_name";
 
-echo $query . "<BR><BR>";
+#die ($query);
 
 		return ($query);
 	}

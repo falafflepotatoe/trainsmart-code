@@ -36,13 +36,13 @@ if ( $this->mode == 'count' ) {
 
     <h1><?php tp('Course');?> <?php echo ($this->mode != 'search'? t('Reports'):t('Search') );  ?></h1>
  <?php /*?><?php if ($this->mode != 'search' ) { ?>
-    	<div class="fieldLabel" style="width: auto;"><?php tp('Select training report');?></div>
+    	<div class="fieldLabel" style="width: auto;"><?php echo t('Select').' '.t('Training').' '.t('report');?></div>
     	<select id="training" name="training" onchange="gotoPage('training');">
     		<option value="">--<?php tp('choose');?>--</option>
-    		<option value="/reports/trainings" <?php if ($this->mode == 'id') echo 'selected="selected"';?>><?php tp('Trainings by Name');?></option>
+    		<option value="/reports/trainings" <?php if ($this->mode == 'id') echo 'selected="selected"';?>><?php echo t('Trainings').' '.t('by Name');?></option>
     		<option value="/reports/trainingByParticipants" <?php if ($this->mode == 'count') echo 'selected="selected"';?>><?php tp('Trainings by Participant Count');?></option>
         <?php if ($this->setting['module_unknown_participants_enabled']) { ?>
-        <option value="/reports/trainingUnknown" <?php if ($this->mode == 'unknown') echo 'selected="selected"';?>><?php tp('Trainings with Unknown Participants');?></option>
+        <option value="/reports/trainingUnknown" <?php if ($this->mode == 'unknown') echo 'selected="selected"';?>><?php echo t('Trainings').' '.t('with Unknown Participants');?></option>
          <?php } ?>
    	</select>
    <?php } ?><?php */?>
@@ -242,9 +242,9 @@ if ( $this->mode == 'count' ) {
 <?php if ( $this->mode == 'search') {?>
   <div class="clear"></div>
   <br/>
-      <div class="fieldLabel"></div><div class="fieldInput" ><input type="radio" id="has_known_participants" value="has_known_participants" name="training_participants_type" <?php if ( $this->criteria['training_participants_type'] == 'has_known_participants') echo 'CHECKED'; ?> />&nbsp;<?php tp('Trainings with known participants only');?></div>
-      <div class="fieldLabel"></div><div class="fieldInput" ><input type="radio" id="has_unknown_participants" value="has_unknown_participants" name="training_participants_type" <?php if ( $this->criteria['training_participants_type'] == 'has_unknown_participants' ) echo 'CHECKED'; ?> />&nbsp;<?php tp('Trainings with unknown participants only');?></div>
-      <div class="fieldLabel"></div><div class="fieldInput" ><input type="radio" id="has_known_participants" value="has_everyone" name="training_participants_type" <?php if ( $this->criteria['training_participants_type'] == 'has_everyone' ) echo 'CHECKED'; ?> />&nbsp;<?php tp('All trainings');?></div>
+      <div class="fieldLabel"></div><div class="fieldInput" ><input type="radio" id="has_known_participants" value="has_known_participants" name="training_participants_type" <?php if ( $this->criteria['training_participants_type'] == 'has_known_participants') echo 'CHECKED'; ?> />&nbsp;<?php echo t('Trainings').' '.t('with known participants only');?></div>
+      <div class="fieldLabel"></div><div class="fieldInput" ><input type="radio" id="has_unknown_participants" value="has_unknown_participants" name="training_participants_type" <?php if ( $this->criteria['training_participants_type'] == 'has_unknown_participants' ) echo 'CHECKED'; ?> />&nbsp;<?php echo t('Trainings').' '.t('with unknown participants only');?></div>
+      <div class="fieldLabel"></div><div class="fieldInput" ><input type="radio" id="has_known_participants" value="has_everyone" name="training_participants_type" <?php if ( $this->criteria['training_participants_type'] == 'has_everyone' ) echo 'CHECKED'; ?> />&nbsp;<?php echo t('All').' '.t('trainings');?></div>
 <?php }?>
 	<div class="clear"></div>
 	<input type="hidden" name="limit" id="limit" value="1" />
@@ -255,7 +255,7 @@ if ( $this->mode == 'count' ) {
 <div class="hrGrey"></div>
     <div class="fieldIndentNoMargin"><?php tp('Trainings');?> <span class="total"><?php echo $this->count;?> <?php if ( $this->mode == 'count' ) echo t('Participants'); else echo '';?></span><?php echo $this->printAndExport();?></div>
 <?php if ($this->mode == 'search' ) { ?>
-	<a href="<?php echo $this->base_url;?>/training/add"><?php tp('Add New Training');?></a><br/><br/>
+	<a href="<?php echo $this->base_url;?>/training/add"><?php echo t('Add').' '.t('New').' '.t('Training');?></a><br/><br/>
 <?php } ?>
     <div id="trainings" class="itechTable"></div>
     <script type="text/javascript">

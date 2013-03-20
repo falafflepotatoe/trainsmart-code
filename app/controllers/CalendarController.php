@@ -24,11 +24,24 @@ class CalendarController extends ITechController
     {
   		  require_once 'models/table/Training.php';
 	      require_once 'models/Session.php';
+        require_once 'views/helpers/TrainingViewHelper.php';
+        
 	      $uid = Session::getCurrentUserId();
+      
+        // restricted access?? only show trainings we have the ACL to view
+        $org_allowed_ids = allowed_organizer_access($this);
+        $allowedWhereClause = "";
+        if ($org_allowed_ids) { // doesnt have acl 'training_organizer_option_all'
+          $org_allowed_ids = implode(',', $org_allowed_ids);
+          $allowedWhereClause = " training_organizer_option_id in ($org_allowed_ids) ";
+        }
+        // restricted access?? only show organizers that belong to this site if its a multi org site
+        $site_orgs = allowed_organizer_in_this_site($this); // for sites to host multiple training organizers on one domain
+        $allowedWhereClause .= $site_orgs ? " AND training_organizer_option_id in ($site_orgs) " : "";
       
         // Future trainings
         $tableObj = new Training();
-        $rows = $tableObj->getIncompleteTraining($uid, '', '')->toArray(); // training_start_date >= NOW()
+        $rows = $tableObj->getIncompleteTraining($uid, $allowedWhereClause, '')->toArray(); // training_start_date >= NOW()
         
         if($rows) {
           require_once 'views/helpers/Calendar.php';
@@ -89,11 +102,12 @@ class CalendarController extends ITechController
           $calHtml = $cal->display();
           
         } else {
-          $calhtml = t('No future trainings found.');  
+          $calhtml = t('No future').' '.t('Trainings').' '.t('found.');  
         }
         
         
         $this->view->assign('calendar', $calHtml);
-
+        $this->view->assign('calMonth', $cal->calMonth);
+        $this->view->assign('calYear',  $cal->calYear);
     }
 }

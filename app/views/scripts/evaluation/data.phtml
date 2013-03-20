@@ -7,18 +7,23 @@ require_once('views/helpers/ScriptContainer.php');
 print ScriptContainer::$instance->renderCSSHead();
 print ScriptContainer::$instance->renderJSHead();
 
-function renderLikert($qid, $qtext, $idx) {
+function renderLikert($qid, $qtext, $qtype, $idx) {
 	echo "<div class='qtext'>".$qtext."</div><br/>";
 	echo "<div class='likert'><input type='radio' value='1' name='value_".$qid."' /><label>1</label>";
-  echo "<input type='radio' value='2' name='value_".$qid."' /><label>2</label>";
-  echo "<input type='radio' value='3' name='value_".$qid."' /><label>3</label>";
-  echo "<input type='radio' value='4' name='value_".$qid."' /><label>4</label>";
-  echo "<input type='radio' value='5' name='value_".$qid."' /><label>5</label></div>";
+	echo "<input type='radio' value='2' name='value_".$qid."' /><label>2</label>";
+	echo "<input type='radio' value='3' name='value_".$qid."' /><label>3</label>";
+	if ($qtype == 'Likert' || $qtype == 'LikertNA') {
+	echo "<input type='radio' value='4' name='value_".$qid."' /><label>4</label>";
+	echo "<input type='radio' value='5' name='value_".$qid."' /><label>5</label>";
+	}
+	if ($qtype == 'Likert3NA' || $qtype == 'LikertNA')
+	echo "<input type='radio' value='0' name='value_".$qid."' /><label>".t('Not Applicable')."</label>";
+	echo '</div>';
 }
 
 function renderText($qid, $qtext, $idx) {
-  echo "<div class='qtext'>".$qtext."</div><br/>";
-  echo "<div class='likert'><textarea cols='80' rows='5' name='value_".$qid."'></textarea></div>";
+	echo "<div class='qtext'>".$qtext."</div><br/>";
+	echo "<div class='likert'><textarea cols='80' rows='5' name='value_".$qid."'></textarea></div>";
 }
 
 ?>
@@ -32,10 +37,29 @@ function renderText($qid, $qtext, $idx) {
   <h1><?php tp('Evaluation Data Entry');?></h1>
   <form name="evaluationForm" id="evaluationForm" method="post" action="">
 
-	<h2><?php echo $this->title;?> - <?php echo $this->course_name;?></h2><br/><br/>
+	<h2><?php echo $this->title;?> - <?php echo $this->course_name;?></h2><br/>
+	<label class="label"><?php tp('Trainer (Optional)'); ?></label>
+	<select id="trainer" name="trainer_id"><option value="">&mdash;<?php tp('select'); ?>&mdash;</option>
+	<?php foreach($this->trainers as $row) {
+		if ($this->setting [ 'display_middle_name_last' ])
+			$fullName = implode(' ', array( $row['first_name'], $row['last_name'], $row['middle_name'] ));
+		else
+			$fullName = implode(' ', array( $row['first_name'], $row['middle_name'], $row['last_name'] ));
+		echo '<option value="'.$row['trainer_id'].'">'.$fullName.'</option>';
+	}
+	?>
+	</select>
+
+	<br/><br/>
 	<ol>
 	<?php foreach($this->qid as $i=>$qid) {?>
-	<li><label class="qnum"><?php echo $i + 1;?></label><?php ( $this->qtype[$i] == 'Text'? renderText($qid, $this->qtext[$i], $i) :renderLikert($qid, $this->qtext[$i], $i));?></li>
+	<li><label class="qnum"><?php echo $i + 1;?></label>
+    <?php if ( $this->qtype[$i] == 'Text' )
+            renderText($qid, $this->qtext[$i], $i);
+          else
+            renderLikert($qid, $this->qtext[$i], $this->qtype[$i], $i);
+    ?>
+  </li>
 	<?php } ?>
 	</ol>
 	<br/><br/>

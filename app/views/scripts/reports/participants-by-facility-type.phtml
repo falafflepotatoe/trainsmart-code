@@ -46,19 +46,9 @@ function setDistrictStatus(selectedIndex)  {
 
       	<div class="fieldLabel" ></div>
     	<div class="fieldInput  criteria-header"><div   class="criteria-label"><?php echo $checkLabel;?></div><div  class="criteria-label" style="padding-left: 20px;"><?php tp('filter');?></div></div>
-   	<div class="fieldLabel" id="province_id_lbl"><?php echo (@$this->translation['Region A (Province)']); ?> (<?php tp('facility');?>)</div>
-   	<div class="fieldInput"><div  class="leftBorderPad"><input type="checkbox" name="showProvince"  <?php  if ($this->criteria['showProvince']) echo 'CHECKED';?> /></div>
-	<div  class="leftBorder"><?php renderFilter($this->locations, 1, 'province_id', $this->criteria['province_id'], 'district_id', false); ?></div></div>
-	<?php if ( $this->setting['display_region_b'] ) { ?>
-	<div class="fieldLabel" id="district_id_lbl"><?php echo (@$this->translation['Region B (Health District)']); ?> (<?php tp('facility');?>)</div><div class="fieldInput">
-	<div  class="leftBorderPad"><input type="checkbox" name="showDistrict" <?php  if ($this->criteria['showDistrict']) echo 'CHECKED';?> /></div>
-  	<div  class="leftBorder"><?php renderFilter($this->locations, 2, 'district_id', $this->criteria['district_id'], ($this->setting['display_region_c']?'region_c_id':false), false); ?></div></div>
-	<?php } ?>
-  <?php if ( $this->setting['display_region_c'] ) { ?>
-  <div class="fieldLabel" id="region_c_id_lbl"><?php echo (@$this->translation['Region C (Local Region)']); ?> (<?php tp('facility');?>)</div><div class="fieldInput">
-  <div  class="leftBorderPad"><input type="checkbox" name="showRegionC" <?php  if ($this->criteria['showRegionC']) echo 'CHECKED';?> /></div>
-    <div  class="leftBorder"><?php renderFilter($this->locations, 3, 'region_c_id', $this->criteria['region_c_id'], false, false); ?></div></div>
-  <?php } ?>
+
+	<?php region_filters_dropdown($this, $this->locations, $this->criteria, false, true); ?>
+
 	<div id="facilityAutoComplete">
 	    <div class="fieldLabel" id="facilityInput_lbl"><?php tp('Facility');?></div>
 	    <div class="fieldInput">
@@ -171,6 +161,22 @@ function setDistrictStatus(selectedIndex)  {
 		<option value="female"  <?php echo (@$this->criteria['training_gender'] == 'female'? 'SELECTED':''); ?> ><?php tp('female');?></option>
 		<option value="na"  <?php echo (@$this->criteria['training_gender'] == 'na'? 'SELECTED':''); ?> ><?php tp('na');?></option>
 	</select></div></div>
+<div class="fieldLabel" id="qualification_option_id_lbl"><?php tp('Qualification');?></div>
+  <div class="fieldInput"><div  class="leftBorderPad"><input type="checkbox" name="showQualification"  <?php  if ($this->criteria['showQualification']) echo 'checked="checked"';?> /></div><label for="showQualification" ></label>  <div  class="leftBorder">    <select id="qualification_option_id" name="qualification_option_id">
+  <option value="">--<?php tp('choose');?>--</option>
+  <?php
+    $lastParent = null;
+    foreach ( $this->qualifications as $vals ) {
+    if ( !$vals['id'] ) {
+      $lastParent = ($vals['parent_phrase']);
+      echo '<option value="'.$vals['parent_id'].'" '.($this->criteria['qualification_option_id'] == $vals['parent_id'] ?'selected="selected"':'').'>'.htmlspecialchars($vals['parent_phrase']).'</option>';
+    } else {
+      echo '<option value="'.$vals['id'].'" '.($this->criteria['qualification_option_id'] == $vals['id'] ?'selected="selected"':'').'>&nbsp;&nbsp;'. htmlspecialchars($vals['qualification_phrase']).'</option>';
+    }
+  }
+    ?>
+</select></div></div>
+
 <?php if ( $this->setting['display_people_age'] ) { ?>
   <div class="fieldLabel" id="training_age_lbl"><?php tp('Age');?></div>
   <div class="fieldInput">
@@ -265,7 +271,7 @@ if ( $this->criteria['showTrainingTitle'] or $this->criteria['showTopic'] or $th
 ?>
 <div class="hrGrey"></div>
     <div class="fieldIndentNoMargin"><?php tp('Participants');?> <span class="total"><?php echo $this->count;?> <?php tp('Participants');?> </span><?php echo $this->printAndExport();?>
-    <?php echo ($hasTrainingInfo? '<br/><span class="total">*'.t('Note: This report may contain multiple rows for participants who attended multiple trainings').'.</span>':''); ?>
+    <?php echo ($hasTrainingInfo? '<br/><span class="total">*'.t('Note: This report may contain multiple rows for participants who attended multiple').' '.t('trainings').'.</span>':''); ?>
     </div>
 
     <div id="trainings"  class="itechTable"></div>
@@ -302,7 +308,7 @@ foreach($this->results as $row) {
 	if ( $this->criteria['showGender'] )
 		echo ',"'.$row['gender'].'"';
   if ( $this->criteria['showAge'] )
-    echo ',"'.$row['age'].'"';
+    echo ','.$row['age']    ;
 		if ( $this->criteria['showActive'] )
 		echo ',"'.$row['active'].'"';
 	if ( $this->criteria['showProvince'] )
@@ -318,9 +324,9 @@ foreach($this->results as $row) {
 	if ( $this->criteria['showSponsor'] )
 		echo ',"'.$row['facility_sponsor_phrase'].'"';
 	if ( $this->criteria['showTrainingTitle'] )
-		echo ',"'.$row['training_title'].'","'.$row['training_start_date'].'"';/*
+		echo ',"'.$row['training_title'].'","'.$row['training_start_date'].'"';
 	if ( $this->criteria['showQualification'] )
-		echo ',"'.$row['qualification_phrase'].'"';*/
+		echo ',"'.$row['qualification_phrase'].'"';
 	if ( $this->criteria['showOrganizer'] )
 		echo ',"'.$row['training_organizer_phrase'].'"';
 	if ( $this->criteria['showTopic'] )
@@ -391,9 +397,9 @@ var trainingColumnDefs = [
    ,{key:"training_title", label: "<?php echo (@$this->translation['Training Name']); ?>", sortable:true, resizeable:true}
    ,{key:"training_start_date", label: "<?php tp('Date'); ?>", sortable:true, resizeable:true}
  <?php } ?>
-<?php /* if ( $this->criteria['showQualification'] ) { ?>
+<?php  if ( $this->criteria['showQualification'] ) { ?>
    ,{key:"qualification_phrase", label: "<?php tp('Qualification');?>", sortable:true, resizeable:true}
- <?php } */ ?>
+ <?php } ?>
  <?php if ( $this->criteria['showOrganizer'] ) { ?>
    ,{key:"training_organizer_phrase", label: "<?php echo (@$this->translation['Training Organizer']); ?>", sortable:true, resizeable:true}
  <?php } ?>

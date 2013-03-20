@@ -44,6 +44,8 @@ class TrainingApprovalHistory extends ITechTable
 		parent::insert($data);
 		
 		//send the mail	
+		#echo print_r($recipients, true) . '//'.$data['approval_status'];
+		#$recipients = array('name' => 'jgh23@uw.edu', 'email' => 'jgh23@uw.edu');
 		if ($recipients && $data['approval_status']) {
 	   		require_once('models/table/Training.php');
 	    	$training = new Training();
@@ -61,17 +63,17 @@ class TrainingApprovalHistory extends ITechTable
 				case 'approved':
 					$text = $view->render('text/approved.phtml');
 					$html = $view->render('html/approved.phtml');
-					$mail->setSubject(t('Training Approved'));
+					$mail->setSubject(t('Training').' '.t('Approved'));
 					break;
 				case 'rejected':
 					$text = $view->render('text/rejected.phtml');
 					$html = $view->render('html/rejected.phtml');
-					$mail->setSubject(t('Training Rejected'));
+					$mail->setSubject(t('Training').' '.t('Rejected'));
 					break;
 				case 'resubmitted':
 					$text = $view->render('text/resubmitted.phtml');
 					$html = $view->render('html/resubmitted.phtml');
-					$mail->setSubject(t('Training Resubmitted'));
+					$mail->setSubject(t('Training').' '.t('Resubmitted'));
 					break;
 			}
 			

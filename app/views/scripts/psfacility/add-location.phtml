@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <title><?php echo $this->translation['Application Name'];?> | <?php print t('Add Training Location'); ?></title>
+  <title><?php echo $this->translation['Application Name'];?> | <?php print t('Add').' '.t('Training').' '.t('Location'); ?></title>
 <?php
 require_once('views/helpers/ScriptContainer.php');
 print ScriptContainer::$instance->renderCSSHead();
@@ -14,15 +14,15 @@ print ScriptContainer::$instance->renderJSHead();
   <div id="header"><?php require_once('views/scripts/preheader.phtml');?></div>
   <div id="content">
 
-		<h1><?php print t('Add Training Location'); ?></h1>
+		<h1><?php print t('Add').' '.t('Training').' '.t('Location'); ?></h1>
 
-    <p><?php print t('Please enter training location information'); ?>:</p>
+    <p><?php print t('Please enter').' '.t('Training').' '.t('location').' '.t('information'); ?>:</p>
     <br>
 
 		<?php require_once('views/scripts/training/_template_locationform.phtml'); ?>
 
     <div class="actionBtn">
-		<button type="button" id="submitLocation"><?php print t('Add Location'); ?></button></div>
+		<button type="button" id="submitLocation"><?php print t('Add').' '.t('Location'); ?></button></div>
 		<br/><br/>
 		<script type="text/javascript">
 			addAjaxSubmit('submitLocation','addLocationForm','<?php echo $this->base_url;?>/training/location-add/info/extra/outputType/json');

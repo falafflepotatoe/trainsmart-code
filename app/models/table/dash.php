@@ -11,10 +11,24 @@ class Dashview extends ITechTable
 		$output = array();
 		
 		$helper = new Helper();
-
 		$db = Zend_Db_Table_Abstract::getDefaultAdapter (); 
-		$select = $db->select()
-			->from($this->_name);
+		
+		// GETTING CURRENT USER ID
+		$uid = $helper->myid();
+
+		// GETTING INSTITUTION IDS
+		$ids = $helper->getUserInstitutions($uid,false);
+		if (count ($ids) > 0){
+			// LIMITING INSTITUTIONS TO THE ONES ENABLED FOR THIS USER
+			$select = $db->select()
+				->from($this->_name)
+				->where("id IN (" . implode(",", $ids) . ")");
+		} else {
+			// SHOWING ALL INSTITUTIONS
+			$select = $db->select()
+				->from($this->_name);
+		}
+
 		$result = $db->fetchAll($select);
 		foreach ($result as $row){
 			$students	= $helper->getInstitutionStudents($row['id'],"all","count");

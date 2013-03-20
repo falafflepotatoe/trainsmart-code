@@ -16,7 +16,7 @@ class StudenttranscriptController extends ITechController {
 		$studenttrans = new Studenttranscript();
 		$transstud=$studenttrans->EditStudenttranscript($id);
 		$this->view->assign('id',$id);
-       	$this->view->assign('title','Trainsmart');
+       	$this->view->assign('title',$this->view->translation['Application Name']);
 		$this->view->assign('firstname',$transstud['firstname']);
 		$this->view->assign('cadre',$transstud['cadre']);
 		$this->view->assign('dateofenroll',$transstud['enrollmentdate']);

@@ -40,7 +40,6 @@ class TrainingController extends ReportFilterHelpers {
 
 		if (! $this->isLoggedIn ())
 		$this->doNoAccessError ();
-
 	}
 
 	public function addAction() {
@@ -48,7 +47,7 @@ class TrainingController extends ReportFilterHelpers {
 			$this->doNoAccessError ();
 		}
 
-		$this->view->assign ( 'pageTitle', t ( 'Add New Training' ) );
+		$this->view->assign ( 'pageTitle', t ( 'Add New' ).' '.t( 'Training' ) );
 		return $this->doAddEditView ();
 	}
 
@@ -57,19 +56,19 @@ class TrainingController extends ReportFilterHelpers {
 			$this->doNoAccessError ();
 		}
 
-		$this->view->assign ( 'pageTitle', t ( 'View/Edit Training' ) );
+		$this->view->assign ( 'pageTitle', t ( 'View/Edit' ).' '.t( 'Training' ) );
 		return $this->doAddEditView ();
 	}
 
 	public function viewAction() {
-		$this->view->assign ( 'pageTitle', t ( 'View/Edit Training' ) );
+		$this->view->assign ( 'pageTitle', t ( 'View/Edit' ).' '.t( 'Training' ) );
 		return $this->doAddEditView ();
 	}
 
 	private function doAddEditView() {
 		if (! $this->hasACL ( 'edit_course' )) {
 			$this->view->assign ( 'viewonly', 'disabled="disabled"' );
-			$this->view->assign ( 'pageTitle', t ( 'View Training' ) );
+			$this->view->assign ( 'pageTitle', t ( 'View' ).' '.t( 'Training' ) );
 		}
 
 		// edittable ajax (remove/update/etc)
@@ -106,7 +105,7 @@ class TrainingController extends ReportFilterHelpers {
 
 		$trainingObj = new Training ( );
 		$row = $trainingObj->findOrCreate ( $training_id );
-		$rowRay = $row->toArray ();
+		$rowRay = @$row->toArray ();
 
 		//filter training orgs by user access
 		$allowIds = false;
@@ -122,7 +121,7 @@ class TrainingController extends ReportFilterHelpers {
 
 		if (($this->_getParam ( 'action' ) != 'add') and ! $this->hasACL ( 'training_organizer_option_all' ) and ((! $allowIds) or (array_search ( $rowRay ['training_organizer_option_id'], $allowIds ) === false))) {
 			$this->view->assign ( 'viewonly', 'disabled="disabled"' );
-			$this->view->assign ( 'pageTitle', t ( 'View Training' ) );
+			$this->view->assign ( 'pageTitle', t ( 'View' ).' '.t( 'Training' ) );
 		}
 
 		if ($row->is_deleted) {
@@ -149,8 +148,8 @@ class TrainingController extends ReportFilterHelpers {
 
 			//$status->checkRequired($this, 'training_title_option_id',t('Training Name'));
 			//$status->checkRequired($this, 'training_category_and_title_option_id',t('Training Name'));
-			$status->checkRequired ( $this, 'training_length_value', t ( 'Training Length' ) );
-			$status->checkRequired ( $this, 'training_length_interval', t ( 'Training Interval' ) );
+			$status->checkRequired ( $this, 'training_length_value', t ( 'Training' ).' '.t( 'Length' ) );
+			$status->checkRequired ( $this, 'training_length_interval', t ( 'Training' ).' '.t( 'Interval' ) );
 			//$status->checkRequired($this, 'training_organizer_option_id',t('Training Organizer'));
 			//$status->checkRequired($this, 'training_level_option_id',t('Training Level'));
 			//$status->checkRequired($this, 'training_location_id',t('Training Location'));
@@ -178,13 +177,15 @@ class TrainingController extends ReportFilterHelpers {
 				}
 			}
 
+			if ( $this->getSanParam('start-year') == ""  || $this->getSanParam('start-month') == "" || $this->getSanParam('start-day') == "" )
+				$status->addError( 'start-day', t('Start date is required.') );
 			$training_start_date = (@$this->getSanParam ( 'start-year' )) . '-' . (@$this->getSanParam ( 'start-month' )) . '-' . (@$this->getSanParam ( 'start-day' ));
 			if ($training_start_date !== '--' and $training_start_date !== '0000-00-00')
-			$status->isValidDate ( $this, 'start-day', t ( 'Training start' ), $training_start_date );
+			$status->isValidDate ( $this, 'start-day', t ( 'Training' ).' '.t( 'start' ), $training_start_date );
 			if ($this->setting ( 'display_end_date' )) {
 				$training_end_date = (@$this->getSanParam ( 'end-year' )) . '-' . (@$this->getSanParam ( 'end-month' )) . '-' . (@$this->getSanParam ( 'end-day' ));
 				if ($training_end_date !== '--' and $training_end_date !== '0000-00-00') {
-					$status->isValidDate ( $this, 'end-day', t ( 'Training end' ), $training_end_date );
+					$status->isValidDate ( $this, 'end-day', t ( 'Training' ).' '.t( 'end' ), $training_end_date );
 				}
 
 				if ($training_end_date != '--') {
@@ -193,6 +194,8 @@ class TrainingController extends ReportFilterHelpers {
 					}
 				}
 			}
+
+			$pepfarEnabled = @$this->setting['display_training_pepfar'];
 
 			if ($training_id) {
 
@@ -211,7 +214,7 @@ class TrainingController extends ReportFilterHelpers {
 
 
 				// pepfar (multiple days)
-				if ($this->getSanParam ( 'pepfar_days' )) {
+				if ($this->getSanParam ( 'pepfar_days' ) && $pepfarEnabled) {
 					$pepfarTotal = 0;
 					foreach ( $this->getSanParam ( 'pepfar_days' ) as $key => $value ) {
 						if (! is_numeric ( $value ))
@@ -220,7 +223,7 @@ class TrainingController extends ReportFilterHelpers {
 						$daysRay [$key] = $value; //set the days key to  the pepfar id
 						$pepfarTotal += $value;
 
-						if ($pepfarCount > 1 && ! $value) {
+						if ($pepfarCount > 1 && ! $value  && $pepfarEnabled) {
 							$status->addError ( 'training_pepfar_categories_option', t ( 'Number of days is required.' ) );
 						}
 
@@ -244,8 +247,8 @@ class TrainingController extends ReportFilterHelpers {
 					}
 
 					// do days add up to match training length?
-					if ($days != $pepfarTotal && $pepfarCount > 1) {
-						$status->addError ( 'training_pepfar_categories_option', sprintf ( t ( "Total training length is %s, but PEPFAR category total is %d days. " ), (($days == 1) ? $days . ' ' . t ( 'day' ) : $days . ' ' . t ( 'days' )), $pepfarTotal ) );
+					if ($days != $pepfarTotal && $pepfarCount > 1 && $pepfarEnabled) {
+						$status->addError ( 'training_pepfar_categories_option', sprintf ( t("Total").' '.t('Training').' '.t("length is %s, but PEPFAR category total is %d days. " ), (($days == 1) ? $days . ' ' . t ( 'day' ) : $days . ' ' . t ( 'days' )), $pepfarTotal ) );
 					}
 
 				}
@@ -259,6 +262,10 @@ class TrainingController extends ReportFilterHelpers {
 					$tableCustom = new ITechTable ( array ('name' => 'training_custom_2_option' ) );
 					$row->training_custom_2_option_id = $tableCustom->insertUnique ( 'custom2_phrase', $this->getSanParam ( 'custom2_phrase' ), true );
 				}
+				$custom3 = $this->getSanParam ( 'custom3_phrase' );
+				$row->custom_3 = ($custom3) ? $custom3 : '';
+				$custom4 = $this->getSanParam ( 'custom4_phrase' );
+				$row->custom_4 = ($custom4) ? $custom4 : '';
 
 				// checkbox
 				if (! $this->getSanParam ( 'is_tot' )) {
@@ -266,6 +273,11 @@ class TrainingController extends ReportFilterHelpers {
 				}
 				if (! $this->getSanParam ( 'is_refresher' )) {
 					$row->is_refresher = 0;
+				}
+
+				$training_refresher_option_id =  $this->getSanParam ( 'training_refresher_option_id' );
+				if (! empty($training_refresher_option_id )) {
+					$row->is_refresher = 1;
 				}
 
 			}
@@ -291,13 +303,13 @@ class TrainingController extends ReportFilterHelpers {
 					$row->is_deleted = 1;
 					$trainingObj->delete ( 'id = ' . $row->id );
 				} else {
-					$status->setStatusMessage ( t ( 'This training session could not be deleted. Some participants or trainers may still be attached.' ) );
+					$status->setStatusMessage ( t ( 'This' ).' '.t( 'Training' ).' '.t( 'session could not be deleted. Some participants or trainers may still be attached.' ) );
 
 				}
 			}
 
 			if ($status->hasError () && ! $row->is_deleted) {
-				$status->setStatusMessage ( t ( 'This training session could not be saved.' ) );
+				$status->setStatusMessage ( t ( 'This' ).' '.t( 'Training' ).' '.t( 'session could not be saved.' ) );
 			} else {
 				$row = self::fillFromArray ( $row, $this->_getAllParams () );
 
@@ -331,7 +343,6 @@ class TrainingController extends ReportFilterHelpers {
 					// funding
 					$amount_extra_col = '';
 					$amount_extra_vals = array ();
-					//if ($this->setting ( 'display_funding_amount' ) && $this->getSanParam ( 'funding_id' )) {
 					$amount_extra_col = 'funding_amount';
 					if ($this->getSanParam ( 'funding_id' )) {
 						foreach ( $this->getSanParam ( 'funding_id' ) as $funding_id ) {
@@ -339,12 +350,10 @@ class TrainingController extends ReportFilterHelpers {
 						}
 					}
 
-					//}
-
-
 					MultiOptionList::updateOptions ( 'training_to_training_funding_option', 'training_funding_option', 'training_id', $training_id, 'training_funding_option_id', $this->getSanParam ( 'funding_id' ), $amount_extra_col, $amount_extra_vals );
 
 					// pepfar
+					if ($pepfarEnabled)
 					MultiOptionList::updateOptions ( 'training_to_training_pepfar_categories_option', 'training_pepfar_categories_option', 'training_id', $training_id, 'training_pepfar_categories_option_id', $this->getSanParam ( 'training_pepfar_categories_option_id' ), 'duration_days', (isset ( $daysRay ) ? $daysRay : false) );
 
 					// method
@@ -358,6 +367,11 @@ class TrainingController extends ReportFilterHelpers {
 						$_GET ['topic_id'] [] = $this->getSanParam ( 'training_topic_option_id' );
 					}
 					MultiOptionList::updateOptions ( 'training_to_training_topic_option', 'training_topic_option', 'training_id', $training_id, 'training_topic_option_id', $this->getSanParam ( 'topic_id' ) );
+
+					// refresher course (if dropdownlist)
+					if ($this->setting ( 'multi_opt_refresher_course')) {
+						MultiOptionList::updateOptions ('training_to_training_refresher_option', 'training_refresher_option', 'training_id', $training_id, 'training_refresher_option_id', $this->getSanParam ( 'training_refresher_option_id' ));
+					}
 
 					//Qualifications for unknown participants
 					if (! $row->has_known_participants) {
@@ -411,11 +425,18 @@ class TrainingController extends ReportFilterHelpers {
 				if ($this->setting ( 'module_approvals_enabled' )) {
 					if ($this->getSanParam ( 'approval_status' ) == 'approved') {
 						$row->is_approved = 1;
+						if($this->setting ( 'allow_multi_approvers' ) && !$this->hasACL ( 'master_approver' ) ) {
+							$row->is_approved = 2; // approved, but not approved by master approver, only that user can make this a 1 and have it display aproved!
+						}
 						$rowRay ['is_approved'] = 1;
 						$do_save_approval_history = true;
 					} else if ($this->getSanParam ( 'approval_status' ) == 'rejected') {
 						$row->is_approved = 0;
 						$rowRay ['is_approved'] = 0;
+						if($this->setting ( 'allow_multi_approvers' ) && !$this->hasACL ( 'master_approver' ) ) {
+							$row->is_approved = 1; // approved, but not approved by master approver, only that user can make this a 1 and have it display aproved!
+							$rowRay['is_approved'] = 1;
+						}
 						$do_save_approval_history = true;
 					}
 					if (($this->_getParam ( 'action' ) == 'add') or (! $this->hasACL ( 'approve_trainings' ))) {
@@ -427,6 +448,7 @@ class TrainingController extends ReportFilterHelpers {
 				if ($this->_getParam ( 'action' ) == 'add') {
 					$do_save_approval_history = true;
 				}
+				$row->training_refresher_option_id = 0; // refresher / bugfix - this col isnt used anymore
 
 				if ($row->save ()) {
 
@@ -452,12 +474,15 @@ class TrainingController extends ReportFilterHelpers {
 
 					// duplicate training
 					if ($this->getSanParam ( 'specialAction' ) == 'duplicate') {
+						$has_duplicate_acl = (!@$this->setting['require_duplicate_acl'] || (@$this->setting['require_duplicate_acl'] && $this->hasACL('duplicate_training')));
+						if ($has_duplicate_acl) {
 						$dupId = $trainingObj->duplicateTraining ( $row->id );
 						$status->redirect = Settings::$COUNTRY_BASE_URL . '/training/edit/id/' . $dupId . '/msg/duplicate';
 					}
+					}
 
 					if (! $status->redirect) {
-						$status->setStatusMessage ( t ( 'This training session has been saved.' ) );
+						$status->setStatusMessage ( t ( 'This' ).' '.t( 'Training' ).' '.t( 'session has been saved.' ) );
 					}
 
 				} else {
@@ -478,6 +503,8 @@ class TrainingController extends ReportFilterHelpers {
 		// Init view
 		//
 
+		$this->view->assign ('custom3_phrase', $row->custom_3);
+		$this->view->assign ('custom4_phrase', $row->custom_4);
 
 		//split start date fields
 		if (! $row->training_start_date)
@@ -513,6 +540,10 @@ class TrainingController extends ReportFilterHelpers {
 		// training categories & titles
 		$categoryTitle = MultiAssignList::getOptions ( 'training_title_option', 'training_title_phrase', 'training_category_option_to_training_title_option', 'training_category_option' );
 		$this->view->assign ( 'categoryTitle', $categoryTitle );
+		// add title link
+		if ($this->hasACL ( 'training_title_option_all' )) {
+			$this->view->assign ( 'titleInsertLink', " <a href=\"#\" onclick=\"addToSelect('" . str_replace ( "'", "\\" . "'", t ( 'Please enter your new' ) ) . " " . strtolower ( $this->view->translation ['Training'] . t('Name') ) . ":', 'select_training_title_option', '" . Settings::$COUNTRY_BASE_URL . "/training/insert-table/table/training_title_option/column/training_title_phrase/outputType/json'); return false;\">" . t ( 'Insert new' ) . "</a>" );
+		}
 
 		//get assigned evaluation
 		$ev_id = null;
@@ -526,11 +557,6 @@ class TrainingController extends ReportFilterHelpers {
 			}
 			$this->view->assign ( 'evaluation_id', $ev_id );
 			$this->view->assign ( 'evaluation_to_training_id', $ev_to_t_id );
-		}
-
-		// add title link
-		if ($this->hasACL ( 'training_title_option_all' )) {
-			$this->view->assign ( 'titleInsertLink', " <a href=\"#\" onclick=\"addToSelect('" . str_replace ( "'", "\\" . "'", t ( 'Please enter your new' ) ) . " " . strtolower ( $this->view->translation ['Training Name'] ) . ":', 'select_training_title_option', '" . Settings::$COUNTRY_BASE_URL . "/training/insert-table/table/training_title_option/column/training_title_phrase/outputType/json'); return false;\">" . t ( 'Insert new' ) . "</a>" );
 		}
 
 		//Qualifications for unknown participants
@@ -584,12 +610,13 @@ class TrainingController extends ReportFilterHelpers {
 		$catId = 0;
 		if ($courseRow && $courseRow->training_title_option_id) {
 			foreach ( $categoryTitle as $r ) {
-				if ($r ['id'] == $courseRow->training_title_option_id) {
+				if ($r ['id'] == $courseRow->training_title_option_id && $r['training_category_option_id'] != 0) {
 					$catId = $r ['training_category_option_id'];
 					break;
 				}
 			}
 		}
+		
 		$this->view->assign ( 'dropDownCategory', DropDown::generateHtml ( 'training_category_option', 'training_category_phrase', $catId, false, $this->view->viewonly, false ) );
 
 		//echo '<pre>';
@@ -614,6 +641,9 @@ class TrainingController extends ReportFilterHelpers {
 			}
 
 		}
+		if ($this->hasACL ( 'acl_editor_training_topic' )) {
+			$this->view->assign ( "topicInsertLink", ' <a href="#" onclick="addCheckbox(\''.t('Please enter the name your new topic item') .     '\', \'topic_id\', \'topicContainer\', \''.$this->view->topicJsonUrl.'\'); return false;">'.t('Insert New').'</a>' );
+		}
 
 		// get custom phrases (custom1_phrase, custom2_phrase)
 		if ($training_id) {
@@ -623,9 +653,13 @@ class TrainingController extends ReportFilterHelpers {
 		// location drop-down
 		$tlocations = TrainingLocation::selectAllLocations ( $this->setting ( 'num_location_tiers' ) );
 		$this->viewAssignEscaped ( 'tlocations', $tlocations );
+		if ($this->hasACL ( 'edit_facility' )) {
+			$this->view->assign ( "insertLocationLink", '<a href="#" onclick="return false;" id="show">'. t(str_replace(' ','&nbsp;',t('Insert new'))) . '</a>' );
+		}
 
 		// pepfar durations
-		if ($training_id) {
+		$pepfarEnabled = @$this->setting('display_training_pepfar');
+		if ($training_id && $pepfarEnabled) {
 			$pepfarArray = MultiOptionList::choicesList ( 'training_to_training_pepfar_categories_option', 'training_id', $training_id, 'training_pepfar_categories_option', 'pepfar_category_phrase', 'duration_days' );
 			foreach ( $pepfarArray as $item ) {
 				if (isset ( $item ['training_id'] ) && $item ['training_id']) {
@@ -664,7 +698,27 @@ class TrainingController extends ReportFilterHelpers {
 			}
 		}
 		$this->view->assign ( 'fundingArray', $fundingArray );
+		if ($this->hasACL ( 'acl_editor_funding' )) {
 		$this->view->assign ( 'fundingJsonUrl', Settings::$COUNTRY_BASE_URL . '/training/insert-table/table/training_funding_option/column/funding_phrase/outputType/json' );
+			$this->view->assign ( "fundingInsertLink", ' <a href="#" onclick="addCheckbox(\''.t('Please enter the name your new funding item:') .  '\', \'funding_id\', \'fundingContainer\', \''.$this->view->fundingJsonUrl.'\'); return false;">'.t('Insert New').'</a>' );
+		}
+
+		// refresher (if multi)
+		if ($training_id) {
+			if ($this->setting ( 'multi_opt_refresher_course' )) {
+				$training_refresher_id = $row->training_refresher_option_id;
+				if ($is_new)
+				$training_refresher_id = false; // use default
+				#$this->view->assign ( 'dropDownRefresher', DropDown::generateHtml ( 'training_refresher_option', 'refresher_phrase_option', $training_refresher_id, 'training/insert-table', $this->view->viewonly ) );
+				$this->view->assign ( 'refresherArray', MultiOptionList::choicesList ( 'training_to_training_refresher_option', 'training_id', $training_id, 'training_refresher_option', 'refresher_phrase_option', false, false ) );
+				if ($this->hasACL ( 'acl_editor_refresher_course' )) {
+				$this->view->assign ( 'refresherJsonUrl', Settings::$COUNTRY_BASE_URL . '/training/insert-table/table/training_refresher_option/column/refresher_phrase_option/outputType/json' );
+					$this->view->assign ( "refresherInsertLink", ' <a href="#" onclick="addCheckbox(\''.t('Please enter the name your new refresher item') . '\', \'training_refresher_option_id\', \'refresherContainer\', \''.$this->view->refresherJsonUrl.'\'); return false;">'.t('Insert New').'</a>' );
+				}
+			}
+		}
+
+
 
 		/****************************************************************************************************************
 		* Trainers */
@@ -716,14 +770,16 @@ class TrainingController extends ReportFilterHelpers {
 		if ($training_id) {
 			$persons = PersonToTraining::getParticipants ( $training_id )->toArray ();
 			foreach ( $persons as $pid => $p ) {
-				list ( $city_name, $prov_id, $dist_id, $regc_id ) = Location::getCityInfo ( $p ['location_id'], $this->setting ( 'num_location_tiers' ) );
-				$persons [$pid] ['province_name'] = $locations [$prov_id] ['name'];
-				if ($dist_id)
-				$persons [$pid] ['district_name'] = $locations [$dist_id] ['name'];
+				$region_ids = Location::getCityInfo ( $p ['location_id'], $this->setting ( 'num_location_tiers' ) ); // todo expensive call, getcityinfo loads all locations each time??
+				$region_ids = Location::cityInfotoHash($region_ids);
+				
+				$persons [$pid] ['province_name'] = $locations [$region_ids['province_id']] ['name'];
+				if ($region_ids['district_id'])
+				$persons [$pid] ['district_name'] = $locations [$region_ids['district_id']] ['name'];
 				else
 				$persons [$pid] ['district_name'] = 'unknown';
-				if ($regc_id)
-				$persons [$pid] ['region_c_name'] = $locations [$regc_id] ['name'];
+				if ($region_ids['region_c_id'])
+				$persons [$pid] ['region_c_name'] = $locations [$region_ids['region_c_id']] ['name'];
 				else
 				$persons [$pid] ['region_c_name'] = 'unknown';
 			}
@@ -738,8 +794,12 @@ class TrainingController extends ReportFilterHelpers {
 		} else {
 			$personsFields = array ('first_name' => $this->tr ( 'First Name' ), 'middle_name' => "..." . $this->tr ( 'Middle Name' ), 'last_name' => $this->tr ( 'Last Name' ), 'birthdate' => t ( 'Date of Birth' ), 'facility_name' => t ( 'Facility' ) );
 		}
+		if ( $this->setting ( 'module_attendance_enabled' )) {
+			$personsFields['duration_days'] = $this->tr ( 'Days Attended' );
+			$personsFields['award_id'] = $this->tr ( 'Complete' );
+		}
 
-		if ($this->setting ( 'display_region_c' )) {
+		if ( $this->setting ( 'display_region_c' )) {
 			$personsFields ['region_c_name'] = $this->tr ( 'Region C (Local Region)' );
 		} else if ($this->setting ( 'display_region_b' )) {
 			$personsFields ['district_name'] = $this->tr ( 'Region B (Health District)' );
@@ -747,8 +807,12 @@ class TrainingController extends ReportFilterHelpers {
 			$personsFields ['province_name'] = $this->tr ( 'Region A (Province)' );
 		}
 
-		$colStatic = array_keys ( $personsFields ); // all
-
+		$colStatic = array_keys ( $personsFields ); // static calumns (From field keys)
+		if ( $this->setting ( 'module_attendance_enabled' )) { // remove 1 so we can edit the field
+			foreach( $colStatic as $i => $v )
+				if( $v == 'duration_days' || $v == 'award_id' )
+					unset( $colStatic[$i] );
+		}
 
 		if ($this->view->viewonly) {
 			$editLinkInfo ['disabled'] = 1;
@@ -760,14 +824,21 @@ class TrainingController extends ReportFilterHelpers {
 			'linkUrl' => Settings::$COUNTRY_BASE_URL . '/person/edit/id/%person_id%' );
 			$linkInfo ['linkUrl'] = "javascript:submitThenRedirect('{$linkInfo['linkUrl']}/trainingredirect/$training_id');";
 
-			$editLinkInfo = array (// add link next to "Remove"
-			array ('linkName' => t ( 'Pre-Test' ), 'linkId' => 'id', // use this value in link
-			'linkUrl' => "javascript:updateScore('Pre-Test', %id%, '" . Settings::$COUNTRY_BASE_URL . "/training/scores-update', '%score_pre%');" ), // do not translate label/key
-			array ('linkName' => t ( 'Post-Test' ), 'linkId' => 'id', // use this value in link
-			'linkUrl' => "javascript:updateScore('Post-Test', %id%, '" . Settings::$COUNTRY_BASE_URL . "/training/scores-update', '%score_post%');" ), // do not translate label/key
-			array ('linkName' => t ( 'Scores' ), 'linkId' => 'id', // use this value in link
+			$editLinkInfo = array ();// add link next to "Remove"
+			if ($this->setting('display_training_pre_test')) {
+				$editLinkInfo[] = array ('linkName' => t ( 'Pre-Test' ), 'linkId' => 'id', // use this value in link
+				'linkUrl' => "javascript:updateScore('Pre-Test', %id%, '" . Settings::$COUNTRY_BASE_URL . "/training/scores-update', '%score_pre%');" ); // do not translate label/key
+			}
+
+			if ($this->setting('display_training_post_test')) {
+				$editLinkInfo[] = array ('linkName' => t ( 'Post-Test' ), 'linkId' => 'id', // use this value in link
+				'linkUrl' => "javascript:updateScore('Post-Test', %id%, '" . Settings::$COUNTRY_BASE_URL . "/training/scores-update', '%score_post%');" ); // do not translate label/key
+			}
+
+			$editLinkInfo[] = array ('linkName' => t ( 'Scores' ), 'linkId' => 'id', // use this value in link
+				'linkUrl' => "javascript:submitThenRedirect('" . Settings::$COUNTRY_BASE_URL . "/training/scores/ptt_id/%id%');" );
+			// old
 			//'linkUrl' => Settings::$COUNTRY_BASE_URL."/training/scores/training/$training_id/person/%person_id%",
-			'linkUrl' => "javascript:submitThenRedirect('" . Settings::$COUNTRY_BASE_URL . "/training/scores/ptt_id/%id%');" ) );
 			//$editLinkInfo['linkUrl'] = "javascript:submitThenRedirect('{$editLinkInfo['linkUrl']}');";
 
 
@@ -790,13 +861,36 @@ class TrainingController extends ReportFilterHelpers {
 		}
 
 		/****************************************************************************************************************/
+		/* Approval status */
+
+		if ( $this->setting('module_approvals_enabled') )
+		{
+			$canApprove = ($this->hasACL('master_approver') && $row->is_approved == 2) || ($this->hasACL('approve_trainings') && ! $row->is_approved);
+			$this->view->assign('can_approve', $canApprove);
+
+			if ($canApprove)
+				$this->view->assign('approve_val', '');
+			else
+				$this->view->assign('approve_val', $row->is_approved);
+			
+			// disable control
+			if (!$canApprove or !$this->hasACL('approve_trainings')) {
+				$this->view->assign('approve_disable_str', 'disabled');
+			} else {
+				$this->view->assign('approve_disable_str', '');
+			}
+		}
+
+		/****************************************************************************************************************/
+		/* Attached Files */
+
 
 		// mode
 		$this->view->assign ( 'mode', $this->_getParam ( 'action' ) );
 
 		switch ($this->_getParam ( 'msg' )) {
 			case 'duplicate' :
-			$this->view->assign ( 'msg', t ( 'Training session has been duplicated.<br>You can edit the duplicate session below.' ) );
+			$this->view->assign ( 'msg', t ( 'Training' ).' '.t( 'session has been duplicated.<br>You can edit the duplicate session below.' ) );
 			break;
 			default :
 			break;
@@ -816,6 +910,17 @@ class TrainingController extends ReportFilterHelpers {
 		if (empty ( $trainers ) || empty ( $persons )) {
 			$this->view->assign ( 'isIncomplete', true );
 		}
+
+		// default start date?
+		if($this->getSanParam('start-date')){
+			$parts = explode('/', $this->getSanParam('start-date'));
+			if(count($parts) == 3) {
+				$rowRay['start-day'] = $parts[0];
+				$rowRay['start-month'] = $parts[1];
+				$rowRay['start-year'] = $parts[2];
+			}
+		}
+
 
 		// row values
 		$this->view->assign ( 'row', $rowRay );
@@ -909,7 +1014,7 @@ class TrainingController extends ReportFilterHelpers {
 				$result = TrainingToTrainer::addTrainerToTraining ( $row_id, $training_id, $days );
 				$sendRay ['insert'] = $result;
 				if ($result == - 1) {
-					$sendRay ['error'] = t ( 'This trainer is already in this training session.' );
+					$sendRay ['error'] = t ( 'This' ).' '.t( 'trainer' ).' '.t( 'is already in this training session.' );
 				}
 				$this->sendData ( $sendRay );
 
@@ -942,17 +1047,43 @@ class TrainingController extends ReportFilterHelpers {
 			$tableObj = new PersonToTraining ( );
 
 			if ($action == 'add') {
-				$result = $tableObj->addPersonToTraining ( $row_id, $training_id );
 
+				$result = $tableObj->addPersonToTraining ( $row_id, $training_id );
 				$sendRay ['insert'] = $result;
 				if ($result == - 1) {
-					$sendRay ['error'] = t ( 'This participant is already in this training session.' );
+					$sendRay ['error'] = t ( 'This' ).' '.t( 'participant' ).' '.t( 'is already in this training session.' );
 				}
 				$this->sendData ( $sendRay );
 
 			} elseif ($action == 'del') {
 				$result = $tableObj->delete ( "id=$row_id", true );
 				$this->sendData ( array ('delete' => $result ) );
+			} else { // update a row?
+
+				$days = $this->_getParam ( 'duration_days' );
+				if ($days) {
+					$tableObj = new PersonToTraining ( );
+					$result = $tableObj->update ( array ("duration_days" => $days ), "id=$row_id" );
+					$sendRay ['update'] = $result;
+
+					if (! $result) {
+						$sendRay ['error'] = t ( 'Could not update this record.' );
+					}
+
+					$this->sendData ( $sendRay );
+				}
+				$award = $this->_getParam ( 'award_id' );
+				if ($award) {
+					$tableObj = new PersonToTraining ( );
+					$result = $tableObj->update ( array ("award_id" => $award ), "id=$row_id" );
+					$sendRay ['update'] = $result;
+					if (! $result) {
+						$sendRay ['error'] = t ( 'Could not update this record.' );
+					}
+
+					$this->sendData ( $sendRay );
+				}
+
 			}
 
 		}
@@ -961,6 +1092,384 @@ class TrainingController extends ReportFilterHelpers {
 		$tableObj = new Training ( );
 		$tableObj->update ( array (), "id = $training_id" );
 
+	}
+
+	/**
+	* Import a training
+	*/
+	public function importAction() {
+
+		//ini_set('max_execution_time','300');
+		$errs = array();
+		$this->view->assign('pageTitle', t( 'Import a training' ));
+
+		// template redirect
+		if ( $this->getSanParam('download') )
+			return $this->importTrainingTemplateAction();
+
+		if( ! $this->hasACL('import_training') )
+			$this->doNoAccessError ();
+
+		//CSV STUFF
+		$filename = ($_FILES['upload']['tmp_name']);
+		if ( $filename )
+		{
+			require_once('models/table/TrainingLocation.php');
+			require_once('models/table/Person.php');
+			require_once('models/table/TrainingToTrainer.php');
+			require_once('models/table/PersonToTraining.php');
+
+			$trainingObj = new Training ();
+			$personToTraining = new PersonToTraining();
+			while ($row = $this->_csv_get_row($filename) )
+			{
+				$cntz++; // todo remove
+				$values = array();
+				if (! is_array($row) )
+					continue;
+				if (! isset($cols) ) {
+					$cols = $row;	// first row is headers (fieldnames)
+					continue;
+				}
+				if (! empty($row) ) { // add
+					$countValidFields = 0;
+					foreach($row as $i=>$v){
+						if ( empty($v) && $v !== '0' )
+							continue;
+						if ( $v == 'n/a') // has to be able to process values from a data export
+							$v = NULL;
+						$countValidFields++;
+						if (strpos($v, "\n")){ // explode by newline then comma to give us arrays
+							$v = explode("\n", $v);
+							foreach ($v as $key => $value) {
+								$delimiter = strpos($value, ',');
+								if ($delimiter && $value[$delimiter - 1] != '\\') // todo this doesnt really work, explode will still break it (supposed to be a \, handler (escaped comma), so you can use commas in fields)
+									$values[$cols[$i]][] = explode(',', $this->sanitize($value)); // trimmed later
+								else
+									$values[$cols[$i]][] = $this->sanitize($value);
+							}
+						} else {
+							$delimiter = strpos($v, ',');
+							if ($delimiter && $v[$delimiter - 1] != '\\')
+								$values[$cols[$i]] = explode(',', $this->sanitize($v));
+							else
+								$values[$cols[$i]] = $this->sanitize($v);
+						}
+
+					}
+				} // all values are now in a hash ex: $values['training_id']
+				if ( $countValidFields ) {
+					//validate
+					if (isset($values['uuid']))   {     unset($values['uuid']);         }
+					if (isset($values['id']))     {     unset($values['id']);           }
+					if (isset($values['is_deleted'])) { unset($values['is_deleted']);   }
+					if (isset($values['created_by'])) { unset($values['created_by']);   }
+					if (isset($values['modified_by'])){ unset($values['modified_by']);  }
+					if (isset($values['timestamp_created'])){ unset($values['timestamp_created']); }
+					if (isset($values['timestamp_updated'])){ unset($values['timestamp_updated']); }
+					if (!$this->hasACL('approve_trainings')){ $values['is_approved'] = 0; }
+					if (!$this->setting('module_approvals_enabled') == 0) { $values['is_approved'] = 1; }
+					if ($values['training_start_date']){                $values['training_start_date'] = $this->_date_to_sql($values['training_start_date']); }
+					if ($values['training_end_date']) {                 $values['training_end_date'] = $this->_date_to_sql($values['training_end_date']); }
+					if ($values['training_length_interval'] == 'days')  $values['training_length_interval'] = 'day';
+					if ($values['training_length_interval'] == 'weeks') $values['training_length_interval'] = 'week';
+					if ($values['training_length_interval'] == 'hours') $values['training_length_interval'] = 'hour';
+					// remap fields (field names differ vs actual column names on export/template for readibility thanks to some function in iTechTranslate)
+					if ($values['training_title_phrase'])               $values['training_title_option_id'] = $values['training_title_phrase'];
+					if ($values['training_title'])                      $values['training_title_option_id'] = $values['training_title'];
+					if ($values['custom3_phrase'])                      $values['custom_3'] = $values['custom3_phrase'];
+					if ($values['custom4_phrase'])                      $values['custom_4'] = $values['custom4_phrase'];
+					if ($values['custom5_phrase'])                      $values['custom_5'] = $values['custom5_phrase'];
+					if ($values['refresher_phrase_option'])             $values['training_refresher_phrase'] = $values['refresher_phrase_option'];
+					if ($values['training_refresher_option_id'])        $values['training_refresher_phrase'] = $values['training_refresher_option_id'];
+					if ($values['language_phrase'])                     $values['training_primary_language_option_id'] = $values['language_phrase'];
+					// required fields
+					if( ! $values['training_title_option_id'] )         $values['training_title_option_id'] = 0;
+					if( ! $values['comments'] )                         $values['comments'] = '';
+					if( ! $values['got_comments'] )                     $values['got_comments'] = '';
+					if( ! $values['objectives'] )                       $values['objectives'] = '';
+					
+					// training location
+					$num_location_tiers = $this->setting('num_location_tiers');
+					$bSuccess = true;
+					if (! isset($regionNames) )
+						$regionNames = array ('', t('Region A (Province)'), t('Region B (Health District)'), t('Region C (Local Region)'), t('Region D'), t('Region E'), t('Region F'), t('Region G'), t('Region H'), t('Region I'), t('City') );
+
+					$location_id = 0;
+					$training_location_id = ($values['training_location_id'] ? $values['training_location_id'] : 0); // training_location_id and a default
+					
+					// validity check location name
+					if ($training_location_id && $values['training_location_name']) {
+						$dupe = new TrainingLocation();
+						$select = $dupe->select()->where('id =' . $training_location_id . ' and training_location_name = "' . $values['training_location_name'] . '"');
+						$training_location_id = ($a = $dupe->fetchRow($select)) ? $a->id : 0; // valid or doesnt match lets reset it and insert a new one this record was imported from another site
+					}
+					// insert new location
+					$tier = 1;
+					if (! $training_location_id && $values['training_location_name'] ) // we need to search for loc or insert a new one
+					{
+						for ($i=1; $i < $num_location_tiers + 1; $i++) { // insert/find locations
+							$location_name = ($i == $num_location_tiers) ? @$values[t('City')] : @$values[$regionNames[$i]]; // last one?
+
+							if ( $regionNames[$i] != t('City') && ( empty($location_name) || $bSuccess == false ) ) {
+								$bSuccess = false;
+								continue;
+							}
+							else { // insert
+								$location_id = Location::insertIfNotFound ( $location_name, $location_id, $tier );
+								if (! $location_id) {
+									$bSuccess = false;
+									$errs[] = t('Error locating/creating region or city:').' '.$location_name.' '.t('Training Location').': '.$values['training_location_name'];
+									break;
+								}
+							}
+							$tier++;
+						}
+
+						if ($bSuccess && $location_id){
+							// we have a region id (location id), now save training_location
+							// dupecheck
+							$dupe = new TrainingLocation();
+							$select = $dupe->select()->where('location_id =' . $location_id . ' and training_location_name = "' . $values['training_location_name'] . '"');
+							if( $a = $dupe->fetchRow($select) ) {
+								$training_location_id = $a->id;
+							}
+							else {
+								// save
+								try {
+									$trainingLocModel = new TrainingLocation();
+									$trainingLocationObj = $trainingLocModel->createRow();
+									$trainingLocationObj->training_location_name = $values['training_location_name'];
+									$trainingLocationObj->location_id = $location_id;
+									$training_location_id = $trainingLocationObj->save();				
+								} catch (Exception $e) {
+									$errored = 1;
+									$errs[]  = nl2br($e->getMessage()).space.t ( 'ERROR: The training location could not be saved.' ).space.'"'.$values['training_location_name'].'"';
+								}
+								if(! $training_location_id)
+									$errored = 1;
+							}
+						}
+						if ( $errored || ! $bSuccess ) { // couldn't save location
+							$errs[] = t('Error locating/creating').space.t('Training Location').space.': '.$location_name.' '.t('Training Location').': '.$values['training_location_name'];
+							$errored = 0;
+							$bSuccess = true;
+						}
+					}
+					if ($training_location_id)
+						$values['training_location_id'] = $training_location_id;
+					// done, saved training location.
+					// save
+				
+					try {
+						// option tables / lookup tables // insert or get id, and remap col names from csv template name to actual column name, asdf_phrase to asdf_option_id
+						// the logic is: if ($values['title_phrase']) $training->title_option_id = findOrCreate('training_title', $values['title_phrase']) );
+						if (isset($values['training_title_option_id'])){             $values['training_title_option_id']             = $this->_importHelperFindOrCreate('training_title_option',          'training_title_phrase',           $values['training_title_option_id']); }
+						if (isset($values['training_got_curriculum_phrase'])){       $values['training_got_curriculum_option_id']    = $this->_importHelperFindOrCreate('training_got_curriculum_option', 'training_got_curriculum_phrase',  $values['training_got_curriculum_phrase']); }
+						if (isset($values['training_level_phrase'])){                $values['training_level_option_id']             = $this->_importHelperFindOrCreate('training_level_option',          'training_level_phrase',           $values['training_level_phrase']); }
+						if (isset($values['custom1_phrase'])){                       $values['training_custom_1_option_id']          = $this->_importHelperFindOrCreate('training_custom_1_option',       'custom1_phrase',                  $values['custom1_phrase']); }
+						if (isset($values['custom2_phrase'])){                       $values['training_custom_2_option_id']          = $this->_importHelperFindOrCreate('training_custom_2_option',       'custom2_phrase',                  $values['custom2_phrase']); }
+						if (isset($values['training_organizer_phrase'])){            $values['training_organizer_option_id']         = $this->_importHelperFindOrCreate('training_organizer_option',      'training_organizer_phrase',       $values['training_organizer_phrase']); }
+						if (isset($values['training_method_phrase'])){               $values['training_method_option_id']            = $this->_importHelperFindOrCreate('training_method_option',         'training_method_phrase',          $values['training_method_phrase']); }
+						if (isset($values['training_primary_language_option_id'])){  $values['training_primary_language_option_id']  = $this->_importHelperFindOrCreate('trainer_language_option',        'language_phrase',                 $values['training_primary_language_option_id']); }
+						if (isset($values['training_refresher_phrase']) && !is_array($values['training_refresher_phrase'])){ $values['training_refresher_option_id'] = $this->_importHelperFindOrCreate('training_refresher_option', 'refresher_phrase_option', $values['training_refresher_phrase']); }
+						// participants, trainers
+						$tableObj = $trainingObj->createRow();
+						$tableObj = ITechController::fillFromArray($tableObj, $values);
+						$row_id = $tableObj->save();
+						// done save - we have a training id now
+						// linked tables
+						if ($row_id > 0) {
+							$training_id = $row_id;
+							$success[] = t('Successfully imported training #').space
+								.'<a href="'. Settings::$COUNTRY_BASE_URL . '/training/view/id/'.$training_id.'">'.$training_id.'</a>';
+							// multiOptionList tables
+							if ( $values['funding_phrase'] ) {
+								$bSuccess = $this->_importHelperFindOrCreateMOLT('training_funding_option',   'funding_phrase',                 $values['funding_phrase'],            'funding',   $training_id , $values['funding_amount'] );
+								if ( ! $bSuccess ) $errs[] = t('Training').space."#$training_id ".t('Some Data not imported')." (funding)";
+							}
+							if ( $values['pepfar_category_phrase'] ) {
+								$bSuccess = $this->_importHelperFindOrCreateMOLT('training_pepfar_categories_option', 'pepfar_category_phrase', $values['pepfar_category_phrase'],    'pepfar',    $training_id, $values['pepfar_duration_days'] );
+								if ( ! $bSuccess ) $errs[] = t('Training').space."#$training_id ".t('Some Data not imported')." (PEPFAR)";
+							}
+							if ( $values['training_refresher_phrase'] ) {
+								$bSuccess = $this->_importHelperFindOrCreateMOLT('training_refresher_option', 'refresher_phrase_option',        $values['training_refresher_phrase'], 'refresher', $training_id );
+								if ( ! $bSuccess ) $errs[] = t('Training').space."#$training_id ".t('Some Data not imported')." (refresher course)";
+							}
+							if ( $values['training_topic_phrase'] ) {
+								$bSuccess = $this->_importHelperFindOrCreateMOLT('training_topic_option',     'training_topic_phrase',          $values['training_topic_phrase'],     'topic',     $training_id );
+								if ( ! $bSuccess ) $errs[] = t('Training').space."#$training_id ".t('Some Data not imported')." (training topic)";
+							}
+							//unknown participants
+							if (!empty($values['unknown participants']))
+							{
+								$upTable = new ITechTable(array('name' => 'training_to_person_qualification_option'));
+								foreach ($values['unknown participants'] as $i => $data) {
+
+									if (empty($data) || $data == 'n/a')
+										continue;
+
+									try {
+										# (this row is $data) row format: array( "2(na)"," 2(male)"," 2(female)"," "QualificationPhrase")
+										
+										$qual_id = $data[count($data)-1];
+										$qual_id = trim($qual_id);
+										if (!is_int($qual_id) && strpos($qual_id, '(na)') === false && strpos($qual_id, '(female)') === false && strpos($qual_id, '(male)') === false ) {
+											$qual_id = $this->_importHelperFindOrCreate('person_qualification_option',   'qualification_phrase',   $qual_id);
+										} else {
+											$errs[] = 'Training #'.$row_id.space.t('You did not set a qualification for a group of unknown participants.');
+											$qual_id = 0;
+										}
+										
+										$tablerow = $upTable->createRow();
+										$tablerow->id = null;
+										$tablerow->training_id = $row_id;
+										$tablerow->person_qualification_option_id = $qual_id ? $qual_id : 0;
+										$tablerow->age_range_option_id = 0; // todo age_range_option_id
+										#reference: $age_opts = OptionList::suggestionList('age_range_option',array('id','age_range_phrase'), false, 100, false);
+										$tablerow->person_count_na = 0;
+										$tablerow->person_count_male = 0;
+										$tablerow->person_count_female = 0;
+										foreach ($data as $v) {
+											if ( strpos($v, '(na)') )     $tablerow->person_count_na     = trim(str_replace('(na)',     '', $v));
+											if ( strpos($v, '(male)') )   $tablerow->person_count_male   = trim(str_replace('(male)',   '', $v));
+											if ( strpos($v, '(female)') ) $tablerow->person_count_female = trim(str_replace('(female)', '', $v));
+										}
+										if (! $tablerow->person_count_na && ! $tablerow->person_count_male && ! $tablerow->person_count_female)
+											continue; //empty
+										
+										$tablerow->save();
+
+									} catch (Exception $e) {
+										$errs[] = t('Error saving unknown participant information.').space.'Training #'.$row_id.space.'Error: '.$e->getMessage();
+									}
+								}
+							}
+
+							//training_to_trainer
+
+							foreach (array( $values['trainers'], $values['participants'] ) as $imode => $personArr) {
+								$persons = explode("\n", $personArr);
+								if ( empty($personArr) )
+									continue;
+								if (!is_array($personArr))
+									$personArr = array($personArr);
+								foreach ($personArr as $tRow) {
+									$tRow = trim( $tRow );
+									if ($tRow == '' || $tRow == 'n/a')
+										continue;
+
+									echo '<br>'.PHP_EOL.'trainer [t|p]'.$imode.' row @ training id #training_id: '.print_r($tRow,true)."<Br>".PHP_EOL;
+									if( is_array($tRow) ) {
+										if(count($tRow) == 4 && is_numeric($tRow[0])) // some handling if it has a middle name or ID # attached or exported from training search
+											$trainer_id = $tRow[0];
+										else if(count($tRow) == 3 && $this->setting('display_middle_name') == 0 && is_numeric($tRow[0]))
+											$trainer_id = $tRow[0];
+										else
+											list($trainer_first, $trainer_middle, $trainer_last) = $tRow;   // expects comma seperated list of names...
+									} else {
+										list($trainer_first, $trainer_middle, $trainer_last) = explode(' ', $tRow);
+									}
+									if ($trainer_middle && ! $trainer_last) {
+										$trainer_last = $trainer_middle;
+										$trainer_middle = '';
+									}
+									echo "trainer_first, trainer_middle, trainer_last = $trainer_first, $trainer_middle, $trainer_last";
+									$trainer_id = Person::tryFind($trainer_first, $trainer_middle, $trainer_last);
+									echo " and trainer_id = $trainer_id <br>\n";
+									if ( !$trainer_id) {
+										$errs[] = t("Could not add user to training because they were not found in the system.").space.t('Training')." #$training_id: '$trainer_first $trainer_middle $trainer_last'";
+										continue;
+									}
+									echo " and trainer found, addTrainerToTraining($trainer_id, $training_id,0)<br>\n";
+									if ($imode == 0) TrainingToTrainer::addTrainerToTraining($trainer_id, $training_id, 0); // todo days
+									elseif ($imode == 1) $personToTraining->addPersonToTraining($trainer_id, $training_id);
+								}
+							}
+						}
+					} catch (Exception $e) {
+						$errored = 1;
+						$errs[]  = nl2br($e->getMessage()).' '.t ( 'ERROR: The training data could not be saved.').space.($training_id ? t('Training').space."#$training_id".space.t('Warning: Some data imported.').space.t('Check Funding, PEPFAR, Topic, Refresher options and Participants and Trainers Data; or delete the training and try again.') : '') ;
+					}
+					if(! $row_id)
+						$errored = 1;
+				}
+			}
+			// done processing rows
+			$_POST['redirect'] = null;
+			$status = ValidationContainer::instance();
+			if( empty($errored) && empty($errs) )
+				$stat = t ('Your changes have been saved.');
+			else
+				$stat = t ('Error importing data. Some data may have been imported and some may not have.');
+
+			foreach ($success as $errmsg)
+				$stat .= '<br>'.$errmsg;
+			foreach($errs as $errmsg)
+				$stat .= '<br>'.'Error: '.htmlspecialchars($errmsg, ENT_QUOTES);
+
+	 		$status->setStatusMessage($stat);
+			$this->view->assign('status',$status);
+		}
+		// done with import
+	}
+
+	/**
+	* A template for importing a training
+	*/
+	public function importTrainingTemplateAction() {
+		$sorted = array (
+			array (
+				'training_title_phrase' => '',
+				'has_known_participants' => '1',
+				'training_start_date' => '',
+				'training_end_date' => '',
+				'training_length_value' => '',
+				'training_length_interval' => t('hours').space.t('or').space.t('days').space.t('or').space.t('weeks'),
+				'training_location_id' => '',
+				'training_location_name' => ''
+			));
+		// add some regions
+		$num_location_tiers = $this->setting('num_location_tiers');
+		$regionNames = array ('', t('Region A (Province)'), t('Region B (Health District)'), t('Region C (Local Region)'), t('Region D'), t('Region E'), t('Region F'), t('Region G'), t('Region H'), t('Region I') );
+		for ($i=1; $i < $num_location_tiers; $i++) { 
+			//add regions
+			$sorted[0][$regionNames[$i]] = '';
+		}
+		// add city region
+		$sorted[0][t('City')] = '';
+		$sorted[0] = array_merge($sorted[0], array('comments' => '',
+				'got_comments' => '',
+				'objectives' => '',
+				'is_approved' => '1',
+				'is_tot' => '0',
+				'is_refresher' => '1',
+				'pre' => '',
+				'post' => '',
+				'course_id' => '',
+				'training_refresher_phrase' => '',
+				'training_got_curriculum_phrase' => '',
+				'training_level_phrase' => '',
+				'training_method_phrase' => '',
+				'training_primary_language_phrase' => '',
+				'training_secondary_language_phrase' => '',
+				'funding_phrase' => '',
+				'funding_amount' => '',
+				'pepfar_category_phrase' => '',
+				'pepfar_duration_days' => '',
+				'training_topic_phrase' => '',
+				'custom1_phrase' => '',
+				'custom2_phrase' => '',
+				'custom_3' => '',
+				'custom_4' => '',
+				'custom_5' => '',
+				'training_organizer_phrase' => '',
+				'participants' => '',
+				'trainers' => '',
+				'unknown participants' => ''));
+		//done, output a csv
+		if( $this->getSanParam('outputType') == 'csv' )
+			$this->sendData ( $this->reportHeaders ( false, $sorted ) );
 	}
 
 	/**
@@ -982,45 +1491,66 @@ class TrainingController extends ReportFilterHelpers {
 
 			$location = $this->_getParam ( 'training_location_name' );
 
-			list ( $location_params, $location_tier, $location_id ) = $this->getLocationCriteriaValues ( array (), 'location' );
-
+			list ( $location_params, $location_tier, $location_id ) = $this->getLocationCriteriaValues ( array () );
 			//validate
 			$status = ValidationContainer::instance ();
 
 			$districtText = $this->tr ( 'Region B (Health District)' );
 			$provinceText = $this->tr ( 'Region A (Province)' );
 			$localRegionText = $this->tr ( 'Region C (Local Region)' );
+			$regionDText = $this->tr ( 'Region D' );
+			$regionEText = $this->tr ( 'Region E' );
+			$regionFText = $this->tr ( 'Region F' );
+			$regionGText = $this->tr ( 'Region G' );
+			$regionHText = $this->tr ( 'Region H' );
+			$regionIText = $this->tr ( 'Region I' );
 
-			$status->checkRequired ( $this, 'location_province_id', $provinceText );
-			if ($this->setting ( 'display_region_b' ))
-			$status->checkRequired ( $this, 'location_district_id', $districtText );
-			if ($this->setting ( 'display_region_c' ))
-			$status->checkRequired ( $this, 'location_region_c_id', $localRegionText );
-			//$status->checkRequired ( $this, 'location_city', t ( "City is required." ) );
+			$status->checkRequired ( $this, 'province_id', $provinceText );
+			if ($this->setting ( 'display_region_b' )) $status->checkRequired ( $this, 'district_id', $districtText );
+			if ($this->setting ( 'display_region_c' )) $status->checkRequired ( $this, 'region_c_id', $localRegionText );
+			if ($this->setting ( 'display_region_d' )) $status->checkRequired ( $this, 'region_d_id', $regionDText );
+			if ($this->setting ( 'display_region_e' )) $status->checkRequired ( $this, 'region_e_id', $regionEText );
+			if ($this->setting ( 'display_region_f' )) $status->checkRequired ( $this, 'region_f_id', $regionFText );
+			if ($this->setting ( 'display_region_g' )) $status->checkRequired ( $this, 'region_g_id', $regionGText );
+			if ($this->setting ( 'display_region_h' )) $status->checkRequired ( $this, 'region_h_id', $regionHText );
+			if ($this->setting ( 'display_region_i' )) $status->checkRequired ( $this, 'region_i_id', $regionIText );
+			//$status->checkRequired ( $this, 'city', t ( "City is required." ) );
 
 			$city_id = false;
-			if ($this->getSanParam('location_city') && ! $this->getSanParam ( 'is_new_city' )) {
-				$city_id = Location::verifyHierarchy ( $location_params ['location_city'], $location_params ['location_city_parent_id'], $this->setting ( 'num_location_tiers' ) );
+			if ($this->getSanParam('city') && ! $this->getSanParam ( 'is_new_city' )) {
+				$city_id = Location::verifyHierarchy ( $location_params ['city'], $location_params ['city_parent_id'], $this->setting ( 'num_location_tiers' ) );
 				if ($city_id === false) {
-					$status->addError ( 'location_city', t ( "That city does not appear to be located in the chosen region. If you want to create a new city, check the new city box." ) );
+					$status->addError ( 'city', t ( "That city does not appear to be located in the chosen region. If you want to create a new city, check the new city box." ) );
 				}
 			}
 			// save
 			if (! $status->hasError ()) {
 				$location_id = null;
 				if (($city_id === false) && $this->getSanParam ( 'is_new_city' )) {
-					$location_id = Location::insertIfNotFound ( $location_params ['location_city'], $location_params ['location_city_parent_id'], $this->setting ( 'num_location_tiers' ) );
+					$location_id = Location::insertIfNotFound ( $location_params ['city'], $location_params ['city_parent_id'], $this->setting ( 'num_location_tiers' ) );
 					if ($location_id === false)
-					$status->addError ( 'location_city', t ( 'Could not save that city.' ) );
+					$status->addError ( 'city', t ( 'Could not save that city.' ) );
 				} else {
 					if ( $city_id ) {
 						$location_id = $city_id;
+					} else if ($this->setting ( 'display_region_i' )) {
+						$location_id = $this->getSanParam('region_i_id');
+					} else if ($this->setting ( 'display_region_h' )) {
+						$location_id = $this->getSanParam('region_h_id');
+					} else if ($this->setting ( 'display_region_g' )) {
+						$location_id = $this->getSanParam('region_g_id');
+					} else if ($this->setting ( 'display_region_f' )) {
+						$location_id = $this->getSanParam('region_f_id');
+					} else if ($this->setting ( 'display_region_e' )) {
+						$location_id = $this->getSanParam('region_e_id');
+					} else if ($this->setting ( 'display_region_d' )) {
+						$location_id = $this->getSanParam('region_d_id');
 					} else if ($this->setting ( 'display_region_c' )) {
-						$location_id = $this->getSanParam('location_region_c_id');
+						$location_id = $this->getSanParam('region_c_id');
 					} else if ($this->setting ( 'display_region_b' )) {
-						$location_id = $this->getSanParam('location_district_id' );
+						$location_id = $this->getSanParam('district_id' );
 					} else {
-						$location_id = $this->getSanParam('location_province_id' );
+						$location_id = $this->getSanParam('province_id' );
 					}
 
 					if ( strstr($location_id,'_') ) {
@@ -1040,8 +1570,8 @@ class TrainingController extends ReportFilterHelpers {
 						$tableObj = new TrainingLocation ( );
 						$tableObj->update ( $data, "id = " . $this->_getParam ( 'update' ) );
 
-						$status->setStatusMessage ( t ( 'The training center has been updated.' ) );
-						$_SESSION['status'] = t ( 'The training center has been updated.' );
+						$status->setStatusMessage ( t ( 'The' ).' '.t( 'Training Center' ).' '.t( 'has been updated.' ) );
+						$_SESSION['status'] = t ( 'The' ).' '.t( 'Training Center' ).' '.t( 'has been updated.' );
 
 						//refresh the page, so the picker dropdown is refreshed as well
 						$status->setRedirect ( '/facility/view-location/id/' . $this->_getParam ( 'update' ) );
@@ -1049,8 +1579,8 @@ class TrainingController extends ReportFilterHelpers {
 						$id = TrainingLocation::insertIfNotFound ( $location, $location_id );
 
 						if ($this->_getParam ( 'info' ) == 'extra') {
-							$status->setStatusMessage ( t ( 'The training center has been saved.' ) );
-							$_SESSION['status'] = t ( 'The training center has been saved.' );
+							$status->setStatusMessage ( t ( 'The' ).' '.t( 'Training Center' ).' '.t( 'has been saved.' ) );
+							$_SESSION['status'] = t ( 'The' ).' '.t( 'Training Center' ).' '.t( 'has been saved.' );
 							$status->setRedirect ( '/facility/view-location/id/' . $id );
 						}
 					}
@@ -1062,7 +1592,7 @@ class TrainingController extends ReportFilterHelpers {
 					}
 				}
 			} else {
-				$status->setStatusMessage ( t ( 'The training center could not be saved.' ) );
+				$status->setStatusMessage ( t ( 'The' ).' '.t( 'Training Center' ).' '.t( 'could not be saved.' ) );
 				$this->sendData ( $status );
 			}
 
@@ -1074,14 +1604,17 @@ class TrainingController extends ReportFilterHelpers {
 			$num_tiers = $this->setting ( 'num_location_tiers' );
 			$locations = Location::getAll ();
 			foreach ( $rowArray as $id => $row ) {
-				list ( $city_name, $prov_id, $dist_id, $regc_id ) = Location::getCityInfo ( $row ['location_id'], $num_tiers );
-				$rowArray [$id] ['province_name'] = $locations [$prov_id] ['name'];
-				$rowArray [$id] ['district_name'] = $locations [$dist_id] ['name'];
-				if (isset ($locations [$regc_id])){
-					$rowArray [$id] ['region_c_name'] = $locations [$regc_id] ['name'];
-				} else {
-					$rowArray [$id] ['region_c_name'] = "";
-				}
+				$regions = Location::getCityInfo ( $row ['location_id'], $num_tiers );
+				$regions = Location::cityInfotoHash($regions);
+				$rowArray [$id] ['province_name'] = $locations [$regions['province_id']] ['name'];
+				$rowArray [$id] ['district_name'] = isset( $locations[$regions['district_id']]['name'] ) ? $locations [$regions['district_id']] ['name'] : "";
+				$rowArray [$id] ['region_c_name'] = isset( $locations[$regions['region_c_id']]['name'] ) ? $locations [$regions['region_c_id']] ['name'] : "";
+				$rowArray [$id] ['region_d_name'] = isset( $locations[$regions['region_d_id']]['name'] ) ? $locations [$regions['region_d_id']] ['name'] : "";
+				$rowArray [$id] ['region_e_name'] = isset( $locations[$regions['region_e_id']]['name'] ) ? $locations [$regions['region_e_id']] ['name'] : "";
+				$rowArray [$id] ['region_f_name'] = isset( $locations[$regions['region_f_id']]['name'] ) ? $locations [$regions['region_f_id']] ['name'] : "";
+				$rowArray [$id] ['region_g_name'] = isset( $locations[$regions['region_g_id']]['name'] ) ? $locations [$regions['region_g_id']] ['name'] : "";
+				$rowArray [$id] ['region_h_name'] = isset( $locations[$regions['region_h_id']]['name'] ) ? $locations [$regions['region_h_id']] ['name'] : "";
+				$rowArray [$id] ['region_i_name'] = isset( $locations[$regions['region_i_id']]['name'] ) ? $locations [$regions['region_i_id']] ['name'] : "";
 			}
 		}
 
@@ -1181,6 +1714,7 @@ class TrainingController extends ReportFilterHelpers {
 		$editTable->insertExtra = array ('person_to_training_id' => $personTrainingRow->id );
 		//$editTable->customColDef = array('training_date' => 'formatter:YAHOO.widget.DataTable.formatDate, editor:"date"');
 		//$editTable->customColDef = array('training_date' => 'width:120');
+		$editTable->customColDef = array('score_value' => 'formatter:fickle');/*Todo rename this*/
 
 
 		$editTable->execute ();
@@ -1200,6 +1734,132 @@ class TrainingController extends ReportFilterHelpers {
 		Training::updateScore ( $ptt_id, $label, $value );
 		$status = ValidationContainer::instance ();
 		$this->sendData('');
+	}
+
+	public function scoresImportAction() {
+		require_once ('models/table/Person.php');
+		require_once ('models/table/PersonToTraining.php');
+
+		//labels
+		$id = $this->getSanParam ( 'training' );
+		$db = Zend_Db_Table_Abstract::getDefaultAdapter ();
+		$status = ValidationContainer::instance ();
+		$trainingObj = new Training ( );
+		$this->viewAssignEscaped ( 'courseName', $trainingObj->getCourseName ( $id ) );
+		$this->view->assign ( 'training_id', $id );
+
+		//CSV import -- post
+		if(@$_FILES['import']['tmp_name']) {
+			$filename = ($_FILES['import']['tmp_name']);
+			if ( $filename ) {
+				// we need a table to compare names to
+				$table = new ITechTable(array('name' => 'score'));
+				$persons = new ITechTable(array('name' => 'person'));
+				$sql = 'select distinct person_to_training.id as pid,person.first_name,person.last_name from person_to_training
+					   left join person on person.id = person_id
+					   where person_to_training.training_id = '.$id;
+				$ppl = $db->fetchAll($sql);
+
+				while ($row = $this->_csv_get_row($filename) ) {
+					if ( is_array($row) ) {
+						if ( isset($row[0]) && isset($row[4]) && !empty($row[0]) && !empty($row[4]) ) {
+
+							// find person
+							$row[0] = trim($row[0]);
+							$row[1] = trim($row[1]);
+							$pid = null;
+							foreach($ppl as $v){
+								if ($v['first_name'] == $row[0] && $v['last_name'] == $row[1]){
+									$pid = $v['pid'];
+									break;
+								}
+
+							}
+							if($pid){
+								$new_row = $table->createRow ( );
+								$new_row->person_to_training_id = $pid;
+								$new_row->training_date = $row[2];
+								$new_row->score_label = $row[3];
+								$new_row->score_value = $row[4];
+								$new_row->save();
+							}
+							else { // err
+								if (! isset($notfound))
+									$notfound = array();
+								if ($row[0] != t('First Name'))
+									$notfound [] = $row[0].' '.$row[1].'<br>';
+							}
+						}
+					}
+				}
+			}
+			$_POST['redirect'] = null;
+			if($notfound){
+				$status->setStatusMessage( t('The following users could not be found while importing, perhaps they were not adding to the training:<br>') );
+				foreach($notfound as $v)
+					$status->setStatusMessage($v);
+			}
+		// done
+		}
+
+		// score view (edit table)
+		require_once ('views/helpers/EditTableHelper.php');
+		$label = 'Score';
+		$fields = array ('name' => t('Name'), 'score_label' => t ( 'Label' ), 'score_value' => t ( 'Score' ) );
+		$rowRay = $db->fetchAll("select score.*,CONCAT(person.first_name, CONCAT(' ', person.last_name)) as name from person_to_training
+						inner join score on score.person_to_training_id = person_to_training.id
+						left join person on person.id = person_id
+						where person_to_training.training_id = $id
+						");
+		$this->view->assign('editTable', EditTableHelper::generateHtml($label, $rowRay, $fields, array(), array(), true));
+
+
+	}
+
+	public function scoresTemplateAction() {
+		// gimme a csv template for training scores for this training
+		$id = $this->getSanParam('training');
+		$db = Zend_Db_Table_Abstract::getDefaultAdapter();
+		$rowRay = $db->fetchAll("select person.first_name, person.last_name from person_to_training
+						left join person on person.id = person_id
+						where person_to_training.training_id = $id");
+
+		$sorted = array();
+		if ( count( $rowRay ) ){ // either print names attached to training or 3 generic ones
+			foreach( $rowRay as $row ){
+				
+				$sorted[] = array(
+				t('First Name')    => $row['first_name'],
+				t('Last Name')     => $row['last_name'],
+				t('Training Date') => '',
+				t('Score Label')   => '',
+				t('Score Value')   => '');
+			}
+		} else {
+			$sorted = array (
+				array (
+					t('First Name')    => 'Charles',
+					t('Last Name')     => 'Goo',
+					t('Training Date') => '2012-05-30',
+					t('Score Label')   => 'Pre-Test',
+					t('Score Value')   => '99'),
+				array (
+					t('First Name')    => 'Charles',
+					t('Last Name')     => 'Goo',
+					t('Training Date') => '2012-05-30',
+					t('Score Label')   => 'Post-Test',
+					t('Score Value')   => '100'),
+				array (
+					t('First Name')    => 'Charles',
+					t('Last Name')     => 'Goo',
+					t('Training Date') => '2012-05-30',
+					t('Score Label')   => 'Custom 1 (Extra Test)',
+					t('Score Value')   => '100')
+				);
+		}
+		//done, output a csv
+		if( $this->getSanParam('outputType') == 'csv' )
+			$this->sendData ( $this->reportHeaders ( false, $sorted ) );
 	}
 
 	public function indexAction() {
@@ -1263,20 +1923,29 @@ class TrainingController extends ReportFilterHelpers {
 
 		/* Participants */
 		$persons = PersonToTraining::getParticipants ( $training_id )->toArray ();
-		$personsFields = array ('last_name' => $this->tr ( 'Last Name' ), 'first_name' => $this->tr ( 'First Name' ), 'birthdate' => t ( 'Date of Birth' ), 'facility_name' => t ( 'Facility' ) );
+		$personsFields = array ('last_name' => $this->tr ( 'Last Name' ), 'first_name' => $this->tr ( 'First Name' ));
+
+		if ( $this->setting('module_attendance_enabled') ) {
+			if( strtotime( $rowRay ['training_start_date'] ) < time() ) {
+				$personsFields = array_merge($personsFields, array ( 'duration_days' => t ( 'Days' ) )); // already had class(es) - show the days attended
+			}
+		}
+		$personsFields = array_merge($personsFields, array ('birthdate' => t ( 'Date of Birth' ), 'facility_name' => t ( 'Facility' )));
+		
 		//if ($this->setting ( 'display_region_b' ))
 		$personsFields ['location_name'] = t ( 'Location' );
 		//add location
 		$locations = Location::getAll ();
 		foreach ( $persons as $pid => $person ) {
-			list ( $city_name, $prov_id, $dis_id, $reg_c_id ) = Location::getCityInfo ( $person ['location_id'], $this->setting ( 'num_location_tiers' ) );
-			$ordered_l = array ($city_name );
-			if ($reg_c_id)
-			$ordered_l [] = $locations [$reg_c_id] ['name'];
-			if ($dis_id && count ( $ordered_l ) > 2)
-			$ordered_l [] = $locations [$dis_id] ['name'];
-			if ($prov_id && count ( $ordered_l ) > 2)
-			$ordered_l [] = $locations [$prov_id] ['name'];
+			$region_ids = Location::getCityInfo ( $person ['location_id'], $this->setting ( 'num_location_tiers' ) );
+			$ordered_l = array( $region_ids['cityname'] );
+			
+			foreach ($region_ids as $key => $value) {
+				if( !empty ($value) && isset($locations[$value]['name']))
+					$ordered_l [] = $locations [$value] ['name'];	
+				else
+					break;
+			}
 			$persons [$pid] ['location_name'] = implode ( ', ', $ordered_l );
 		}
 
@@ -1350,6 +2019,16 @@ class TrainingController extends ReportFilterHelpers {
 		$output .= '</select>';
 		return $output;
 
+	}
+
+	public function hasACLEdit($requireACL, $linkURL)
+	{
+		//$helpr = new Zend_View_Helper_HasACL ();
+		//$helpr->setView($this);  
+		if(! ($this->hasACL($requireACL) || $this->hasACL('edit_country_options')))
+			return null;
+
+		return ' &nbsp; &nbsp; <a href="'.$linkURL.'" onclick="submitThenRedirect(\''.$linkURL.'\');return false;">'.t('Edit').'</a>';
 	}
 }
 ?>

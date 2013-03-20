@@ -1,11 +1,12 @@
-<?php require_once('views/helpers/Location.php');?>
+<?php require_once('views/helpers/Location.php');
+      require_once('views/helpers/TrainingViewHelper.php'); ?>
 <div class="fieldLabelThin" id="facility_name_lbl"><span class="required">*</span><?php tp('Facility');?></div>
-	<div class="fieldInput"><input type="text" name="facility_name"  id="facility_name" value="" size="40" maxlength="40"/></div>
+	<div class="fieldInput"><input type="text" name="facility_name"  id="facility_name" value="" size="40" maxlength="128"/></div>
 
 	<div class="fieldLabelThin" id="facility_address1_lbl"><?php tp('Address 1');?></div>
-	  <div class="fieldInput"><input type="text" name="facility_address1" id="facility_address1" value="" size="40" maxlength="40"/></div>
+	  <div class="fieldInput"><input type="text" name="facility_address1" id="facility_address1" value="" size="40" maxlength="128"/></div>
 	<div class="fieldLabelThin" id="facility_address2_lbl"><?php tp('Address 2');?></div>
-	  <div class="fieldInput"><input type="text" name="facility_address2" id="facility_address2" value="" size="40" maxlength="40"/></div>
+	  <div class="fieldInput"><input type="text" name="facility_address2" id="facility_address2" value="" size="40" maxlength="128"/></div>
   
   <div class="fieldLabelThin" id="facility_province_id_lbl"><span class="required">*</span><?php echo (@$this->translation['Region A (Province)']); ?></div>
   <div class="fieldInput"><?php renderFilter($this->locations, 1, 'facility_province_id', false, 'facility_district_id');?></div>
@@ -25,14 +26,17 @@
   	</div>
 <?php renderCityAutocomplete('facility','facilityCityContainer',$this->base_url.'/facility/cityList/outputType/text/', $this->setting['num_location_tiers']);?>
 	
-	
 	<div class="fieldLabelThin" id="facility_postal_code_lbl"><?php tp('Postal code');?></div>
-	  <div class="fieldInput"><input type="text" name="facility_postal_code" id="facility_postal_code" value="" size="40" maxlength="40"/></div>
+	  <div class="fieldInput"><input type="text" name="facility_postal_code" id="facility_postal_code" value="" size="40" maxlength="20"/></div>
+	<div class="fieldLabelThin" id="facility_latitude_lbl"><?php tp('Latitude');?></div>
+	  <div class="fieldInput"><input type="text" name="facility_latitude" id="facility_latitude" value="" size="40" maxlength="11"/></div>
+	<div class="fieldLabelThin" id="facility_longitude_lbl"><?php tp('Longitude');?></div>
+	  <div class="fieldInput"><input type="text" name="facility_longitude" id="facility_longitude" value="" size="40" maxlength="11"/></div>
 	<div class="fieldLabelThin" id="facility_phone_lbl"><?php tp('Phone'); ?></div>
-	  <div class="fieldInput"><input type="text" name="facility_phone" id="facility_phone" value="" size="40" maxlength="40"/></div>
+	  <div class="fieldInput"><input type="text" name="facility_phone" id="facility_phone" value="" size="40" maxlength="32"/></div>
 	<div class="fieldLabelThin" id="facility_fax_lbl"><?php tp('Fax');?></div>
-	  <div class="fieldInput"><input type="text" name="facility_fax" id="facility_fax" value="" size="40" maxlength="40"/></div>
-	<div class="fieldLabelThin" id="facility_type_id_lbl"><span class="required">*</span><?php tp('Facility type');?></div>
+	  <div class="fieldInput"><input type="text" name="facility_fax" id="facility_fax" value="" size="40" maxlength="32"/></div>
+	<div class="fieldLabelThin" id="facility_type_id_lbl"><span class="required">*</span><?php tp('Facility'); echo ' '; tp('type');?></div>
 	<div class="fieldInput"><select id="facility_type_id" name="facility_type_id">
 		<option value="">--<?php tp('choose');?>--</option>
 		<?php
@@ -41,9 +45,9 @@
 		}
 		?>
 	</select></div>
-	<div class="fieldLabelThin" id="facility_sponsor_id_lbl"><?php tp('Facility sponsor');?></div>
-	<div class="fieldInput">
-	<select id="facility_sponsor_id" name="facility_sponsor_id">
+	<div class="fieldLabelThin" id="facility_sponsor_id_lbl"><?php tp('Facility'); echo ' '; tp('sponsor');?></div>
+	<div class="fieldInput" id="facility_sponsor_wrapper">
+		<select id="facility_sponsor_id" name="facility_sponsor_id[]">
 		<option value="">--<?php tp('choose');?>--</option>
 		<?php
 		  if ( @$this->facility_sponsors ) {
@@ -52,14 +56,34 @@
 				}
 		  }
 		?>
-	</select></div>
-	<div class="fieldLabelThin" id="facility_comments_lbl"><?php tp('Comments');?></div>
-	<div class="fieldInput"><textarea name="facility_comments" id="facility_comments" cols="40" rows="5" ></textarea></div>
+		</select>
+		<?php if ( $this->hasACL( 'acl_editor_facility_sponsors' ) && $i==0 ) { echo '<a href="#" onclick="addToSelect(\''.t('Please enter your new').' '.t('Facility sponsor').':'.'\', \'facility_sponsor_id\', \''.Settings::$COUNTRY_BASE_URL.'/training/insert-table/table/facility_sponsor_option/column/facility_sponsor_phrase/outputType/json\'); return false;">'.t('Insert New').'</a>'; } ?>
+		<?php echo hasACLEdit( 'acl_editor_facility_sponsors', 'admin/facilities-sponsors' , $this ); ?>
+		<?php if ( @$this->setting['allow_multi_sponsors'] ) {         echo '<a id="sponsor_add"    href="#" onclick="addSponsorRow();return false;">'.t('Add another sponsor to this Facility').'</a>'; } ?>
+	</div>
+<?php if ( @$this->setting['display_sponsor_dates'] ) { ?>
+	<div class="fieldLabelThin" id="facility_sponsor_id_lbl"><?php if( @$this->setting['require_sponsor_dates'] ) echo '<span class="required">*</span>'; ?><?php tp('Sponsor Date');?></div>
+	<div class="fieldInput sponsorDates" id="facility_sponsor_wrapper">
+		<span><input class="datepicker" type="text" name="sponsor_start_date[]" /><a class="calenderbtn" href="#"><img src="<?php echo $this->base_url; ?>/js/yui/assets/calbtn.gif"></a></span>&nbsp;&nbsp;
+		<?php if( @$this->setting['require_sponsor_dates'] ) echo '<span class="required">*</span>'; ?><label class="label"><?php tp('to'); ?></label>
+		<span><input class="datepicker" type="text" name="sponsor_end_date[]" /><a class="calenderbtn" href="#"><img src="<?php echo $this->base_url; ?>/js/yui/assets/calbtn.gif"></a></span>
+	</div>
+<?php } ?>
 
 
+	<div class="fieldLabelThin" id="facility_comments_lbl"><?php tp('Facility Comments');?></div>
+	<div class="fieldInput"><textarea name="facility_comments" id="facility_comments" cols="40" rows="5"></textarea></div>
+
+<script type="text/javascript">
+// on load
+$(document).ready(function () {
+	$('.datepicker').datepicker();
+	$('.calenderbtn').click(openNearestDatePicker);
+});
+</script>
 
 <?php if ( $this->setting['display_region_b'] ) { ?>
-  <script>
+<script type="text/javascript">
     filterSubTypeOptions('facility_province_id','facility_district_id'); 
-  </script>
+</script>
 <?php } ?>

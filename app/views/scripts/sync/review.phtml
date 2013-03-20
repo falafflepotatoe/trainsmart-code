@@ -88,13 +88,13 @@ table.sync tbody td {
 				<input type="submit" class="submitArrow" name="go" value="Commit Changes" />
 		    <br/>
 			<br/>
-			<h2><?php tp('Training Conflicts');?></h2>
+			<h2><?php echo t('Training').' '.t('Conflicts');?></h2>
 			<?php conflict_table(@$this->items['training']);?><br/>
-			<h2><?php tp('People Conflicts');?></h2>
+			<h2><?php echo t('People').' '.t('Conflicts');?></h2>
 			<?php conflict_table(@$this->items['person']);?><br/>
-			<h2><?php tp('Facility Conflicts');?></h2>
+			<h2><?php echo t('Facility').' '.t('Conflicts');?></h2>
 			<?php conflict_table(@$this->items['facility']);?><br/>
-			<h2><?php tp('Training Location Conflicts');?></h2>
+			<h2><?php tp('Training Location').' '.t('Conflicts');?></h2>
 			<?php conflict_table(@$this->items['training_location']);?><br/>
 			
 			

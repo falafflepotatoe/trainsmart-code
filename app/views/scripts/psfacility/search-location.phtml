@@ -17,11 +17,11 @@ print ScriptContainer::$instance->renderJSHead();
   <div id="header"><?php require_once('views/scripts/preheader.phtml');?></div>
   <div id="content">
 
-    <h1><?php tp('Search for Training Location');?></h1>
+    <h1><?php echo t('Search for').' '.t('Training').' '.t('Location');?></h1>
 	   <form action="" method="GET">
    <fieldset><legend><?php tp('Select Criteria');?></legend>
    
-	<div class="fieldLabel"><?php tp('Training Location Name');?></div>
+	<div class="fieldLabel"><?php tp('Training').' '.t('Location').' '.t('Name');?></div>
 	<div class="fieldInput"><select id="training_location_name" name="training_location_name">
 		<option value="">--<?php tp('All');?>--</option>
 		<?php
@@ -52,8 +52,8 @@ print ScriptContainer::$instance->renderJSHead();
    </form>
 <?php if ( $this->criteria['go'] ) { ?>
 		    <div class="hrGrey"></div>
-		    <div class="fieldIndentNoMargin"><?php tp('Training locations');?> <span class="total"><?php echo $this->count;?>  <?php tp('Results');?></span><?php echo $this->printAndExport();?></div>
-			<a href="<?php echo $this->base_url;?>/facility/add-location"><?php tp('Add new training location');?></a><br/><br/>
+		    <div class="fieldIndentNoMargin"><?php tp('Training').' '.t('locations');?> <span class="total"><?php echo $this->count;?>  <?php tp('Results');?></span><?php echo $this->printAndExport();?></div>
+			<a href="<?php echo $this->base_url;?>/facility/add-location"><?php tp('Add new').' '.t('training').' '.t('location');?></a><br/><br/>
 		    <div id="locations"></div>
 		    <script type="text/javascript">
 		var locationsData = [
@@ -65,8 +65,20 @@ print ScriptContainer::$instance->renderJSHead();
 				if (!$isFirstRow )
 					echo ',';
 				$isFirstRow = false;
-				echo '['.'"'.$row['id'].'","'.str_replace('\\','',$row['training_location_name']).'","'.$row['province_name'].($this->setting['display_region_b']?'","'.$row['district_name']:'').($this->setting['display_region_c']?'","'.$row['region_c_name']:'').'"]';
-				$cnt++;
+					echo '[';
+						echo '"'.$row['id'];
+						echo '","';
+						echo str_replace('\\','',$row['training_location_name']);
+						echo '","'.$row['province_name'];
+						echo ($this->setting['display_region_b']) ? '","'.$row['district_name'] : '';
+						echo ($this->setting['display_region_c']) ? '","'.$row['region_c_name'] : '';
+						echo ($this->setting['display_region_d']) ? '","'.$row['region_d_name'] : '';
+						echo ($this->setting['display_region_e']) ? '","'.$row['region_e_name'] : '';
+						echo ($this->setting['display_region_f']) ? '","'.$row['region_f_name'] : '';
+						echo ($this->setting['display_region_g']) ? '","'.$row['region_g_name'] : '';
+						echo ($this->setting['display_region_h']) ? '","'.$row['region_h_name'] : '';
+						echo ($this->setting['display_region_i']) ? '","'.$row['region_i_name'] : '';
+					echo '"]';
 			}
 			}
 		   ?>];

@@ -6,11 +6,9 @@
 	<?php
     require_once('views/helpers/ScriptContainer.php');
     print ScriptContainer::$instance->renderCSSHead();
-	print ScriptContainer::$instance->renderJSHead();      ?>
+	print ScriptContainer::$instance->renderJSHead();
+	?>
     
-<script type="text/javascript" src="<?php  echo Settings::$COUNTRY_BASE_URL.'/js/scripts/jquery-1.7.1.min.js'; ?>"></script>
-<script type="text/javascript" src="<?php  echo Settings::$COUNTRY_BASE_URL.'/js/scripts/jquery-ui-1.8.17.custom.min.js'; ?>"></script>
-<script type="text/javascript" language="javascript" src="<?php  echo Settings::$COUNTRY_BASE_URL.'/js/scripts/jquery.dataTables.js'; ?>"></script>
 		<script type="text/javascript" charset="utf-8">
 			$(document).ready(function() {
 				$( ".calendarbox" ).datepicker({
@@ -58,7 +56,7 @@
             <div id="content">
 			<div id="subcontent">
 				<div id="contentheader">
-					<h2>Edit/View Cohort Record</h2>
+					<h2><?php echo t('Edit/View Cohort Record'); ?></h2>
 					<br>
 			
 				</div>
@@ -67,32 +65,32 @@
                 <input type="hidden" name="id" value="<?php echo $this->escape($this->id);?>">
 				<div class="mainformholder">
                     
-               <p style="padding-left:105px;font-weight:bold;">Select Criteria</p><br>
+               <p style="padding-left:105px;font-weight:bold;"><?php echo t('Select Criteria'); ?></p><br>
                		
-                    <label>Degree Information</label>
+                    <label><?php echo t('Degree Information'); ?></label>
 					<input type="text" name="degreeinfo" size="32" value="<?php echo $this->escape($this->degree);?>">	
                		
- 					<label>Cohort Start Date</label>
+ 					<label><?php echo t('Cohort Start Date'); ?></label>
 					<input type="text" name="cohortstart" class="calendarbox" value="<?php echo $this->escape($this->startname);?>">
 
-					<label>Cohort Gruduation Date</label>
+					<label><?php echo t('Cohort Gruduation Date'); ?></label>
 					<input type="text" name="cohortgrade" class="calendarbox" value="<?php echo $this->escape($this->graddate);?>">
 
-					<label>Cohort Participants at Start</label>
+					<label><?php echo t('Cohort Participants at Start'); ?></label>
 					<input type="text" name="startdate" size="32" maxlength="32">
                     
-                    <label>Cohort Participants Separated</label>
+                    <label><?php echo t('Cohort Participants Dropped Out'); ?></label>
 					<input type="text" name="sepratedate" size="32" maxlength="32">
                     
-                     <label>Graduating Number</label>
+                     <label><?php echo t('Graduating Number'); ?></label>
 					<input type="text" name="graddate" size="32" maxlength="32">
 
 					<div class="pad20 clear"></div>
-					<p style="float:left;font-size:14px;">Cohort</p>
+					<p style="float:left;font-size:14px;"><?php echo t('Cohort'); ?></p>
 					<div class="pad20 clear"></div><br>
                     
                     <div class="pad20 clear"></div>
-					<a style="float:left;font-size:14px;">Add New Cohort</a>
+					<a style="float:left;font-size:14px;"><?php echo t('Add New Cohort'); ?></a>
 					</div>
                     
 					
@@ -100,11 +98,11 @@
 <table cellpadding="0" cellspacing="0" border="0" class="display tablegrid" id="" style="width:900px">
 	<thead>
 		<tr>
-			<th>ID</th>
-			<th>Name</th>
-			<th>Gender</th>
-			<th>Institution</th>
-			<th>Cohort</th>
+			<th><?php echo t('ID'); ?></th>
+			<th><?php echo t('Name'); ?></th>
+			<th><?php echo t('Gender'); ?></th>
+			<th><?php echo t('Institution'); ?></th>
+			<th><?php echo t('Cohort'); ?></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -112,65 +110,65 @@
 			<td>123</td>
 			<td class="">John Doe</td>
 			<td class="">M</td>
-			<td class="">Institution</td>
-			<td class="">Cohort</td>
+			<td class=""><?php echo t('Institution'); ?></td>
+			<td class=""><?php echo t('Cohort'); ?></td>
 		</tr>
 		<tr class="GradeA">
 			<td>123</td>
 			<td class="">John Doe</td>
 			<td class="">M</td>
-			<td class="">Institution</td>
-			<td class="">Cohort</td>
+			<td class=""><?php echo t('Institution'); ?></td>
+			<td class=""><?php echo t('Cohort'); ?></td>
 		</tr>
 		<tr class="GradeA">
 			<td>123</td>
 			<td class="">John Doe</td>
 			<td class="">M</td>
-			<td class="">Institution</td>
-			<td class="">Cohort</td>
+			<td class=""><?php echo t('Institution'); ?></td>
+			<td class=""><?php echo t('Cohort'); ?></td>
 		</tr>
 		
 		<tr class="GradeA">
 			<td>123</td>
 			<td class="">John Doe</td>
 			<td class="">M</td>
-			<td class="">Institution</td>
-			<td class="">Cohort</td>
+			<td class=""><?php echo t('Institution'); ?></td>
+			<td class=""><?php echo t('Cohort'); ?></td>
 		</tr>
 		<tr class="GradeA">
 			<td>123</td>
 			<td class="">John Doe</td>
 			<td class="">M</td>
-			<td class="">Institution</td>
-			<td class="">Cohort</td>
+			<td class=""><?php echo t('Institution'); ?></td>
+			<td class=""><?php echo t('Cohort'); ?></td>
 		</tr>
 		<tr class="GradeA">
 			<td>123</td>
 			<td class="">John Doe</td>
 			<td class="">M</td>
-			<td class="">Institution</td>
-			<td class="">Cohort</td>
+			<td class=""><?php echo t('Institution'); ?></td>
+			<td class=""><?php echo t('Cohort'); ?></td>
 		</tr>
 		<tr class="GradeA">
 			<td>123</td>
 			<td class="">John Doe</td>
 			<td class="">M</td>
-			<td class="">Institution</td>
-			<td class="">Cohort</td>
+			<td class=""><?php echo t('Institution'); ?></td>
+			<td class=""><?php echo t('Cohort'); ?></td>
 		</tr>
 		<tr class="GradeA">
 			<td>123</td>
 			<td class="">John Doe</td>
 			<td class="">M</td>
-			<td class="">Institution</td>
-			<td class="">Cohort</td>
+			<td class=""><?php echo t('Institution'); ?></td>
+			<td class=""><?php echo t('Cohort'); ?></td>
 		</tr>
 		<tr class="GradeA">
 			<td>123</td>
 			<td class="">John Doe</td>
 			<td class="">M</td>
-			<td class="">Institution</td>
-			<td class="">Cohort</td>
+			<td class=""><?php echo t('Institution'); ?></td>
+			<td class=""><?php echo t('Cohort'); ?></td>
 		</tr>
 		
 	</tbody>
@@ -178,7 +176,7 @@
 </div>
 
            <div class="rightdiv">
-		<input type="submit" name="update" value="Add" class="tsbutton green large">
+		<input type="submit" name="update" value="<?php echo t('Add'); ?>" class="tsbutton green large">
 					</div>
                 
                </form>

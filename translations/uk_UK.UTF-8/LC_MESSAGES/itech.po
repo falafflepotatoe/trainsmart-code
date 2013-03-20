@@ -2894,7 +2894,7 @@ msgstr "Тренінги відповідно об'єкту"
 #: views/scripts/reportpreservice/studentname.phtml:336
 #: views/scripts/reports/facilities.phtml:320
 msgid "Training Location"
-msgstr "Навчання розташування"
+msgstr "розташування навчання"
 
 #: views/scripts/reportpreservice/studentname.phtml:348
 #: views/scripts/reports/facilities.phtml:332

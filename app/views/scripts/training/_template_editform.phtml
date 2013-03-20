@@ -7,11 +7,13 @@ require_once('views/helpers/ScriptContainer.php');
 print ScriptContainer::$instance->renderCSSHead();
 print ScriptContainer::$instance->renderJSHead();
 
+require_once('views/helpers/TrainingViewHelper.php');
+
 ?>
 <style>
 
 <?php if($this->viewonly) : ?>
-.required { display:none; }
+  .required { display:none; }
 <?php endif; ?>
 
 </style>
@@ -28,7 +30,7 @@ print ScriptContainer::$instance->renderJSHead();
  <?php if(!$this->viewonly ) : ?>
   <div  class="actionBtn" >
     <div class="clear yui-push-button">
-      <button type="button" onclick="submitForm();"><?php tp('Save Training');?></button>
+      <button type="button" onclick="submitForm();"><?php echo t('Save').' '.t('Training');?></button>
     </div></div>
   <?php endif; ?>
 
@@ -40,10 +42,10 @@ print ScriptContainer::$instance->renderJSHead();
 <!-- "add new" training location pop-up modal -->
 
 <div id="addLocation">
-<div class="hd"><?php tp('Add new Training Location');?></div>
+<div class="hd"><?php echo t('Add new').' '.t('Training').' '.t('Location');?></div>
 <div class="bd">
 
-    <h1><?php tp('Please enter training location information:');?></h1>
+    <h1><?php echo t('Please enter').' '.t('Training').' '.t('location').' '.t('information'.':');?></h1>
     <?php require_once('views/scripts/training/_template_locationform.phtml'); ?>
 
 </div>
@@ -60,11 +62,13 @@ function dateCalc() {
     var elED = YAHOO.util.Dom.get("end-day").value;
     var elEM = YAHOO.util.Dom.get("end-month").value;
     var elEY = YAHOO.util.Dom.get("end-year").value;
-    var startTime = new Date(elSY, elSM, elSD).getTime();
-    var endTime = new Date(elEY, elEM, elED).getTime();
+    if (elSM > 0) elSM--;
+    if (elEM > 0) elEM--;
+    var startTime = new Date(elSY, elSM, elSD,1).getTime();
+    var endTime = new Date(elEY, elEM, elED,1).getTime();
     var day = 1000*60*60*24;
     var duration = (endTime - startTime)/day;
-    if ( duration >= 0 && duration < 400) {
+    if ( duration >= 0 && duration < 1200) {
       YAHOO.util.Dom.get("training_length_value").value = Math.round(duration) + 1;
         YAHOO.util.Dom.get("interval2").checked = 'checked';
 
@@ -78,12 +82,14 @@ function dateConfirm() {
     var elED = YAHOO.util.Dom.get("end-day").value;
     var elEM = YAHOO.util.Dom.get("end-month").value;
     var elEY = YAHOO.util.Dom.get("end-year").value;
-    var startTime = new Date(elSY, elSM, elSD).getTime();
-    var endTime = new Date(elEY, elEM, elED).getTime();
+    if (elSM > 0) elSM--;
+    if (elEM > 0) elEM--;
+    var startTime = new Date(elSY, elSM, elSD,1).getTime();
+    var endTime = new Date(elEY, elEM, elED,1).getTime();
     var day = 1000*60*60*24;
     var duration = (endTime - startTime)/day;
       if ( YAHOO.util.Dom.get("training_length_value").value != (Math.round(duration) + 1) )
-         alert("<?php tp('It looks like the training dates do not match the length. Please double check these fields.');?>");
+      alert("<?php echo t('It looks like the').' '.t('training').' '.t('dates do not match the length. Please double check these fields.');?>");
 
   }
 
@@ -178,14 +184,14 @@ YAHOO.util.Event.onDOMReady(init);
     <b><?php tp('Date modified:');?></b>  <?php echo $this->row['timestamp_updated']; ?><br>
     <b><?php tp('Modified by:');?></b> <?php echo $this->row['updater']; ?><br>
     <hr size="1">
-    <a href="javascript:submitThenRedirect('<?php echo $this->base_url;?>/training/roster/id/<?php echo $this->row['id']; ?>');" onclick=""><?php tp('View/Print Training Roster');?></a><br>
+    <a href="javascript:submitThenRedirect('<?php echo $this->base_url;?>/training/roster/id/<?php echo $this->row['id']; ?>');" onclick=""><?php echo t('View/Print Training Roster');?></a><br>
     <?php if ( $this->setting['module_evaluation_enabled'] ) { ?>
-    <?php if ( !@$this->evaluation_id ) { ?><a href="javascript:submitThenRedirect('<?php echo $this->base_url;?>/evaluation/assign-training/id/<?php echo $this->row['id']; ?>');" onclick=""><?php tp('Assign Evaluation to Training');?></a>&nbsp;&nbsp;&nbsp;<?php } ?>
+    <?php if ( !@$this->evaluation_id ) { ?><a href="javascript:submitThenRedirect('<?php echo $this->base_url;?>/evaluation/assign-training/id/<?php echo $this->row['id']; ?>');" onclick=""><?php echo t('Assign Evaluation to').' '.t('Training');?></a>&nbsp;&nbsp;&nbsp;<?php } ?>
     <?php if ( @$this->evaluation_id ) : ?><a href="javascript:submitThenRedirect('<?php echo $this->base_url;?>/evaluation/data/id/<?php echo $this->evaluation_to_training_id; ?>');" onclick=""><?php tp('Enter Evaluation Data');?></a>&nbsp;&nbsp;&nbsp;<a href="javascript:submitThenRedirect('<?php echo $this->base_url;?>/reports/evaluations/training_id/<?php echo $this->row['id']; ?>');" onclick=""><?php tp('View Data');?></a><?php else : ?><?php tp('unassigned')?><?php endif;?><br>
     <?php } ?>
     <?php if(!$this->viewonly) : ?>
-      <a href="" onclick="duplicateTraining(); return false;"><?php tp('Duplicate this Training');?></a><br>
-      <a href="#" onclick="deleteTraining(); return false;"><?php tp('Delete this Training');?></a>
+      <?php if (!@$this->setting['require_duplicate_acl'] || (@$this->setting['require_duplicate_acl'] && $this->hasACL('duplicate_training'))) { echo '  <a href="" onclick="duplicateTraining(); return false;">'.t('Duplicate this').' '.t('Training').'</a><br>'; } ?>
+      <a href="#" onclick="deleteTraining(); return false;"><?php echo t('Delete this').' '.t('Training');?></a>
     <?php endif; ?>
 
   </div>
@@ -214,7 +220,7 @@ YAHOO.util.Event.onDOMReady(init);
         $lastId = $vals['id'];
       }
 		?>
-		</select><?php print $this->titleInsertLink; ?>
+		</select><?php print $this->titleInsertLink; ?>    <?php echo hasACLEdit('acl_editor_training_title', 'admin/training-title', $this); ?>
   </div>
 
     <script>
@@ -243,7 +249,7 @@ YAHOO.util.Event.onDOMReady(init);
 
 
 
-  <div class="fieldLabel"><span class="required">*</span><?php tp('Training start date');?></div>
+  <div class="fieldLabel"><span class="required">*</span><?php echo t('Training').' '.t('start date');?></div>
   <div class="fieldInput" id="startdate">
     <?php tp('Day');?> <input id="start-day" class="dayfield" type="text" name="start-day" maxlength="2" value="<?php echo $this->row['start-day']; ?>"  <?php echo $this->viewonly; ?>>
     / <?php tp('Month');?> <input id="start-month" class="monthfield" type="text" name="start-month" maxlength="2" value="<?php echo $this->row['start-month']; ?>"  <?php echo $this->viewonly; ?>>
@@ -258,7 +264,7 @@ YAHOO.util.Event.onDOMReady(init);
     <?php endif; ?>
   </div><br/>
 <?php if ( $this->setting['display_end_date'] ) { ?>
- <div class="fieldLabel"><?php tp('Training end date');?></div>
+ <div class="fieldLabel"><?php echo t('Training').' '.t('end date');?></div>
  <div class="fieldInput" id="enddate">
     <?php tp('Day');?> <input id="end-day" class="dayfield" type="text" name="end-day" maxlength="2" value="<?php echo $this->row['end-day']; ?>"  <?php echo $this->viewonly; ?>>
     / <?php tp('Month');?> <input id="end-month" class="monthfield" type="text" name="end-month" maxlength="2" value="<?php echo $this->row['end-month']; ?>"  <?php echo $this->viewonly; ?>>
@@ -274,7 +280,7 @@ YAHOO.util.Event.onDOMReady(init);
   </div><br/>
   <?php } ?>
 
-  <div class="fieldLabel" id="training_length_value_lbl"><span class="required">*</span><?php tp('Training length');?></div>
+  <div class="fieldLabel" id="training_length_value_lbl"><span class="required">*</span><?php echo t('Training').' '.t('length');?></div>
   <div class="fieldInput">
     <input type="text" id="training_length_value" name="training_length_value" size="6" value="<?php echo $this->row['training_length_value']; ?>" <?php echo $this->viewonly; ?>>
     &nbsp;
@@ -292,37 +298,26 @@ YAHOO.util.Event.onDOMReady(init);
   <div class="fieldLabel" id="training_organizer_option_id_lbl"><?php echo $this->translation['Training Organizer']; ?></div>
   <div class="fieldInput">
     <?php echo $this->dropDownOrg; ?>
+    <?php echo hasACLEdit('acl_editor_training_organizer', 'admin/training-organizer', $this); ?>
   </div><br/>
-
-  <div class="fieldLabel"><?php tp('Training location');?></div>
+  <div class="fieldLabel"><?php echo t('Training').' '.t('location');?></div>
   <div class="fieldInput">
-    <select name="training_location_id" id="select_training_location"<?php echo $this->viewonly; ?>>
-    <option value="">&mdash; <?php tp('select');?> &mdash;</option>
     <?php
-    foreach($this->tlocations as $r) {
-      
-      // province_name
-      if(!isset($lastProv) || $lastProv != $r['province_name']) {
-        if(!isset($lastProv)) echo '</optgroup>';
-        echo '<optgroup label="'.$r['province_name'].'">';
-        $lastProv = $r['province_name'];
-      }
-
-      echo '<option value="'.$r['id'].'"'.(($this->row['training_location_id'] == $r['id']) ? ' selected' : '').'>';
-      if($this->setting['display_region_b']  and $r['district_name'] ) echo $r['district_name'] . ' &mdash; ';
-      echo $r['training_location_name'];
-    }
+      training_location_dropdown ($this->tlocations, $this->row['training_location_id'], 'name="training_location_id" id="select_training_location" '.$this->viewonly);
+      if(!$this->viewonly)
+        echo $this->insertLocationLink;
     ?>
-    <option value="0"><?php tp('unknown');?>
-    </select>
-    <?php if(!$this->viewonly) : ?>
-      <a href="#" onclick="return false;" id="show"><?php print t(str_replace(' ','&nbsp;',t('Insert new')));?></a>
-    <?php endif; ?>
   </div><br/>
 
   <div class="fieldLabel" id="training_level_option_id_lbl"><?php echo $this->translation['Training Level']; ?></div>
   <div class="fieldInput">
     <?php echo $this->dropDownLevel; ?>
+    <?php
+
+      #if(!@$this->setting['desktop_disable_insert_level']) {    // desktop_disable_ prefix is only in tanzania databases, but anyone can add this option to their _system
+        echo hasACLEdit('acl_editor_training_level', 'admin/training-level', $this);
+     # }
+    ?>
   </div><br/>
 
     <?php if($this->mode == 'add' && $this->setting['module_unknown_participants_enabled']) :  ?>
@@ -337,7 +332,14 @@ YAHOO.util.Event.onDOMReady(init);
   /*** ADD TRAINING ends here ***************************************************************************/
   if($this->mode == 'add') : ?>
     <div class="clear"></div>
-
+    <?php if( $this->hasACL('import_training') ) : ?>
+    <!-- import training button -->
+    <span id="importTraining" class="yui-button yui-push-button" style="float:left;">
+      <span class="first-child">
+        <button onclick="location.href='<?php echo $this->base_url; ?>/training/import';return false;" type="button" tabindex=1 id="trainingImportBtn" class="yui-button yui-push-button"><?php tp('Import trainings from Excel');?></button>
+      </span>
+    </span>
+    <?php endif; ?>
     <button type="button" id="submitTraining"><?php tp('Save and Continue');?></button><br>
 
     <script>
@@ -351,7 +353,7 @@ YAHOO.util.Event.onDOMReady(init);
     </html>
 
   <?php return; endif;?>
-
+  <?php if($this->setting['display_training_pepfar']) :  ?>
   <div class="fieldLabel" id="training_pepfar_categories_option_lbl"><?php echo $this->translation['PEPFAR Category']; ?></div>
   <div class="fieldInput"><div style="margin-left: 250px;">
     <?php for($j = 0; $j < $this->NUM_PEPFAR; $j++) { ?>
@@ -367,11 +369,12 @@ YAHOO.util.Event.onDOMReady(init);
     <?php } ?>
 
   </div></div><br/>
-
+  <?php endif; ?>
   <?php if ($this->setting['display_training_method'] ) { ?>
     <div class="fieldLabel" id="training_method_option_id_lbl"><?php echo $this->translation['Training Method']; ?></div>
   <div class="fieldInput">
     <?php echo $this->dropDownMethod; ?>
+    <?php echo hasACLEdit('acl_editor_method', 'admin/training-method', $this); ?>
   </div>
   <?php } ?>
 
@@ -384,7 +387,8 @@ YAHOO.util.Event.onDOMReady(init);
       <div style="line-height:1.5em;margin-bottom:0.5em;">
        <?php if(!$this->viewonly) : ?>
           <?php tp('Check all that apply below');?>
-          <a href="#" onclick="addCheckbox('Please enter the name your new topic item:', 'topic_id', 'topicContainer', '<?php echo $this->topicJsonUrl; ?>'); return false;"><?php tp('Insert new');?></a>
+          <?php echo $this->insertTopicLink; ?>
+          <?php echo hasACLEdit('acl_editor_training_topic', 'admin/training-topic', $this); ?>
         <?php endif; ?>
       </div>
       <?php
@@ -422,8 +426,45 @@ YAHOO.util.Event.onDOMReady(init);
   <?php if($this->setting['display_training_refresher']) : ?>
   <div class="fieldLabel"><?php echo $this->translation['Refresher Course'];?></div>
   <div class="fieldInput" id="refresherContainer">
-    <input type="checkbox" name="is_refresher" value="1" id="is_refresher" <?php if($this->row['is_refresher']) print 'checked'; ?>/><label for="is_refresher"></label>
-  </div><br/>
+  	<?php
+
+  	if(@$this->setting['multi_opt_refresher_course']) {
+  		echo '<div style="line-height:1.5em;margin-bottom:0.5em;">';
+  		if(!$this->viewonly) {
+  			tp('Check all that apply below');
+  			echo $this->refresherInsertLink;
+        echo hasACLEdit('acl_editor_refresher_course', 'admin/training-refreshercourse', $this);
+  		}
+  		echo '</div>';
+  		if($this->refresherArray) {
+			// table used to align checkboxes w/labels
+  			$chunked = array_chunk($this->refresherArray, count($this->refresherArray) / 2);
+
+  			foreach($chunked as $i => $topicRay) {
+  				if ( $i%2 == 0) echo '<div class="fieldLabel" >&nbsp;</div>';
+  				echo '<div id="refresherTableContainer" class="float50" style="width: 33%;"><table width="100%" class="tableChoices">';
+  				foreach($topicRay as $item) {
+  					$isChecked = (isset($item['training_id']) && $item['training_id']) ? ' checked' : '';
+  					echo '<tr><td valign="top" width="30px;">';
+  					echo '<input type="checkbox" name="training_refresher_option_id[]" value="'.$item['id'].'" id="training_refresher_option_id_'.$item['id'].'"'.$isChecked.' '.$this->viewonly.'> ';
+  					echo '</td><td valign="top">';
+  					echo '<label for="refresher_id_'.$item['id'].'">'.$item['refresher_phrase_option'].'</label>';
+  					echo '</td></tr>';
+  				}
+  				echo '</table></div>';
+  			}
+  			echo '</tr>';
+  			echo '</table>';
+  		}
+
+  	} else {
+        echo '  <input type="checkbox" name="is_refresher" value="1" id="is_refresher" ';
+        if($this->row['is_refresher']){ echo 'checked'; }
+        echo '><label for="is_refresher"></label>';
+    }
+    ?>
+  </div><br/><br clear="all"/>
+
   <?php endif; ?>
 
   <script  type="text/javascript">
@@ -441,18 +482,15 @@ YAHOO.util.Event.onDOMReady(init);
     <div style="line-height:1.5em;margin-bottom:0.5em;">
      <?php if(!$this->viewonly) : ?>
         <?php tp('Check all that apply below');?>
-        <a href="#" onclick="addCheckbox('<?php tp('Please enter the name your new funding item:');?>', 'funding_id', 'fundingContainer', '<?php echo $this->fundingJsonUrl; ?>'); return false;"><?php tp('Insert new');?></a>
+        <?php echo $this->fundingInsertLink; ?>
+        <?php echo hasACLEdit('acl_editor_funding', 'admin/training-funding', $this); ?>
       <?php endif; ?>
     </div>
     <?php
       // table used to align checkboxes w/labels
-      $fundingChunked = array($this->fundingArray); //no longer chunked with the amount field
-    //  $fundingChunked = (count($this->fundingArray) >= 2 )
-   //     ? array_chunk($this->fundingArray, count($this->fundingArray) / 2)
-   //     : array($this->fundingArray);
-
+      $fundingChunked = array($this->fundingArray);
       foreach($fundingChunked as $fundingRay) {
-        echo '<div class="float50"><table class="tableChoices">';
+        echo '<div class="fieldLabel">&nbsp;</div><div class="float50"><table class="tableChoices">';
         foreach($fundingRay as $item) {
           $isChecked = ( (isset($item['training_id']) && $item['training_id']) || ($this->is_new && $item['is_default']) ) ? ' checked' : '';
           echo '<tr><td valign="top">';
@@ -480,6 +518,7 @@ YAHOO.util.Event.onDOMReady(init);
   <div class="fieldLabel" id="training_got_cirriculum_option_id_lbl"><?php echo $this->translation['GOT Curriculum']; ?></div>
   <div class="fieldInput">
     <?php echo $this->dropDownGotCir; ?>
+    <?php echo hasACLEdit('acl_editor_funding', 'admin/training-funding', $this); ?>
   </div><br/>
   <?php endif; ?>
 
@@ -520,7 +559,7 @@ YAHOO.util.Event.onDOMReady(init);
   <?php if(!$this->viewonly && !$this->isIncomplete) : ?>
     <div class="actionBtn">
     <div class="clear yui-push-button">
-      <button type="button" onclick="submitForm();"><?php tp('Save Training');?></button><br>
+      <button type="button" onclick="submitForm();"><?php echo t('Save').' '.t('Training');?></button><br>
     </div>
     </div>
   <?php endif; ?>
@@ -534,7 +573,7 @@ YAHOO.util.Event.onDOMReady(init);
 if ( $this->row['has_known_participants'] ) :
 ?>
 
-  <div class="fieldIndentNoMargin"><span class="required">*</span><?php tp('Trainer Information');?> <span class="total"><?php tp('Total Trainers:');?> <span id="trainer_total">0</span></span></div>
+  <div class="fieldIndentNoMargin"><span class="required">*</span><?php echo t('Trainer').' '.t('Information');?> <span class="total"><?php echo t('Total').' '.t('Trainers').':';?> <span id="trainer_total">0</span></span></div>
   <div class="fieldIndent2">
 
       <div id="trainerTable"></div>
@@ -585,7 +624,6 @@ if ( $this->row['has_known_participants'] ) :
       <input type="button" value="<?php tp('Insert'); ?>" class="insert" onclick="addTrainer(this);return false;">
       &nbsp;&nbsp;&nbsp;
       <a href="javascript:submitThenRedirect('<?php echo $this->base_url;?>/person/add/trainingredirect/<?php echo $this->row['id']; ?>/maketrainer/1');"><?php tp('New Person Form');?></a>
-<!--      <a href="<?php echo $this->base_url;?>/person/add/trainingredirect/<?php echo $this->row['id']; ?>/maketrainer/1"><?php tp('New Person Form');?></a> -->
     </div>
 
     <div style="z-index:9001;">
@@ -677,21 +715,22 @@ if ( $this->row['has_known_participants'] ) :
     		var oIsTrainer = YAHOO.util.Dom.get('is_trainer');
 
     		if(oTrainerId.value == 0) {
-          alert("<?php tp('The entered trainer name could not be found.\n\nPlease select one from the list or add a new person.');?>");
+          alert("<?php echo t('The entered').' '.t('trainer').' '.t('name could not be found.\n\nPlease select one from the list or add a new person.');?>");
           return;
         }
 
       //  if(oTrainerDays.value == "Days" || !oTrainerDays.value) {
-    //      alert('<?php tp('Please enter the number of days for this trainer.');?>');
+    //      alert('<?php echo t('Please enter the number of days for this').' '.t('trainer').'.';?>');
     //   return;
     //    }
-
+    <?php if (@$this->setting['require_trainer_skill']) : ?>
         if(oIsTrainer.value == 0) {
-          if(confirm("<?php tp('You must edit this person\'s trainer profile before adding them to this session.\n\nWould you like to do this now?');?>")) {
+          if(confirm("<?php echo t('You must edit this person\'s').' '.t('trainer').' '.t('profile before adding them to this session.\n\nWould you like to do this now?');?>")) {
             submitThenRedirect('<?php echo $this->base_url;?>/person/edit/id/' + oTrainerId.value + '/trainingredirect/<?php echo $this->row['id']; ?>/maketrainer/1/days/1'  + '#training');
           }
           return;
         }
+    <?php endif; ?>
 
         //oButton.disabled = true;
 
@@ -780,7 +819,6 @@ if ( $this->row['has_known_participants'] ) :
         <input type="button" name="Insert" value="<?php tp("Insert");?>" class="insert" id="personInsertButton" onclick="addPerson(this);return false;">
        &nbsp;&nbsp;&nbsp;
         <a href="javascript:submitThenRedirect('<?php echo $this->base_url;?>/person/add/trainingredirect/<?php echo $this->row['id']; ?>');"><?php tp('New Person Form');?></a>
-<!--        <a href="<?php echo $this->base_url;?>/person/add/trainingredirect/<?php echo $this->row['id']; ?>"><?php tp('New Person Form');?></a> -->
       </div>
 
 
@@ -868,7 +906,7 @@ if ( $this->row['has_known_participants'] ) :
     	      var oPId = YAHOO.util.Dom.get('person_id');
 
     		if(oPId.value == 0) {
-          alert("The entered person could not be found.\n\nPlease select one from the list or add a new person.");
+          alert("<?php echo t('The entered person could not be found.\n\nPlease select one from the list or add a new person.'); ?>");
           return;
         }
 
@@ -907,8 +945,9 @@ if ( $this->row['has_known_participants'] ) :
 <?php endif; ?>
 
   </div>
-
-
+  <?php if(! $this->viewonly) { ?>
+  <div class="fieldLabel"><label><?php tp('Participant Test Scores'); ?></label></div><div class="fieldInput"><a href="<?php echo $this->base_url; ?>/training/scores-import/training/<?php echo $this->row['id']; ?>"><?php tp('Import Scores'); ?></a></div>
+  <?php } ?>
   <?php if($this->setting['display_training_pre_test'] || $this->setting['display_training_post_test']) : ?>
   <!-- test scores -->
     <div class="clear"></div>
@@ -1035,6 +1074,32 @@ if ( $this->row['has_known_participants'] ) :
     </div>
   <?php endif; ?>
 
+  <?php if($this->setting['display_training_custom3']) : ?>
+    <!-- custom field 3 -->
+
+    <div class="clear"></div>
+    <div class="hrGrey"></div>
+    <div class="clear"></div>
+
+    <div class="fieldIndentNoMargin"><?php echo $this->translation['Training Custom 3']; ?></div>
+    <div class="fieldIndent2">
+          <input type="text" name="custom3_phrase" size="60" value="<?php echo $this->row['custom_3']; ?>">
+    </div>
+  <?php endif; ?>
+
+  <?php if($this->setting['display_training_custom4']) : ?>
+    <!-- custom field 4 -->
+
+    <div class="clear"></div>
+    <div class="hrGrey"></div>
+    <div class="clear"></div>
+
+    <div class="fieldIndentNoMargin"><?php echo $this->translation['Training Custom 4']; ?></div>
+    <div class="fieldIndent2">
+          <input type="text" name="custom4_phrase" size="60" value="<?php echo $this->row['custom_4']; ?>">
+    </div>
+  <?php endif; ?>
+
 
 	<?php if ( $this->setting['module_approvals_enabled']) : ?>
     <div class="clear"></div>
@@ -1042,10 +1107,10 @@ if ( $this->row['has_known_participants'] ) :
     <div class="clear"></div>
   	<div class="fieldIndentNoMargin"><?php tp('Approval Status'); ?></div>
 	<div class="fieldIndentNoMargin">
-		<div class="fieldLabel" >Approved</div><input type="radio" name="approval_status" value="approved" <?php if ($this->row['is_approved']) {echo 'checked';} ?> <?php if ( $this->row['is_approved'] or (array_search('approve_trainings',$this->identity->acls) === false) ) echo 'disabled';?> />
+		<div class="fieldLabel"><?php tp('Approved'); ?></div><input type="radio" name="approval_status" value="approved" <?php if ($this->approve_val) {echo 'checked';} ?> <?php echo $this->approve_disable_str;?> />
 	</div>
 	<div class="fieldIndentNoMargin">
-		<div class="fieldLabel" >Rejected</div><input type="radio" name="approval_status" value="rejected" <?php if (!$this->row['is_approved']) {echo 'checked';} ?> <?php if ( $this->row['is_approved'] or (array_search('approve_trainings',$this->identity->acls) === false) ) echo 'disabled';?> />
+		<div class="fieldLabel"><?php tp('Rejected'); ?></div><input type="radio" name="approval_status" value="rejected" <?php if (!$this->row['is_approved']) {echo 'checked';} ?> <?php echo $this->approve_disable_str;?> />
 	</div>
 	<?php if ( !$this->row['is_approved'] and (array_search('approve_trainings',$this->identity->acls) !== false) ) { ?>
 	<div class="clear"></div>
@@ -1061,7 +1126,7 @@ if ( $this->row['has_known_participants'] ) :
 
    <?php if(!$this->viewonly) : ?>
    <div class="actionBtn">
-    <button type="button" id="submitTraining"><?php tp('Save Training');?></button><br>
+    <button type="button" id="submitTraining"><?php echo t('Save').' '.t('Training');?></button><br>
    </div>
    <?php endif; ?>
 
@@ -1087,60 +1152,59 @@ YAHOO.util.Event.on(window, 'load', initUploadButton);
 
 
 </div>
+
 <script type="text/javascript">
-  <?php if(!$this->viewonly) : ?>
+<?php
+// onready - add ajax submit
+	if(!$this->viewonly) {
+		if ( $this->mode != 'add') {
+			echo "addAjaxSubmit('submitTraining','trainingForm','".$this->base_url."/training/edit/id/".$this->row['id'].">/outputType/json');".PHP_EOL;
+		} else {
+			echo "addAjaxSubmit('submitTraining','trainingForm','".$this->base_url."/training/add/outputType/json/');".PHP_EOL;
+		}
+	}
 
-	<?php if ( $this->mode != 'add') { ?>
-		addAjaxSubmit('submitTraining','trainingForm','<?php echo $this->base_url;?>/training/edit/id/<?php echo $this->row['id'];?>/outputType/json');
-	<?php } else { ?>
+?>
 
-		addAjaxSubmit('submitTraining','trainingForm','<?php echo $this->base_url;?>/training/add/outputType/json');
-
-  <?php } ?>
-
-  <?php endif; ?>
-
-
-// submit form, then redirect
+// submitThenRedirect()
 function submitThenRedirect(url) {
   var fld = document.getElementById('redirectUrl');
   fld.value = url;
-  if (confirm("You are moving to a new page, do you wish to save the changes you\'ve made?"))
+	if (confirm("<?php echo t('You are moving to a new page, do you wish to save the changes you\'ve made?');?>"))
     submitForm();
   else
     window.location = url;
 }
 
-  // delete training
-  function deleteTraining() {
+function deleteTraining() {
 	  var personsTable = ITECH.personsTable;
 	  var trainerTable = ITECH.trainerTable;
 
 		if ( <?php
     echo ($this->row['has_known_participants'] ? '(trainerTable != undefined &&  (trainerTable.myDataTable.getRecordSet().getLength() != 0)) || (personsTable != undefined && (personsTable.myDataTable.getRecordSet().getLength() != 0))': ' (YAHOO.util.Dom.get("qualification_quantity_na_0").value > 0) || (YAHOO.util.Dom.get("qualification_quantity_female_0").value > 0) || (YAHOO.util.Dom.get("qualification_quantity_male_0").value > 0) ');  ?> ) {
-      alert('All trainers and participants must be removed before deleting a training session.')
-    } else if(confirm("Are you sure you wish to delete this training session?")) {
+		alert('<?php echo t('All trainers and participants must be removed before deleting a training session.'); ?>');
+	} else if(confirm("<?php tp("Are you sure you wish to delete this training session?"); ?>")) {
       YAHOO.util.Dom.get('specialAction').value = "delete";
       YAHOO.util.Dom.get('redirectUrl').value = "<?php echo $this->base_url;?>/training/deleted";
       submitForm();
     }
-  }
+}
 
-  // duplicate training confirm
-  function duplicateTraining() {
-    if(confirm("Duplicate this training session?")) {
+// duplicate training confirm
+function duplicateTraining() {
+	if(confirm("<?php echo t('Duplicate this').' '.t('Training').'?'; ?>")) {
       YAHOO.util.Dom.get('specialAction').value = "duplicate";
       submitForm();
     }
-  }
+}
 
-  // submit form via ajax
-  function submitForm() {
-  <?php if ( $this->mode != 'add') { 
+// submit form via ajax
+function submitForm() {
+<?php if ( $this->mode != 'add') { 
       echo 'var postUrl = "'. $this->base_url . '/training/edit/id/'.$this->row['id'].'/outputType/json"';
-    } else {
+} else {
       echo 'var postUrl = "' . $this->base_url . '/training/add/outputType/json"';
-    } ?>
+} ?>
 
   var buttonId = 'submitTraining';
   var formId = 'trainingForm';

@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title><?php echo $this->translation['Application Name'] . " | " . $this->pageTitle; ?></title>
+	<?php
+	require_once('views/helpers/Location.php');
+	require_once('views/helpers/ScriptContainer.php');
+	require_once('views/helpers/FormHelper.php');
+	print ScriptContainer::$instance->renderCSSHead();
+	print ScriptContainer::$instance->renderJSHead();
+	?>
+
+</head>
+<body class="yui-skin-sam"  >
+
+	<div id="pageHolder">
+
+		<div id="header"><?php require_once('views/scripts/header.phtml');?></div>
+		<div id="content">
+
+			<?php require_once 'views/scripts/status.phtml' ?>
+
+			<h1><?php $this->view->mode == 'add' ? tp('Add Employee') : tp('Edit Employee'); ?></h1>
+			<form action="" method="POST" class="form_employee">
+				<legend></legend>
+
+					<?php if ($this->employee['id']): ?>
+					<div class="historyDiv">
+						<a href="<?php echo $this->base_url; ?>/employee/delete/id/<?php echo $this->employee['id']; ?>"><?php echo t('Delete this').space.t('Employee'); ?></a>
+					</div>
+					<?php
+						endif; // fi historyDiv
+
+						//if (! $this->hasACL('edit_employee')) $this->read_only = true; // readonly
+						$this->required_fields = array('first_name', 'last_name', 'site');
+						if ($this->mode != 'add' && $this->employee['id'])
+						echo labelAndField($this, 'Person ID',   'text', 'id', $this->employee['id']);
+						echo labelAndField($this, t('Title'),      $this->titles);
+						echo labelAndField($this, t('First Name'), 'text', 'first_name',  $this->employee['first_name'] );
+						if($this->setting['display_middle_name'])
+						echo labelAndField($this, t('Middle Name'),'text', 'middle_name', $this->employee['middle_name'] );
+						echo labelAndField($this, t('Last Name'),  'text', 'last_name',   $this->employee['last_name'] );
+						echo labelAndField($this, t('National ID'),'text', 'national_id', $this->employee['national_id'] );
+						echo labelAndField($this, t('Other ID'),   'text', 'other_id',    $this->employee['other_id'] );
+						echo genderDropdown($this, t('Gender'),    'gender', $this->employee['gender']);
+						echo '<div class="clear"></div><br /><br />'.PHP_EOL;
+
+						if($this->setting['display_employee_partner'])
+						echo labelAndField($this, t('Partner'),     $this->partners);
+						if($this->setting['display_employee_sub_partner'])
+						echo labelAndField($this, t('Sub Partner'), $this->subpartners);
+						echo region_filters_dropdown( $this, $this->locations, $this->employee, false, false );
+						if($this->setting['display_employee_site_name'])
+						echo labelAndField($this, t('Site'), renderFacilityDropDown($this->facilities, $this->employee['site_id']), 'site');
+						echo labelAndField($this, t('Address 1'),    'text', 'address1',        $this->employee['address1']);
+						echo labelAndField($this, t('Address 2'),    'text', 'address2',        $this->employee['address2']);
+						echo labelAndField($this, t('Mobile Phone'), 'text', 'primary_phone',   $this->employee['primary_phone']);
+						echo labelAndField($this, t('Second Phone'), 'text', 'secondary_phone', $this->employee['secondary_phone']);
+						echo labelAndField($this, t('Email'),        'text', 'email',           $this->employee['email']);
+
+						echo '<div class="clear"></div><br /><br />'.PHP_EOL;
+						echo labelAndField($this, t('Staff Cadre'),    $this->cadres);
+						if($this->setting['display_employee_staff_category'])
+						echo labelAndField($this, t('Staff Category'), $this->categories);
+						if($this->setting['display_employee_primary_role'])
+						echo labelAndField($this, t('Primary Role'),   $this->roles);
+						if($this->setting['display_employee_full_time'])
+						echo labelAndCheckBox($this, t('Full Time'), 'full_time', $this->employee['full_time'], false, $this->viewonly);
+						echo labelAndField($this, t('Funded hours per week'),  'text', 'funded_hours_per_week', $this->employee['funded_hours_per_week']);
+						if($this->setting['display_employee_annual_cost'])
+						echo labelAndField($this, t('Annual Cost'),             'text', 'annual_cost',            $this->employee['annual_cost']);
+						if($this->setting['display_employee_contract_end_date'])
+						echo labelAndField($this, t('Contract End Date'),      'date', 'agreement_end_date',     $this->employee['agreement_end_date']);
+						if($this->setting['display_employee_intended_transition'])
+						echo labelAndField($this, t('Intended Transition'), $this->transitions);
+						if($this->setting['display_employee_transition_confirmed'])
+						echo confirmDropdown($this, t('Transition Confirmed'), 'transition_confirmed', $this->employee['transition_confirmed']);
+						echo labelAndField($this, t('Employee Comments'), 'textarea', 'comments', $this->employee['comments']);
+
+						echo '<div class="clear"></div><br /><br />';
+						echo '<div id="chw"'.($this->expandCHWFields ? '' : ' style="display:none;"') . '>';
+							if($this->setting['display_employee_relationship'])
+							echo labelAndField($this, t('Relationship between CHW and formal health services'), $this->relationships);
+							if($this->setting['display_employee_referral_mechanism'])
+							echo labelAndField($this, t('Referral Mechanism'), $this->referrals);
+							if($this->setting['display_employee_chw_supervisor'])
+							echo labelAndField($this, t('CHW Supervisor'),     $this->supervisors);
+							if($this->setting['display_employee_trainings_provided'])
+							echo labelAndField($this, t('Trainings provided'), $this->provided);
+						echo '</div>';
+						//////////////////////////////////// data table - course history //////////////////////////////////////
+					?>
+						<div class="clear"></div>
+
+					<?php if($this->setting['display_employee_courses_completed']) require_once ('employee_course_table.phtml'); ?>
+
+					<script type="text/javascript">
+						validCHWids = [<?php echo implode(',', $this->validCHWids); ?>]; /* watch Cadre field and show/hide CHW divs on CHW fields */
+					</script>
+										
+					<script type="text/javascript">
+						$(document).ready(function () {  /* doc ready */
+							$('#person_qualification_option_id').change( function () { /* watch Cadre field and show/hide CHW divs on CHW fields */
+
+								if (validCHWids.lastIndexOf( parseInt( $(this).val() ) ) != -1) { // found in the valid list
+									$('#chw,#classWrapper').show();
+								} else {
+									$('#chw,#classWrapper').hide();
+								}
+							});
+
+							$('#id').attr({readonly: 'readonly'});
+
+							$('#agreement_end_date').datepicker();
+							$('.calendarbtn').click(openNearestDatePicker);
+
+						});
+					</script>
+
+					<div class="clear"></div>
+					<input type="hidden" name="limit" id="limit" value="1" />
+					<input type="submit" class="submitNoArrow" name="go" value="<?php tp('Save');?>" />
+			</form>
+			<div class="clear"></div>
+		</div>
+	</body>
+</html>

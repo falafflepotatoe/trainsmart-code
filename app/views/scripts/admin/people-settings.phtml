@@ -18,7 +18,7 @@ ob_end_clean();
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <title><?php echo $this->translation['Application Name'];?> | <?php echo $pageTitle; ?></title>
+  <title><?php echo $this->translation['Application Name'];?> | <?php echo $this->pageTitle; ?></title>
 <?php
 require_once('views/helpers/ScriptContainer.php');
 print ScriptContainer::$instance->renderCSSHead();
@@ -35,7 +35,7 @@ print ScriptContainer::$instance->renderJSHead();
     <div id="navAdmin"><?php echo $nav;?></div>
 
     <div id="contentAdmin">
-    <h1><?php echo $pageTitle; ?></h1>
+    <h1><?php echo $this->pageTitle; ?></h1>
 
     <table class="settings">
     <thead>
@@ -86,14 +86,30 @@ print ScriptContainer::$instance->renderJSHead();
    	<td></td>
    	<td></td>
    </tr>
+   <tr><td class="fieldTitle">Gender</td>
+   	<td><input type="checkbox" name="check_people_gender" <?php if($this->check_people_gender) echo 'checked'; ?> id="check_people_gender"></td>
+   	<td><input type="text" name="label_people_gender" value="<?php echo $this->label_people_gender; ?>"></td>
+   	<td></td>
+   </tr>
   <tr><td class="fieldTitle">Home Address fields</td>
    	<td><input type="checkbox" name="check_people_home_address" <?php if($this->check_people_home_address) echo 'checked'; ?> id="check_people_home_address"></td>
    	<td></td>
    	<td></td>
    </tr>
+  <tr><td class="fieldTitle">Address 1</td>
+    <td></td>
+    <td><input type="text" name="label_address1" value="<?php echo $this->label_address1; ?>"></td>
+    <td></td>
+   </tr>
+  <tr><td class="fieldTitle">Address 2</td>
+    <td></td>
+    <td><input type="text" name="label_address2" value="<?php echo $this->label_address2; ?>"></td>
+    <td></td>
+   </tr>
+
  <tr><td class="fieldTitle">Home phone</td>
    	<td><input type="checkbox" name="check_people_home_phone" <?php if($this->check_people_home_phone) echo 'checked'; ?> id="check_people_home_phone"></td>
-   	<td></td>
+    <td><input type="text" name="label_home_phone" value="<?php echo $this->label_home_phone; ?>"></td>
    	<td></td>
    </tr>
  <tr><td class="fieldTitle">Second email</td>
@@ -175,11 +191,23 @@ print ScriptContainer::$instance->renderJSHead();
    	<td><a href="<?php echo $this->base_url;?>/admin/people-primaryresp" onclick="return submitAdminForm(this);">Add/Edit</a></td>
    </tr>
  <tr><td class="fieldTitle">Custom field 1</td>
+    <td><input type="checkbox" name="check_people_custom3" <?php if($this->check_people_custom3) echo 'checked'; ?> id="check_people_custom3"></td>
+    <td><input type="text" name="label_people_custom3" value="<?php echo $this->label_people_custom3; ?>"></td>
+    <td></td>
+ <tr><td class="fieldTitle">Custom field 2</td>
+    <td><input type="checkbox" name="check_people_custom4" <?php if($this->check_people_custom4) echo 'checked'; ?> id="check_people_custom4"></td>
+    <td><input type="text" name="label_people_custom4" value="<?php echo $this->label_people_custom4; ?>"></td>
+    <td></td>
+ <tr><td class="fieldTitle">Custom field 3</td>
+    <td><input type="checkbox" name="check_people_custom5" <?php if($this->check_people_custom5) echo 'checked'; ?> id="check_people_custom5"></td>
+    <td><input type="text" name="label_people_custom5" value="<?php echo $this->label_people_custom5; ?>"></td>
+    <td></td>
+  <tr><td class="fieldTitle">Custom field 4</td>
    	<td><input type="checkbox" name="check_people_custom1" <?php if($this->check_people_custom1) echo 'checked'; ?> id="check_people_custom1"></td>
    	<td><input type="text" name="label_people_custom1" value="<?php echo $this->label_people_custom1; ?>"></td>
    	<td></td>
  </tr>
- <tr><td class="fieldTitle">Custom field 2</td>
+ <tr><td class="fieldTitle">Custom field 5</td>
    	<td><input type="checkbox" name="check_people_custom2" <?php if($this->check_people_custom2) echo 'checked'; ?> id="check_people_custom2"></td>
    	<td><input type="text" name="label_people_custom2" value="<?php echo $this->label_people_custom2; ?>"></td>
    	<td></td>
@@ -209,6 +237,11 @@ print ScriptContainer::$instance->renderJSHead();
    	<td></td>
    	<td><a href="<?php echo $this->base_url;?>/admin/people-affiliations" onclick="return submitAdminForm(this);">Add/Edit</a></td>
    </tr>
+ <tr><td class="fieldTitle">Approval Mod</td>
+    <td></td>
+    <td></td>
+    <td><input type="checkbox" name="check_approval_mod" <?php if($this->check_approval_mod) echo 'checked'; ?> id="check_approval_mod"><label for="check_approval_mod">Enabled</label></td>
+  </tr>
 
 </table>
 

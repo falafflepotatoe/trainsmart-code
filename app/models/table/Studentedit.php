@@ -119,7 +119,7 @@ class Studentedit extends ITechTable
 	}
 	 
 	// RETRIEVING TUTORS FOR ADVISORS
-	public function ListTutors(){
+	public function ListTutors($cohort_id = 0){
 		$select = $this->dbfunc()->select()
 			->from(array('p' => 'person'),
 				array('id','first_name','last_name'))
@@ -127,6 +127,13 @@ class Studentedit extends ITechTable
 				'p.id = t.personid')
 			->order('last_name')
 			->order('first_name');
+		
+		if($cohort_id > 0){
+			$select = $select
+				->join(array('lti' => 'link_tutor_institution'), 'lti.id_tutor = t.id')
+				->join(array('c' => 'cohort'), 'lti.id_institution = c.institutionid')
+				->where("c.id = {$cohort_id}");
+		}
 		
 		$result = $this->dbfunc()->fetchAll($select);
 		return $result;  
@@ -137,7 +144,7 @@ class Studentedit extends ITechTable
 		$select = $this->dbfunc()->select()
 			->from('person_title_option');
 		$result = $this->dbfunc()->fetchAll($select);
-		return $result;  
+		return $result;
 	}
 	 
 	public function listCadre(){
@@ -217,6 +224,7 @@ class Studentedit extends ITechTable
 			'home_address_1'	=>	$param['localaddress1'],
 			'home_address_2'	=>	$param['localaddress2'],
 			'home_postal_code'	=>	$param['localpostalcode'],
+			'home_city'			=>	$param['localcity'],
 			'email'				=>	$param['email'],
 			'email_secondary'	=>	$param['email_secondary'],
 			'phone_work'		=>	$param['localphone'],
@@ -226,7 +234,6 @@ class Studentedit extends ITechTable
 			
 			//'home_location_id'=>"$param[city]"
 		);
-		//print_r($data);
 		
 		$db->update('person',$data,"id = '".$param['id']."'"); 		 
 		return $data;
@@ -313,6 +320,10 @@ class Studentedit extends ITechTable
 		
 			$rowArray = $db->insert("link_student_cohort",$link);
 			$id = $db->lastInsertId(); 
+
+			$helper = new helper();
+			$helper->updatePersonInstitution("student",$studentid,$param['cohortid']);			
+
 			return $id;
 		} else {
 			# LINK EXISTS - UPDATE
@@ -330,6 +341,9 @@ class Studentedit extends ITechTable
 			    'joinreason'		=>	$param['enrollmentreason'],
 			    'dropreason'		=>	$param['separationreason'],
 			);
+
+			$helper = new helper();
+			$helper->updatePersonInstitution("student",$studentid,$param['cohortid']);			
 			
 			$db->update('link_student_cohort',$link,"id = '".$linkid."' AND id_student = " . $studentid);
 			return $link;
@@ -521,7 +535,6 @@ class Studentedit extends ITechTable
 			foreach ($param['funding'] as $key=>$value){
 				if ($param['fundingamount'][$key] != ""){
 					$ids[] = $key;
-					echo "funder " . $key . " for amount " . $param['fundingamount'][$key] . "<br>";
 					
 					$query = "SELECT * FROM link_student_funding WHERE studentid = " . $studentid . " AND fundingsource = " . $key;
 					$stmt = $this->dbfunc()->query($query);

@@ -19,22 +19,48 @@ class IndexController extends ITechController {
 	public function indexAction() {
 		
 		if (strstr($_SERVER['REQUEST_URI'],'index/index') === false) {
+			if ($this->hasACL ( 'in_service' )) {
+				$this->_redirect('index/index');
+				exit();
+			} elseif ($this->hasACL ( 'pre_service' )) {
+				$this->_redirect('dash/dash');
+				exit();
+			}
+
 			$this->_redirect('index/index');
 			exit();
 		}
 		
+		$db = Zend_Db_Table_Abstract::getDefaultAdapter ();
+		$sql = "SELECT q2.qualification_phrase, COUNT(q2.qualification_phrase) CNT FROM person p INNER JOIN person_qualification_option q1 ON p.primary_qualification_option_id = q1.id INNER JOIN person_qualification_option q2 ON q1.parent_id = q2.id WHERE p.is_deleted = 0 GROUP BY q2.qualification_phrase;";
+		$rowyArray1 = $db->fetchAll ( $sql );
+		$sql = "SELECT q3.qualification_phrase, 0 CNT FROM person_qualification_option q3 WHERE q3.id NOT IN (SELECT q2.id CNT FROM person p INNER JOIN person_qualification_option q1 ON p.primary_qualification_option_id = q1.id INNER JOIN person_qualification_option q2 ON q1.parent_id = q2.id WHERE p.is_deleted = 0) AND q3.parent_id IS NULL;";
+		$rowyArray2 = $db->fetchAll ( $sql );
+		$rowyArray = array_merge($rowyArray1, $rowyArray2);
+		$this->viewAssignEscaped ( 'rowy', $rowyArray );
+		$sql = "SELECT p.comments FROM person p INNER JOIN person_qualification_option q1 ON p.primary_qualification_option_id = q1.id INNER JOIN person_qualification_option q2 ON q1.parent_id = q2.id WHERE p.is_deleted = 0 AND q2.id = 8";
+		$rowsArray = $db->fetchAll ( $sql );
+		$NIMART = 0;
+		foreach($rowsArray as $key => $row) {
+			$NIMARTsplit=split("§",$rowsArray[$key]['comments']);
+			if(strlen($NIMARTsplit[21])>0) {
+				if($NIMARTsplit[21] = "Nurse Initiating ART") {
+					$NIMART = $NIMART + 1;
+				}
+			}
+		}
+		$this->viewAssignEscaped ( 'NIMART', $NIMART );
+
 		// retrieve list of incomplete courses created by user
 		if ($this->hasACL ( 'edit_course' )) {
 			require_once 'models/table/Training.php';
 			require_once 'models/Session.php';
+			require_once 'views/helpers/EditTableHelper.php';
+			require_once('views/helpers/TrainingViewHelper.php');
 			
 			$uid = Session::getCurrentUserId ();
 			
 			// Find incomplete training and future trainings
-			
-
-			require_once 'views/helpers/EditTableHelper.php';
-			
 			$trainingFields = array ('training_title' => t ( 'Course Name' ), 'training_start_date' => t ( 'Start Date' ), 'training_location_name' => t ( 'Training Center' ), 'creator' => t ( 'Created By' ) );
 			
 			foreach ( array_keys ( $trainingFields ) as $key ) {
@@ -51,9 +77,17 @@ class IndexController extends ITechController {
 				'linkId' => 'id', // use ths value in link
 				'linkUrl' => Settings::$COUNTRY_BASE_URL . '/training/edit/id/%id%' );
 			
+			// restricted access?? only show trainings we have the ACL to view // add this to every query
+			$org_allowed_ids = allowed_org_access_full_list($this); // doesnt have acl 'training_organizer_option_all'
+			$allowedWhereClause = $org_allowed_ids ? " AND training_organizer_option_id in ($org_allowed_ids) " : "";
+
+			// restricted access?? only show organizers that belong to this site if its a multi org site
+			$site_orgs = allowed_organizer_in_this_site($this); // for sites to host multiple training organizers on one domain
+			$allowedWhereClause .= $site_orgs ? " AND training_organizer_option_id in ($site_orgs) " : "";
+			
 			// Incomplete
 			$tableObj = new Training ( );
-			$rowsPast = $tableObj->getIncompleteTraining ( $uid, 'training_start_date < NOW()' )->toArray ();
+			$rowsPast = $tableObj->getIncompleteTraining ( $uid, 'training_start_date < NOW() '.$allowedWhereClause )->toArray ();
 			if ($rowsPast) {
 				$html = EditTableHelper::generateHtmlTraining ( 'TrainingPast', $rowsPast, $trainingFields, $colStatic, $linkInfo, $editLinkInfo, $colCustom );
 				$this->view->assign ( 'tableTrainingPast', $html );
@@ -61,77 +95,89 @@ class IndexController extends ITechController {
 			
 			// Future
 			$tableObj = new Training ( );
-			$rowsFuture = $tableObj->getIncompleteTraining ( $uid, 'training_start_date >= NOW()', '' )->toArray ();
+			$rowsFuture = $tableObj->getIncompleteTraining ( $uid, 'training_start_date >= NOW()'.$allowedWhereClause, '' )->toArray ();
 			if ($rowsFuture) {
 				$html = EditTableHelper::generateHtmlTraining ( 'TrainingFuture', $rowsFuture, $trainingFields, $colStatic, $linkInfo, $editLinkInfo, $colCustom );
 				$this->view->assign ( 'tableTrainingFuture', $html );
 			}
 			
+			// Unapproved
 			if ($this->setting ( 'module_approvals_enabled' )) {
 				$tableObj = new Training ( );
-				$unapproved = $tableObj->getUnapprovedTraining ();
+				$unapproved = $tableObj->getUnapprovedTraining ("1".$allowedWhereClause); // everything
 				if ($unapproved) {
-					$linkInfo2 = $linkInfo;
+					$linkInfoUnapprov = $linkInfo;
 					if (! $this->hasACL ( 'approve_trainings' )) {
-						$linkInfo2 ['linkFields'] = array ('training_title');
+						$linkInfoUnapprov ['linkFields'] = array ('training_title');
 					}
 					
-					$trainingFields2 = $trainingFields;
-					$trainingFields2['message'] = t('Message');
+					$trainingFieldsUnapprov = $trainingFields;
+					$trainingFieldsUnapprov['message'] = t('Message');
+					$colStatic['message'] = 'message';
 					
-					$html = EditTableHelper::generateHtmlTraining ( 'unapproved', $unapproved, $trainingFields2, $colStatic, $linkInfo2, $editLinkInfo, $colCustom );
+					$html = EditTableHelper::generateHtmlTraining ( 'unapproved', $unapproved, $trainingFieldsUnapprov, $colStatic, $linkInfoUnapprov, $editLinkInfo, $colCustom );
 					$this->view->assign ( 'tableUnapproved', $html );
 				}
 			}
 			
 			//YTD, start at April 1
+			if (isset($this->setting['fiscal_year_start'])) {
+				$ytdStart = date('Y-n-j', strtotime($this->setting['fiscal_year_start']));
+				$this->view->assign ( 'ytdStart', $ytdStart );
+				//get total unique participants
+				$db = Zend_Db_Table_Abstract::getDefaultAdapter ();
+				$sql = "SELECT COUNT(DISTINCT person_id) as \"unique_p\" from person_to_training left join training on (training.id = training_id and training.is_deleted = 0) where training_start_date > ".$ytdStart.$allowedWhereClause;
+				$rowArray = $db->fetchRow ( $sql );
+				$this->view->assign ( 'unique_participants', $rowArray ['unique_p'] );
+			} else {
 			$ytdStart = (date ( 'Y' ) - ((date ( 'n' ) < 4) ? 1 : 0)) . '-04-01';
 			$this->view->assign ( 'ytdStart', $ytdStart );
 			//get total unique participants
 			$db = Zend_Db_Table_Abstract::getDefaultAdapter ();
-			$sql = "SELECT COUNT(DISTINCT person_id) as \"unique_p\" from person_to_training";
+				$sql = "SELECT COUNT(DISTINCT person_id) as \"unique_p\" from person_to_training left join training on (training.id = training_id and training.is_deleted = 0) where 1 ".$allowedWhereClause;
 			$rowArray = $db->fetchRow ( $sql );
 			$this->view->assign ( 'unique_participants', $rowArray ['unique_p'] );
+			}
+			
+			$allowedOrgJoin = ($allowedWhereClause ? ' LEFT JOIN training ON training.id = training_id WHERE training.is_deleted = 0 '.$allowedWhereClause: ''); // only show trainings we're allowed to see by access level
 			
 			//get participants total and by YTD
 			$db = Zend_Db_Table_Abstract::getDefaultAdapter ();
-			$sql = "SELECT COUNT(person_id) as \"attendees\" from person_to_training";
+			$sql = "SELECT COUNT(person_id) as \"attendees\" from person_to_training".$allowedOrgJoin;
 			$rowArray = $db->fetchRow ( $sql );
 			$this->view->assign ( 'attendees', $rowArray ['attendees'] );
 			
-			$db = Zend_Db_Table_Abstract::getDefaultAdapter ();
-			$sql = "SELECT COUNT(person_id) as  \"attendees\" FROM training, person_to_training as pt WHERE pt.training_id = training.id AND training_start_date >= '$ytdStart'";
+			$sql = "SELECT COUNT(person_id) as  \"attendees\" FROM training, person_to_training as pt WHERE pt.training_id = training.id AND training_start_date >= '$ytdStart'".$allowedWhereClause;
 			$rowArray = $db->fetchRow ( $sql );
 			$this->view->assign ( 'attendees_ytd', $rowArray ['attendees'] );
 			
 			//get total unique trainers
-			$db = Zend_Db_Table_Abstract::getDefaultAdapter ();
+			if ($allowedOrgJoin) {
+				$sql = "SELECT COUNT(DISTINCT trainer_id) as \"unique_t\" FROM training_to_trainer".$allowedOrgJoin; // trainers in viewable trainings
+			} else {
 			$sql = "SELECT COUNT(person_id) as \"unique_t\" from trainer";
+			}
 			$rowArray = $db->fetchRow ( $sql );
 			$this->view->assign ( 'unique_trainers', $rowArray ['unique_t'] );
 			
 			//get total trainers and by YTD
-			$db = Zend_Db_Table_Abstract::getDefaultAdapter ();
-			$sql = "SELECT COUNT(trainer_id) as \"trainers\" FROM training_to_trainer";
+			$sql = "SELECT COUNT(trainer_id) as \"trainers\" FROM training_to_trainer".$allowedOrgJoin;
 			$rowArray = $db->fetchRow ( $sql );
 			$this->view->assign ( 'trainers', $rowArray ['trainers'] );
 			
-			$db = Zend_Db_Table_Abstract::getDefaultAdapter ();
-			$sql = "SELECT COUNT(tt.trainer_id) as \"trainers\" FROM training, training_to_trainer as tt WHERE tt.training_id = training.id AND training_start_date >= '$ytdStart'";
+			$sql = "SELECT COUNT(tt.trainer_id) as \"trainers\" FROM training, training_to_trainer as tt WHERE tt.training_id = training.id AND training_start_date >= '$ytdStart'".$allowedWhereClause;
 			$rowArray = $db->fetchRow ( $sql );
 			$this->view->assign ( 'trainers_ytd', $rowArray ['trainers'] );
 			
 			//get trainings
 			//    total and YTD
-			$db = Zend_Db_Table_Abstract::getDefaultAdapter ();
-			$sql = "SELECT COUNT(id) as \"trainings\", MIN(training_start_date) as \"min_date\",MAX(training_start_date) as \"max_date\"  from training WHERE is_deleted = 0";
+			$sql = "SELECT COUNT(id) as \"trainings\", MIN(training_start_date) as \"min_date\",MAX(training_start_date) as \"max_date\"  from training WHERE is_deleted = 0".$allowedWhereClause;
 			$rowArray = $db->fetchRow ( $sql );
 			$this->view->assign ( 'trainings', $rowArray ['trainings'] );
 			$this->view->assign ( 'min_date', $rowArray ['min_date'] );
 			$this->view->assign ( 'max_date', $rowArray ['max_date'] );
 			
-			$db = Zend_Db_Table_Abstract::getDefaultAdapter ();
-			$sql = "SELECT COUNT(id) as \"trainings\"  from training WHERE training_start_date >= '$ytdStart' AND is_deleted = 0";
+			$sql = "SELECT COUNT(id) as \"trainings\"  from training WHERE training_start_date >= '$ytdStart' AND is_deleted = 0".$allowedWhereClause;
 			$rowArray = $db->fetchRow ( $sql );
 			$this->view->assign ( 'trainings_ytd', $rowArray ['trainings'] );
 		
@@ -183,18 +229,21 @@ class IndexController extends ITechController {
 	        header('Last-Modified: '.gmdate('D, d M Y H:i:s',  time()).' GMT', true, 304);
 			$this->setNoRenderer();
 	    }
-echo Globals::$BASE_PATH.Globals::$WEB_FOLDER.$file;
-exit;
-*/
+		#echo Globals::$BASE_PATH.Globals::$WEB_FOLDER.$file;
+		#exit;
+		*/
+
 		$response = $this->getResponse ();
 		$response->clearHeaders ();
+		
 		//allow cache
 		#$response->setHeader ( 'Expires', gmdate ( 'D, d M Y H:i:s', time () + 60 * 60 * 30 ) . ' GMT', true );
 		#$response->setHeader ( 'Cache-Control', 'max-age=7200, public', true );
 		#$response->setHeader ( 'Last-Modified', '', true );
-		$response->setHeader ( 'Cache-Control',  "public, must-revalidate, max-age=".(60*60*24*7), true ); // new ver TS 4.0 new JS file,wassup...
-		$response->setHeader ( 'Pragma', 'public', true );
-		$response->setHeader ( 'Last-Modified',''.date('D, d M Y H:i:s', strtotime('9 September 2012 04:00')).' GMT', true );
+		#$response->setHeader ( 'Cache-Control',  "public, must-revalidate, max-age=".(60*60*24*7), true ); // new ver TS new JS file
+		$response->setHeader ( 'Cache-Control',  "must-revalidate, max-age=".(60*60*24*7), true ); // new ver TS new JS file
+		#$response->setHeader ( 'Pragma', 'public', true );
+		$response->setHeader ( 'Last-Modified',''.date('D, d M Y H:i:s', strtotime('18 March 2013 19:20')).' GMT', true ); // todo update this when thers a new javascript file to force re dl
 
 	}
 

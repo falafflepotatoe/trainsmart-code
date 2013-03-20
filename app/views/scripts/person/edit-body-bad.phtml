@@ -374,7 +374,7 @@ YAHOO.util.Event.onDOMReady(init);
   <div class="hrGrey"></div>
   <div class="clear"></div>
   <a name="training"></a>
- <div class="fieldIndentNoMargin"><?php tp('Trainer Information');?> <a href="javascript:toggleDiv('trainingInfo','placeholderTraining');"><?php tp('Show/Hide');?></a></div>
+ <div class="fieldIndentNoMargin"><?php echo t('Trainer').' '.t('Information');?> <a href="javascript:toggleDiv('trainingInfo','placeholderTraining');"><?php tp('Show/Hide');?></a></div>
 <div id="trainingInfo" style="<?php echo ($this->person['trainer_is_active'] ? 'display:block;' : 'display:none;');?>"><br/>
 	<div class="fieldInput"><input type="checkbox" id="is_trainer" name="is_trainer" <?php if (@$this->person['trainer_is_active']) echo 'CHECKED ';?>/><label for="is_trainer"><?php tp('Is person an active trainer?');?></label></div>
 	<div class="fieldLabel" id="trainer_type_option_id_lbl"><span class="required">*</span><?php tp('Trainer type');?></div>
@@ -387,7 +387,7 @@ YAHOO.util.Event.onDOMReady(init);
 		?>
 	</select></div>
 	<?php if ($this->setting['display_trainer_affiliations'] ) { ?>
-	<div class="fieldLabel"  id="trainer_affiliation_option_id_lbl"><span class="required">*</span><?php tp('Trainer Affiliation');?></div>
+	<div class="fieldLabel"  id="trainer_affiliation_option_id_lbl"><span class="required">*</span><?php echo t('Trainer').' '.t('Affiliation');?></div>
 	<div class="fieldInput"><select id="trainer_affiliation_option_id" name="trainer_affiliation_option_id" >
 		<option value="">--<?php tp('choose');?>--</option>
 		<?php
@@ -398,7 +398,7 @@ YAHOO.util.Event.onDOMReady(init);
 	</select></div>
 	<?php } ?>
 <div class="clear" ></div>
-	<div class="fieldLabel"  id="trainer_skill_id_lbl"><span class="required">*</span><?php tp('Trainer skills');?></div>
+	<div class="fieldLabel"  id="trainer_skill_id_lbl"><span class="required">*</span><?php echo('Trainer').' '.t('skills');?></div>
 	<div class="fieldInput">
 	      (<?php tp('check all that apply');?>)<br/><br/>
 	       <span class="checkBoxes">
@@ -409,7 +409,7 @@ YAHOO.util.Event.onDOMReady(init);
 	?>      </span></div>
 
 <div class="clear" ></div>
-	<div class="fieldLabel" ><?php tp('Trainer languages');?></div>
+	<div class="fieldLabel" ><?php echo('Trainer').' '.t('languages');?></div>
 		<div class="fieldInput">
 	      (<?php tp('check all that apply');?>)<br/><br/>
 	      <span class="checkBoxes">
@@ -462,7 +462,7 @@ YAHOO.util.Event.onDOMReady(init);
     }
     ?>
 
-   <div class="fieldIndentNoMargin"><?php tp('Upcoming Trainings');?> </div>
+   <div class="fieldIndentNoMargin"><?php echo t('Upcoming').' '.t('Trainings');?> </div>
    <div id="classRecommend"  class="itechTable"></div>
 
     <script type="text/javascript">
@@ -485,7 +485,7 @@ YAHOO.util.Event.onDOMReady(init);
       {key:"course_name", label: "<?php tp('Name');?>", sortable:true, resizeable:true},
       {key:"topics", label: "<?php tp('Topic(s)');?>", sortable:true, resizeable:true},
        {key:"province_name", label: "<?php echo (@$this->translation['Region A (Province)']); ?>", sortable:true, resizeable:true},
-      {key:"training_organizer_phrase", label: "<?php tp('Training Organizer');?>", sortable:true, resizeable:true}
+      {key:"training_organizer_phrase", label: "<?php echo('Training').' '.t('Organizer');?>", sortable:true, resizeable:true}
   ];
 
   	var action = '<?php echo $this->base_url;?>/training/listByTrainingRecommendPerson/id/<?php echo $this->person['id'];?>/outputType/json';
@@ -564,7 +564,7 @@ var classColumnDefs = [
 		//addAjaxSubmit('submitPersonTop','personForm','<?php echo $this->base_url;?>/person/add/outputType/json');
 	<?php } ?>
 	<?php if ( $this->mode == 'edit' && $this->maketrainer) { ?>
-	 displayStatus("<?php tp('Please add or verify the trainer information below.'); ?>");
+	 displayStatus("<?php echo t('Please add or verify the').' '.t('trainer').' '.t('information below.'); ?>");
 	<?php } ?>
 	
 </script>

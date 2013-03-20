@@ -18,7 +18,7 @@ ob_end_clean();
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <title><?php echo $this->translation['Application Name'];?> | <?php echo $pageTitle; ?></title>
+  <title><?php echo $this->translation['Application Name'];?> | <?php echo $this->pageTitle; ?></title>
 <?php
 require_once('views/helpers/ScriptContainer.php');
 print ScriptContainer::$instance->renderCSSHead();
@@ -35,7 +35,7 @@ print ScriptContainer::$instance->renderJSHead();
     <div id="navAdmin"><?php echo $nav;?></div>
 
     <div id="contentAdmin">
-    <h1><?php echo $pageTitle; ?></h1>
+    <h1><?php echo $this->pageTitle; ?></h1>
 
     <table class="settings">
     <thead>
@@ -56,7 +56,8 @@ print ScriptContainer::$instance->renderJSHead();
    <tr><td class="fieldTitle">Training level</td><td></td>
     <td><input type="text" name="label_training_level" value="<?php echo $this->label_training_level; ?>"></td><td><a href="<?php echo $this->base_url;?>/admin/training-level" onclick="return submitAdminForm(this);">Add/Edit</a></td></tr>
 
-   <tr><td class="fieldTitle">PEPFAR Category</td><td></td>
+   <tr><td class="fieldTitle">PEPFAR Category</td>
+   	<td><input type="checkbox" name="check_training_pepfar" <?php if($this->check_training_pepfar) echo 'checked'; ?> id="check_training_pepfar"></td>
     <td><input type="text" name="label_pepfar" value="<?php echo $this->label_pepfar; ?>"></td><td><a href="<?php echo $this->base_url;?>/admin/training-pepfar" onclick="return submitAdminForm(this);">Add/Edit</a></td></tr>
 
    <tr><td class="fieldTitle">Training topic</td><td><input type="checkbox" name="check_training_topic" <?php if($this->check_training_topic) echo 'checked'; ?> id="check_training_topic"></td>
@@ -92,9 +93,10 @@ print ScriptContainer::$instance->renderJSHead();
     </td><td></td></tr>
 
    <tr><td class="fieldTitle">Refresher Course</td><td><input type="checkbox" name="check_training_refresher" <?php if($this->check_training_refresher) echo 'checked'; ?> id="check_training_refresher"></td>
-    <td><input type="text" name="label_training_refresher" value="<?php echo $this->label_training_refresher; ?>">
+    <td><input type="text" name="label_training_refresher" value="<?php echo $this->label_training_refresher; ?>"></td>
+    <td><input type="checkbox" name="check_multi_refresher" <?php if($this->check_multi_refresher) echo 'checked'; ?> id="check_multi_refresher"><label><?php tp('Mutiple checkbox field'); ?></label><br><a href="<?php echo $this->base_url;?>/admin/training-refreshercourse" onclick="return submitAdminForm(this);">Add/Edit</a></td>
+   </tr>
 
-    </td><td></td></tr>
 
    <tr><td class="fieldTitle">Comments</td><td></td>
     <td><input type="text" name="label_training_comments" value="<?php echo $this->label_training_comments; ?>"></td><td></td></tr>
@@ -120,14 +122,13 @@ print ScriptContainer::$instance->renderJSHead();
     </td><td></td></tr>
 
    <tr><td class="fieldTitle">Custom field 1</td><td><input type="checkbox" name="check_training_custom1" <?php if($this->check_training_custom1) echo 'checked'; ?> id="check_training_custom1"></td>
-    <td><input type="text" name="label_training_custom1" value="<?php echo $this->label_training_custom1; ?>">
-
-    </td><td></td></tr>
-
+    <td><input type="text" name="label_training_custom1" value="<?php echo $this->label_training_custom1; ?>"></td><td></td></tr>
    <tr><td class="fieldTitle">Custom field 2</td><td><input type="checkbox" name="check_training_custom2" <?php if($this->check_training_custom2) echo 'checked'; ?> id="check_training_custom2"></td>
     <td><input type="text" name="label_training_custom2" value="<?php echo $this->label_training_custom2; ?>">
-
-    </td><td></td></tr>
+   <tr><td class="fieldTitle">Custom field 3</td><td><input type="checkbox" name="check_training_custom3" <?php if($this->check_training_custom3) echo 'checked'; ?> id="check_training_custom3"></td>
+    <td><input type="text" name="label_training_custom3" value="<?php echo $this->label_training_custom3; ?>"></td><td></td></tr>
+   <tr><td class="fieldTitle">Custom field 4</td><td><input type="checkbox" name="check_training_custom4" <?php if($this->check_training_custom4) echo 'checked'; ?> id="check_training_custom4"></td>
+    <td><input type="text" name="label_training_custom4" value="<?php echo $this->label_training_custom4; ?>"></td><td></td></tr>
 </table>
 
     <input type="hidden" name="redirect" value="<?php echo Settings::$COUNTRY_BASE_URL . '/admin/' . $nextUri; ?>">

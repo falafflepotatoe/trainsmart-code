@@ -13,6 +13,7 @@ require_once ('Zend/Validate/EmailAddress.php');
 require_once ('Zend/Mail.php');
 require_once ('models/table/MultiOptionList.php');
 #require_once ('models/table/ITechTable.php');
+require_once('models/table/Helper.php');
 
 class UserController extends ReportFilterHelpers {
 
@@ -120,30 +121,54 @@ class UserController extends ReportFilterHelpers {
 			$this->viewAssignEscaped ( 'training_organizer', $training_organizer_array );
 
 			$this->view->assign ( 'status', $status );
+			
+			if ($this->hasACL ( 'pre_service' )) {
+				$helper = new Helper();
+				$this->view->assign ('showinstitutions',true);
+				$this->view->assign ('institutions',$helper->getInstitutions());
+
+				// Getting current credentials
+				$auth = Zend_Auth::getInstance ();
+				$identity = $auth->getIdentity ();
+
+				$this->view->assign ('userinstitutions',$helper->getUserInstitutions($user_id));
+			} else {
+				$this->view->assign ('showinstitutions',false);
+			}
 		}
 	}
 
 	protected function saveAclCheckboxes($user_id) {
 		//save Access Level stuff
 		$acl = array ();
-		$acl ['edit_course'] = (($this->_getParam ( 'edit_course' ) == 'view_course') ? null : 'edit_course');
-		$acl ['view_course'] = (($this->_getParam ( 'edit_course' ) == 'view_course') ? 'view_course' : null);
-		$acl ['edit_people'] = (($this->_getParam ( 'edit_people' ) == 'view_people') ? null : 'edit_people');
-		$acl ['view_people'] = (($this->_getParam ( 'edit_people' ) == 'view_people') ? 'view_people' : null);
-		$acl ['view_create_reports'] = ($this->_getParam ( 'view_create_reports' ) ? 'view_create_reports' : null);
-		$acl ['edit_country_options'] = ($this->_getParam ( 'edit_country_options' ) ? 'edit_country_options' : null);
-		$acl ['use_offline_app'] = ($this->_getParam ( 'use_offline_app' ) ? 'use_offline_app' : null);
-		$acl ['add_edit_users'] = ($this->_getParam ( 'add_edit_users' ) ? 'add_edit_users' : null);
-		$acl ['training_organizer_option_all'] = ($this->_getParam ( 'training_organizer_option_all' ) ? 'training_organizer_option_all' : null);
-		$acl ['training_title_option_all'] = ($this->_getParam ( 'training_title_option_all' ) ? 'training_title_option_all' : null);
-		$acl ['approve_trainings'] = ($this->_getParam ( 'approve_trainings' ) ? 'approve_trainings' : null);
-		$acl ['admin_files'] = ($this->_getParam ( 'admin_files' ) ? 'admin_files' : null);
-
-		$acl ['pre_service'] = ($this->_getParam ( 'pre_service' ) ? 'pre_service' : null);
+		// all acls available and training_organizer_all except: 'master_approver' - this is done on the approvers page
+		$checkboxes = array('training_organizer_all', 'in_service', 'edit_course', 'view_course', 'edit_people', 'view_people', 'edit_facility', 'view_create_reports', 'edit_employee', 'edit_country_options', 'add_edit_users', 'training_organizer_option_all', 'training_title_option_all', 'approve_trainings', 'admin_files', 'use_offline_app', 'pre_service', 'facility_and_person_approver', 'edit_evaluations', 'duplicate_training', 'acl_editor_training_category', 'acl_editor_people_qualifications', 'acl_editor_people_responsibility', 'acl_editor_training_organizer', 'acl_editor_people_trainer', 'acl_editor_training_topic', 'acl_editor_people_titles', 'acl_editor_training_level', 'acl_editor_people_trainer_skills', 'acl_editor_pepfar_category', 'acl_editor_people_languages', 'acl_editor_funding', 'acl_editor_people_affiliations', 'acl_editor_recommended_topic', 'acl_editor_nationalcurriculum', 'acl_editor_people_suffix', 'acl_editor_method', 'acl_editor_people_active_trainer', 'acl_editor_facility_types', 'acl_editor_ps_classes', 'acl_editor_facility_sponsors', 'acl_editor_ps_cadres', 'acl_editor_ps_degrees', 'acl_editor_ps_funding', 'acl_editor_ps_institutions', 'acl_editor_ps_languages', 'acl_editor_ps_nationalities', 'acl_editor_ps_joindropreasons', 'acl_editor_ps_sponsors', 'acl_editor_ps_tutortypes', 'acl_editor_ps_coursetypes', 'acl_editor_ps_religions', 'add_edit_users', 'acl_admin_training', 'acl_admin_people', 'acl_admin_facilities', 'acl_editor_refresher_course', 'import_training', 'import_training_location', 'import_facility', 'import_person');
+		foreach ($checkboxes as $value) {
+			$acl [$value] = ( ( $this->_getParam ( $value ) == $value || $this->_getParam($value) == 'on' ) ? $value : null);
+		}
+		
+		$checkboxes = array(
+			'edit_course' => 'view_course',
+			'edit_people' => 'view_people',
+			'edit_facility' => 'view_facility');
+		foreach ($checkboxes as $key => $value) {
+			$acl [$value] = ( $this->_getParam ( $key ) == $value ? $value : null );
+		}
 
 		MultiOptionList::updateOptions ( 'user_to_acl', 'acl', 'user_id', $user_id, 'acl_id', $acl );
 		MultiOptionList::updateOptions ( 'user_to_organizer_access', 'training_organizer_option', 'user_id', $user_id, 'training_organizer_option_id', $this->_getParam ( 'training_organizer_option_id' ) );
+		
+		// Capturing the institution access if necessary
 
+		if ($this->hasACL ( 'pre_service' )) {
+			// Getting current credentials
+			$auth = Zend_Auth::getInstance ();
+			$identity = $auth->getIdentity ();
+
+			$helper = new Helper();
+			//$helper->saveUserInstitutions($identity->id, is_array($this->_getParam ('institutionselect')) ? $this->_getParam ('institutionselect') : array());
+			$helper->saveUserInstitutions($user_id, is_array($this->_getParam ('institutionselect')) ? $this->_getParam ('institutionselect') : array());
+		}
 	}
 
 	public function logoutAction() {
@@ -316,6 +341,20 @@ class UserController extends ReportFilterHelpers {
 		$this->viewAssignEscaped ( 'training_organizer', $training_organizer_array );
 		$this->viewAssignEscaped ( 'user', $userArray );
 
+		if ($this->hasACL ( 'pre_service' )) {
+			$helper = new Helper();
+			$this->view->assign ('showinstitutions',true);
+			$this->view->assign ('institutions',$helper->getInstitutions());
+
+			// Getting current credentials
+			$auth = Zend_Auth::getInstance ();
+			$identity = $auth->getIdentity ();
+
+			$this->view->assign ('userinstitutions',$helper->getUserInstitutions($user_id));
+		} else {
+			$this->view->assign ('showinstitutions',false);
+		}
+
 	}
 
 	public function deleteAction() {
@@ -361,11 +400,11 @@ class UserController extends ReportFilterHelpers {
 				$row->is_blocked = 0;
 				$row->save ();
 			}
-			$status->setStatusMessage ( 'That user was activated.' );
+			$status->setStatusMessage ( t('That user was activated.') );
 			$this->_redirect ( 'user/search' );
 
 		} else if (! $user_id) {
-			$status->setStatusMessage ( 'That user could not be found.' );
+			$status->setStatusMessage ( t( 'That user could not be found.' ) );
 		}
 
 		//validate
@@ -425,7 +464,7 @@ class UserController extends ReportFilterHelpers {
 					$this->view->assign ( 'complete', true );
 				}
 
-				if ($row && 1==0) {
+				if ($row) {
 					require_once ('models/Password.php');
 					$newpass = Text_Password::create ( 8 );
 					$row->password = $newpass;
@@ -528,7 +567,7 @@ class UserController extends ReportFilterHelpers {
 						$userRow = $user->find ( $adapter->getResultRowObject ()->id )->current ();
 
 						if($user->hasPS($userRow->id)){
-							$redirect = "select/select";
+							$redirect = $redirect ? $redirect : "select/select";
 						}
 
 						if ( $userRow->is_blocked ) {

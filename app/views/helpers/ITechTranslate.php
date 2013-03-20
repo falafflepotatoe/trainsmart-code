@@ -8,7 +8,6 @@ require_once('controllers/ITechController.php');
  * @return str
  */
 function t($string) {
-	
 	//first check our label list for the phrase
 	$t = ITechController::translations();
 	
@@ -171,7 +170,51 @@ class ITechTranslate extends Zend_Translate {
  			case 'home_postal_code':
   				return t('Address');
   				break;
-
+			case 'title_option_id':
+				return t('Title');
+				break;
+			case 'suffix_option_id':
+				return t('Suffix');
+				break;
+			case 'person_custom_1_option_id':
+				return t('People Custom 1');
+				break;
+			case 'person_custom_2_option_id':
+				return t('People Custom 2');
+				break;
+			case 'home_location_id':
+				return t('Home Location');
+				break;
+			case 'active':
+				return t('Active');
+				break;
+			case 'me_responsibility':
+				return t('M&E Responsibility');
+				break;
+			case 'highest_edu_level_option_id':
+				return t('Highest Education Level');
+				break;
+			case 'attend_reason_option_id':
+				return t('Reason Attending');
+				break;
+			case 'attend_reason_other':
+				return t('Reason Attending');
+				break;
+			case 'highest_level_option_id':
+				return t('Highest Education Level');
+				break;
+			case 'approved':
+				return t('Approved');
+				break;
+			case 'custom_3':
+				return t('People Custom 3');
+				break;
+			case 'custom_4':
+				return t('People Custom 4');
+				break;
+			case 'custom_5':
+				return t('People Custom 5');
+				break;
   		}
 
   		return $db_field_name;

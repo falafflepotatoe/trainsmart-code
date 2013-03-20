@@ -155,7 +155,8 @@ class Training extends ITechTable
 
   }
 
-  public function getUnapprovedTraining() {
+  public function getUnapprovedTraining($where = false) {
+   	$where = $where ? ' AND ' .$where : "";
    	
   	$sql = "
   	 SELECT
@@ -171,7 +172,7 @@ class Training extends ITechTable
 			 INNER JOIN `training_approval_history` AS `ta` ON ta.id = tamax.id
 			 LEFT JOIN `user` AS `uc` ON training.created_by = uc.id
 			WHERE
-			  (training.is_deleted = 0 AND is_approved = 0 )
+			  (training.is_deleted = 0 AND is_approved = 0 ) $where
 			GROUP BY
 			  `training`.`id`
 			ORDER BY
@@ -236,11 +237,73 @@ class Training extends ITechTable
        WHERE training_id = $training_id
       ");
 
+    // todo custom1 option custom23 refresher
 
 
     return $dupId;
   }
 
+  /**
+   * import training session
+   */
+  public function importTraining() {
+
+    $select = $this->select()
+        ->from($this->_name, array('*'))
+        ->where("$this->_name.id = $training_id");
+
+    $row = $this->fetchRow($select);
+
+    $rowDup = $row->toArray();
+    unset($rowDup['id']);
+    unset($rowDup['uuid']);
+    
+    $dupId = $this->insert($rowDup);
+
+    // import other tables now
+    $db = $this->getDefaultAdapter();
+
+    // pepfar
+    $db->query("
+      INSERT INTO training_to_training_pepfar_categories_option
+      (id, training_id, training_pepfar_categories_option_id, duration_days, created_by, timestamp_created)
+      SELECT 0, $dupId, training_pepfar_categories_option_id, duration_days, ".(Session::getCurrentUserId()).", now() ".
+      " FROM training_to_training_pepfar_categories_option
+      WHERE training_id = $training_id
+      ");
+
+    // funding //todo refresher and title and other stuff (maybe?)
+    $db->query("
+      INSERT INTO training_to_training_funding_option
+      (id, training_id, training_funding_option_id, created_by, timestamp_created)
+      SELECT 0, $dupId, training_funding_option_id, ".(Session::getCurrentUserId()).", now() ".
+      " FROM training_to_training_funding_option
+      WHERE training_id = $training_id
+      ");
+
+		//added June 12,2008 ToddW
+    // participants
+    $db->query("
+      INSERT INTO person_to_training
+      (person_id, training_id, created_by, timestamp_created)
+      SELECT person_id, $dupId,".(Session::getCurrentUserId()).", now() ".
+      " FROM person_to_training
+       WHERE training_id = $training_id
+      ");
+
+    // trainers
+    $db->query("
+      INSERT INTO training_to_trainer
+      (trainer_id, training_id, duration_days, created_by, timestamp_created)
+      SELECT trainer_id, $dupId, duration_days,".(Session::getCurrentUserId()).", now() ".
+      " FROM training_to_trainer
+       WHERE training_id = $training_id
+      ");
+
+
+
+    return $dupId;
+  }
 
 	public function findFromParticipant($person_id) {
     	$select = $this->select()->from('training')->setIntegrityCheck(false);
@@ -345,12 +408,14 @@ class Training extends ITechTable
    * Get list of trainings to assign
    * @var $where defaults to trainings from last 30 days
    */
-  public function getTrainings() {
+  public function getTrainings($where = '') {
 
     $select = $this->_trainingsQuery();
+    if ($where)
+      $select = $select->where($where);
       $rows = $this->fetchAll($select)->toArray();
-      return $rows;
 
+    return $rows;
   }
   
   private function _trainingsQuery() {

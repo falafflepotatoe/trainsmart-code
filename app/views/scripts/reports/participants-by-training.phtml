@@ -34,19 +34,8 @@ if ( $this->mode == 'count' )
 <div id="dividers">
       	<div class="fieldLabel" ></div>
     	<div class="fieldInput  criteria-header"><div   class="criteria-label" ><?php echo $checkLabel;?></div><div  class="criteria-label" style="padding-left: 20px;"><?php tp('filter');?></div></div>
-   	<div class="fieldLabel" id="province_id_lbl"><?php echo (@$this->translation['Region A (Province)']); ?> (<?php tp('facility');?>)</div>
-   	<div class="fieldInput bordered"><div  class="leftBorderPad"><input type="checkbox" name="showProvince"  <?php  if ($this->criteria['showProvince']) echo 'CHECKED';?> /></div>
-	<div  class="leftBorder autoHeight"><?php renderFilter($this->locations, 1, 'province_id', $this->criteria['province_id'], 'district_id', true); ?><p>&nbsp;</p></div></div>
-	<?php if ( $this->setting['display_region_b'] ) { ?>
-	<div class="fieldLabel" id="district_id_lbl"><?php echo (@$this->translation['Region B (Health District)']); ?> (<?php tp('facility');?>)</div>
-  <div class="fieldInput bordered"><div  class="leftBorderPad"><input type="checkbox" name="showDistrict" <?php  if ($this->criteria['showDistrict']) echo 'CHECKED';?> /></div>
-  	<div  class="leftBorder autoHeight"><?php renderFilter($this->locations, 2, 'district_id', $this->criteria['district_id'], ($this->setting['display_region_c']?'region_c_id':false), true); ?><p>&nbsp;</p></div></div>
-	<?php } ?>
-	<?php if ( $this->setting['display_region_c'] ) { ?>
-    <div class="fieldLabel" id="region_c_id_lbl"><?php echo (@$this->translation['Region C (Local Region)']); ?> (<?php tp('facility');?>)</div>
-  <div class="fieldInput bordered"><div  class="leftBorderPad"><input type="checkbox" name="showRegionC" <?php  if ($this->criteria['showRegionC']) echo 'CHECKED';?> /></div>
-    <div  class="leftBorder autoHeight"><?php renderFilter($this->locations, 3, 'region_c_id', $this->criteria['region_c_id'], false, true); ?><p>&nbsp;</p></div></div>
-  <?php } ?>
+
+	<?php region_filters_dropdown($this, $this->locations, $this->criteria, true, true); ?>
 	
 	<div id="facilityAutoComplete">
 	    <div class="fieldLabel" id="facilityInput_lbl"><?php tp('Facility');?></div>
@@ -251,8 +240,64 @@ if ( $this->mode == 'count' )
 	</select></div></div>
 	<?php } ?>
 
+	<?php if ( $this->setting['display_people_custom2'] ) { ?>
+	<div class="fieldLabel" id="person_custom2_lbl"><?php print $this->translation['People Custom 2']; ?></div>
+	<div class="fieldInput"><div  class="leftBorderPad" ><input type="checkbox" name="showCustom2"   <?php  if ($this->criteria['showCustom2']) echo 'CHECKED';?> /></div><label for="showCustom2" ></label>
+	<div  class="leftBorder"><select id="custom_2_id" name="custom_2_id" >
+		<option value="">--<?php tp('All');?>--</option>
+		<?php
+			foreach ( $this->custom2 as $vals ) {
+				echo '<option value="'.$vals['id'].'" '.((@$this->criteria['custom_2_id']) == $vals['id']? 'SELECTED="selected"':'').' >'.($this->truncate($vals['custom2_phrase'],45)).'</option>';
+		}
+		?>
+	</select></div></div>
+	<?php } ?>
 
-<?php if(!$this->isScoreReport) { ?>
+	<?php if ( $this->setting['display_people_custom3'] ) { ?>
+	<div class="fieldLabel" id="person_custom3_lbl"><?php print $this->translation['People Custom 3']; ?></div>
+	<div class="fieldInput"><div  class="leftBorderPad" ><input type="checkbox" name="showCustom3"   <?php  if ($this->criteria['showCustom3']) echo 'CHECKED';?> /></div><label for="showCustom3" ></label>
+	<div  class="leftBorder"><select id="custom_3_id" name="custom_3_id" >
+		<option value="">--<?php tp('All');?>--</option>
+		<?php
+			foreach ( $this->custom3 as $vals ) {
+				if(! trim($vals['custom_3']))
+					continue;
+				echo '<option value="'.$vals['custom_3'].'" '.((@$this->criteria['custom_3_id']) == $vals['custom_3']? 'SELECTED="selected"':'').' >'.($this->truncate($vals['custom_3'],45)).'</option>';
+		}
+		?>
+	</select></div></div>
+	<?php } ?>
+
+	<?php if ( $this->setting['display_people_custom4'] ) { ?>
+	<div class="fieldLabel" id="person_custom4_lbl"><?php print $this->translation['People Custom 4']; ?></div>
+	<div class="fieldInput"><div  class="leftBorderPad" ><input type="checkbox" name="showCustom4"   <?php  if ($this->criteria['showCustom4']) echo 'CHECKED';?> /></div><label for="showCustom4" ></label>
+	<div  class="leftBorder"><select id="custom_4_id" name="custom_4_id" >
+		<option value="">--<?php tp('All');?>--</option>
+		<?php
+			foreach ( $this->custom4 as $vals ) {
+				if(! trim($vals['custom_4']))
+					continue;
+				echo '<option value="'.$vals['custom_4'].'" '.((@$this->criteria['custom_4_id']) == $vals['custom_4']? 'SELECTED="selected"':'').' >'.($this->truncate($vals['custom_4'],45)).'</option>';
+		}
+		?>
+	</select></div></div>
+	<?php } ?>
+
+	<?php if ( $this->setting['display_people_custom5'] ) { ?>
+	<div class="fieldLabel" id="person_custom5_lbl"><?php print $this->translation['People Custom 5']; ?></div>
+	<div class="fieldInput"><div  class="leftBorderPad" ><input type="checkbox" name="showCustom5"   <?php  if ($this->criteria['showCustom5']) echo 'CHECKED';?> /></div><label for="showCustom5" ></label>
+	<div  class="leftBorder"><select id="custom_5_id" name="custom_5_id" >
+		<option value="">--<?php tp('All');?>--</option>
+		<?php
+			foreach ( $this->custom5 as $vals ) {
+				if(! trim($vals['custom_5']))
+					continue;
+				echo '<option value="'.$vals['custom_5'].'" '.((@$this->criteria['custom_5_id']) == $vals['custom_5']? 'SELECTED="selected"':'').' >'.($this->truncate($vals['custom_5'],45)).'</option>';
+		}
+		?>
+	</select></div></div>
+	<?php } ?>
+
 	<div class="fieldLabel" id="training_gender_lbl"><?php tp('Gender');?></div>
 	<div class="fieldInput">
 	<div  class="leftBorderPad"><input type="checkbox" name="showGender" <?php  if ($this->criteria['showGender']) echo 'CHECKED';?> /></div>
@@ -282,7 +327,6 @@ if ( $this->mode == 'count' )
 		<option value="inactive"  <?php echo (@$this->criteria['training_active'] == 'inactive'? 'SELECTED':''); ?> ><?php tp('inactive');?></option>
 	</select></div></div>
 <?php } ?>
-<?php } // endif isScoreReport conditional ?>
 
 <?php if (( strstr($path[2], 'trainersByName') !== FALSE ) OR ( strstr($path[2], 'participantsByName') !== FALSE )) { ?>
 	
@@ -348,7 +392,7 @@ if ( $this->mode == 'count' )
 <?php if(strstr($path[2], 'participantsByTraining') != FALSE ) { ?>
   <div class="clear"></div>
 	<div class="fieldLabel">&nbsp;</div>
-   	<div class="fieldInput" style="margin-top:1em;"><input type="checkbox" name="distinctCount" id="distinctCount" <?php  if ($this->criteria['distinctCount']) echo 'checked="checked"';?> /><label for="distinctCount" ><?php tp('Return Unique Participants');?></label></div>
+   	<div class="fieldInput" style="margin-top:1em;"><input type="checkbox" name="distinctCount" id="distinctCount" <?php  if ($this->criteria['distinctCount']) echo 'checked="checked"';?> /><label for="distinctCount" > <?php tp('Return Unique Participants');?></label></div>
 <?php }; ?>
 
 
@@ -387,7 +431,7 @@ if ( $this->mode == 'count' )
    </form>
 <?php if ( $this->criteria['go'] ) { ?>
 <div class="hrGrey"></div>
-    <div class="fieldIndentNoMargin">Participants <span class="total"><?php echo $this->count;?> <?php tp('Trainings Attended');?></span><?php echo $this->printAndExport();?></div>
+    <div class="fieldIndentNoMargin">Participants <span class="total"><?php echo $this->count;?> <?php echo t('Trainings').' '.t('Attended');?></span><?php echo $this->printAndExport();?></div>
 
     <div id="trainings"  class="itechTable"></div>
     <script type="text/javascript">
@@ -420,9 +464,9 @@ foreach($this->results as $row) {
 		echo ',"'.$row['name'].'"';
 	if ( isset($row['id']) and $this->criteria['showEmail'])
 		echo ',"'.$row['email'].'"';
-	if ( isset($row['id']) and $this->criteria['showPhone'])
-		if (! array_key_exists('phone', $row)) {
-			$row['phone'] = '(no phone)';
+	if ( isset($row['id']) and $this->criteria['showPhone']){
+		if (! array_key_exists('phone', $row))
+			$row['phone'] = t('(no phone)');
 			echo ',"'. (isset ($row['phone']) ? $row['phone'] : "N/A") .'"';
 		}
 	if ( isset($row['id']) )
@@ -430,15 +474,27 @@ foreach($this->results as $row) {
 	if ( $this->criteria['showGender'] )
 		echo ',"'.$row['gender'].'"';
 	if ( $this->criteria['showAge'] )
-	  echo ',"'.$row['age'].'"';
+	  echo ','.$row['age']    ;
 	if ( $this->criteria['showActive'] )
 		echo ',"'.$row['active'].'"';
 	if ( $this->criteria['showProvince'] )
 		echo ',"'.$row['province_name'].'"';
 	if ( $this->criteria['showDistrict'] )
 		echo ',"'.$row['district_name'].'"';
-  if ( $this->criteria['showRegionC'] )
-    echo ',"'.$row['region_c_name'].'"';
+	if ( $this->criteria['showRegionC'] )
+	echo ',"'.$row['region_c_name'].'"';
+	if ( $this->criteria['showRegionD'] )
+		echo ',"'.$row['region_d_name'].'"';
+	if ( $this->criteria['showRegionD'] )
+		echo ',"'.$row['region_e_name'].'"';
+	if ( $this->criteria['showRegionE'] )
+		echo ',"'.$row['region_f_name'].'"';
+	if ( $this->criteria['showRegionF'] )
+		echo ',"'.$row['region_g_name'].'"';
+	if ( $this->criteria['showRegionH'] )
+		echo ',"'.$row['region_h_name'].'"';
+	if ( $this->criteria['showRegionI'] )
+		echo ',"'.$row['region_i_name'].'"';
 	if ( $this->criteria['showFacility'] )
 		echo ',"'.$row['facility_name'].'"';
 	if ( $this->criteria['showTrainingTitle'] )
@@ -467,6 +523,14 @@ foreach($this->results as $row) {
 		echo ',"'.$row['funding_phrase'].'"';
 	if ( $this->criteria['showCustom1'] )
 		echo ',"'.$row['custom1_phrase'].'"';
+	if ( $this->criteria['showCustom2'] )
+		echo ',"'.$row['custom2_phrase'].'"';
+	if ( $this->criteria['showCustom3'] )
+		echo ',"'.$row['custom3_phrase'].'"';
+	if ( $this->criteria['showCustom4'] )
+		echo ',"'.$row['custom4_phrase'].'"';
+	if ( $this->criteria['showCustom5'] )
+		echo ',"'.$row['custom5_phrase'].'"';
 	if ( $this->criteria['showTot'] )
 		echo ',"'.$row['is_tot'].'"';
   if ( $this->isScoreReport) {
@@ -479,12 +543,15 @@ foreach($this->results as $row) {
     echo ',"'.$row['score_pre'].'"';
     echo ',"'.$row['score_post'].'"';
     echo ',"'.$row['score_percent_change'].'"';
+    echo ',"'.$row['labels'].'"';
+    echo ',"'.$row['scores'].'"';
   }
 	echo "]";
 	$cnt++;
 	}
-	}
-   ?>];
+}
+   ?>
+   ];
 
 var myNumberSort = function(a,b,desc,fieldname) {
 
@@ -562,6 +629,24 @@ var trainingColumnDefs = [
 <?php if ( $this->criteria['showRegionC'] ) { ?>
    ,{key:"region_c_name", label: "<?php echo (@$this->translation['Region C (Local Region)']); ?>", sortable:true, resizeable:true}
  <?php } ?>
+<?php if ( $this->criteria['showRegionD'] ) { ?>
+   ,{key:"region_D_name", label: "<?php echo (@$this->translation['Region D']); ?>", sortable:true, resizeable:true}
+ <?php } ?>
+<?php if ( $this->criteria['showRegionE'] ) { ?>
+   ,{key:"region_e_name", label: "<?php echo (@$this->translation['Region E']); ?>", sortable:true, resizeable:true}
+ <?php } ?>
+<?php if ( $this->criteria['showRegionF'] ) { ?>
+   ,{key:"region_f_name", label: "<?php echo (@$this->translation['Region F']); ?>", sortable:true, resizeable:true}
+ <?php } ?>
+<?php if ( $this->criteria['showRegionG'] ) { ?>
+   ,{key:"region_g_name", label: "<?php echo (@$this->translation['Region G']); ?>", sortable:true, resizeable:true}
+ <?php } ?>
+<?php if ( $this->criteria['showRegionH'] ) { ?>
+   ,{key:"region_h_name", label: "<?php echo (@$this->translation['Region H']); ?>", sortable:true, resizeable:true}
+ <?php } ?>
+<?php if ( $this->criteria['showRegionI'] ) { ?>
+   ,{key:"region_i_name", label: "<?php echo (@$this->translation['Region I']); ?>", sortable:true, resizeable:true}
+ <?php } ?>
  <?php if ( $this->criteria['showFacility'] ) { ?>
    ,{key:"facility_name", label: "<?php tp('Facility');?>", sortable:true, resizeable:true}
  <?php } ?>
@@ -609,6 +694,18 @@ var trainingColumnDefs = [
 <?php 	if ( $this->criteria['showCustom1'] ) { ?>
   ,{key:"custom1_phrase", label: "<?php echo (@$this->translation['People Custom 1']); ?>", sortable:true, resizeable:true}
  <?php } ?>
+<?php 	if ( $this->criteria['showCustom2'] ) { ?>
+  ,{key:"custom2_phrase", label: "<?php echo (@$this->translation['People Custom 2']); ?>", sortable:true, resizeable:true}
+ <?php } ?>
+<?php 	if ( $this->criteria['showCustom3'] ) { ?>
+  ,{key:"custom3_phrase", label: "<?php echo (@$this->translation['People Custom 3']); ?>", sortable:true, resizeable:true}
+ <?php } ?>
+<?php 	if ( $this->criteria['showCustom4'] ) { ?>
+  ,{key:"custom4_phrase", label: "<?php echo (@$this->translation['People Custom 4']); ?>", sortable:true, resizeable:true}
+ <?php } ?>
+<?php 	if ( $this->criteria['showCustom5'] ) { ?>
+  ,{key:"custom5_phrase", label: "<?php echo (@$this->translation['People Custom 5']); ?>", sortable:true, resizeable:true}
+ <?php } ?>
 <?php if ( $this->criteria['showTot'] ) { ?>
    ,{key:"is_tot", label: "<?php echo tp('TOT'); ?>", sortable:true, resizeable:true}
  <?php } ?>
@@ -616,6 +713,8 @@ var trainingColumnDefs = [
   ,{key:"score_pre", label: "<?php echo tp('Pre-Test'); ?>", sortable:true, sortOptions: { sortFunction: myScorePreSortFunction }, resizeable:true}
   ,{key:"score_post", label: "<?php echo tp('Post-Test'); ?>", sortable:true, sortOptions: { sortFunction: myScorePostSortFunction }, resizeable:true}
   ,{key:"score_percent_change", label: "<?php echo tp('% Change'); ?>", sortable:true, sortOptions: { sortFunction: myScorePercentSortFunction }, resizeable:true}
+  ,{key:"labels", label: "<?php echo tp('Other Scores'); ?>", sortable:true, resizeable:true}
+  ,{key:"scores", label: "<?php echo tp('Other Scores'); ?>", sortable:true, resizeable:true}
   <?php } ?>
 
 

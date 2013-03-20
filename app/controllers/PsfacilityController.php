@@ -54,7 +54,7 @@ class PsfacilityController extends ReportFilterHelpers {
 		
 		if ($request->isPost ()) {
 			$facilityObj = new Facility ( );
-			$obj_id = $this->validateAndSave ( $facilityObj->createRow (), true );
+			$obj_id = $this->validateAndSave ( $facilityObj->createRow (), false );
 			
 			//validate
 			$status = ValidationContainer::instance ();
@@ -96,9 +96,21 @@ class PsfacilityController extends ReportFilterHelpers {
 				$status->addError ( 'facility_name', t ( 'That name already exists.' ) );
 			}
 		}
+		// validate lat & long
+		require_once 'Zend/Validate/Float.php';
+		require_once 'Zend/Validate/Between.php';
+		$lat = $this->getSanParam('facility_latitude');
+		$long = $this->getSanParam('facility_longitude');
+		$validator = new Zend_Validate_Float();
+		$validbetween = new Zend_Validate_Between('-180','180');
+		if ($lat && (!$validator->isValid($lat) || !$validbetween->isValid($lat))){
+			$status->addError( 'facility_latitude', t('That latitude and longitude does not appear to be valid.') );
+		}
+		if ($long && (!$validator->isValid($long) || !$validbetween->isValid($long))){
+			$status->addError( 'facility_longitude', t('That latitude and longitude does not appear to be valid.') );
+		}
 		
 		$status->checkRequired ( $this, 'facility_type_id', t ( 'Facility type' ) );
-		
 		$status->checkRequired ( $this, 'facility_province_id', $provinceText );
 		if ($this->setting ( 'display_region_b' ))
 			$status->checkRequired ( $this, 'facility_district_id', $districtText );
@@ -116,6 +128,30 @@ class PsfacilityController extends ReportFilterHelpers {
 			}
 		}
 		
+		$sponsor_date_array     = $this->getSanParam('sponsor_start_date');// may or may not be array
+		$sponsor_end_date_array = $this->getSanParam('sponsor_end_date');
+		$sponsor_id = ($this->getSanParam ( 'facility_sponsor_id' ) ? $this->getSanParam ( 'facility_sponsor_id' ) : null);
+		if(is_array($sponsor_id)) {
+			$sponsor_array = $sponsor_id;
+			$sponsor_id = $sponsor_id[0];
+		}
+		// todo case where multip array and no_allow_multi
+		if( @$this->setting('require_sponsor_dates') ) {
+			$status->checkRequired ( $this, 'sponsor_option_id', t('Sponsor dates are required.')."\n" );
+			if( $this->setting('allow_multi_sponsors') ){ // and multiple sponsors option
+				if(! is_array($this->getSanParam('sponsor_option_id')) ) { 
+					$status->addError('sponsor_end_date', t('Sponsor dates are required.')."\n" );
+				}
+				foreach($sponsor_array as $i => $val ){
+					if(empty($sponsor_date_array[$i]) || !empty($val))
+						$status->addError('sponsor_start_date', t('Sponsor dates are required.')."\n" );
+					if(empty($sponsor_end_date_array[$i]) || !empty($val))
+						$status->addError('sponsor_end_date', t('Sponsor dates are required.')."\n" );
+				}
+			}
+		}
+
+		// end validation
 		if ($status->hasError ()) {
 			$status->setStatusMessage ( t ( 'The facility could not be saved.' ) );
 		} else {
@@ -140,27 +176,43 @@ class PsfacilityController extends ReportFilterHelpers {
 						$location_id = $parts[count($parts) - 1];
 					}
 			}
-			
+			// save row
 			if ($location_id) {
-				
 				//map db field names to FORM field names
-				if ($checkName)
 					$facilityRow->facility_name = $this->getSanParam ( 'facility_name' );
 				$facilityRow->location_id = $location_id;
 				$facilityRow->type_option_id = ($this->getSanParam ( 'facility_type_id' ) ? $this->getSanParam ( 'facility_type_id' ) : null);
 				$facilityRow->facility_comments = $this->_getParam ( 'facility_comments' );
 				$facilityRow->address_1 = $this->getSanParam ( 'facility_address1' );
 				$facilityRow->address_2 = $this->getSanParam ( 'facility_address2' );
+				$facilityRow->lat         = $lat;
+				$facilityRow->long        = $long;
 				$facilityRow->postal_code = $this->getSanParam ( 'facility_postal_code' );
 				$facilityRow->phone = $this->getSanParam ( 'facility_phone' );
 				$facilityRow->fax = $this->getSanParam ( 'facility_fax' );
-				$facilityRow->sponsor_option_id = ($this->getSanParam ( 'facility_sponsor_id' ) ? $this->getSanParam ( 'facility_sponsor_id' ) : null);
+				$facilityRow->sponsor_option_id = $sponsor_id;
+				
+				//dupecheck
+				$dupe = new Facility();
+				$select = $dupe->select()->where('location_id =' . $facilityRow->location_id . ' and facility_name = "' . $facilityRow->facility_name . '"');
+				if(!$facilityRow->id && $dupe->fetchRow($select)) {
+					$status->status = '';
+					$status->setStatusMessage( t ( 'The facility could not be saved. A facility with this name already exists in that location.' ) );
+					return false;
+				}
 				
 				$obj_id = $facilityRow->save ();
+				$_SESSION['status'] =  t ( 'The facility was saved.' );
 				if ($obj_id) {
+					if(! Facility::saveSponsors ( $obj_id, $sponsor_array, $sponsor_date_array, $sponsor_end_date_array )) {
+						$status->setStatusMessage( t ( 'There was an error saving sponsor data though.' ) );
+						return false;
+					}
 					$status->setStatusMessage ( t ( 'The facility was saved.' ) );
+					$status->setRedirect ( '/facility/view/id/' . $obj_id );
 					return $obj_id;
 				} else {
+					unset($_SESSION['status']);
 					$status->setStatusMessage ( t ( 'ERROR: The facility could not be saved.' ) );
 				}
 			}
@@ -187,11 +239,17 @@ class PsfacilityController extends ReportFilterHelpers {
 		}
 		
 		require_once ('models/table/OptionList.php');
+		require_once ('views/helpers/TrainingViewHelper.php');
 		
 		if ($id = $this->getSanParam ( 'id' )) {
 			$facility = new Facility ( );
 			$facilityRow = $facility->fetchRow ( 'id = ' . $id );
+			if ($facilityRow) {
 			$facilityArray = $facilityRow->toArray ();
+		} else {
+				$facilityArray = array();
+				$facilityArray ['id'] = null;
+			}
 		} else {
 			$facilityArray = array ();
 			$facilityArray ['id'] = null;
@@ -204,7 +262,8 @@ class PsfacilityController extends ReportFilterHelpers {
 			$this->setNoRenderer ();
 		
 		if ($request->isPost ()) {
-			$rslt = $this->validateAndSave ( $facilityRow, (($this->getSanParam ( 'facility_name' ) != $facilityRow->facility_name) ? true : false) );
+			$rslt = $this->validateAndSave ( $facilityRow, false );
+			//$rslt = $this->validateAndSave ( $facilityRow, (($this->getSanParam ( 'facility_name' ) != $facilityRow->facility_name) ? true : false) ); // checkName from _request, we dont need this anymore [bugfix/feature request]
 			
 			//validate
 			$status = ValidationContainer::instance ();
@@ -248,6 +307,11 @@ class PsfacilityController extends ReportFilterHelpers {
 		
 		$this->viewAssignEscaped ( 'facility', $facilityArray );
 	
+		//sponsors
+		$sTable      = new ITechTable ( array ('name' => 'facility_sponsors' ) );
+		$select      = $sTable->select()->where( 'is_deleted = 0 and facility_id = '.$id );
+		$sponsorRows = $sTable->fetchAll($select);
+		$this->viewAssignEscaped ( 'sponsor_data', count($sponsorRows) ? $sponsorRows->toArray() : array( array()) ); // sponsor rows or an empty row for the template to work
 	}
 	
 	public function deleteAction() {
@@ -321,14 +385,18 @@ class PsfacilityController extends ReportFilterHelpers {
 			$db = Zend_Db_Table_Abstract::getDefaultAdapter ();
 			
 			$num_locs = $this->setting ( 'num_location_tiers' );
-			list ( $field_name, $location_sub_query ) = Location::subquery ( $num_locs, $location_tier, $location_id );
+			list ( $field_name, $location_sub_query ) = Location::subquery ( $num_locs, $location_tier, $location_id, true);
 			
 			$sql = 'SELECT 
 								training_location.training_location_name,
 								training_location.id , ' . implode ( ',', $field_name ) . '
-							FROM training_location JOIN (' . $location_sub_query . ') as l ON training_location.location_id = l.id';
+							FROM training_location LEFT JOIN (' . $location_sub_query . ') as l ON training_location.location_id = l.id';
 			
 			$where = array ('training_location.is_deleted = 0' );
+			$locationWhere = $this->getLocationCriteriaWhereClause($criteria, '', '');
+			if ($locationWhere) {
+				$where[] = $locationWhere;
+			}
 			if ($criteria ['training_location_name']) {
 				$where [] = " training_location_name='" . mysql_escape_string ( $criteria ['training_location_name'] ) . "'";
 			}
@@ -377,18 +445,23 @@ class PsfacilityController extends ReportFilterHelpers {
 			$db = Zend_Db_Table_Abstract::getDefaultAdapter ();
 			
 			$num_locs = $this->setting ( 'num_location_tiers' );
-			list ( $field_name, $location_sub_query ) = Location::subquery ( $num_locs, $location_tier, $location_id );
+			list ( $field_name, $location_sub_query ) = Location::subquery ( $num_locs, $location_tier, $location_id, true);
 			
 			$sql = 'SELECT facility_sponsor_option.facility_sponsor_phrase, facility.location_id,
                 facility_type_option.facility_type_phrase,
                 facility.facility_name,
                 facility.id , ' . implode ( ',', $field_name ) . '
-              FROM facility JOIN (' . $location_sub_query . ') as l ON facility.location_id = l.id
+              FROM facility LEFT JOIN (' . $location_sub_query . ') as l ON facility.location_id = l.id
               LEFT OUTER JOIN facility_sponsor_option ON facility.sponsor_option_id = facility_sponsor_option.id
               LEFT OUTER JOIN facility_type_option ON facility.type_option_id = facility_type_option.id ';
 			
 			$where = array ();
 			$where [] = ' facility.is_deleted = 0 ';
+
+			$locationWhere = $this->getLocationCriteriaWhereClause($criteria, '', '');
+			if ($locationWhere) {
+				$where[] = $locationWhere;
+			}
 			
 			if ($criteria ['type_id'] or $criteria ['type_id'] === '0') {
 				$where [] = ' type_option_id = "' . $criteria ['type_id'] . '"';
@@ -459,7 +532,6 @@ class PsfacilityController extends ReportFilterHelpers {
 				$facilitiesArray [] = $val;
 		}
 		$this->viewAssignEscaped ( 'facilities', $facilitiesArray );
-		
 		//locations
 		$this->viewAssignEscaped ( 'locations', Location::getAll () );
 		//facility types
@@ -468,8 +540,14 @@ class PsfacilityController extends ReportFilterHelpers {
 		//sponsor types
 		$sponsorsArray = OptionList::suggestionList ( 'facility_sponsor_option', 'facility_sponsor_phrase', false, false );
 		$this->viewAssignEscaped ( 'facility_sponsors', $sponsorsArray );
+		//sponsors
+		$sponsorsArray = OptionList::suggestionList ( 'facility_sponsors', 'facility_sponsor_phrase_id', false, false, true, 'id = '.$id );
+		$stable = new ITechTable ( array ('name' => 'facility_sponsors' ) );
+		$select = $stable->select()->where( 'facility_id = '.$id );
+		$rows = $stable->fetchAll($select);
+		if ($rows)
+			$this->viewAssignEscaped ( 'sponsor_data', $rows->toArray() );
 		
-		$this->viewAssignEscaped ( 'locations', $locations );
 		list ( $cname, $prov, $dist, $regc ) = Location::getCityInfo ( $facilityRow->location_id, $this->setting ( 'num_location_tiers' ) );
 		$facilityArray ['facility_city'] = $cname;
 		$facilityArray ['region_c_id'] = $regc;
@@ -503,7 +581,6 @@ class PsfacilityController extends ReportFilterHelpers {
 			$rowLocation = TrainingLocation::selectLocation ( $this->_getParam ( 'id' ) )->toArray ();
 			
 			//locations
-			$this->viewAssignEscaped ( 'locations', Location::getAll () );
 			list ( $cname, $prov, $dist, $regc ) = Location::getCityInfo ( $rowLocation ['location_id'], $this->setting ( 'num_location_tiers' ) );
 			$rowLocation ['city_name'] = $cname;
 			$rowLocation ['region_c_id'] = $regc;

@@ -6,8 +6,11 @@
  *  Fuse IQ -- todd@fuseiq.com
  *  
  */
- 
-ini_set('memory_limit', '64M');
+
+ini_set('max_execution_time','300');
+ini_set('memory_limit', '1024M');
+
+define('space',  " ");
 
  class Globals {
  	public static $BASE_PATH = '/var/www/';

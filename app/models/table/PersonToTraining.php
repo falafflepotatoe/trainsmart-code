@@ -20,7 +20,7 @@ class PersonToTraining extends ITechTable
     $tableObj = new PersonToTraining();
 
     $select = $tableObj->select()
-        ->from(array('ptt' => $tableObj->_name), array('id', 'person_id', 'score_percent_change' => new Zend_Db_Expr('ROUND((spost.score_value - spre.score_value) / spre.score_value * 100)')))
+        ->from(array('ptt' => $tableObj->_name), array('id', 'person_id', 'duration_days', 'award_id', 'score_percent_change' => new Zend_Db_Expr('ROUND((spost.score_value - spre.score_value) / spre.score_value * 100)')))
         ->setIntegrityCheck(false)
         ->join(array('p' => 'person'), "p.id = ptt.person_id",array('first_name','middle_name', 'last_name','birthdate'))
         ->join(array('f' => 'facility'), "p.facility_id = f.id",array('facility_name', 'location_id'))

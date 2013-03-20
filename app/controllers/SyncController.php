@@ -25,8 +25,9 @@ class SyncController extends ReportFilterHelpers
 	
 	public function __construct(Zend_Controller_Request_Abstract $request, Zend_Controller_Response_Abstract $response, array $invokeArgs = array())
 	{
-		ini_set('max_execution_time',120);
-		
+//		ini_set('max_execution_time',120);
+//		set_time_limit(120);
+		set_time_limit(300);
 		parent::__construct($request, $response, $invokeArgs);
 	}
 	

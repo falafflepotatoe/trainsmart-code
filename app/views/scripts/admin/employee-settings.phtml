@@ -1,0 +1,167 @@
+<?php
+
+// template for page that contains an EditTable
+
+// need $pageTitle and $nextUri variables from these includes
+
+ob_start();
+require_once('views/scripts/header.phtml');
+$header = ob_get_contents();
+ob_end_clean();
+
+ob_start();
+require_once('views/scripts/nav-admin.phtml');
+$nav = ob_get_contents();
+ob_end_clean();
+
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title><?php echo $this->translation['Application Name'];?> | <?php echo $this->pageTitle; ?></title>
+	<?php
+	require_once('views/helpers/ScriptContainer.php');
+	print ScriptContainer::$instance->renderCSSHead();
+	print ScriptContainer::$instance->renderJSHead();
+	?>
+</head>
+<body  class="yui-skin-sam">
+	<div id="pageHolder">
+		<div id="header"><?php echo $header; ?></div>
+		<div id="content" class="adminDiv">
+
+			<form method="post" name="adminForm">
+
+			<div id="navAdmin"><?php echo $nav;?></div>
+
+			<div id="contentAdmin">
+				<h1><?php echo $this->pageTitle; ?></h1>
+
+			<table class="settings">
+				<thead>
+					<tr><th>Field</th><th>Display</th><th>Label</th><th>Options</th></tr>
+				</thead>
+				<tbody>
+					<tr><td class="fieldTitle">Partner</td>
+					<td><input type="checkbox" name="check_partner" <?php if($this->check_partner) echo 'checked'; ?> id="check_partner"></td>
+					<td><input type="text" name="label_partner" value="<?php echo $this->label_partner; ?>"></td>
+					<td></td></tr>
+
+					<tr><td class="fieldTitle">Sub Partner</td>
+					<td><input type="checkbox" name="check_sub_partner" <?php if($this->check_sub_partner) echo 'checked'; ?> id="check_sub_partner"></td>
+					<td><input type="text" name="label_sub_partner" value="<?php echo $this->label_sub_partner; ?>"></td>
+					<td></td></tr>
+
+					<tr><td class="fieldTitle">Funder</td>
+					<td><input type="checkbox" name="check_funder" <?php if($this->check_funder) echo 'checked'; ?> id="check_funder"></td>
+					<td><input type="text" name="label_funder" value="<?php echo $this->label_funder; ?>"></td>
+					<td><a href="<?php echo $this->base_url;?>/admin/employee-partner-funding" onclick="return submitAdminForm(this);"><?php tp('Add/Edit');?></a></td></tr>
+
+					<tr><td class="fieldTitle">Full Time</td>
+					<td><input type="checkbox" name="check_full_time" <?php if($this->check_full_time) echo 'checked'; ?> id="check_full_time"></td>
+					<td><input type="text" name="label_full_time" value="<?php echo $this->label_full_time; ?>"></td>
+					<td></td></tr>
+
+					<tr><td class="fieldTitle">Funded hours per week</td>
+					<td><input type="checkbox" name="check_funded_hours_per_week" <?php if($this->check_funded_hours_per_week) echo 'checked'; ?> id="check_funded_hours_per_week"></td>
+					<td><input type="text" name="label_funded_hours_per_week" value="<?php echo $this->label_funded_hours_per_week; ?>"></td>
+					<td></td></tr>
+
+
+					<tr><td class="fieldTitle">Staff Category</td>
+					<td><input type="checkbox" name="check_staff_category" <?php if($this->check_staff_category) echo 'checked'; ?> id="check_staff_category"></td>
+					<td><input type="text" name="label_staff_category" value="<?php echo $this->label_staff_category; ?>"></td>
+					<td><a href="<?php echo $this->base_url;?>/admin/employee-category" onclick="return submitAdminForm(this);"><?php tp('Add/Edit');?></a></td></tr>
+
+					<tr><td class="fieldTitle">Annual Cost</td>
+					<td><input type="checkbox" name="check_annual_cost" <?php if($this->check_annual_cost) echo 'checked'; ?> id="check_annual_cost"></td>
+					<td><input type="text" name="label_annual_cost" value="<?php echo $this->label_annual_cost; ?>"></td>
+					<td></td></tr>
+
+					<tr><td class="fieldTitle">Primary Role</td>
+					<td><input type="checkbox" name="check_primary_role" <?php if($this->check_primary_role) echo 'checked'; ?> id="check_primary_role"></td>
+					<td><input type="text" name="label_primary_role" value="<?php echo $this->label_primary_role; ?>"></td>
+					<td><a href="<?php echo $this->base_url;?>/admin/employee-role" onclick="return submitAdminForm(this);"><?php tp('Add/Edit');?></a></td></tr>
+
+					<tr><td class="fieldTitle">Importance</td>
+					<td><input type="checkbox" name="check_importance" <?php if($this->check_importance) echo 'checked'; ?> id="check_importance"></td>
+					<td><input type="text" name="label_importance" value="<?php echo $this->label_importance; ?>"></td>
+					<td><a href="<?php echo $this->base_url;?>/admin/employee-partner-importance" onclick="return submitAdminForm(this);"><?php tp('Add/Edit');?></a></td></tr>
+
+					<tr><td class="fieldTitle">Contract end date</td>
+					<td><input type="checkbox" name="check_contract_end_date" <?php if($this->check_contract_end_date) echo 'checked'; ?> id="check_contract_end_date"></td>
+					<td></td>
+					<td></td></tr>
+
+					<tr><td class="fieldTitle">Agreement end date</td>
+					<td><input type="checkbox" name="check_agreement_end_date" <?php if($this->check_agreement_end_date) echo 'checked'; ?> id="check_agreement_end_date"></td>
+					<td></td>
+					<td></td></tr>
+   
+					<tr><td class="fieldTitle">Intended Transition</td>
+					<td><input type="checkbox" name="check_intended_transition" <?php if($this->check_intended_transition) echo 'checked'; ?> id="check_intended_transition"></td>
+					<td><input type="text" name="label_intended_transition" value="<?php echo $this->label_intended_transition; ?>"></td>
+					<td><a href="<?php echo $this->base_url;?>/admin/employee-transition" onclick="return submitAdminForm(this);"><?php tp('Add/Edit');?></a></td></tr>
+
+					<tr><td class="fieldTitle">Transition confirmed</td>
+					<td><input type="checkbox" name="check_transition_confirmed" <?php if($this->check_transition_confirmed) echo 'checked'; ?> id="check_transition_confirmed"></td>
+					<td></td>
+					<td><a href="<?php echo $this->base_url;?>/admin/employee-XYZ" onclick="return submitAdminForm(this);">!!!<?php tp('Add/Edit');?></a></td></tr>
+
+					<tr><td class="fieldTitle">Incoming partner</td>
+					<td><input type="checkbox" name="check_incoming_partner" <?php if($this->check_incoming_partner) echo 'checked'; ?> id="check_incoming_partner"></td>
+					<td><input type="text" name="label_incoming_partner" value="<?php echo $this->label_incoming_partner; ?>"></td>
+					<td><a href="<?php echo $this->base_url;?>/admin/employee-XYZ" onclick="return submitAdminForm(this);">!!!!!<?php tp('Add/Edit');?></a></td></tr>
+
+					<tr><td class="fieldTitle">Relationship</td>
+					<td><input type="checkbox" name="check_relationship" <?php if($this->check_relationship) echo 'checked'; ?> id="check_relationship"></td>
+					<td><input type="text" name="label_relationship" value="<?php echo $this->label_relationship; ?>"></td>
+					<td><a href="<?php echo $this->base_url;?>/admin/employee-relationship" onclick="return submitAdminForm(this);"><?php tp('Add/Edit');?></a></td></tr>
+
+					<tr><td class="fieldTitle">Referral Mechanism</td>
+					<td><input type="checkbox" name="check_referral_mechanism" <?php if($this->check_referral_mechanism) echo 'checked'; ?> id="check_referral_mechanism"></td>
+					<td><input type="text" name="label_referral_mechanism" value="<?php echo $this->label_referral_mechanism; ?>"></td>
+					<td><a href="<?php echo $this->base_url;?>/admin/employee-referral" onclick="return submitAdminForm(this);"><?php tp('Add/Edit');?></a></td></tr>
+
+					<tr><td class="fieldTitle">CHW Supervisor</td>
+					<td><input type="checkbox" name="check_chw_supervisor" <?php if($this->check_chw_supervisor) echo 'checked'; ?> id="check_chw_supervisor"></td>
+					<td><input type="text" name="label_chw_supervisor" value="<?php echo $this->label_chw_supervisor; ?>"></td>
+					<td></td></tr>
+
+					<tr><td class="fieldTitle">Trainings provided</td>
+					<td><input type="checkbox" name="check_trainings_provided" <?php if($this->check_trainings_provided) echo 'checked'; ?> id="check_trainings_provided"></td>
+					<td><input type="text" name="label_trainings_provided" value="<?php echo $this->label_trainings_provided; ?>"></td>
+					<td><a href="<?php echo $this->base_url;?>/admin/employee-training-provided" onclick="return submitAdminForm(this);"><?php tp('Add/Edit');?></a></td></tr>
+
+					<tr><td class="fieldTitle">Courses Completed</td>
+					<td><input type="checkbox" name="check_courses_completed" <?php if($this->check_courses_completed) echo 'checked'; ?> id="check_courses_completed"></td>
+					<td><input type="text" name="label_courses_completed" value="<?php echo $this->label_courses_completed; ?>"></td>
+					<td><a href="<?php echo $this->base_url;?>/admin/employee-courses" onclick="return submitAdminForm(this);">!!!<?php tp('Add/Edit');?></a></td></tr>
+
+					<tr><td class="fieldTitle">Site Name</td>
+					<td><input type="checkbox" name="check_site_name" <?php if($this->check_site_name) echo 'checked'; ?> id="check_site_name"></td>
+					<td></td>
+					<td><a href="<?php echo $this->base_url;?>/admin/employee-XYZ" onclick="return submitAdminForm(this);">!!!<?php tp('Add/Edit');?></a></td></tr>
+
+					<tr><td class="fieldTitle">Landing Page Comments</td>
+					<td><input type="checkbox" name="check_employee_header" <?php if($this->check_employee_header) echo 'checked'; ?> id="check_employee_header"></td>
+					<td><input type="text" name="employee_header" value="<?php echo $this->employee_header; ?>"></td>
+					<td></td></tr>
+				</tbody>
+			</table>
+
+			<input type="hidden" name="redirect" value="<?php echo Settings::$COUNTRY_BASE_URL . '/admin/' . $nextUri; ?>">
+			<input type="submit" value="Save" name="saveonly" class="submitNoArrow" onclick="document.adminForm.redirect.value=''" style="margin-right:1em;">
+			</form>
+
+
+			</div>
+
+			<div class="clear"></div>
+
+		</div>
+		<div id="footer"><?php require_once('views/scripts/footer.phtml');?></div>
+	</div>
+
+</body>
+</html>

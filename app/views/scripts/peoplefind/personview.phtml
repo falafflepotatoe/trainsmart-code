@@ -57,7 +57,7 @@
             <div id="content">
 				<div id="subcontent">
 				<div id="contentheader">
-	<h2>Person's Record <?php /*?><a href="../../studenttranscript/studenttranscript/<?php echo $this->escape($this->id); ?>" style="margin-left:405px;text-decoration:none;">Student Transcript Report</a><?php */?></h2><br>
+	<h2><?php echo t("Person's Record"); ?></h2><br>
 				</div>
 				<div class="pad50 clear"></div>
 				<?php echo $this->escape($this->name); ?>
@@ -67,11 +67,11 @@
 				<div class="mainformholder" style="height:1850px;">
             <!--   <p>Graduated?(Y/N)&nbsp;&nbsp;&nbsp;&nbsp;
                <input type="radio" name="graduated" value="1">Yes<input type="radio" name="graduated" value="0">No</p>--><br>
-                 	<label>Cohort ID</label>
+                 	<label><?php echo t('Cohort ID'); ?></label>
 					<input type="text" name="cohortid" size="32" maxlength="32"><br><br><br>
                     <?php echo $this->escape($this->type);?>
-               <p style="padding-left:105px;">Personal Information</p><br>
- 					<label>Title</label>
+               <p style="padding-left:105px;"><?php echo t('Personal Information'); ?></p><br>
+ 					<label><?php echo t('Title'); ?></label>
                     <select name="title" >
                    
                     
@@ -82,33 +82,33 @@
                       <option value="" selected><?php echo $this->escape($this->seltitle); ?></option>
                     </select>
 
-					<label>First name</label>
+					<label><?php echo t('First name'); ?></label>
 				<input type="text" name="firstname" size="32" maxlength="32" value="<?php echo $this->escape($this->fname);?>">
                 
-                    <label>Middle name</label>
+                    <label><?php echo t('Middle name'); ?></label>
 				 <input type="text" name="firstname" size="32" maxlength="32" value="<?php echo $this->escape($this->middlename);?>">
 
-					<label>Last name</label>
+					<label><?php echo t('Last name'); ?></label>
 				<input type="text" name="lastname" size="32" maxlength="32" value="<?php echo $this->escape($this->lastname);?>">
                     
-                    <label>National Id</label>
+                    <label><?php echo t('National Id'); ?></label>
 					<input type="text" name="nationalid" size="32" maxlength="32" >
                     
-                    <label>Nationality</label>
+                    <label><?php echo t('Nationality'); ?></label>
 					<input type="text" name="nationality" size="32" maxlength="32">
 
-					<label>Gender</label>
+					<label><?php echo t('Gender'); ?></label>
 					<input type="text" name="gender" size="32" maxlength="32" value="<?php echo $this->escape($this->gender);?>">
 
-					<label>Date of birth</label>
+					<label><?php echo t('Date of birth'); ?></label>
 					<input type="text" class="calendarbox" name="dob" value="<?php echo $this->escape($this->dob);?>"><br>
 
 					<div class="pad20 clear"></div>
-					<p style="float:left;font-size:14px;">Current contact information</p>
+					<p style="float:left;font-size:14px;"><?php echo t('Current contact information'); ?></p>
 					<div class="pad20 clear"></div><br>
                     
                     <div class="pad20 clear"></div>
-					<p style="float:left;font-size:14px;">Permanent Address</p>
+					<p style="float:left;font-size:14px;"><?php echo t('Permanent Address'); ?></p>
 					<div class="pad20 clear"></div><br>
                     
                     <label id="province_id_lbl"><?php echo (@$this->translation['Region A (Province)']); ?></label>
@@ -131,14 +131,14 @@
 <label>Geography Level 3</label>
 <input type="text" name="geog3" size="32" maxlength="32" value="<?php echo $this->escape($this->geo3);?>"><?php */?>
 
-					<label>Address 1</label>
+					<label><?php echo t('Address 1'); ?></label>
 					<input type="text" name="peraddress1" size="32" maxlength="32" value="<?php echo $this->escape($this->address1);?>">
 
-					<label>Address 2</label>
+					<label><?php echo t('Address 2'); ?></label>
 					<input type="text" name="address2" size="32" maxlength="32" value="<?php echo $this->escape($this->address2);?>" >
 					
                   
-					<label>City</label>
+					<label><?php echo t('City'); ?></label>
 					<select name="city" >
                     <?php foreach ($this->getcity as $city){ ?>
                     <option value="<?php echo $city[id];?>"><?php echo $city[city_name];?></option>
@@ -146,11 +146,11 @@
                     <option value="" selected> <?php echo $this->escape($this->selcity);?></option>
                     </select>
 
-					<label>Postal code / ZIP</label>
+					<label><?php echo t('Postal code / ZIP'); ?></label>
 					<input type="text" name="postalcode" size="32" maxlength="32" value="">                    
                     
                      <div class="pad20 clear"></div>
-					<p style="float:left;font-size:14px;">Local Address</p>
+					<p style="float:left;font-size:14px;"><?php echo t('Local Address'); ?></p>
 					<div class="pad20 clear"></div><br>
                     
                       <label id="province_id_lbl"><?php echo (@$this->translation['Region A (Province)']); ?></label>
@@ -164,22 +164,22 @@
           <?php renderFilter($this->locations, 3, 'region_c_id', $this->criteria['region_c_id'], false);?>
           <?php } ?>
 
-					<?php /*?><label>Geography Level 1</label>
+					<?php /*?><label><?php echo t('Geography Level 1'); ?></label>
 					<input type="text" name="localgeog1" size="32" maxlength="32" value="<?php echo $this->escape($this->geo1);?>">
 
-					<label>Geography Level 2</label>
+					<label><?php echo t('Geography Level 2'); ?></label>
 					<input type="text" name="localgeog2" size="32" maxlength="32" value="<?php echo $this->escape($this->geo2);?>">
 
-					<label>Geography Level 3</label>
+					<label><?php echo t('Geography Level 3'); ?></label>
 					<input type="text" name="localgeog3" size="32" maxlength="32" value="<?php echo $this->escape($this->geo3);?>"><?php */?>
 
-					<label>Address 1</label>
+					<label><?php echo t('Address 1'); ?></label>
 					<input type="text" name="localaddress1" size="32" maxlength="32" value="<?php echo $this->escape($this->address1);?>">
 
-					<label>Address 2</label>
+					<label><?php echo t('Address 2'); ?></label>
 					<input type="text" name="localaddress2" size="32" maxlength="32" value="<?php echo $this->escape($this->address2);?>" >
 
-					<label>City</label>
+					<label><?php echo t('City'); ?></label>
 					<select name="city" >
                     <?php foreach ($this->getcity as $city){ ?>
                     <option value="<?php echo $city[id];?>"><?php echo $city[city_name];?></option>
@@ -187,74 +187,74 @@
                     <option value="" selected> <?php echo $this->escape($this->selcity);?></option>
                     </select>
 
-					<label>Postal code / ZIP</label>
+					<label><?php echo t('Postal code / ZIP'); ?></label>
 					<input type="text" name="localpostalcode" size="32" maxlength="32" value="">
-                    <label>Phone</label>
+                    <label><?php echo t('Phone'); ?></label>
 					<input type="text" name="localphone" size="32" maxlength="32" value="<?php echo $this->escape($this->pwork);?>">
 
-					<label>Cellphone</label>
+					<label><?php echo t('Cellphone'); ?></label>
 					<input type="text" name="localcell" size="32" maxlength="32" value="<?php echo $this->escape($this->phone);?>" >
 
-					<label>Email</label>
+					<label><?php echo t('Email'); ?></label>
 			<input type="text" name="email" size="32" maxlength="32" value="<?php echo $this->escape($this->email);?>">
 
-					<label>Email 2</label>
+					<label><?php echo t('Email 2'); ?></label>
 			<input type="text" name="email_secondary" size="32" maxlength="32" value="<?php echo $this->escape($this->email2);?>">
                     
                      <div class="pad20 clear"></div>
-					<p style="float:left;font-size:14px;">Student Information</p>
+					<p style="float:left;font-size:14px;"><?php echo t('Student Information'); ?></p>
 					<div class="pad20 clear"></div><br>
 
-					<label>Student ID</label>
+					<label><?php echo t('Student ID'); ?></label>
 					<input type="text" name="studenentid" size="32" maxlength="32">
 
-					<label>Student Type</label>
+					<label><?php echo t('Student Type'); ?></label>
 					<input type="text" name="studenttype" size="32" maxlength="32">
 
-					<label>Date of Enrollment</label>
+					<label><?php echo t('Date of Enrollment'); ?></label>
 					<input type="text" name="enrollmentdate" size="32" maxlength="32" class="calendarbox" 
                     value="<?php echo $this->escape($this->enrollmentdate);?>">
 
-					<label>Reason for Enrollment</label>
+					<label><?php echo t('Reason for Enrollment'); ?></label>
 					<input type="text" name="enrollmentreason" size="32" maxlength="32" 
                     value="<?php echo $this->escape($this->enrollmentreason);?>">
 
-					<label>Date of Separation</label>
+					<label><?php echo t('Date of Separation'); ?></label>
 					<input type="text" name="separationdate" size="32" maxlength="32" class="calendarbox" 
                     value="<?php echo $this->escape($this->separation);?>">
 
-					<label>Reason for Separation</label>
+					<label><?php echo t('Reason for Separation'); ?></label>
 					<input type="text" name="separationreason" size="32" maxlength="32" 
                     value="<?php echo $this->escape($this->separationreason);?>">
 
-					<label>Program Enrolled in(Cadre)</label>
+					<label><?php echo t('Program Enrolled in(Cadre)'); ?></label>
 					<input type="text" name="cadre" size="32" maxlength="32" value="<?php echo $this->escape($this->cadrename);?>">
                     
-                    <label>Year of Study</label>
+                    <label><?php echo t('Year of Study'); ?></label>
 				<input type="text" name="yearofstudy" size="32" maxlength="32" value="<?php echo $this->escape($this->study);?>">
                     
                      <div class="pad20 clear"></div>
-					<p style="float:left;font-size:14px;">Funding</p>
+					<p style="float:left;font-size:14px;"><?php echo t('Funding'); ?></p>
 					<div class="pad20 clear"></div><br>
                     
                 
 
-					<label>Funding Source</label>
+					<label><?php echo t('Funding Source'); ?></label>
 					<input type="text" name="fundingsource" size="32" maxlength="32">
 
-					<label>Amount</label>
+					<label><?php echo t('Amount'); ?></label>
 					<input type="text" name="amount" size="32" maxlength="32">
                     
                     	<p>&nbsp;&nbsp;&nbsp;</p>
                     
                     
-                    <label>Tutor Advisor</label>
+                    <label><?php echo t('Tutor Advisor'); ?></label>
 					<input type="text" name="tutoradviser" size="32" maxlength="32">
                     	
                         
                         
 				
-                <table><tr><td style="margin-top:-50px;font-weight:bold;">Facility After Graduation</td></tr>
+                <table><tr><td style="margin-top:-50px;font-weight:bold;"><?php echo t('Facility After Graduation'); ?></td></tr>
                 <tr><td>&nbsp;</td></tr></table>
                 
                 
@@ -278,21 +278,21 @@
 					<label>Geography Level 3</label>
 					<input type="text" name="geo3" size="32" maxlength="32" value="">-->
 
-					<label>Address 1</label>
+					<label><?php echo t('Address 1'); ?></label>
 				<input type="text" name="address1" size="32" maxlength="32" value="">
                     
-                    <label>Faclity Name</label>
+                    <label><?php echo t('Faclity Name'); ?></label>
 					<input type="text" name="tutoradviser" size="32" maxlength="32">
 					
 					
-					<p style="margin-left:5px;"><label>Comments</label>
+					<p style="margin-left:5px;"><label><?php echo t('Comments'); ?></label>
                     <textarea name="comments" rows="3" cols="33" style="margin:-19px 0 0 333px;">
                     <?php echo $this->escape($this->comments);?></textarea></p>
    
 					<div  style="padding-left:400px; padding-top:20px;" >
                   
  <input type="submit" name="update" value="Update" class="tsbutton green large"> 				
- <a href="../../../people/people"> <input type="button"  value="Back" class="tsbutton green large"></a>
+ <a href="../../../people/people"> <input type="button"  value="<?php echo t('Back'); ?>" class="tsbutton green large"></a>
 					</div>
 			</form>
             </div>
@@ -304,11 +304,11 @@
 <table cellpadding="0" cellspacing="0" border="0" class="display tablegrid" id="" style="width:900px">
 	<thead>
 		<tr>
-			<th>Class ID</th>
-			<th>Class Name</th>
-			<th>Date</th>
-			<th>Instructor</th>
-			<th>Grade</th>
+			<th><?php echo t('Class ID'); ?></th>
+			<th><?php echo t('Class Name'); ?></th>
+			<th><?php echo t('Date'); ?></th>
+			<th><?php echo t('Instructor'); ?></th>
+			<th><?php echo t('Grade'); ?></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -333,15 +333,15 @@
 
 
 <div style="margin-top:-150px;">
- <p style="margin:15px 0 15px 0;font-weight:bold;">Practicum</p>   
+ <p style="margin:15px 0 15px 0;font-weight:bold;"><?php echo t('Practicum'); ?></p>   
 <table cellpadding="0" cellspacing="0" border="0" class="display tablegrid" id="" style="width:900px">
 	<thead>
 		<tr>
-            <th class="">Practicum name</th>
-			<th class="">Facility</th>
-			<th class="">Clinical Advisor</th>
-			<th class=""># of hours completed</th>
-            <th class=""># of hours required</th>
+            <th class=""><?php echo t('Practicum name'); ?></th>
+			<th class=""><?php echo t('Facility'); ?></th>
+			<th class=""><?php echo t('Clinical Advisor'); ?></th>
+			<th class=""><?php echo t('# of hours completed'); ?></th>
+            <th class=""><?php echo t('# of hours required'); ?></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -367,14 +367,14 @@
 
 
 <div style="margin-top:-150px;">
- <p style="margin:15px 0 15px 0;font-weight:bold;">Exams (licensure/registration)</p>   
+ <p style="margin:15px 0 15px 0;font-weight:bold;"><?php echo t('Exams (licensure/registration)'); ?></p>   
 <table cellpadding="0" cellspacing="0" border="0" class="display tablegrid" id="" style="width:900px">
 	<thead>
 		<tr>
-            <th class="">Exam ID</th>
-			<th class="">Exam Name</th>
-			<th class="">Date completed</th>
-            <th class="">Grade</th>
+            <th class=""><?php echo t('Exam ID'); ?></th>
+			<th class=""><?php echo t('Exam Name'); ?></th>
+			<th class=""><?php echo t('Date completed'); ?></th>
+            <th class=""><?php echo t('Grade'); ?></th>
 		</tr>
 	</thead>
 	<tbody>

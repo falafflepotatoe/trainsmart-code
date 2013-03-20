@@ -127,6 +127,9 @@ die($query);
 			$tt[] = $type['id'];
 		}
 		$this->view->assign('tutortypes',$tt);
+		
+		$this->view->assign('students', $helper->getTutorStudents($tutorid));
+		$this->view->assign('classes', $helper->getTutorClasses($tutorid));
 
 		# GET ALL STUDENTS WHERE ADVISOR = THIS ID
 		# GET ALL COURSES LINKED TO THIS ID

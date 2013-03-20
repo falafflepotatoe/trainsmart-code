@@ -53,70 +53,70 @@
             
 			<div id="subcontent">
 				<div id="contentheader">
-					<h2>People Search</h2><br/>
-					<p style="float:left;font-size:13px;">Select criteria</p>
+					<h2><?php echo t('People Search'); ?></h2><br/>
+					<p style="float:left;font-size:13px;"><?php echo t('Select criteria'); ?></p>
 				</div>
 				<div class="pad50 clear"></div>
 				
 				<div class="mainformholder">
                 <form name="peoplefind" action="../peoplefind/peoplefind" method="post">
-					<label>First name</label>
-					<input type="text" name="firstname" value="<?php echo $this->escape($_POST['firstname']);?>">
+					<label><?php echo t('First name'); ?></label>
+					<input type="text" name="firstname" value="<?php echo $this->escape($_REQUEST['firstname']);?>">
 
-					<label>Last name</label>
-					<input type="text" name="lastname" value="<?php echo $this->escape($_POST['lastname']);?>">
+					<label><?php echo t('Last name'); ?></label>
+					<input type="text" name="lastname" value="<?php echo $this->escape($_REQUEST['lastname']);?>">
 
 
-					<label>Cohort</label>
+					<label><?php echo t('Cohort'); ?></label>
 					<select id="cohort" name="cohort">
-						<option value="0">Select...</option>
-<?php
-	foreach ($this->cohort as $cohort){
-		echo "<option value=\"" . $cohort['id'] . "\"" . ($_POST['cohort'] == $cohort['id'] ? " selected" : "") . ">" . $cohort['cohortname'] . "</option>\n";
-	}
-?>
+						<option value="0"><?php echo t('Select...'); ?></option>
+						<?php
+							foreach ($this->cohort as $cohort){
+								echo "<option value=\"" . $cohort['id'] . "\"" . ($_REQUEST['cohort'] == $cohort['id'] ? " selected" : "") . ">" . $cohort['cohortname'] . "</option>\n";
+							}
+						?>
 					</select>
 
-					<label>Student cadre</label>
+					<label><?php echo t('Student cadre'); ?></label>
 					<select id="cadre" name="cadre">
-						<option value="0">Select...</option>
-<?php
-	foreach ($this->cadre as $cadre){
-		echo "<option value=\"" . $cadre['id'] . "\"" . ($_POST['cadre'] == $cadre['id'] ? " selected" : "") . ">" . $cadre['cadrename'] . "</option>\n";
-	}
-?>
+						<option value="0"><?php echo t('Select...'); ?></option>
+						<?php
+							foreach ($this->cadre as $cadre){
+								echo "<option value=\"" . $cadre['id'] . "\"" . ($_REQUEST['cadre'] == $cadre['id'] ? " selected" : "") . ">" . $cadre['cadrename'] . "</option>\n";
+							}
+						?>
 					</select>
 
-					<label>Institution</label>
+					<label><?php echo t('Institution'); ?></label>
 					<select id="inst" name="inst">
-						<option value="0">Select...</option>
-<?php
-	foreach ($this->institution as $institution){
-		echo "<option value=\"" . $institution['id'] . "\"" . ($_POST['inst'] == $institution['id'] ? " selected" : "") . ">" . $institution['institutionname'] . "</option>\n";
-	}
-?>
+						<option value="0"><?php echo t('Select...'); ?></option>
+						<?php
+							foreach ($this->institution as $institution){
+								echo "<option value=\"" . $institution['id'] . "\"" . ($_REQUEST['inst'] == $institution['id'] ? " selected" : "") . ">" . $institution['institutionname'] . "</option>\n";
+							}
+						?>
 					</select>
 
-					<label>Facility</label>
+					<label><?php echo t('Facility'); ?></label>
 					<select id="fact" name="fact">
-						<option value="0">Select...</option>
-<?php
-	foreach ($this->facility as $facility){
-		echo "<option value=\"" . $facility['id'] . "\"" . ($_POST['fact'] == $facility['id'] ? " selected" : "") . ">" . $facility['facility_name'] . "</option>\n";
-	}
-?>
+						<option value="0"><?php echo t('Select...'); ?></option>
+						<?php
+							foreach ($this->facility as $facility){
+								echo "<option value=\"" . $facility['id'] . "\"" . ($_REQUEST['fact'] == $facility['id'] ? " selected" : "") . ">" . $facility['facility_name'] . "</option>\n";
+							}
+						?>
 					</select>
 
 					<label>Return</label>
-	                <input type="radio" name="type" value="every" style="margin-left : 30px;"<?php echo $this->escape($_POST['type']) == "every" ? " checked" : "";?>> Everyone
+	                <input type="radio" name="type" value="every" style="margin-left : 30px;"<?php echo (empty($_REQUEST) || $this->escape($_REQUEST['type']) == "every") ? " checked" : ""; ?>> <?php echo t('Everyone'); ?>
                     <p style="padding : 0px; margin : 0px; background-color : #FFFFFF;">&nbsp;</p>
 
 					<label>&nbsp;</label>
-                    <input type="radio" name="type" value="student" style="margin-left : 30px;"<?php echo $this->escape($_POST['type']) == "student" ? " checked" : "";?>> Students
+                    <input type="radio" name="type" value="student" style="margin-left : 30px;"<?php echo $this->escape($_REQUEST['type']) == "student" ? " checked" : ""; ?>> <?php echo t('Students'); ?>
                     <p style="padding : 0px; margin : 0px; background-color : #FFFFFF;">&nbsp;</p>
 
                     <label>&nbsp;</label>
-                    <input type="radio" name="type" value="tutor" style="margin-left : 30px;"<?php echo $this->escape($_POST['type']) == "tutor" ? " checked" : "";?>> Tutor
+                    <input type="radio" name="type" value="tutor" style="margin-left : 30px;"<?php echo $this->escape($_REQUEST['type']) == "tutor" ? " checked" : ""; ?>> <?php echo t('Tutor'); ?>
                     <p style="padding : 0px; margin : 0px; background-color : #FFFFFF;">&nbsp;</p>
 
 
@@ -133,30 +133,42 @@
 				<table cellpadding="0" cellspacing="0" border="0" class="display tablegrid" id="" style="width:100%">
 					<thead>
 						<tr>
-							<th>ID</th>
-							<th>Name</th>
-							<th>Gender</th>
-							<th>Institution</th>
-							<th>Cohort</th>
+							<th><?php echo t('ID'); ?></th>
+							<th><?php echo t('Name'); ?></th>
+							<th><?php echo t('Gender'); ?></th>
+							<th><?php echo t('Institution'); ?></th>
+							<th><?php echo t('Cohort'); ?></th>
 						</tr>
 					</thead>
 					<tbody>
     
     
     
-<?php 
-	foreach($this->getpeople as $getpeople){
-?>
-						<tr class="GradeA" style="cursor : pointer;" onClick="window.location.href='<?php echo $getpeople['link']; ?>'">
-							<td name="getpeo" style="width : 120px;"><?php echo $getpeople['id']; ?></td>
-							<td class=""><?php echo trim ($getpeople['first_name'] . " " . $getpeople['last_name'] . ($_POST['type'] == "every" ? " (" . $getpeople['type'] . ")" : "")); ?></td>
-							<td class="" style="width : 150px;"><?php echo $getpeople['gender'] ? $getpeople['gender'] : 'N/A'; ?></td>
-							<td class="" style="width : 150px;"><?php echo $getpeople['institutionname'] ? $getpeople['institutionname'] : 'N/A'; ?></td>
-							<td class="" style="width : 150px;"><?php echo $getpeople['cohortname'] ? $getpeople['cohortname'] : 'N/A'; ?></td>
-						</tr>
-<?php
-	}
-?>
+					<?php 
+						foreach($this->getpeople as $getpeople){
+						?>
+							<tr class="GradeA" style="cursor : pointer;" onClick="window.location.href='<?php echo $getpeople['link']; ?>'">
+								<td name="getpeo" style="width : 120px;"><?php echo $getpeople['id']; ?></td>
+								<td class=""><?php echo trim ($getpeople['first_name'] . " " . $getpeople['last_name'] . ($_REQUEST['type'] == "every" ? " (" . $getpeople['type'] . ")" : "")); ?></td>
+								<td class="" style="width : 150px;"><?php echo $getpeople['gender'] ? $getpeople['gender'] : 'N/A'; ?></td>
+								<?php
+									if (count ($getpeople['institution']) > 0){
+										echo "<td class=\"\" style=\"width : 150px;\">" . $getpeople['institution']['institutionname'] . "</td>\n";
+									} else {
+										echo "<td class=\"\" style=\"width : 150px;\">N/A</td>\n";
+									}
+	
+									if (count ($getpeople['cohort']) > 0){
+										echo "<td class=\"\" style=\"width : 150px;\">" . $getpeople['cohort']['cohortname'] . "</td>\n";
+									} else {
+										echo "<td class=\"\" style=\"width : 150px;\">N/A</td>\n";
+									}
+								?>
+							</tr>
+						<?php
+						}
+					?>
+					
 					</tbody>
 				</table>
 				</div>
@@ -164,7 +176,7 @@
 				<div>&nbsp;</div>
 				<div class="pad20 clear"></div>
 				<div class="rightdiv">
-					<a href="<?php  echo Settings::$COUNTRY_BASE_URL.'/peopleadd/peopleadd'; ?>" class="tsbutton green large">Add a person &raquo;</a>
+					<a href="<?php  echo Settings::$COUNTRY_BASE_URL.'/peopleadd/peopleadd'; ?>" class="tsbutton green large"><?php echo t('Add a person'); ?> &raquo;</a>
 				</div>
 
 			</div>

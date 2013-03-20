@@ -545,9 +545,15 @@ function updateScore(label, pttId, jsonUrl, promptDefault) {
 		promptScore = promptDefault;
 	}
 
-	inputScore = prompt("Please enter a " + label + " score between 1-100:",
+	inputScore = prompt("Please enter a " + label + " score between 1-100:\nOptionally enter Number Questions Correct/Total Questions, for example 80/105, we will calculate the percentage.",
 			promptScore);
 	if (inputScore) {
+		// fraction?
+		if(inputScore.indexOf('/') > 0){
+			parts = inputScore.split('/');
+			inputScore = score = parseInt((parseInt( $.trim(parts[0]) ) / parseInt( $.trim(parts[1]) ) * 100 ));
+		}
+		// int
 		score = parseInt(inputScore);
 		if (inputScore != score || score < 1 || score > 100) {
 			alert('That is not a valid score.');

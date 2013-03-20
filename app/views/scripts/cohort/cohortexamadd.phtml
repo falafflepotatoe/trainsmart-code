@@ -6,11 +6,9 @@
 	<?php
     require_once('views/helpers/ScriptContainer.php');
     print ScriptContainer::$instance->renderCSSHead();
-	print ScriptContainer::$instance->renderJSHead();      ?>
+	print ScriptContainer::$instance->renderJSHead();
+	?>
     
-<script type="text/javascript" src="<?php  echo Settings::$COUNTRY_BASE_URL.'/js/scripts/jquery-1.7.1.min.js'; ?>"></script>
-<script type="text/javascript" src="<?php  echo Settings::$COUNTRY_BASE_URL.'/js/scripts/jquery-ui-1.8.17.custom.min.js'; ?>"></script>
-<script type="text/javascript" language="javascript" src="<?php  echo Settings::$COUNTRY_BASE_URL.'/js/scripts/jquery.dataTables.js'; ?>"></script>
 		<script type="text/javascript" charset="utf-8">
 			$(document).ready(function() {
 				$( ".calendarbox" ).datepicker({
@@ -59,7 +57,7 @@
             <div id="content">
 			<div id="subcontent">
 				<div id="contentheader">
-					<h2>Exams associated with the cohort</h2>
+					<h2><?php echo t('Exams associated with the cohort'); ?></h2>
 					<br>
 			
 				</div>
@@ -67,21 +65,21 @@
 				<form  action="<?php echo $this->escape($this->action); ?>" id="peopleadd" method="post">
 				<div class="mainformholder">
                     
-               <p style="padding-left:105px;font-weight:bold;">Select Criteria</p><br>
+               <p style="padding-left:105px;font-weight:bold;"><?php echo t('Select Criteria'); ?></p><br>
                		
- 					<label>Exam</label>
+ 					<label><?php echo t('Exam'); ?></label>
 					<input type="text" name="exam" size="32" maxlength="32" >
 
-					<label>Date</label>
+					<label><?php echo t('Date'); ?></label>
 					<input type="text" name="examdate" size="32" maxlength="32" class="calendarbox">
                     
-                    <label>Grade</label>
+                    <label><?php echo t('Grade'); ?></label>
 					<input type="text" name="grade" size="32" maxlength="32" >
 
                 </div>
                 
          <div  style="margin:-130px 0 0 510px;">
-         <a href="<?php echo Settings::$COUNTRY_BASE_URL.'/cohort/cohortedit' ?>" class="tsbutton green large">Go back &raquo;</a> 
+         <a href="<?php echo Settings::$COUNTRY_BASE_URL.'/cohort/cohortedit' ?>" class="tsbutton green large"><?php echo t('Go back'); ?> &raquo;</a> 
 		<input type="submit" name="updateexam" value="Add &raquo;" class="tsbutton green large">
 					</div>
 

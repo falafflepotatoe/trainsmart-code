@@ -56,14 +56,10 @@ class EditTableHelper {
 		$js .= "{$labelSafe}ColDefs = [ " . implode(',', $colDefs) . " ];\n\n";
 		$js .= "{$labelSafe}NoDelete = [ " . implode(',', $noDelete) . " ];\n\n";
 
-		//add it to a global namespace as well
-		$js .= "ITECH.{$labelSafe}Table = {$labelSafe}Table;\n\n";
-
 		$js .= "var {$labelSafe}Table = makeEditTable(\"{$labelSafe}\", {$labelSafe}DataSource, {$labelSafe}ColDefs, {$labelSafe}NoDelete, $noEdit);\n\n";
 
 		//add it to a global namespace as well
 		$js .= "ITECH.{$labelSafe}Table = {$labelSafe}Table;\n\n";
-
 
 		$js .= "}); //--><!]]> </script>\n\n";
 

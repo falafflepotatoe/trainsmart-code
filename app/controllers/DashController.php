@@ -25,7 +25,7 @@ class DashController extends ITechController {
 	
 	public function dashAction()
 	{
-	$this->view->assign('title','Trainsmart');
+	$this->view->assign('title',$this->view->translation['Application Name']);
         
         $institute = new Dashview();
         $details=$institute->fetchdetails();

@@ -1,4 +1,6 @@
-<?php require_once('ITechTable.php');
+<?php
+require_once('ITechTable.php');
+require_once('Helper.php');
 
 class Cohortedit extends ITechTable
 {
@@ -68,12 +70,40 @@ class Cohortedit extends ITechTable
 			'degree'		 =>	$param['degreeinfo'],
 			'cohortid'		 =>	$param['cohortid'],
 			'cohortname'	 =>	$param['cohortname'],
+			'cadreid'		 => $param['cadre']
 		);
-	
+		
+		// update associated student records with new cadre id
+		//$cadre_sql = "UPDATE student SET cadre = (SELECT cadreid FROM cohort WHERE id = {$cid}) WHERE id = ";
+		//$db->query($cadre_sql);
+		$select = $db->query("SELECT id_student FROM link_student_cohort WHERE id_cohort = {$param['id']}");
+		$row = $select->fetchAll();
+		foreach($row as $student){
+			$db->query("UPDATE student SET cadre = {$param['cadre']} WHERE id = {$student['id_student']}");
+		}
+		
 		$db->update('cohort',$data,'id = ' . $param['id']);
 		return $data;
 	}
 	 
+	public function DeleteCohort($param){
+		$cohort_id = $param['cohortid'];
+		
+		// remove cohort
+		$sql = "DELETE FROM cohort WHERE id = {$cohort_id}";
+		$result = $this->dbfunc()->query($sql);
+		
+		// remove cohort class link
+		$sql = "DELETE FROM link_cohorts_classes WHERE cohortid = {$cohort_id}";
+		$result = $this->dbfunc()->query($sql);
+		
+		// remove student cohort link
+		$sql = "DELETE FROM link_student_cohort WHERE id_cohort = {$cohort_id}";
+		$result = $this->dbfunc()->query($sql);
+		
+		return true;
+	}
+	
 	public function Cohortsearch($param) {
 		$where = array();
 		$joins = array();
@@ -83,6 +113,13 @@ class Cohortedit extends ITechTable
 		
 		$joininstitution = false;
 		$joincadre = false;
+
+		$helper = new Helper();
+		$institutions = $helper->getUserInstitutions($helper->myid(),false);
+		if ((is_array($institutions)) && (count($institutions) > 0)){
+			$insids = implode(",", $institutions);
+			$where[] = "c.institutionid IN (" . $insids . ")";
+		}
  
 		foreach ($param as $key =>$value){
 			if (trim ($value) != ""){
@@ -177,28 +214,45 @@ class Cohortedit extends ITechTable
 		return $output;
 	} 
 	
-	public function getAllStudents($cid = false){
-		if ($cid !== false){
+	public function getAllStudents($cid = false, $unassigned_only = false){
+		
+		if($unassigned_only){
+			
 			$select = $this->dbfunc()->select()
 				->from(array('p' => 'person'),
 						array('id','first_name','last_name','gender','birthdate'))
 				->join(array('s' => 'student'),
 						's.personid = p.id',
 						array("sid"=>'id'))
-				->join(array('l' => 'link_student_cohort'),
-						'l.id_student = s.id',
-						array('isgraduated','dropdate','joindate'))
-				->where('l.id_cohort = ?',$cid)
-				->order('p.first_name','p.last_name');
+				->order('p.first_name','p.last_name')
+				->where("s.id NOT IN (SELECT id_student FROM link_student_cohort WHERE id_cohort != {$cid})");
+			
 		} else {
-			$select = $this->dbfunc()->select()
-				->from(array('p' => 'person'),
-						array('id','first_name','last_name','gender','birthdate'))
-				->join(array('s' => 'student'),
-						's.personid = p.id',
-						array("sid"=>'id'))
-				->order('p.first_name','p.last_name');
+			
+			if ($cid !== false){
+				$select = $this->dbfunc()->select()
+					->from(array('p' => 'person'),
+							array('id','first_name','last_name','gender','birthdate'))
+					->join(array('s' => 'student'),
+							's.personid = p.id',
+							array("sid"=>'id'))
+					->join(array('l' => 'link_student_cohort'),
+							'l.id_student = s.id',
+							array('isgraduated','dropdate','joindate'))
+					->where('l.id_cohort = ?',$cid)
+					->order('p.first_name','p.last_name');
+			} else {
+				$select = $this->dbfunc()->select()
+					->from(array('p' => 'person'),
+							array('id','first_name','last_name','gender','birthdate'))
+					->join(array('s' => 'student'),
+							's.personid = p.id',
+							array("sid"=>'id'))
+					->order('p.first_name','p.last_name');
+			}
+			
 		}
+		
 		$result = $this->dbfunc()->fetchAll($select);
 		return $result;
 	}

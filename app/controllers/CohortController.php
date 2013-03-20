@@ -20,7 +20,9 @@ class CohortController extends ITechController {
 		
 		if (! $this->isLoggedIn ())
 			$this->doNoAccessError ();
-	
+
+		if (empty($this->view->title))
+			$this->view->assign('title', $this->view->translation['Application Name']);
 	}
 	
 	public function indexAction() {
@@ -33,11 +35,19 @@ class CohortController extends ITechController {
 			$newid = $cohort->addCohort($_POST);
 			$this->_redirect(Settings::$COUNTRY_BASE_URL . '/cohort/cohortedit/id/' . $newid);
 		}
-		$this->view->assign('title','Trainsmart');
+
 		$this->view->assign('action','../cohort/cohortedit/');
 
 		# CREATING HELPER
 		$helper = new Helper();
+		
+		# GETTING ALL COHORT NAMES
+		$allcohorts = $helper->getCohorts();
+		$cohortarray = array();
+		foreach ($allcohorts as $co){
+			$cohortarray[] = addslashes($co['cohortname']);
+		}
+		$this->view->assign('allcohorts',"'" . implode("','", $cohortarray) . "'");
 
 		# GETTING CADRES
 		$listcadre = $helper->getCadres();
@@ -55,8 +65,6 @@ class CohortController extends ITechController {
 	public function cohorteditAction(){
 		$request = $this->getRequest();
 		
-		$this->view->assign('title','Trainsmart');
-
 		$helper = new Helper();
 		
 		if ((isset ($_POST['action'])) && ($_POST['action'] == "students")){
@@ -98,13 +106,22 @@ class CohortController extends ITechController {
 		// Cohort Update Query
 	    if(isset($_POST['updatecohort'])){
 			$cohortupdate = new Cohortedit();
-			$update=$cohortupdate->UpdateCohort($_POST);	
+			$update = $cohortupdate->UpdateCohort($_POST);	
+		}
+		
+		// delete cohort ?
+		if(isset($_POST['deletecohort'])){
+			$cohortupdate = new Cohortedit();
+			
+	    	if( $cohortupdate->DeleteCohort($_POST) ){
+	    		header("Location:/cohort/");
+	    		exit;
+	    	}
 		}
 		
 		$cohortlist = new Cohortedit();
 		$result = $cohortlist->Listcohort($fetchlist);	
 		  
-		$this->view->assign('title','Trainsmart');
 		$this->view->assign('cohortfetch',$result);
 		  
 		$cohortid = $request->getparam('id');	
@@ -125,12 +142,17 @@ class CohortController extends ITechController {
 		$institutions = $helper->getInstitutions();
 		$this->view->assign('institutions',$institutions);
 
+		# cadres
+		$institution_cadres = $helper->getInstitutionCadres($details['institutionid']);
+		$this->view->assign('institution_cadre_id', $details['cadreid']);
+		$this->view->assign('institution_cadres', $institution_cadres);
+		
 		$cohort = new Cohortedit();
 		$this->view->assign('studentsatstart',count($helper->getCohortStudents($cohortid)));
 		$this->view->assign('studentsseparated',count($helper->getCohortStudents($cohortid,"dropped")));
 		$this->view->assign('studentsgraduating',count($helper->getCohortStudents($cohortid,"graduating")));
 
-		$this->view->assign('allStudents',$cohort->getAllStudents());
+		$this->view->assign('allStudents',$cohort->getAllStudents($cohortid, true));
 		$this->view->assign('cohortStudents',$cohort->getAllStudents($cohortid));
 		$this->view->assign('licenses',$cohort->getLicenses($cohortid));
 		
@@ -142,24 +164,20 @@ class CohortController extends ITechController {
 		  
 #		$requirementlist = new Cohortedit();
 #		$result = $requirementlist->ListRequirement($fetchrequire);	
-#		$this->view->assign('title','Trainsmart');
 #		$this->view->assign('graduationfetch',$result);
 #		//$this->view->assign('action','../cohort/cohortgraduationedit');
 		
 		
 		$result = $helper->ListCurrentPracticum($cohortid);	
-		$this->view->assign('title','Trainsmart');
 		$this->view->assign('practicumfetch',$result);
 		//$this->view->assign('action','../cohort/cohortpracticumedit');
 		
 				
 		$result = $cohort->ListExams($fetchexams);	
-		$this->view->assign('title','Trainsmart');
 		$this->view->assign('fetchexams',$result);
 		//$this->view->assign('action','../cohort/cohortexamedit');
 		
 		$result = $cohort->ListClasses();	
-		$this->view->assign('title','Trainsmart');
 		$this->view->assign('fetchclasses',$result);
 
 		$result = $helper->ListCurrentClasses($cohortid);	
@@ -174,11 +192,9 @@ class CohortController extends ITechController {
 	
 	
 	public function cohortstudentAction(){
-		$this->view->assign('title','Trainsmart');
 	}
 
 	public function cohortpracticumAction(){
-		$this->view->assign('title','Trainsmart');
 		$request = $this->getRequest();
 		$cohortid = $request->getparam('cohortid');	
 		$this->view->assign('id',$cohortid);
@@ -195,7 +211,6 @@ class CohortController extends ITechController {
 	
 	public function cohortgraduationeditAction(){
 	
-		$this->view->assign('title','Trainsmart');
 		$request = $this->getRequest();
 		$requireid = $request->getparam('grduateid');	
 	
@@ -220,7 +235,6 @@ class CohortController extends ITechController {
 	}
 	
 	public function cohortclassAction(){
-		$this->view->assign('title','Trainsmart');
 		
 		$request = $this->getRequest();
 		$cohortid = $request->getparam('cohortid');	
@@ -236,7 +250,6 @@ class CohortController extends ITechController {
 	
 	public function cohortclasseditAction(){
 	
-		$this->view->assign('title','Trainsmart');
 		$request = $this->getRequest();
 		$classid = $request->getparam('classid');	
 		
@@ -260,7 +273,6 @@ class CohortController extends ITechController {
 	}
 	
 	public function cohortasspracticumAction(){
-		$this->view->assign('title','Trainsmart');
 		
 		$request = $this->getRequest();
 		$cohortid = $request->getparam('cohortid');	
@@ -276,7 +288,6 @@ class CohortController extends ITechController {
 	
 	public function cohortpracticumeditAction(){
 	
-		$this->view->assign('title','Trainsmart');
 		$request = $this->getRequest();
 		$pracid = $request->getparam('pracid');	
 		
@@ -301,7 +312,6 @@ class CohortController extends ITechController {
 	}
 	
 	public function cohortexamaddAction(){
-		$this->view->assign('title','Trainsmart');
 		
 		$request = $this->getRequest();
 		$cohortid = $request->getparam('cohortid');	
@@ -317,7 +327,6 @@ class CohortController extends ITechController {
 	
 	public function cohortexameditAction(){
 	
-		$this->view->assign('title','Trainsmart');
 		$request = $this->getRequest();
 		$examid = $request->getparam('examid');	
 		
@@ -349,30 +358,39 @@ class CohortController extends ITechController {
 		$cohorts = $cohort->Cohortsearch($_POST);
 */
 		
-		$this->view->assign('title','Trainsmart');
 		#$this->view->assign('cohort',$cohorts);
 		$this->view->assign('action','../cohort/cohortsearch');
 
 		$helper = new Helper();
-		$this->view->assign('lookup_institutions',$helper->getInstitutions());
-		$this->view->assign('lookup_cadres',$helper->getCadres());
+		$this->view->assign('lookup_institutions', $helper->getInstitutions(false));
+		$this->view->assign('lookup_cadres', $helper->getCadres());
 	}
 	
 	public function cohortsearchAction(){
 		$cohorts = array();
 		#print_r ($_POST);
+		
+		$converted = false;
+		if( !empty($_GET) ){
+			$_POST = $_GET;
+			$converted = true;
+		}
 		if (isset ($_POST['update'])){
 			$cohort = new Cohortedit();
 			$cohorts = $cohort->Cohortsearch($_POST);
+			
+			if(!$converted){
+				$params_query = http_build_query($_POST);
+				header("Location:http://{$_SERVER['HTTP_HOST']}/cohort/cohortsearch?{$params_query}");
+			}
 		}
 		#print_r ($cohorts);
 		
-		$this->view->assign('title','Trainsmart');
 		$this->view->assign('cohort',$cohorts);
 
 		$helper = new Helper();
-		$this->view->assign('lookup_institutions',$helper->getInstitutions());
-		$this->view->assign('lookup_cadres',$helper->getCadres());
+		$this->view->assign('lookup_institutions',$helper->getInstitutions(false));
+		$this->view->assign('lookup_cadres', $helper->getCadres());
 	}
 
 }

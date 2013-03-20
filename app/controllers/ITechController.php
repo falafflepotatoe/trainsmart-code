@@ -22,6 +22,11 @@ class ITechController extends Zend_Controller_Action
         public $_countrySettings = null;
 
         
+	protected function dbfunc()
+	{
+		return Zend_Db_Table_Abstract::getDefaultAdapter();
+	}
+
     public static function translations() {       
     	return self::$_translations;
     }
@@ -61,7 +66,15 @@ class ITechController extends Zend_Controller_Action
 		  $this->_countrySettings = array();
 		  $this->_countrySettings = System::getAll();
 		 
-		  $this->_countrySettings['num_location_tiers'] = 2 + $this->_countrySettings['display_region_c'] + $this->_countrySettings['display_region_b']; //including city
+		  $this->_countrySettings['num_location_tiers'] = 2 //including city
+        + $this->_countrySettings['display_region_b']
+        + $this->_countrySettings['display_region_c']
+        + $this->_countrySettings['display_region_d'] 
+        + $this->_countrySettings['display_region_e'] 
+        + $this->_countrySettings['display_region_f'] 
+        + $this->_countrySettings['display_region_g'] 
+        + $this->_countrySettings['display_region_h'] 
+        + $this->_countrySettings['display_region_i']; 
 		  
 	    $this->view->assign('setting', $this->_countrySettings);
 	    $this->view->assign('languages', ITechTranslate::getLanguages());
@@ -81,7 +94,15 @@ class ITechController extends Zend_Controller_Action
 		foreach ($sys as $key=>$val){
 			$this->_countrySettings[$key] = $val;
 		}
-		$this->_countrySettings['num_location_tiers'] = 2 + $this->_countrySettings['display_region_c'] + $this->_countrySettings['display_region_b']; //including city
+    $this->_countrySettings['num_location_tiers'] = 2 //including city
+      + $this->_countrySettings['display_region_b']
+      + $this->_countrySettings['display_region_c']
+      + $this->_countrySettings['display_region_d'] 
+      + $this->_countrySettings['display_region_e'] 
+      + $this->_countrySettings['display_region_f'] 
+      + $this->_countrySettings['display_region_g'] 
+      + $this->_countrySettings['display_region_h'] 
+      + $this->_countrySettings['display_region_i']; 
 
 		$response->setHeader('Content-Type', 'text/html; charset=utf-8', true);
 
@@ -170,6 +191,49 @@ class ITechController extends Zend_Controller_Action
 
         return $outputType;
     } // protected function getProcessorClass($output)
+
+  /**
+  * Converts or returns header labels. Since the export CSV must use header
+  * labels instead of database fields, define headers here.
+  *
+  * @param $fieldname = database field name to convert
+  * @param $rowRay = will add CSV headers to array
+  *
+  * @todo modify all report phtml files to use these headers
+  */
+  public function reportHeaders($fieldname = false, $rowRay = false) {
+
+    require_once ('models/table/Translation.php');
+    $translation = Translation::getAll ();
+
+    #$headers = array (// fieldname => label
+    # 'id' => 'ID','pcnt' => 'Participants'
+    # );
+    // action => array(field => label)
+    #$headersSpecific = array ('peopleByFacility' => array ('qualification_phrase' => t ( 'Qualification' ) ), 'participantsByCategory' => array ('cnt' => t ( 'Participants' ), 'person_cnt' => t ( 'Unique participants' ) ) );
+
+    if ($rowRay) {
+      $keys = array_keys ( reset ( $rowRay ) );
+      foreach ( $keys as $k ) {
+        $csvheaders [] = $this->reportHeaders ( $k );
+      }
+
+      return array_merge ( array ('csvheaders' => $csvheaders ), $rowRay );
+
+    } elseif ($fieldname) {
+
+      // check report specific headers first
+      $action = $this->getRequest ()->getActionName ();
+      if (isset ( $headersSpecific [$action] ) && isset ( $headersSpecific [$action] [$fieldname] )) {
+        return $headersSpecific [$action] [$fieldname];
+      }
+
+      return (isset ( $headers [$fieldname] )) ? $headers [$fieldname] : $fieldname;
+    } else {
+      return $headers;
+    }
+
+  }
 
     protected function sendData($data) {
 		$this->setNoRenderer();
@@ -340,6 +404,21 @@ class ITechController extends Zend_Controller_Action
    }
 
    /**
+    * Return an array of sanitized data, post and get.
+    *
+    * do not use this on post or get variables with names action,controller or module
+    */
+	public function getAllParams() {
+	// this might not work on arrays with arrays in them, TODO, might be a security flaw, sanitize() wont handle arrays we should array_walk_recursive here. (but will probably just say, ARRAY)
+		$ret = array_merge($_GET,$_POST,$this->getRequest()->getParams());
+		foreach ($ret as $key => $value) {
+			$ret[$key] = $this->getSanParam($key);
+		}
+
+		return $ret;
+	}
+
+   /**
     * Putting this here since we can't get the Zend function to work correctly
     * $path is from the base path beginning with the action, such as 'user/login'
     */
@@ -381,7 +460,176 @@ class ITechController extends Zend_Controller_Action
  		return $this->view->assign($spec,$value);
  	}
 
+  protected function _csv_get_row($filepath, $reset = FALSE) {
+    ini_set('auto_detect_line_endings',true);
 
+    if ($filepath == '') {
+      $this->_csvHandle = null;
+      return FALSE;
+    }
+
+    if (!$this->_csvHandle || $reset) {
+      if ($this->_csvHandle) {
+        fclose($this->_csvHandle);
+      }
+      $this->_csvHandle = fopen($filepath, 'r');
+    }
+
+    return fgetcsv($this->_csvHandle, 10000, ',');
+  }
+
+  /*
+   * string or comma seperated list to array
+   */
+  protected function _array_me($var)
+  {
+    if ( is_array($var) )
+      return $var;
+
+    $comma = strpos($var, ',');
+    if ($comma)
+      return explode(',', $var);
+
+    #else
+    return array($var);
+  }
+
+  // lazy date parsing
+  // accepts (euro: m-y-d, us: m/d/y, sql: yyyy-mm-dd)
+  // returns yyyy-mm-dd
+  protected function _date_to_sql ($val)
+  {
+      $val = trim($val);
+
+      if (preg_match('/^\d{4}-\d{2}-\d{2}/', $val)) {
+        return $val;
+      }
+      if (preg_match('/^\d+-\d+-\d+/', $val)) { //M-Y-D
+        list($day, $month, $year) = explode('-', $val);
+        if (checkdate($month, $day, $year))
+          return date ('Y-m-d', mktime (0, 0, 0, $month, $day, $year));
+      }
+      if (preg_match('/^\d+\/\d+\/\d+/', $val)) { //M/D/Y
+        list($month, $day, $year) = explode('/', $val);
+        if (checkdate($month, $day, $year))
+          return date ('Y-m-d', mktime (0, 0, 0, $month, $day, $year));
+      }
+
+      return $val;
+  }
+
+  protected function _money_to_int ($str)
+  {
+    return ereg_replace("[^0-9]", "", $str);
+  }
+
+  // create option phrase and return option ID
+  // last 2 params only required if multi option table to save option ids to training
+  // 
+  protected function _importHelperFindOrCreate($table, $col, $val)
+  {
+  	require_once('models/table/MultiOptionList.php');
+
+	$val = $this->sanitize($val);
+  	if(!is_array($val))
+		$val = trim($val); // todo check acls
+	if(empty($val)) return '';
+
+	$tableCustom = new ITechTable ( array ('name' => $table ) );
+	$row = $tableCustom->fetchRow($tableCustom->select()->where( "$col = ?", $val ));
+	if (! $row) {
+		$row = $tableCustom->createRow();
+		$row->{$col} = $val;
+		if(isset($row->is_default)) $row->is_default = 0;
+		$option_id = $row->save();
+	}else{
+		$option_id = $row->id;
+	}
+
+	if($option_id)
+		return $option_id;
+
+  }
+
+
+  // create option phrase and return option ID
+  // second 2 to last params only required if multi option table to save option ids to training
+  // last param is extra data, ie # days for pepfar trainings, funding amount for funding
+  protected function _importHelperFindOrCreateMOLT($table, $col, $val, $multiAssignTable = null, $training_id = null, $extra = null)
+  {
+  	require_once('models/table/MultiOptionList.php');
+
+	$val = $this->sanitize($val); // todo check acls
+	if(empty($val)) return true;
+
+	$option_id = '';
+	$results = array();
+
+	if (! is_array($val) )
+		$val = array($val); // handle single values (string input) too
+
+	foreach ($val as $key => $value) {
+		$option_id = '';
+		$tableCustom = new ITechTable ( array ('name' => $table ) );
+		$value = trim($value);
+		$row = $tableCustom->fetchRow($tableCustom->select()->where( "$col = ?", $value ));
+		if (! $row) {
+			$row = $tableCustom->createRow();
+			$row->{$col} = $value;
+			if(isset($row->is_default)) $row->is_default = 0; //unset on import, we prob dont want this.
+			$option_id = $row->save();
+		}else{
+			$option_id = $row->id;
+		}
+		$results[] = $option_id;
+	}
+
+	if (! $training_id)
+		return (count($results) ? true : false);
+
+	try {
+		switch($multiAssignTable) {
+			case 'funding':
+				MultiOptionList::updateOptions ( 'training_to_training_funding_option', 'training_funding_option', 'training_id', $training_id, 'training_funding_option_id', $results, 'funding_amount', $extra );
+			break;
+			case 'pepfar':
+				MultiOptionList::updateOptions ( 'training_to_training_pepfar_categories_option', 'training_pepfar_categories_option', 'training_id', $training_id, 'training_pepfar_categories_option_id', $results, 'duration_days', $extra );
+			break;
+			case 'topic':
+				MultiOptionList::updateOptions ( 'training_to_training_topic_option', 'training_topic_option', 'training_id', $training_id, 'training_topic_option_id', $results );
+			break;
+			case 'refresher':
+				MultiOptionList::updateOptions ( 'training_to_training_refresher_option', 'training_refresher_option', 'training_id', $training_id, 'training_refresher_option_id', $results );
+			break;
+		}
+
+	} catch (Exception $e) {
+		return false;
+	}
+
+	return true;
+  }
+
+  /*
+   * find or create a row, then save it with values from $valueArray
+   *
+   * basically an extension of existing fuctions like fillFromArray
+   */
+	protected function _findOrCreateSaveGeneric($tableName, $valueArray, $whereCol = 'id', $whereVal = false)
+	{
+		$tableCustom = new ITechTable ( array ('name' => $tableName ) );
+		$whereVal = $whereVal ? $whereVal : $valueArray['id'];                                 // usually looking for id
+		$row = $whereVal ? $tableCustom->fetchRow($tableCustom->select()->where( "$whereCol = ?", $whereVal )) : false; // lookup or set to false which will cause row to be created
+		if (! $row) {                                                                          // created row or if not found
+			$row = $tableCustom->createRow();
+		}
+
+		$this->fillFromArray($row, $valueArray);                                               // fill data from array
+		if(isset($row->is_default) && !isset($valueArray['is_default']))                       // breaks otherwise
+			$row->is_default = 0;
+		
+		$id = $row->save();
+		return $id;
+	}
 }
-
 ?>

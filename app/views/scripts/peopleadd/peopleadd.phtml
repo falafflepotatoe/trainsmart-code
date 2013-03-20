@@ -71,17 +71,17 @@
 			<div id="content">
 				<div id="subcontent">
 					<div id="contentheader">
-						<h2>Add a New Student or Tutor Record</h2><br>
-						<p style="float:left;font-size:13px;">Enter details</p>
+						<h2><?php echo t('Add a New Student or Tutor Record'); ?></h2><br>
+						<p style="float:left;font-size:13px;"><?php echo t('Enter details'); ?></p>
 					</div>
 
 					<div class="pad50 clear"></div>
 		
 					<div class="mainformholder" style="">
 						<form action="<?php echo $this->escape($this->action); ?>" method="post" name="second" id="second" >
-							<label>Title</label>
+							<label><?php echo t('Title'); ?></label>
 							<select name="title" >
-								<option value="0">Select...</option>
+								<option value="0"><?php echo t('Select...'); ?></option>
 <?php
 	foreach ($this->fetchtitle as $fetchtitle){
 ?>
@@ -91,26 +91,38 @@
 ?>
 							</select>
 
-							<label><span class="required">*</span> First name</label>
+							<label><span class="required">*</span> <?php echo t('First name'); ?></label>
 							<input type="text" name="firstname" value="" class="required">
 							
-							<label>Middle name</label>
+							<label><?php echo t('Middle name'); ?></label>
 							<input type="text" name="middlename" value="" class="">
 							
-							<label><span class="required">*</span> Last name</label>
+							<label><span class="required">*</span> <?php echo t('Last name'); ?></label>
 							<input type="text" name="lastname" value="" class="required">
 							
 							<label>Gender</label>
 							<select name="gender" id="gender">
-								<option value="male" >Male</option>
-								<option value="female" >Female</option>
+								<option value="male" ><?php echo t('Male'); ?></option>
+								<option value="female" ><?php echo t('Female'); ?></option>
+								<option value="unknown" ><?php echo t('Unknown'); ?></option>
 							</select>
 							
-							<label>Date of birth</label>
+							<label><?php echo t('Date of birth'); ?></label>
 							<input type="text" class="calendarbox" name="dob" value=""><br>
 		
+							<label><?php echo t('Institution'); ?></label>
+							<select name="institutionid" id="institutionid">
+<?php
+	foreach ($this->institutions as $institution){
+?>
+								<option value="<?php echo $institution['id'];?>"><?php echo $institution['institutionname'];?></option>
+<?php
+	}
+?>
+							</select>
+							
 							<div class="pad50 clear"></div>
-							<p style="float:left;font-size:14px;">Local address</p>
+							<p style="float:left;font-size:14px;"><?php echo t('Local address'); ?></p>
 
 							<div class="pad20 clear"></div>
 
@@ -139,9 +151,9 @@
 ?>
 							<!-- geographical area-->
 		
-							<label> Facility</label>
+							<label><?php echo t('Facility'); ?></label>
 							<select name="facility" id="facility" >
-								<option value="0">Select...</option>
+								<option value="0"><?php echo t('Select...'); ?></option>
 <?php
 	foreach ($this->fetchfacility as $facility){
 ?>
@@ -151,15 +163,15 @@
 ?>
 							</select>
 
-							<label>Address 1</label>
+							<label><?php echo t('Address 1'); ?></label>
 							<input type="text" name="address1" value="">
 							
-							<label>Address 2</label>
+							<label><?php echo t('Address 2'); ?></label>
 							<input type="text" name="address2">
 							
-							<label>City</label>
+							<label><?php echo t('City'); ?></label>
 							<select name="city" >
-								<option value="0">Select...</option>
+								<option value="0"><?php echo t('Select...'); ?></option>
 <?php
 	foreach ($this->fetchcity as $city){
 ?>
@@ -170,17 +182,17 @@
 							</select>
 							<!--<input type="text" name="city" value="">-->
 
-							<label style="display : none;">Postal code / ZIP</label>
+							<label style="display : none;"><?php echo t('Postal code / ZIP'); ?></label>
 							<input type="text" name="zip" value="" style="display : none;">
 		
-							<label>Type</label>
+							<label><?php echo t('Type'); ?></label>
 							<select name="type" onchange="clickform(this.value)">
-								<option value="student">Student</option>
-								<option value="tutor">Tutor</option>
+								<option value="student"><?php echo t('Student'); ?></option>
+								<option value="tutor"><?php echo t('Tutor'); ?></option>
 							</select>
 		
 							<div class="rightdiv" style="padding-top:50px;margin-left:25px;;">
-								<input type="submit" border="0" class="tsbutton green large" name="addpeople" value="Add person &raquo;">
+								<input type="submit" border="0" class="tsbutton green large" name="addpeople" value="<?php echo t('Add person'); ?> &raquo;">
 							</div>
 						</form>
 						<div class="clear"></div>

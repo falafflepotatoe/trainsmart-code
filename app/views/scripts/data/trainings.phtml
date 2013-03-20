@@ -13,10 +13,20 @@ print ScriptContainer::$instance->renderCSSHead();
 
 <div id="pageHolder">
   <div id="content">
-
 <?php foreach($this->data as $row) {?>
-  <h2><?php echo $row['training_title']; unset($row['training_title']);unset($row['training_title_option_id']);unset($row['course_id']);
-   if ( $row['is_deleted'] ) echo ' (DELETED) '; unset($row['is_deleted']);?></h2>
+  <h2><?php
+  echo $row['training_title'] ? $row['training_title'] : t('Unknown');
+
+  unset($row['training_title']);
+  unset($row['training_title_option_id']);
+  unset($row['course_id']);
+
+  if ( $row['is_deleted'] )
+    echo space.t('(DELETED)').space;
+  unset($row['is_deleted']);
+  
+  ?></h2>
+
   <?php  foreach($row as $k=>$v) {
   	if ( is_array($v) ) {
   		if ( $v && is_array(reset($v))) {
@@ -24,7 +34,7 @@ print ScriptContainer::$instance->renderCSSHead();
        foreach($v as $vals) {
        	  echo '<br/>&nbsp;&nbsp;'.implode(', ',$vals);
        }
-       echo '<br/';
+       echo '<br/>';
   	 } else {
   	   echo "<span style='font-weight:bold;'>".(str_replace('_phrase','',$k))."</span> ".implode(',',$v)."<br/>";
   		}

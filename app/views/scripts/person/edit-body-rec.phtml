@@ -1,6 +1,6 @@
 <?php if($this->setting['display_training_recommend']) : ?>
 
-  <div class="fieldIndentNoMargin"><?php tp('Recommended Training Topics');?> </div>
+  <div class="fieldIndentNoMargin"><?php echo t('Recommended').' '.t('Training Topics');?> </div>
 
   <?php if(!$this->training_recommend) : ?>
     <?php tp('No recommended classes were found for the above primary qualification'); ?>.
@@ -18,7 +18,7 @@
     }
     ?>
 
-   <div class="fieldIndentNoMargin"><?php tp('Upcoming Trainings');?> </div>
+   <div class="fieldIndentNoMargin"><?php echo t('Upcoming').' '.t('Trainings');?> </div>
    <div id="classRecommend"  class="itechTable"></div>
 
     <script type="text/javascript">
@@ -43,7 +43,7 @@
       {key:"training_title", label: "<?php tp('Name');?>", sortable:true, resizeable:true},
       {key:"topics", label: "<?php tp('Topic(s)');?>", sortable:true, resizeable:true},
        {key:"province_name", label: "<?php echo (@$this->translation['Region A (Province)']); ?>", sortable:true, resizeable:true},
-      {key:"training_organizer_phrase", label: "<?php tp('Training Organizer');?>", sortable:true, resizeable:true}
+      {key:"training_organizer_phrase", label: "<?php echo t('Training').' '.t('Organizer');?>", sortable:true, resizeable:true}
   ];
 
     var caction = '<?php echo $this->base_url;?>/training/listByTrainingRecommendPerson/id/<?php echo $this->person['id'];?>/outputType/json';

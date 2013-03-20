@@ -19,20 +19,28 @@ print ScriptContainer::$instance->renderJSHead(); ?>
 				</div>
 				<div class="pad50 clear"></div>
 				<div class="centerdiv">
-					<div id="loginholder" style="height : 115px;">
+					<div id="loginholder" style="height : <?php echo $this->setting['module_employee_enabled'] ? '145px' : '115px'; ?>;">
 						Please select the TrainSmart module to enter
 						<div class="pad10 clear"></div>
 						<form method="post">
 							<input type="hidden" name="dashaction" id="dashaction" value="inservice">
-							<a href="<?php  echo Settings::$COUNTRY_BASE_URL.'/index/index'; ?>" class="tsbutton green large">In-Service Training Tracking System &raquo;</a>
-<!--							<button type="submit" class="tsbutton green large">In-Service Training Tracking System  &raquo;</button> -->
+							<a href="<?php  echo Settings::$COUNTRY_BASE_URL.'/index/index'; ?>" class="tsbutton green large"><?php tp('In-Service Training Tracking System'); ?> &raquo;</a>
+<!--							<button type="submit" class="tsbutton green large"><?php tp('In-Service Training Tracking System'); ?> &raquo;</button> -->
 						</form>
 						<div class="pad10 clear"></div>
 						<form method="post">
 							<input type="hidden" name="dashaction" id="dashaction" value="preservice">
-							<a href="<?php  echo Settings::$COUNTRY_BASE_URL.'/dash/dash'; ?>" class="tsbutton green large">Pre-Service Training Tracking System &raquo;</a>
-<!--							<button type="submit" class="tsbutton green large">Pre-Service Training Tracking System &raquo;</button> -->
+							<a href="<?php  echo Settings::$COUNTRY_BASE_URL.'/dash/dash'; ?>" class="tsbutton green large"><?php tp('Pre-Service Training Tracking System'); ?> &raquo;</a>
+<!--							<button type="submit" class="tsbutton green large"><?php tp('Pre-Service Training Tracking System'); ?> &raquo;</button> -->
 						</form>
+					<?php if($this->setting['module_employee_enabled']): ?>
+						<div class="pad10 clear"></div>
+						<form method="post">
+							<input type="hidden" name="dashaction" id="dashaction" value="employee">
+							<a href="<?php  echo Settings::$COUNTRY_BASE_URL.'/employee/'; ?>" class="tsbutton green large"><?php tp('Employee Tracking System'); ?> &raquo;</a>
+<!--							<button type="submit" class="tsbutton green large">Employee Tracking System'); ?> &raquo;</button> -->
+						</form>
+					<?php endif; ?>
 					</div>
 				</div>
 			</div>

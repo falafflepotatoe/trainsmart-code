@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <title><?php echo $this->translation['Application Name'];?> | <?php tp('View Training Location');?></title>
+  <title><?php echo $this->translation['Application Name'];?> | <?php echo t('View').' '.t('Training').' '.t('Location');?></title>
 <?php
 require_once('views/helpers/Location.php');
 require_once('views/helpers/ScriptContainer.php');
@@ -15,7 +15,7 @@ print ScriptContainer::$instance->renderJSHead();
   <div id="header"><?php require_once('views/scripts/preheader.phtml');?></div>
   <div id="content">
 
-		<h1><?php tp('View Training Location');?></h1>
+		<h1><?php echo t('View').' '.t('Training').' '.t('Location');?></h1>
 
 		<div class="fieldLabel">
 		<?php tp('Location');?>

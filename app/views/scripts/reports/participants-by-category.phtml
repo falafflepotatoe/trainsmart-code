@@ -39,16 +39,8 @@ switch ( $this->criteria['cat'] ) {
     	<?php require_once('peopleReportsPicker.phtml'); ?>
    <form action="" method="get">
    <fieldset><legend><?php tp('Select Criteria');?></legend>
-  	<div class="fieldLabel" id="province_id_lbl"><?php echo (@$this->translation['Region A (Province)']); ?> (<?php tp('facility location');?>)</div>
-	<div class="fieldInput"><?php renderFilter($this->locations, 1, 'province_id', $this->criteria['province_id'], 'district_id', true); ?></div>
-	<?php if ( $this->setting['display_region_b'] ) { ?>
-  	<div class="fieldLabel" id="district_id_lbl"><?php echo (@$this->translation['Region B (Health District)']); ?> (<?php tp('facility location');?>)</div>
-	<div class="fieldInput"><?php renderFilter($this->locations, 2, 'district_id', $this->criteria['district_id'], ($this->setting['display_region_c']?'region_c_id':false), true); ?></div>
-	<?php } ?>
-  <?php if ( $this->setting['display_region_c'] ) { ?>
-    <div class="fieldLabel" id="region_c_id_lbl"><?php echo (@$this->translation['Region C (Local Region)']); ?> (<?php tp('facility location');?>)</div>
-  <div class="fieldInput"><?php renderFilter($this->locations, 3, 'region_c_id', $this->criteria['region_c_id'], false, true); ?></div>
-  <?php } ?>
+
+	<?php region_filters_dropdown($this, $this->locations, $this->criteria, true, false); ?>
 
 	<div class="fieldLabel" id="training_organizer_id_lbl"><?php echo (@$this->translation['Training Organizer']); ?></div>
 	<div class="fieldInput"><?php echo $this->organizers_checkboxes; ?><br /></div>
