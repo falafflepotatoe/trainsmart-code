@@ -52,8 +52,6 @@
 						<div class="leftBorder autoHeight">
 							<select id="searchflds" name="searchflds[]" class="fixed" multiple="multiple" size="20">
 							<?php
-								echo '<option value="">--' . t ( 'All' ) . '--</option>\n';
-
 								foreach ($this->flds as $tr => $value) {
 									$sel = ( is_array($this->criteria['searchflds']) && array_search($value, $this->criteria['searchflds']) !== false ) ? ' selected' : '';
 									echo '<option value="'.$value.'"'.$sel.'>'.t( $tr ).'</option>'.PHP_EOL;

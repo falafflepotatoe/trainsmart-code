@@ -14,6 +14,8 @@ class Checkboxes {
   public static function generateHtml($table, $column, &$view, $checked = array(), $where = '') {
     $html = '<div class="checkboxHelper" ><table cellspacing="0">';
     $rows = OptionList::suggestionList($table,$column,false,false,false,$where);
+    if (! $rows )
+      return '<input type="text" readonly="readonly" disabled="disabled" /> ';
      
     foreach($rows as $r) {
       $isChecked = 

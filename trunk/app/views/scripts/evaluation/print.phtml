@@ -2,26 +2,30 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <title><?php echo $this->translation['Application Name'];?> | <?php tp('Evaluation Data Entry');?></title>
+
 <?php
 require_once('views/helpers/ScriptContainer.php');
 print ScriptContainer::$instance->renderCSSHead();
 print ScriptContainer::$instance->renderJSHead();
 
-function renderLikert($qid, $qtext, $idx) {
+function renderLikert($qid, $qtext, $qtype, $idx) {
 	echo "<div class='qtext'>".$qtext."</div><br/>";
 	echo "<div class='likert'><input type='radio' value='1' name='value_".$qid."' /><label>1</label>";
   echo "<input type='radio' value='2' name='value_".$qid."' /><label>2</label>";
   echo "<input type='radio' value='3' name='value_".$qid."' /><label>3</label>";
+	if ($qtype == 'Likert' || $qtype == 'LikertNA') {
   echo "<input type='radio' value='4' name='value_".$qid."' /><label>4</label>";
-  echo "<input type='radio' value='5' name='value_".$qid."' /><label>5</label></div>";
+		echo "<input type='radio' value='5' name='value_".$qid."' /><label>5</label>";
+	}
+	if ($qtype == 'Likert3NA' || $qtype == 'LikertNA')
+		echo "<input type='radio' value='0' name='value_".$qid."' /><label>".t('Not Applicable')."</label>";
+	echo '</div>';
 }
 
 function renderText($qid, $qtext, $idx) {
   echo "<div class='qtext'>".$qtext."</div><br/>";
   echo "<div class='likert'><textarea cols='80' rows='5' name='value_".$qid."'></textarea></div>";
 }
-
-
 ?>
 
 </head>
@@ -41,7 +45,7 @@ window.print();
 	<h2><?php echo $this->title;?></h2><br/><br/>
 	<ol>
 	<?php foreach($this->qid as $i=>$qid) {?>
-	<li><label class="qnum"><?php echo $i + 1;?></label><?php ( $this->qtype[$i] == 'Text'? renderText($qid, $this->qtext[$i], $i) :renderLikert($qid, $this->qtext[$i], $i));?></li>
+	<li><label class="qnum"><?php echo $i + 1;?></label><?php ( $this->qtype[$i] == 'Text'? renderText($qid, $this->qtext[$i], $i) :renderLikert($qid, $this->qtext[$i], $this->qtype[$i], $i));?></li>
 	<?php } ?>
 	</ol>
 	<br/><br/>

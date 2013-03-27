@@ -5175,6 +5175,7 @@ class ReportsController extends ReportFilterHelpers {
 				<strong>" . t ('Course Length') . ":</strong> {$rowRay['duration']}<br />
 				<strong>" . t ('Training').' '.t('Topic' ) . ":</strong> {$rowRay['training_topic_phrase']}<br />
 				<strong>" . t ('Training').' '.t('Level' ) . ":</strong> {$rowRay['training_level_phrase']}<br />
+				<strong>" . t ('Training').' '.t('Organizer' ) . ":</strong> {$rowRay['training_organizer']}<br />
 				" . ($rowRay ['training_got_curriculum_phrase'] ? "<strong>" . $this->tr ( 'GOT Curriculum' ) . "</strong>: {$rowRay['training_got_curriculum_phrase']}<br />" : '') . "
 				" . ($rowRay ['got_comments'] ? "<strong>" . $this->tr ( 'GOT Comment' ) . "</strong>: {$rowRay['got_comments']}<br />" : '') . "
 				" . ($rowRay ['comments'] ? "<strong>" . $this->tr ( 'Comments' ) . "</strong>: {$rowRay['comments']}<br />" : "") . "
@@ -10071,7 +10072,7 @@ die (__LINE__ . " - " . $sql);
 			if ($org_allowed_ids)                              $where[] = "partner.organizer_option_id in ($org_allowed_ids)";
 			// restricted access?? only show organizers that belong to this site if its a multi org site
 			$site_orgs = allowed_organizer_in_this_site($this); // for sites to host multiple training organizers on one domain
-			if ($site_orgs)                                    $where[] = "training_organizer_option_id in ($site_orgs) ";
+			if ($site_orgs)                                    $where[] = "partner.organizer_option_id in ($site_orgs) ";
 
 			$locationWhere = $this->getLocationCriteriaWhereClause($criteria, '', '');
 			if ($locationWhere)                                $where[] = $locationWhere;
@@ -10174,7 +10175,7 @@ die (__LINE__ . " - " . $sql);
 			if ($org_allowed_ids)                             $where[] = "partner.organizer_option_id in ($org_allowed_ids)";
 			// restricted access?? only show organizers that belong to this site if its a multi org site
 			$site_orgs = allowed_organizer_in_this_site($this); // for sites to host multiple training organizers on one domain
-			if ($site_orgs)                                   $where[] = "training_organizer_option_id in ($site_orgs)";
+			if ($site_orgs)                                   $where[] = "partner.organizer_option_id in ($site_orgs)";
 
 			// criteria
 			$locationWhere = $this->getLocationCriteriaWhereClause($criteria, '', '');

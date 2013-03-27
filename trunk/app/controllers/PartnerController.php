@@ -99,7 +99,7 @@ class PartnerController extends ReportFilterHelpers {
 			$orgWhere = ($org_allowed_ids) ? " AND partner.organizer_option_id in ($org_allowed_ids) " : "";
 			// restricted access?? only show organizers that belong to this site if its a multi org site
 			$site_orgs = allowed_organizer_in_this_site($this); // for sites to host multiple training organizers on one domain
-			$allowedWhereClause .= $site_orgs ? " AND training_organizer_option_id in ($site_orgs) " : "";
+			$allowedWhereClause .= $site_orgs ? " AND partner.organizer_option_id in ($site_orgs) " : "";
 
 			// continue reading data
 			$sql = 'SELECT * FROM partner WHERE id = '.$id.space.$orgWhere;
@@ -177,7 +177,7 @@ class PartnerController extends ReportFilterHelpers {
 			// restricted access?? only show organizers that belong to this site if its a multi org site
 			$site_orgs = allowed_organizer_in_this_site($this); // for sites to host multiple training organizers on one domain
 			if ($site_orgs)
-				$where[] = " training_organizer_option_id in ($site_orgs) ";
+				$where[] = " partner.organizer_option_id in ($site_orgs) ";
 
 			$locationWhere = $this->getLocationCriteriaWhereClause($criteria, '', '');
 			if ($locationWhere)

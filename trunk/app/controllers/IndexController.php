@@ -121,8 +121,8 @@ class IndexController extends ITechController {
 			}
 			
 			//YTD, start at April 1
-			if (isset($this->setting['fiscal_year_start'])) {
-				$ytdStart = date('Y-n-j', strtotime($this->setting['fiscal_year_start']));
+			if ( $ytdStart = $this->setting('fiscal_year_start') ) {
+				$ytdStart = date('Y-n-j', strtotime($ytdStart));
 				$this->view->assign ( 'ytdStart', $ytdStart );
 				//get total unique participants
 				$db = Zend_Db_Table_Abstract::getDefaultAdapter ();

@@ -13,7 +13,7 @@
 	<div class="fieldIndentNoMargin"><?php tp('All Courses completed by the Community Health Worker');?></div>
 	<div id="classInfo"  class="itechTable"></div>
 	<div id="classInfoTable"  class="itechTable"></div>
-		<a id="course_add" href="#"><?php tp('Assign this person to a class');?></a>
+		<a id="course_add" href="#"><?php tp('Add a completed course');?></a>
 </div>
 
 
@@ -119,7 +119,7 @@
 				unset($row['created_by']);
 				unset($row['timestamp_created']);
 				if ($i > 0) echo ',';
-				echo '["' . implode('","', $row) . '"' . $links . ']';
+				echo '["' . implode('","', $row) . '"' . $links . ']'; // print an array of data
 			}
 		?>
 	];
@@ -137,10 +137,11 @@
 	];
 
 	classInfoDataTable = makeEditTable("classInfo", classInfoData, classColumnDefs, null, true);
-	ITECH.classInfoTable.myDataTable.deleteAjax       = null; // dont need their function
-	ITECH.classInfoTable.myDataTable.config.editOnly  = true; // hide their edit/delete links
-	ITECH.classInfoTable.myDataTable.config.editLinks = '';
-	ITECH.classInfoTable.myDataTable.config.deleteOnly= '';
+	classInfoDataTable.myDataTable.deleteAjax       = null; // dont need their function
+	classInfoDataTable.myDataTable.config.editOnly  = true; // hide their edit/delete links
+	classInfoDataTable.myDataTable.config.editLinks = '';
+	classInfoDataTable.myDataTable.config.deleteOnly= '';
+	ITECH.classInfoTable = classInfoDataTable;
 	// we are not using default DataTable editor AJAX function because they are designed for cell-editing and saving
 
 	// doc ready

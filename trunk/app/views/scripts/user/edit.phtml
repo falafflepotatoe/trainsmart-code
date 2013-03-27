@@ -79,7 +79,7 @@
 
 					<fieldset id="admin_box" class="width100">
 						<legend><?php tp('Admin access');?></legend>
-						<div class="fieldLabelThin"> <?php tp('Admin'); ?></div><div class="fieldInput"><label><a href="#" onclick="adminChecks(1);"><button>select all admin capabilities</button></a><a href="#" onclick="adminChecks(0);"><button>de-select all</button></a></label></div>
+						<div class="fieldLabelThin"> <?php tp('Admin'); ?></div><div class="fieldInput"><label><a href="#" id="admin_select_all"><button>select all admin capabilities</button></a><a href="#" id="admin_select_none"><button>de-select all</button></a><button>de-select all</button></a></label></div>
 						<div class="fieldLabelThin"> <?php tp('Restricted Settings'); ?></div><div class="fieldInput"><div class="width100"><input type="checkbox" id="edit_country_options" name="edit_country_options" <?php if ( array_search('edit_country_options',$this->user['acls']) !== false ) echo 'CHECKED'; ?>><label for="edit_country_options"> <?php tp('Edit country options');?></label></div></div>
 						<div class="fieldLabelThin"></div><div class="fieldInput"><input type="checkbox" id="add_edit_users" name="add_edit_users" <?php if ( array_search('add_edit_users',$this->user['acls']) !== false ) echo 'CHECKED'; ?>><label for="add_edit_users"> <?php tp('Add/Edit users');?></label></div>
 						<div class="fieldLabelThin"> <?php tp('Fields on/off and Labels'); ?></div><div class="fieldInput"><label for="acl_admin_training"><input type="checkbox" id="acl_admin_training" name="acl_admin_training" <?php if ( array_search('acl_admin_training',$this->user['acls']) !== false ) echo 'CHECKED'; ?>><label for="acl_admin_training"> <?php tp('Training Settings');?></label></div>
@@ -166,6 +166,15 @@
 		$('#edit_country_options').click(function (e) { /* edit country options checkbox (this is master admin) */
 			$('#admin_box input[type="checkbox"]').attr('checked', $(this).is(':checked'));
 		});
+
+		$('#admin_select_all').click(function (e) {
+			e.preventDefault();
+			adminChecks(1);
+		});
+		$('#admin_select_none').click(function (e) {
+			e.preventDefault();
+			adminChecks(0);
+		})
 	});
 
 	function adminChecks(val) { /* check all admin options btn */
@@ -173,7 +182,6 @@
 		if( val==1 ) 
 			chked = 'checked';
 		$('#admin_box input[type="checkbox"]').attr('checked', chked);
-		event.preventDefault();
 		return false;
 	}
 

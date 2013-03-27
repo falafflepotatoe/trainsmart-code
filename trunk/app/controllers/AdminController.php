@@ -1793,6 +1793,11 @@ class AdminController extends UserController
 		return parent::addAction();
 	}
 
+	public function usersSearchAction() {
+
+		$this->_redirect('user/search');
+	}
+
 	public function preserviceClassesAction(){
 		$helper = new Helper();
 
@@ -2508,7 +2513,7 @@ class AdminController extends UserController
 		}
 	}
 
-	public function employeecategoryAction()
+	public function employeeCategoryAction()
 	{
 
 		/* edit table */
@@ -2520,7 +2525,7 @@ class AdminController extends UserController
 		$editTable->execute();
 	}
 
-	public function employeeroleAction()
+	public function employeeRoleAction()
 	{
 
 		/* edit table */
@@ -2532,7 +2537,7 @@ class AdminController extends UserController
 		$editTable->execute();
 	}
 
-	public function employeetransitionAction()
+	public function employeeTransitionAction()
 	{
 
 		/* edit table */
@@ -2544,7 +2549,7 @@ class AdminController extends UserController
 		$editTable->execute();
 	}
 
-	public function employeerelationshipAction()
+	public function employeeRelationshipAction()
 	{
 
 		/* edit table */
@@ -2556,7 +2561,7 @@ class AdminController extends UserController
 		$editTable->execute();
 	}
 
-	public function employeereferralAction()
+	public function employeeReferralAction()
 	{
 
 		/* edit table */
@@ -2568,7 +2573,7 @@ class AdminController extends UserController
 		$editTable->execute();
 	}
 
-	public function employeetrainingprovidedAction()
+	public function employeeTrainingProvidedAction()
 	{
 
 		/* edit table */
@@ -2588,7 +2593,7 @@ class AdminController extends UserController
 		$editTable->table   = 'partner_funder_option';
 		$editTable->fields  = array('funder_phrase' => 'Funder');
 		$editTable->label   = 'Funder';
-		$editTable->dependencies = array('funder_option_id' => 'partner_to_funder');
+		$editTable->dependencies = array('partner_funder_option_id' => 'partner_to_funder');
 		$editTable->execute();
 	}
 

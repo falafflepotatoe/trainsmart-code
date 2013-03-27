@@ -78,6 +78,7 @@ class Training extends ITechTable
         ->joinLeft(array('tl' => 'training_location'), "$this->_name.training_location_id = tl.id",'training_location_name')
         ->joinLeft(array('tg' => 'training_got_curriculum_option'), "$this->_name.training_got_curriculum_option_id = tg.id",'training_got_curriculum_phrase')
         ->joinLeft(array('tlvl' => 'training_level_option'), "$this->_name.training_level_option_id = tlvl.id",'training_level_phrase')
+        ->joinLeft(array('torg' => 'training_organizer_option'),    "$this->_name.training_organizer_option_id = torg.id",    array('training_organizer' => 'training_organizer_phrase'))
         //->joinLeft(array('tt' => 'training_topic_option'), "$this->_name.training_topic_option_id = tt.id",'training_topic_phrase')
         ->where("$this->_name.id = $training_id");
       $rowRay = $this->fetchRow($select)->toArray();

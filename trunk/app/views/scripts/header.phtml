@@ -162,7 +162,7 @@ if ( $this->isLoggedIn() ) {
 	}
   if ( isset($this->setting['module_employee_enabled']) && $this->setting['module_employee_enabled'] == 1 ) {
     if ( $this->hasACL('edit_country_options') ) {
-      $navMain['user']['../admin/employee-settings']  = no_soft_space_str( t('Employees') );
+      $navMain['user']['../admin/employee-settings']  = no_soft_space_str( t('Employees').' '.t('Settings') );
     }
   }
 	if ( $this->hasACL('add_edit_users')) {

@@ -104,7 +104,7 @@ YAHOO.util.Event.onDOMReady(setOrgAccessStatus);
 		?>
 	</fieldset>
 	<fieldset id="admin_box" class="width100" style="display:none;"><legend><?php tp('Admin access');?></legend>
-			<div class="fieldLabelThin"><?php tp('Admin'); ?></div><div class="fieldInput"><label><a href="#" onclick="adminChecks(1);"><button>select all admin capabilities</button></a><a href="#" onclick="adminChecks(0);"><button>de-select all</button></a></label></div>
+			<div class="fieldLabelThin"><?php tp('Admin'); ?></div><div class="fieldInput"><label><a href="#" id="admin_select_all"><button>select all admin capabilities</button></a><a href="#" id="admin_select_none"><button>de-select all</button></a></label></div>
 		<div class="fieldLabelThin"> <?php tp('Restricted Settings'); ?></div><div class="fieldInput"><div class="width100"><input type="checkbox" id="edit_country_options" name="edit_country_options" /><label for="edit_country_options"> <?php tp('Edit country options');?></label></div></div>
 		<div class="fieldLabelThin"></div><div class="fieldInput"><input type="checkbox" id="add_edit_users" name="add_edit_users" /><label for="add_edit_users"> <?php tp('Add/Edit users');?></label></div>
 
@@ -166,6 +166,15 @@ $(document).ready(function () {
 
 	$('#edit_country_options').click(function (e) { /* edit country options checkbox (this is master admin) */
 		$('#admin_box input[type="checkbox"]').attr('checked', $(this).is(':checked'));
+	});
+
+	$('#admin_select_all').click(function (e) {
+		e.preventDefault();
+		adminChecks(1);
+	});
+	$('#admin_select_none').click(function (e) {
+		e.preventDefault();
+		adminChecks(0);
 	});
 });
 

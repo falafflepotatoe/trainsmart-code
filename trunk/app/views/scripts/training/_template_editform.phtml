@@ -190,7 +190,7 @@ YAHOO.util.Event.onDOMReady(init);
     <?php if ( @$this->evaluation_id ) : ?><a href="javascript:submitThenRedirect('<?php echo $this->base_url;?>/evaluation/data/id/<?php echo $this->evaluation_to_training_id; ?>');" onclick=""><?php tp('Enter Evaluation Data');?></a>&nbsp;&nbsp;&nbsp;<a href="javascript:submitThenRedirect('<?php echo $this->base_url;?>/reports/evaluations/training_id/<?php echo $this->row['id']; ?>');" onclick=""><?php tp('View Data');?></a><?php else : ?><?php tp('unassigned')?><?php endif;?><br>
     <?php } ?>
     <?php if(!$this->viewonly) : ?>
-      <?php if (!@$this->setting['require_duplicate_acl'] || (@$this->setting['require_duplicate_acl'] && $this->hasACL('duplicate_training'))) { echo '  <a href="" onclick="duplicateTraining(); return false;">'.t('Duplicate this').' '.t('Training').'</a><br>'; } ?>
+      <?php if ($this->hasACL('duplicate_training')) { echo '  <a href="" onclick="duplicateTraining(); return false;">'.t('Duplicate this').' '.t('Training').'</a><br>'; } ?>
       <a href="#" onclick="deleteTraining(); return false;"><?php echo t('Delete this').' '.t('Training');?></a>
     <?php endif; ?>
 
@@ -1166,11 +1166,26 @@ YAHOO.util.Event.on(window, 'load', initUploadButton);
 
 ?>
 
+documentHasChanged = false;
+
+function monitorChanges (e) {
+  documentHasChanged = true;
+}
+
+$(document).ready ( function () {
+  $('#trainingForm select').click(monitorChanges);
+  $('#trainingForm input').change(monitorChanges);
+});
+
 // submitThenRedirect()
 function submitThenRedirect(url) {
   var fld = document.getElementById('redirectUrl');
   fld.value = url;
-	if (confirm("<?php echo t('You are moving to a new page, do you wish to save the changes you\'ve made?');?>"))
+
+  if (!documentHasChanged)
+    return window.location = url;
+
+	if (confirm("<?php tp('You are moving to a new page, do you wish to save the changes you\'ve made?');?>"))
     submitForm();
   else
     window.location = url;
@@ -1235,7 +1250,7 @@ function submitForm() {
         }
         
         var redir = document.getElementById('redirectUrl');
-        if(redir.value != ''){
+        if(redir.value != '' && allGood){
           window.location =  redir.value;
         } else if ( responseObj.redirect ) {
           window.location = responseObj.redirect;

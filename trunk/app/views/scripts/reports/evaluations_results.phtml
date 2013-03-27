@@ -7,49 +7,52 @@
 $output = '';
 
 foreach( $this->questions as $q) {
-		  if ($q['question_type'] == 'Likert') {
-		    //calculate average
-		    $sum = 0;
-		    $count = 0;
-		    $rslt_score = array(1=>0, 2=>0, 3=>0, 4=>0, 5=>0);
-		    foreach ( $this->results as $rslt ) {
-		      if ( $rslt['evaluation_question_id'] == $q['id'] ) {
-		        $sum += $rslt['value_int'];
-		        $rslt_score[$rslt['value_int']] = $rslt_score[$rslt['value_int']] + 1;
-		        $count++;
-		      }
-		    }
-		    
-		    if ( $count ) {
-		      $likert_resp = '';
-		      foreach($rslt_score as $r=>$s) {
-		      	$likert_resp .= $r."($s)&nbsp;&nbsp;";
-		      }
-		      $likert_resp .= '&nbsp;&nbsp;&nbsp;average: '.$sum/$count;
-		    }
-		      
-		  } else {
-		    //concat text responses
-		    $resp = '<ul>';
-		    $count = 0;
-		    foreach ( $this->results as $rslt ) {
-		      if ( $rslt['evaluation_question_id'] == $q['id'] && $rslt['value_text'] ) {
-		        $resp .= '<li>'.$rslt['value_text'].'</li>';
-           $count++;
-		      }
-		    }
-		    $resp .= '</ul>';
-		    
-		   }
-			
-        $output .= "
-        <p>
-        <strong>".t('Evaluation Name').":</strong> {$q['title']}<br />
-        <strong>".t('Question').":</strong> {$q['question_text']}<br />
-        <strong>".t('Type').":</strong> {$q['question_type']}<br />
-         <strong>".t('Responses')."(".$count."):</strong> ".($q['question_type'] == 'Likert'?$likert_resp:$resp)."<br />
-        </p>
-        ";
+	if ( $q['question_type'] == 'Text') {
+		//concat text responses
+		$resp = '<ul>';
+		$count = 0;
+		foreach ( $this->results as $rslt ) {
+			if ( $rslt['evaluation_question_id'] == $q['id'] && $rslt['value_text'] ) {
+				$resp .= '<li>'.$rslt['value_text'].'</li>';
+				$count++;
+			}
+		}
+		$resp .= '</ul>';
+
+	} else { // ($q['question_type'] is a (Likert,Likert3,LikertNA,Liker3NA)	
+		//calculate average
+		$sum = 0;
+		$count = 0;
+		$rslt_score = array(1=>0, 2=>0, 3=>0, 4=>0, 5=>0);
+		if ($q['question_type'] == 'Likert3' || $q['question_type'] == 'Likert3NA') {
+			$rslt_score = array(1=>0, 2=>0, 3=>0);
+		}
+
+		foreach ( $this->results as $rslt ) {
+			if ( $rslt['evaluation_question_id'] == $q['id'] ) {
+				$sum += $rslt['value_int'];
+				$rslt_score[$rslt['value_int']] = $rslt_score[$rslt['value_int']] + 1;
+				$count++;
+			}
+		}
+
+		if ( $count ) {
+			$likert_resp = '';
+			foreach($rslt_score as $r=>$s) {
+				$likert_resp .= $r."($s)&nbsp;&nbsp;";
+			}
+			$likert_resp .= '&nbsp;&nbsp;&nbsp;average: '.$sum/$count;
+		}
+	}
+
+	$output .= "
+	<p>
+	<strong>".t('Evaluation Name').":</strong> {$q['title']}<br />
+	<strong>".t('Question').":</strong> {$q['question_text']}<br />
+	<strong>".t('Type').":</strong> {$q['question_type']}<br />
+	<strong>".t('Responses')."(".$count."):</strong> ".($q['question_type'] == 'Text'?$resp:$likert_resp)."<br />
+	</p>
+	";
 } 
 print $output;
 ?>
