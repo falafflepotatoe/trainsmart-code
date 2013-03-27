@@ -474,8 +474,7 @@ class TrainingController extends ReportFilterHelpers {
 
 					// duplicate training
 					if ($this->getSanParam ( 'specialAction' ) == 'duplicate') {
-						$has_duplicate_acl = (!@$this->setting['require_duplicate_acl'] || (@$this->setting['require_duplicate_acl'] && $this->hasACL('duplicate_training')));
-						if ($has_duplicate_acl) {
+						if ($this->hasACL('duplicate_training')) {
 						$dupId = $trainingObj->duplicateTraining ( $row->id );
 						$status->redirect = Settings::$COUNTRY_BASE_URL . '/training/edit/id/' . $dupId . '/msg/duplicate';
 					}

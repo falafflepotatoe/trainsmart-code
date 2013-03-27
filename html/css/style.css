@@ -64,7 +64,13 @@ input[type='checkbox'] { margin-right: .5em;}
 
 .label { font-weight:bold; font-size:90%; color:#696969; }
 
+.red   { color:#FF0000; }
 
+.block { display: block; }
+
+.right { float:right; }
+
+.borderGrey { border: 1px solid grey; }
 
 /* Forms */
 
@@ -1273,33 +1279,37 @@ table {
 /*  employee module */
 /********************/
 
-.form_employee select, .form_employee input:not([type="submit"]),
-.form_styled   select, .form_styled   input:not([type="submit"])
- {
+.form_employee select, .form_employee input:not([type="submit"]):not([type="checkbox"]),
+.form_styled   select, .form_styled   input:not([type="submit"]):not([type="checkbox"]) {
 	border-radius           : 3px;
 	-moz-border-radius		: 3px; 
 	-webkit-border-radius	: 3px;
 }
 
-.form_styled input {
-	min-width:250px;
-	max-width:250px;
+.form_employee input:not([type="submit"]):not([type="checkbox"]),
+.form_styled input:not([type="submit"]):not([type="checkbox"]) {
+	width:250px;
 }
 
-.form_employee input:not([type="submit"]),.form_styled input:not([type="submit"]) {
+.form_employee select,
+.form_styled select {
 	min-width:250px;
 	max-width:250px;
 }
 
 .form_employee #hours_min, .form_employee #hours_max,
 .form_employee #cost_min,  .form_employee #cost_max,
-.form_employee #start_date,.form_employee #end_date {
+.form_employee #start_date,.form_employee #end_date,
+.datepicker,.datepicker {
+	max-width: 100px;
+	min-width: 100px;
 	width:100px;
 }
 
+
 .calenderbtn img { vertical-align: bottom; }
 
-.subpartner_id_display {width:30px; float:left;}
+.subpartner_id_display {min-width:30px !important;width:30px !important; float:left;}
 
 .subpartners_wrapper { width:600px;display:block;overflow:hidden; }
 

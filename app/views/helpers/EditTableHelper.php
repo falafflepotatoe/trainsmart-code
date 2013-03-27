@@ -113,6 +113,9 @@ class EditTableHelper {
 			$editLinkInfo = '""';
 		}
 
+		$req_url = $_SERVER['REQUEST_URI'];
+		$req_url = rtrim($req_url,"/");
+
 		$js = '';
 		$js .= "<script type='text/javascript'>\n\n";
 		$js .= "YAHOO.util.Event.onDOMReady(function() {\n\n";
@@ -120,7 +123,7 @@ class EditTableHelper {
 		$js .= "var editLinkInfo = $editLinkInfo;\n\n";
 		$js .= "var {$labelSafe}DataSource = [ " . implode(",\n", $rowRay) . " ];\n\n";
 		$js .= "var {$labelSafe}ColDefs = [ " . implode(',', $colDefsClone) . " ];\n\n";
-		$js .= "var {$labelSafe}Table = makeEditTableTraining(\"{$labelSafe}\", {$labelSafe}DataSource, {$labelSafe}ColDefs, \"{$_SERVER['REQUEST_URI']}/edittable/$labelSafe/outputType/json\", linkInfo, editLinkInfo);\n\n";
+		$js .= "var {$labelSafe}Table = makeEditTableTraining(\"{$labelSafe}\", {$labelSafe}DataSource, {$labelSafe}ColDefs, \"{$req_url}/edittable/$labelSafe/outputType/json\", linkInfo, editLinkInfo);\n\n";
 		//add it to a global namespace as well
 		$js .= "ITECH.{$labelSafe}Table = {$labelSafe}Table;\n\n";
 		$js .= "});</script>\n\n";

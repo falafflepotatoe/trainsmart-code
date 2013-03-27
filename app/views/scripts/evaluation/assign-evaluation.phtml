@@ -41,7 +41,7 @@ print ScriptContainer::$instance->renderJSHead();
 
 		var trainingColumnDefs = [
       {key:"input_checkbox", label: "<?php tp('Assign'); ?>", sortable:false, resizable:false},
-      {key:"training_id", label: "ID", sortable:false, resizeable:true, formatter: formatTrainingViewUrl},
+      {key:"training_id", label: "ID", sortable:true, resizeable:true, formatter: formatTrainingViewUrl},
       {key:"training_category_phrase", label: "<?php echo (@$this->translation['Training Category']); ?>", sortable:true, resizeable:true},
       {key:"training_title", label: "<?php echo (@$this->translation['Training Name']); ?>", sortable:true, resizeable:true},
       {key:"training_start_date", label: "<?php tp('Start Date'); ?>", sortable:true, resizeable:true},

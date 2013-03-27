@@ -44,10 +44,10 @@ class EmployeeController extends ReportFilterHelpers {
 
 		// restricted access?? does this user only have acl to view some trainings or people
 		$org_allowed_ids = allowed_org_access_full_list($this); // doesnt have acl 'training_organizer_option_all'?
-		$allowedWhereClause = $org_allowed_ids ? " training_organizer_option_id in ($org_allowed_ids) " : "";
+		$allowedWhereClause = $org_allowed_ids ? " partner.organizer_option_id in ($org_allowed_ids) " : "";
 		// restricted access?? only show organizers that belong to this site if its a multi org site
 		$site_orgs = allowed_organizer_in_this_site($this); // for sites to host multiple training organizers on one domain
-		$allowedWhereClause .= $site_orgs ? " AND training_organizer_option_id in ($site_orgs) " : "";
+		$allowedWhereClause .= $site_orgs ? " AND partner.organizer_option_id in ($site_orgs) " : "";
 
 		$institute = new DashviewEmployee();
 		$details=$institute->fetchdetails($org_allowed_ids);
