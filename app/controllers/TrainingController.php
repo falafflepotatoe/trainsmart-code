@@ -27,7 +27,7 @@ class TrainingController extends ReportFilterHelpers {
 		$this->_countrySettings = array();
 		$this->_countrySettings = System::getAll();
 
-		$this->_countrySettings['num_location_tiers'] = 2 + $this->_countrySettings['display_region_c'] + $this->_countrySettings['display_region_b']; //including city
+		$this->_countrySettings['num_location_tiers'] = 2 + $this->_countrySettings['display_region_c'] + $this->_countrySettings['display_region_b'] + $this->_countrySettings['display_region_d'] + $this->_countrySettings['display_region_e'] + $this->_countrySettings['display_region_f'] + $this->_countrySettings['display_region_g'] + $this->_countrySettings['display_region_h'] + $this->_countrySettings['display_region_i']; //including city // todo i want to mark this for removal
 
 		parent::__construct ( $request, $response, $invokeArgs );
 	}
@@ -195,7 +195,7 @@ class TrainingController extends ReportFilterHelpers {
 				}
 			}
 
-			$pepfarEnabled = @$this->setting['display_training_pepfar'];
+			$pepfarEnabled = @$this->setting('display_training_pepfar');
 
 			if ($training_id) {
 
@@ -475,9 +475,9 @@ class TrainingController extends ReportFilterHelpers {
 					// duplicate training
 					if ($this->getSanParam ( 'specialAction' ) == 'duplicate') {
 						if ($this->hasACL('duplicate_training')) {
-						$dupId = $trainingObj->duplicateTraining ( $row->id );
-						$status->redirect = Settings::$COUNTRY_BASE_URL . '/training/edit/id/' . $dupId . '/msg/duplicate';
-					}
+							$dupId = $trainingObj->duplicateTraining ( $row->id );
+							$status->redirect = Settings::$COUNTRY_BASE_URL . '/training/edit/id/' . $dupId . '/msg/duplicate';
+						}
 					}
 
 					if (! $status->redirect) {
@@ -615,7 +615,7 @@ class TrainingController extends ReportFilterHelpers {
 				}
 			}
 		}
-		
+
 		$this->view->assign ( 'dropDownCategory', DropDown::generateHtml ( 'training_category_option', 'training_category_phrase', $catId, false, $this->view->viewonly, false ) );
 
 		//echo '<pre>';
@@ -765,26 +765,57 @@ class TrainingController extends ReportFilterHelpers {
 		* Participants */
 
 		$locations = Location::getAll ();
+		$customColDefs = array();
 
 		if ($training_id) {
 			$persons = PersonToTraining::getParticipants ( $training_id )->toArray ();
 			foreach ( $persons as $pid => $p ) {
 				$region_ids = Location::getCityInfo ( $p ['location_id'], $this->setting ( 'num_location_tiers' ) ); // todo expensive call, getcityinfo loads all locations each time??
-				$region_ids = Location::cityInfotoHash($region_ids);
-				
-				$persons [$pid] ['province_name'] = $locations [$region_ids['province_id']] ['name'];
-				if ($region_ids['district_id'])
-				$persons [$pid] ['district_name'] = $locations [$region_ids['district_id']] ['name'];
+				$persons [$pid] ['province_name'] = ($region_ids[1] ? $locations [$region_ids['1']] ['name'] : 'unknown');
+				if ($region_ids[2])
+					$persons [$pid] ['district_name'] = $locations [$region_ids[2]] ['name'];
 				else
-				$persons [$pid] ['district_name'] = 'unknown';
-				if ($region_ids['region_c_id'])
-				$persons [$pid] ['region_c_name'] = $locations [$region_ids['region_c_id']] ['name'];
+					$persons [$pid] ['district_name'] = 'unknown';
+
+				if ($region_ids[3])
+					$persons [$pid] ['region_c_name'] = $locations [$region_ids[3]] ['name'];
 				else
-				$persons [$pid] ['region_c_name'] = 'unknown';
+					$persons [$pid] ['region_c_name'] = 'unknown';
+
+				if ($region_ids[4])
+					$persons [$pid] ['region_d_name'] = $locations [$region_ids[4]] ['name'];
+				else
+					$persons [$pid] ['region_d_name'] = 'unknown';
+
+				if ($region_ids[5])
+					$persons [$pid] ['region_e_name'] = $locations [$region_ids[5]] ['name'];
+				else
+					$persons [$pid] ['region_e_name'] = 'unknown';
+
+				if ($region_ids[6])
+					$persons [$pid] ['region_f_name'] = $locations [$region_ids[6]] ['name'];
+				else
+					$persons [$pid] ['region_f_name'] = 'unknown';
+
+				if ($region_ids[7])
+					$persons [$pid] ['region_g_name'] = $locations [$region_ids[7]] ['name'];
+				else
+					$persons [$pid] ['region_g_name'] = 'unknown';
+
+				if ($region_ids[8])
+					$persons [$pid] ['region_h_name'] = $locations [$region_ids[8]] ['name'];
+				else
+					$persons [$pid] ['region_h_name'] = 'unknown';
+
+				if ($region_ids[9])
+					$persons [$pid] ['region_i_name'] = $locations [$region_ids[9]] ['name'];
+				else
+					$persons [$pid] ['region_i_name'] = 'unknown';
 			}
 		} else {
 			$persons = array ();
 		}
+
 
 		if (! $this->setting ( 'display_middle_name' )) {
 			$personsFields = array ('first_name' => $this->tr ( 'First Name' ), 'last_name' => $this->tr ( 'Last Name' ), 'birthdate' => t ( 'Date of Birth' ), 'facility_name' => t ( 'Facility' ) );
@@ -795,22 +826,81 @@ class TrainingController extends ReportFilterHelpers {
 		}
 		if ( $this->setting ( 'module_attendance_enabled' )) {
 			$personsFields['duration_days'] = $this->tr ( 'Days Attended' );
-			$personsFields['award_id'] = $this->tr ( 'Complete' );
+			$personsFields['award_phrase']       = $this->tr ( 'Complete' );
+
+			$rowArray = OptionList::suggestionList('person_to_training_award_option', array('id', 'award_phrase'), false, 9999, false, false);
+			$elements = array(0 => array('text' => ' ', 'value' => 0));
+			foreach ($rowArray as $i => $tablerow) {
+				$elements[$i+1]['text']  = $tablerow['award_phrase'];
+				$elements[$i+1]['value'] = $tablerow['id'];
+			}
+			$elements = json_encode($elements); // yui data table will enjoy spending time with a json encoded array
+
+			$customColDefs['award_phrase']       = "editor:'dropdown', editorOptions: {dropdownOptions: $elements }";
+		}
+		if ( $this->setting ( 'display_viewing_location' ) ) {
+			$personsFields['location_phrase']    = $this->tr ( 'Viewing Location' );
+
+			$vLocDropDown = OptionList::suggestionList('person_to_training_viewing_loc_option', array('id', 'location_phrase'), false, 9999, false, false);
+			$elements = array(0 => array('text' => '', 'value' => 0));
+			foreach ($vLocDropDown as $i => $tablerow) {
+				$elements[$i+1]['text'] = $tablerow['location_phrase'];
+				$elements[$i+1]['value'] = $tablerow['id'];
+			}
+			$elements = json_encode($elements);
+
+			$customColDefs['location_phrase']    = "editor:'dropdown', editorOptions: {dropdownOptions: $elements }";
+
+		}
+		if ( $this->setting ( 'display_budget_code' ) ) {
+			$personsFields['budget_code_phrase'] = $this->tr ( 'Budget Code' );
+
+			$budgetDropDown = OptionList::suggestionList('person_to_training_budget_option', array('id', 'budget_code_phrase'), false, 9999, false, false);
+			$elements = array( 0 => array('text' => '', 'value' => 0));
+			foreach ($budgetDropDown as $i => $tablerow) {
+				$elements[$i+1]['text'] = $tablerow['budget_code_phrase'];
+				$elements[$i+1]['value'] = $tablerow['id'];
+			}
+			$elements = json_encode($elements);
+			$customColDefs['budget_code_phrase'] = "editor: 'dropdown' , editorOptions:{dropdownOptions: $elements} ";
 		}
 
-		if ( $this->setting ( 'display_region_c' )) {
+
+
+		if ( $this->setting ( 'display_region_i' )) {
+			$personsFields ['region_i_name'] = $this->tr ( 'Region I' );
+		}
+		else if ( $this->setting ( 'display_region_h' )) {
+			$personsFields ['region_h_name'] = $this->tr ( 'Region H' );
+		}
+		else if ( $this->setting ( 'display_region_g' )) {
+			$personsFields ['region_g_name'] = $this->tr ( 'Region G' );
+		}
+		else if ( $this->setting ( 'display_region_f' )) {
+			$personsFields ['region_f_name'] = $this->tr ( 'Region F' );
+		}
+		else if ( $this->setting ( 'display_region_e' )) {
+			$personsFields ['region_e_name'] = $this->tr ( 'Region E' );
+		}
+		else if ( $this->setting ( 'display_region_d' )) {
+			$personsFields ['region_d_name'] = $this->tr ( 'Region D' );
+		}
+		else if ( $this->setting ( 'display_region_c' )) {
 			$personsFields ['region_c_name'] = $this->tr ( 'Region C (Local Region)' );
-		} else if ($this->setting ( 'display_region_b' )) {
+		}
+		else if ($this->setting ( 'display_region_b' )) {
 			$personsFields ['district_name'] = $this->tr ( 'Region B (Health District)' );
-		} else {
+		}
+		else {
 			$personsFields ['province_name'] = $this->tr ( 'Region A (Province)' );
 		}
 
+
 		$colStatic = array_keys ( $personsFields ); // static calumns (From field keys)
-		if ( $this->setting ( 'module_attendance_enabled' )) { // remove 1 so we can edit the field
+		if ( $this->setting ( 'module_attendance_enabled' ) || $this->setting ( 'display_viewing_location' ) || $this->setting( 'display_budget_code' ) ) {
 			foreach( $colStatic as $i => $v )
-				if( $v == 'duration_days' || $v == 'award_id' )
-					unset( $colStatic[$i] );
+				if( $v == 'duration_days' || $v == 'award_phrase' || $v == 'budget_code_phrase' || $v == 'location_phrase')
+					unset( $colStatic[$i] ); // remove 1 so we can edit the field
 		}
 
 		if ($this->view->viewonly) {
@@ -843,7 +933,7 @@ class TrainingController extends ReportFilterHelpers {
 
 		}
 
-		$html = EditTableHelper::generateHtmlTraining ( 'Persons', $persons, $personsFields, $colStatic, $linkInfo, $editLinkInfo );
+		$html = EditTableHelper::generateHtmlTraining ( 'Persons', $persons, $personsFields, $colStatic, $linkInfo, $editLinkInfo, $customColDefs);
 		$this->view->assign ( 'tablePersons', $html );
 
 		/****************************************************************************************************************/
@@ -871,7 +961,7 @@ class TrainingController extends ReportFilterHelpers {
 				$this->view->assign('approve_val', '');
 			else
 				$this->view->assign('approve_val', $row->is_approved);
-			
+
 			// disable control
 			if (!$canApprove or !$this->hasACL('approve_trainings')) {
 				$this->view->assign('approve_disable_str', 'disabled');
@@ -919,7 +1009,6 @@ class TrainingController extends ReportFilterHelpers {
 				$rowRay['start-year'] = $parts[2];
 			}
 		}
-
 
 		// row values
 		$this->view->assign ( 'row', $rowRay );
@@ -1059,8 +1148,8 @@ class TrainingController extends ReportFilterHelpers {
 				$this->sendData ( array ('delete' => $result ) );
 			} else { // update a row?
 
-				$days = $this->_getParam ( 'duration_days' );
-				if ($days) {
+				$days = $this->getSanParam ( 'duration_days' );
+				if ($days !== "") {
 					$tableObj = new PersonToTraining ( );
 					$result = $tableObj->update ( array ("duration_days" => $days ), "id=$row_id" );
 					$sendRay ['update'] = $result;
@@ -1071,10 +1160,35 @@ class TrainingController extends ReportFilterHelpers {
 
 					$this->sendData ( $sendRay );
 				}
-				$award = $this->_getParam ( 'award_id' );
-				if ($award) {
+
+				$award_id = $this->getSanParam ( 'award_phrase' );
+				if ($award_id !== "") {
 					$tableObj = new PersonToTraining ( );
-					$result = $tableObj->update ( array ("award_id" => $award ), "id=$row_id" );
+					$result = $tableObj->update ( array ("award_id" => $award_id ), "id=$row_id" );
+					$sendRay ['update'] = $result;
+					if (! $result) {
+						$sendRay ['error'] = t ( 'Could not update this record.' );
+					}
+
+					$this->sendData ( $sendRay );
+				}
+
+				$viewing_loc_option_id = $this->getSanParam ( 'location_phrase' );
+				if ($viewing_loc_option_id !== "") {
+					$tableObj = new PersonToTraining ( );
+					$result = $tableObj->update ( array ("viewing_location_option_id" => $viewing_loc_option_id ), "id=$row_id" );
+					$sendRay ['update'] = $result;
+					if (! $result) {
+						$sendRay ['error'] = t ( 'Could not update this record.' );
+					}
+
+					$this->sendData ( $sendRay );
+				}
+
+				$budget_code_option_id = $this->getSanParam ( 'budget_code_phrase' );
+				if ($budget_code_option_id !== "") {
+					$tableObj = new PersonToTraining ( );
+					$result = $tableObj->update ( array ("budget_code_option_id" => $budget_code_option_id ), "id=$row_id" );
 					$sendRay ['update'] = $result;
 					if (! $result) {
 						$sendRay ['error'] = t ( 'Could not update this record.' );
@@ -1187,7 +1301,7 @@ class TrainingController extends ReportFilterHelpers {
 					if( ! $values['comments'] )                         $values['comments'] = '';
 					if( ! $values['got_comments'] )                     $values['got_comments'] = '';
 					if( ! $values['objectives'] )                       $values['objectives'] = '';
-					
+
 					// training location
 					$num_location_tiers = $this->setting('num_location_tiers');
 					$bSuccess = true;
@@ -1196,7 +1310,7 @@ class TrainingController extends ReportFilterHelpers {
 
 					$location_id = 0;
 					$training_location_id = ($values['training_location_id'] ? $values['training_location_id'] : 0); // training_location_id and a default
-					
+
 					// validity check location name
 					if ($training_location_id && $values['training_location_name']) {
 						$dupe = new TrainingLocation();
@@ -1240,7 +1354,7 @@ class TrainingController extends ReportFilterHelpers {
 									$trainingLocationObj = $trainingLocModel->createRow();
 									$trainingLocationObj->training_location_name = $values['training_location_name'];
 									$trainingLocationObj->location_id = $location_id;
-									$training_location_id = $trainingLocationObj->save();				
+									$training_location_id = $trainingLocationObj->save();
 								} catch (Exception $e) {
 									$errored = 1;
 									$errs[]  = nl2br($e->getMessage()).space.t ( 'ERROR: The training location could not be saved.' ).space.'"'.$values['training_location_name'].'"';
@@ -1259,7 +1373,7 @@ class TrainingController extends ReportFilterHelpers {
 						$values['training_location_id'] = $training_location_id;
 					// done, saved training location.
 					// save
-				
+
 					try {
 						// option tables / lookup tables // insert or get id, and remap col names from csv template name to actual column name, asdf_phrase to asdf_option_id
 						// the logic is: if ($values['title_phrase']) $training->title_option_id = findOrCreate('training_title', $values['title_phrase']) );
@@ -1310,7 +1424,7 @@ class TrainingController extends ReportFilterHelpers {
 
 									try {
 										# (this row is $data) row format: array( "2(na)"," 2(male)"," 2(female)"," "QualificationPhrase")
-										
+
 										$qual_id = $data[count($data)-1];
 										$qual_id = trim($qual_id);
 										if (!is_int($qual_id) && strpos($qual_id, '(na)') === false && strpos($qual_id, '(female)') === false && strpos($qual_id, '(male)') === false ) {
@@ -1319,7 +1433,7 @@ class TrainingController extends ReportFilterHelpers {
 											$errs[] = 'Training #'.$row_id.space.t('You did not set a qualification for a group of unknown participants.');
 											$qual_id = 0;
 										}
-										
+
 										$tablerow = $upTable->createRow();
 										$tablerow->id = null;
 										$tablerow->training_id = $row_id;
@@ -1336,7 +1450,7 @@ class TrainingController extends ReportFilterHelpers {
 										}
 										if (! $tablerow->person_count_na && ! $tablerow->person_count_male && ! $tablerow->person_count_female)
 											continue; //empty
-										
+
 										$tablerow->save();
 
 									} catch (Exception $e) {
@@ -1431,7 +1545,7 @@ class TrainingController extends ReportFilterHelpers {
 		// add some regions
 		$num_location_tiers = $this->setting('num_location_tiers');
 		$regionNames = array ('', t('Region A (Province)'), t('Region B (Health District)'), t('Region C (Local Region)'), t('Region D'), t('Region E'), t('Region F'), t('Region G'), t('Region H'), t('Region I') );
-		for ($i=1; $i < $num_location_tiers; $i++) { 
+		for ($i=1; $i < $num_location_tiers; $i++) {
 			//add regions
 			$sorted[0][$regionNames[$i]] = '';
 		}
@@ -1826,7 +1940,7 @@ class TrainingController extends ReportFilterHelpers {
 		$sorted = array();
 		if ( count( $rowRay ) ){ // either print names attached to training or 3 generic ones
 			foreach( $rowRay as $row ){
-				
+
 				$sorted[] = array(
 				t('First Name')    => $row['first_name'],
 				t('Last Name')     => $row['last_name'],
@@ -1928,9 +2042,18 @@ class TrainingController extends ReportFilterHelpers {
 			if( strtotime( $rowRay ['training_start_date'] ) < time() ) {
 				$personsFields = array_merge($personsFields, array ( 'duration_days' => t ( 'Days' ) )); // already had class(es) - show the days attended
 			}
+			$personsFields['award_phrase']  = $this->tr ( 'Complete' );
 		}
 		$personsFields = array_merge($personsFields, array ('birthdate' => t ( 'Date of Birth' ), 'facility_name' => t ( 'Facility' )));
-		
+
+		if ( $this->setting('display_viewing_location') ) {
+			$personsFields['location_phrase'] = $this->tr ( 'Viewing Location' );
+		}
+		if ( $this->setting('display_budget_code') ) {
+			$personsFields['budget_code_phrase'] = $this->tr ( 'Budget Code' );
+		}
+
+
 		//if ($this->setting ( 'display_region_b' ))
 		$personsFields ['location_name'] = t ( 'Location' );
 		//add location
@@ -1938,10 +2061,10 @@ class TrainingController extends ReportFilterHelpers {
 		foreach ( $persons as $pid => $person ) {
 			$region_ids = Location::getCityInfo ( $person ['location_id'], $this->setting ( 'num_location_tiers' ) );
 			$ordered_l = array( $region_ids['cityname'] );
-			
+
 			foreach ($region_ids as $key => $value) {
 				if( !empty ($value) && isset($locations[$value]['name']))
-					$ordered_l [] = $locations [$value] ['name'];	
+					$ordered_l [] = $locations [$value] ['name'];
 				else
 					break;
 			}
@@ -2023,7 +2146,7 @@ class TrainingController extends ReportFilterHelpers {
 	public function hasACLEdit($requireACL, $linkURL)
 	{
 		//$helpr = new Zend_View_Helper_HasACL ();
-		//$helpr->setView($this);  
+		//$helpr->setView($this);
 		if(! ($this->hasACL($requireACL) || $this->hasACL('edit_country_options')))
 			return null;
 

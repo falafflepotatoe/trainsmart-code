@@ -321,6 +321,10 @@ function makeEditTableTraining(labelAdd, tableData, columnDefs, jsonUrl,
 					// SUCCESS
 				var status = YAHOO.lang.JSON.parse(o.responseText); // , true);
 
+				if (oCellEditor.column.editorOptions && oCellEditor.column.editorOptions.dropdownOptions) { // is dropdown
+					oCellEditor.value = oCellEditor.column.editorOptions.dropdownOptions[oCellEditor.value].text;
+				}
+
 				// error handling
 				if (status.error != null) {
 					status.error = status.error.replace('%s', newData);

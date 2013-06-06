@@ -92,7 +92,7 @@ function setDistrictStatus(selectedIndex)  {
 		<option value="">--<?php tp('All');?>--</option>
 		<?php
 			foreach ( $this->courses as $vals ) {
-				echo '<option value="'.$vals['id'].'" 
+				echo '<option value="'.$vals['id'].'"
 				     '.((@$this->criteria['training_title_id']) == $vals['id']? 'SELECTED':'').' >'
 				     .$this->truncate($vals['training_title_phrase']).'</option>';
 
@@ -120,7 +120,7 @@ function setDistrictStatus(selectedIndex)  {
 		?>
 	</select></div></div>
 	<?php } ?>
-	
+
 	<div class="fieldLabel" id="training_pepfar_id_lbl"><?php print $this->translation['PEPFAR Category'];?></div>
 	<div class="fieldInput">
 	<div  class="leftBorderPad"><input type="checkbox" name="showPepfar" <?php  if ($this->criteria['showPepfar']) echo 'CHECKED';?> /></div>
@@ -331,8 +331,10 @@ foreach($this->results as $row) {
 		echo ',"'.$row['training_organizer_phrase'].'"';
 	if ( $this->criteria['showTopic'] )
 		echo ',"'.$row['training_topic_phrase'].'"';
-	if ( $this->criteria['showPepfar'] )
-		echo ',"'.$row['pepfar_category_phrase'].'"';
+    if ( $this->criteria['showPepfar'] )
+        echo ',"'.$row['pepfar_category_phrase'].'"';
+    if ( $this->criteria['showFunding'] )
+        echo ',"'.$row['funding_phrase'].'"';
 	if ( $this->criteria['showTot'] )
 		echo ',"'.$row['is_tot'].'"';
 	echo "]";
@@ -410,6 +412,9 @@ var trainingColumnDefs = [
 <?php if ( $this->criteria['showPepfar'] ) { ?>
    ,{key:"pepfar_category_phrase", label: "<?php tp('PEPFAR');?>", sortable:true, resizeable:true}
  <?php } ?>
+<?php if ( $this->criteria['showFunding'] ) { ?>
+   ,{key:"funding_phrase", label: "<?php tp('Funding');?>", sortable:true, resizeable:true}
+ <?php } ?>
 <?php if ( $this->criteria['showTot'] ) { ?>
    ,{key:"is_tot", label: "<?php echo tp('TOT'); ?>", sortable:true, resizeable:true}
  <?php } ?>
@@ -424,7 +429,6 @@ var trainingColumnDefs = [
 <?php } ?>
   </div>
   <div id="footer"><?php require_once('views/scripts/footer.phtml');?></div>
-
 
 </div>
 

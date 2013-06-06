@@ -24,11 +24,11 @@ a { color:#3669aa; }
 
 
 
-fieldset	{ border:1pt solid;	margin: 1em 5%;  padding: 1em;}
+fieldset { border:1pt solid;	margin: 1em 5%;  padding: 1em;}
 
-legend { padding: .5em; }
+legend   { padding: .5em; }
 
-label { cursor:pointer; }
+label    { cursor:pointer; }
 
 
 
@@ -56,6 +56,8 @@ input[type='checkbox'] { margin-right: .5em;}
 
  * Common Elements/Classes */
 
+.displayNone { display: none; }
+
 .clear { clear:both; margin-top:0px;}
 
 .errorText, #statusBox.statusError, .required { color: #F22; }
@@ -69,6 +71,8 @@ input[type='checkbox'] { margin-right: .5em;}
 .block { display: block; }
 
 .right { float:right; }
+
+.left  { float: left; }
 
 .borderGrey { border: 1px solid grey; }
 
@@ -459,7 +463,7 @@ table.tableChoices td { padding-bottom:0.5em; } /* checkbox choices */
 
 	visibility:hidden;
 
-	z-index:1;
+	z-index: 9999999;
 
 	background:#fed636;
 
@@ -840,7 +844,11 @@ fieldset.settings legend, .caption {
 
 }
 
+.evalRelabelWrapper input { width: 50px; max-width: 50px; }
 
+.evalRelabelWrapper label, .evalRelabelWrapper input { float:left; margin: 0px 10px; }
+
+#evaluationForm .col_4 { min-width:200px; }
 
 #addFacility { background: #ffffff; }
 
@@ -1306,6 +1314,7 @@ table {
 	width:100px;
 }
 
+#employeePartnerEdit input.submitNoArrow { min-height:25px !important; min-width:140px !important; }
 
 .calenderbtn img { vertical-align: bottom; }
 
@@ -1314,6 +1323,7 @@ table {
 .subpartners_wrapper { width:600px;display:block;overflow:hidden; }
 
 #subpartners_table { clear:none; border: 0px; float:left; }
+
 #subpartners_table tr,td { margin: 10px; }
 
 
@@ -1323,5 +1333,7 @@ table {
  ***/
 
 .nwtxtbig {font-size:11px;font-weight:bold;color:#696969;margin:4px}
+
 .nwtxt    {font-size:11px;color:#696969;margin:4px}
+
 .nwtxthead{font-size:11px;font-weight:bold;color:#444;margin:4px}

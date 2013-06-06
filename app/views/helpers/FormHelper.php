@@ -1,15 +1,15 @@
 <?php
 // simple form functions
-// params: 
+// params:
 //		$view = $this
-//		$label = labeltext
+//		$label = label text
 //		$content = 'text' or 'textarea' or any html blob
 //		$val = value to display for <input> tags
 // They also work off things like the $view's $this->viewonly variable (readonly)
 // to handle displaying extra data or disabling fields.
-// 		currently checking: $view->viewonly, $view->required_fields, $view->is_report
-// 
-// they also print a checkbox if $view->isReport is 1  
+// 		currently checking: $view->viewonly, $view->required_fields, $view->is_report, $view->thin_labels
+//
+// they also print a checkbox if $view->is_report is 1
 // is_report checkboxes check $view->criteria[] for report check values.
 //
 // examples:
@@ -63,13 +63,13 @@ function labelAndCheckBox($view, $label, $id = '', $val = '')
 	$class = $view->thin_labels ? 'fieldLabelThin' : 'fieldLabel';
 	$checked = $val ? 'checked="checked"' : '';
 	$reportcheck = $view->is_report ? '<div class="leftBorderPad"><input type="checkbox" name="show_'.$id.'"'. (($view->criteria['show_'.$id]) ? 'CHECKED' : '').'/></div></div><div class="leftBorder">' : '';
-	
+
 	$o = <<< EOF
 	<div class="$class $id">$required$label</div>
 	<div class="fieldInput">$reportcheck<input type="checkbox" id="$id" name="$id" $checked $readonly /></div>
 EOF;
 	return $o;
-	
+
 }
 /* labelTwoFields
 
@@ -87,7 +87,7 @@ EOF;
 function labelTwoFields($view, $label, $label2, $id1, $id2, $val1 = '', $val2 = '') {
 	$readonly = $view->viewonly ? 'readonly="readonly"' : '';
 	$class = $view->thin_labels ? 'fieldLabelThin' : 'fieldLabel';
-	$required = ( array_search($id,$view->required_fields) !== false ) ? '<span class="required">*</span>' : '';
+	$required = ( array_search($id1,$view->required_fields) !== false ) ? '<span class="required">*</span>' : '';
 	$cal = '<a class="calenderbtn" href="#"><img src="'.$view->base_url.'/js/yui/assets/calbtn.gif"></a>';
 	$cal1 = (array_search($id1, $view->calendar_fields) === false) ? '' : $cal;
 	$cal2 = (array_search($id2, $view->calendar_fields) === false) ? '' : $cal;
@@ -96,7 +96,7 @@ function labelTwoFields($view, $label, $label2, $id1, $id2, $val1 = '', $val2 = 
 	if ($view->autoheight_labels)
 		$class .= ' autoHeight ';
 	$reportcheck = $view->is_report ? '<div class="leftBorderPad"><input type="checkbox" name="show_'.$id1.'"'. (($view->criteria['show_'.$id1]) ? 'CHECKED' : '').'/></div></div><div class="leftBorder">' : '';
-	
+
 	$o = <<< EOF
 	<div class="$class $id">$required$label</div>
 	<div class="fieldInput">$reportcheck
@@ -129,9 +129,9 @@ function label($view, $label, $float50 = false) {
 	return "<div class=\"$class\">$label</div>";
 }
 
-/* label
+/* formhelperdate
 	mysql timestamp -> m/d/Y output
-	
+
 	returns:
 	m/d/Y date or empty string
 */
@@ -173,9 +173,9 @@ function genderDropdown($view, $label, $id, $val)
   	//<div  class="leftBorder">
 	'<select id="'.$id.'" name="'.$id.'" '.$readonly.'>
 		<option value="">--'.t('choose').'--</option>
-		<option value="male"  ' .($val == 'male'? 'selected="selected"':''). '>'.t('male').'</option>
-		<option value="female"  ' .($val == 'female'? 'selected="selected"':''). '>'.t('female').'</option>
-		<option value="na"  ' .($val == 'na'? 'selected="selected"':''). '>'.t('na').'</option>
+		<option value="male"  ' .($val == 'male'? 'selected="selected"':''). '>'.t('MALE').'</option>
+		<option value="female"  ' .($val == 'female'? 'selected="selected"':''). '>'.t('FEMALE').'</option>
+		<option value="na"  ' .($val == 'na'? 'selected="selected"':''). '>'.t('NA').'</option>
 	</select></div>';//</div>
 	return $o;
 }
@@ -193,9 +193,8 @@ function confirmDropdown($view, $label, $id, $val)
 	<div class="fieldInput">'.$reportcheck.
 	'<select id="'.$id.'" name="'.$id.'" '.$readonly.'>
 		<option value="">--'.t('choose').'--</option>
-		<option value="0" ' .($val === "0" ? 'selected="selected"':''). '>'.t('no').'</option>
-		<option value="1" ' .($val === "1"  ? 'selected="selected"':''). '>'.t('yes').'</option>
+		<option value="0" ' .($val === "0" ? 'selected="selected"':''). '>'.t('NO').'</option>
+		<option value="1" ' .($val === "1"  ? 'selected="selected"':''). '>'.t('YES').'</option>
 	</select></div>';//</div>
 	return $o;
 }
-

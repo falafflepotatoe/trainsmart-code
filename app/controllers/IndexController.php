@@ -13,10 +13,16 @@ class IndexController extends ITechController {
 		parent::__construct ( $request, $response, $invokeArgs );
 	}
 	
-	public function init() {
-	}
-	
+	public function init() {	}
+
 	public function indexAction() {
+
+		if($this->hasACL('edit_employee') && $this->setting('module_employee_enabled')){
+			if($this->hasACL('in-service') == false && $this->hasACL('pre-service') == false) {
+			$this->_redirect('employee');
+				exit();
+			}
+		}
 		
 		if (strstr($_SERVER['REQUEST_URI'],'index/index') === false) {
 			if ($this->hasACL ( 'in_service' )) {

@@ -23,7 +23,7 @@ print ScriptContainer::$instance->renderCSSHead();
        foreach($v as $vals) {
           echo '<br/>&nbsp;&nbsp;'.implode(', ',$vals);
        }
-       echo '<br/';
+       echo '<br/>';
      } else {
        echo "<span style='font-weight:bold;'>".(str_replace('_phrase','',$k))."</span> ".implode(',',$v)."<br/>";
       }

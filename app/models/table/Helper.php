@@ -2418,6 +2418,18 @@ class Helper extends ITechTable
 		}
 	}
 
+	public function getCompQuestions($compids){
+		$db = $this->dbfunc();
+		$ret = array();
+		$query = "SELECT id FROM competencies_questions WHERE competencyid IN (" . implode(",", $compids) . ")";
+		$result = $db->fetchAll($query);
+		if (count ($result) > 0){
+			foreach ($result as $row){
+				$ret[] = $row['id'];
+			}
+		}
+		return $ret;
+	}
 
 }
 

@@ -2424,7 +2424,7 @@ msgstr "Charger un document"
 
 #: views/scripts/index/index.phtml:105
 msgid "Please login below"
-msgstr "S'il vous palit ouvrir une session ci-dessous"
+msgstr "S'il vous plait ouvrir une session ci-dessous"
 
 #: views/scripts/index/index.phtml:108 views/scripts/user/login.phtml:21
 msgid "User name"

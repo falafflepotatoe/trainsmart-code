@@ -465,7 +465,7 @@ msgstr "Рекомендований"
 #: views/scripts/reports/training-unknown.phtml:136
 #: views/scripts/reports/training-unknown.phtml:400
 msgid "Qualification"
-msgstr "Кваліфікація"
+msgstr "Кваліфікаційна категорія"
 
 #: controllers/ReportpreserviceController.php:31
 #: controllers/ReportsController.php:67

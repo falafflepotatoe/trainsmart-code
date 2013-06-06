@@ -154,12 +154,12 @@ var formatViewUrl = function(elCell, oRecord, oColumn, sData) {
 <?php } ?>
   if ( (sData == null) || (sData.length == 0) )
     sData = '&nbsp;&nbsp;&nbsp;';
-    elCell.innerHTML = "<a href='<?php echo $this->base_url;?>/person/edit/id/" + oRecord.getData("id") + tredirect + "' >" + sData + "</a>";
+    elCell.innerHTML = "<a href='<?php echo $this->base_url;?>/person/edit/id/" + oRecord.getData("person_id") + tredirect + "' >" + sData + "</a>";
 }
 
 //{key:"input", width:0, resizeable:true , label:"", hidden:"true", width:"0", className:"hidden"},
 var dupeColDefs =
-[ {key:"id", label: "ID", sortable:false, resizable:false, formatter: formatViewUrl},
+[ {key:"person_id", label: "ID", sortable:false, resizable:false, formatter: formatViewUrl},
 {key:"first_name", width:60, sortable:true, resizeable:true , label:"<?php tp("First Name"); ?>"},
 <?php if ( !$this->setting['display_middle_name_last'] ) { ?>
 {key:"middle_name", width:66, sortable:true, resizeable:true , label:"<?php echo (@$this->translation['Middle Name']); ?>"},

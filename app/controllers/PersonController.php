@@ -1067,7 +1067,10 @@ class PersonController extends ReportFilterHelpers {
 
 	public function searchAction() {
 		require_once ('models/table/Person.php');
-
+  		 if ($this->setting('display_mod_skillsmart')){
+      		// SKILLSMART-ENABLED SYSTEM USES DIFFERENT SEARCH FOR ADDITIONAL FIELDS
+      		return $this->doMySearch();
+      	}
 		if (! $this->hasACL ( 'view_people' ) and ! $this->hasACL ( 'edit_people' )) {
 			$this->doNoAccessError ();
 		}
@@ -1298,7 +1301,7 @@ class PersonController extends ReportFilterHelpers {
 				LEFT JOIN person_qualification_option as q ON p.primary_qualification_option_id = q.id
 				LEFT JOIN facility as f ON p.facility_id = f.id
 				LEFT JOIN compres as cmpr ON cmpr.person = p.id AND cmpr.active=\'Y\'
-				JOIN ('.$location_sub_query.') as l ON f.location_id = l.id  ';
+				LEFT JOIN ('.$location_sub_query.') as l ON f.location_id = l.id  ';
 
 			} else {
 				# removing from query, filtering happens on front-end

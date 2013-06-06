@@ -406,10 +406,10 @@ class ITechController extends Zend_Controller_Action
    /**
     * Return an array of sanitized data, post and get.
     *
-    * do not use this on post or get variables with names action,controller or module
+    * do not use this on post or get variables with names: action,controller or module
     */
 	public function getAllParams() {
-	// this might not work on arrays with arrays in them, TODO, might be a security flaw, sanitize() wont handle arrays we should array_walk_recursive here. (but will probably just say, ARRAY)
+  	// this might not work on arrays with arrays in them, TODO, might be a security flaw, sanitize() wont handle arrays we should array_walk_recursive here. (but will probably just say: ARRAY)
 		$ret = array_merge($_GET,$_POST,$this->getRequest()->getParams());
 		foreach ($ret as $key => $value) {
 			$ret[$key] = $this->getSanParam($key);
@@ -481,7 +481,7 @@ class ITechController extends Zend_Controller_Action
   /*
    * string or comma seperated list to array
    */
-  protected function _array_me($var)
+  protected function _array_me(&$var)
   {
     if ( is_array($var) )
       return $var;
@@ -492,6 +492,18 @@ class ITechController extends Zend_Controller_Action
 
     #else
     return array($var);
+  }
+
+  /*
+   * map array to hash
+   */
+  protected function _map_me(&$var, $keyCol = 0, $valCol = 1)
+  {
+    $output = array();
+    foreach ($var as $row) {
+      $output[$row[$keyCol]] = $row[$valCol]; // logic: $output[$rowid] = $row['phrase']
+    }
+    return $output;
   }
 
   // lazy date parsing

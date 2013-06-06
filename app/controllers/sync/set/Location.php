@@ -38,12 +38,9 @@ class SyncSetLocation extends SyncSetSimple
 
 	public function fetchLeftPool()
 	{
-		
-		
 		//get city tier
 		$settings = System::getAll();
-		$city_tier = 2 + $settings['display_region_c'] + $settings['display_region_b'];
-		
+		$city_tier = 2 +  $settings['display_region_i'] + $settings['display_region_h'] + $settings['display_region_g'] +  $settings['display_region_f'] +  $settings['display_region_e'] +  $settings['display_region_d'] +  $settings['display_region_c'] + $settings['display_region_b'];
 		
 		//only return cities
 		$rows = $this->getLeftTable()->fetchAll('(timestamp_updated > "' . SyncCompare::$lastSyncCompleted . '") AND tier = '.$city_tier);

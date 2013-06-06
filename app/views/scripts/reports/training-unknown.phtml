@@ -42,10 +42,13 @@ if ( $this->mode == 'count' ) {
         <option value="/reports/trainings" <?php if ($this->mode == 'id') echo 'selected="selected"';?>><?php echo t('Trainings').' '.t('by').' '.t('Name');?></option>
         <option value="/reports/trainingByTitle" <?php if ($this->expand_lists) echo 'selected="selected"';?>><?php echo t('Trainings').' '.t('by').' '.t('Multiple Names');?></option>
         <option value="/reports/trainingByParticipants" <?php if ($this->mode == 'count') echo 'selected="selected"';?>><?php echo t('Trainings').' '.t('by').' '.t('Participant Count');?></option>
+        <?php if ($this->setting['display_viewing_location']) { ?>
+        <option value="/reports/budgetcode"><?php echo t('Trainings').space.t('by').space.t('Participants').space.t('Viewing Location'); ?></option>
+        <?php } ?>
         <?php if ($this->setting['module_unknown_participants_enabled']) { ?>
         <option value="/reports/trainingUnknown" <?php if ($this->mode == 'unknown') echo 'selected="selected"';?>><?php echo t('Trainings').' '.t('with').' '.t('Unknown Participants');?></option>
-        <option value="/reports/trainingsMissingInformation" <?php if ($this->missing_info) echo 'selected="selected"';?>><?php echo t('Trainings').' '.t('with').' '.t('missing information');?></option>
          <?php } ?>
+        <option value="/reports/trainingsMissingInformation" <?php if ($this->missing_info) echo 'selected="selected"';?>><?php echo t('Trainings').' '.t('with').' '.t('missing information');?></option>
    	</select>
    <?php } ?>
 	   <form action="" method="get">
@@ -58,10 +61,10 @@ if ( $this->mode == 'count' ) {
 
 <?php region_filters_dropdown($this, $this->locations, $this->criteria, true, true);  ?>
 
-<?php 
+<?php
    echo DropDown::render_report_filter('training_category', 'showCategory', @$this->translation['Training Category'], $this->category, 'training_category_phrase', @$this->criteria['training_category_id'], $this->criteria['showCategory']);
 
-?>	
+?>
 
 	<div class="fieldLabel" id="training_title_option_id_lbl"><?php echo (@$this->translation['Training Name']); ?></div>
 	<div class="fieldInput"><div class="leftBorderPad" ><input type="checkbox" name="showTrainingTitle"  <?php  if ($this->criteria['showTrainingTitle']) echo 'checked="checked"';?> /></div><label for="showTrainingTitle" ></label>
@@ -71,25 +74,25 @@ if ( $this->mode == 'count' ) {
       $lastId = NULL;
       foreach ( $this->categoryTitle as $vals ) {
         $isselected = ($vals['id'] === @$this->criteria['training_title_option_id']) ? ' selected="selected"' : '';
-        
+
         // Also list empty prefix to allow all titles to be displayed
         if($vals['training_category_option_id'] && $vals['id'] != $lastId) {
-          echo '<option value="_'.$vals['id'].'"'.$isselected.'>'.$vals['training_title_phrase'].'</option>';          
+          echo '<option value="_'.$vals['id'].'"'.$isselected.'>'.$vals['training_title_phrase'].'</option>';
         }
-      
+
         echo '<option value="'. $vals['training_category_option_id'].'_'.$vals['id'].'"'.$isselected.'>'.$vals['training_title_phrase'].'</option>';
         $lastId = $vals['id'];
       }
 		?>
   </select></div></div>
-  
+
     <script type="text/javascript">
     // Set correct title
     elCategory = YAHOO.util.Dom.get("training_category_id");
     elTitle = YAHOO.util.Dom.get("select_training_title_option");
     elCategory.onchange = function() { setTrainingTitle(this.selectedIndex,'training_category_id','select_training_title_option'); }
-    setTrainingTitle(elCategory.selectedIndex,'training_category_id','select_training_title_option');      
-    
+    setTrainingTitle(elCategory.selectedIndex,'training_category_id','select_training_title_option');
+
 	</script>
 
 
@@ -129,21 +132,21 @@ if ( $this->mode == 'count' ) {
 
   <div  class="leftBorder">
    </div></div>
-    <?php 
+    <?php
 
 
   echo DropDown::render_report_filter('training_organizer','showOrganizer',(@$this->translation['Training Organizer']),$this->organizers,'training_organizer_phrase',$this->criteria['training_organizer_id'],$this->criteria['showOrganizer']);
-  if ( $this->setting['display_training_topic'] ) { 
+  if ( $this->setting['display_training_topic'] ) {
       echo DropDown::render_report_filter('training_topic', 'showTopic', @$this->translation['Training Topic'], $this->topics, 'training_topic_phrase', @$this->criteria['training_topic_id'], $this->criteria['showTopic'],false, true);
-   } 
-   
+   }
+
    echo DropDown::render_report_filter('training_level', 'showLevel', @$this->translation['Training Level'], $this->levels, 'training_level_phrase', @$this->criteria['training_level_id'], $this->criteria['showLevel']);
    echo DropDown::render_report_filter('training_pepfar', 'showPepfar', @$this->translation['PEPFAR Category'], $this->pepfars, 'pepfar_category_phrase', @$this->criteria['training_pepfar_id'], $this->criteria['showPepfar']);
 
    if ( $this->setting['display_training_method'] && $this->mode != 'search') {
     echo DropDown::render_report_filter('training_method', 'showMethod', @$this->translation['Training Method'], $this->methods, 'training_method_phrase', @$this->criteria['funding_id'], $this->criteria['showMethod']);
    }
-   
+
    if ( $this->setting['display_funding_options'] && $this->mode != 'search') {
     echo DropDown::render_report_filter('training_funding', 'showFunding', t('Funding'), $this->funding, 'funding_phrase', @$this->criteria['funding_id'], $this->criteria['showFunding']);
    }
@@ -155,10 +158,10 @@ if ( $this->mode == 'count' ) {
       <div id="funding_max_lbl"  style="float:left; margin-top: .5em;"><?php tp('Max'); ?> $</div>
       <input type="text" value=""  style="float:left;" size="6" maxlength="10" name="funding_max" />
       </div>
-    
+
    </div>
   <?php }?>
- 	
+
  	<?php if ( $this->setting['display_training_trainers'] && $this->mode != 'search') { ?>
 	<div class="fieldLabel" id="is_tot_lbl"><?php echo (@$this->translation['Training of Trainers']); ?></div>
 	<div class="fieldInput"><div  class="leftBorderPad"><input type="checkbox" name="showTot"   <?php  if ($this->criteria['showTot']) echo 'checked="checked"';?> /></div><label for="showTot" ></label>
@@ -171,9 +174,9 @@ if ( $this->mode == 'count' ) {
 	<div class="fieldLabel" id="is_refresher_lbl"><?php echo (@$this->translation['Refresher Course']); ?></div>
 	<div class="fieldInput"><div  class="leftBorderPad"><input type="checkbox" name="showRefresher"   <?php  if ($this->criteria['showRefresher']) echo 'checked="checked"';?> /></div><label for="showRefresher" ></label>
 	<div class="leftBorder"></div></div>
-	<?php } ?>	
+	<?php } ?>
 
- 	<?php if ( $this->setting['display_training_got_curric'] && $this->mode != 'search') { 
+ 	<?php if ( $this->setting['display_training_got_curric'] && $this->mode != 'search') {
  	  echo DropDown::render_report_filter('training_got_curric', 'showGotCurric', @$this->translation['GOT Curriculum'], $this->gotcurric, 'training_got_curriculum_phrase', @$this->criteria['training_got_curric_id'], $this->criteria['showGotCurric']);
   } ?>
 
@@ -182,7 +185,7 @@ if ( $this->mode == 'count' ) {
 	<div class="fieldInput"><div  class="leftBorderPad"><input type="checkbox" name="showGotComment"   <?php  if ($this->criteria['showGotComment']) echo 'checked="checked"';?> /></div><label for="showGotComment" ></label>
 	<div class="leftBorder"></div></div>
 	<?php } ?>
-  <?php 
+  <?php
    if ( $this->setting['display_primary_language'] && $this->mode != 'search') {
     echo DropDown::render_report_filter('training_primary_language_option', 'showPrimaryLanguage', @$this->translation['Primary Language'], $this->language, 'language_phrase', @$this->criteria['training_primary_language_option_id'], $this->criteria['showPrimaryLanguage']);
    }

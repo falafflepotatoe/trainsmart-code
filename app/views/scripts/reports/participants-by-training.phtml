@@ -5,6 +5,7 @@
 <?php
 require_once('views/helpers/Location.php');
 require_once('views/helpers/ScriptContainer.php');
+require_once('views/helpers/DropDown.php');
 print ScriptContainer::$instance->renderCSSHead();
 print ScriptContainer::$instance->renderJSHead();
 
@@ -16,7 +17,7 @@ if ( $this->mode == 'count' )
 
 </head>
 <body class="yui-skin-sam" >
-	
+
 <div id="pageHolder">
 
   <div id="header"><?php require_once('views/scripts/header.phtml');?></div>
@@ -36,7 +37,7 @@ if ( $this->mode == 'count' )
     	<div class="fieldInput  criteria-header"><div   class="criteria-label" ><?php echo $checkLabel;?></div><div  class="criteria-label" style="padding-left: 20px;"><?php tp('filter');?></div></div>
 
 	<?php region_filters_dropdown($this, $this->locations, $this->criteria, true, true); ?>
-	
+
 	<div id="facilityAutoComplete">
 	    <div class="fieldLabel" id="facilityInput_lbl"><?php tp('Facility');?></div>
 	    <div class="fieldInput">
@@ -102,7 +103,7 @@ if ( $this->mode == 'count' )
 		}
 		?>
 	</select></div></div>
-	
+
 	<!-- Primary Responsibility -->
 	<?php if ($this->setting['display_primary_responsibility']) { ?>
 	<div class="fieldLabel" id="resppri_lbl"><?php echo (@$this->translation['Primary Responsibility']); ?> </div><div class="fieldInput">
@@ -116,7 +117,7 @@ if ( $this->mode == 'count' )
 		?>
 	</select></div></div>
 	<?php }	?>
-		
+
 	<!-- Secondary Responsibility -->
 	<?php if ($this->setting['display_secondary_responsibility']) { ?>
 	<div class="fieldLabel" id="respsec_lbl"><?php echo (@$this->translation['Secondary Responsibility']); ?> </div><div class="fieldInput">
@@ -133,14 +134,14 @@ if ( $this->mode == 'count' )
 
 
 
-	<?php 	
+	<?php
 
 	if (( strstr($path[2], 'trainersByName') !== FALSE ) OR ( strstr($path[2], 'participantsByName') !== FALSE )) { ?>
 
 		<!-- Highest Education Level -->
 		<?php if ($this->setting['display_highest_ed_level']) { ?>
 			<div class="fieldLabel" id="person_highest_edu_level_lbl">
-				<?php echo (@$this->translation['Highest Education Level']); ?> 
+				<?php echo (@$this->translation['Highest Education Level']); ?>
 			</div><div class="fieldInput">
 			<div  class="leftBorderPad"><input type="checkbox" name="showHighestEd" <?php  if ($this->criteria['showHighestEd']) echo 'CHECKED';?> /></div>
 	  	<div  class="leftBorder"><select id="highest_edu_level_option_id" name="highest_edu_level_option_id">
@@ -154,10 +155,10 @@ if ( $this->mode == 'count' )
 		<?php } ?>
   <?php } ?>
 
-	<?php 	
+	<?php
 
 	if ( strstr($path[2], 'participantsByName') !== FALSE ) { ?>
-	
+
 		<!-- Attend Reason -->
 		<?php if ($this->setting['display_attend_reason']) { ?>
 			<div class="fieldLabel" id="person_attend_reason_lbl"><?php echo (@$this->translation['Reason Attending']); ?> </div><div class="fieldInput">
@@ -171,11 +172,11 @@ if ( $this->mode == 'count' )
 			?>
 			</select></div></div>
 		<?php } ?>
-  
+
   <?php } ?>
-	  
-	
-	
+
+
+
 
 	<div class="fieldLabel" id="training_organizer_id_lbl"><?php echo (@$this->translation['Training Organizer']); ?></div>
 	<div class="fieldInput bordered"><div  class="leftBorderPad"><input type="checkbox" name="showOrganizer" <?php  if ($this->criteria['showOrganizer']) echo 'CHECKED';?> /></div><label for="showOrganizer" ></label>
@@ -316,7 +317,13 @@ if ( $this->mode == 'count' )
     <?php tp('min');?> <input type="text" id="age_min" name="age_min" size="4" value="<?php echo ( $this->criteria['age_min'] ? $this->criteria['age_min'] : '0');?>" /> <?php tp('max');?> <input type="text"  size="4" name="age_max" id="age_max" value="<?php echo ( $this->criteria['age_max'] ? $this->criteria['age_max'] : '');?>" /> <a href="#" id="clear_age" onclick="return clearAge();" ><?php tp('clear');?></a>
     </div></div>
 <?php } ?>
- <?php if ($this->setting['display_people_active']) { ?>
+
+<?php
+if ( $this->setting['display_viewing_location'] && $this->mode != 'search' && ! $this->is_trainers ) {
+	echo DropDown::render_report_filter('person_to_training_viewing_loc_option', 'showViewingLoc', @$this->translation['Viewing Location'], $this->viewing_loc, 'location_phrase', @$this->criteria['person_to_training_viewing_loc_option_id'], $this->criteria['showViewingLoc']);
+} ?>
+
+<?php if ($this->setting['display_people_active']) { ?>
 	<div class="fieldLabel" id="training_active_lbl"><?php echo (@$this->translation['Is Active']); ?></div>
 	<div class="fieldInput">
 	<div  class="leftBorderPad"><input type="checkbox" name="showActive" <?php  if ($this->criteria['showActive']) echo 'CHECKED';?> /></div>
@@ -329,7 +336,7 @@ if ( $this->mode == 'count' )
 <?php } ?>
 
 <?php if (( strstr($path[2], 'trainersByName') !== FALSE ) OR ( strstr($path[2], 'participantsByName') !== FALSE )) { ?>
-	
+
 	<?php if ($this->setting['display_people_suffix']) { ?>
 		<div class="fieldLabel" id="person_suffix_lbl"><?php echo (@$this->translation['Suffix']); ?></div>
 		<div class="fieldInput">
@@ -337,7 +344,7 @@ if ( $this->mode == 'count' )
 		  <div  class="leftBorder"></div>
 		</div>
   <?php } ?>
-  
+
 	<div class="fieldLabel" id="training_phone_lbl"><?php tp('Email');?></div>
 	<div class="fieldInput">
 		<div  class="leftBorderPad"><input type="checkbox" name="showEmail" <?php  if ($this->criteria['showEmail']) echo 'CHECKED';?> /></div>
@@ -474,7 +481,9 @@ foreach($this->results as $row) {
 	if ( $this->criteria['showGender'] )
 		echo ',"'.$row['gender'].'"';
 	if ( $this->criteria['showAge'] )
-	  echo ','.$row['age']    ;
+		echo ','.$row['age'];
+	if ( $this->criteria['showViewingLoc'] )
+		echo ',"'.($row['location_phrase'] ? $row['location_phrase'] : '-').'"';
 	if ( $this->criteria['showActive'] )
 		echo ',"'.$row['active'].'"';
 	if ( $this->criteria['showProvince'] )
@@ -593,7 +602,7 @@ var trainingColumnDefs = [
 		    {key:"middle_name", label: "<?php echo (@$this->translation['Middle Name']); ?>", sortable:true, resizeable:true},
 	<?php }?>
 		{key:"last_name", label: "<?php echo (@$this->translation['Last Name']); ?>", sortable:true, resizeable:true},
-		
+
 	<?php if ( $this->setting['display_people_suffix'] && $this->criteria['showSuffix']) {?>
 		{key:"suffix_phrase", label: "<?php echo (@$this->translation['Suffix']); ?>", sortable:true, resizeable:true},
 	<?php } ?>
@@ -616,6 +625,9 @@ var trainingColumnDefs = [
  <?php } ?>
 <?php if ( $this->criteria['showAge'] ) { ?>
    ,{key:"age", label: "<?php tp('Age');?>", sortable:true, resizeable:true}
+ <?php } ?>
+ <?php if ( $this->criteria['showViewingLoc'] ) { ?>
+   ,{key:"viewing_loc", label: "<?php echo (@$this->translation['Viewing Location']);?>", sortable:true, resizeable:true}
  <?php } ?>
  <?php if ( $this->criteria['showActive'] ) { ?>
    ,{key:"active", label: "<?php echo (@$this->translation['Is Active']); ?>", sortable:true, resizeable:true}
@@ -662,7 +674,7 @@ var trainingColumnDefs = [
 <?php if ( $this->criteria['showQualSecond'] ) { ?>
    ,{key:"qualification_secondary_phrase", label: "<?php tp('Qualification') . ' ' . tp('(secondary)');?>", sortable:true, resizeable:true}
  <?php } ?>
- 
+
 <?php if ( $this->criteria['showRespPrim'] ) { ?>
    ,{key:"primaryResponsibility", label: "<?php echo (@$this->translation['Primary Responsibility']);?>", sortable:true, resizeable:true}
  <?php } ?>
@@ -677,8 +689,8 @@ var trainingColumnDefs = [
 <?php if ( $this->criteria['showReason'] ) { ?>
    ,{key:"attend_reason_phrase", label: "<?php echo (@$this->translation['Reason Attending']);?>", sortable:true, resizeable:true}
  <?php } ?>
- 
- 
+
+
  <?php if ( $this->criteria['showOrganizer'] ) { ?>
    ,{key:"training_organizer_phrase", label: "<?php echo (@$this->translation['Training Organizer']); ?>", sortable:true, resizeable:true}
  <?php } ?>

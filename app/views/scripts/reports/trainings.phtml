@@ -28,7 +28,7 @@
 		<div id="pageHolder">
 
 			<div id="header"><?php require_once('views/scripts/header.phtml');?></div>
-			
+
 			<div id="content">
 				<h1><?php echo ($this->identity->locale == 'nl_NL.UTF-8' ? t('Training Search') : ($this->mode != 'search'? t('Training').' '.t('Reports'):t('Training').' '.t('Search') ));  ?></h1>
 
@@ -39,10 +39,13 @@
 					<option value="/reports/trainings" <?php if ($this->mode == 'id') echo 'selected="selected"';?>><?php echo t('Trainings').' '.t('by').' '.t('Name');?></option>
 					<option value="/reports/trainingByTitle" <?php if ($this->expand_lists) echo 'selected="selected"';?>><?php echo t('Trainings').' '.t('by').' '.t('Multiple Names');?></option>
 					<option value="/reports/trainingByParticipants" <?php if ($this->mode == 'count') echo 'selected="selected"';?>><?php echo t('Trainings').' '.t('by').' '.t('Participant Count');?></option>
+					<?php if ($this->setting['display_viewing_location']) { ?>
+					<option value="/reports/budgetcode"><?php echo t('Trainings').space.t('by').space.t('Participants').space.t('Viewing Location'); ?></option>
+					<?php } ?>
 					<?php if ($this->setting['module_unknown_participants_enabled']) { ?>
 					<option value="/reports/trainingUnknown" <?php if ($this->mode == 'unknown') echo 'selected="selected"';?>><?php echo t('Trainings').' '.t('with').' '.t('Unknown Participants');?></option>
-					<option value="/reports/trainingsMissingInformation" <?php if ($this->missing_info) echo 'selected="selected"';?>><?php echo t('Trainings').' '.t('with').' '.t('missing information');?></option>
 					<?php } ?>
+					<option value="/reports/trainingsMissingInformation" <?php if ($this->missing_info) echo 'selected="selected"';?>><?php echo t('Trainings').' '.t('with').' '.t('missing information');?></option>
 				</select>
 				<?php } ?>
 				<form id="trainingreport" action="" method="get">
@@ -77,7 +80,7 @@
 
 											<div class="fieldLabel" id="training_title_option_id_lbl"><?php echo (@$this->translation['Training Name']); ?></div>
 											<div class="fieldInput"><div class="leftBorderPad" ><input type="checkbox" name="showTrainingTitle"  <?php  if ($this->criteria['showTrainingTitle']) echo 'checked="checked"';?> /></div><label for="showTrainingTitle" ></label>
-												<div  class="leftBorder"><select <?php echo ($this->expand_lists?'multiple="multiple" size="10"':'class="fixed"'); ?> id="select_training_title_option" name="training_category_and_title_id" >
+												<div  class="leftBorder"><select <?php echo ($this->expand_lists?'multiple="multiple" size="10"':'class="fixed"'); ?> id="select_training_title_option" name="training_category_and_title_id<?php if ($this->expand_lists) echo '[]'; ?>" >
 													<option value="">--<?php tp('All');?>--</option>
 													<?php
 													$lastId = NULL;
@@ -109,7 +112,7 @@
 												<div class="fieldLabel" id="training_location_id_lbl"><?php echo t('Training').' '.t('location');?></div>
 												<div class="fieldInput"><div  class="leftBorderPad"><input type="checkbox" name="showLocation"  <?php  if ($this->criteria['showLocation']) echo 'checked="checked"';?> /></div><label for="showLocation" ></label>
 
-													<div  class="leftBorder"> 
+													<div  class="leftBorder">
 														<?php
 			training_location_dropdown( $this->tlocations, @$this->criteria['training_location_id'], 'name="training_location_id" id="select_training_location"');
 		?>
@@ -173,7 +176,7 @@
 
 												<?php if ( $this->setting['display_training_refresher'] && $this->mode != 'search') { ?>
 											<?php if ( $this->setting['multi_opt_refresher_course'] && $this->refresherArray ) { ?>
-											<?php echo DropDown::render_report_filter('training_refresher', 'showPepfar', @$this->translation['Refresher Course'], $this->refresherArray, 'refresher_phrase_option', @$this->criteria['refresher_id'], $this->criteria['showRefresher']); ?>
+											<?php echo DropDown::render_report_filter('training_refresher', 'showRefresher', @$this->translation['Refresher Course'], $this->refresherArray, 'refresher_phrase_option', @$this->criteria['refresher_id'], $this->criteria['showRefresher']); ?>
 											<?php } else { ?>
 												<div class="fieldLabel" id="is_refresher_lbl"><?php echo (@$this->translation['Refresher Course']); ?></div>
 												<div class="fieldInput"><div  class="leftBorderPad"><input type="checkbox" name="showRefresher"   <?php  if ($this->criteria['showRefresher']) echo 'checked="checked"';?> /></div><label for="showRefresher" ></label>
@@ -198,6 +201,11 @@
 														if ( $this->setting['display_secondary_language'] && $this->mode != 'search') {
 															echo DropDown::render_report_filter('training_secondary_language_option', 'showSecondaryLanguage', @$this->translation['Secondary Language'], $this->language, 'language_phrase', @$this->criteria['training_secondary_language_option_id'], $this->criteria['showSecondaryLanguage']);
 														}
+
+														if ( $this->setting['display_viewing_location'] && $this->mode != 'search') {
+															echo DropDown::render_report_filter('person_to_training_viewing_loc_option', 'showViewingLoc', @$this->translation['Viewing Location'], $this->viewing_loc, 'location_phrase', @$this->criteria['person_to_training_viewing_loc_option_id'], $this->criteria['showViewingLoc']);
+														}
+
 														?>
 														<?php if ( $this->setting['display_training_custom1'] ) { ?>
 														<div class="fieldLabel" id="person_custom1_lbl"><?php print $this->translation['Training Custom 1']; ?></div>
@@ -257,7 +265,7 @@
 														<div class="fieldLabel" id="training_created_by_lbl"><?php tp('Created By'); ?></div>
 														<div class="fieldInput"><div  class="leftBorderPad" ><input type="checkbox" name="showCreatedBy" <?php  if ($this->criteria['showCreatedBy']) echo 'CHECKED';?> /></div><label for="showCreatedBy" ></label>
 															<div  class="leftBorder">
-																<select id="created_by" name="created_by"  <?php echo ($this->expand_lists?'multiple="multiple" size="10"':'class="fixed"'); ?> >
+																<select id="created_by" name="created_by<?php if($this->expand_lists) echo '[]'; ?>"  <?php echo ($this->expand_lists?'multiple="multiple" size="10"':'class="fixed"'); ?> >
 																	<option value="">--<?php tp('All');?>--</option>
 																	<?php
 																	foreach ( $this->createdBy as $vals ) {
@@ -462,14 +470,15 @@
 																	if ( $this->criteria['showCreationDate'] )
 																	echo ',"'.$row['created_date'].'"';
 																	if ( $this->criteria ['showAge'] )
-																	echo ','.$row['age']    ;
+																	echo ','.($row['age'] ? $row['age'] : '"-"');
 																	if ( $this->criteria ['showGender'] )
 																	echo ',"'.$row['gender'].'"';
+																	if ( $this->criteria ['showViewingLoc'] )
+																	echo ',"'.($row['location_phrases'] ? $row['location_phrases'] : '-').'"';
 																	if ( $this->criteria ['showQualPrim'] )
 																	echo ',"'.$row['qualification_phrase'].'"';
 																	if ( $this->criteria ['showQualSecond'] )
 																	echo ',"'.$row['qualification_secondary_phrase'].'"';
-
 																	echo "]";
 																	$cnt++;
 																}}
@@ -574,7 +583,7 @@
 																<?php   if ( $this->criteria['showCustom4'] ) { ?>
 																	,{key:"custom4_phrase", label: "<?php echo (@$this->translation['Training Custom 4']); ?>", sortable:true, resizeable:true}
 																<?php } ?>
-																<?php if (array_key_exists('pcnt', $this->results[0]) !== false) { ?>
+																<?php if ($this->results[0] && array_key_exists('pcnt', $this->results[0]) !== false) { ?>
 																	,{key:"pcnt", label: "<?php tp('Participants');?>", sortable:true, resizeable:true}
 																<?php } ?>
 																<?php   if ( $this->criteria['showCreatedBy'] ) { ?>
@@ -589,11 +598,14 @@
 																<?php   if ( $this->criteria['showGender'] ) { ?>
 																	,{key:"gender", label: "<?php tp('Gender'); ?>", sortable:true, resizeable:true}
 																<?php } ?>
-																<?php   if ( $this->criteria['showQualPrim'] ) { ?>
-																	,{key:"qualification_phrase", label: "<?php tp('Qualification'); tp('primary'); ?>", sortable:true, resizeable:true}
+																<?php   if ( $this->criteria['showViewingLoc'] ) { ?>
+																	,{key:"viewingloc", label: "<?php tp('Viewing Location'); ?>", sortable:true, resizeable:true}
 																<?php } ?>
-																<?php   if ( $this->criteria['showQualSecond'] ) { ?>
-																	,{key:"qualification_secondary_phrase", label: "<?php tp('Qualification'); tp('secondary');?>", sortable:true, resizeable:true}
+																<?php   if ($criteria['doCount'] &&  $this->criteria['showQualPrim'] ) { ?>
+																	,{key:"qualification_phrase", label: "<?php echo t('Qualification').space.t('primary'); ?>", sortable:true, resizeable:true}
+																<?php } ?>
+																<?php   if ($criteria['doCount'] &&  $this->criteria['showQualSecond'] ) { ?>
+																	,{key:"qualification_secondary_phrase", label: "<?php echo t('Qualification').space.t('secondary');?>", sortable:true, resizeable:true}
 																<?php } ?>
 																];
 
@@ -606,7 +618,6 @@
 															<?php } ?>
 															<?php } ?>
 														</div>
-
 <script type="text/javascript">
 $(document).ready( function	() {
 	$('.trainingReportCreationDate').datepicker({dateFormat: 'mm/dd/yy'});

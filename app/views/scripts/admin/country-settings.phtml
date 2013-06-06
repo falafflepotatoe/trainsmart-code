@@ -91,7 +91,8 @@ ob_end_clean();
 							<tr><td class="fieldTitle">Country</td><td></td><td><input type="text" name="country" value="<?php echo $this->country; ?>"></td><td></td></tr>
 							<tr><td class="fieldTitle"></td><td><a href="#" onclick="return confirmRegionAddTop();" >Add region</a></td><td></td><td></td>
 								<tr><td class="fieldTitle">Region A</td><td></td><td><input type="text" name="label_regiona" value="<?php echo $this->label_regiona; ?>"></td><td><a href="<?php echo $this->base_url;?>/admin/country-region/tier/1" onclick="return submitAdminForm(this);">Add/Edit</a></td>
-<?php if ($this->setting['display_region_c'] ) { ?>
+							<tr><td class="fieldTitle"></td><td><a href="#" onclick="return confirmRegionAddBottom();" >Add region</a></td><td></td><td></td>
+<?php if ($this->setting['display_region_b'] ) { ?>
 							<tr><td class="fieldTitle">Region B</td><td><a href="#" onclick="return confirmRegionDelete();" >Delete region</a></td><td><input type="text" name="label_regionb" value="<?php echo $this->label_regionb; ?>"></td><td><a href="<?php echo $this->base_url;?>/admin/country-region/tier/2" onclick="return submitAdminForm(this);">Add/Edit</a></td>
 											<tr><td class="fieldTitle"></td><td><a href="#" onclick="return confirmRegionAddBottom();" >Add region</a></td><td></td><td></td>
 <?php } ?>

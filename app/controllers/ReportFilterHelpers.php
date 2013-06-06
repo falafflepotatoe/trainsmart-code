@@ -3,23 +3,23 @@
 require_once ('app/controllers/ITechController.php');
 
 class ReportFilterHelpers extends ITechController {
-	
+
 	public function __construct($request, $response, $invokeArgs = array()) {
 		parent::__construct ( $request, $response, $invokeArgs = array () );
-	
+
 	}
-	
+
 	/**
 	 * Get the location filter values
 	 *
 	 * @param unknown_type $criteria
 	 * @param unknown_type $prefix
-	 * 
+	 *
 	 * return $criteria, location tier, location id, city, and city_parent_id
 	 */
-  protected function getLocationCriteriaValues($criteria = array(), $prefix = '') {
-  	if ( $prefix != '' ) $prefix .= '_';
-    
+	protected function getLocationCriteriaValues($criteria = array(), $prefix = '') {
+	if ( $prefix != '' ) $prefix .= '_';
+
 		$criteria [$prefix.'city'] = $this->getSanParam ( $prefix.'city' ); // set city
 		$rgns = array('province_id', 'district_id','region_c_id','region_d_id','region_e_id','region_f_id','region_g_id','region_h_id','region_i_id');
 		// get value from each region sent by form
@@ -28,25 +28,25 @@ class ReportFilterHelpers extends ITechController {
 			if (is_array ( $tmp ) ) {
 				if ( $tmp [0] === "") { // "All"
 					$criteria [$prefix.$rgn_name] = array ();
-       } else {
+			} else {
 					foreach($tmp as $key => $val) {
 						if (strstr ( $val, '_' ) !== false) {
 							$parts = explode ( '_', $val );
 							#$tmp [$key] = $parts [count($parts)-1];
 							$tmp [$key] = array_pop($parts);
-          }
-        }
+						}
+					}
 					$criteria [$prefix.$rgn_name] = $tmp;
-       }
-    } else {
+				}
+			} else {
 				if (strstr ( $tmp, '_' ) !== false) {
 					$parts = explode ( '_', $tmp );
 					$tmp = array_pop($parts);
 				}
 				$criteria [$prefix.$rgn_name] = $tmp;
-          }
-    }
-    
+			}
+		}
+
 		$city_parent_id = 0; // todo: small bug here, on receiving array input for region_ids, city_parent_id returns an array of ids, possibly even wrong ids -- probably ok - its not used in reports anyway...
 		if ( $this->setting ( 'display_region_i' ) ) {
 			$city_parent_id = $criteria[$prefix.'region_i_id'];
@@ -68,8 +68,8 @@ class ReportFilterHelpers extends ITechController {
 			$city_parent_id = $criteria['_id'];
     }
     $criteria [$prefix.'city_parent_id'] = $city_parent_id;
-    
-    
+
+
     $location_tier = 1;
     $location_id = $criteria [$prefix.'province_id'];
     if ( $criteria [$prefix.'district_id'] ) {
@@ -79,32 +79,32 @@ class ReportFilterHelpers extends ITechController {
     if ( $criteria [$prefix.'region_c_id'] ) {
       $location_id = $criteria [$prefix.'region_c_id'];
       $location_tier = 3;
-    } 
+    }
 		if ( $criteria [$prefix.'region_d_id'] ) {
 			$location_id = $criteria [$prefix.'region_d_id'];
 			$location_tier = 4;
-		} 
+		}
 		if ( $criteria [$prefix.'region_e_id'] ) {
 			$location_id = $criteria [$prefix.'region_e_id'];
 			$location_tier = 5;
-		} 
+		}
 		if ( $criteria [$prefix.'region_f_id'] ) {
 			$location_id = $criteria [$prefix.'region_f_id'];
 			$location_tier = 6;
-		} 
+		}
 		if ( $criteria [$prefix.'region_g_id'] ) {
 			$location_id = $criteria [$prefix.'region_g_id'];
 			$location_tier = 7;
-		} 
+		}
 		if ( $criteria [$prefix.'region_h_id'] ) {
 			$location_id = $criteria [$prefix.'region_h_id'];
 			$location_tier = 8;
-		} 
+		}
 		if ( $criteria [$prefix.'region_i_id'] ) {
 			$location_id = $criteria [$prefix.'region_i_id'];
 			$location_tier = 9;
-		} 
-    
+		}
+
     return array($criteria, $location_tier, $location_id);
   }
 
@@ -127,6 +127,12 @@ class ReportFilterHelpers extends ITechController {
 			return " " . $tableString . $tableCols[$tier] . " IN ( " . implode(',', $location_id) . " ) ";
 
 		return false;
+	}
+
+	// return either just a number or comma seperated list if $val is array or not // todo probably can remove, my local php errors here but i have high warning levels enabled
+	protected function _sql_implode($val)
+	{
+		return (is_array($val) ? implode(',', $val) : $val);
 	}
 }
 

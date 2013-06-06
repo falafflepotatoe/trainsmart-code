@@ -74,14 +74,16 @@ class Training extends ITechTable
         ->from($this->_name, array('*'))
         ->setIntegrityCheck(false)
       //  ->join(array('c' => 'course'), "$this->_name.training_title_option_id = c.id",'training_title_option_id')
-        ->join(array('t' => 'training_title_option'), "training_title_option_id = t.id",array('training_title' => 'training_title_phrase'))
-        ->joinLeft(array('tl' => 'training_location'), "$this->_name.training_location_id = tl.id",'training_location_name')
+        ->join(array('t' => 'training_title_option'),               "training_title_option_id = t.id",                        array('training_title' => 'training_title_phrase'))
+        ->joinLeft(array('tl' => 'training_location'),              "$this->_name.training_location_id = tl.id",             'training_location_name')
         ->joinLeft(array('tg' => 'training_got_curriculum_option'), "$this->_name.training_got_curriculum_option_id = tg.id",'training_got_curriculum_phrase')
-        ->joinLeft(array('tlvl' => 'training_level_option'), "$this->_name.training_level_option_id = tlvl.id",'training_level_phrase')
+        ->joinLeft(array('tlvl' => 'training_level_option'),        "$this->_name.training_level_option_id = tlvl.id",       'training_level_phrase')
         ->joinLeft(array('torg' => 'training_organizer_option'),    "$this->_name.training_organizer_option_id = torg.id",    array('training_organizer' => 'training_organizer_phrase'))
         //->joinLeft(array('tt' => 'training_topic_option'), "$this->_name.training_topic_option_id = tt.id",'training_topic_phrase')
         ->where("$this->_name.id = $training_id");
-      $rowRay = $this->fetchRow($select)->toArray();
+      $rowRay = $this->fetchRow($select);
+      if ($rowRay)
+        $rowRay = $rowRay->toArray();
     
     // now get pepfar
     $select = $this->select()
@@ -328,6 +330,7 @@ class Training extends ITechTable
        						'training.training_location_id = tc.id', 'training_location_name');
 
      	$select->where('p.id = '.$person_id);
+      $select->where('training.is_deleted = 0');
      	$select->order('training_start_date DESC');
      	$rows = $this->fetchAll($select);
      	$rowArray = $rows->toArray();
@@ -342,7 +345,7 @@ class Training extends ITechTable
 	public function findFromTrainer($person_id) {
     	$select = $this->select()->from('training')->setIntegrityCheck(false);
     	$select->join(array('ttot' => 'training_to_trainer'),
-       						'training.id = ttot.training_id','ttot.id');
+       						'training.id = ttot.training_id','ttot.training_id');
     	$select->join(array('tr' => 'trainer'),
        						'ttot.trainer_id = tr.person_id','tr.person_id');
     //	$select->join(array('c' => 'course'),
@@ -353,6 +356,7 @@ class Training extends ITechTable
        						'training.training_location_id = tc.id', 'training_location_name');
 
      	$select->where('tr.person_id = '.$person_id);
+      $select->where('training.is_deleted = 0');
      	$select->order('training_start_date DESC');
      	$rows = $this->fetchAll($select);
       	$rowArray = $rows->toArray();

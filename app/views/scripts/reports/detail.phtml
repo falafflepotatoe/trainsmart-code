@@ -9,8 +9,29 @@
 	print ScriptContainer::$instance->renderJSHead();
 	?>
 
+<script language="JavaScript">
+	var all = false;
+	function allcompetence(){
+		if ($('#complist').is(":disabled")){
+			alert("Please select an occupational category first.");
+			$("#qualification_id").focus();
+		} else {
+			if (!all){
+				$("#complist > option").attr("selected", true);
+				all = true;
+			} else {
+				$("#complist > option").removeAttr("selected");
+				all = false;
+			}
+			$('#complist').change();
+//			ShwHid(document.getElementById("complist"));
+		}
+	}
+</script>
+
 </head>
-<body class="yui-skin-sam" onload="SwHd(document.getElementById('qualification_id'));Sel();">
+<!--<body class="yui-skin-sam" onload="SwHd(document.getElementById('qualification_id'));Sel();"> -->
+<body class="yui-skin-sam" onload="Sel();">
 	<div id="pageHolder">
 
 		<div id="header"><?php require_once('views/scripts/header.phtml');?></div>
@@ -54,7 +75,7 @@
 					<div class="clear"></div>
 
 					<div class="fieldLabel" id="qualification_id_lbl"><?php echo t('Occupational category'); ?></div>
-					<div class="fieldInput"><select id="qualification_id" name="qualification_id" onchange="SwHd(this)">
+					<div class="fieldInput"><select id="qualification_id" name="qualification_id" onchange="showCompetencies()">
 						<option value="">--<?php tp('choose');?>--</option>
 						<?php
 						$lastParent = null;
@@ -68,41 +89,55 @@
 					</select></div>
 					<div class="clear"></div>
 					<script type="text/javascript">
-<?php
-	foreach ($this->criteria['competencies'] as $competence){
-
-	}
-?>
+/*
 					var i;
-					for(i=0;i<document.getElementById("qualification_id").options.length;i++)
-					{
+					for(i=0;i<document.getElementById("qualification_id").options.length;i++){
 						if(document.getElementById("qualification_id").options[i].text.indexOf("ther (Please")>0)
 							document.getElementById("qualification_id").options[i].text=document.getElementById("qualification_id").options[i].text.substr(0,document.getElementById("qualification_id").options[i].text.length-2).replace("Z_","");
-						}
+					}
+*/
 						</script>
-						<div class="fieldLabel" id="qualification_id_lbl"><?php echo t('Competence'); ?></div>
+						<div class="fieldLabel" id="qualification_id_lbl"><?php echo t('Competence'); ?><br><a href="#" onclick="allcompetence()"><span style="font-size : 9px;">Select all / none</span></a></div>
 						<div class="fieldInput">
-							<select name="complist" id="complist" style="width : 250px;" size="5" multiple="multiple">
+							<select name="complist[]" id="complist" style="width : 350px;" size="5" multiple="multiple" disabled onchange="ShwHid(this)">
+								<option>Select an occupational category first</option>
 							</select>
-							<?php # OLD HARDCODED COMPETENCIES ARE BAD M'KAY ?>
-							<?php # DISABLED - require_once('listcomn.phtml');?>
-							<?php # DISABLED - require_once('listcomd.phtml');?>
-							<?php # DISABLED - require_once('listcomp.phtml');?>
-							<?php # DISABLED - require_once('listcomc.phtml');?>
+<?php
+
+	# HARDCODED COMPETENCIES ARE BAD M'KAY
+	#require_once('listcomn.phtml');
+	#require_once('listcomd.phtml');
+	#require_once('listcomp.phtml');
+	#require_once('listcomc.phtml');
+
+?>
 						</div>
 						<div class="clear"></div>
 						<script type="text/javascript">
-<?
-/*
-						document.getElementById("listc").setAttribute("multiple","multiple");
-						document.getElementById("listd").setAttribute("multiple","multiple");
-						document.getElementById("listn").setAttribute("multiple","multiple");
-						document.getElementById("listp").setAttribute("multiple","multiple");
-						document.getElementById("listc").options.remove(0);
-						document.getElementById("listd").options.remove(0);
-						document.getElementById("listn").options.remove(0);
-						document.getElementById("listp").options.remove(0);
-*/
+
+<?php
+
+	echo "var comptrans = new Array();\n";
+	foreach ($this->complist as $cl){
+		$comp = array();
+		if (count($cl['competencies']) > 0){
+			foreach ($cl['competencies'] as $c_arr){
+				$comp[] = "[" . $c_arr['id'] . ",'" . addslashes($c_arr['name']) . "']";
+			}
+		}
+		echo "comptrans['c" . $cl['id'] . "'] = [" . implode(",", $comp) . "];\n";
+	}
+
+?>
+
+						// document.getElementById("listc").setAttribute("multiple","multiple");
+						// document.getElementById("listd").setAttribute("multiple","multiple");
+						// document.getElementById("listn").setAttribute("multiple","multiple");
+						// document.getElementById("listp").setAttribute("multiple","multiple");
+						// document.getElementById("listc").options.remove(0);
+						// document.getElementById("listd").options.remove(0);
+						// document.getElementById("listn").options.remove(0);
+						// document.getElementById("listp").options.remove(0);
 						function myExport()
 						{
 							var v1;
@@ -174,13 +209,61 @@
 								}
 							}
 						}
+
+						function is_array(input){
+							return typeof(input)=='object'&&(input instanceof Array);
+						}
+
+						function showCompetencies(selected){
+							all = false;
+							if ($("#qualification_id").val() != ""){
+								var items = comptrans['c'+$("#qualification_id").val()];
+								$("#complist").empty();
+								var ctr = 0;
+								if (items[ctr]){
+									while (items[ctr]){
+										$('#complist')
+											.append($("<option></option>")
+											.attr("value",items[ctr][0])
+											.text(items[ctr][1])); 
+										ctr++;
+									}
+									$("#complist").removeAttr("disabled");
+
+									if (is_array(selected)){
+										// highlighting selected elements
+										var ctr = 0;
+										while(selected[ctr]){
+											$("#complist option[value='" + selected[ctr] + "']").attr("selected", true);
+											ctr++;
+										}
+									}
+
+								} else {
+									$('#complist')
+										.append($("<option></option>")
+										.attr("value","")
+										.text("Category has no competencies")); 
+									$("#complist").attr("disabled",true);
+								}
+							} else {
+								$("#complist").empty();
+								$('#complist')
+									.append($("<option></option>")
+									.attr("value","")
+									.text("Select an occupational category first")); 
+								$("#complist").attr("disabled",true);
+								ctr++;
+							}
+						}
+
+/*
 						function SwHd(obj)
 						{
 							document.getElementById("listc").style.display="none";
 							document.getElementById("listd").style.display="none";
 							document.getElementById("listn").style.display="none";
 							document.getElementById("listp").style.display="none";
-							document.getElementById("NurseOptions").style.display="none";
 							document.getElementById("listc").selectedIndex=0;
 							document.getElementById("listd").selectedIndex=0;
 							document.getElementById("listn").selectedIndex=0;
@@ -217,6 +300,7 @@
 								document.getElementById("listp").style.display="inline";
 							}
 						}
+*/
 						function ShwHid(obj)
 						{
 							document.getElementById("ques").value="";
@@ -224,7 +308,8 @@
 							{
 								if(obj.options[i].selected)
 								{
-									document.getElementById("ques").value=document.getElementById("ques").value+i+",";
+									// document.getElementById("ques").value=document.getElementById("ques").value+i+",";
+									document.getElementById("ques").value=document.getElementById("ques").value + obj.options[i].value + ",";
 								}
 							}
 							document.getElementById("ques").value=document.getElementById("ques").value.replace(/,+$/,'');
@@ -254,7 +339,7 @@
 						<option value="10" <?php if ($this->criteria['hivInput']=="10") echo 'selected="selected"';?>><?php echo t('More than 5 years'); ?></option>
 					</select>
 				</div>
-				<div id="NurseOptions">
+				<div id="NurseOptions" style="display : none;">
 					<div class="fieldLabel"><?php echo t('Nurse trainer type'); ?></div><div class="fieldInput">
 					<select id="trainer_type_option_id1" name="trainer_type_option_id1">
 						<option value="">--<?php echo t('choose'); ?>--</option>
@@ -288,28 +373,76 @@
 <?php if ( $this->criteria['go'] ) { ?>
 <div class="hrGrey"></div>
 <div class="fieldIndentNoMargin"><?php tp('Results');?></span><span class="printAndExport"><a href="javascript:window.print()"><?php echo t('Print'); ?></a>&nbsp;&nbsp;<a href="javascript:myExport()"><?php echo t('Export'); ?></a>&nbsp;&nbsp;<a href="javascript:myExport()"><img src="<?php echo (Settings::$COUNTRY_BASE_URL).'/images/excel.jpg'; ?>" /></a></span></div>
+
+<script language="JavaScript">
+$(function(){
+	document.getElementById("NurseOptions").style.display="none";
 <?php
-if(isset($this->rss[0]))
-{
-	$cntr;
-	$cntr=0;
-	echo '<table cellpadding="0" cellspacing="0" border="0" style="width:40%;border:solid 1px #AAA">';
-	echo '<tr><td><div class="nwtxtbig">'.t('Competence').'</div></td><td><div class="nwtxtbig">'.t('Result').'</div></td></tr>';
-	foreach ( $this->rss as $ys => $ls ) {
-		echo '<tr><td><div class="nwtxt" id="dv'.$cntr.'"></div></td>';
-		echo '<td><div class="nwtxt" id="pr'.$cntr.'">';
-		echo $ls.'%';
-		echo '</div></td>';
-		echo '</tr>';
+	if (isset ($_GET['qualification_id'])){
+		echo "showCompetencies([" . implode(",", $_GET['complist']) . "]);\n";
+//		echo "alert('" . implode(",", $_GET['complist']) . "');\n";
+	}
+?>
+})
+</script>
+
+<?php
+
+if (isset ($this->reportoutput)){
+	echo "<table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"width:40%;border:solid 1px #AAA\">\n";
+	echo "	<tr>\n";
+	echo "		<td><div class=\"nwtxtbig\">".t("Competence")."</div></td>\n";
+	echo "		<td><div class=\"nwtxtbig\">".t("Result")."</div></td>\n";
+	echo "	</tr>\n";
+	foreach ( $this->reportoutput as $k => $v ) {
+		echo "	<tr>\n";
+		echo "		<td><div class=\"nwtxt\" id=\"dv".$cntr."\">" . $k . "</div></td>\n";
+		echo "		<td><div class=\"nwtxt\" id=\"pr".$cntr."\">" . $v . "%</div></td>\n";
+		echo "	</tr>\n";
 		$cntr=$cntr+1;;
 	}
-	echo '</table>';
+	echo "</table>\n";
 }
+
+/*
+if(isset($this->rss[0])){
+	$cntr;
+	$cntr=0;
+	echo "<table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"width:40%;border:solid 1px #AAA\">\n";
+	echo "	<tr>\n";
+	echo "		<td><div class=\"nwtxtbig\">".t("Competence")."</div></td>\n";
+	echo "		<td><div class=\"nwtxtbig\">".t("Result")."</div></td>\n";
+	echo "	</tr>\n";
+	foreach ( $this->rss as $ys => $ls ) {
+		echo "	<tr>\n";
+		echo "		<td><div class=\"nwtxt\" id=\"dv".$cntr."\">" . $ys . "</div></td>\n";
+		echo "		<td><div class=\"nwtxt\" id=\"pr".$cntr."\">" . $ls . "%</div></td>\n";
+		echo "	</tr>\n";
+		$cntr=$cntr+1;;
+	}
+	echo "</table>\n";
+} else {
+
+	if ( $this->criteria['go'] ){
+		echo "<table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"width:40%;border:solid 1px #AAA\">\n";
+		echo "	<tr>\n";
+		echo "		<td><div class=\"nwtxtbig\">".t("Competence")."</div></td>\n";
+		echo "		<td><div class=\"nwtxtbig\">".t("Result")."</div></td>\n";
+		echo "	</tr>\n";
+		foreach ($this->complist as $cl){
+			echo "	<tr>\n";
+			echo "		<td><div class=\"nwtxt\" id=\"dv".$cntr."\">" . $ys . "</div></td>\n";
+			echo "		<td><div class=\"nwtxt\" id=\"pr".$cntr."\">" . $ls . "%</div></td>\n";
+			echo "	</tr>\n";
+		}
+		echo "</table>\n";
+	}
+}
+*/
 ?>
 <?php } ?>
 </div>
 <div id="footer"><?php require_once('views/scripts/footer.phtml');?></div>
-
 
 </div>
 

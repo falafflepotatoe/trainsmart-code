@@ -74,10 +74,6 @@ Class Output_Csv extends Output_Abstract
     
   public function makeCSVTable( $header, $rows )
   {
-  	//bugfix to utf_decode any strings in this func, part 1
-  	foreach ($header as $key => $value)
-  		$header[$key] = utf8_decode($value);
-
   	$result = '';
     // Handles the "separator" and the optional "enclosed by" characters
     $sep     = ',';
@@ -116,6 +112,7 @@ Class Output_Csv extends Output_Abstract
 	        } else if ($value == '0' || $value != '') {
 	          // test bugfix - array to string
 	          if (is_array($value)){ 
+	          	$done = '';  //todo test, adding ternary fallback
 	          	foreach ($value as $akey => $aval){
 	          		if (is_array($aval) ) // bugfix - sometimes strings get here, 12/28/12
 	          			$done .= implode(', ', $aval) . PHP_EOL;
@@ -125,8 +122,6 @@ Class Output_Csv extends Output_Abstract
 	          	$value = $done;
 		      }
 		      
-	          //bugfix to utf_decode any strings in this func, part 2
-			  $value = utf8_decode($value);
 	          // loic1 : always enclose fields
 	          $value = ereg_replace("\015(\012)?", "\012", $value);
 	           if ($enc_by == '') {
@@ -172,9 +167,6 @@ Class Output_Csv extends Output_Abstract
 				  $schema_insert .= '';
 		        } else if ($value == '0' || $value != '') {
 		          
-		          //bugfix to utf_decode any strings in this func, part 2
-				  $value = utf8_decode($value);
-
 		          // loic1 : always enclose fields
 		          $value = ereg_replace("\015(\012)?", "\012", $value);
 		           if ($enc_by == '') {

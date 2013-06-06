@@ -140,7 +140,7 @@ class DropDown {
 		$html .= "<div class='fieldInput'><div  class='leftBorderPad'>\n";
 		$html .= "<input type='checkbox' name='$show_id' " . ($show_selected ? 'checked="checked"' : '') . " />\n";
 		$html .= "</div><label for='$show_id' ></label><div  class='leftBorder'>\n";
-		$html .= "<select id='" . $id . "_id' name='" . $id . "_id' ".($fixedWidth?'class="fixed" ':'').($multiple?'multiple="multiple" size="10" ':'').">\n";
+		$html .= "<select id='" . $id . "_id' name='" . $id . "_id".($multiple?'[]':'')."' ".($fixedWidth?'class="fixed" ':'').($multiple?'multiple="multiple" size="10" ':'').">\n";
 		$html .= "<option value=''>--" . t ( 'All' ) . "--</option>\n";
 		
 		//look for default

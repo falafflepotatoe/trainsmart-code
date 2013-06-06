@@ -55,7 +55,7 @@
 							echo labelAndField($this, t('Intended Transition'), $this->transitions, 'intended_transition');
 						if($this->setting['display_employee_transition_confirmed'])
 							echo confirmDropdown($this, t('Transition Confirmed'), 'transition_confirmed', $this->criteria['transition_confirmed']);
-						echo labelAndField($this, t('Employee Comments'), '', 'comments'); //empty field ('')
+						#echo labelAndField($this, t('Employee Comments'), '', 'comments'); //empty field ('')
 
 					?>
 					</div>
@@ -118,7 +118,7 @@
 						if ($this->criteria['show_staff_category'])       $data[] = $row['staff_category'];
 						if ($this->criteria['show_intended_transition'])  $data[] = $row['transition_phrase'];
 						if ($this->criteria['show_transition_confirmed']) $data[] = $row['transition_confirmed'];
-						if ($this->criteria['show_comments'])             $data[] = $row['comments'];
+#						if ($this->criteria['show_comments'])             $data[] = $row['comments'];
 						echo '"'.implode('","', $data).'"';
 					echo ']';
 					$cnt++;
@@ -204,9 +204,9 @@
 				<?php if ( $this->criteria['show_transition_confirmed'] ) { ?>
 				{key:"transition_confirmed", label: "<?php tp('Transition Confirmed');?>", sortable:true, resizeable:true},
 				<?php } ?>
-				<?php if ( $this->criteria['show_comments'] ) { ?>
+				<?php /*if ( $this->criteria['show_comments'] ) {
 				{key:"employee_comments", label: "<?php tp('Employee Comments');?>", sortable:true, resizeable:true}
-				<?php } ?>
+				 #} */ ?>
 			];
 
 			makeDataTable("employees", null, employeesData, employeesColumnDefs);
