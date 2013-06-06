@@ -147,7 +147,7 @@ class SyncCompare
     $tiers = $_app->getAdapter()->query('SELECT COUNT(DISTINCT tier) as "cnt" FROM location');
     $rows = $tiers->fetchAll();
     $settings = System::getAll();
-    $city_tier = 2 + $settings['display_region_c'] + $settings['display_region_b'];
+    $city_tier = 2 +  $settings['display_region_i'] + $settings['display_region_h'] + $settings['display_region_g'] +  $settings['display_region_f'] +  $settings['display_region_e'] +  $settings['display_region_d'] +  $settings['display_region_c'] + $settings['display_region_b'];
     if ( $rows[0]['cnt'] != $city_tier) {
       return 'Could not import data: Offline database contains '.$rows[0]['cnt'].' regional levels, while the web database contains '.$city_tier.'.';
     }
@@ -306,6 +306,7 @@ class SyncCompare
             //$this->syncLog->markDone($logData->id);
             
         } catch (Exception $e) {
+          $this->syncLog->add(array($e->getMessage(), $tableType, $logData->left_id, '?', $logData));
           $errors []= print_r($e, true);
         }
         

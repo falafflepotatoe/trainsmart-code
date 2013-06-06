@@ -41,7 +41,9 @@
 					<option value="">--<?php tp('choose');?>--</option>
 					<option value="/reports/trainings"><?php echo t('Trainings').space.t('by').space.t('Name'); ?></option>
 					<option value="/reports/trainingByTitle"><?php echo t('Trainings').space.t('by').space.t('Multiple Names'); ?></option>
-					<option value="/reports/trainingByParticipants"><?php echo t('Trainings').space.t('by').space.t('Participant Count'); ?></option>
+					<?php if ($this->setting['display_viewing_location']) { ?>
+					<option value="/reports/budgetcode"><?php echo t('Trainings').space.t('by').space.t('Participants').space.t('Viewing Location'); ?></option>
+					<?php } ?>
 					<option value="/reports/trainingUnknown"><?php echo t('Trainings').space.t('with').space.t('Unknown Participants'); ?></option>
 					<option value="/reports/trainingsMissingInformation"><?php echo t('Trainings').space.t('with').space.t('missing information'); ?></option>
 				</select><br/><br/>

@@ -182,8 +182,9 @@ class AdminController extends UserController
 			Location::addTier(1);
 			require_once('models/table/System.php');
 			$sysTable = new System();
+			$upd = array();
 			//add one region
-			if ($this->setting('display_region_a')) $upd = array('display_region_b' => 1);
+			if (!$this->setting('display_region_b')) $upd = array('display_region_b' => 1);
 			if ($this->setting('display_region_b')) $upd = array('display_region_c' => 1);
 			if ($this->setting('display_region_c')) $upd = array('display_region_d' => 1);
 			if ($this->setting('display_region_d')) $upd = array('display_region_e' => 1);
@@ -191,6 +192,7 @@ class AdminController extends UserController
 			if ($this->setting('display_region_f')) $upd = array('display_region_g' => 1);
 			if ($this->setting('display_region_g')) $upd = array('display_region_h' => 1);
 			if ($this->setting('display_region_h')) $upd = array('display_region_i' => 1);
+			if (! empty($upd))
 			$sysTable->update($upd, '');
 		}
 
@@ -203,8 +205,9 @@ class AdminController extends UserController
 			Location::addTier($this->setting('num_location_tiers'));
 			require_once('models/table/System.php');
 			$sysTable = new System();
+			$upd = array();
 			// add one region
-			if ($this->setting('display_region_a')) $upd = array('display_region_b' => 1);
+			if (!$this->setting('display_region_b')) $upd = array('display_region_b' => 1);
 			if ($this->setting('display_region_b')) $upd = array('display_region_c' => 1);
 			if ($this->setting('display_region_c')) $upd = array('display_region_d' => 1);
 			if ($this->setting('display_region_d')) $upd = array('display_region_e' => 1);
@@ -212,6 +215,7 @@ class AdminController extends UserController
 			if ($this->setting('display_region_f')) $upd = array('display_region_g' => 1);
 			if ($this->setting('display_region_g')) $upd = array('display_region_h' => 1);
 			if ($this->setting('display_region_h')) $upd = array('display_region_i' => 1);
+			if (! empty($upd))
 			$sysTable->update($upd, '');
 		}
 
@@ -239,7 +243,7 @@ class AdminController extends UserController
 	}
 	public function countryDataShareAction()
 	{
-		
+
 	}
 
 	/*
@@ -410,6 +414,9 @@ class AdminController extends UserController
 		'label_training_funding_amt' => 'Funding Amount',
 		'label_primary_language' => 'Primary Language',
 		'label_secondary_language' => 'Secondary Language',
+		'label_award'                => 'Award',
+		'label_viewing_location'     => 'Viewing Location',
+		'label_budget_code'          => 'Budget Code'
 		);
 
 		// _system settings
@@ -433,8 +440,9 @@ class AdminController extends UserController
 		'check_training_secondary_language'  => 'display_secondary_language',
 		'check_training_end_date' => 'display_end_date',
 		'check_training_funding_options' => 'display_funding_options',
-		'check_training_funding_amounts' => 'display_funding_amounts'
-
+		'check_training_funding_amounts'     => 'display_funding_amounts',
+		'check_display_viewing_location'     => 'display_viewing_location',
+		'check_display_budget_code'          => 'display_budget_code'
 		);
 
 		if($this->getRequest()->isPost()) { // Update db
@@ -628,7 +636,7 @@ class AdminController extends UserController
 		$name = array(''); // prepend 1 for readability, tiers start at 1
 		$flds = array(''); // always show // this form has to be dynamic becasue city tier is num_tiers - 1
 
-		$name[] = 'Region A (Province)'; 
+		$name[] = 'Region A (Province)';
 		$flds[] = 'province_id';
 		if($this->setting('display_region_b')){ $name[] = 'Region B (Health District)'; $flds[] = 'district_id'; }
 		if($this->setting('display_region_c')){ $name[] = 'Region C (Local Region)';    $flds[] = 'region_c_id'; }
@@ -719,22 +727,22 @@ class AdminController extends UserController
 					break;
 					case 5:
 						$target = $this->getSanParam('target_region_d_id');
-					break;	       	
+					break;
 					case 6:
 						$target = $this->getSanParam('target_region_e_id');
-					break;	       	
+					break;
 					case 7:
 						$target = $this->getSanParam('target_region_f_id');
-					break;	       	
+					break;
 					case 8:
 						$target = $this->getSanParam('target_region_g_id');
-					break;	       	
+					break;
 					case 9:
 						$target = $this->getSanParam('target_region_h_id');
-					break;	       	
+					break;
 					case 10:
 						$target = $this->getSanParam('target_region_i_id');
-					break;	       	
+					break;
 				}
 				$target_parts = explode('_',$target);
 				$target_id = $target_parts[count($target_parts) - 1];
@@ -773,14 +781,18 @@ class AdminController extends UserController
 		// For "Labels"
 		require_once('models/table/Translation.php');
 		$labelNames = array( // input name => key_phrase
-		'label_facility'   => 'Facility',
-		'label_comments'   => 'Facility Comments',
+		'label_facility'         => 'Facility',
+		'label_comments'         => 'Facility Comments',
+		'label_sponsor_date'     => 'Sponsor Date',
 		);
 	$checkboxFields = array(
-		'check_approval_mod' =>   'module_facility_approval',
-		'check_multi_sponsors' => 'allow_multi_sponsors',
-		'check_display_dates' =>  'display_sponsor_dates',
-		'check_require_dates' =>  'require_sponsor_dates'
+		'check_approval_mod'     => 'module_facility_approval',
+		'check_multi_sponsors'   => 'allow_multi_sponsors',
+		'check_display_dates'    => 'display_sponsor_dates',
+		'check_require_dates'    => 'require_sponsor_dates',
+		'check_display_lat_long' => 'display_facility_lat_long',
+		'check_display_postal'   => 'display_facility_postal_code',
+		'check_display_sponsor'  => 'display_facility_sponsor'
 		);
 
 		if($this->getRequest()->isPost()) { // Update db
@@ -857,9 +869,9 @@ class AdminController extends UserController
 		'label_people_gender'   => 'Gender',
 		'label_people_custom1'    => 'People Custom 1',
 		'label_people_custom2'    => 'People Custom 2',
-		'label_people_custom2'  => 'People Custom 3',
-		'label_people_custom2'  => 'People Custom 4',
-		'label_people_custom2'  => 'People Custom 5',
+		'label_people_custom3'            => 'People Custom 3',
+		'label_people_custom4'            => 'People Custom 4',
+		'label_people_custom5'            => 'People Custom 5',
 		'label_responsibility_me'    => 'M&E Responsibility',
 		'label_highest_ed_level'    => 'Highest Education Level',
 		'label_attend_reason'    => 'Reason Attending',
@@ -1304,7 +1316,7 @@ class AdminController extends UserController
 		$html = EditTableHelper::generateHtml('Approvers', $rows, $fieldDefs, array(), $noDelete, true); // array(1) and select 1 as id = bugfix: remove delete col
 		$this->view->assign('editTable', $html);
 		// done
- 
+
 
 		// process form (copied from other pages)
 		if($this->getRequest()->isPost()) { // Update db
@@ -1490,6 +1502,42 @@ class AdminController extends UserController
 		$this->sendData($rowArray);
 	}
 
+	public function trainingCompletionAction()
+	{
+
+		/* edit table */
+		$editTable = new EditTableController($this);
+		$editTable->table   = 'person_to_training_award_option';
+		$editTable->fields  = array('award_phrase' => 'Training Completion');
+		$editTable->label   = 'Complete Status';
+		$editTable->dependencies = array('award_id' => 'person_to_training');
+		$editTable->execute();
+	}
+
+	public function trainingViewingLocationAction()
+	{
+
+		/* edit table */
+		$editTable = new EditTableController($this);
+		$editTable->table   = 'person_to_training_viewing_loc_option';
+		$editTable->fields  = array('location_phrase' => 'Location');
+		$editTable->label   = 'Location';
+		$editTable->dependencies = array('viewing_location_option_id' => 'person_to_training');
+		$editTable->execute();
+	}
+
+	public function trainingBudgetCodeAction()
+	{
+
+		/* edit table */
+		$editTable = new EditTableController($this);
+		$editTable->table   = 'person_to_training_budget_option';
+		$editTable->fields  = array('budget_code_phrase' => 'Budget Code');
+		$editTable->label   = 'Budget Code';
+		$editTable->dependencies = array('budget_code_option_id' => 'person_to_training');
+		$editTable->execute();
+	}
+
 	/************************************************************************************
 	* People (Person) / Trainer
 	*/
@@ -1515,7 +1563,7 @@ class AdminController extends UserController
 
 		// fill form dropdowns
 		$this->viewAssignEscaped ( 'locations', Location::getAll() );
-		
+
 		//training titles
 		require_once ('models/table/TrainingTitleOption.php');
 		$titleArray = TrainingTitleOption::suggestionList ( false, 10000 );
@@ -1523,7 +1571,7 @@ class AdminController extends UserController
 		//types
 		$qualificationsArray = OptionList::suggestionListHierarchical ( 'person_qualification_option', 'qualification_phrase', false, false );
 		$this->viewAssignEscaped ( 'qualifications', $qualificationsArray );
-		
+
 		//facilities list
 		$rowArray = OptionList::suggestionList ( 'facility', array ('facility_name', 'id' ), false, 9999 );
 		$facilitiesArray = array ();
@@ -1738,7 +1786,7 @@ class AdminController extends UserController
 		list($field_name,$location_sub_query) = Location::subquery($num_locs, $location_tier, $location_id);
 		$rows = $db->fetchAll("
 			select loc.*,facility.*,types.facility_type_phrase,sponsors.facility_sponsor_phrase,facility.id as id
-			from facility 
+			from facility
 			left join ($location_sub_query)    as loc   on loc.id = location_id
 			left join facility_type_option     as types on types.id = type_option_id
 			left join facility_sponsor_option  as sponsors on sponsors.id = sponsor_option_id
@@ -2184,7 +2232,7 @@ class AdminController extends UserController
 		}
 
 	}
-	
+
 	public function skillsmartRaceAction(){
 		$helper = new Helper();
 
@@ -2205,7 +2253,7 @@ class AdminController extends UserController
 		$this->view->assign("lookup", $list['race']);
 		$this->view->assign("header","Race");
 	}
-	
+
 	public function skillsmartDisabilityAction(){
 		$helper = new Helper();
 
@@ -2225,7 +2273,7 @@ class AdminController extends UserController
 		$this->view->assign("lookup", $list['disability']);
 		$this->view->assign("header","Disability");
 	}
-	
+
 	public function skillsmartProfessionalbodiesAction(){
 		$helper = new Helper();
 
@@ -2245,7 +2293,7 @@ class AdminController extends UserController
 		$this->view->assign("lookup", $list['professionalbodies']);
 		$this->view->assign("header","Professional Bodies");
 	}
-	
+
 	public function skillsmartSupervisedAction(){
 		$helper = new Helper();
 
@@ -2265,7 +2313,7 @@ class AdminController extends UserController
 		$this->view->assign("lookup", $list['supervised']);
 		$this->view->assign("header","Supervised");
 	}
-	
+
 	public function skillsmartSupervisedfrequencyAction(){
 		$helper = new Helper();
 
@@ -2285,7 +2333,7 @@ class AdminController extends UserController
 		$this->view->assign("lookup", $list['supervisedfrequency']);
 		$this->view->assign("header","Supervision Frequency");
 	}
-	
+
 	public function skillsmartTrainingAction(){
 		$helper = new Helper();
 
@@ -2305,7 +2353,7 @@ class AdminController extends UserController
 		$this->view->assign("lookup", $list['training']);
 		$this->view->assign("header","Training received");
 	}
-	
+
 	public function skillsmartFacilitydepartmentAction(){
 		$helper = new Helper();
 
@@ -2371,10 +2419,10 @@ class AdminController extends UserController
 			$this->view->assign("header","Competencies");
 		} else {
 			// COMPETENCY SPECIFIC OUTPUT
-			
+
 			$competency = $helper->getSkillSmartCompetencies($compid);
 			$questions = $helper->getSkillSmartCompetenciesQuestions($compid);
-			
+
 			$this->view->assign("header","Update competency '" . $competency['label'] . "'");
 			$this->view->assign("questions",$questions);
 
@@ -2386,10 +2434,10 @@ class AdminController extends UserController
 		}
 	}
 
-	
+
 	public function skillsmartOccupationalCatsAction(){
 		$parent = $this->getSanParam('parent');
-		
+
 		if ( $parent or $this->getSanParam('redirect') ) {
 			$editTable = new EditTableController($this);
 			$editTable->table   = 'occupational_categories';
@@ -2401,7 +2449,7 @@ class AdminController extends UserController
 			$editTable->allowDefault = true;
 			$editTable->execute();
 		}
-		
+
 		$parentArray = OptionList::suggestionList('occupational_categories', 'category_phrase', false, false, true, 'parent_id IS NULL');
 		$this->viewAssignEscaped('parents', $parentArray);
 		$this->view->assign('parent', $parent);
@@ -2417,45 +2465,72 @@ class AdminController extends UserController
 	// same logic as other Settings pages - except the employee_header setting below
 		require_once('models/table/Translation.php');
 		$labelNames = array( // input name => key_phrase
-			'label_partner'               => 'Partner',
-			'label_sub_partner'           => 'Sub Partner',
-			'label_funder'                => 'Funder',
-			'label_full_time'             => 'Full Time',
-			'label_funded_hours_per_week' => 'Funded hours per week',
-			'label_staff_category'        => 'Staff Category',
-			'label_annual_cost'           => 'Annual Cost',
-			'label_primary_role'          => 'Primary Role',
-			'label_importance'            => 'Importance',
-			'label_intended_transition'   => 'Intended Transition',
-			'label_incoming_partner'      => 'Incoming partner',
-			'label_relationship'          => 'Relationship',
-			'label_referral_mechanism'    => 'Referral Mechanism',
-			'label_chw_supervisor'        => 'CHW Supervisor',
-			'label_trainings_provided'    => 'Trainings provided',
-			'label_courses_completed'     => 'Courses Completed'
+			'label_partner'                  => 'Partner',
+			'label_sub_partner'              => 'Sub Partner',
+			'label_type'                     => 'Type of Partner',
+			'label_funder'                   => 'Funder',
+			'label_full_time'                => 'Full Time',
+			'label_base'                     => 'Employee Based at',
+			'label_funded_hours_per_week'    => 'Funded hours per week',
+			'label_cadre'                    => 'Staff Cadre',
+			'label_staff_category'           => 'Staff Category',
+			'label_annual_cost'              => 'Annual Cost',
+			'label_primary_role'             => 'Primary Role',
+			'label_importance'               => 'Importance',
+			'label_intended_transition'      => 'Intended Transition',
+			'label_incoming_partner'         => 'Incoming partner',
+			'label_relationship'             => 'Relationship',
+			'label_referral_mechanism'       => 'Referral Mechanism',
+			'label_chw_supervisor'           => 'CHW Supervisor',
+			'label_trainings_provided'       => 'Trainings provided',
+			'label_courses_completed'        => 'Courses Completed',
+			'label_other_id'                 => 'Other ID',
+			'label_disability'               => 'Disability',
+			'label_disability_comments'      => 'Disability Comments',
+			'label_nationality'              => 'Employee Nationality',
+			'label_race'                     => 'Race',
+			'label_registration_number'      => 'Registration Number',
+			'label_salary'                   => 'Salary',
+			'label_benefits'                 => 'Benefits',
+			'label_additional_expenses'      => 'Additional Expenses',
+			'label_stipend'                  => 'Stipend'
 			);
 		$checkboxFields = array(
-			'check_partner'               => 'display_employee_partner',
-			'check_sub_partner'           => 'display_employee_sub_partner',
-			'check_funder'                => 'display_employee_funder',
-			'check_full_time'             => 'display_employee_full_time',
-			'check_funded_hours_per_week' => 'display_employee_funded_hours_per_week',
-			'check_staff_category'        => 'display_employee_staff_category',
-			'check_annual_cost'           => 'display_employee_annual_cost',
-			'check_primary_role'          => 'display_employee_primary_role',
-			'check_importance'            => 'display_employee_importance',
-			'check_contract_end_date'     => 'display_employee_contract_end_date',
-			'check_agreement_end_date'    => 'display_employee_agreement_end_date',
-			'check_intended_transition'   => 'display_employee_intended_transition',
-			'check_transition_confirmed'  => 'display_employee_transition_confirmed',
-			'check_incoming_partner'      => 'display_employee_incoming_partner',
-			'check_relationship'          => 'display_employee_relationship',
-			'check_referral_mechanism'    => 'display_employee_referral_mechanism',
-			'check_chw_supervisor'        => 'display_employee_chw_supervisor',
-			'check_trainings_provided'    => 'display_employee_trainings_provided',
-			'check_courses_completed'     => 'display_employee_courses_completed',
-			'check_site_name'             => 'display_employee_site_name',
-			'check_employee_header'       => 'display_employee_employee_header',
+			'check_partner'                  => 'display_employee_partner',
+			'check_sub_partner'              => 'display_employee_sub_partner',
+			'check_type'                     => 'display_partner_type',
+			'check_funder'                   => 'display_employee_funder',
+			'check_full_time'                => 'display_employee_full_time',
+			'check_base'                     => 'display_employee_base',
+			'check_site_type'                => 'display_employee_site_type',
+			'check_funded_hours_per_week'    => 'display_employee_funded_hours_per_week',
+			'check_staff_category'           => 'display_employee_staff_category',
+			'check_annual_cost'              => 'display_employee_annual_cost',
+			'check_primary_role'             => 'display_employee_primary_role',
+			'check_importance'               => 'display_employee_importance',
+			'check_contract_end_date'        => 'display_employee_contract_end_date',
+			'check_agreement_end_date'       => 'display_employee_agreement_end_date',
+			'check_intended_transition'      => 'display_employee_intended_transition',
+			'check_transition_confirmed'     => 'display_employee_transition_confirmed',
+			'check_transition_complete'      => 'display_employee_complete_transition',
+			'check_transition_complete_date' => 'display_employee_actual_transition_date',
+			'check_incoming_partner'         => 'display_employee_incoming_partner',
+			'check_relationship'             => 'display_employee_relationship',
+			'check_referral_mechanism'       => 'display_employee_referral_mechanism',
+			'check_chw_supervisor'           => 'display_employee_chw_supervisor',
+			'check_trainings_provided'       => 'display_employee_trainings_provided',
+			'check_courses_completed'        => 'display_employee_courses_completed',
+			'check_site_name'                => 'display_employee_site_name',
+			'check_employee_header'          => 'display_employee_employee_header',
+			'check_other_id'                 => 'display_employee_other_id',
+			'check_disability'               => 'display_employee_disability',
+			'check_nationality'              => 'display_employee_nationality',
+			'check_race'                     => 'display_employee_race',
+			'check_registration_number'      => 'display_employee_registration_number',
+			'check_salary'                   => 'display_employee_salary',
+			'check_benefits'                 => 'display_employee_benefits',
+			'check_additional_expenses'      => 'display_employee_additional_expenses',
+			'check_stipend'                  => 'display_employee_stipend'
 			);
 
 		if($this->getRequest()->isPost()) { // Update db
@@ -2513,6 +2588,18 @@ class AdminController extends UserController
 		}
 	}
 
+	public function employeePartnerTypeAction()
+	{
+
+		/* edit table */
+		$editTable = new EditTableController($this);
+		$editTable->table   = 'partner_type_option';
+		$editTable->fields  = array('type_phrase' => 'Partner Type');
+		$editTable->label   = 'Partner Type';
+		$editTable->dependencies = array('partner_type_option_id' => 'partner');
+		$editTable->execute();
+	}
+
 	public function employeeCategoryAction()
 	{
 
@@ -2522,6 +2609,66 @@ class AdminController extends UserController
 		$editTable->fields  = array('category_phrase' => 'Staff Category');
 		$editTable->label   = 'Staff Category';
 		$editTable->dependencies = array('employee_category_option_id' => 'employee');
+		$editTable->execute();
+	}
+
+	public function employeeBaseAction()
+	{
+
+		/* edit table */
+		$editTable = new EditTableController($this);
+		$editTable->table   = 'employee_base_option';
+		$editTable->fields  = array('base_phrase' => 'Base');
+		$editTable->label   = 'Base';
+		$editTable->dependencies = array('employee_base_option_id' => 'employee');
+		$editTable->execute();
+	}
+
+	public function employeeSiteTypeAction()
+	{
+
+		/* edit table */
+		$editTable = new EditTableController($this);
+		$editTable->table   = 'employee_site_type_option';
+		$editTable->fields  = array('site_type_phrase' => 'Type');
+		$editTable->label   = 'Type';
+		$editTable->dependencies = array('facility_type_option_id' => 'employee');
+		$editTable->execute();
+	}
+
+	public function employeeFullTimeAction()
+	{
+
+		/* edit table */
+		$editTable = new EditTableController($this);
+		$editTable->table   = 'employee_fulltime_option';
+		$editTable->fields  = array('fulltime_phrase' => 'Full Time');
+		$editTable->label   = 'Status';
+		$editTable->dependencies = array('employee_fulltime_option_id' => 'employee');
+		$editTable->execute();
+	}
+
+	public function personRaceAction()
+	{
+
+		/* edit table */
+		$editTable = new EditTableController($this);
+		$editTable->table   = 'person_race_option';
+		$editTable->fields  = array('race_phrase' => 'Race');
+		$editTable->label   = 'Race';
+		$editTable->dependencies = array('race_option_id' => 'employee');
+		$editTable->execute();
+	}
+
+	public function employeeQualificationAction()
+	{
+
+		/* edit table */
+		$editTable = new EditTableController($this);
+		$editTable->table   = 'employee_qualification_option';
+		$editTable->fields  = array('qualification_phrase' => 'Qualification');
+		$editTable->label   = 'Qualification';
+		$editTable->dependencies = array('employee_qualification_option_id' => 'employee');
 		$editTable->execute();
 	}
 
@@ -2605,11 +2752,11 @@ class AdminController extends UserController
 		$editTable->table   = 'partner_importance_option';
 		$editTable->fields  = array('importance_phrase' => 'Importance');
 		$editTable->label   = 'Importance';
-		$editTable->dependencies = array('importance' => 'partner');
+		$editTable->dependencies = array('partner_importance_option_id' => 'partner');
 		$editTable->execute();
 	}
 
-	public function hasEditorACL(){								
+	public function hasEditorACL(){
 		// return hasACL() based on admin page viewing
 		$validACLEditPages = array(
 			'training_title_option_all'   => 'training_title_option_all',
@@ -2633,6 +2780,8 @@ class AdminController extends UserController
 			'training-recommend'          => 'acl_editor_recommended_topic',
 			'training-gotcurriculum'      => 'acl_editor_nationalcurriculum',
 			'training-method'             => 'acl_editor_method',
+			'training-viewing-location'   => 'acl_admin_training',
+			'training-budget-code'        => 'acl_admin_training',
 			'facilities-types'            => 'acl_editor_facility_types',
 			'facilities-sponsors'         => 'acl_editor_facility_sponsors',
 			'preservice-classes'          => 'acl_editor_ps_classes',

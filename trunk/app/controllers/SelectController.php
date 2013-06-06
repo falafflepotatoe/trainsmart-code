@@ -9,14 +9,16 @@ class SelectController extends ITechController {
 		parent::__construct ( $request, $response, $invokeArgs );
 	}
 	
-	public function init() {
-		if($this->hasACL('edit_employee')){
-			if($this->hasACL('in-service') == false && $this->hasACL('pre-service') == false)
-				$this->_redirect('/employee');
-		}
+	public function init() {	}
+
+	public function selectAction(){
+		if($this->hasACL('edit_employee') && $this->setting('module_employee_enabled')){
+			if($this->hasACL('in-service') == false && $this->hasACL('pre-service') == false) {
+				$this->_redirect('employee');
+				exit();
+			}
 	}
 	
-	public function selectAction(){
 /*
         require_once('Zend/Session.php');
         $itechspace = new Zend_Session_Namespace('itech');

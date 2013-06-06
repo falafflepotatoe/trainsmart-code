@@ -296,11 +296,13 @@ class Location extends ITechTable
 	*
 	* @param int $loc_id
 	*/
-	public static function getCityInfo($loc_id, $num_tiers) {
+	public static function getCityInfo($loc_id, $num_tiers, &$locations = null) {
 
   	$output = array(0=>null, 1=>null, 2=>null, 3=>null, 4=>null, 5=>null, 6=>null, 7=>null, 8=>null, 9=>null);
 		if ( $loc_id ) {
-			$locations = self::getAll();
+			if ($locations == null)
+				$locations = self::getAll();
+
 			$loc = $locations[$loc_id];
 
 			if ( $loc['tier'] == $num_tiers) {
@@ -314,11 +316,17 @@ class Location extends ITechTable
 				$output[$locations[$parent_id]['tier']]= $parent_id;
 				$parent_id = $locations[$parent_id]['parent_id'];
 			}
-  	}
+		}
 
-  	foreach ($output as $i => $value) {
-  		if($value == null)
-  			unset($output[$i]); // remove items from array if empty instead of having a bunch of: if(display_region_d) dostuff
+		// bugfix - lets give a city name even when the system bug of region merging gives us 19 tiers, and $num_tiers is invalid
+		if ($output[0] == null){
+			$output[0] = $locations[$loc_id]['name'];
+		}
+		// end bugfix
+
+		foreach ($output as $i => $value) {
+			if($value == null)
+				unset($output[$i]); // remove items from array if empty instead of having a bunch of: if(display_region_d) dostuff
 		}
 
 		return $output;
@@ -369,7 +377,7 @@ class Location extends ITechTable
   }
 
   /**
-   * getCityInfoAsHash
+   * getCityandParentNames
    *
    * Returns a hash of cityname,province_name, district_name, etc
    */
@@ -377,7 +385,7 @@ class Location extends ITechTable
   {
   	if ($prefix)
   		$prefix .= '_';
-  	
+
   	// assumes there is a bug in region merge (todo remove this line)
   	// stops counting at # of tiers the system is set at
   	// ideally this first for loop will be removed (todo) when the region merge doesnt allow all these bogus tiers to be made
@@ -397,14 +405,11 @@ class Location extends ITechTable
 		// sometimes theres a location with 20 parent tiers, so technically we want
 		// to return the first 5 tiers as region_a, region_b, etc
 		// i guess ill do that so at least it has 'some data' and its *valid* by application standards,
-		// even though at this point its not correct due to a bug in (region_Create or region_merge) 
+		// even though at this point its not correct due to a bug in (region_Create or region_merge)
 		// that causes some data to have 20 tiers, hopefuly this wont ever happen but at least it exports / imports cleanly now
 		$hash[$prefix.'city_name'] = $o[0]; // u will probably want to add city_name back into the above array and loop through them all
 		unset($hash[0]);
-		$o = array_reverse($o);
 
-		$max = count($o);
-		if ($max > $num_location_tiers) $max = $num_location_tiers;
 		// end bugfix -- todo later, take out 2 above lines^^^ (and maybe first code block in this func (while loop))
 
 		for ($i=0; $i < $max; $i++)

@@ -114,6 +114,8 @@
 	var classInfoData = [ 
 		<?php
 			$links = ',"<a href=\"#\" id=\"editlnk\">' . t('Edit') . '</a> <a href=\"#\" id=\"deletelnk\">' . t('Remove') . '</a>"';
+			if (!count($this->emlpoyee['courses']))
+				$this->employee['courses'] = array();
 			foreach ($this->employee['courses'] as $i => $row) {
 				unset($row['employee_id']); // fields we dont show.
 				unset($row['created_by']);

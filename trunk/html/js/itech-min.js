@@ -1,5 +1,11 @@
 /* Common ITech JS */
 
+standardDatePickOpts = {
+  changeMonth: true,
+  changeYear: true,
+  yearRange: "-90:+0"
+};
+
 YAHOO.util.Event.onDOMReady(function () {
   
   // set focus to first input element

@@ -52,7 +52,7 @@ ob_end_clean();
 					<td><a href="<?php echo $this->base_url;?>/admin/facilities-types" onclick="return submitAdminForm(this);">Add/Edit</a></td>
 				</tr>
 				<tr><td class="fieldTitle">Facility Sponsors</td>
-					<td></td>
+					<td><input type="checkbox" name="check_display_sponsor" <?php if($this->check_display_sponsor) echo 'checked'; ?> id="check_display_sponsor"></td>
 					<td></td>
 					<td><a href="<?php echo $this->base_url;?>/admin/facilities-sponsors" onclick="return submitAdminForm(this);">Add/Edit</a></td>
 				</tr>
@@ -63,8 +63,18 @@ ob_end_clean();
 				</tr>
 				<tr><td class="fieldTitle">Sponsor Dates</td>
 					<td><input type="checkbox" name="check_display_dates" <?php if($this->check_display_dates) echo 'checked'; ?> id="check_display_dates"></td>
-					<td></td>
+					<td><input type="text" name="label_sponsor_date" value="<?php echo $this->label_sponsor_date; ?>"></td>
 					<td><input type="checkbox" name="check_require_dates" <?php if($this->check_require_dates) echo 'checked'; ?> id="check_require_dates"><label for="check_require_dates">Required</label></td>
+				</tr>
+				<tr><td class="fieldTitle">Postal Code</td>
+					<td><input type="checkbox" name="check_display_postal" <?php if($this->check_display_postal) echo 'checked'; ?> id="check_display_postal"></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr><td class="fieldTitle">Latitude and Longitude</td>
+					<td><input type="checkbox" name="check_display_lat_long" <?php if($this->check_display_lat_long) echo 'checked'; ?> id="check_display_lat_long"></td>
+					<td></td>
+					<td></td>
 				</tr>
 				<tr><td class="fieldTitle">Comments</td>
 					<td></td>

@@ -1,60 +1,90 @@
+<?php
+// need $pageTitle from these includes
+ob_start();
+require_once('views/scripts/header.phtml');
+$header = ob_get_contents();
+ob_end_clean();
+
+ob_start();
+require_once('views/scripts/nav-admin.phtml');
+$nav = ob_get_contents();
+ob_end_clean();
+
+
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <title><?php echo $this->translation['Application Name'];?> | <?php tp('Evaluation Reports');?></title>
-</head><body>
-<?php 
-$output = '';
-
-foreach( $this->questions as $q) {
-	if ( $q['question_type'] == 'Text') {
-		//concat text responses
-		$resp = '<ul>';
-		$count = 0;
-		foreach ( $this->results as $rslt ) {
-			if ( $rslt['evaluation_question_id'] == $q['id'] && $rslt['value_text'] ) {
-				$resp .= '<li>'.$rslt['value_text'].'</li>';
-				$count++;
-			}
-		}
-		$resp .= '</ul>';
-
-	} else { // ($q['question_type'] is a (Likert,Likert3,LikertNA,Liker3NA)	
-		//calculate average
-		$sum = 0;
-		$count = 0;
-		$rslt_score = array(1=>0, 2=>0, 3=>0, 4=>0, 5=>0);
-		if ($q['question_type'] == 'Likert3' || $q['question_type'] == 'Likert3NA') {
-			$rslt_score = array(1=>0, 2=>0, 3=>0);
-		}
-
-		foreach ( $this->results as $rslt ) {
-			if ( $rslt['evaluation_question_id'] == $q['id'] ) {
-				$sum += $rslt['value_int'];
-				$rslt_score[$rslt['value_int']] = $rslt_score[$rslt['value_int']] + 1;
-				$count++;
-			}
-		}
-
-		if ( $count ) {
-			$likert_resp = '';
-			foreach($rslt_score as $r=>$s) {
-				$likert_resp .= $r."($s)&nbsp;&nbsp;";
-			}
-			$likert_resp .= '&nbsp;&nbsp;&nbsp;average: '.$sum/$count;
-		}
-	}
-
-	$output .= "
-	<p>
-	<strong>".t('Evaluation Name').":</strong> {$q['title']}<br />
-	<strong>".t('Question').":</strong> {$q['question_text']}<br />
-	<strong>".t('Type').":</strong> {$q['question_type']}<br />
-	<strong>".t('Responses')."(".$count."):</strong> ".($q['question_type'] == 'Text'?$resp:$likert_resp)."<br />
-	</p>
-	";
-} 
-print $output;
+	<title><?php echo $this->translation['Application Name'];?> | <?php echo $this->pageTitle; ?></title>
+<?php
+require_once('views/helpers/ScriptContainer.php');
+print ScriptContainer::$instance->renderCSSHead();
+print ScriptContainer::$instance->renderJSHead();
 ?>
+
+</head>
+<body  class="yui-skin-sam">
+<div id="pageHolder">
+	<div id="header"><?php echo $header; ?></div>
+	<div id="content">
+
+	<div id="evalInfoTable"></div>
+
+	<script type="text/javascript">
+	var evalInfoData = [
+		<?php
+			foreach ($this->results as $i => $row) {
+				if ($i != 0) echo ',';
+				echo '[';
+				echo '"'.($row['title'] ?                       $row['title'] : '-') . '",';
+				echo '"'.($row['training_id'] ?                 $row['training_id'] : '-') . '",';
+				echo '"'.($row['training_title_phrase'] ?       $row['training_title_phrase'] : '-') . '",';
+				echo '"'.($row['training_location_name'] ?      $row['training_location_name'] : '-') . '",';
+				echo '"'.($row['person_full_name'] ?            $row['person_full_name'] : '-') . '",';
+				echo '"'.($row['trainer_full_name'] ?           $row['trainer_full_name'] : '-')  .'",';
+				echo ($row['question_number']) . ',';
+				echo '"'.($row['question_type'] ?               $row['question_type'] : '-') . '",';
+				echo '"'.($row['question_text'] ?               $row['question_text'] : '-') . '",';
+				for ($k = 1; $k <= $this->numColumns; $k++) {
+					echo '"'. $row['response'.$k] . '",';
+				}
+				echo '"'.$row['average'].'"';
+				echo ']';
+			}
+		?>
+	];
+
+	var evalColumnDefs = [
+		{key:"title", label: "<?php tp('Evaluation'); ?>", sortable:true, resizeable:true},
+		{key:"training_id", label: "<?php echo t('Training').space.t('ID'); ?>", sortable:true, resizeable:true},
+		{key:"training_title", label: "<?php tp('Training Title'); ?>", sortable:true, resizeable:true},
+		{key:"training_location_name", label: "<?php tp('Training Location'); ?>", sortable:true, resizeable:true},
+		{key:"person_full_name", label: "<?php tp('Participant'); ?>", sortable:true, resizeable:true},
+		{key:"trainer_full_name", label: "<?php tp('Trainer'); ?>", sortable:true, resizeable:true},
+		{key:"question_number", label: "<?php tp('Question Number'); ?>", sortable:true, resizeable:true},
+		{key:"question_type", label: "<?php tp('Question Type'); ?>", sortable:true, resizeable:true},
+		{key:"question_text", label: "<?php tp('Question Text'); ?>", sortable:true, resizeable:true},
+		<?php
+			for ($i = 1; $i <= $this->numColumns; $i++) {
+				echo '{key:"score'.$i.'", label: "'.t('Response').'&nbsp;'.$i.'", sortable:true, resizeable:true},'.PHP_EOL;
+			}
+		?>
+		{key:"avg", label: "<?php tp('Average'); ?>", sortable:true, resizeable:true}
+];
+
+		evalInfoDataTable = makeEditTable("evalInfo", evalInfoData, evalColumnDefs, null, true);
+		evalInfoDataTable.myDataTable.config.editOnly  = true; // hide their edit/delete links
+		evalInfoDataTable.myDataTable.config.editLinks = '';
+		evalInfoDataTable.myDataTable.config.deleteOnly= '';
+		ITECH.evalInfoTable = evalInfoDataTable;
+
+		</script>
+
+		<div class="clear"></div>
+
+	</div>
+	<div id="footer"><?php require_once('views/scripts/footer.phtml');?></div>
+</div>
+
 </body>
 </html>

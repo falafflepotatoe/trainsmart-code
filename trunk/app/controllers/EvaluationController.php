@@ -35,9 +35,9 @@ class EvaluationController extends ITechController {
 	}
 
 	protected function _fetchQuestions($evaluation_id = false) {
-		
+
 		$id = $evaluation_id ? $evaluation_id : $this->getSanParam ( 'id' );
-		
+
 		if ($id) {
 			$ev = new Evaluation ( );
 			$source_row = $ev->findOrCreate ( $id );
@@ -52,42 +52,50 @@ class EvaluationController extends ITechController {
 					$qtype [] = $qr->question_type;
 					$qid [] = $qr->id;
 				}
+				$answers = $ev->fetchCustomAnswers ( $id );
+				if (!is_array($answers) || empty($answers))
+					$answers = array();
+
 			}
 		} else {
 			$this->_redirect ( 'error' );
 		}
 
-		return array ($title, $qtext, $qtype, $qid );
+		return array ($title, $qtext, $qtype, $qid, $answers );
 	}
 
 	public function printAction() {
 
+		$id = $this->getSanParam ( 'id' );
 		list ( $title, $qtext, $qtype, $qid ) = $this->_fetchQuestions ();
+		$answerArray = Evaluation::fetchRelatedCustomAnswers($id);
 
 		$this->view->assign ( 'title', $title );
 		$this->view->assign ( 'qtext', $qtext );
 		$this->view->assign ( 'qtype', $qtype );
 		$this->view->assign ( 'qid', $qid );
+		$this->view->assign ( 'answers', $answerArray);
 
 	}
 
 	public function dataAction() {
 		$request = $this->getRequest ();
 		$id = $this->getSanParam ( 'id' );
-		
+
 		//get training and evaluation ids
 		list($evaluation_id, $training_id) = Evaluation::fetchAssignment($id);
 		if (!$evaluation_id) {
 		  $status->setStatusMessage ( t ( 'The evaluation could not be loaded.' ) );
 		  return;
 		}
-		
+
 		//load training
-	   $trainingTable = new Training();
-	   $course_name = $trainingTable->getCourseName($training_id);
-	   $this->view->assign('course_name', $course_name);
-		
+		$trainingTable = new Training();
+		$course_name = $trainingTable->getCourseName($training_id);
+		$this->view->assign('course_name', $course_name);
+
 		list ( $title, $qtext, $qtype, $qid ) = $this->_fetchQuestions ($evaluation_id);
+		$answerArray = Evaluation::fetchRelatedCustomAnswers($evaluation_id);
 
 		if ($request->isPost ()) {
 			//validate
@@ -109,7 +117,8 @@ class EvaluationController extends ITechController {
 					$qr_table = new ITechTable ( array ('name' => 'evaluation_response' ) );
 					$qr_row = $qr_table->createRow ();
 					$qr_row->evaluation_to_training_id = $id;
-					$qr_row->trainer_person_id = $this->getSanParam ( 'trainer_id' ) ? $this->getSanParam( 'trainer_id' ) : null;
+					if (isset($qr_row->trainer_person_id)) $qr_row->trainer_person_id = $this->getSanParam ( 'trainer_id' ) ? $this->getSanParam( 'trainer_id' ) : null;
+					if (isset($qr_row->person_id)) $qr_row->person_id = $this->getSanParam ( 'person_id' ) ? $this->getSanParam( 'person_id' ) : null;
 
 					$qr_id = $qr_row->save ();
 
@@ -121,7 +130,7 @@ class EvaluationController extends ITechController {
 						$qrow->evaluation_response_id = $qr_id;
 						$qrow->evaluation_question_id = $qidi;
 						$response_value = $this->getSanParam ( 'value_' . $qidi );
-						if ($qtype[$qk] == 'Text') {
+						if ($qtype[$qk] == 'Text' || !empty($answerArray[$qidi])) { // is text or relabeled (will store as text)
 							$qrow->value_text = $response_value;
 						} else {
 							$qrow->value_int = $response_value;
@@ -140,10 +149,30 @@ class EvaluationController extends ITechController {
 		$this->view->assign ( 'qtext', $qtext );
 		$this->view->assign ( 'qtype', $qtype );
 		$this->view->assign ( 'qid', $qid );
-
+		$this->view->assign ( 'answers', $answerArray );
 		// list of trainers
 		require_once( 'models/table/TrainingToTrainer.php' );
+		require_once( 'models/table/PersonToTraining.php' );
 		$this->view->assign('trainers', TrainingToTrainer::getTrainers ( $training_id )->toArray () );
+		$this->view->assign('participants', PersonToTraining::getParticipants ( $training_id )->toArray () );
+		// all evaluations attached to this training
+		if ($training_id) {
+			$otherEvalDropDown = '';
+			$db = $this->dbfunc();
+			$otherEvals = $db->fetchAll('SELECT ett.id, evaluation_id, title
+									FROM evaluation_to_training as ett
+									LEFT JOIN evaluation e ON e.id = ett.evaluation_id
+									WHERE e.is_deleted = 0 AND ett.training_id = ?', $training_id);
+			if ($otherEvals && count($otherEvals) > 1) {
+				$selectOptions = array();
+				foreach($otherEvals as $v)
+					if ($v['id'] && $v['title'])
+						$selectOptions [] = "<option value=\"{$v['id']}\"".(($id==$v['id'])? ' selected' : '').">{$v['title']}</option>";
+
+				$otherEvalDropDown = '<select id="other_evals" name="other_evals">' . implode('',$selectOptions) . '</select>';
+			}
+			$this->view->assign('otherEvalDropDown', $otherEvalDropDown);
+		}
 	}
 
 	public function addCopyAction() {
@@ -170,7 +199,13 @@ class EvaluationController extends ITechController {
 					break;
 				}
 			}
-			
+
+			$custom_answers = array();
+			$useCustomAnswers = $this->getSanParam('qrelabel');
+			foreach($qtext as $i => $val) {
+				$custom_answers[] = ($useCustomAnswers[$i]) ? $this->getSanParam('answers'.($i+1)) : array();
+			}
+
 			if ($status->hasError ()) {
 				$status->setStatusMessage ( t ( 'The evaluation could not be saved.' ) );
 			} else {
@@ -178,7 +213,7 @@ class EvaluationController extends ITechController {
 				$ev_row = $ev->createRow ( array ('title' => $title ) );
 
 				if ($id = $ev_row->save ()) {
-					$ev->insertQuestions ( $id, $qtext, $qtype );
+					$ev->insertQuestions ( $id, $qtext, $qtype, $custom_answers );
 					$status->setStatusMessage ( t ( 'The new evaluation was created.' ) );
 					$this->_redirect ( 'evaluation/browse' );
 				} else {
@@ -221,7 +256,13 @@ class EvaluationController extends ITechController {
 					break;
 				}
 			}
-			
+
+			$custom_answers = array();
+			$useCustomAnswers = $this->getSanParam('qrelabel');
+			foreach($qtext as $i => $val) {
+				$custom_answers[] = ($useCustomAnswers[$i]) ? $this->getSanParam('answers'.($i+1)) : array();
+			}
+
 			if ($status->hasError ()) {
 				$status->setStatusMessage ( t ( 'The evaluation could not be saved.' ) );
 			} else {
@@ -230,7 +271,7 @@ class EvaluationController extends ITechController {
 				$ev_row->title = $title;
 
 				if ($id = $ev_row->save ()) {
-					$ev->updateQuestions ( $id, $qtext, $qtype, $qid ) or $status->setStatusMessage(t('Error saving questions.'));
+					$ev->updateQuestions ( $id, $qtext, $qtype, $qid, $custom_answers ) or $status->setStatusMessage(t('Error saving questions.'));
 					$status->setStatusMessage ( t ( 'The evaluation was saved.' ) );
 					$this->_redirect ( 'evaluation/browse' );
 				} else {
@@ -240,6 +281,11 @@ class EvaluationController extends ITechController {
 
 		} else if ($id = $this->getSanParam ( 'id' )) {
 			list ( $title, $qtext, $qtype, $qid ) = $this->_fetchQuestions ();
+
+			$answers = Evaluation::fetchCustomAnswers ($id);
+			if (count($answers))
+				$answers = $answers->toArray();
+			$this->view->assign ('answers', $answers);
 		}
 
 		$this->view->assign ( 'title', $title );
@@ -257,7 +303,7 @@ class EvaluationController extends ITechController {
 			$this->doNoAccessError();
 			return;
 		}
-		
+
 		try {
 			$row = new Evaluation();
 			$row = $row->find( $id )->current();

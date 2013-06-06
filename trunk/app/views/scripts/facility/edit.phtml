@@ -68,7 +68,7 @@ print ScriptContainer::$instance->renderJSHead();
 		}
 		?>
 	</select></div>
-
+<?php if($this->setting['display_facility_sponsor']) { ?>
 <?php foreach($this->sponsor_data as $i => $sponsorRow) { ?>
 	<div class="fieldLabel" id="<?php if ($i==0) echo 'facility_sponsor_id_lbl'; ?>"><?php tp('Facility'); echo ' '; tp('sponsor');?></div>
 	  <div class="fieldInput" id="<?php if ($i==0) echo 'facility_sponsor_wrapper'; ?>">
@@ -96,9 +96,12 @@ print ScriptContainer::$instance->renderJSHead();
 	</div>
 <?php } ?>
 <?php } ?>
+<?php } ?>
 
+<?php if ( @$this->setting['display_facility_comments'] ) { ?>
 	<div class="fieldLabel" id="facility_comments_lbl"><?php tp('Facility Comments');?></div>
 	<div class="fieldInput"><textarea name="facility_comments" id="facility_comments" size="40" maxlength="255" ><?php echo $this->facility['facility_comments'];?></textarea></div>
+<?php } ?>
 
 
 	<div class="clear" ></div>

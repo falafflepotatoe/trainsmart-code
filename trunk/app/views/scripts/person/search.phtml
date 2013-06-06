@@ -171,7 +171,7 @@
 										// ONLY DISPLAY NON-SKILLSMART COLUMNS
 										$thisrow[] = addslashes($row['gender']);
 										$thisrow[] = addslashes($row['birthdate']);
-										$thisrow[] = addslashes($row['qualification_phrase']);
+										$thisrow[] = trim(addslashes($row['qualification_phrase'])); // bugfix.
 										$thisrow[] = addslashes($row['province_name']);
 									}
 									echo "['" . implode("','", $thisrow) . "']\n";
@@ -202,15 +202,11 @@
 						{key:"birthdate", label: "<?php tp('Birthdate');?>", sortable:true, resizeable:true},
 						{key:"qualification_phrase", label: "<?php tp('Qualification');?>", sortable:true, resizeable:true},
 						{key:"province_name", label: "<?php echo (@$this->translation['Region A (Province)']); ?>", sortable:true, resizeable:true}
-<?php
-	if (isset($this->setting['display_mod_skillsmart']) && ($this->setting['display_mod_skillsmart'] == 1)){
+<?php 	if (isset($this->setting['display_mod_skillsmart']) && ($this->setting['display_mod_skillsmart'] == 1)){
 ?>
-			,
-			{key:"comp", label: "<?php tp('Competence');?>", sortable:false, resizeable:false},
+						,{key:"comp", label: "<?php tp('Competence');?>", sortable:false, resizeable:false},
 			{key:"rpt", label: "<?php tp('Report');?>", sortable:false, resizeable:false}
-<?php
-	}
-?>
+<?php	} 	?>
 						];
 
 						makeDataTable("people", null, peopleData, peopleColumnDefs);

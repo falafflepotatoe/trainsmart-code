@@ -195,7 +195,29 @@ if ($this->setting['display_mod_skillsmart']) {
   </div><br/>
   <?php } ?>
         
+  <?php if ( $this->setting['display_people_custom3'] ) { ?>
+  <div id="custom3AutoComplete" >
+      <div class="fieldLabel" id="custom3Input_lbl"><?php echo (@$this->translation['People Custom 3']); ?> </div><div class="fieldInput"><input id="custom_3" name="custom_3" type="text" size="40" maxlength="128" value="<?php echo @$this->person['custom_3'];?>" /><div class="clear"></div><div id="custom3Container" class="autoComplete"></div></div>
+  </div><br/>
+  <?php } ?>
           
+  <?php if ( $this->setting['display_people_custom4'] ) { ?>
+  <div id="custom4AutoComplete" >
+      <div class="fieldLabel" id="custom2Input_lbl"><?php echo (@$this->translation['People Custom 4']); ?> </div>
+      <div class="fieldInput"><input id="custom_4" name="custom_4" type="text" size="40" maxlength="128" value="<?php echo @$this->person['custom_4'];?>" />
+      <div class="clear"></div>
+      <div id="custom4Container" class="autoComplete"></div></div>
+  </div><br/>
+  <?php } ?>
+
+    <?php if ( $this->setting['display_people_custom5'] ) { ?>
+  <div id="custom5AutoComplete" >
+      <div class="fieldLabel" id="custom5Input_lbl"><?php echo (@$this->translation['People Custom 5']); ?> </div>
+      <div class="fieldInput"><input id="custom_5" name="custom_5" type="text" size="40" maxlength="128" value="<?php echo @$this->person['custom_5'];?>" />
+      <div class="clear"></div>
+      <div id="custom5Container" class="autoComplete"></div></div>
+  </div><br/>
+  <?php } ?>
           
   <?php if ( $this->setting['display_highest_ed_level']  ) { ?>
 		<?php echo DropDown::render('highest_edu_level_option_id', $this->translation['Highest Education Level'], $this->educationlevels, 'education_level_phrase', 'id', $this->person['highest_edu_level_option_id']); ?><br/>
@@ -287,8 +309,19 @@ if ($this->setting['display_mod_skillsmart']) {
   <?php if ( $this->mode != 'add' ) { ?>
   <div id="trainerInfo" class="itechTable"></div>
   <script type="text/javascript">
+
+  var formatTrainingViewUrl = function(elCell, oRecord, oColumn, sData) {
+    if ( oRecord.getData("training_id") == null )
+      return;
+
+    if ( (sData == null) || (sData.length == 0) )
+      sData = '&nbsp;&nbsp;&nbsp;';
+    elCell.innerHTML = "<a href='<?php echo $this->base_url;?>/training/view/id/" + oRecord.getData("training_id") + "' >" + sData + "</a>";
+  };
+
+
     var trainerColumnDefs = [
-        {key:"id", label: "ID", sortable:false, resizeable:true},
+        {key:"training_id", label: "ID", sortable:false, resizeable:true, formatter: formatTrainingViewUrl},
         {key:"training_start_date", label: "<?php tp('Start Date');?>", sortable:true, resizeable:true},
         {key:"training_title", label: "<?php tp('Name');?>", sortable:true, resizeable:true},
         {key:"training_location_name", label: "<?php tp('Location');?>", sortable:true, resizeable:true}

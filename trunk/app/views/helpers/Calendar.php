@@ -705,7 +705,7 @@ class calendar {
         //Set default attributes
 
         //Create the header
-        $output = "<div style=\"vertical-align: top;\">";
+        $output = "<div style=\"vertical-align: top;clear:left;display:block;\">";
         $output .= "<table".$largeCalendarClass.$largeCalendarID." border=\"1\" cellspacing=\"0\" cellpadding=\"0\" align=\"".$this->largeFormatAlign."\" style=\"width: ".$width.";".$height.$background."\">\n";
         $output .= "    <tr>\n";
         $output .= "        <td colspan=\"7\" style=\"text-align: center; height: ".$headerHeight.";\">\n";

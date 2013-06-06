@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Trainsmart\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-12 14:41-0800\n"
+"POT-Creation-Date: 2013-04-01 13:04-0800\n"
 "PO-Revision-Date: \n"
 "Last-Translator: DB\n"
 "Language-Team: Fuse IQ <todd@fuseiq.com>\n"
@@ -22,57 +22,57 @@ msgstr ""
 msgid "Administration"
 msgstr ""
 
-#: controllers/AdminController.php:168 controllers/AdminController.php:488
-#: controllers/AdminController.php:834 controllers/AdminController.php:953
-#: controllers/AdminController.php:1357 controllers/AdminController.php:2177
-#: controllers/AdminController.php:2506
+#: controllers/AdminController.php:169 controllers/AdminController.php:492
+#: controllers/AdminController.php:838 controllers/AdminController.php:957
+#: controllers/AdminController.php:1361 controllers/AdminController.php:2210
+#: controllers/AdminController.php:2539
 msgid "Your settings have been updated."
 msgstr "Your settings have been updated."
 
-#: controllers/AdminController.php:583 controllers/FacilityController.php:764
-#: controllers/FacilityController.php:923
-#: controllers/PersonController.php:1842
-#: controllers/TrainingController.php:1402
+#: controllers/AdminController.php:587 controllers/FacilityController.php:773
+#: controllers/FacilityController.php:932
+#: controllers/PersonController.php:1834
+#: controllers/TrainingController.php:1451
 #, fuzzy
 msgid "Your changes have been saved."
 msgstr "Your settings have been updated."
 
-#: controllers/AdminController.php:688 views/scripts/nav-admin.phtml:10
+#: controllers/AdminController.php:692 views/scripts/nav-admin.phtml:10
 #: views/scripts/nav-admin.phtml:79
 msgid "Move Regions"
 msgstr ""
 
-#: controllers/AdminController.php:1241
+#: controllers/AdminController.php:1245
 msgid "That user is now a master approver"
 msgstr ""
 
-#: controllers/AdminController.php:1241
+#: controllers/AdminController.php:1245
 msgid "Unable to make that user a master approver"
 msgstr ""
 
-#: controllers/AdminController.php:1247
+#: controllers/AdminController.php:1251
 msgid "That user is now a regular approver"
 msgstr ""
 
-#: controllers/AdminController.php:1247
+#: controllers/AdminController.php:1251
 msgid "Unable to remove that user as a master approver"
 msgstr ""
 
-#: controllers/AdminController.php:1253
+#: controllers/AdminController.php:1257
 msgid "That user is no longer an approver"
 msgstr ""
 
-#: controllers/AdminController.php:1253
+#: controllers/AdminController.php:1257
 msgid "Unable to delete that approver"
 msgstr ""
 
-#: controllers/AdminController.php:1275 controllers/PersonController.php:1798
-#: controllers/PersonController.php:1834
+#: controllers/AdminController.php:1279 controllers/PersonController.php:1790
+#: controllers/PersonController.php:1826
 #: controllers/ReportpreserviceController.php:31
 #: controllers/ReportsController.php:82 controllers/ReportsController.php:88
-#: controllers/ReportsController.php:5213
-#: controllers/TrainingController.php:545
-#: controllers/TrainingController.php:1808
+#: controllers/ReportsController.php:5211
+#: controllers/TrainingController.php:544
+#: controllers/TrainingController.php:1857
 #: views/scripts/admin/facilities-new-facilities.phtml:107
 #: views/scripts/admin/facilities-new-facilities.phtml:147
 #: views/scripts/admin/facilities-new-facilities.phtml:149
@@ -89,8 +89,9 @@ msgstr ""
 #: views/scripts/cohort/cohortstudent.phtml:74
 #: views/scripts/cohortedit/cohortedit.phtml:102
 #: views/scripts/institution/institutionedit.phtml:253
+#: views/scripts/partner/edit.phtml:37 views/scripts/partner/search.phtml:111
 #: views/scripts/peoplefind/peoplefind.phtml:137
-#: views/scripts/person/edit-body-addtl.phtml:269
+#: views/scripts/person/edit-body-addtl.phtml:293
 #: views/scripts/person/edit-body-bad.phtml:431
 #: views/scripts/person/edit-body-bad.phtml:485
 #: views/scripts/person/edit-body-bad.phtml:529
@@ -104,7 +105,7 @@ msgstr ""
 #: views/scripts/reports/index.phtml:36 views/scripts/reports/index.phtml:42
 #: views/scripts/reports/needs-by-person-name.phtml:312
 #: views/scripts/reports/participants-by-facility-type.phtml:360
-#: views/scripts/reports/participants-by-training.phtml:604
+#: views/scripts/reports/participants-by-training.phtml:613
 #: views/scripts/reports/people-by-facility.phtml:302
 #: views/scripts/reports/trainerReportsPicker.phtml:14
 #: views/scripts/reports/trainers.phtml:142
@@ -116,63 +117,63 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: controllers/AdminController.php:1276 views/scripts/user/edit.phtml:65
+#: controllers/AdminController.php:1280 views/scripts/user/edit.phtml:65
 #: views/scripts/user/_add_form.phtml:92
 msgid "Approver"
 msgstr ""
 
-#: controllers/AdminController.php:1278
+#: controllers/AdminController.php:1282
 msgid "Master Approver"
 msgstr ""
 
-#: controllers/AdminController.php:1281
+#: controllers/AdminController.php:1285
 #: views/scripts/admin/facilities-new-facilities.phtml:119
 #: views/scripts/admin/people-new-people.phtml:134
 #: views/scripts/employee/employee_course_table.phtml:136
 msgid "Actions"
 msgstr ""
 
-#: controllers/AdminController.php:1284 controllers/AdminController.php:1297
+#: controllers/AdminController.php:1288 controllers/AdminController.php:1301
 #: controllers/ReportpreserviceController.php:231
-#: controllers/ReportsController.php:1357
-#: controllers/ReportsController.php:1361
-#: controllers/ReportsController.php:2007
-#: controllers/ReportsController.php:2011
-#: controllers/ReportsController.php:2590
-#: controllers/ReportsController.php:3271
-#: controllers/ReportsController.php:4095
+#: controllers/ReportsController.php:1359
+#: controllers/ReportsController.php:1363
+#: controllers/ReportsController.php:2029
+#: controllers/ReportsController.php:2033
+#: controllers/ReportsController.php:2620
+#: controllers/ReportsController.php:3321
+#: controllers/ReportsController.php:4148
+#: controllers/ReportsController.php:5644
 #: controllers/ReportsController.php:5645
-#: controllers/ReportsController.php:5646
 #: views/scripts/person/addcomc.phtml:552
 #: views/scripts/person/addcomd.phtml:1967
 #: views/scripts/person/addcomn.phtml:1944
 #: views/scripts/person/addcomp.phtml:253
-#: views/scripts/person/edit-body.phtml:601
+#: views/scripts/person/edit-body.phtml:600
 #: views/scripts/person/editcompetency.phtml:80
 #: views/scripts/person/viewcomc.phtml:610
 #: views/scripts/person/viewcomd.phtml:2055
 #: views/scripts/person/viewcomn.phtml:2032
 #: views/scripts/person/viewcompetency.phtml:79
-#: views/scripts/reports/detail.phtml:256
-#: views/scripts/reports/detail.phtml:260
-#: views/scripts/reports/detail.phtml:264
+#: views/scripts/reports/detail.phtml:267
+#: views/scripts/reports/detail.phtml:271
+#: views/scripts/reports/detail.phtml:275
 #: views/scripts/reports/ss-detail.phtml:255
 #: views/scripts/reports/ss-detail.phtml:259
 #: views/scripts/reports/ss-detail.phtml:263
 msgid "Yes"
 msgstr ""
 
-#: controllers/AdminController.php:1293 controllers/PersonController.php:1708
+#: controllers/AdminController.php:1297 controllers/PersonController.php:1700
 #: controllers/ReportpreserviceController.php:231
-#: controllers/ReportsController.php:1357
-#: controllers/ReportsController.php:1361
-#: controllers/ReportsController.php:2007
-#: controllers/ReportsController.php:2011
-#: controllers/ReportsController.php:2590
-#: controllers/ReportsController.php:3271
-#: controllers/ReportsController.php:4095
+#: controllers/ReportsController.php:1359
+#: controllers/ReportsController.php:1363
+#: controllers/ReportsController.php:2029
+#: controllers/ReportsController.php:2033
+#: controllers/ReportsController.php:2620
+#: controllers/ReportsController.php:3321
+#: controllers/ReportsController.php:4148
+#: controllers/ReportsController.php:5644
 #: controllers/ReportsController.php:5645
-#: controllers/ReportsController.php:5646
 #: views/scripts/person/addcomc.phtml:555
 #: views/scripts/person/addcomd.phtml:1970
 #: views/scripts/person/addcomn.phtml:1947
@@ -182,31 +183,31 @@ msgstr ""
 #: views/scripts/person/viewcomd.phtml:2058
 #: views/scripts/person/viewcomn.phtml:2035
 #: views/scripts/person/viewcompetency.phtml:82
-#: views/scripts/reports/detail.phtml:257
-#: views/scripts/reports/detail.phtml:261
-#: views/scripts/reports/detail.phtml:265
+#: views/scripts/reports/detail.phtml:268
+#: views/scripts/reports/detail.phtml:272
+#: views/scripts/reports/detail.phtml:276
 #: views/scripts/reports/ss-detail.phtml:256
 #: views/scripts/reports/ss-detail.phtml:260
 #: views/scripts/reports/ss-detail.phtml:264
 msgid "No"
 msgstr ""
 
-#: controllers/AdminController.php:1294 controllers/AdminController.php:1299
+#: controllers/AdminController.php:1298 controllers/AdminController.php:1303
 #: views/helpers/ITechTranslate_adds.php:37
 #: views/scripts/employee/employee_course_table.phtml:104
 #: views/scripts/employee/employee_course_table.phtml:116
 msgid "Remove"
 msgstr ""
 
-#: controllers/AdminController.php:1295
+#: controllers/AdminController.php:1299
 msgid "Make Master"
 msgstr ""
 
-#: controllers/AdminController.php:1298
+#: controllers/AdminController.php:1302
 msgid "Make Low Level Approver"
 msgstr ""
 
-#: controllers/AdminController.php:1609
+#: controllers/AdminController.php:1637
 msgid "Require at least one trainer skill per trainer"
 msgstr ""
 
@@ -217,10 +218,9 @@ msgstr ""
 #: controllers/CalendarController.php:105
 #: controllers/EvaluationController.php:316
 #: controllers/EvaluationController.php:317
-#: controllers/PersonController.php:1708 views/scripts/header.phtml:23
-#: views/scripts/header.phtml:29 views/scripts/nav-admin.phtml:153
-#: views/scripts/index/index.phtml:32 views/scripts/index/index.phtml:80
-#: views/scripts/index/index.phtml:96
+#: controllers/PersonController.php:1700 views/scripts/header.phtml:23
+#: views/scripts/header.phtml:29 views/scripts/index/index.phtml:32
+#: views/scripts/index/index.phtml:80 views/scripts/index/index.phtml:96
 #: views/scripts/person/edit-body-bad.phtml:465
 #: views/scripts/person/edit-body-rec.phtml:21
 #: views/scripts/reportpreservice/coursebyname.phtml:245
@@ -234,7 +234,7 @@ msgstr ""
 #: views/scripts/reports/index.phtml:42 views/scripts/reports/index.phtml:43
 #: views/scripts/reports/index.phtml:44 views/scripts/reports/index.phtml:45
 #: views/scripts/reports/index.phtml:46
-#: views/scripts/reports/participants-by-training.phtml:434
+#: views/scripts/reports/participants-by-training.phtml:441
 #: views/scripts/reports/people-by-facility.phtml:225
 #: views/scripts/reports/training-multi-training-report.phtml:42
 #: views/scripts/reports/training-multi-training-report.phtml:43
@@ -252,7 +252,7 @@ msgstr ""
 #: views/scripts/reports/trainings.phtml:41
 #: views/scripts/reports/trainings.phtml:43
 #: views/scripts/reports/trainings.phtml:44
-#: views/scripts/reports/trainings.phtml:375 views/scripts/user/edit.phtml:45
+#: views/scripts/reports/trainings.phtml:378 views/scripts/user/edit.phtml:45
 #: views/scripts/user/_add_form.phtml:72
 msgid "Trainings"
 msgstr ""
@@ -269,42 +269,42 @@ msgstr ""
 msgid "The employee module is not enabled on this site."
 msgstr ""
 
-#: controllers/EmployeeController.php:36 views/scripts/employee/index.phtml:4
+#: controllers/EmployeeController.php:43 views/scripts/employee/index.phtml:4
 #: views/scripts/select/select.phtml:40
 msgid "Employee Tracking System"
 msgstr ""
 
-#: controllers/EmployeeController.php:97
+#: controllers/EmployeeController.php:104
 msgid "Error creating record."
 msgstr ""
 
-#: controllers/EmployeeController.php:106
-#: controllers/EmployeeController.php:110
-#: controllers/EmployeeController.php:199
+#: controllers/EmployeeController.php:113
+#: controllers/EmployeeController.php:117
+#: controllers/EmployeeController.php:207
 #: controllers/PartnerController.php:108
 msgid "Error finding that record in the database."
 msgstr ""
 
-#: controllers/EmployeeController.php:143
+#: controllers/EmployeeController.php:150
 #: controllers/TrainingController.php:50 views/scripts/header.phtml:25
 #: views/scripts/employee/search.phtml:52
 msgid "Add New"
 msgstr ""
 
-#: controllers/EmployeeController.php:143 views/scripts/nav-admin.phtml:147
+#: controllers/EmployeeController.php:150 views/scripts/nav-admin.phtml:147
 #: views/scripts/employee/edit.phtml:29
 msgid "Employee"
 msgstr ""
 
-#: controllers/EmployeeController.php:172
+#: controllers/EmployeeController.php:180
 msgid "Frist Name"
 msgstr ""
 
-#: controllers/EmployeeController.php:173
-#: controllers/TrainingController.php:1833
-#: controllers/TrainingController.php:1842
-#: controllers/TrainingController.php:1848
-#: controllers/TrainingController.php:1854
+#: controllers/EmployeeController.php:181
+#: controllers/TrainingController.php:1882
+#: controllers/TrainingController.php:1891
+#: controllers/TrainingController.php:1897
+#: controllers/TrainingController.php:1903
 #: views/helpers/ITechTranslate.php:117
 #: views/helpers/ITechTranslate_adds.php:31
 #: views/scripts/admin/people-new-people.phtml:221
@@ -314,10 +314,12 @@ msgstr ""
 msgid "Last Name"
 msgstr ""
 
-#: controllers/EmployeeController.php:175 controllers/PartnerController.php:62
+#: controllers/EmployeeController.php:183 controllers/PartnerController.php:62
 #: views/scripts/nav-admin.phtml:154 views/scripts/employee/edit.phtml:49
 #: views/scripts/employee/index.phtml:35
-#: views/scripts/employee/search.phtml:32
+#: views/scripts/employee/search.phtml:32 views/scripts/partner/edit.phtml:26
+#: views/scripts/partner/edit.phtml:36 views/scripts/partner/edit.phtml:37
+#: views/scripts/partner/search.phtml:111
 #: views/scripts/reports/employees.phtml:33
 #: views/scripts/reports/employees.phtml:169
 #: views/scripts/reports/partners.phtml:30
@@ -340,22 +342,22 @@ msgstr ""
 msgid "Partner"
 msgstr ""
 
-#: controllers/EmployeeController.php:180
 #: controllers/EmployeeController.php:188
-#: controllers/PersonController.php:1834
+#: controllers/EmployeeController.php:196
+#: controllers/PersonController.php:1826
 msgid "That person could not be saved."
 msgstr ""
 
-#: controllers/EmployeeController.php:184 controllers/PersonController.php:400
-#: controllers/PersonController.php:725
+#: controllers/EmployeeController.php:192 controllers/PersonController.php:400
+#: controllers/PersonController.php:726
 msgid "The person was saved."
 msgstr ""
 
-#: controllers/EmployeeController.php:217 views/scripts/employee/edit.phtml:23
+#: controllers/EmployeeController.php:225 views/scripts/employee/edit.phtml:23
 msgid "Add Employee"
 msgstr ""
 
-#: controllers/EmployeeController.php:217 views/scripts/employee/edit.phtml:23
+#: controllers/EmployeeController.php:225 views/scripts/employee/edit.phtml:23
 msgid "Edit Employee"
 msgstr ""
 
@@ -380,7 +382,7 @@ msgstr ""
 #: views/scripts/institution/institutionedit.phtml:254
 #: views/scripts/peopleadd/peopleadd.phtml:82
 #: views/scripts/peoplefind/personview.phtml:74
-#: views/scripts/studentedit/personview.phtml:305
+#: views/scripts/studentedit/personview.phtml:306
 #: views/scripts/tutoredit/tutoredit.phtml:71
 msgid "Title"
 msgstr ""
@@ -417,12 +419,12 @@ msgstr ""
 
 #: controllers/EvaluationController.php:316
 #: controllers/EvaluationController.php:317
-#: controllers/PersonController.php:788 controllers/PersonController.php:1705
-#: controllers/TrainingController.php:1573
-#: controllers/TrainingController.php:1574
-#: controllers/TrainingController.php:1582
-#: controllers/TrainingController.php:1583
-#: controllers/TrainingController.php:1595
+#: controllers/PersonController.php:768 controllers/PersonController.php:1697
+#: controllers/TrainingController.php:1622
+#: controllers/TrainingController.php:1623
+#: controllers/TrainingController.php:1631
+#: controllers/TrainingController.php:1632
+#: controllers/TrainingController.php:1644
 msgid "The"
 msgstr ""
 
@@ -436,11 +438,12 @@ msgstr "Your settings have been updated."
 msgid "The evaluation has been assigned."
 msgstr ""
 
-#: controllers/ExternalController.php:46 controllers/PersonController.php:1705
+#: controllers/ExternalController.php:46 controllers/PersonController.php:1697
 #: controllers/ReportsController.php:82 controllers/ReportsController.php:88
-#: controllers/ReportsController.php:5213
+#: controllers/ReportsController.php:5211
+#: controllers/ReportsController.php:5215
+#: controllers/ReportsController.php:5216
 #: controllers/ReportsController.php:5217
-#: controllers/ReportsController.php:5218
 #: controllers/TrainingController.php:50 controllers/TrainingController.php:59
 #: controllers/TrainingController.php:64 controllers/TrainingController.php:71
 #: controllers/TrainingController.php:124
@@ -451,14 +454,14 @@ msgstr ""
 #: controllers/TrainingController.php:251
 #: controllers/TrainingController.php:306
 #: controllers/TrainingController.php:312
-#: controllers/TrainingController.php:485
-#: controllers/TrainingController.php:892
-#: controllers/TrainingController.php:1288
-#: controllers/TrainingController.php:1292
-#: controllers/TrainingController.php:1296
-#: controllers/TrainingController.php:1300
-#: controllers/TrainingController.php:1381
-#: controllers/TrainingController.php:1392
+#: controllers/TrainingController.php:484
+#: controllers/TrainingController.php:918
+#: controllers/TrainingController.php:1338
+#: controllers/TrainingController.php:1342
+#: controllers/TrainingController.php:1346
+#: controllers/TrainingController.php:1350
+#: controllers/TrainingController.php:1430
+#: controllers/TrainingController.php:1441
 #: models/table/TrainingApprovalHistory.php:66
 #: models/table/TrainingApprovalHistory.php:71
 #: models/table/TrainingApprovalHistory.php:76 views/scripts/header.phtml:24
@@ -475,7 +478,8 @@ msgstr ""
 #: views/scripts/nav-admin.phtml:88 views/scripts/nav-admin.phtml:89
 #: views/scripts/nav-admin.phtml:95 views/scripts/preheader.phtml:83
 #: views/scripts/preheader.phtml:85 views/scripts/preheader.phtml:88
-#: views/scripts/data/trainings.phtml:4
+#: views/scripts/calendar/index.phtml:24 views/scripts/calendar/index.phtml:29
+#: views/scripts/calendar/index.phtml:30 views/scripts/data/trainings.phtml:4
 #: views/scripts/email/html/approved.phtml:1
 #: views/scripts/email/html/rejected.phtml:1
 #: views/scripts/email/html/resubmitted.phtml:1
@@ -498,7 +502,7 @@ msgstr ""
 #: views/scripts/person/assign-training.phtml:4
 #: views/scripts/person/assign-training.phtml:20
 #: views/scripts/person/edit-body-rec.phtml:46
-#: views/scripts/person/edit-body.phtml:600
+#: views/scripts/person/edit-body.phtml:599
 #: views/scripts/person/view.phtml:188
 #: views/scripts/psfacility/add-location.phtml:4
 #: views/scripts/psfacility/add-location.phtml:17
@@ -525,8 +529,8 @@ msgstr ""
 #: views/scripts/reports/training-unknown.phtml:299
 #: views/scripts/reports/trainings.phtml:4
 #: views/scripts/reports/trainings.phtml:33
-#: views/scripts/reports/trainings.phtml:111
-#: views/scripts/reports/trainings.phtml:377
+#: views/scripts/reports/trainings.phtml:109
+#: views/scripts/reports/trainings.phtml:380
 #: views/scripts/site/add-location.phtml:4
 #: views/scripts/site/add-location.phtml:17
 #: views/scripts/site/add-location.phtml:19
@@ -554,9 +558,9 @@ msgstr ""
 #: views/scripts/training/_template_editform.phtml:267
 #: views/scripts/training/_template_editform.phtml:283
 #: views/scripts/training/_template_editform.phtml:303
-#: views/scripts/training/_template_editform.phtml:558
-#: views/scripts/training/_template_editform.phtml:1125
-#: views/scripts/training/_template_editform.phtml:1191
+#: views/scripts/training/_template_editform.phtml:562
+#: views/scripts/training/_template_editform.phtml:1129
+#: views/scripts/training/_template_editform.phtml:1210
 #: views/scripts/training-partner/add.phtml:4
 #: views/scripts/training-partner/add.phtml:17
 #: views/scripts/training-partner/delete.phtml:4
@@ -622,7 +626,7 @@ msgstr ""
 
 #: controllers/FacilityController.php:167 controllers/PersonController.php:513
 #: controllers/PsfacilityController.php:127
-#: controllers/TrainingController.php:1523
+#: controllers/TrainingController.php:1572
 msgid ""
 "That city does not appear to be located in the chosen region. If you want to "
 "create a new city, check the new city box."
@@ -646,12 +650,12 @@ msgstr ""
 
 #: controllers/FacilityController.php:202 controllers/PersonController.php:531
 #: controllers/PsfacilityController.php:162
-#: controllers/TrainingController.php:1532
+#: controllers/TrainingController.php:1581
 msgid "Could not save that city."
 msgstr ""
 
 #: controllers/FacilityController.php:236
-#: controllers/FacilityController.php:725
+#: controllers/FacilityController.php:734
 #: controllers/PsfacilityController.php:200
 msgid ""
 "The facility could not be saved. A facility with this name already exists in "
@@ -666,13 +670,13 @@ msgid "The facility was saved."
 msgstr ""
 
 #: controllers/FacilityController.php:244
-#: controllers/FacilityController.php:751
+#: controllers/FacilityController.php:760
 #: controllers/PsfacilityController.php:208
 msgid "There was an error saving sponsor data though."
 msgstr ""
 
 #: controllers/FacilityController.php:252
-#: controllers/FacilityController.php:738
+#: controllers/FacilityController.php:747
 #: controllers/PsfacilityController.php:216
 msgid "ERROR: The facility could not be saved."
 msgstr ""
@@ -707,29 +711,29 @@ msgstr ""
 msgid "That location is in use and could not be deleted."
 msgstr ""
 
-#: controllers/FacilityController.php:635
+#: controllers/FacilityController.php:644
 msgid "Import a facility"
 msgstr ""
 
-#: controllers/FacilityController.php:692
+#: controllers/FacilityController.php:701
 msgid "Error adding facility, Facility name cannot be empty."
 msgstr ""
 
-#: controllers/FacilityController.php:717
-#: controllers/FacilityController.php:891
-#: controllers/PersonController.php:1791
-#: controllers/TrainingController.php:1221
+#: controllers/FacilityController.php:726
+#: controllers/FacilityController.php:900
+#: controllers/PersonController.php:1783
+#: controllers/TrainingController.php:1271
 msgid "Error locating/creating region or city:"
 msgstr ""
 
-#: controllers/FacilityController.php:717
-#: controllers/FacilityController.php:725
-#: controllers/FacilityController.php:751 controllers/PersonController.php:467
-#: controllers/PersonController.php:1791 controllers/ReportsController.php:82
-#: controllers/ReportsController.php:88 controllers/TrainingController.php:790
-#: controllers/TrainingController.php:792
-#: controllers/TrainingController.php:794
-#: controllers/TrainingController.php:1933
+#: controllers/FacilityController.php:726
+#: controllers/FacilityController.php:734
+#: controllers/FacilityController.php:760 controllers/PersonController.php:467
+#: controllers/PersonController.php:1783 controllers/ReportsController.php:82
+#: controllers/ReportsController.php:88 controllers/TrainingController.php:791
+#: controllers/TrainingController.php:793
+#: controllers/TrainingController.php:795
+#: controllers/TrainingController.php:1982
 #: views/helpers/ITechTranslate.php:126 views/scripts/header.phtml:86
 #: views/scripts/nav-admin.phtml:45 views/scripts/nav-admin.phtml:47
 #: views/scripts/nav-admin.phtml:48 views/scripts/nav-admin.phtml:114
@@ -749,7 +753,7 @@ msgstr ""
 #: views/scripts/peoplefind/peoplefind.phtml:100
 #: views/scripts/peoplefind/personview.phtml:341
 #: views/scripts/person/edit-body-addtl.phtml:6
-#: views/scripts/person/edit-body-addtl.phtml:19
+#: views/scripts/person/edit-body-addtl.phtml:20
 #: views/scripts/person/edit-body-bad.phtml:193
 #: views/scripts/person/edit-body.phtml:170
 #: views/scripts/person/reports.phtml:35 views/scripts/person/search.phtml:28
@@ -772,8 +776,8 @@ msgstr ""
 #: views/scripts/reports/needs-by-person-name.phtml:338
 #: views/scripts/reports/participants-by-facility-type.phtml:53
 #: views/scripts/reports/participants-by-facility-type.phtml:388
-#: views/scripts/reports/participants-by-training.phtml:41
-#: views/scripts/reports/participants-by-training.phtml:651
+#: views/scripts/reports/participants-by-training.phtml:42
+#: views/scripts/reports/participants-by-training.phtml:663
 #: views/scripts/reports/people-by-facility.phtml:70
 #: views/scripts/reports/people-by-facility.phtml:325
 #: views/scripts/reports/prof.phtml:35 views/scripts/reports/prof.phtml:401
@@ -790,29 +794,29 @@ msgstr ""
 #: views/scripts/site/addfacility-form.phtml:72
 #: views/scripts/site/edit.phtml:23 views/scripts/site/edit.phtml:62
 #: views/scripts/site/edit.phtml:72 views/scripts/site/view.phtml:61
-#: views/scripts/studentedit/personview.phtml:660
+#: views/scripts/studentedit/personview.phtml:661
 #: views/scripts/sync/review.phtml:95
-#: views/scripts/training/_template_editform.phtml:787
+#: views/scripts/training/_template_editform.phtml:791
 #: views/scripts/user/edit.phtml:105 views/scripts/user/_add_form.phtml:131
 msgid "Facility"
 msgstr ""
 
-#: controllers/FacilityController.php:734
+#: controllers/FacilityController.php:743
 msgid "Couldn't save facility type for facility:"
 msgstr ""
 
-#: controllers/FacilityController.php:766
-#: controllers/FacilityController.php:925
-#: controllers/TrainingController.php:1404
+#: controllers/FacilityController.php:775
+#: controllers/FacilityController.php:934
+#: controllers/TrainingController.php:1453
 msgid ""
 "Error importing data. Some data may have been imported and some may not have."
 msgstr ""
 
-#: controllers/FacilityController.php:791
+#: controllers/FacilityController.php:800
 msgid "Facility Type (Hospital, Dispensary, Clinic, Etc)"
 msgstr ""
 
-#: controllers/FacilityController.php:792
+#: controllers/FacilityController.php:801
 #: controllers/ReportpreserviceController.php:31
 #: views/scripts/admin/facilities-new-facilities.phtml:118
 #: views/scripts/facility/search.phtml:47
@@ -826,142 +830,143 @@ msgstr ""
 msgid "Facility Sponsor"
 msgstr ""
 
-#: controllers/FacilityController.php:792
-#: controllers/TrainingController.php:1711
-#: controllers/TrainingController.php:1808
+#: controllers/FacilityController.php:801
+#: controllers/TrainingController.php:1760
+#: controllers/TrainingController.php:1857
 msgid "Label"
 msgstr ""
 
-#: controllers/FacilityController.php:792
-#: controllers/FacilityController.php:793
-#: controllers/FacilityController.php:794
+#: controllers/FacilityController.php:801
+#: controllers/FacilityController.php:802
+#: controllers/FacilityController.php:803
 msgid "Please seperate multiple entries by Comma"
 msgstr ""
 
-#: controllers/FacilityController.php:793
-#: controllers/FacilityController.php:794
+#: controllers/FacilityController.php:802
+#: controllers/FacilityController.php:803
 msgid "Required"
 msgstr ""
 
-#: controllers/FacilityController.php:793
-#: controllers/FacilityController.php:794
+#: controllers/FacilityController.php:802
+#: controllers/FacilityController.php:803
 msgid "The same number of sponsor_option_id's is required"
 msgstr ""
 
-#: controllers/FacilityController.php:795 views/helpers/ITechTranslate.php:151
+#: controllers/FacilityController.php:804 views/helpers/ITechTranslate.php:151
 #: views/scripts/institution/institutionadd.phtml:248
 #: views/scripts/institution/institutionedit.phtml:234
 #: views/scripts/peoplefind/personview.phtml:288
 #: views/scripts/psfacility/edit.phtml:108
 #: views/scripts/psfacility/view.phtml:74
-#: views/scripts/studentedit/personview.phtml:594
-#: views/scripts/training/_template_editform.phtml:1113
+#: views/scripts/studentedit/personview.phtml:595
+#: views/scripts/training/_template_editform.phtml:1117
 #: views/scripts/tutoredit/tutoredit.phtml:301
 msgid "Comments"
 msgstr ""
 
-#: controllers/FacilityController.php:800
-#: controllers/FacilityController.php:945
-#: controllers/TrainingController.php:1195
-#: controllers/TrainingController.php:1434 views/helpers/Location.php:247
+#: controllers/FacilityController.php:809
+#: controllers/FacilityController.php:954
+#: controllers/TrainingController.php:1245
+#: controllers/TrainingController.php:1483 views/helpers/Location.php:247
 #: views/scripts/admin/facilities-new-facilities.phtml:109
 msgid "Region A (Province)"
 msgstr ""
 
-#: controllers/FacilityController.php:800
-#: controllers/FacilityController.php:945
-#: controllers/TrainingController.php:1195
-#: controllers/TrainingController.php:1434 views/helpers/Location.php:252
+#: controllers/FacilityController.php:809
+#: controllers/FacilityController.php:954
+#: controllers/TrainingController.php:1245
+#: controllers/TrainingController.php:1483 views/helpers/Location.php:252
 #: views/scripts/admin/facilities-new-facilities.phtml:110
 msgid "Region B (Health District)"
 msgstr ""
 
-#: controllers/FacilityController.php:800
-#: controllers/FacilityController.php:945
-#: controllers/TrainingController.php:1195
-#: controllers/TrainingController.php:1434 views/helpers/Location.php:258
+#: controllers/FacilityController.php:809
+#: controllers/FacilityController.php:954
+#: controllers/TrainingController.php:1245
+#: controllers/TrainingController.php:1483 views/helpers/Location.php:258
 #: views/scripts/admin/facilities-new-facilities.phtml:111
 msgid "Region C (Local Region)"
 msgstr ""
 
-#: controllers/FacilityController.php:800
-#: controllers/FacilityController.php:945
-#: controllers/TrainingController.php:1195
-#: controllers/TrainingController.php:1434 views/helpers/Location.php:264
-#: views/scripts/reports/trainings.phtml:502
+#: controllers/FacilityController.php:809
+#: controllers/FacilityController.php:954
+#: controllers/TrainingController.php:1245
+#: controllers/TrainingController.php:1483 views/helpers/Location.php:264
+#: views/scripts/reports/trainings.phtml:507
 msgid "Region D"
 msgstr ""
 
-#: controllers/FacilityController.php:800
-#: controllers/FacilityController.php:945
-#: controllers/TrainingController.php:1195
-#: controllers/TrainingController.php:1434 views/helpers/Location.php:270
-#: views/scripts/reports/trainings.phtml:505
+#: controllers/FacilityController.php:809
+#: controllers/FacilityController.php:954
+#: controllers/TrainingController.php:1245
+#: controllers/TrainingController.php:1483 views/helpers/Location.php:270
+#: views/scripts/reports/trainings.phtml:510
 msgid "Region E"
 msgstr ""
 
-#: controllers/FacilityController.php:800
-#: controllers/FacilityController.php:945
-#: controllers/TrainingController.php:1195
-#: controllers/TrainingController.php:1434 views/helpers/Location.php:276
-#: views/scripts/reports/trainings.phtml:508
+#: controllers/FacilityController.php:809
+#: controllers/FacilityController.php:954
+#: controllers/TrainingController.php:1245
+#: controllers/TrainingController.php:1483 views/helpers/Location.php:276
+#: views/scripts/reports/trainings.phtml:513
 msgid "Region F"
 msgstr ""
 
-#: controllers/FacilityController.php:800
-#: controllers/FacilityController.php:945
-#: controllers/TrainingController.php:1195
-#: controllers/TrainingController.php:1434 views/helpers/Location.php:282
-#: views/scripts/reports/trainings.phtml:511
+#: controllers/FacilityController.php:809
+#: controllers/FacilityController.php:954
+#: controllers/TrainingController.php:1245
+#: controllers/TrainingController.php:1483 views/helpers/Location.php:282
+#: views/scripts/reports/trainings.phtml:516
 msgid "Region G"
 msgstr ""
 
-#: controllers/FacilityController.php:800
-#: controllers/FacilityController.php:945
-#: controllers/TrainingController.php:1195
-#: controllers/TrainingController.php:1434 views/helpers/Location.php:288
-#: views/scripts/reports/trainings.phtml:514
+#: controllers/FacilityController.php:809
+#: controllers/FacilityController.php:954
+#: controllers/TrainingController.php:1245
+#: controllers/TrainingController.php:1483 views/helpers/Location.php:288
+#: views/scripts/reports/trainings.phtml:519
 msgid "Region H"
 msgstr ""
 
-#: controllers/FacilityController.php:800
-#: controllers/FacilityController.php:945
-#: controllers/TrainingController.php:1195
-#: controllers/TrainingController.php:1434 views/helpers/Location.php:294
-#: views/scripts/reports/trainings.phtml:517
+#: controllers/FacilityController.php:809
+#: controllers/FacilityController.php:954
+#: controllers/TrainingController.php:1245
+#: controllers/TrainingController.php:1483 views/helpers/Location.php:294
+#: views/scripts/reports/trainings.phtml:522
 msgid "Region I"
 msgstr ""
 
-#: controllers/FacilityController.php:805
-#: controllers/FacilityController.php:950
-#: controllers/TrainingController.php:1195
-#: controllers/TrainingController.php:1211
-#: controllers/TrainingController.php:1213
-#: controllers/TrainingController.php:1440
+#: controllers/FacilityController.php:814
+#: controllers/FacilityController.php:959
+#: controllers/TrainingController.php:1245
+#: controllers/TrainingController.php:1261
+#: controllers/TrainingController.php:1263
+#: controllers/TrainingController.php:1489
 #: views/helpers/ITechTranslate_adds.php:10
 #: views/scripts/admin/facilities-new-facilities.phtml:108
 #: views/scripts/institution/institutionadd.phtml:113
 #: views/scripts/institution/institutionedit.phtml:112
+#: views/scripts/partner/edit.phtml:41
 #: views/scripts/peopleadd/peopleadd.phtml:172
 #: views/scripts/peoplefind/personview.phtml:141
 #: views/scripts/peoplefind/personview.phtml:182
-#: views/scripts/studentedit/personview.phtml:390
-#: views/scripts/studentedit/personview.phtml:423
+#: views/scripts/studentedit/personview.phtml:391
+#: views/scripts/studentedit/personview.phtml:424
 #: views/scripts/tutoredit/tutoredit.phtml:126
 msgid "City"
 msgstr ""
 
-#: controllers/FacilityController.php:816
+#: controllers/FacilityController.php:825
 msgid "Import a training location"
 msgstr ""
 
-#: controllers/FacilityController.php:868
+#: controllers/FacilityController.php:877
 msgid "Error adding training location, training location name cannot be empty."
 msgstr ""
 
-#: controllers/FacilityController.php:891
-#: controllers/TrainingController.php:1221
-#: controllers/TrainingController.php:1253
+#: controllers/FacilityController.php:900
+#: controllers/TrainingController.php:1271
+#: controllers/TrainingController.php:1303
 #: views/scripts/reportpreservice/studentname.phtml:336
 #: views/scripts/reports/evaluations-report.phtml:43
 #: views/scripts/sync/review.phtml:97 views/scripts/user/edit.phtml:106
@@ -969,13 +974,13 @@ msgstr ""
 msgid "Training Location"
 msgstr ""
 
-#: controllers/FacilityController.php:899
+#: controllers/FacilityController.php:908
 msgid ""
 "The training location could not be saved. A training location with this name "
 "already exists in that location."
 msgstr ""
 
-#: controllers/FacilityController.php:899
+#: controllers/FacilityController.php:908
 #: views/scripts/reports/ps-facility-report.phtml:107
 #: views/scripts/reports/ps-facility-report.phtml:115
 #: views/scripts/reports/ps-facility-report.phtml:124
@@ -1003,8 +1008,8 @@ msgstr ""
 msgid "training location"
 msgstr ""
 
-#: controllers/FacilityController.php:912
-#: controllers/TrainingController.php:1246
+#: controllers/FacilityController.php:921
+#: controllers/TrainingController.php:1296
 msgid "ERROR: The training location could not be saved."
 msgstr ""
 
@@ -1023,7 +1028,7 @@ msgstr ""
 #: views/scripts/cohort/cohortsearch.phtml:231
 #: views/scripts/evaluation/assign-evaluation.phtml:47
 #: views/scripts/person/assign-training.phtml:66
-#: views/scripts/person/edit-body-addtl.phtml:268
+#: views/scripts/person/edit-body-addtl.phtml:292
 #: views/scripts/person/edit-body-bad.phtml:430
 #: views/scripts/person/edit-body-bad.phtml:484
 #: views/scripts/person/edit-body-bad.phtml:528
@@ -1035,22 +1040,22 @@ msgstr ""
 #: views/scripts/reports/evaluations-report.phtml:216
 #: views/scripts/reports/training-multi-training-report.phtml:444
 #: views/scripts/reports/training-unknown.phtml:387
-#: views/scripts/reports/trainings.phtml:487
+#: views/scripts/reports/trainings.phtml:492
 msgid "Start Date"
 msgstr ""
 
-#: controllers/IndexController.php:64 controllers/ReportsController.php:5214
-#: controllers/TrainingController.php:1573
-#: controllers/TrainingController.php:1574
-#: controllers/TrainingController.php:1582
-#: controllers/TrainingController.php:1583
-#: controllers/TrainingController.php:1595
+#: controllers/IndexController.php:64 controllers/ReportsController.php:5212
+#: controllers/TrainingController.php:1622
+#: controllers/TrainingController.php:1623
+#: controllers/TrainingController.php:1631
+#: controllers/TrainingController.php:1632
+#: controllers/TrainingController.php:1644
 msgid "Training Center"
 msgstr ""
 
 #: controllers/IndexController.php:64
-#: views/scripts/reports/trainings.phtml:259
-#: views/scripts/reports/trainings.phtml:583
+#: views/scripts/reports/trainings.phtml:262
+#: views/scripts/reports/trainings.phtml:588
 msgid "Created By"
 msgstr ""
 
@@ -1072,7 +1077,7 @@ msgstr ""
 msgid "The partner was saved."
 msgstr ""
 
-#: controllers/PartnerController.php:135
+#: controllers/PartnerController.php:135 views/scripts/partner/edit.phtml:22
 msgid "Add Partner"
 msgstr ""
 
@@ -1100,23 +1105,23 @@ msgstr ""
 msgid "That person is an active"
 msgstr ""
 
-#: controllers/PersonController.php:89 controllers/TrainingController.php:1053
+#: controllers/PersonController.php:89 controllers/TrainingController.php:1078
 msgid "participant"
 msgstr ""
 
-#: controllers/PersonController.php:89 controllers/TrainingController.php:1428
+#: controllers/PersonController.php:89 controllers/TrainingController.php:1477
 msgid "or"
 msgstr ""
 
-#: controllers/PersonController.php:89 controllers/PersonController.php:788
-#: controllers/TrainingController.php:1016
+#: controllers/PersonController.php:89 controllers/PersonController.php:768
+#: controllers/TrainingController.php:1041
 #: views/scripts/person/edit-body-bad.phtml:567
-#: views/scripts/person/edit-body.phtml:297
+#: views/scripts/person/edit-body.phtml:296
 #: views/scripts/person/view.phtml:148 views/scripts/reports/index.phtml:32
 #: views/scripts/reports/trainerReportsPicker.phtml:11
-#: views/scripts/training/_template_editform.phtml:714
-#: views/scripts/training/_template_editform.phtml:719
-#: views/scripts/training/_template_editform.phtml:724
+#: views/scripts/training/_template_editform.phtml:718
+#: views/scripts/training/_template_editform.phtml:723
+#: views/scripts/training/_template_editform.phtml:728
 msgid "trainer"
 msgstr ""
 
@@ -1137,7 +1142,7 @@ msgid "The person was saved. Refreshing history..."
 msgstr ""
 
 #: controllers/PersonController.php:410 controllers/PersonController.php:422
-#: views/scripts/person/edit-body-addtl.phtml:103
+#: views/scripts/person/edit-body-addtl.phtml:128
 #: views/scripts/person/edit-body-bad.phtml:297
 #: views/scripts/person/view.phtml:88
 msgid "Professional qualification"
@@ -1159,7 +1164,7 @@ msgstr ""
 #: views/scripts/person/edit-body-bad.phtml:56
 #: views/scripts/person/edit-body-bad.phtml:92
 #: views/scripts/person/edit-body.phtml:169
-#: views/scripts/person/edit-body.phtml:436
+#: views/scripts/person/edit-body.phtml:435
 #: views/scripts/person/reports.phtml:178
 #: views/scripts/person/search.phtml:201 views/scripts/person/view.phtml:47
 #: views/scripts/reportpreservice/graduated.phtml:113
@@ -1171,8 +1176,8 @@ msgstr ""
 #: views/scripts/reports/needs-by-person-name.phtml:323
 #: views/scripts/reports/participants-by-facility-type.phtml:154
 #: views/scripts/reports/participants-by-facility-type.phtml:370
-#: views/scripts/reports/participants-by-training.phtml:301
-#: views/scripts/reports/participants-by-training.phtml:615
+#: views/scripts/reports/participants-by-training.phtml:302
+#: views/scripts/reports/participants-by-training.phtml:624
 #: views/scripts/reports/people-by-facility.phtml:313
 #: views/scripts/reports/ps-cohort-by-participant-count.phtml:130
 #: views/scripts/reports/ps-graduated-students.phtml:147
@@ -1183,9 +1188,9 @@ msgstr ""
 #: views/scripts/reports/ss-compcomp.phtml:311
 #: views/scripts/reports/ss-quescomp.phtml:360
 #: views/scripts/reports/training-unknown.phtml:127
-#: views/scripts/reports/trainings.phtml:295
-#: views/scripts/reports/trainings.phtml:592
-#: views/scripts/studentedit/personview.phtml:337
+#: views/scripts/reports/trainings.phtml:298
+#: views/scripts/reports/trainings.phtml:597
+#: views/scripts/studentedit/personview.phtml:338
 #: views/scripts/tutoredit/tutoredit.phtml:103
 msgid "Gender"
 msgstr ""
@@ -1197,7 +1202,7 @@ msgstr ""
 #: controllers/PersonController.php:427 views/helpers/ITechTranslate.php:129
 #: views/scripts/admin/people-new-people.phtml:117
 #: views/scripts/person/search.phtml:202
-#: views/scripts/training/_template_editform.phtml:786
+#: views/scripts/training/_template_editform.phtml:790
 msgid "Birthdate"
 msgstr ""
 
@@ -1206,10 +1211,10 @@ msgstr ""
 #: views/scripts/nav-admin.phtml:36 views/scripts/nav-admin.phtml:41
 #: views/scripts/nav-admin.phtml:104 views/scripts/nav-admin.phtml:105
 #: views/scripts/nav-admin.phtml:110
-#: views/scripts/person/edit-body-addtl.phtml:204
-#: views/scripts/person/edit-body-addtl.phtml:211
-#: views/scripts/person/edit-body-addtl.phtml:224
-#: views/scripts/person/edit-body-addtl.phtml:238
+#: views/scripts/person/edit-body-addtl.phtml:228
+#: views/scripts/person/edit-body-addtl.phtml:235
+#: views/scripts/person/edit-body-addtl.phtml:248
+#: views/scripts/person/edit-body-addtl.phtml:262
 #: views/scripts/person/edit-body-bad.phtml:377
 #: views/scripts/person/edit-body-bad.phtml:390
 #: views/scripts/person/view.phtml:142 views/scripts/person/view.phtml:150
@@ -1223,14 +1228,14 @@ msgstr ""
 #: views/scripts/reports/trainers.phtml:38
 #: views/scripts/reports/trainers.phtml:47
 #: views/scripts/training/edit-topic.phtml:18
-#: views/scripts/training/_template_editform.phtml:572
+#: views/scripts/training/_template_editform.phtml:576
 msgid "Trainer"
 msgstr ""
 
 #: controllers/PersonController.php:431 controllers/ReportsController.php:82
 #: views/scripts/facility/addfacility-form.phtml:63
 #: views/scripts/facility/edit.phtml:62
-#: views/scripts/person/edit-body-addtl.phtml:211
+#: views/scripts/person/edit-body-addtl.phtml:235
 #: views/scripts/psfacility/addfacility-form.phtml:39
 #: views/scripts/reports/trainers.phtml:29
 #: views/scripts/site/addfacility-form.phtml:63
@@ -1259,48 +1264,48 @@ msgstr ""
 msgid "The person could not be saved. <br>"
 msgstr ""
 
-#: controllers/PersonController.php:724
+#: controllers/PersonController.php:725
 msgid "The person was saved. Refreshing change history..."
 msgstr ""
 
-#: controllers/PersonController.php:788
+#: controllers/PersonController.php:768
 msgid "information could not be saved."
 msgstr ""
 
-#: controllers/PersonController.php:865
+#: controllers/PersonController.php:845
 msgid "ERROR: The person could not be saved. "
 msgstr ""
 
-#: controllers/PersonController.php:1065
-#: views/scripts/person/edit-body-addtl.phtml:54
+#: controllers/PersonController.php:1045
+#: views/scripts/person/edit-body-addtl.phtml:75
 #: views/scripts/person/edit-body-bad.phtml:200
 msgid "Insert new facility"
 msgstr ""
 
-#: controllers/PersonController.php:1705
+#: controllers/PersonController.php:1697
 #, fuzzy
 msgid "(s) have been assigned."
 msgstr "Your settings have been updated."
 
-#: controllers/PersonController.php:1708
+#: controllers/PersonController.php:1700
 msgid "selected"
 msgstr ""
 
-#: controllers/PersonController.php:1720
+#: controllers/PersonController.php:1712
 msgid "Import a person"
 msgstr ""
 
-#: controllers/PersonController.php:1798
+#: controllers/PersonController.php:1790
 msgid ""
 "A person with this name already exists in the database, the user was not "
 "added."
 msgstr ""
 
-#: controllers/PersonController.php:1830
+#: controllers/PersonController.php:1822
 msgid "ERROR: The person could not be saved."
 msgstr ""
 
-#: controllers/PersonController.php:1844
+#: controllers/PersonController.php:1836
 msgid "Error importing data. Some data rows have not been imported."
 msgstr ""
 
@@ -1310,7 +1315,7 @@ msgstr ""
 #: views/scripts/reports/evaluations-report.phtml:210
 #: views/scripts/reports/training-multi-training-report.phtml:439
 #: views/scripts/reports/training-unknown.phtml:382
-#: views/scripts/reports/trainings.phtml:482
+#: views/scripts/reports/trainings.phtml:487
 msgid "Count"
 msgstr ""
 
@@ -1322,7 +1327,7 @@ msgstr ""
 
 #: controllers/ReportpreserviceController.php:31
 #: controllers/ReportsController.php:82 controllers/ReportsController.php:88
-#: controllers/TrainingController.php:1936 views/scripts/header.phtml:62
+#: controllers/TrainingController.php:1993 views/scripts/header.phtml:62
 #: views/scripts/header.phtml:64 views/scripts/header.phtml:67
 #: views/scripts/preheader.phtml:83 views/scripts/preheader.phtml:85
 #: views/scripts/preheader.phtml:88
@@ -1335,7 +1340,7 @@ msgstr ""
 #: views/scripts/facility/view-location.phtml:18
 #: views/scripts/facility/view-location.phtml:21
 #: views/scripts/person/assign-training.phtml:68
-#: views/scripts/person/edit-body-addtl.phtml:270
+#: views/scripts/person/edit-body-addtl.phtml:294
 #: views/scripts/person/edit-body-bad.phtml:432
 #: views/scripts/person/edit-body-bad.phtml:531
 #: views/scripts/person/edit-body-class-history.phtml:26
@@ -1354,7 +1359,7 @@ msgstr ""
 #: views/scripts/reports/facilities.phtml:369
 #: views/scripts/reports/training-multi-training-report.phtml:483
 #: views/scripts/reports/training-unknown.phtml:408
-#: views/scripts/reports/trainings.phtml:526
+#: views/scripts/reports/trainings.phtml:531
 #: views/scripts/site/add-location.phtml:4
 #: views/scripts/site/add-location.phtml:17
 #: views/scripts/site/search-location.phtml:20
@@ -1383,11 +1388,11 @@ msgstr ""
 #: views/scripts/reportpreservice/studentname.phtml:309
 #: views/scripts/reports/facilities.phtml:327
 #: views/scripts/reports/participants-by-facility-type.phtml:398
-#: views/scripts/reports/participants-by-training.phtml:612
+#: views/scripts/reports/participants-by-training.phtml:621
 #: views/scripts/reports/people-by-facility.phtml:310
 #: views/scripts/studentedit/personview.phtml:161
-#: views/scripts/studentedit/personview.phtml:659
-#: views/scripts/studentedit/personview.phtml:696
+#: views/scripts/studentedit/personview.phtml:660
+#: views/scripts/studentedit/personview.phtml:697
 #: views/scripts/tutoredit/tutoredit.phtml:264
 msgid "Date"
 msgstr ""
@@ -1403,23 +1408,23 @@ msgstr ""
 #: controllers/ReportpreserviceController.php:31
 #: controllers/ReportsController.php:82 controllers/ReportsController.php:88
 #: views/scripts/nav-admin.phtml:22 views/scripts/nav-admin.phtml:56
-#: views/scripts/nav-admin.phtml:91 views/scripts/nav-admin.phtml:155
+#: views/scripts/nav-admin.phtml:91
 #: views/scripts/peoplefind/personview.phtml:237
 #: views/scripts/reportpreservice/coursebyname.phtml:148
 #: views/scripts/reportpreservice/coursebyname.phtml:374
 #: views/scripts/reports/evaluations-report.phtml:53
 #: views/scripts/reports/evaluations-report.phtml:255
 #: views/scripts/reports/participants-by-facility-type.phtml:139
-#: views/scripts/reports/participants-by-training.phtml:216
-#: views/scripts/reports/participants-by-training.phtml:692
+#: views/scripts/reports/participants-by-training.phtml:217
+#: views/scripts/reports/participants-by-training.phtml:704
 #: views/scripts/reports/training-multi-training-report.phtml:204
 #: views/scripts/reports/training-multi-training-report.phtml:504
 #: views/scripts/reports/training-unknown.phtml:148
 #: views/scripts/reports/training-unknown.phtml:438
-#: views/scripts/reports/trainings.phtml:151
-#: views/scripts/reports/trainings.phtml:547
-#: views/scripts/studentedit/personview.phtml:515
-#: views/scripts/training/_template_editform.phtml:476
+#: views/scripts/reports/trainings.phtml:149
+#: views/scripts/reports/trainings.phtml:552
+#: views/scripts/studentedit/personview.phtml:516
+#: views/scripts/training/_template_editform.phtml:480
 #: views/scripts/user/edit.phtml:95 views/scripts/user/edit.phtml:106
 #: views/scripts/user/_add_form.phtml:121
 #: views/scripts/user/_add_form.phtml:132
@@ -1433,10 +1438,10 @@ msgstr ""
 #: views/scripts/reports/evaluations-report.phtml:257
 #: views/scripts/reports/facilities.phtml:384
 #: views/scripts/reports/participants-by-facility-type.phtml:414
-#: views/scripts/reports/participants-by-training.phtml:710
+#: views/scripts/reports/participants-by-training.phtml:722
 #: views/scripts/reports/training-multi-training-report.phtml:507
 #: views/scripts/reports/training-unknown.phtml:441
-#: views/scripts/reports/trainings.phtml:550
+#: views/scripts/reports/trainings.phtml:555
 msgid "TOT"
 msgstr ""
 
@@ -1489,8 +1494,6 @@ msgstr ""
 #: controllers/ReportsController.php:88 controllers/ReportsController.php:91
 #: views/helpers/ITechTranslate.php:166
 #: views/scripts/admin/people-new-people.phtml:224
-#: views/scripts/admin/people-settings.phtml:205
-#: views/scripts/admin/people-settings.phtml:210
 #: views/scripts/person/edit-body.phtml:171
 #: views/scripts/person/search.phtml:47 views/scripts/person/search.phtml:203
 #: views/scripts/reports/facilities.phtml:202
@@ -1502,34 +1505,34 @@ msgstr ""
 #: views/scripts/reports/participants-by-category.phtml:22
 #: views/scripts/reports/participants-by-facility-type.phtml:164
 #: views/scripts/reports/participants-by-facility-type.phtml:401
-#: views/scripts/reports/participants-by-training.phtml:71
-#: views/scripts/reports/participants-by-training.phtml:84
-#: views/scripts/reports/participants-by-training.phtml:95
-#: views/scripts/reports/participants-by-training.phtml:657
-#: views/scripts/reports/participants-by-training.phtml:660
-#: views/scripts/reports/participants-by-training.phtml:663
+#: views/scripts/reports/participants-by-training.phtml:72
+#: views/scripts/reports/participants-by-training.phtml:85
+#: views/scripts/reports/participants-by-training.phtml:96
+#: views/scripts/reports/participants-by-training.phtml:669
+#: views/scripts/reports/participants-by-training.phtml:672
+#: views/scripts/reports/participants-by-training.phtml:675
 #: views/scripts/reports/people-by-facility.phtml:95
 #: views/scripts/reports/people-by-facility.phtml:331
 #: views/scripts/reports/training-unknown.phtml:109
 #: views/scripts/reports/training-unknown.phtml:417
-#: views/scripts/reports/trainings.phtml:313
-#: views/scripts/reports/trainings.phtml:324
-#: views/scripts/reports/trainings.phtml:595
-#: views/scripts/reports/trainings.phtml:598
+#: views/scripts/reports/trainings.phtml:316
+#: views/scripts/reports/trainings.phtml:327
+#: views/scripts/reports/trainings.phtml:603
+#: views/scripts/reports/trainings.phtml:606
 msgid "Qualification"
 msgstr ""
 
 #: controllers/ReportpreserviceController.php:31
 #: controllers/ReportsController.php:82 controllers/ReportsController.php:88
 #: views/scripts/reports/needs-by-person-name.phtml:344
-#: views/scripts/reports/participants-by-training.phtml:660
+#: views/scripts/reports/participants-by-training.phtml:672
 msgid "(primary)"
 msgstr ""
 
 #: controllers/ReportpreserviceController.php:31
 #: controllers/ReportsController.php:82 controllers/ReportsController.php:88
 #: views/scripts/reports/needs-by-person-name.phtml:347
-#: views/scripts/reports/participants-by-training.phtml:663
+#: views/scripts/reports/participants-by-training.phtml:675
 msgid "(secondary)"
 msgstr ""
 
@@ -1540,19 +1543,19 @@ msgstr ""
 #: views/scripts/employee/edit.phtml:59
 #: views/scripts/institution/institutionedit.phtml:256
 #: views/scripts/peoplefind/personview.phtml:198
-#: views/scripts/person/edit-body-addtl.phtml:88
+#: views/scripts/person/edit-body-addtl.phtml:113
 #: views/scripts/person/edit-body-bad.phtml:210
 #: views/scripts/person/view.phtml:77
 #: views/scripts/reports/needs-by-person-name.phtml:204
 #: views/scripts/reports/needs-by-person-name.phtml:315
 #: views/scripts/reports/participants-by-facility-type.phtml:201
 #: views/scripts/reports/participants-by-facility-type.phtml:363
-#: views/scripts/reports/participants-by-training.phtml:341
-#: views/scripts/reports/participants-by-training.phtml:607
+#: views/scripts/reports/participants-by-training.phtml:348
+#: views/scripts/reports/participants-by-training.phtml:616
 #: views/scripts/reports/people-by-facility.phtml:176
 #: views/scripts/reports/people-by-facility.phtml:305
 #: views/scripts/reports/ps-tutor-by-name.phtml:229
-#: views/scripts/studentedit/personview.phtml:437
+#: views/scripts/studentedit/personview.phtml:438
 #: views/scripts/user/search.phtml:37
 msgid "Email"
 msgstr ""
@@ -1565,6 +1568,7 @@ msgstr ""
 #: views/scripts/institution/institutionadd.phtml:131
 #: views/scripts/institution/institutionedit.phtml:130
 #: views/scripts/institution/institutionedit.phtml:255
+#: views/scripts/partner/edit.phtml:43
 #: views/scripts/peoplefind/personview.phtml:192
 #: views/scripts/psfacility/addfacility-form.phtml:35
 #: views/scripts/psfacility/edit.phtml:68
@@ -1573,14 +1577,14 @@ msgstr ""
 #: views/scripts/reports/needs-by-person-name.phtml:318
 #: views/scripts/reports/participants-by-facility-type.phtml:206
 #: views/scripts/reports/participants-by-facility-type.phtml:366
-#: views/scripts/reports/participants-by-training.phtml:346
-#: views/scripts/reports/participants-by-training.phtml:610
+#: views/scripts/reports/participants-by-training.phtml:353
+#: views/scripts/reports/participants-by-training.phtml:619
 #: views/scripts/reports/people-by-facility.phtml:181
 #: views/scripts/reports/people-by-facility.phtml:308
 #: views/scripts/reports/ps-tutor-by-name.phtml:234
 #: views/scripts/site/addfacility-form.phtml:59
 #: views/scripts/site/edit.phtml:58 views/scripts/site/view.phtml:50
-#: views/scripts/studentedit/personview.phtml:431
+#: views/scripts/studentedit/personview.phtml:432
 msgid "Phone"
 msgstr ""
 
@@ -1601,7 +1605,7 @@ msgstr ""
 #: views/scripts/peopleadd/peopleadd.phtml:188
 #: views/scripts/person/view.phtml:150
 #: views/scripts/psfacility/search.phtml:108
-#: views/scripts/reports/evaluations_results.phtml:49
+#: views/scripts/reports/evaluations_results.phtml:52
 #: views/scripts/reports/participants-by-facility-type.phtml:391
 #: views/scripts/reports/trainers.phtml:144
 #: views/scripts/site/_search.phtml:120
@@ -1651,8 +1655,8 @@ msgstr ""
 #: views/scripts/reports/training-multi-training-report.phtml:537
 #: views/scripts/reports/training-unknown.phtml:297
 #: views/scripts/reports/training-unknown.phtml:462
-#: views/scripts/reports/trainings.phtml:375
-#: views/scripts/reports/trainings.phtml:580
+#: views/scripts/reports/trainings.phtml:378
+#: views/scripts/reports/trainings.phtml:585
 #: views/scripts/training/roster.phtml:79
 msgid "Participants"
 msgstr ""
@@ -1664,15 +1668,16 @@ msgid "Unique Participants"
 msgstr ""
 
 #: controllers/ReportsController.php:82 controllers/ReportsController.php:88
+#: controllers/ReportsController.php:5217
 #: views/helpers/ITechTranslate_adds.php:15 views/scripts/nav-admin.phtml:18
-#: views/scripts/nav-admin.phtml:87
+#: views/scripts/nav-admin.phtml:87 views/scripts/partner/edit.phtml:38
 #: views/scripts/person/edit-body-bad.phtml:488
 #: views/scripts/person/edit-body-rec.phtml:46
 msgid "Organizer"
 msgstr ""
 
 #: controllers/ReportsController.php:82 controllers/ReportsController.php:88
-#: controllers/ReportsController.php:5218
+#: controllers/ReportsController.php:5216
 #: views/helpers/ITechTranslate_adds.php:14 views/scripts/nav-admin.phtml:19
 #: views/scripts/nav-admin.phtml:88
 msgid "Level"
@@ -1701,21 +1706,21 @@ msgid "Topics taught"
 msgstr ""
 
 #: controllers/ReportsController.php:82
-#: views/scripts/person/edit-body-addtl.phtml:84
+#: views/scripts/person/edit-body-addtl.phtml:109
 #: views/scripts/person/edit-body-bad.phtml:206
 #: views/scripts/person/view.phtml:73
 msgid "Work phone"
 msgstr ""
 
 #: controllers/ReportsController.php:82
-#: views/scripts/person/edit-body-addtl.phtml:81
+#: views/scripts/person/edit-body-addtl.phtml:106
 #: views/scripts/person/edit-body-bad.phtml:204
 #: views/scripts/person/view.phtml:70
 msgid "Home phone"
 msgstr ""
 
 #: controllers/ReportsController.php:82
-#: views/scripts/person/edit-body-addtl.phtml:86
+#: views/scripts/person/edit-body-addtl.phtml:111
 #: views/scripts/person/edit-body-bad.phtml:208
 #: views/scripts/person/view.phtml:75
 msgid "Mobile phone"
@@ -1725,12 +1730,12 @@ msgstr ""
 msgid "Unique participants"
 msgstr ""
 
-#: controllers/ReportsController.php:88 controllers/ReportsController.php:5217
+#: controllers/ReportsController.php:88 controllers/ReportsController.php:5215
 #: views/scripts/nav-admin.phtml:20 views/scripts/nav-admin.phtml:89
 #: views/scripts/reportpreservice/coursebystudent.phtml:135
 #: views/scripts/reports/ps-course-by-name.phtml:181
 #: views/scripts/reports/ps-course-by-student-count.phtml:169
-#: views/scripts/studentedit/personview.phtml:622
+#: views/scripts/studentedit/personview.phtml:623
 #: views/scripts/training/edit-topic.phtml:18
 msgid "Topic"
 msgstr ""
@@ -1746,47 +1751,47 @@ msgstr ""
 msgid "Sponsor"
 msgstr ""
 
-#: controllers/ReportsController.php:2379
-#: controllers/ReportsController.php:5209
+#: controllers/ReportsController.php:2407
+#: controllers/ReportsController.php:5207
 #: views/scripts/data/trainings.phtml:18
 #: views/scripts/peopleadd/peopleadd.phtml:107
 #: views/scripts/person/edit-body-bad.phtml:59
-#: views/scripts/person/edit-body.phtml:440 views/scripts/person/view.phtml:50
+#: views/scripts/person/edit-body.phtml:439 views/scripts/person/view.phtml:50
 #: views/scripts/reports/training-unknown.phtml:413
-#: views/scripts/training/_template_editform.phtml:1038
+#: views/scripts/training/_template_editform.phtml:1042
 msgid "Unknown"
 msgstr ""
 
-#: controllers/ReportsController.php:2380
+#: controllers/ReportsController.php:2408
 #: views/scripts/peopleadd/peopleadd.phtml:106
 #: views/scripts/person/edit-body-bad.phtml:57
-#: views/scripts/person/edit-body.phtml:438 views/scripts/person/view.phtml:48
+#: views/scripts/person/edit-body.phtml:437 views/scripts/person/view.phtml:48
 #: views/scripts/reports/training-unknown.phtml:411
-#: views/scripts/training/_template_editform.phtml:1037
+#: views/scripts/training/_template_editform.phtml:1041
 #: views/scripts/tutoredit/tutoredit.phtml:107
 msgid "Female"
 msgstr ""
 
-#: controllers/ReportsController.php:2381
+#: controllers/ReportsController.php:2409
 #: views/scripts/peopleadd/peopleadd.phtml:105
 #: views/scripts/person/edit-body-bad.phtml:58
-#: views/scripts/person/edit-body.phtml:439 views/scripts/person/view.phtml:49
+#: views/scripts/person/edit-body.phtml:438 views/scripts/person/view.phtml:49
 #: views/scripts/reports/training-unknown.phtml:412
-#: views/scripts/training/_template_editform.phtml:1036
+#: views/scripts/training/_template_editform.phtml:1040
 #: views/scripts/tutoredit/tutoredit.phtml:106
 msgid "Male"
 msgstr ""
 
-#: controllers/ReportsController.php:5215
+#: controllers/ReportsController.php:5213
 msgid "Dates"
 msgstr ""
 
-#: controllers/ReportsController.php:5216
+#: controllers/ReportsController.php:5214
 #: views/scripts/training/roster.phtml:38
 msgid "Course Length"
 msgstr ""
 
-#: controllers/ReportsController.php:5269 views/scripts/preheader.phtml:35
+#: controllers/ReportsController.php:5268 views/scripts/preheader.phtml:35
 #: views/scripts/reportpreservice/coursebyname.phtml:37
 #: views/scripts/training/roster.phtml:67
 #: views/scripts/training/roster.phtml:79
@@ -1795,71 +1800,71 @@ msgstr ""
 msgid "Course"
 msgstr ""
 
-#: controllers/ReportsController.php:5269 views/scripts/index/index.phtml:31
+#: controllers/ReportsController.php:5268 views/scripts/index/index.phtml:31
 #: views/scripts/person/search.phtml:75 views/scripts/reports/index.phtml:35
 #: views/scripts/reports/index.phtml:36
 #: views/scripts/reports/trainerReportsPicker.phtml:14
 #: views/scripts/reports/trainers.phtml:72
 #: views/scripts/training/roster.phtml:67
-#: views/scripts/training/_template_editform.phtml:572
+#: views/scripts/training/_template_editform.phtml:576
 msgid "Trainers"
 msgstr ""
 
-#: controllers/ReportsController.php:5273
-#: controllers/TrainingController.php:1918
-#: controllers/TrainingController.php:1930
+#: controllers/ReportsController.php:5272
+#: controllers/TrainingController.php:1967
+#: controllers/TrainingController.php:1979
 msgid "Days"
 msgstr ""
 
-#: controllers/ReportsController.php:5294
+#: controllers/ReportsController.php:5293
 msgid "Course Participants"
 msgstr ""
 
-#: controllers/ReportsController.php:5300
-#: controllers/TrainingController.php:790
-#: controllers/TrainingController.php:792
-#: controllers/TrainingController.php:794
-#: controllers/TrainingController.php:1933
+#: controllers/ReportsController.php:5299
+#: controllers/TrainingController.php:791
+#: controllers/TrainingController.php:793
+#: controllers/TrainingController.php:795
+#: controllers/TrainingController.php:1982
 #: views/scripts/person/edit-body-bad.phtml:91
 #: views/scripts/person/edit-body.phtml:168
 msgid "Date of Birth"
 msgstr ""
 
-#: controllers/ReportsController.php:5312
+#: controllers/ReportsController.php:5311
 #: views/scripts/admin/people-new-people.phtml:127
 #: views/scripts/reports/training-unknown.phtml:416
 msgid "Primary Qualification"
 msgstr ""
 
-#: controllers/ReportsController.php:5313
+#: controllers/ReportsController.php:5312
 msgid "Secondary Qualification"
 msgstr ""
 
-#: controllers/ReportsController.php:5316
+#: controllers/ReportsController.php:5315
 msgid "Days Attended"
 msgstr ""
 
-#: controllers/ReportsController.php:5317
+#: controllers/ReportsController.php:5316
 msgid "Complete"
 msgstr ""
 
-#: controllers/ReportsController.php:5320
-#: controllers/TrainingController.php:828
-#: views/scripts/reports/participants-by-training.phtml:713
+#: controllers/ReportsController.php:5319
+#: controllers/TrainingController.php:854
+#: views/scripts/reports/participants-by-training.phtml:725
 msgid "Pre-Test"
 msgstr ""
 
-#: controllers/ReportsController.php:5321
-#: controllers/TrainingController.php:833
-#: views/scripts/reports/participants-by-training.phtml:714
+#: controllers/ReportsController.php:5320
+#: controllers/TrainingController.php:859
+#: views/scripts/reports/participants-by-training.phtml:726
 msgid "Post-Test"
 msgstr ""
 
-#: controllers/ReportsController.php:5322
+#: controllers/ReportsController.php:5321
 msgid "Change in Score"
 msgstr ""
 
-#: controllers/ReportsController.php:5392 views/scripts/header.phtml:89
+#: controllers/ReportsController.php:5391 views/scripts/header.phtml:89
 #: views/scripts/header.phtml:109 views/scripts/evaluation/add-copy.phtml:4
 #: views/scripts/evaluation/add-copy.phtml:31
 #: views/scripts/evaluation/assign-training.phtml:29
@@ -1871,31 +1876,55 @@ msgstr ""
 msgid "Evaluations"
 msgstr ""
 
-#: controllers/SyncController.php:73
+#: controllers/ReportsController.php:10164
+#: controllers/ReportsController.php:10269 views/scripts/header.phtml:72
+#: views/scripts/header.phtml:83 views/scripts/header.phtml:84
+#: views/scripts/header.phtml:85 views/scripts/header.phtml:86
+#: views/scripts/header.phtml:87 views/scripts/header.phtml:88
+#: views/scripts/header.phtml:89 views/scripts/header.phtml:143
+#: views/scripts/preheader.phtml:96 views/scripts/dash/dash.phtml:100
+#: views/scripts/employee/index.phtml:67
+#: views/scripts/reportpreservice/coursebyname.phtml:4
+#: views/scripts/reportpreservice/coursebyname.phtml:37
+#: views/scripts/reportpreservice/graduated.phtml:64
+#: views/scripts/reportpreservice/reportstudentstrained.phtml:61
+#: views/scripts/reportpreservice/studentname.phtml:74
+#: views/scripts/reports/facilities.phtml:4
+#: views/scripts/reports/facilities.phtml:36
+#: views/scripts/reports/training-multi-training-report.phtml:4
+#: views/scripts/reports/training-multi-training-report.phtml:37
+#: views/scripts/reports/training-unknown.phtml:37
+#: views/scripts/reports/trainings.phtml:4
+#: views/scripts/reports/trainings.phtml:33 views/scripts/user/edit.phtml:44
+#: views/scripts/user/_add_form.phtml:71
+msgid "Reports"
+msgstr ""
+
+#: controllers/SyncController.php:74
 msgid "There was a problem with file types <code>"
 msgstr ""
 
-#: controllers/SyncController.php:80
+#: controllers/SyncController.php:81
 msgid "There was a problem creating <code>"
 msgstr ""
 
-#: controllers/SyncController.php:85
+#: controllers/SyncController.php:86
 msgid "There was a problem moving files <code>"
 msgstr ""
 
-#: controllers/SyncController.php:132
+#: controllers/SyncController.php:133
 msgid "Sync database file uploaded."
 msgstr ""
 
-#: controllers/SyncController.php:137
+#: controllers/SyncController.php:138
 msgid "Invalid desktop database file"
 msgstr ""
 
-#: controllers/SyncController.php:152 controllers/SyncController.php:195
+#: controllers/SyncController.php:153 controllers/SyncController.php:196
 msgid "Please upload a file to continue"
 msgstr ""
 
-#: controllers/SyncController.php:265
+#: controllers/SyncController.php:266
 msgid "Done"
 msgstr ""
 
@@ -1964,7 +1993,7 @@ msgstr ""
 #: controllers/TrainingController.php:251 views/scripts/index/index.phtml:38
 #: views/scripts/index/index.phtml:80 views/scripts/index/index.phtml:96
 #: views/scripts/training/roster.phtml:71
-#: views/scripts/training/_template_editform.phtml:572
+#: views/scripts/training/_template_editform.phtml:576
 msgid "Total"
 msgstr ""
 
@@ -1978,18 +2007,18 @@ msgid "day"
 msgstr ""
 
 #: controllers/TrainingController.php:251
-#: controllers/TrainingController.php:1428 views/scripts/external/add.phtml:42
+#: controllers/TrainingController.php:1477 views/scripts/external/add.phtml:42
 #: views/scripts/training/_template_editform.phtml:291
-#: views/scripts/training/_template_editform.phtml:360
-#: views/scripts/training/_template_editform.phtml:616
+#: views/scripts/training/_template_editform.phtml:364
+#: views/scripts/training/_template_editform.phtml:620
 msgid "days"
 msgstr ""
 
 #: controllers/TrainingController.php:306
 #: controllers/TrainingController.php:312
-#: controllers/TrainingController.php:485
-#: controllers/TrainingController.php:1016
-#: controllers/TrainingController.php:1053
+#: controllers/TrainingController.php:484
+#: controllers/TrainingController.php:1041
+#: controllers/TrainingController.php:1078
 #: views/scripts/training/deleted.phtml:21
 msgid "This"
 msgstr ""
@@ -2004,12 +2033,12 @@ msgstr ""
 msgid "session could not be saved."
 msgstr ""
 
-#: controllers/TrainingController.php:485
+#: controllers/TrainingController.php:484
 #, fuzzy
 msgid "session has been saved."
 msgstr "Your settings have been updated."
 
-#: controllers/TrainingController.php:545 views/helpers/DropDown.php:103
+#: controllers/TrainingController.php:544 views/helpers/DropDown.php:103
 #: views/scripts/facility/addfacility-form.phtml:84
 #: views/scripts/facility/edit.phtml:86
 #: views/scripts/psfacility/addfacility-form.phtml:60
@@ -2019,7 +2048,7 @@ msgstr "Your settings have been updated."
 msgid "Please enter your new"
 msgstr ""
 
-#: controllers/TrainingController.php:545
+#: controllers/TrainingController.php:544
 #: controllers/TrainingController.php:656 views/helpers/DropDown.php:103
 msgid "Insert new"
 msgstr ""
@@ -2048,108 +2077,110 @@ msgstr ""
 msgid "Please enter the name your new refresher item"
 msgstr ""
 
-#: controllers/TrainingController.php:837
+#: controllers/TrainingController.php:863
 #: views/scripts/training/scores-import.phtml:35
 #: views/scripts/training/scores.phtml:27
 msgid "Scores"
 msgstr ""
 
-#: controllers/TrainingController.php:892
+#: controllers/TrainingController.php:918
 msgid ""
 "session has been duplicated.<br>You can edit the duplicate session below."
 msgstr ""
 
-#: controllers/TrainingController.php:964
+#: controllers/TrainingController.php:989
 msgid "already exists"
 msgstr ""
 
-#: controllers/TrainingController.php:1016
-#: controllers/TrainingController.php:1053
+#: controllers/TrainingController.php:1041
+#: controllers/TrainingController.php:1078
 msgid "is already in this training session."
 msgstr ""
 
-#: controllers/TrainingController.php:1036
-#: controllers/TrainingController.php:1069
-#: controllers/TrainingController.php:1080
+#: controllers/TrainingController.php:1061
+#: controllers/TrainingController.php:1094
+#: controllers/TrainingController.php:1106
+#: controllers/TrainingController.php:1118
+#: controllers/TrainingController.php:1130
 msgid "Could not update this record."
 msgstr ""
 
-#: controllers/TrainingController.php:1103
+#: controllers/TrainingController.php:1153
 msgid "Import a training"
 msgstr ""
 
-#: controllers/TrainingController.php:1253
+#: controllers/TrainingController.php:1303
 msgid "Error locating/creating"
 msgstr ""
 
-#: controllers/TrainingController.php:1283
+#: controllers/TrainingController.php:1333
 msgid "Successfully imported training #"
 msgstr ""
 
-#: controllers/TrainingController.php:1288
-#: controllers/TrainingController.php:1292
-#: controllers/TrainingController.php:1296
-#: controllers/TrainingController.php:1300
+#: controllers/TrainingController.php:1338
+#: controllers/TrainingController.php:1342
+#: controllers/TrainingController.php:1346
+#: controllers/TrainingController.php:1350
 msgid "Some Data not imported"
 msgstr ""
 
-#: controllers/TrainingController.php:1320
+#: controllers/TrainingController.php:1369
 msgid "You did not set a qualification for a group of unknown participants."
 msgstr ""
 
-#: controllers/TrainingController.php:1344
+#: controllers/TrainingController.php:1393
 msgid "Error saving unknown participant information."
 msgstr ""
 
-#: controllers/TrainingController.php:1381
+#: controllers/TrainingController.php:1430
 msgid ""
 "Could not add user to training because they were not found in the system."
 msgstr ""
 
-#: controllers/TrainingController.php:1392
+#: controllers/TrainingController.php:1441
 msgid "ERROR: The training data could not be saved."
 msgstr ""
 
-#: controllers/TrainingController.php:1392
+#: controllers/TrainingController.php:1441
 msgid "Warning: Some data imported."
 msgstr ""
 
-#: controllers/TrainingController.php:1392
+#: controllers/TrainingController.php:1441
 msgid ""
 "Check Funding, PEPFAR, Topic, Refresher options and Participants and "
 "Trainers Data; or delete the training and try again."
 msgstr ""
 
-#: controllers/TrainingController.php:1428
+#: controllers/TrainingController.php:1477
 #: views/scripts/training/_template_editform.phtml:288
 msgid "hours"
 msgstr ""
 
-#: controllers/TrainingController.php:1428
+#: controllers/TrainingController.php:1477
 #: views/scripts/training/_template_editform.phtml:294
 msgid "weeks"
 msgstr ""
 
-#: controllers/TrainingController.php:1573
-#: controllers/TrainingController.php:1574
+#: controllers/TrainingController.php:1622
+#: controllers/TrainingController.php:1623
 #, fuzzy
 msgid "has been updated."
 msgstr "Your settings have been updated."
 
-#: controllers/TrainingController.php:1582
-#: controllers/TrainingController.php:1583
+#: controllers/TrainingController.php:1631
+#: controllers/TrainingController.php:1632
 msgid "has been saved."
 msgstr ""
 
-#: controllers/TrainingController.php:1595
+#: controllers/TrainingController.php:1644
 msgid "could not be saved."
 msgstr ""
 
-#: controllers/TrainingController.php:1711
-#: controllers/TrainingController.php:1808
+#: controllers/TrainingController.php:1760
+#: controllers/TrainingController.php:1857
 #: views/scripts/reports/compcomp.phtml:99
 #: views/scripts/reports/compcomp.phtml:240
-#: views/scripts/reports/detail.phtml:222
+#: views/scripts/reports/detail.phtml:233
 #: views/scripts/reports/quescomp.phtml:163
 #: views/scripts/reports/quescomp.phtml:319
 #: views/scripts/reports/ss-compcomp.phtml:99
@@ -2161,11 +2192,11 @@ msgstr ""
 msgid "Score"
 msgstr ""
 
-#: controllers/TrainingController.php:1789
-#: controllers/TrainingController.php:1832
-#: controllers/TrainingController.php:1841
-#: controllers/TrainingController.php:1847
-#: controllers/TrainingController.php:1853
+#: controllers/TrainingController.php:1838
+#: controllers/TrainingController.php:1881
+#: controllers/TrainingController.php:1890
+#: controllers/TrainingController.php:1896
+#: controllers/TrainingController.php:1902
 #: views/helpers/ITechTranslate.php:111
 #: views/helpers/ITechTranslate_adds.php:29
 #: views/scripts/admin/people-new-people.phtml:220
@@ -2175,53 +2206,54 @@ msgstr ""
 #: views/scripts/person/edit-body.phtml:163
 #: views/scripts/reports/compcomp.phtml:311
 #: views/scripts/reports/employees.phtml:138
+#: views/scripts/reports/quescomp.phtml:361
 #: views/scripts/reports/ss-compcomp.phtml:311
 #: views/scripts/reports/ss-quescomp.phtml:360
 msgid "First Name"
 msgstr ""
 
-#: controllers/TrainingController.php:1798
+#: controllers/TrainingController.php:1847
 msgid ""
 "The following users could not be found while importing, perhaps they were "
 "not adding to the training:<br>"
 msgstr ""
 
-#: controllers/TrainingController.php:1834
-#: controllers/TrainingController.php:1843
-#: controllers/TrainingController.php:1849
-#: controllers/TrainingController.php:1855
+#: controllers/TrainingController.php:1883
+#: controllers/TrainingController.php:1892
+#: controllers/TrainingController.php:1898
+#: controllers/TrainingController.php:1904
 msgid "Training Date"
 msgstr ""
 
-#: controllers/TrainingController.php:1835
-#: controllers/TrainingController.php:1844
-#: controllers/TrainingController.php:1850
-#: controllers/TrainingController.php:1856
+#: controllers/TrainingController.php:1884
+#: controllers/TrainingController.php:1893
+#: controllers/TrainingController.php:1899
+#: controllers/TrainingController.php:1905
 msgid "Score Label"
 msgstr ""
 
-#: controllers/TrainingController.php:1836
-#: controllers/TrainingController.php:1845
-#: controllers/TrainingController.php:1851
-#: controllers/TrainingController.php:1857
+#: controllers/TrainingController.php:1885
+#: controllers/TrainingController.php:1894
+#: controllers/TrainingController.php:1900
+#: controllers/TrainingController.php:1906
 msgid "Score Value"
 msgstr ""
 
-#: controllers/TrainingController.php:2008 views/helpers/DropDown.php:57
+#: controllers/TrainingController.php:2065 views/helpers/DropDown.php:57
 #: views/helpers/Location.php:427 views/scripts/evaluation/add-copy.phtml:45
 #: views/scripts/evaluation/data.phtml:42
 #: views/scripts/evaluation/edit.phtml:46
 #: views/scripts/psfacility/view-location.phtml:26
 #: views/scripts/reportpreservice/coursebyname.phtml:115
 #: views/scripts/reports/evaluations-report.phtml:29
-#: views/scripts/reports/evaluations.phtml:24
+#: views/scripts/reports/evaluations.phtml:28
 #: views/scripts/reports/roster.phtml:29
 #: views/scripts/reports/training-multi-training-report.phtml:150
 #: views/scripts/training/_template_editform.phtml:208
 msgid "select"
 msgstr ""
 
-#: controllers/TrainingController.php:2031
+#: controllers/TrainingController.php:2088
 #: views/helpers/ITechTranslate_adds.php:43
 #: views/helpers/TrainingViewHelper.php:8
 #: views/scripts/employee/employee_course_table.phtml:104
@@ -2274,13 +2306,14 @@ msgstr ""
 #: views/scripts/facility/search-location.phtml:40
 #: views/scripts/facility/search.phtml:60
 #: views/scripts/facility/_search.phtml:43
+#: views/scripts/partner/search.phtml:41
 #: views/scripts/person/reports.phtml:103 views/scripts/person/search.phtml:87
 #: views/scripts/psfacility/search-location.phtml:50
 #: views/scripts/psfacility/search.phtml:67
 #: views/scripts/reportpreservice/coursebyname.phtml:251
 #: views/scripts/reports/comp.phtml:303
 #: views/scripts/reports/compcomp.phtml:304
-#: views/scripts/reports/detail.phtml:274
+#: views/scripts/reports/detail.phtml:285
 #: views/scripts/reports/employees.phtml:64
 #: views/scripts/reports/facilities.phtml:249
 #: views/scripts/reports/participants-by-facility-type.phtml:262
@@ -2303,7 +2336,7 @@ msgstr ""
 #: views/scripts/reports/ss-quescomp.phtml:353
 #: views/scripts/reports/training-multi-training-report.phtml:352
 #: views/scripts/reports/training-unknown.phtml:292
-#: views/scripts/reports/trainings.phtml:370
+#: views/scripts/reports/trainings.phtml:373
 #: views/scripts/site/search-location.phtml:40
 #: views/scripts/site/_search.phtml:43
 #: views/scripts/training-partner/search.phtml:48
@@ -2401,12 +2434,13 @@ msgstr ""
 #: views/scripts/facility/edit.phtml:26 views/scripts/facility/edit.phtml:64
 #: views/scripts/facility/edit.phtml:76 views/scripts/facility/view.phtml:23
 #: views/scripts/facility/view.phtml:64
-#: views/scripts/person/edit-body-addtl.phtml:25
-#: views/scripts/person/edit-body-addtl.phtml:38
-#: views/scripts/person/edit-body-addtl.phtml:61
-#: views/scripts/person/edit-body-addtl.phtml:104
-#: views/scripts/person/edit-body-addtl.phtml:214
-#: views/scripts/person/edit-body-addtl.phtml:226
+#: views/scripts/person/edit-body-addtl.phtml:28
+#: views/scripts/person/edit-body-addtl.phtml:41
+#: views/scripts/person/edit-body-addtl.phtml:60
+#: views/scripts/person/edit-body-addtl.phtml:86
+#: views/scripts/person/edit-body-addtl.phtml:129
+#: views/scripts/person/edit-body-addtl.phtml:238
+#: views/scripts/person/edit-body-addtl.phtml:250
 #: views/scripts/person/edit-body-bad.phtml:194
 #: views/scripts/person/edit-body-bad.phtml:298
 #: views/scripts/person/edit-body-bad.phtml:312
@@ -2415,13 +2449,13 @@ msgstr ""
 #: views/scripts/person/edit-body-bad.phtml:392
 #: views/scripts/person/edit-body-bad.phtml:455
 #: views/scripts/person/edit-body-rec.phtml:11
-#: views/scripts/person/edit-body.phtml:392
-#: views/scripts/person/edit-body.phtml:459
-#: views/scripts/person/edit-body.phtml:475
-#: views/scripts/person/edit-body.phtml:491
-#: views/scripts/person/edit-body.phtml:517
-#: views/scripts/person/edit-body.phtml:527
-#: views/scripts/person/edit-body.phtml:537
+#: views/scripts/person/edit-body.phtml:391
+#: views/scripts/person/edit-body.phtml:458
+#: views/scripts/person/edit-body.phtml:474
+#: views/scripts/person/edit-body.phtml:490
+#: views/scripts/person/edit-body.phtml:516
+#: views/scripts/person/edit-body.phtml:526
+#: views/scripts/person/edit-body.phtml:536
 #: views/scripts/person/reports.phtml:36
 #: views/scripts/psfacility/addfacility-form.phtml:41
 #: views/scripts/psfacility/addfacility-form.phtml:51
@@ -2431,10 +2465,10 @@ msgstr ""
 #: views/scripts/psfacility/view.phtml:23 views/scripts/reports/comp.phtml:35
 #: views/scripts/reports/comp.phtml:46 views/scripts/reports/compcomp.phtml:38
 #: views/scripts/reports/detail.phtml:34 views/scripts/reports/detail.phtml:58
-#: views/scripts/reports/detail.phtml:224
-#: views/scripts/reports/detail.phtml:232
-#: views/scripts/reports/detail.phtml:240
-#: views/scripts/reports/detail.phtml:249
+#: views/scripts/reports/detail.phtml:235
+#: views/scripts/reports/detail.phtml:243
+#: views/scripts/reports/detail.phtml:251
+#: views/scripts/reports/detail.phtml:260
 #: views/scripts/reports/facilities.phtml:40
 #: views/scripts/reports/facilities.phtml:57
 #: views/scripts/reports/index.phtml:34 views/scripts/reports/index.phtml:41
@@ -2447,7 +2481,7 @@ msgstr ""
 #: views/scripts/reports/needsReportsPicker.phtml:11
 #: views/scripts/reports/participants-by-facility-type.phtml:57
 #: views/scripts/reports/participants-by-facility-type.phtml:166
-#: views/scripts/reports/participants-by-training.phtml:45
+#: views/scripts/reports/participants-by-training.phtml:46
 #: views/scripts/reports/people-by-facility.phtml:74
 #: views/scripts/reports/peopleReportsPicker.phtml:11
 #: views/scripts/reports/prof.phtml:36 views/scripts/reports/prof.phtml:60
@@ -2533,25 +2567,25 @@ msgstr ""
 #: views/scripts/reports/participants-by-facility-type.phtml:159
 #: views/scripts/reports/participants-by-facility-type.phtml:195
 #: views/scripts/reports/participants-by-facility-type.phtml:221
-#: views/scripts/reports/participants-by-training.phtml:61
-#: views/scripts/reports/participants-by-training.phtml:75
-#: views/scripts/reports/participants-by-training.phtml:87
-#: views/scripts/reports/participants-by-training.phtml:98
-#: views/scripts/reports/participants-by-training.phtml:111
-#: views/scripts/reports/participants-by-training.phtml:125
-#: views/scripts/reports/participants-by-training.phtml:147
-#: views/scripts/reports/participants-by-training.phtml:166
-#: views/scripts/reports/participants-by-training.phtml:193
-#: views/scripts/reports/participants-by-training.phtml:207
-#: views/scripts/reports/participants-by-training.phtml:220
-#: views/scripts/reports/participants-by-training.phtml:234
-#: views/scripts/reports/participants-by-training.phtml:247
-#: views/scripts/reports/participants-by-training.phtml:260
-#: views/scripts/reports/participants-by-training.phtml:275
-#: views/scripts/reports/participants-by-training.phtml:290
-#: views/scripts/reports/participants-by-training.phtml:306
-#: views/scripts/reports/participants-by-training.phtml:325
-#: views/scripts/reports/participants-by-training.phtml:361
+#: views/scripts/reports/participants-by-training.phtml:62
+#: views/scripts/reports/participants-by-training.phtml:76
+#: views/scripts/reports/participants-by-training.phtml:88
+#: views/scripts/reports/participants-by-training.phtml:99
+#: views/scripts/reports/participants-by-training.phtml:112
+#: views/scripts/reports/participants-by-training.phtml:126
+#: views/scripts/reports/participants-by-training.phtml:148
+#: views/scripts/reports/participants-by-training.phtml:167
+#: views/scripts/reports/participants-by-training.phtml:194
+#: views/scripts/reports/participants-by-training.phtml:208
+#: views/scripts/reports/participants-by-training.phtml:221
+#: views/scripts/reports/participants-by-training.phtml:235
+#: views/scripts/reports/participants-by-training.phtml:248
+#: views/scripts/reports/participants-by-training.phtml:261
+#: views/scripts/reports/participants-by-training.phtml:276
+#: views/scripts/reports/participants-by-training.phtml:291
+#: views/scripts/reports/participants-by-training.phtml:307
+#: views/scripts/reports/participants-by-training.phtml:332
+#: views/scripts/reports/participants-by-training.phtml:368
 #: views/scripts/reports/people-by-facility.phtml:50
 #: views/scripts/reports/people-by-facility.phtml:61
 #: views/scripts/reports/people-by-facility.phtml:87
@@ -2579,17 +2613,16 @@ msgstr ""
 #: views/scripts/reports/training-unknown.phtml:212
 #: views/scripts/reports/training-unknown.phtml:226
 #: views/scripts/reports/training-unknown.phtml:241
-#: views/scripts/reports/trainings.phtml:55
-#: views/scripts/reports/trainings.phtml:83
-#: views/scripts/reports/trainings.phtml:128
-#: views/scripts/reports/trainings.phtml:209
-#: views/scripts/reports/trainings.phtml:222
-#: views/scripts/reports/trainings.phtml:235
-#: views/scripts/reports/trainings.phtml:249
-#: views/scripts/reports/trainings.phtml:263
-#: views/scripts/reports/trainings.phtml:300
-#: views/scripts/reports/trainings.phtml:316
-#: views/scripts/reports/trainings.phtml:327
+#: views/scripts/reports/trainings.phtml:81
+#: views/scripts/reports/trainings.phtml:126
+#: views/scripts/reports/trainings.phtml:212
+#: views/scripts/reports/trainings.phtml:225
+#: views/scripts/reports/trainings.phtml:238
+#: views/scripts/reports/trainings.phtml:252
+#: views/scripts/reports/trainings.phtml:266
+#: views/scripts/reports/trainings.phtml:303
+#: views/scripts/reports/trainings.phtml:319
+#: views/scripts/reports/trainings.phtml:330
 #: views/scripts/site/search-location.phtml:26
 #: views/scripts/site/_search.phtml:10 views/scripts/site/_search.phtml:23
 #: views/scripts/site/_search.phtml:33
@@ -2616,7 +2649,7 @@ msgstr ""
 
 #: views/helpers/FileUpload.php:29 views/scripts/employee/index.phtml:77
 #: views/scripts/index/index.phtml:117
-#: views/scripts/training/_template_editform.phtml:1134
+#: views/scripts/training/_template_editform.phtml:1138
 msgid "Attached Documents"
 msgstr ""
 
@@ -2630,22 +2663,22 @@ msgstr ""
 
 #: views/helpers/FormHelper.php:176 views/scripts/reports/facilities.phtml:190
 #: views/scripts/reports/participants-by-facility-type.phtml:160
-#: views/scripts/reports/participants-by-training.phtml:307
-#: views/scripts/reports/trainings.phtml:301
+#: views/scripts/reports/participants-by-training.phtml:308
+#: views/scripts/reports/trainings.phtml:304
 msgid "male"
 msgstr ""
 
 #: views/helpers/FormHelper.php:177 views/scripts/reports/facilities.phtml:191
 #: views/scripts/reports/participants-by-facility-type.phtml:161
-#: views/scripts/reports/participants-by-training.phtml:308
-#: views/scripts/reports/trainings.phtml:302
+#: views/scripts/reports/participants-by-training.phtml:309
+#: views/scripts/reports/trainings.phtml:305
 msgid "female"
 msgstr ""
 
 #: views/helpers/FormHelper.php:178 views/scripts/reports/facilities.phtml:192
 #: views/scripts/reports/participants-by-facility-type.phtml:162
-#: views/scripts/reports/participants-by-training.phtml:309
-#: views/scripts/reports/trainings.phtml:303
+#: views/scripts/reports/participants-by-training.phtml:310
+#: views/scripts/reports/trainings.phtml:306
 msgid "na"
 msgstr ""
 
@@ -2695,7 +2728,8 @@ msgstr ""
 #: views/scripts/facility/edit.phtml:60 views/scripts/facility/view.phtml:52
 #: views/scripts/institution/institutionadd.phtml:134
 #: views/scripts/institution/institutionedit.phtml:133
-#: views/scripts/person/edit-body-addtl.phtml:95
+#: views/scripts/partner/edit.phtml:44
+#: views/scripts/person/edit-body-addtl.phtml:120
 #: views/scripts/person/edit-body-bad.phtml:212
 #: views/scripts/person/view.phtml:80
 #: views/scripts/psfacility/addfacility-form.phtml:37
@@ -2766,7 +2800,7 @@ msgstr ""
 
 #: views/helpers/ITechTranslate.php:207
 #: models/table/TrainingApprovalHistory.php:66
-#: views/scripts/training/_template_editform.phtml:1106
+#: views/scripts/training/_template_editform.phtml:1110
 msgid "Approved"
 msgstr ""
 
@@ -2917,7 +2951,7 @@ msgid ""
 "it?"
 msgstr ""
 
-#: views/helpers/Location.php:448
+#: views/helpers/Location.php:452
 #: views/scripts/psfacility/view-location.phtml:43
 #: views/scripts/reportpreservice/coursebyname.phtml:131
 #: views/scripts/reports/training-multi-training-report.phtml:166
@@ -2926,7 +2960,7 @@ msgstr ""
 
 #: views/helpers/PrintAndExport.php:37
 #: views/scripts/evaluation/browse.phtml:41
-#: views/scripts/reports/comp.phtml:308 views/scripts/reports/detail.phtml:279
+#: views/scripts/reports/comp.phtml:308 views/scripts/reports/detail.phtml:290
 #: views/scripts/reports/ss-comp.phtml:302
 #: views/scripts/reports/ss-prof.phtml:361
 #: views/scripts/training/roster.phtml:18
@@ -2935,7 +2969,7 @@ msgstr ""
 
 #: views/helpers/PrintAndExport.php:37 views/scripts/reports/comp.phtml:308
 #: views/scripts/reports/data.phtml:24 views/scripts/reports/data.phtml:28
-#: views/scripts/reports/data.phtml:32 views/scripts/reports/detail.phtml:279
+#: views/scripts/reports/data.phtml:32 views/scripts/reports/detail.phtml:290
 #: views/scripts/reports/ss-detail.phtml:278
 #: views/scripts/reports/ss-prof.phtml:361
 msgid "Export"
@@ -2950,7 +2984,7 @@ msgid "is not a valid date"
 msgstr ""
 
 #: models/table/TrainingApprovalHistory.php:71
-#: views/scripts/training/_template_editform.phtml:1109
+#: views/scripts/training/_template_editform.phtml:1113
 msgid "Rejected"
 msgstr ""
 
@@ -3039,7 +3073,7 @@ msgstr ""
 #: views/scripts/reportpreservice/coursebyname.phtml:258
 #: views/scripts/reports/training-multi-training-report.phtml:359
 #: views/scripts/reports/training-unknown.phtml:299
-#: views/scripts/reports/trainings.phtml:377
+#: views/scripts/reports/trainings.phtml:380
 #: views/scripts/site/add-location.phtml:4
 #: views/scripts/site/add-location.phtml:17
 #: views/scripts/training-partner/add.phtml:4
@@ -3047,28 +3081,6 @@ msgstr ""
 #: views/scripts/training-partner/edit.phtml:20
 #: views/scripts/training-partner/search.phtml:57
 msgid "Add"
-msgstr ""
-
-#: views/scripts/header.phtml:72 views/scripts/header.phtml:83
-#: views/scripts/header.phtml:84 views/scripts/header.phtml:85
-#: views/scripts/header.phtml:86 views/scripts/header.phtml:87
-#: views/scripts/header.phtml:88 views/scripts/header.phtml:89
-#: views/scripts/header.phtml:143 views/scripts/preheader.phtml:96
-#: views/scripts/dash/dash.phtml:100 views/scripts/employee/index.phtml:67
-#: views/scripts/reportpreservice/coursebyname.phtml:4
-#: views/scripts/reportpreservice/coursebyname.phtml:37
-#: views/scripts/reportpreservice/graduated.phtml:64
-#: views/scripts/reportpreservice/reportstudentstrained.phtml:61
-#: views/scripts/reportpreservice/studentname.phtml:74
-#: views/scripts/reports/facilities.phtml:4
-#: views/scripts/reports/facilities.phtml:36
-#: views/scripts/reports/training-multi-training-report.phtml:4
-#: views/scripts/reports/training-multi-training-report.phtml:37
-#: views/scripts/reports/training-unknown.phtml:37
-#: views/scripts/reports/trainings.phtml:4
-#: views/scripts/reports/trainings.phtml:33 views/scripts/user/edit.phtml:44
-#: views/scripts/user/_add_form.phtml:71
-msgid "Reports"
 msgstr ""
 
 #: views/scripts/header.phtml:76
@@ -3154,7 +3166,7 @@ msgstr ""
 
 #: views/scripts/header.phtml:134 views/scripts/header.phtml:145
 #: views/scripts/header.phtml:160 views/scripts/employee/index.phtml:64
-#: views/scripts/reports/index.phtml:128
+#: views/scripts/partner/search.phtml:59 views/scripts/reports/index.phtml:128
 #: views/scripts/reports/partners.phtml:74
 #: views/scripts/training-partner/search.phtml:56
 msgid "Partners"
@@ -3190,6 +3202,12 @@ msgstr ""
 #: views/scripts/header.phtml:156 views/scripts/preheader.phtml:120
 #: views/scripts/user/edit.phtml:87 views/scripts/user/_add_form.phtml:113
 msgid "Facility Settings"
+msgstr ""
+
+#: views/scripts/header.phtml:165 views/scripts/nav-admin.phtml:14
+#: views/scripts/nav-admin.phtml:45 views/scripts/nav-admin.phtml:83
+#: views/scripts/nav-admin.phtml:114 views/scripts/nav-admin.phtml:147
+msgid "Settings"
 msgstr ""
 
 #: views/scripts/header.phtml:169 views/scripts/preheader.phtml:123
@@ -3289,12 +3307,6 @@ msgstr ""
 msgid "Region Setup"
 msgstr ""
 
-#: views/scripts/nav-admin.phtml:14 views/scripts/nav-admin.phtml:45
-#: views/scripts/nav-admin.phtml:83 views/scripts/nav-admin.phtml:114
-#: views/scripts/nav-admin.phtml:147
-msgid "Settings"
-msgstr ""
-
 #: views/scripts/nav-admin.phtml:16 views/scripts/nav-admin.phtml:85
 msgid "Assign Titles"
 msgstr ""
@@ -3332,7 +3344,7 @@ msgid "Awaiting Approval"
 msgstr ""
 
 #: views/scripts/nav-admin.phtml:33 views/scripts/nav-admin.phtml:102
-#: views/scripts/person/edit-body-addtl.phtml:102
+#: views/scripts/person/edit-body-addtl.phtml:127
 #: views/scripts/person/edit-body-bad.phtml:296
 #: views/scripts/person/view.phtml:87 views/scripts/user/edit.phtml:89
 #: views/scripts/user/_add_form.phtml:115
@@ -3463,11 +3475,11 @@ msgstr ""
 msgid "SkillSmart Main Settings"
 msgstr ""
 
-#: views/scripts/nav-admin.phtml:132 views/scripts/person/edit-body.phtml:456
+#: views/scripts/nav-admin.phtml:132 views/scripts/person/edit-body.phtml:455
 msgid "Race"
 msgstr ""
 
-#: views/scripts/nav-admin.phtml:133 views/scripts/person/edit-body.phtml:472
+#: views/scripts/nav-admin.phtml:133 views/scripts/person/edit-body.phtml:471
 msgid "Disability"
 msgstr ""
 
@@ -3505,12 +3517,20 @@ msgstr ""
 msgid "Occupational Categories"
 msgstr ""
 
-#: views/scripts/nav-admin.phtml:148
-msgid "Categories"
+#: views/scripts/nav-admin.phtml:148 views/scripts/employee/edit.phtml:64
+#: views/scripts/employee/search.phtml:40
+#: views/scripts/employee/search.phtml:142
+#: views/scripts/reports/employees.phtml:43
+#: views/scripts/reports/employees.phtml:184
+#: views/scripts/reports/partners.phtml:40
+msgid "Staff Category"
 msgstr ""
 
-#: views/scripts/nav-admin.phtml:149
-msgid "Roles"
+#: views/scripts/nav-admin.phtml:149 views/scripts/employee/edit.phtml:66
+#: views/scripts/reports/employees.phtml:49
+#: views/scripts/reports/employees.phtml:193
+#: views/scripts/reports/partners.phtml:46
+msgid "Primary Role"
 msgstr ""
 
 #: views/scripts/nav-admin.phtml:150
@@ -3518,24 +3538,35 @@ msgid "Intended Transitions"
 msgstr ""
 
 #: views/scripts/nav-admin.phtml:151
-msgid "Relationships"
+msgid "Relationship"
 msgstr ""
 
-#: views/scripts/nav-admin.phtml:152
-msgid "Referrals"
+#: views/scripts/nav-admin.phtml:152 views/scripts/employee/edit.phtml:85
+msgid "Referral Mechanism"
 msgstr ""
 
-#: views/scripts/nav-admin.phtml:154 views/scripts/reports/employees.phtml:51
+#: views/scripts/nav-admin.phtml:153
+msgid "Training Provided"
+msgstr ""
+
+#: views/scripts/nav-admin.phtml:154 views/scripts/partner/edit.phtml:61
+#: views/scripts/reports/employees.phtml:51
 #: views/scripts/reports/employees.phtml:196
 #: views/scripts/reports/partners.phtml:48
 msgid "Importance"
+msgstr ""
+
+#: views/scripts/nav-admin.phtml:155 views/scripts/partner/edit.phtml:49
+#: views/scripts/partner/edit.phtml:53 views/scripts/partner/search.phtml:142
+#: views/scripts/training-partner/search.phtml:34
+msgid "Funder"
 msgstr ""
 
 #: views/scripts/nav-admin.phtml:176 views/scripts/nav-admin.phtml:179
 #: views/scripts/reportpreservice/coursebyname.phtml:258
 #: views/scripts/reports/training-multi-training-report.phtml:359
 #: views/scripts/reports/training-unknown.phtml:299
-#: views/scripts/reports/trainings.phtml:377
+#: views/scripts/reports/trainings.phtml:380
 msgid "New"
 msgstr ""
 
@@ -3650,13 +3681,9 @@ msgstr ""
 #: views/scripts/admin/employee-settings.phtml:84
 #: views/scripts/admin/employee-settings.phtml:89
 #: views/scripts/admin/employee-settings.phtml:104
-#: views/scripts/admin/employee-settings.phtml:109
-#: views/scripts/admin/employee-settings.phtml:114
 #: views/scripts/admin/employee-settings.phtml:119
 #: views/scripts/admin/employee-settings.phtml:124
 #: views/scripts/admin/employee-settings.phtml:134
-#: views/scripts/admin/employee-settings.phtml:139
-#: views/scripts/admin/employee-settings.phtml:144
 msgid "Add/Edit"
 msgstr ""
 
@@ -3684,6 +3711,7 @@ msgstr ""
 #: views/scripts/facility/view.phtml:34
 #: views/scripts/institution/institutionadd.phtml:107
 #: views/scripts/institution/institutionedit.phtml:106
+#: views/scripts/partner/edit.phtml:39
 #: views/scripts/peopleadd/peopleadd.phtml:166
 #: views/scripts/peoplefind/personview.phtml:134
 #: views/scripts/peoplefind/personview.phtml:176
@@ -3693,8 +3721,8 @@ msgstr ""
 #: views/scripts/psfacility/view.phtml:35
 #: views/scripts/site/addfacility-form.phtml:6
 #: views/scripts/site/view.phtml:34
-#: views/scripts/studentedit/personview.phtml:384
-#: views/scripts/studentedit/personview.phtml:417
+#: views/scripts/studentedit/personview.phtml:385
+#: views/scripts/studentedit/personview.phtml:418
 #: views/scripts/tutoredit/tutoredit.phtml:119
 msgid "Address 1"
 msgstr ""
@@ -3704,6 +3732,7 @@ msgstr ""
 #: views/scripts/facility/addfacility-form.phtml:8
 #: views/scripts/facility/edit.phtml:41 views/scripts/facility/view.phtml:36
 #: views/scripts/institution/institutionadd.phtml:110
+#: views/scripts/partner/edit.phtml:40
 #: views/scripts/peopleadd/peopleadd.phtml:169
 #: views/scripts/peoplefind/personview.phtml:137
 #: views/scripts/peoplefind/personview.phtml:179
@@ -3713,8 +3742,8 @@ msgstr ""
 #: views/scripts/psfacility/view.phtml:37
 #: views/scripts/site/addfacility-form.phtml:8
 #: views/scripts/site/edit.phtml:41 views/scripts/site/view.phtml:36
-#: views/scripts/studentedit/personview.phtml:387
-#: views/scripts/studentedit/personview.phtml:420
+#: views/scripts/studentedit/personview.phtml:388
+#: views/scripts/studentedit/personview.phtml:421
 #: views/scripts/tutoredit/tutoredit.phtml:122
 msgid "Address 2"
 msgstr ""
@@ -3812,11 +3841,11 @@ msgstr ""
 
 #: views/scripts/admin/training-approvers.phtml:53
 #: views/scripts/admin/_template_edittable.phtml:66
-#: views/scripts/employee/edit.phtml:122
+#: views/scripts/employee/edit.phtml:122 views/scripts/partner/edit.phtml:144
 #: views/scripts/person/editcompetency.phtml:221
 #: views/scripts/training/_template_editform.phtml:33
-#: views/scripts/training/_template_editform.phtml:558
-#: views/scripts/training/_template_editform.phtml:1125
+#: views/scripts/training/_template_editform.phtml:562
+#: views/scripts/training/_template_editform.phtml:1129
 msgid "Save"
 msgstr ""
 
@@ -3828,7 +3857,7 @@ msgstr ""
 msgid "Your changes could not be saved"
 msgstr ""
 
-#: views/scripts/admin/training-settings.phtml:97
+#: views/scripts/admin/training-settings.phtml:152
 msgid "Mutiple checkbox field"
 msgstr ""
 
@@ -3844,8 +3873,25 @@ msgstr ""
 msgid "Print Calendar"
 msgstr ""
 
-#: views/scripts/calendar/index.phtml:50
+#: views/scripts/calendar/index.phtml:23
 msgid "Add trainings"
+msgstr ""
+
+#: views/scripts/calendar/index.phtml:24 views/scripts/calendar/index.phtml:30
+msgid "Past"
+msgstr ""
+
+#: views/scripts/calendar/index.phtml:24 views/scripts/calendar/index.phtml:29
+#: views/scripts/index/index.phtml:80
+msgid "Future"
+msgstr ""
+
+#: views/scripts/calendar/index.phtml:28
+msgid "Legend"
+msgstr ""
+
+#: views/scripts/calendar/index.phtml:31
+msgid "Today"
 msgstr ""
 
 #: views/scripts/cohort/cohort.phtml:115
@@ -3866,7 +3912,8 @@ msgstr ""
 #: views/scripts/facility/search-location.phtml:22
 #: views/scripts/facility/search.phtml:23
 #: views/scripts/facility/_search.phtml:5
-#: views/scripts/person/reports.phtml:23 views/scripts/person/search.phtml:23
+#: views/scripts/partner/search.phtml:22 views/scripts/person/reports.phtml:23
+#: views/scripts/person/search.phtml:23
 #: views/scripts/psfacility/search-location.phtml:22
 #: views/scripts/psfacility/search.phtml:22
 #: views/scripts/reportpreservice/coursebyname.phtml:50
@@ -3878,7 +3925,7 @@ msgstr ""
 #: views/scripts/reports/needs-by-person-name.phtml:29
 #: views/scripts/reports/participants-by-category.phtml:41
 #: views/scripts/reports/participants-by-facility-type.phtml:44
-#: views/scripts/reports/participants-by-training.phtml:33
+#: views/scripts/reports/participants-by-training.phtml:34
 #: views/scripts/reports/partners.phtml:22
 #: views/scripts/reports/people-by-facility.phtml:43
 #: views/scripts/reports/prof.phtml:23
@@ -3888,8 +3935,19 @@ msgstr ""
 #: views/scripts/reports/ps-facility-report.phtml:94
 #: views/scripts/reports/ps-graduated-students.phtml:102
 #: views/scripts/reports/ps-institution-information.phtml:94
+#: views/scripts/reports/ps-missing-cohort-by-participant-count.phtml:23
+#: views/scripts/reports/ps-missing-course-by-name.phtml:23
+#: views/scripts/reports/ps-missing-course-by-student-count.phtml:23
+#: views/scripts/reports/ps-missing-facility-report.phtml:23
+#: views/scripts/reports/ps-missing-graduated-students.phtml:23
+#: views/scripts/reports/ps-missing-institution-information.phtml:23
+#: views/scripts/reports/ps-missing-students-by-name.phtml:23
+#: views/scripts/reports/ps-missing-students-trained.phtml:23
+#: views/scripts/reports/ps-missing-tutor-by-name.phtml:23
 #: views/scripts/reports/ps-students-by-name.phtml:102
 #: views/scripts/reports/ps-students-trained.phtml:111
+#: views/scripts/reports/ps-training-by-participants.phtml:23
+#: views/scripts/reports/ps-trainings-by-name.phtml:23
 #: views/scripts/reports/ps-tutor-by-name.phtml:94
 #: views/scripts/reports/quescomp.phtml:22
 #: views/scripts/reports/ss-comp.phtml:23
@@ -3900,7 +3958,7 @@ msgstr ""
 #: views/scripts/reports/trainers.phtml:24
 #: views/scripts/reports/training-multi-training-report.phtml:50
 #: views/scripts/reports/training-unknown.phtml:52
-#: views/scripts/reports/trainings.phtml:67
+#: views/scripts/reports/trainings.phtml:65
 #: views/scripts/site/search-location.phtml:22
 #: views/scripts/site/_search.phtml:5
 #: views/scripts/training-partner/search.phtml:21
@@ -4025,16 +4083,16 @@ msgstr ""
 #: views/scripts/peoplefind/peoplefind.phtml:82
 #: views/scripts/peoplefind/peoplefind.phtml:92
 #: views/scripts/peoplefind/peoplefind.phtml:102
-#: views/scripts/person/edit-body.phtml:413
-#: views/scripts/studentedit/personview.phtml:289
-#: views/scripts/studentedit/personview.phtml:307
-#: views/scripts/studentedit/personview.phtml:327
-#: views/scripts/studentedit/personview.phtml:339
-#: views/scripts/studentedit/personview.phtml:452
-#: views/scripts/studentedit/personview.phtml:468
-#: views/scripts/studentedit/personview.phtml:487
-#: views/scripts/studentedit/personview.phtml:499
-#: views/scripts/studentedit/personview.phtml:553
+#: views/scripts/person/edit-body.phtml:412
+#: views/scripts/studentedit/personview.phtml:290
+#: views/scripts/studentedit/personview.phtml:308
+#: views/scripts/studentedit/personview.phtml:328
+#: views/scripts/studentedit/personview.phtml:340
+#: views/scripts/studentedit/personview.phtml:453
+#: views/scripts/studentedit/personview.phtml:469
+#: views/scripts/studentedit/personview.phtml:488
+#: views/scripts/studentedit/personview.phtml:500
+#: views/scripts/studentedit/personview.phtml:554
 #: views/scripts/tutoredit/tutoredit.phtml:73
 #: views/scripts/tutoredit/tutoredit.phtml:93
 #: views/scripts/tutoredit/tutoredit.phtml:105
@@ -4068,6 +4126,7 @@ msgstr ""
 
 #: views/scripts/cohort/cohortasspracticum.phtml:81
 #: views/scripts/cohort/cohortclass.phtml:80
+#: views/scripts/cohort/cohortclassedit.phtml:85
 #: views/scripts/cohort/cohortexamadd.phtml:82
 #: views/scripts/cohort/cohortexamedit.phtml:86
 #: views/scripts/cohort/cohortgraduationedit.phtml:83
@@ -4087,7 +4146,7 @@ msgstr ""
 #: views/scripts/reports/facilities.phtml:42
 #: views/scripts/reports/index.phtml:44
 #: views/scripts/reports/participants-by-facility-type.phtml:346
-#: views/scripts/reports/participants-by-training.phtml:587
+#: views/scripts/reports/participants-by-training.phtml:596
 #: views/scripts/reports/people-by-facility.phtml:289
 #: views/scripts/reports/training-multi-training-report.phtml:43
 #: views/scripts/reports/training-unknown.phtml:44
@@ -4097,10 +4156,6 @@ msgstr ""
 
 #: views/scripts/cohort/cohortclassedit.phtml:60
 msgid "Classes Associated With Cohort"
-msgstr ""
-
-#: views/scripts/cohort/cohortclassedit.phtml:85
-msgid "Go back &raquo;"
 msgstr ""
 
 #: views/scripts/cohort/cohortedit.phtml:71
@@ -4145,7 +4200,7 @@ msgstr ""
 #: views/scripts/cohort/cohortedit.phtml:273
 #: views/scripts/peoplefind/personview.phtml:310
 #: views/scripts/studentedit/personview.phtml:200
-#: views/scripts/studentedit/personview.phtml:625
+#: views/scripts/studentedit/personview.phtml:626
 msgid "Instructor"
 msgstr ""
 
@@ -4153,18 +4208,18 @@ msgstr ""
 #: views/scripts/cohort/cohortedit.phtml:513
 #: views/scripts/reportpreservice/coursebyname.phtml:219
 #: views/scripts/reports/evaluations-report.phtml:78
-#: views/scripts/reports/evaluations.phtml:35
+#: views/scripts/reports/evaluations.phtml:39
 #: views/scripts/reports/facilities.phtml:223
 #: views/scripts/reports/participants-by-category.phtml:49
 #: views/scripts/reports/participants-by-facility-type.phtml:234
-#: views/scripts/reports/participants-by-training.phtml:400
+#: views/scripts/reports/participants-by-training.phtml:407
 #: views/scripts/reports/people-by-facility.phtml:192
 #: views/scripts/reports/roster.phtml:51
 #: views/scripts/reports/training-multi-training-report.phtml:320
 #: views/scripts/reports/training-unknown.phtml:260
-#: views/scripts/reports/trainings.phtml:338
+#: views/scripts/reports/trainings.phtml:341
 #: views/scripts/studentedit/personview.phtml:201
-#: views/scripts/studentedit/personview.phtml:623
+#: views/scripts/studentedit/personview.phtml:624
 msgid "Start date"
 msgstr ""
 
@@ -4173,21 +4228,21 @@ msgstr ""
 #: views/scripts/reportpreservice/coursebyname.phtml:211
 #: views/scripts/reportpreservice/coursebyname.phtml:230
 #: views/scripts/reports/evaluations-report.phtml:81
-#: views/scripts/reports/evaluations.phtml:46
+#: views/scripts/reports/evaluations.phtml:50
 #: views/scripts/reports/facilities.phtml:234
 #: views/scripts/reports/participants-by-category.phtml:60
 #: views/scripts/reports/participants-by-facility-type.phtml:245
-#: views/scripts/reports/participants-by-training.phtml:411
+#: views/scripts/reports/participants-by-training.phtml:418
 #: views/scripts/reports/people-by-facility.phtml:203
 #: views/scripts/reports/roster.phtml:62
 #: views/scripts/reports/training-multi-training-report.phtml:311
 #: views/scripts/reports/training-multi-training-report.phtml:331
 #: views/scripts/reports/training-unknown.phtml:252
 #: views/scripts/reports/training-unknown.phtml:271
-#: views/scripts/reports/trainings.phtml:287
-#: views/scripts/reports/trainings.phtml:349
+#: views/scripts/reports/trainings.phtml:290
+#: views/scripts/reports/trainings.phtml:352
 #: views/scripts/studentedit/personview.phtml:202
-#: views/scripts/studentedit/personview.phtml:624
+#: views/scripts/studentedit/personview.phtml:625
 msgid "End date"
 msgstr ""
 
@@ -4198,19 +4253,19 @@ msgstr ""
 #: views/scripts/reports/training-multi-training-report.phtml:39
 #: views/scripts/reports/training-unknown.phtml:39
 #: views/scripts/reports/trainings.phtml:36
-#: views/scripts/studentedit/personview.phtml:583
+#: views/scripts/studentedit/personview.phtml:584
 msgid "Select"
 msgstr ""
 
 #: views/scripts/cohort/cohortedit.phtml:325
 #: views/scripts/cohort/cohortedit.phtml:551
-#: views/scripts/studentedit/personview.phtml:661
+#: views/scripts/studentedit/personview.phtml:662
 msgid "Advisor"
 msgstr ""
 
 #: views/scripts/cohort/cohortedit.phtml:336
 #: views/scripts/studentedit/personview.phtml:243
-#: views/scripts/studentedit/personview.phtml:662
+#: views/scripts/studentedit/personview.phtml:663
 msgid "Hours required"
 msgstr ""
 
@@ -4299,7 +4354,7 @@ msgstr ""
 
 #: views/scripts/cohort/cohortedit.phtml:511
 #: views/scripts/peoplefind/personview.phtml:308
-#: views/scripts/studentedit/personview.phtml:621
+#: views/scripts/studentedit/personview.phtml:622
 msgid "Class Name"
 msgstr ""
 
@@ -4315,7 +4370,7 @@ msgid "Update associated classes"
 msgstr ""
 
 #: views/scripts/cohort/cohortedit.phtml:542
-#: views/scripts/studentedit/personview.phtml:654
+#: views/scripts/studentedit/personview.phtml:655
 msgid "Clinical Allocation"
 msgstr ""
 
@@ -4335,9 +4390,9 @@ msgstr ""
 #: views/scripts/studentedit/personview.phtml:162
 #: views/scripts/studentedit/personview.phtml:203
 #: views/scripts/studentedit/personview.phtml:245
-#: views/scripts/studentedit/personview.phtml:627
-#: views/scripts/studentedit/personview.phtml:664
-#: views/scripts/studentedit/personview.phtml:697
+#: views/scripts/studentedit/personview.phtml:628
+#: views/scripts/studentedit/personview.phtml:665
+#: views/scripts/studentedit/personview.phtml:698
 msgid "Grade"
 msgstr ""
 
@@ -4355,21 +4410,21 @@ msgstr ""
 #: views/scripts/cohort/cohortpracticum.phtml:78
 #: views/scripts/external/add.phtml:29
 #: views/scripts/person/edit-body-bad.phtml:65
-#: views/scripts/person/edit-body.phtml:447
-#: views/scripts/person/edit-body.phtml:602 views/scripts/person/lh.phtml:30
+#: views/scripts/person/edit-body.phtml:446
+#: views/scripts/person/edit-body.phtml:601 views/scripts/person/lh.phtml:30
 #: views/scripts/person/lh.phtml:47 views/scripts/person/view.phtml:57
 #: views/scripts/reportpreservice/coursebyname.phtml:223
 #: views/scripts/reportpreservice/coursebyname.phtml:234
-#: views/scripts/reports/evaluations.phtml:39
-#: views/scripts/reports/evaluations.phtml:50
+#: views/scripts/reports/evaluations.phtml:43
+#: views/scripts/reports/evaluations.phtml:54
 #: views/scripts/reports/facilities.phtml:227
 #: views/scripts/reports/facilities.phtml:238
 #: views/scripts/reports/participants-by-category.phtml:53
 #: views/scripts/reports/participants-by-category.phtml:64
 #: views/scripts/reports/participants-by-facility-type.phtml:238
 #: views/scripts/reports/participants-by-facility-type.phtml:249
-#: views/scripts/reports/participants-by-training.phtml:404
-#: views/scripts/reports/participants-by-training.phtml:415
+#: views/scripts/reports/participants-by-training.phtml:411
+#: views/scripts/reports/participants-by-training.phtml:422
 #: views/scripts/reports/people-by-facility.phtml:196
 #: views/scripts/reports/people-by-facility.phtml:207
 #: views/scripts/reports/roster.phtml:55 views/scripts/reports/roster.phtml:66
@@ -4377,8 +4432,8 @@ msgstr ""
 #: views/scripts/reports/training-multi-training-report.phtml:335
 #: views/scripts/reports/training-unknown.phtml:264
 #: views/scripts/reports/training-unknown.phtml:275
-#: views/scripts/reports/trainings.phtml:342
-#: views/scripts/reports/trainings.phtml:353
+#: views/scripts/reports/trainings.phtml:345
+#: views/scripts/reports/trainings.phtml:356
 #: views/scripts/training/_template_editform.phtml:256
 #: views/scripts/training/_template_editform.phtml:271
 #: views/scripts/tutoredit/tutoredit.phtml:209
@@ -4391,7 +4446,8 @@ msgstr ""
 #: views/scripts/employee/employee_course_table.phtml:128
 #: views/scripts/employee/search.phtml:102
 #: views/scripts/facility/search.phtml:110
-#: views/scripts/facility/_search.phtml:92
+#: views/scripts/facility/_search.phtml:92 views/scripts/partner/edit.phtml:36
+#: views/scripts/partner/edit.phtml:78 views/scripts/partner/search.phtml:109
 #: views/scripts/peoplefind/peoplefind.phtml:136
 #: views/scripts/person/history.phtml:2
 #: views/scripts/psfacility/search.phtml:98
@@ -4582,7 +4638,7 @@ msgstr ""
 msgid "You can log into our website at:"
 msgstr ""
 
-#: views/scripts/employee/edit.phtml:29
+#: views/scripts/employee/edit.phtml:29 views/scripts/partner/edit.phtml:26
 #: views/scripts/training/_template_editform.phtml:194
 msgid "Delete this"
 msgstr ""
@@ -4592,7 +4648,9 @@ msgstr ""
 msgid "Other ID"
 msgstr ""
 
-#: views/scripts/employee/edit.phtml:51
+#: views/scripts/employee/edit.phtml:51 views/scripts/partner/edit.phtml:80
+#: views/scripts/partner/edit.phtml:86 views/scripts/partner/search.phtml:29
+#: views/scripts/partner/search.phtml:139
 #: views/scripts/reports/employees.phtml:35
 #: views/scripts/reports/employees.phtml:172
 #: views/scripts/reports/partners.phtml:32
@@ -4621,21 +4679,6 @@ msgstr ""
 msgid "Staff Cadre"
 msgstr ""
 
-#: views/scripts/employee/edit.phtml:64 views/scripts/employee/search.phtml:40
-#: views/scripts/employee/search.phtml:142
-#: views/scripts/reports/employees.phtml:43
-#: views/scripts/reports/employees.phtml:184
-#: views/scripts/reports/partners.phtml:40
-msgid "Staff Category"
-msgstr ""
-
-#: views/scripts/employee/edit.phtml:66
-#: views/scripts/reports/employees.phtml:49
-#: views/scripts/reports/employees.phtml:193
-#: views/scripts/reports/partners.phtml:46
-msgid "Primary Role"
-msgstr ""
-
 #: views/scripts/employee/edit.phtml:68
 msgid "Full Time"
 msgstr ""
@@ -4662,7 +4705,7 @@ msgstr ""
 msgid "Intended Transition"
 msgstr ""
 
-#: views/scripts/employee/edit.phtml:77
+#: views/scripts/employee/edit.phtml:77 views/scripts/partner/edit.phtml:65
 #: views/scripts/reports/employees.phtml:57
 #: views/scripts/reports/employees.phtml:205
 #: views/scripts/reports/partners.phtml:54
@@ -4677,10 +4720,6 @@ msgstr ""
 
 #: views/scripts/employee/edit.phtml:83
 msgid "Relationship between CHW and formal health services"
-msgstr ""
-
-#: views/scripts/employee/edit.phtml:85
-msgid "Referral Mechanism"
 msgstr ""
 
 #: views/scripts/employee/edit.phtml:87
@@ -4727,16 +4766,14 @@ msgid "All Courses completed by the Community Health Worker"
 msgstr ""
 
 #: views/scripts/employee/employee_course_table.phtml:16
-#: views/scripts/person/edit-body-class-history.phtml:3
-#: views/scripts/person/history.phtml:22
-msgid "Assign this person to a class"
+msgid "Add a completed course"
 msgstr ""
 
-#: views/scripts/employee/employee_course_table.phtml:158
+#: views/scripts/employee/employee_course_table.phtml:159
 msgid "Add a Course"
 msgstr ""
 
-#: views/scripts/employee/employee_course_table.phtml:178
+#: views/scripts/employee/employee_course_table.phtml:179
 msgid "Please save the user before adding a course."
 msgstr ""
 
@@ -4745,12 +4782,12 @@ msgid "of employees"
 msgstr ""
 
 #: views/scripts/employee/index.phtml:80 views/scripts/index/index.phtml:120
-#: views/scripts/training/_template_editform.phtml:1137
+#: views/scripts/training/_template_editform.phtml:1141
 msgid "Right-click and select \"Save Target As...\" to download."
 msgstr ""
 
 #: views/scripts/employee/index.phtml:83 views/scripts/index/index.phtml:123
-#: views/scripts/training/_template_editform.phtml:1140
+#: views/scripts/training/_template_editform.phtml:1144
 msgid "Document Upload"
 msgstr ""
 
@@ -4762,13 +4799,14 @@ msgstr ""
 #: views/scripts/facility/search-location.phtml:45
 #: views/scripts/facility/search.phtml:67
 #: views/scripts/facility/_search.phtml:48
+#: views/scripts/partner/search.phtml:59
 #: views/scripts/person/assign-training.phtml:42
 #: views/scripts/person/reports.phtml:108 views/scripts/person/search.phtml:99
 #: views/scripts/psfacility/search-location.phtml:55
 #: views/scripts/psfacility/search.phtml:72
 #: views/scripts/reports/comp.phtml:308
 #: views/scripts/reports/compcomp.phtml:309
-#: views/scripts/reports/detail.phtml:279
+#: views/scripts/reports/detail.phtml:290
 #: views/scripts/reports/employees.phtml:77
 #: views/scripts/reports/participants-by-category.phtml:83
 #: views/scripts/reports/participants-by-category.phtml:88
@@ -4795,6 +4833,7 @@ msgstr ""
 #: views/scripts/facility/search-location.phtml:116
 #: views/scripts/facility/search.phtml:145
 #: views/scripts/facility/_search.phtml:127
+#: views/scripts/partner/search.phtml:150
 #: views/scripts/person/reports.phtml:189
 #: views/scripts/person/search.phtml:219
 #: views/scripts/psfacility/search-location.phtml:108
@@ -4806,13 +4845,13 @@ msgstr ""
 #: views/scripts/reports/facilities.phtml:400
 #: views/scripts/reports/needs-by-person-name.phtml:366
 #: views/scripts/reports/participants-by-facility-type.phtml:422
-#: views/scripts/reports/participants-by-training.phtml:728
+#: views/scripts/reports/participants-by-training.phtml:740
 #: views/scripts/reports/partners.phtml:124
 #: views/scripts/reports/people-by-facility.phtml:348
 #: views/scripts/reports/trainers.phtml:161
 #: views/scripts/reports/training-multi-training-report.phtml:546
 #: views/scripts/reports/training-unknown.phtml:471
-#: views/scripts/reports/trainings.phtml:607
+#: views/scripts/reports/trainings.phtml:615
 #: views/scripts/site/search-location.phtml:116
 #: views/scripts/site/_search.phtml:127
 #: views/scripts/training-partner/search.phtml:97
@@ -4823,6 +4862,7 @@ msgstr ""
 #: views/scripts/facility/search-location.phtml:116
 #: views/scripts/facility/search.phtml:145
 #: views/scripts/facility/_search.phtml:127
+#: views/scripts/partner/search.phtml:150
 #: views/scripts/person/reports.phtml:189
 #: views/scripts/person/search.phtml:219
 #: views/scripts/psfacility/search-location.phtml:108
@@ -4834,13 +4874,13 @@ msgstr ""
 #: views/scripts/reports/facilities.phtml:400
 #: views/scripts/reports/needs-by-person-name.phtml:366
 #: views/scripts/reports/participants-by-facility-type.phtml:422
-#: views/scripts/reports/participants-by-training.phtml:728
+#: views/scripts/reports/participants-by-training.phtml:740
 #: views/scripts/reports/partners.phtml:124
 #: views/scripts/reports/people-by-facility.phtml:348
 #: views/scripts/reports/trainers.phtml:161
 #: views/scripts/reports/training-multi-training-report.phtml:546
 #: views/scripts/reports/training-unknown.phtml:471
-#: views/scripts/reports/trainings.phtml:607
+#: views/scripts/reports/trainings.phtml:615
 #: views/scripts/site/search-location.phtml:116
 #: views/scripts/site/_search.phtml:127
 #: views/scripts/training-partner/search.phtml:97
@@ -4870,9 +4910,10 @@ msgstr ""
 #: views/scripts/evaluation/add-copy.phtml:37
 #: views/scripts/evaluation/edit.phtml:38
 #: views/scripts/reports/evaluations-report.phtml:282
-#: views/scripts/reports/evaluations_results.phtml:48
+#: views/scripts/reports/evaluations_results.phtml:51
 #: views/scripts/reports/quescomp.phtml:157
 #: views/scripts/reports/quescomp.phtml:319
+#: views/scripts/reports/ss-quescomp.phtml:156
 msgid "Question"
 msgstr ""
 
@@ -4943,6 +4984,7 @@ msgid "Evaluation Data Entry"
 msgstr ""
 
 #: views/scripts/evaluation/data.phtml:20
+#: views/scripts/evaluation/print.phtml:21
 msgid "Not Applicable"
 msgstr ""
 
@@ -4955,7 +4997,7 @@ msgid "Save and Exit"
 msgstr ""
 
 #: views/scripts/evaluation/data.phtml:67
-#: views/scripts/training/_template_editform.phtml:339
+#: views/scripts/training/_template_editform.phtml:343
 msgid "Save and Continue"
 msgstr ""
 
@@ -4973,7 +5015,7 @@ msgstr ""
 
 #: views/scripts/external/add.phtml:27
 #: views/scripts/person/edit-body-bad.phtml:63
-#: views/scripts/person/edit-body.phtml:445 views/scripts/person/lh.phtml:28
+#: views/scripts/person/edit-body.phtml:444 views/scripts/person/lh.phtml:28
 #: views/scripts/person/lh.phtml:45 views/scripts/person/view.phtml:55
 #: views/scripts/reportpreservice/coursebyname.phtml:221
 #: views/scripts/reportpreservice/coursebyname.phtml:232
@@ -4985,16 +5027,16 @@ msgstr ""
 #: views/scripts/reportpreservice/reportstudentstrained.phtml:219
 #: views/scripts/reportpreservice/studentname.phtml:225
 #: views/scripts/reportpreservice/studentname.phtml:233
-#: views/scripts/reports/evaluations.phtml:37
-#: views/scripts/reports/evaluations.phtml:48
+#: views/scripts/reports/evaluations.phtml:41
+#: views/scripts/reports/evaluations.phtml:52
 #: views/scripts/reports/facilities.phtml:225
 #: views/scripts/reports/facilities.phtml:236
 #: views/scripts/reports/participants-by-category.phtml:51
 #: views/scripts/reports/participants-by-category.phtml:62
 #: views/scripts/reports/participants-by-facility-type.phtml:236
 #: views/scripts/reports/participants-by-facility-type.phtml:247
-#: views/scripts/reports/participants-by-training.phtml:402
-#: views/scripts/reports/participants-by-training.phtml:413
+#: views/scripts/reports/participants-by-training.phtml:409
+#: views/scripts/reports/participants-by-training.phtml:420
 #: views/scripts/reports/people-by-facility.phtml:194
 #: views/scripts/reports/people-by-facility.phtml:205
 #: views/scripts/reports/roster.phtml:53 views/scripts/reports/roster.phtml:64
@@ -5002,8 +5044,8 @@ msgstr ""
 #: views/scripts/reports/training-multi-training-report.phtml:333
 #: views/scripts/reports/training-unknown.phtml:262
 #: views/scripts/reports/training-unknown.phtml:273
-#: views/scripts/reports/trainings.phtml:340
-#: views/scripts/reports/trainings.phtml:351
+#: views/scripts/reports/trainings.phtml:343
+#: views/scripts/reports/trainings.phtml:354
 #: views/scripts/training/_template_editform.phtml:254
 #: views/scripts/training/_template_editform.phtml:269
 msgid "Day"
@@ -5011,20 +5053,20 @@ msgstr ""
 
 #: views/scripts/external/add.phtml:28
 #: views/scripts/person/edit-body-bad.phtml:64
-#: views/scripts/person/edit-body.phtml:446 views/scripts/person/lh.phtml:29
+#: views/scripts/person/edit-body.phtml:445 views/scripts/person/lh.phtml:29
 #: views/scripts/person/lh.phtml:46 views/scripts/person/view.phtml:56
 #: views/scripts/reportpreservice/coursebyname.phtml:222
 #: views/scripts/reportpreservice/coursebyname.phtml:233
-#: views/scripts/reports/evaluations.phtml:38
-#: views/scripts/reports/evaluations.phtml:49
+#: views/scripts/reports/evaluations.phtml:42
+#: views/scripts/reports/evaluations.phtml:53
 #: views/scripts/reports/facilities.phtml:226
 #: views/scripts/reports/facilities.phtml:237
 #: views/scripts/reports/participants-by-category.phtml:52
 #: views/scripts/reports/participants-by-category.phtml:63
 #: views/scripts/reports/participants-by-facility-type.phtml:237
 #: views/scripts/reports/participants-by-facility-type.phtml:248
-#: views/scripts/reports/participants-by-training.phtml:403
-#: views/scripts/reports/participants-by-training.phtml:414
+#: views/scripts/reports/participants-by-training.phtml:410
+#: views/scripts/reports/participants-by-training.phtml:421
 #: views/scripts/reports/people-by-facility.phtml:195
 #: views/scripts/reports/people-by-facility.phtml:206
 #: views/scripts/reports/roster.phtml:54 views/scripts/reports/roster.phtml:65
@@ -5032,8 +5074,8 @@ msgstr ""
 #: views/scripts/reports/training-multi-training-report.phtml:334
 #: views/scripts/reports/training-unknown.phtml:263
 #: views/scripts/reports/training-unknown.phtml:274
-#: views/scripts/reports/trainings.phtml:341
-#: views/scripts/reports/trainings.phtml:352
+#: views/scripts/reports/trainings.phtml:344
+#: views/scripts/reports/trainings.phtml:355
 #: views/scripts/training/_template_editform.phtml:255
 #: views/scripts/training/_template_editform.phtml:270
 msgid "Month"
@@ -5148,6 +5190,7 @@ msgstr ""
 
 #: views/scripts/facility/addfacility-form.phtml:92
 #: views/scripts/facility/edit.phtml:94 views/scripts/facility/view.phtml:79
+#: views/scripts/partner/search.phtml:35
 #: views/scripts/psfacility/addfacility-form.phtml:68
 #: views/scripts/psfacility/edit.phtml:103
 #: views/scripts/reports/employees.phtml:45
@@ -5156,7 +5199,7 @@ msgstr ""
 #: views/scripts/reports/partners.phtml:42
 #: views/scripts/reports/partners.phtml:44
 #: views/scripts/reports/partners.phtml:50
-#: views/scripts/reports/trainings.phtml:274
+#: views/scripts/reports/trainings.phtml:277
 #: views/scripts/site/addfacility-form.phtml:92
 #: views/scripts/site/edit.phtml:93 views/scripts/site/view.phtml:79
 msgid "to"
@@ -5207,8 +5250,8 @@ msgstr ""
 #: views/scripts/facility/edit.phtml:106
 #: views/scripts/person/edit-body-bad.phtml:181
 #: views/scripts/person/edit-body-bad.phtml:551
-#: views/scripts/person/edit-body.phtml:313
-#: views/scripts/person/edit-body.phtml:673
+#: views/scripts/person/edit-body.phtml:312
+#: views/scripts/person/edit-body.phtml:672
 #: views/scripts/psfacility/edit.phtml:113 views/scripts/site/edit.phtml:103
 #: views/scripts/training-partner/edit.phtml:47
 #: views/scripts/user/edit.phtml:137 views/scripts/user/myaccount.phtml:34
@@ -5285,7 +5328,7 @@ msgstr ""
 #: views/scripts/reports/facilities.phtml:108
 #: views/scripts/reports/training-multi-training-report.phtml:146
 #: views/scripts/reports/training-unknown.phtml:96
-#: views/scripts/reports/trainings.phtml:111
+#: views/scripts/reports/trainings.phtml:109
 #: views/scripts/site/search-location.phtml:46
 #: views/scripts/training/_template_editform.phtml:48
 #: views/scripts/training/_template_editform.phtml:303
@@ -5301,7 +5344,7 @@ msgstr ""
 #: views/scripts/facility/search.phtml:68
 #: views/scripts/facility/_search.phtml:49
 #: views/scripts/person/edit-body-bad.phtml:572
-#: views/scripts/person/edit-body.phtml:687
+#: views/scripts/person/edit-body.phtml:686
 #: views/scripts/psfacility/search.phtml:73
 #: views/scripts/site/_search.phtml:49
 msgid "Add New Facility"
@@ -5337,10 +5380,6 @@ msgstr ""
 
 #: views/scripts/index/index.phtml:39
 msgid "Fiscal Year"
-msgstr ""
-
-#: views/scripts/index/index.phtml:80
-msgid "Future"
 msgstr ""
 
 #: views/scripts/index/index.phtml:84
@@ -5499,6 +5538,62 @@ msgstr ""
 msgid "Add/Edit Staff members"
 msgstr ""
 
+#: views/scripts/partner/edit.phtml:22
+msgid "Edit Partner"
+msgstr ""
+
+#: views/scripts/partner/edit.phtml:51
+#: views/scripts/reports/employees.phtml:199
+msgid "Funding End Date"
+msgstr ""
+
+#: views/scripts/partner/edit.phtml:53 views/scripts/partner/edit.phtml:86
+msgid "Add a new"
+msgstr ""
+
+#: views/scripts/partner/edit.phtml:57
+msgid "Intended Transition After Funding End Date"
+msgstr ""
+
+#: views/scripts/partner/edit.phtml:59
+msgid "Agreement End Date"
+msgstr ""
+
+#: views/scripts/partner/edit.phtml:63
+msgid "Incoming Partner(s)"
+msgstr ""
+
+#: views/scripts/partner/edit.phtml:66 views/scripts/reports/partners.phtml:55
+#: views/scripts/reports/partners.phtml:116
+msgid "Partner Comments"
+msgstr ""
+
+#: views/scripts/partner/edit.phtml:71
+msgid "Sub Partners"
+msgstr ""
+
+#: views/scripts/partner/search.phtml:20
+msgid "Search Partners"
+msgstr ""
+
+#: views/scripts/partner/search.phtml:27
+msgid "Partner ID"
+msgstr ""
+
+#: views/scripts/partner/search.phtml:33
+#: views/scripts/reports/employees.phtml:53
+#: views/scripts/reports/partners.phtml:50
+msgid "Funding End Date Between"
+msgstr ""
+
+#: views/scripts/partner/search.phtml:60
+msgid "Add New Partner"
+msgstr ""
+
+#: views/scripts/partner/search.phtml:143
+msgid "Funder End Date"
+msgstr ""
+
 #: views/scripts/people/people.phtml:59
 #: views/scripts/peoplefind/peoplefind.phtml:56
 #: views/scripts/person/search.phtml:21
@@ -5510,7 +5605,7 @@ msgstr ""
 #: views/scripts/peoplefind/peoplefind.phtml:63
 #: views/scripts/peoplefind/personview.phtml:85
 #: views/scripts/person/view.phtml:32
-#: views/scripts/studentedit/personview.phtml:313
+#: views/scripts/studentedit/personview.phtml:314
 #: views/scripts/tutoredit/tutoredit.phtml:79
 msgid "First name"
 msgstr ""
@@ -5520,7 +5615,7 @@ msgstr ""
 #: views/scripts/peoplefind/peoplefind.phtml:66
 #: views/scripts/peoplefind/personview.phtml:91
 #: views/scripts/person/view.phtml:36
-#: views/scripts/studentedit/personview.phtml:319
+#: views/scripts/studentedit/personview.phtml:320
 #: views/scripts/tutoredit/tutoredit.phtml:85
 msgid "Last name"
 msgstr ""
@@ -5552,14 +5647,14 @@ msgstr ""
 #: views/scripts/peopleadd/peopleadd.phtml:97
 #: views/scripts/peoplefind/personview.phtml:88
 #: views/scripts/person/view.phtml:34
-#: views/scripts/studentedit/personview.phtml:316
+#: views/scripts/studentedit/personview.phtml:317
 #: views/scripts/tutoredit/tutoredit.phtml:82
 msgid "Middle name"
 msgstr ""
 
 #: views/scripts/peopleadd/peopleadd.phtml:110
 #: views/scripts/peoplefind/personview.phtml:103
-#: views/scripts/studentedit/personview.phtml:344
+#: views/scripts/studentedit/personview.phtml:345
 #: views/scripts/tutoredit/tutoredit.phtml:110
 msgid "Date of birth"
 msgstr ""
@@ -5571,8 +5666,8 @@ msgstr ""
 #: views/scripts/peopleadd/peopleadd.phtml:185
 #: views/scripts/peoplefind/personview.phtml:149
 #: views/scripts/peoplefind/personview.phtml:190
-#: views/scripts/studentedit/personview.phtml:393
-#: views/scripts/studentedit/personview.phtml:426
+#: views/scripts/studentedit/personview.phtml:394
+#: views/scripts/studentedit/personview.phtml:427
 #: views/scripts/tutoredit/tutoredit.phtml:129
 msgid "Postal code / ZIP"
 msgstr ""
@@ -5595,14 +5690,14 @@ msgstr ""
 
 #: views/scripts/peoplefind/personview.phtml:73
 #: views/scripts/person/edit-body-bad.phtml:34
-#: views/scripts/person/edit-body.phtml:325 views/scripts/person/view.phtml:26
-#: views/scripts/studentedit/personview.phtml:302
+#: views/scripts/person/edit-body.phtml:324 views/scripts/person/view.phtml:26
+#: views/scripts/studentedit/personview.phtml:303
 #: views/scripts/tutoredit/tutoredit.phtml:69
 msgid "Personal Information"
 msgstr ""
 
 #: views/scripts/peoplefind/personview.phtml:94
-#: views/scripts/studentedit/personview.phtml:322
+#: views/scripts/studentedit/personview.phtml:323
 #: views/scripts/tutoredit/tutoredit.phtml:88
 msgid "National Id"
 msgstr ""
@@ -5615,7 +5710,7 @@ msgstr ""
 #: views/scripts/reports/ps-graduated-students.phtml:158
 #: views/scripts/reports/ps-students-by-name.phtml:164
 #: views/scripts/reports/ps-students-trained.phtml:182
-#: views/scripts/studentedit/personview.phtml:325
+#: views/scripts/studentedit/personview.phtml:326
 #: views/scripts/tutoredit/tutoredit.phtml:91
 msgid "Nationality"
 msgstr ""
@@ -5630,27 +5725,27 @@ msgid "Permanent Address"
 msgstr ""
 
 #: views/scripts/peoplefind/personview.phtml:153
-#: views/scripts/studentedit/personview.phtml:363
+#: views/scripts/studentedit/personview.phtml:364
 msgid "Local Address"
 msgstr ""
 
 #: views/scripts/peoplefind/personview.phtml:195
-#: views/scripts/studentedit/personview.phtml:434
+#: views/scripts/studentedit/personview.phtml:435
 msgid "Cellphone"
 msgstr ""
 
 #: views/scripts/peoplefind/personview.phtml:201
-#: views/scripts/studentedit/personview.phtml:440
+#: views/scripts/studentedit/personview.phtml:441
 msgid "Email 2"
 msgstr ""
 
 #: views/scripts/peoplefind/personview.phtml:205
-#: views/scripts/studentedit/personview.phtml:444
+#: views/scripts/studentedit/personview.phtml:445
 msgid "Student Information"
 msgstr ""
 
 #: views/scripts/peoplefind/personview.phtml:208
-#: views/scripts/studentedit/personview.phtml:447
+#: views/scripts/studentedit/personview.phtml:448
 msgid "Student ID"
 msgstr ""
 
@@ -5659,22 +5754,22 @@ msgid "Student Type"
 msgstr ""
 
 #: views/scripts/peoplefind/personview.phtml:214
-#: views/scripts/studentedit/personview.phtml:462
+#: views/scripts/studentedit/personview.phtml:463
 msgid "Date of Enrollment"
 msgstr ""
 
 #: views/scripts/peoplefind/personview.phtml:218
-#: views/scripts/studentedit/personview.phtml:465
+#: views/scripts/studentedit/personview.phtml:466
 msgid "Reason for Enrollment"
 msgstr ""
 
 #: views/scripts/peoplefind/personview.phtml:222
-#: views/scripts/studentedit/personview.phtml:478
+#: views/scripts/studentedit/personview.phtml:479
 msgid "Date of Separation"
 msgstr ""
 
 #: views/scripts/peoplefind/personview.phtml:226
-#: views/scripts/studentedit/personview.phtml:483
+#: views/scripts/studentedit/personview.phtml:484
 msgid "Reason for Separation"
 msgstr ""
 
@@ -5683,7 +5778,7 @@ msgid "Program Enrolled in(Cadre)"
 msgstr ""
 
 #: views/scripts/peoplefind/personview.phtml:233
-#: views/scripts/studentedit/personview.phtml:511
+#: views/scripts/studentedit/personview.phtml:512
 msgid "Year of Study"
 msgstr ""
 
@@ -5703,12 +5798,12 @@ msgstr ""
 #: views/scripts/reportpreservice/reportstudentstrained.phtml:188
 #: views/scripts/reportpreservice/studentname.phtml:202
 #: views/scripts/reports/ps-students-by-name.phtml:198
-#: views/scripts/studentedit/personview.phtml:551
+#: views/scripts/studentedit/personview.phtml:552
 msgid "Tutor Advisor"
 msgstr ""
 
 #: views/scripts/peoplefind/personview.phtml:257
-#: views/scripts/studentedit/personview.phtml:565
+#: views/scripts/studentedit/personview.phtml:566
 msgid "Facility After Graduation"
 msgstr ""
 
@@ -5722,7 +5817,7 @@ msgstr ""
 
 #: views/scripts/peoplefind/personview.phtml:340
 #: views/scripts/studentedit/personview.phtml:241
-#: views/scripts/studentedit/personview.phtml:658
+#: views/scripts/studentedit/personview.phtml:659
 msgid "Practicum name"
 msgstr ""
 
@@ -5739,7 +5834,7 @@ msgid "# of hours required"
 msgstr ""
 
 #: views/scripts/peoplefind/personview.phtml:370
-#: views/scripts/studentedit/personview.phtml:691
+#: views/scripts/studentedit/personview.phtml:692
 msgid "Exams (licensure/registration)"
 msgstr ""
 
@@ -6089,84 +6184,84 @@ msgstr ""
 msgid "Current Contact Information"
 msgstr ""
 
-#: views/scripts/person/edit-body-addtl.phtml:58
+#: views/scripts/person/edit-body-addtl.phtml:83
 msgid "If facility is a hospital, please click specific department"
 msgstr ""
 
-#: views/scripts/person/edit-body-addtl.phtml:76
+#: views/scripts/person/edit-body-addtl.phtml:101
 msgid "Address and Phone"
 msgstr ""
 
-#: views/scripts/person/edit-body-addtl.phtml:91
+#: views/scripts/person/edit-body-addtl.phtml:116
 msgid "Email Secondary"
 msgstr ""
 
-#: views/scripts/person/edit-body-addtl.phtml:142
+#: views/scripts/person/edit-body-addtl.phtml:167
 msgid "Reason (if 'Other' selected above)"
 msgstr ""
 
-#: views/scripts/person/edit-body-addtl.phtml:181
+#: views/scripts/person/edit-body-addtl.phtml:205
 #: views/scripts/person/edit-body-bad.phtml:354
 #: views/scripts/person/view.phtml:121
 msgid "Qualification Comments"
 msgstr ""
 
-#: views/scripts/person/edit-body-addtl.phtml:204
+#: views/scripts/person/edit-body-addtl.phtml:228
 #: views/scripts/person/edit-body-bad.phtml:377
 #: views/scripts/person/view.phtml:142
-#: views/scripts/training/_template_editform.phtml:572
+#: views/scripts/training/_template_editform.phtml:576
 msgid "Information"
 msgstr ""
 
-#: views/scripts/person/edit-body-addtl.phtml:204
+#: views/scripts/person/edit-body-addtl.phtml:228
 #: views/scripts/person/edit-body-bad.phtml:377
 #: views/scripts/person/view.phtml:142
 msgid "Show/Hide"
 msgstr ""
 
-#: views/scripts/person/edit-body-addtl.phtml:207
+#: views/scripts/person/edit-body-addtl.phtml:231
 msgid "Is person an"
 msgstr ""
 
-#: views/scripts/person/edit-body-addtl.phtml:207
+#: views/scripts/person/edit-body-addtl.phtml:231
 #: views/scripts/reports/participants-by-facility-type.phtml:196
-#: views/scripts/reports/participants-by-training.phtml:326
+#: views/scripts/reports/participants-by-training.phtml:333
 #: views/scripts/user/search.phtml:28
 msgid "active"
 msgstr ""
 
-#: views/scripts/person/edit-body-addtl.phtml:207
+#: views/scripts/person/edit-body-addtl.phtml:231
 msgid "trainer?"
 msgstr ""
 
-#: views/scripts/person/edit-body-addtl.phtml:209
+#: views/scripts/person/edit-body-addtl.phtml:233
 msgid "Active trainer"
 msgstr ""
 
-#: views/scripts/person/edit-body-addtl.phtml:224
+#: views/scripts/person/edit-body-addtl.phtml:248
 #: views/scripts/person/edit-body-bad.phtml:390
 #: views/scripts/person/view.phtml:158
 msgid "Affiliation"
 msgstr ""
 
-#: views/scripts/person/edit-body-addtl.phtml:238
+#: views/scripts/person/edit-body-addtl.phtml:262
 #: views/scripts/person/edit-body-bad.phtml:401
 #: views/scripts/person/view.phtml:167
 msgid "skills"
 msgstr ""
 
-#: views/scripts/person/edit-body-addtl.phtml:240
-#: views/scripts/person/edit-body-addtl.phtml:252
+#: views/scripts/person/edit-body-addtl.phtml:264
+#: views/scripts/person/edit-body-addtl.phtml:276
 #: views/scripts/person/edit-body-bad.phtml:403
 #: views/scripts/person/edit-body-bad.phtml:414
 msgid "check all that apply"
 msgstr ""
 
-#: views/scripts/person/edit-body-addtl.phtml:249
+#: views/scripts/person/edit-body-addtl.phtml:273
 msgid "Primary language"
 msgstr ""
 
-#: views/scripts/person/edit-body-addtl.phtml:250
+#: views/scripts/person/edit-body-addtl.phtml:274
 msgid "Secondary languages"
 msgstr ""
 
@@ -6191,27 +6286,27 @@ msgid "Are you sure you wish to delete this person?"
 msgstr ""
 
 #: views/scripts/person/edit-body-bad.phtml:29
-#: views/scripts/person/edit-body.phtml:317
+#: views/scripts/person/edit-body.phtml:316
 msgid "Edit person's record"
 msgstr ""
 
 #: views/scripts/person/edit-body-bad.phtml:31
-#: views/scripts/person/edit-body.phtml:319
+#: views/scripts/person/edit-body.phtml:318
 msgid "Add person's record"
 msgstr ""
 
 #: views/scripts/person/edit-body-bad.phtml:61
-#: views/scripts/person/edit-body.phtml:443 views/scripts/person/view.phtml:52
+#: views/scripts/person/edit-body.phtml:442 views/scripts/person/view.phtml:52
 msgid "Birth date"
 msgstr ""
 
 #: views/scripts/person/edit-body-bad.phtml:72
-#: views/scripts/person/edit-body.phtml:632
+#: views/scripts/person/edit-body.phtml:631
 msgid "Duplicate Check"
 msgstr ""
 
 #: views/scripts/person/edit-body-bad.phtml:76
-#: views/scripts/person/edit-body.phtml:642
+#: views/scripts/person/edit-body.phtml:641
 msgid "Continue"
 msgstr ""
 
@@ -6221,7 +6316,7 @@ msgid "If the person already exists, please select their name below."
 msgstr ""
 
 #: views/scripts/person/edit-body-bad.phtml:154
-#: views/scripts/person/edit-body.phtml:264
+#: views/scripts/person/edit-body.phtml:263
 msgid "Please enter a first and last name."
 msgstr ""
 
@@ -6275,7 +6370,7 @@ msgstr ""
 #: views/scripts/person/edit-body-bad.phtml:510
 #: views/scripts/person/edit-body-class-history.phtml:1
 #: views/scripts/person/view.phtml:205
-#: views/scripts/studentedit/personview.phtml:617
+#: views/scripts/studentedit/personview.phtml:618
 msgid "Class History"
 msgstr ""
 
@@ -6285,18 +6380,23 @@ msgid "Topics(s)"
 msgstr ""
 
 #: views/scripts/person/edit-body-bad.phtml:567
-#: views/scripts/person/edit-body.phtml:297
+#: views/scripts/person/edit-body.phtml:296
 msgid "Please add or verify the"
 msgstr ""
 
 #: views/scripts/person/edit-body-bad.phtml:567
-#: views/scripts/person/edit-body.phtml:297
+#: views/scripts/person/edit-body.phtml:296
 msgid "information below."
 msgstr ""
 
 #: views/scripts/person/edit-body-bad.phtml:574
-#: views/scripts/person/edit-body.phtml:689
+#: views/scripts/person/edit-body.phtml:688
 msgid "Please enter facility information"
+msgstr ""
+
+#: views/scripts/person/edit-body-class-history.phtml:3
+#: views/scripts/person/history.phtml:22
+msgid "Assign this person to a class"
 msgstr ""
 
 #: views/scripts/person/edit-body-exclass-history.phtml:1
@@ -6327,15 +6427,15 @@ msgstr ""
 msgid "No duplicates found."
 msgstr ""
 
-#: views/scripts/person/edit-body.phtml:376
+#: views/scripts/person/edit-body.phtml:375
 msgid "Government employee"
 msgstr ""
 
-#: views/scripts/person/edit-body.phtml:389
+#: views/scripts/person/edit-body.phtml:388
 msgid "Professional bodies"
 msgstr ""
 
-#: views/scripts/person/edit-body.phtml:451
+#: views/scripts/person/edit-body.phtml:450
 #: views/scripts/reportpreservice/graduated.phtml:130
 #: views/scripts/reportpreservice/reportstudentstrained.phtml:141
 #: views/scripts/reportpreservice/studentname.phtml:155
@@ -6343,70 +6443,70 @@ msgstr ""
 #: views/scripts/reports/facilities.phtml:390
 #: views/scripts/reports/participants-by-facility-type.phtml:181
 #: views/scripts/reports/participants-by-facility-type.phtml:373
-#: views/scripts/reports/participants-by-training.phtml:312
-#: views/scripts/reports/participants-by-training.phtml:618
+#: views/scripts/reports/participants-by-training.phtml:313
+#: views/scripts/reports/participants-by-training.phtml:627
 #: views/scripts/reports/ps-cohort-by-participant-count.phtml:146
 #: views/scripts/reports/ps-graduated-students.phtml:163
 #: views/scripts/reports/ps-students-by-name.phtml:174
 #: views/scripts/reports/ps-students-trained.phtml:187
 #: views/scripts/reports/ps-tutor-by-name.phtml:224
-#: views/scripts/reports/trainings.phtml:306
-#: views/scripts/reports/trainings.phtml:589
-#: views/scripts/studentedit/personview.phtml:347
+#: views/scripts/reports/trainings.phtml:309
+#: views/scripts/reports/trainings.phtml:594
+#: views/scripts/studentedit/personview.phtml:348
 msgid "Age"
 msgstr ""
 
-#: views/scripts/person/edit-body.phtml:488
+#: views/scripts/person/edit-body.phtml:487
 msgid "Nurse Trainer Type"
 msgstr ""
 
-#: views/scripts/person/edit-body.phtml:504
+#: views/scripts/person/edit-body.phtml:503
 msgid "Year you started providing care"
 msgstr ""
 
-#: views/scripts/person/edit-body.phtml:510
+#: views/scripts/person/edit-body.phtml:509
 msgid "Rank patient groups based on time"
 msgstr ""
 
-#: views/scripts/person/edit-body.phtml:515
-#: views/scripts/reports/detail.phtml:233
+#: views/scripts/person/edit-body.phtml:514
+#: views/scripts/reports/detail.phtml:244
 #: views/scripts/reports/ss-detail.phtml:232
 msgid "Pregnant women"
 msgstr ""
 
-#: views/scripts/person/edit-body.phtml:525
-#: views/scripts/reports/detail.phtml:234
+#: views/scripts/person/edit-body.phtml:524
+#: views/scripts/reports/detail.phtml:245
 #: views/scripts/reports/ss-detail.phtml:233
 msgid "Adults"
 msgstr ""
 
-#: views/scripts/person/edit-body.phtml:535
-#: views/scripts/reports/detail.phtml:235
+#: views/scripts/person/edit-body.phtml:534
+#: views/scripts/reports/detail.phtml:246
 #: views/scripts/reports/ss-detail.phtml:234
 msgid "Children"
 msgstr ""
 
-#: views/scripts/person/edit-body.phtml:551
+#: views/scripts/person/edit-body.phtml:550
 msgid "Supervised"
 msgstr ""
 
-#: views/scripts/person/edit-body.phtml:567
+#: views/scripts/person/edit-body.phtml:566
 msgid "Supervision Frequency"
 msgstr ""
 
-#: views/scripts/person/edit-body.phtml:584
+#: views/scripts/person/edit-body.phtml:583
 msgid "Supervisors Profession"
 msgstr ""
 
-#: views/scripts/person/edit-body.phtml:596
+#: views/scripts/person/edit-body.phtml:595
 msgid "Indicate the training you received"
 msgstr ""
 
-#: views/scripts/person/edit-body.phtml:603
+#: views/scripts/person/edit-body.phtml:602
 msgid "Training Institution"
 msgstr ""
 
-#: views/scripts/person/edit-body.phtml:638
+#: views/scripts/person/edit-body.phtml:637
 msgid "Import person from Excel"
 msgstr ""
 
@@ -6481,10 +6581,11 @@ msgid "Incomplete competence"
 msgstr ""
 
 #: views/scripts/person/search.phtml:209 views/scripts/reports/comp.phtml:65
+#: views/scripts/reports/comp.phtml:315
 #: views/scripts/reports/compcomp.phtml:92
 #: views/scripts/reports/compcomp.phtml:240
-#: views/scripts/reports/detail.phtml:78
-#: views/scripts/reports/detail.phtml:286 views/scripts/reports/prof.phtml:103
+#: views/scripts/reports/detail.phtml:83
+#: views/scripts/reports/detail.phtml:297 views/scripts/reports/prof.phtml:103
 #: views/scripts/reports/prof.phtml:401
 #: views/scripts/reports/quescomp.phtml:151
 #: views/scripts/reports/quescomp.phtml:319
@@ -6513,61 +6614,6 @@ msgstr ""
 msgid ">Guidelines:"
 msgstr ""
 
-#: views/scripts/person/viewcomn.phtml:1317
-msgid ""
-"bsp;&nbsp;Provide BANC using integrated BANC/HIV checklist during the "
-"Antenatal period?"
-msgstr ""
-
-#: views/scripts/person/viewcomn.phtml:1340
-msgid "bsp;&nbsp;Perform PAP smears?"
-msgstr ""
-
-#: views/scripts/person/viewcomn.phtml:1363
-msgid ""
-"bsp;&nbsp;Initiate ART prophylaxis and treatment for HIV positive women "
-"during pregnancy, labour and postnatal periods?"
-msgstr ""
-
-#: views/scripts/person/viewcomn.phtml:1386
-msgid ""
-"bsp;&nbsp;Recognise and treat common ART side effects in HIV positive "
-"pregnant women?"
-msgstr ""
-
-#: views/scripts/person/viewcomn.phtml:1409
-msgid ""
-"bsp;&nbsp;Counsel and provide appropriate contraception to HIV positive "
-"women?"
-msgstr ""
-
-#: views/scripts/person/viewcomn.phtml:1432
-msgid ""
-"bsp;&nbsp;Counsel for and terminate unwanted pregnancies; counsel women and "
-"partner/family on postnatal care; provide<br />"
-msgstr ""
-
-#: views/scripts/person/viewcomn.phtml:1432
-msgid "Cotrimoxazole prophylaxis?"
-msgstr ""
-
-#: views/scripts/person/viewcomn.phtml:1648
-msgid "sp;&nbsp;Provide prophylactic treatment to HIV exposed patients?"
-msgstr ""
-
-#: views/scripts/person/viewcomn.phtml:1671
-msgid "sp;&nbsp;Protect yourself from HIV exposure e.g. needle stick injury?"
-msgstr ""
-
-#: views/scripts/person/viewcomn.phtml:1694
-msgid "sp;&nbsp;Apply the protocol for occupational exposure?"
-msgstr ""
-
-#: views/scripts/person/viewcomn.phtml:1717
-msgid ""
-"sp;&nbsp;Provide the correct level of referral for treatment when required?"
-msgstr ""
-
 #: views/scripts/psfacility/add-location.phtml:19
 msgid "information"
 msgstr ""
@@ -6584,7 +6630,7 @@ msgstr ""
 #: views/scripts/reports/evaluations-report.phtml:23
 #: views/scripts/reports/facilities.phtml:11
 #: views/scripts/reports/needs-by-person-name.phtml:11
-#: views/scripts/reports/participants-by-training.phtml:11
+#: views/scripts/reports/participants-by-training.phtml:12
 #: views/scripts/reports/people-by-facility.phtml:10
 #: views/scripts/reports/training-multi-training-report.phtml:12
 #: views/scripts/reports/training-unknown.phtml:12
@@ -6596,7 +6642,7 @@ msgstr ""
 #: views/scripts/reportpreservice/studentname.phtml:14
 #: views/scripts/reports/facilities.phtml:13
 #: views/scripts/reports/needs-by-person-name.phtml:13
-#: views/scripts/reports/participants-by-training.phtml:13
+#: views/scripts/reports/participants-by-training.phtml:14
 #: views/scripts/reports/people-by-facility.phtml:12
 #: views/scripts/reports/training-multi-training-report.phtml:15
 #: views/scripts/reports/training-unknown.phtml:15
@@ -6611,14 +6657,14 @@ msgstr ""
 #: views/scripts/reportpreservice/coursebyname.phtml:152
 #: views/scripts/reports/training-multi-training-report.phtml:208
 #: views/scripts/reports/training-unknown.phtml:153
-#: views/scripts/reports/trainings.phtml:155
+#: views/scripts/reports/trainings.phtml:153
 msgid "Min"
 msgstr ""
 
 #: views/scripts/reportpreservice/coursebyname.phtml:154
 #: views/scripts/reports/training-multi-training-report.phtml:210
 #: views/scripts/reports/training-unknown.phtml:155
-#: views/scripts/reports/trainings.phtml:157
+#: views/scripts/reports/trainings.phtml:155
 msgid "Max"
 msgstr ""
 
@@ -6638,7 +6684,7 @@ msgstr ""
 #: views/scripts/reportpreservice/coursebyname.phtml:338
 #: views/scripts/reports/training-multi-training-report.phtml:447
 #: views/scripts/reports/training-unknown.phtml:390
-#: views/scripts/reports/trainings.phtml:490
+#: views/scripts/reports/trainings.phtml:495
 msgid "End Date"
 msgstr ""
 
@@ -6646,7 +6692,7 @@ msgstr ""
 #: views/scripts/reports/evaluations-report.phtml:259
 #: views/scripts/reports/training-multi-training-report.phtml:510
 #: views/scripts/reports/training-unknown.phtml:444
-#: views/scripts/reports/trainings.phtml:553
+#: views/scripts/reports/trainings.phtml:558
 msgid "Refresher"
 msgstr ""
 
@@ -6723,7 +6769,7 @@ msgstr ""
 
 #: views/scripts/reportpreservice/reportstudentstrained.phtml:200
 #: views/scripts/reportpreservice/studentname.phtml:214
-#: views/scripts/reports/participants-by-training.phtml:395
+#: views/scripts/reports/participants-by-training.phtml:402
 msgid "Return Unique Participants"
 msgstr ""
 
@@ -6745,7 +6791,7 @@ msgstr ""
 #: views/scripts/reports/needs-by-person-name.phtml:359
 #: views/scripts/reports/participants-by-category.phtml:14
 #: views/scripts/reports/participants-by-facility-type.phtml:411
-#: views/scripts/reports/participants-by-training.phtml:689
+#: views/scripts/reports/participants-by-training.phtml:701
 #: views/scripts/reports/people-by-facility.phtml:341
 msgid "PEPFAR"
 msgstr ""
@@ -6765,12 +6811,9 @@ msgstr ""
 #: views/scripts/reports/ss-compcomp.phtml:92
 #: views/scripts/reports/ss-compcomp.phtml:99
 #: views/scripts/reports/ss-prof.phtml:107
+#: views/scripts/reports/ss-quescomp.phtml:156
 #: views/scripts/reports/ss-quescomp.phtml:162
 msgid "Select All"
-msgstr ""
-
-#: views/scripts/reports/comp.phtml:315
-msgid "adsf"
 msgstr ""
 
 #: views/scripts/reports/comp.phtml:315
@@ -6800,13 +6843,13 @@ msgstr ""
 msgid "Sub-district"
 msgstr ""
 
-#: views/scripts/reports/comp.phtml:315 views/scripts/reports/detail.phtml:286
+#: views/scripts/reports/comp.phtml:315 views/scripts/reports/detail.phtml:297
 #: views/scripts/reports/ss-compcsv.phtml:11
 msgid "Result"
 msgstr ""
 
 #: views/scripts/reports/compcomp.phtml:104
-#: views/scripts/reports/detail.phtml:228
+#: views/scripts/reports/detail.phtml:239
 #: views/scripts/reports/ss-compcomp.phtml:104
 #: views/scripts/reports/ss-detail.phtml:227
 msgid "Less than 60%"
@@ -6843,62 +6886,62 @@ msgstr ""
 msgid "Competence Detail Reports"
 msgstr ""
 
-#: views/scripts/reports/detail.phtml:230
+#: views/scripts/reports/detail.phtml:241
 #: views/scripts/reports/ss-detail.phtml:229
 msgid "Primary patients"
 msgstr ""
 
-#: views/scripts/reports/detail.phtml:238
+#: views/scripts/reports/detail.phtml:249
 #: views/scripts/reports/ss-detail.phtml:237
 msgid "Years of experience"
 msgstr ""
 
-#: views/scripts/reports/detail.phtml:241
+#: views/scripts/reports/detail.phtml:252
 #: views/scripts/reports/ss-detail.phtml:240
 msgid "Less than 1 year"
 msgstr ""
 
-#: views/scripts/reports/detail.phtml:242
+#: views/scripts/reports/detail.phtml:253
 #: views/scripts/reports/ss-detail.phtml:241
 msgid "1 - 5 years"
 msgstr ""
 
-#: views/scripts/reports/detail.phtml:243
+#: views/scripts/reports/detail.phtml:254
 #: views/scripts/reports/ss-detail.phtml:242
 msgid "More than 5 years"
 msgstr ""
 
-#: views/scripts/reports/detail.phtml:247
+#: views/scripts/reports/detail.phtml:258
 #: views/scripts/reports/ss-detail.phtml:246
 msgid "Nurse trainer type"
 msgstr ""
 
-#: views/scripts/reports/detail.phtml:250
+#: views/scripts/reports/detail.phtml:261
 #: views/scripts/reports/ss-detail.phtml:249
 msgid "Master Trainer"
 msgstr ""
 
-#: views/scripts/reports/detail.phtml:251
+#: views/scripts/reports/detail.phtml:262
 #: views/scripts/reports/ss-detail.phtml:250
 msgid "Facility Trainer"
 msgstr ""
 
-#: views/scripts/reports/detail.phtml:252
+#: views/scripts/reports/detail.phtml:263
 #: views/scripts/reports/ss-detail.phtml:251
 msgid "N/A or None"
 msgstr ""
 
-#: views/scripts/reports/detail.phtml:255
+#: views/scripts/reports/detail.phtml:266
 #: views/scripts/reports/ss-detail.phtml:254
 msgid "Nurse initiating ART"
 msgstr ""
 
-#: views/scripts/reports/detail.phtml:259
+#: views/scripts/reports/detail.phtml:270
 #: views/scripts/reports/ss-detail.phtml:258
 msgid "Would like to become a nurse mentor"
 msgstr ""
 
-#: views/scripts/reports/detail.phtml:263
+#: views/scripts/reports/detail.phtml:274
 msgid "Feels prepared to become a nurse mentor"
 msgstr ""
 
@@ -6911,11 +6954,11 @@ msgstr ""
 #: views/scripts/reports/facilities.phtml:50
 #: views/scripts/reports/needs-by-person-name.phtml:32
 #: views/scripts/reports/participants-by-facility-type.phtml:48
-#: views/scripts/reports/participants-by-training.phtml:36
+#: views/scripts/reports/participants-by-training.phtml:37
 #: views/scripts/reports/people-by-facility.phtml:46
 #: views/scripts/reports/training-multi-training-report.phtml:54
 #: views/scripts/reports/training-unknown.phtml:56
-#: views/scripts/reports/trainings.phtml:71
+#: views/scripts/reports/trainings.phtml:69
 msgid "filter"
 msgstr ""
 
@@ -6924,17 +6967,8 @@ msgstr ""
 msgid "Funded Hours per week"
 msgstr ""
 
-#: views/scripts/reports/employees.phtml:53
-#: views/scripts/reports/partners.phtml:50
-msgid "Funding End Date Between"
-msgstr ""
-
 #: views/scripts/reports/employees.phtml:178
 msgid "Site Type"
-msgstr ""
-
-#: views/scripts/reports/employees.phtml:199
-msgid "Funding End Date"
 msgstr ""
 
 #: views/scripts/reports/employees.phtml:202
@@ -6943,15 +6977,15 @@ msgstr ""
 
 #: views/scripts/reports/evaluations-report.phtml:4
 #: views/scripts/reports/evaluations-report.phtml:16
-#: views/scripts/reports/evaluations.phtml:5
-#: views/scripts/reports/evaluations.phtml:17
+#: views/scripts/reports/evaluations.phtml:9
+#: views/scripts/reports/evaluations.phtml:21
 #: views/scripts/reports/evaluations_results.phtml:4
 msgid "Evaluation Reports"
 msgstr ""
 
 #: views/scripts/reports/evaluations-report.phtml:25
 #: views/scripts/reports/evaluations-report.phtml:279
-#: views/scripts/reports/evaluations.phtml:21
+#: views/scripts/reports/evaluations.phtml:25
 msgid "Evaluation"
 msgstr ""
 
@@ -6959,8 +6993,8 @@ msgstr ""
 #: views/scripts/reports/evaluations-report.phtml:245
 #: views/scripts/reports/training-multi-training-report.phtml:174
 #: views/scripts/reports/training-multi-training-report.phtml:489
-#: views/scripts/reports/trainings.phtml:124
-#: views/scripts/reports/trainings.phtml:532
+#: views/scripts/reports/trainings.phtml:122
+#: views/scripts/reports/trainings.phtml:537
 #: views/scripts/training-partner/add.phtml:29
 #: views/scripts/training-partner/edit.phtml:36
 #: views/scripts/training-partner/search.phtml:89
@@ -6977,7 +7011,7 @@ msgid "Show Only Evaluations with Response Data"
 msgstr ""
 
 #: views/scripts/reports/evaluations-report.phtml:90
-#: views/scripts/reports/evaluations.phtml:64
+#: views/scripts/reports/evaluations.phtml:68
 #: views/scripts/reports/roster.phtml:85
 msgid "Generate Report"
 msgstr ""
@@ -6998,11 +7032,11 @@ msgstr ""
 msgid "Value"
 msgstr ""
 
-#: views/scripts/reports/evaluations_results.phtml:47
+#: views/scripts/reports/evaluations_results.phtml:50
 msgid "Evaluation Name"
 msgstr ""
 
-#: views/scripts/reports/evaluations_results.phtml:50
+#: views/scripts/reports/evaluations_results.phtml:53
 msgid "Responses"
 msgstr ""
 
@@ -7030,22 +7064,22 @@ msgstr ""
 
 #: views/scripts/reports/facilities.phtml:199
 #: views/scripts/reports/participants-by-facility-type.phtml:185
-#: views/scripts/reports/participants-by-training.phtml:316
-#: views/scripts/reports/trainings.phtml:310
+#: views/scripts/reports/participants-by-training.phtml:317
+#: views/scripts/reports/trainings.phtml:313
 msgid "min"
 msgstr ""
 
 #: views/scripts/reports/facilities.phtml:199
 #: views/scripts/reports/participants-by-facility-type.phtml:185
-#: views/scripts/reports/participants-by-training.phtml:316
-#: views/scripts/reports/trainings.phtml:310
+#: views/scripts/reports/participants-by-training.phtml:317
+#: views/scripts/reports/trainings.phtml:313
 msgid "max"
 msgstr ""
 
 #: views/scripts/reports/facilities.phtml:199
 #: views/scripts/reports/participants-by-facility-type.phtml:185
-#: views/scripts/reports/participants-by-training.phtml:316
-#: views/scripts/reports/trainings.phtml:310
+#: views/scripts/reports/participants-by-training.phtml:317
+#: views/scripts/reports/trainings.phtml:313
 msgid "clear"
 msgstr ""
 
@@ -7179,16 +7213,16 @@ msgid "Assessment Reports"
 msgstr ""
 
 #: views/scripts/reports/needs-by-person-name.phtml:52
-#: views/scripts/reports/participants-by-training.phtml:84
-#: views/scripts/reports/trainings.phtml:313
-#: views/scripts/reports/trainings.phtml:595
+#: views/scripts/reports/participants-by-training.phtml:85
+#: views/scripts/reports/trainings.phtml:316
+#: views/scripts/reports/trainings.phtml:603
 msgid "primary"
 msgstr ""
 
 #: views/scripts/reports/needs-by-person-name.phtml:63
-#: views/scripts/reports/participants-by-training.phtml:95
-#: views/scripts/reports/trainings.phtml:324
-#: views/scripts/reports/trainings.phtml:598
+#: views/scripts/reports/participants-by-training.phtml:96
+#: views/scripts/reports/trainings.phtml:327
+#: views/scripts/reports/trainings.phtml:606
 msgid "secondary"
 msgstr ""
 
@@ -7214,7 +7248,7 @@ msgstr ""
 
 #: views/scripts/reports/needs-by-person-name.phtml:220
 #: views/scripts/reports/participants-by-facility-type.phtml:258
-#: views/scripts/reports/participants-by-training.phtml:424
+#: views/scripts/reports/participants-by-training.phtml:431
 #: views/scripts/reports/people-by-facility.phtml:216
 msgid "Combine First and Last Names"
 msgstr ""
@@ -7260,7 +7294,7 @@ msgstr ""
 
 #: views/scripts/reports/participants-by-category.phtml:37
 #: views/scripts/reports/participants-by-facility-type.phtml:41
-#: views/scripts/reports/participants-by-training.phtml:26
+#: views/scripts/reports/participants-by-training.phtml:27
 msgid "Participant Reports"
 msgstr ""
 
@@ -7275,7 +7309,7 @@ msgid "Participants Report"
 msgstr ""
 
 #: views/scripts/reports/participants-by-facility-type.phtml:197
-#: views/scripts/reports/participants-by-training.phtml:327
+#: views/scripts/reports/participants-by-training.phtml:334
 msgid "inactive"
 msgstr ""
 
@@ -7285,43 +7319,38 @@ msgid ""
 "multiple"
 msgstr ""
 
-#: views/scripts/reports/participants-by-training.phtml:29
+#: views/scripts/reports/participants-by-training.phtml:30
 msgid "Trainers by Name"
 msgstr ""
 
-#: views/scripts/reports/participants-by-training.phtml:373
+#: views/scripts/reports/participants-by-training.phtml:380
 msgid "Show post-test scores above"
 msgstr ""
 
-#: views/scripts/reports/participants-by-training.phtml:380
+#: views/scripts/reports/participants-by-training.phtml:387
 msgid "Show score increase above"
 msgstr ""
 
-#: views/scripts/reports/participants-by-training.phtml:434
+#: views/scripts/reports/participants-by-training.phtml:441
 #: views/scripts/reports/people-by-facility.phtml:225
 msgid "Attended"
 msgstr ""
 
-#: views/scripts/reports/participants-by-training.phtml:469
+#: views/scripts/reports/participants-by-training.phtml:476
 msgid "(no phone)"
 msgstr ""
 
-#: views/scripts/reports/participants-by-training.phtml:715
+#: views/scripts/reports/participants-by-training.phtml:727
 msgid "% Change"
 msgstr ""
 
-#: views/scripts/reports/participants-by-training.phtml:716
-#: views/scripts/reports/participants-by-training.phtml:717
+#: views/scripts/reports/participants-by-training.phtml:728
+#: views/scripts/reports/participants-by-training.phtml:729
 msgid "Other Scores"
 msgstr ""
 
 #: views/scripts/reports/partners.phtml:20
 msgid "Partner Report"
-msgstr ""
-
-#: views/scripts/reports/partners.phtml:55
-#: views/scripts/reports/partners.phtml:116
-msgid "Partner Comments"
 msgstr ""
 
 #: views/scripts/reports/partners.phtml:113
@@ -7478,7 +7507,7 @@ msgstr ""
 
 #: views/scripts/reports/ps-graduated-students.phtml:184
 #: views/scripts/reports/ps-students-trained.phtml:224
-#: views/scripts/studentedit/personview.phtml:548
+#: views/scripts/studentedit/personview.phtml:549
 msgid "Tutor advisor"
 msgstr ""
 
@@ -7514,6 +7543,78 @@ msgstr ""
 msgid "# of Beds"
 msgstr ""
 
+#: views/scripts/reports/ps-missing-cohort-by-participant-count.phtml:4
+msgid "Missing Cohort By Participant Count Report"
+msgstr ""
+
+#: views/scripts/reports/ps-missing-cohort-by-participant-count.phtml:21
+msgid "Missing Cohort By Participant Count"
+msgstr ""
+
+#: views/scripts/reports/ps-missing-course-by-name.phtml:4
+msgid "Missing Course By Name Report"
+msgstr ""
+
+#: views/scripts/reports/ps-missing-course-by-name.phtml:21
+msgid "Missing Course By Name"
+msgstr ""
+
+#: views/scripts/reports/ps-missing-course-by-student-count.phtml:4
+msgid "Missing Course By Student Count Report"
+msgstr ""
+
+#: views/scripts/reports/ps-missing-course-by-student-count.phtml:21
+msgid "Missing Course By Student Count"
+msgstr ""
+
+#: views/scripts/reports/ps-missing-facility-report.phtml:4
+msgid "Missing Facility Report Report"
+msgstr ""
+
+#: views/scripts/reports/ps-missing-facility-report.phtml:21
+msgid "Missing Facility Report"
+msgstr ""
+
+#: views/scripts/reports/ps-missing-graduated-students.phtml:4
+msgid "Missing Graduated Students Report"
+msgstr ""
+
+#: views/scripts/reports/ps-missing-graduated-students.phtml:21
+msgid "Missing Graduated Students"
+msgstr ""
+
+#: views/scripts/reports/ps-missing-institution-information.phtml:4
+msgid "Missing Institution Information Report"
+msgstr ""
+
+#: views/scripts/reports/ps-missing-institution-information.phtml:21
+msgid "Missing Institution Information"
+msgstr ""
+
+#: views/scripts/reports/ps-missing-students-by-name.phtml:4
+msgid "Missing Students By Name Report"
+msgstr ""
+
+#: views/scripts/reports/ps-missing-students-by-name.phtml:21
+msgid "Missing Students By Name"
+msgstr ""
+
+#: views/scripts/reports/ps-missing-students-trained.phtml:4
+msgid "Missing Students Trained Report"
+msgstr ""
+
+#: views/scripts/reports/ps-missing-students-trained.phtml:21
+msgid "Missing Students Trained"
+msgstr ""
+
+#: views/scripts/reports/ps-missing-tutor-by-name.phtml:4
+msgid "Missing Tutor By Name Report"
+msgstr ""
+
+#: views/scripts/reports/ps-missing-tutor-by-name.phtml:21
+msgid "Missing Tutor By Name"
+msgstr ""
+
 #: views/scripts/reports/ps-students-by-name.phtml:59
 msgid "Students By Name Report"
 msgstr ""
@@ -7528,6 +7629,22 @@ msgstr ""
 
 #: views/scripts/reports/ps-students-trained.phtml:235
 msgid "Return unique participants"
+msgstr ""
+
+#: views/scripts/reports/ps-training-by-participants.phtml:4
+msgid "Trainings By Participants Report"
+msgstr ""
+
+#: views/scripts/reports/ps-training-by-participants.phtml:21
+msgid "Trainings By Participants"
+msgstr ""
+
+#: views/scripts/reports/ps-trainings-by-name.phtml:4
+msgid "Trainings By Name Report"
+msgstr ""
+
+#: views/scripts/reports/ps-trainings-by-name.phtml:21
+msgid "Trainings By Name"
 msgstr ""
 
 #: views/scripts/reports/ps-tutor-by-name.phtml:63
@@ -7572,10 +7689,6 @@ msgstr ""
 msgid "Length with Curr. Inst."
 msgstr ""
 
-#: views/scripts/reports/quescomp.phtml:361
-msgid "<div class=\"nwtxtbig\">First Name</div>"
-msgstr ""
-
 #: views/scripts/reports/roster.phtml:4 views/scripts/reports/roster.phtml:22
 msgid "Roster Reports"
 msgstr ""
@@ -7594,11 +7707,6 @@ msgstr ""
 msgid "Please select a competence"
 msgstr ""
 
-#: views/scripts/reports/ss-quescomp.phtml:156
-msgid ""
-"Question <a href=\"javascript:void(0)\" onclick=\"SelAll1()\">Select All</a>"
-msgstr ""
-
 #: views/scripts/reports/trainers.phtml:4
 msgid "Trainer Report"
 msgstr ""
@@ -7613,25 +7721,25 @@ msgstr ""
 
 #: views/scripts/reports/training-multi-training-report.phtml:346
 #: views/scripts/reports/training-unknown.phtml:286
-#: views/scripts/reports/trainings.phtml:364
+#: views/scripts/reports/trainings.phtml:367
 msgid "Trainings with known participants only"
 msgstr ""
 
 #: views/scripts/reports/training-multi-training-report.phtml:347
 #: views/scripts/reports/training-unknown.phtml:287
-#: views/scripts/reports/trainings.phtml:365
+#: views/scripts/reports/trainings.phtml:368
 msgid "Trainings with unknown participants only"
 msgstr ""
 
 #: views/scripts/reports/training-multi-training-report.phtml:348
 #: views/scripts/reports/training-unknown.phtml:288
-#: views/scripts/reports/trainings.phtml:366
+#: views/scripts/reports/trainings.phtml:369
 msgid "All trainings"
 msgstr ""
 
 #: views/scripts/reports/training-unknown.phtml:125
 #: views/scripts/reports/training-unknown.phtml:420
-#: views/scripts/training/_template_editform.phtml:1031
+#: views/scripts/training/_template_editform.phtml:1035
 msgid "Age Range"
 msgstr ""
 
@@ -7648,16 +7756,20 @@ msgstr ""
 msgid "Report on Missing Data Fields"
 msgstr ""
 
-#: views/scripts/reports/trainings.phtml:271
+#: views/scripts/reports/trainings.phtml:274
 msgid "Date Added"
 msgstr ""
 
-#: views/scripts/reports/trainings.phtml:375
+#: views/scripts/reports/trainings.phtml:378
 msgid "Download Complete Excel Data for these trainings"
 msgstr ""
 
-#: views/scripts/reports/trainings.phtml:586
+#: views/scripts/reports/trainings.phtml:591
 msgid "Created"
+msgstr ""
+
+#: views/scripts/reports/trainings.phtml:600
+msgid "Viewing Location"
 msgstr ""
 
 #: views/scripts/select/select.phtml:27 views/scripts/select/select.phtml:28
@@ -7669,7 +7781,7 @@ msgid "Pre-Service Training Tracking System"
 msgstr ""
 
 #: views/scripts/studentedit/personview.phtml:160
-#: views/scripts/studentedit/personview.phtml:695
+#: views/scripts/studentedit/personview.phtml:696
 msgid "License name"
 msgstr ""
 
@@ -7678,7 +7790,7 @@ msgid "Practicum date"
 msgstr ""
 
 #: views/scripts/studentedit/personview.phtml:244
-#: views/scripts/studentedit/personview.phtml:663
+#: views/scripts/studentedit/personview.phtml:664
 msgid "Hours completed"
 msgstr ""
 
@@ -7690,27 +7802,27 @@ msgstr ""
 msgid "Graduated?"
 msgstr ""
 
-#: views/scripts/studentedit/personview.phtml:397
+#: views/scripts/studentedit/personview.phtml:398
 msgid "Next of Kin Address"
 msgstr ""
 
-#: views/scripts/studentedit/personview.phtml:450
+#: views/scripts/studentedit/personview.phtml:451
 msgid "Religious Denomination"
 msgstr ""
 
-#: views/scripts/studentedit/personview.phtml:480
+#: views/scripts/studentedit/personview.phtml:481
 msgid "Clear date"
 msgstr ""
 
-#: views/scripts/studentedit/personview.phtml:497
+#: views/scripts/studentedit/personview.phtml:498
 msgid "Program Enrolled in"
 msgstr ""
 
-#: views/scripts/studentedit/personview.phtml:626
+#: views/scripts/studentedit/personview.phtml:627
 msgid "Course type"
 msgstr ""
 
-#: views/scripts/studentedit/personview.phtml:716
+#: views/scripts/studentedit/personview.phtml:717
 msgid "Update exams"
 msgstr ""
 
@@ -7801,7 +7913,7 @@ msgid "Trainers:"
 msgstr ""
 
 #: views/scripts/training/roster.phtml:83
-#: views/scripts/training/_template_editform.phtml:771
+#: views/scripts/training/_template_editform.phtml:775
 msgid "Total Participants:"
 msgstr ""
 
@@ -7885,7 +7997,7 @@ msgid "unassigned"
 msgstr ""
 
 #: views/scripts/training/_template_editform.phtml:193
-#: views/scripts/training/_template_editform.phtml:1191
+#: views/scripts/training/_template_editform.phtml:1210
 msgid "Duplicate this"
 msgstr ""
 
@@ -7901,100 +8013,100 @@ msgstr ""
 msgid "length"
 msgstr ""
 
-#: views/scripts/training/_template_editform.phtml:320
+#: views/scripts/training/_template_editform.phtml:324
 msgid "Participants are known"
 msgstr ""
 
-#: views/scripts/training/_template_editform.phtml:335
+#: views/scripts/training/_template_editform.phtml:339
 msgid "Import trainings from Excel"
 msgstr ""
 
-#: views/scripts/training/_template_editform.phtml:385
-#: views/scripts/training/_template_editform.phtml:430
-#: views/scripts/training/_template_editform.phtml:480
+#: views/scripts/training/_template_editform.phtml:389
+#: views/scripts/training/_template_editform.phtml:434
+#: views/scripts/training/_template_editform.phtml:484
 msgid "Check all that apply below"
 msgstr ""
 
-#: views/scripts/training/_template_editform.phtml:620
-#: views/scripts/training/_template_editform.phtml:815
+#: views/scripts/training/_template_editform.phtml:624
+#: views/scripts/training/_template_editform.phtml:819
 msgid "Insert"
 msgstr ""
 
-#: views/scripts/training/_template_editform.phtml:622
-#: views/scripts/training/_template_editform.phtml:817
+#: views/scripts/training/_template_editform.phtml:626
+#: views/scripts/training/_template_editform.phtml:821
 msgid "New Person Form"
 msgstr ""
 
-#: views/scripts/training/_template_editform.phtml:714
+#: views/scripts/training/_template_editform.phtml:718
 msgid "The entered"
 msgstr ""
 
-#: views/scripts/training/_template_editform.phtml:714
+#: views/scripts/training/_template_editform.phtml:718
 msgid ""
 "name could not be found.\\n\\nPlease select one from the list or add a new "
 "person."
 msgstr ""
 
-#: views/scripts/training/_template_editform.phtml:719
+#: views/scripts/training/_template_editform.phtml:723
 msgid "Please enter the number of days for this"
 msgstr ""
 
-#: views/scripts/training/_template_editform.phtml:724
+#: views/scripts/training/_template_editform.phtml:728
 msgid "You must edit this person's"
 msgstr ""
 
-#: views/scripts/training/_template_editform.phtml:724
+#: views/scripts/training/_template_editform.phtml:728
 msgid ""
 "profile before adding them to this session.\\n\\nWould you like to do this "
 "now?"
 msgstr ""
 
-#: views/scripts/training/_template_editform.phtml:771
+#: views/scripts/training/_template_editform.phtml:775
 msgid "Participant Information"
 msgstr ""
 
-#: views/scripts/training/_template_editform.phtml:905
+#: views/scripts/training/_template_editform.phtml:909
 msgid ""
 "The entered person could not be found.\\n\\nPlease select one from the list "
 "or add a new person."
 msgstr ""
 
-#: views/scripts/training/_template_editform.phtml:945
+#: views/scripts/training/_template_editform.phtml:949
 msgid "Participant Test Scores"
 msgstr ""
 
-#: views/scripts/training/_template_editform.phtml:945
+#: views/scripts/training/_template_editform.phtml:949
 msgid "Import Scores"
 msgstr ""
 
-#: views/scripts/training/_template_editform.phtml:952
+#: views/scripts/training/_template_editform.phtml:956
 msgid "Course Average Test Scores"
 msgstr ""
 
-#: views/scripts/training/_template_editform.phtml:1013
+#: views/scripts/training/_template_editform.phtml:1017
 msgid "You need to choose a qualification for all recorded participants."
 msgstr ""
 
-#: views/scripts/training/_template_editform.phtml:1025
+#: views/scripts/training/_template_editform.phtml:1029
 msgid "Participant Qualifications"
 msgstr ""
 
-#: views/scripts/training/_template_editform.phtml:1104
+#: views/scripts/training/_template_editform.phtml:1108
 msgid "Approval Status"
 msgstr ""
 
-#: views/scripts/training/_template_editform.phtml:1169
+#: views/scripts/training/_template_editform.phtml:1188
 msgid ""
 "You are moving to a new page, do you wish to save the changes you've made?"
 msgstr ""
 
-#: views/scripts/training/_template_editform.phtml:1181
+#: views/scripts/training/_template_editform.phtml:1200
 msgid ""
 "All trainers and participants must be removed before deleting a training "
 "session."
 msgstr ""
 
-#: views/scripts/training/_template_editform.phtml:1182
+#: views/scripts/training/_template_editform.phtml:1201
 msgid "Are you sure you wish to delete this training session?"
 msgstr ""
 
@@ -8025,10 +8137,6 @@ msgstr ""
 
 #: views/scripts/training-partner/edit.phtml:63
 msgid "Are you sure you wish to delete this partner?"
-msgstr ""
-
-#: views/scripts/training-partner/search.phtml:34
-msgid "Funder"
 msgstr ""
 
 #: views/scripts/training-partner/search.phtml:88

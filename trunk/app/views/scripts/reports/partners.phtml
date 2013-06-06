@@ -52,7 +52,7 @@
 							echo labelAndField($this, t('Intended Transition'), $this->transitions, 'intended_transition');
 						if($this->setting['display_employee_transition_confirmed'])
 							echo confirmDropdown($this, t('Transition Confirmed'), 'transition_confirmed', $this->criteria['transition_confirmed']);
-						echo labelAndCheckBox($this, t('Partner Comments'), 'show_comments', $this->criteria['show_comments']);
+						#echo labelAndCheckBox($this, t('Partner Comments'), 'show_comments', $this->criteria['show_comments']);
 					?>
 					<div class="clear"></div>
 					<input type="hidden" name="limit" id="limit" value="1" />

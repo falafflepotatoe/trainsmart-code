@@ -25,6 +25,7 @@ class DataController extends ITechController {
   }
 
   public function trainingsAction() {
+    try {
   	require_once('models/table/Training.php');
     $table = new Training();
     
@@ -56,17 +57,19 @@ class DataController extends ITechController {
 
    $locations = Location::getAll();
    foreach($sorted as $id => $row) {
-    $city_info = Location::getCityInfo($row['location_id'], $this->setting('num_location_tiers'));
-    $sorted[$id]['city_name'] = $locations[$city_info['city_name']]['location_name'];
-    $sorted[$id]['province_name'] = $locations[$city_info[1]]['name'];
-    if ( $this->setting( 'display_region_b' ) ) $sorted[$id]['district_name'] = $locations[$city_info[2]]['name'];
-    if ( $this->setting( 'display_region_c' ) ) $sorted[$id]['region_c_name'] = $locations[$city_info[3]]['name'];
-    if ( $this->setting( 'display_region_d' ) ) $sorted[$id]['region_d_name'] = $locations[$city_info[4]]['name'];
-    if ( $this->setting( 'display_region_e' ) ) $sorted[$id]['region_e_name'] = $locations[$city_info[5]]['name'];
-    if ( $this->setting( 'display_region_f' ) ) $sorted[$id]['region_f_name'] = $locations[$city_info[6]]['name'];
-    if ( $this->setting( 'display_region_g' ) ) $sorted[$id]['region_g_name'] = $locations[$city_info[7]]['name'];
-    if ( $this->setting( 'display_region_h' ) ) $sorted[$id]['region_h_name'] = $locations[$city_info[8]]['name'];
-    if ( $this->setting( 'display_region_i' ) ) $sorted[$id]['region_i_name'] = $locations[$city_info[9]]['name'];
+    $city_info = Location::getCityInfo($row['location_id'], $this->setting('num_location_tiers'), $locations);
+    if ( count($city_info) ) {
+      $sorted[$id]['city_name'] = $locations[$city_info['city_name']]['location_name'];
+      $sorted[$id]['province_name'] = $locations[$city_info[1]]['name'];
+      if ( $this->setting( 'display_region_b' ) ) $sorted[$id]['district_name'] = $locations[$city_info[2]]['name'];
+      if ( $this->setting( 'display_region_c' ) ) $sorted[$id]['region_c_name'] = $locations[$city_info[3]]['name'];
+      if ( $this->setting( 'display_region_d' ) ) $sorted[$id]['region_d_name'] = $locations[$city_info[4]]['name'];
+      if ( $this->setting( 'display_region_e' ) ) $sorted[$id]['region_e_name'] = $locations[$city_info[5]]['name'];
+      if ( $this->setting( 'display_region_f' ) ) $sorted[$id]['region_f_name'] = $locations[$city_info[6]]['name'];
+      if ( $this->setting( 'display_region_g' ) ) $sorted[$id]['region_g_name'] = $locations[$city_info[7]]['name'];
+      if ( $this->setting( 'display_region_h' ) ) $sorted[$id]['region_h_name'] = $locations[$city_info[8]]['name'];
+      if ( $this->setting( 'display_region_i' ) ) $sorted[$id]['region_i_name'] = $locations[$city_info[9]]['name'];
+    }
      unset($sorted[$id]['location_id']); 
    }
    
@@ -138,9 +141,15 @@ class DataController extends ITechController {
 
    if ($this->getSanParam('outputType') == 'csv') 
       $this->sendData ( $this->reportHeaders ( false, $sorted ) );    
-  }
+       
+    } catch (Exception $e) {
+      echo $e->getMessage();
+      error_log($e->getMessage());      
+    }
+ }
 
   public function facilitiesAction() {
+    try {
     require_once('models/table/Facility.php');
   	$facilityTable = new Facility();
     $select = $facilityTable->select()
@@ -160,17 +169,19 @@ class DataController extends ITechController {
 	   
 	 $locations = Location::getAll();
    foreach($sorted as $id => $row) {
-    $city_info = Location::getCityInfo($row['location_id'], $this->setting('num_location_tiers'));
-    if ( $city_info[0] ) $sorted[$id]['city_name'] = $city_info[0];
-    if ( $city_info[1] ) $sorted[$id]['province_name'] = $locations[$city_info[1]]['name'];
-    if ( $city_info[2] ) $sorted[$id]['district_name'] = $locations[$city_info[2]]['name'];
-    if ( $city_info[3] ) $sorted[$id]['region_c_name'] = $locations[$city_info[3]]['name'];
-    if ( $city_info[4] ) $sorted[$id]['region_d_name'] = $locations[$city_info[4]]['name'];
-    if ( $city_info[5] ) $sorted[$id]['region_e_name'] = $locations[$city_info[5]]['name'];
-    if ( $city_info[6] ) $sorted[$id]['region_f_name'] = $locations[$city_info[6]]['name'];
-    if ( $city_info[7] ) $sorted[$id]['region_g_name'] = $locations[$city_info[7]]['name'];
-    if ( $city_info[8] ) $sorted[$id]['region_h_name'] = $locations[$city_info[8]]['name'];
-    if ( $city_info[9] ) $sorted[$id]['region_i_name'] = $locations[$city_info[9]]['name'];
+    $city_info = Location::getCityInfo($row['location_id'], $this->setting('num_location_tiers'), $locations);
+    if ( count($city_info) ) {
+      if ( $city_info[0] ) $sorted[$id]['city_name'] = $city_info[0];
+      if ( $city_info[1] ) $sorted[$id]['province_name'] = $locations[$city_info[1]]['name'];
+      if ( $city_info[2] ) $sorted[$id]['district_name'] = $locations[$city_info[2]]['name'];
+      if ( $city_info[3] ) $sorted[$id]['region_c_name'] = $locations[$city_info[3]]['name'];
+      if ( $city_info[4] ) $sorted[$id]['region_d_name'] = $locations[$city_info[4]]['name'];
+      if ( $city_info[5] ) $sorted[$id]['region_e_name'] = $locations[$city_info[5]]['name'];
+      if ( $city_info[6] ) $sorted[$id]['region_f_name'] = $locations[$city_info[6]]['name'];
+      if ( $city_info[7] ) $sorted[$id]['region_g_name'] = $locations[$city_info[7]]['name'];
+      if ( $city_info[8] ) $sorted[$id]['region_h_name'] = $locations[$city_info[8]]['name'];
+      if ( $city_info[9] ) $sorted[$id]['region_i_name'] = $locations[$city_info[9]]['name'];
+    }
      unset($sorted[$id]['location_id']); 
         
    }
@@ -183,15 +194,15 @@ class DataController extends ITechController {
       $this->sendData ( $this->reportHeaders ( false, $sorted ) );
 
    $this->view->assign('data', $sorted);
-    
+  } catch (Exception $e) {
+      echo $e->getMessage();
+      error_log($e->getMessage());      
+  }
+
   }
   
   public function personsAction() {
     try {
-
-    // ini_set('max_execution_time','300');
-    // ini_set('memory_limit', '1024M');
-
       
     require_once('models/table/Person.php');
     $personTable = new Person();   
@@ -216,19 +227,20 @@ class DataController extends ITechController {
    */
    $locations = Location::getAll();
    foreach($sorted as $id => $row) {
-   	$city_info = Location::getCityInfo($row['home_location_id'], $this->setting('num_location_tiers'));
-   	if ( $city_info[0] ) $sorted[$id]['city_name'] = $city_info[0];
-    if ( $city_info[1] ) $sorted[$id]['province_name'] = $locations[$city_info[1]]['name'];
-   	if ( $city_info[2] ) $sorted[$id]['district_name'] = $locations[$city_info[2]]['name'];
-    if ( $city_info[3] ) $sorted[$id]['region_c_name'] = $locations[$city_info[3]]['name'];
-    if ( $city_info[4] ) $sorted[$id]['region_d_name'] = $locations[$city_info[4]]['name'];
-    if ( $city_info[5] ) $sorted[$id]['region_e_name'] = $locations[$city_info[5]]['name'];
-    if ( $city_info[6] ) $sorted[$id]['region_f_name'] = $locations[$city_info[6]]['name'];
-    if ( $city_info[7] ) $sorted[$id]['region_g_name'] = $locations[$city_info[7]]['name'];
-    if ( $city_info[8] ) $sorted[$id]['region_h_name'] = $locations[$city_info[8]]['name'];
-    if ( $city_info[9] ) $sorted[$id]['region_i_name'] = $locations[$city_info[9]]['name'];
-     unset($sorted[$id]['home_location_id']); 
-   	    
+   	$city_info = Location::getCityInfo($row['home_location_id'], $this->setting('num_location_tiers'), $locations);
+    if ( count($city_info) ) {
+     	if ( $city_info[0] ) $sorted[$id]['city_name'] = $city_info[0];
+      if ( $city_info[1] ) $sorted[$id]['province_name'] = $locations[$city_info[1]]['name'];
+     	if ( $city_info[2] ) $sorted[$id]['district_name'] = $locations[$city_info[2]]['name'];
+      if ( $city_info[3] ) $sorted[$id]['region_c_name'] = $locations[$city_info[3]]['name'];
+      if ( $city_info[4] ) $sorted[$id]['region_d_name'] = $locations[$city_info[4]]['name'];
+      if ( $city_info[5] ) $sorted[$id]['region_e_name'] = $locations[$city_info[5]]['name'];
+      if ( $city_info[6] ) $sorted[$id]['region_f_name'] = $locations[$city_info[6]]['name'];
+      if ( $city_info[7] ) $sorted[$id]['region_g_name'] = $locations[$city_info[7]]['name'];
+      if ( $city_info[8] ) $sorted[$id]['region_h_name'] = $locations[$city_info[8]]['name'];
+      if ( $city_info[9] ) $sorted[$id]['region_i_name'] = $locations[$city_info[9]]['name'];
+    }
+    unset($sorted[$id]['home_location_id']);
    }
    
    $sorted = $personTable->_fill_lookup($sorted, 'person_qualification_option', 'primary_qualification_option_id', 'qualification_phrase');

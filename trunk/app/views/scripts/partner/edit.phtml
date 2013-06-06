@@ -29,19 +29,24 @@
 					endif; // fi historyDiv
 
 					require_once ('views/helpers/DropDown.php');
-					$this->required_fields = array('partner');
+					$this->required_fields = array('partner', 'partner_type_option_id', 'address1', 'address2', 'city', 'province_id', 'phone', 'fax', 'funder', 'funding_end_date[]', 'employee_transition_option_id', 'agreement_end_date', 'partner_importance_option_id', 'incoming_partner', 'comments', 'subpartner_id[]');
 					$this->partner['agreement_end_date'] = formhelperdate( $this->partner['agreement_end_date'] );
-
 					if ($this->mode != 'add')
-					echo labelAndField($this, t('Partner').space.t('ID'),  'text', 'id',        $this->partner['id']); // prob hur: disabled, maxlen. plus existing 5 options...
-					echo labelAndField($this, t('Partner').space.t('Name'),'text', 'partner',   $this->partner['partner']);
-					echo labelAndField($this, t('Organizer'),     $this->organizers,   'organizer');
-					echo labelAndField($this, t('Address 1'),     'text', 'address1',  $this->partner['address1']);
-					echo labelAndField($this, t('Address 2'),     'text', 'address2',  $this->partner['address2']);
-					echo labelAndField($this, t('City'),          'text', 'city',      $this->partner['city']);
-					echo region_filters_dropdown( $this, $this->locations, $this->partner, false, false );
-					echo labelAndField($this, t('Phone'),         'text', 'phone',     $this->partner['phone']);
-					echo labelAndField($this, t('Fax'),           'text', 'fax',       $this->partner['fax']);
+					echo labelAndField($this, t('Partner').space.t('ID'),  'text', 'id',      $this->partner['id']);
+					echo labelAndField($this, t('Partner').space.t('Name'),'text', 'partner', $this->partner['partner']);
+					if ($this->setting['display_partner_type'])
+					echo labelAndField($this, t('Type of Partner'), $this->types, 'partner_type_option_id');
+					#echo labelAndField($this, t('Organizer'), $this->organizers,   'organizer'); // they dont want this removing, used by site-rollup feature / user-restrict by organizers.
+					echo labelAndField($this, t('Address 1'), 'text', 'address1',  $this->partner['address1']);
+					echo labelAndField($this, t('Address 2'), 'text', 'address2',  $this->partner['address2']);
+					echo labelAndField($this, t('City'),      'text', 'city',      $this->partner['city']);
+					echo region_filters_dropdown( $this, $this->locations, $this->partner, false, false, '', true);
+					echo labelAndField($this, t('Human Resources Contact Person Name'), 'text', 'hr_contact_name',  $this->partner['hr_contact_name']);
+					echo labelAndField($this, t('HR Contact Office Phone'),             'text', 'hr_contact_phone', $this->partner['hr_contact_phone']);
+					echo labelAndField($this, t('HR Contact Office Fax'),               'text', 'hr_contact_fax',   $this->partner['hr_contact_fax']);
+					echo labelAndField($this, t('HR Contact Email'),                    'text', 'hr_contact_email', $this->partner['hr_contact_email']);
+					#echo labelAndField($this, t('Phone'),     'text', 'phone',     $this->partner['phone']);
+					#echo labelAndField($this, t('Fax'),       'text', 'fax',       $this->partner['fax']);
 
 					if ($this->setting['display_employee_funder']) {
 						foreach ($this->partner['funder'] as $i => $row) {
@@ -53,58 +58,59 @@
 						echo '<button id="funder_add">'.t('Add a new').space.t('Funder').'</button><br />';
 					}
 
-					if ($this->setting['display_employee_intended_transition'])
-						echo labelAndField($this, t('Intended Transition After Funding End Date'), $this->transitions);
+					#if ($this->setting['display_employee_intended_transition'])
+					#	echo labelAndField($this, t('Intended Transition'), $this->transitions, 'employee_transition_option_id');
 					if ($this->setting['display_employee_agreement_end_date'])
 						echo labelAndField($this, t('Agreement End Date'), 'date', 'agreement_end_date', $this->partner['agreement_end_date']);
 					if ($this->setting['display_employee_importance'])
-						echo labelAndField($this, t('Importance'), $this->importance);
+						echo labelAndField($this, t('Importance'), $this->importance, 'partner_importance_option_id');
 					if ($this->setting['display_employee_incoming_partner'])
-						echo labelAndField($this, t('Incoming Partner(s)'), $this->incomingPartners);
+						echo labelAndField($this, t('Incoming Partner(s)'), $this->incomingPartners, 'incoming_partner');
 					if ($this->setting['display_employee_transition_confirmed'])
-					echo labelAndCheckBox($this, t('Transition Confirmed'),    'transition_confirmed', $this->partner['transition_confirmed'], false, $this->viewonly);
-					echo labelAndField($this, t('Partner Comments'), 'textarea', 'comments', $this->partner['comments']);
+					echo labelAndCheckBox($this, t('Transition Confirmed'), 'transition_confirmed', $this->partner['transition_confirmed'], false, $this->viewonly);
+#					echo labelAndField($this, t('Partner Comments'), 'textarea', 'comments', $this->partner['comments']);
 
 
-					if ($this->setting['display_employee_sub_partner']){
-						echo '<div class="clear"></div>';                              // clear
-						echo '<div class="fieldLabel">'.t('Sub Partners').'</div>';    // a label
-						echo '<div class="fieldInput subpartners_wrapper">';           // the normal fieldInput
-						echo '<table id="subpartners_table">';                         // a table to line everything up nicely
-						if ($this->partner['subpartners'])
-							foreach($this->partner['subpartners'] as $i => $value){
-								$subPartners = DropDown::generateHtml ( 'partner', 'partner', $value, false, $this->viewonly, false, true, array('name' => 'subpartner_id[]'), true );
-								echo   '<tr>
-											<td><label class="label">'.t('ID').' </label></td>
-											<td><input type="text" class="subpartner_id_display" name="subpartner_id_display[]" value="'.$value.'" readonly="readonly" /></td>
-											<td><label class="label"> '.t('Sub Partner').' </label></td>
-											<td>'.$subPartners.'</td>
-										</tr>';
-							}
-						echo '</table></div>';
-						echo '<div class="clear"></div>';
-						echo '<button id="add_sub_partner">'.t('Add a new').space.t('Sub Partner').'</button><br/><br/>'; // button to interact with dynamic section
-					}
+#seems to not be needed - removing 5/1, may add again? maybe marking for removal.
+#					if ($this->setting['display_employee_sub_partner']){
+#						echo '<div class="clear"></div>';                              // clear
+#						echo '<div class="fieldLabel">'.t('Sub Partners').'</div>';    // a label
+#						echo '<div class="fieldInput subpartners_wrapper">';           // the normal fieldInput
+#						echo '<table id="subpartners_table">';                         // a table to line everything up nicely
+#						if ($this->partner['subpartners'])
+#							foreach($this->partner['subpartners'] as $i => $value){
+#								$subPartners = DropDown::generateHtml ( 'partner', 'partner', $value, false, $this->viewonly, false, true, array('name' => 'subpartner_id[]'), true );
+#								echo   '<tr>
+#											<td><label class="label">'.t('ID').' </label></td>
+#											<td><input type="text" class="subpartner_id_display" name="subpartner_id_display[]" value="'.$value.'" readonly="readonly" /></td>
+#											<td><label class="label"> '.t('Sub Partner').' </label></td>
+#											<td>'.$subPartners.'</td>
+#										</tr>';
+#							}
+#						echo '</table></div>';
+#						echo '<div class="clear"></div>';
+#						echo '<button id="add_sub_partner">'.t('Add a new').space.t('Sub Partner').'</button><br/><br/>'; // button to interact with dynamic section
+#					}
 
 				?>
 
 				<script type="text/javascript">
 
-					$(document).ready(function () { 
-						var subselectchange = function (e) { /* subpartner - <select> 'change' logic */
-							// update id box on change
-							var $idbox = $(this).parents('tr').find('input.subpartner_id_display:first');
-							$idbox.val( (($(this).val()) ? $(this).val() : null));
-						};
-						$('select[name=subpartner_id\\[\\]]').click(subselectchange);
+					$(document).ready(function () {
+//						var subselectchange = function (e) { /* subpartner - <select> 'change' logic */
+//							// update id box on change
+//							var $idbox = $(this).parents('tr').find('input.subpartner_id_display:first');
+//							$idbox.val( (($(this).val()) ? $(this).val() : null));
+//						};
+//						$('select[name=subpartner_id\\[\\]]').click(subselectchange);
 
-						$('#add_sub_partner').click( function (e) { /* button - add a new sub partner */
-							var template = $('#subpartners_table tr:first').clone();
-							template.find('select,input').val(null);
-							$('#subpartners_table').append(template);
-							$('select[name=subpartner_id\\[\\]]').unbind('click').click(subselectchange); // same functionaility
-							e.preventDefault();
-						});
+//						$('#add_sub_partner').click( function (e) { /* button - add a new sub partner */
+//							var template = $('#subpartners_table tr:first').clone();
+//							template.find('select,input').val(null);
+//							$('#subpartners_table').append(template);
+//							$('select[name=subpartner_id\\[\\]]').unbind('click').click(subselectchange); // same functionaility
+//							e.preventDefault();
+//						});
 
 						$('.datepicker').each(function () {
 							$(this).removeAttr('id').datepicker({ //bugfix, datepicker doesnt work with multiple id="" field, these are cloned so remove id attribute

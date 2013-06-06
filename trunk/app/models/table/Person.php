@@ -102,7 +102,7 @@ class Person extends ITechTable
 	}
 
 	public static function suggestionFindDupes($match_last_name, $limit = 100, $middleNameLast = false, $fieldAndWhere = array()) {
-    $additionalCols = array('p.first_name','p.last_name','p.middle_name','p.id','f.facility_name','p.national_id', 'p.birthdate','p.gender', 'q.qualification_phrase', 'p.file_number');
+    $additionalCols = array('p.first_name','p.last_name','p.middle_name','person_id' => 'p.id','f.facility_name','p.national_id', 'p.birthdate','p.gender', 'q.qualification_phrase', 'p.file_number');
 		$rows = self::suggestionQuery($match_last_name, $limit, "last_name", $additionalCols, false, $fieldAndWhere);
 		return $rows->toArray();
 	}

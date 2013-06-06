@@ -31,6 +31,8 @@ print ScriptContainer::$instance->renderJSHead();
 
       <script>
       var fickle = function(elCell, oRecord, oColumn, sData) {
+        if (sData == undefined)
+          sData = '';
         if (sData.indexOf('/') > -1){
           parts = sData.split('/');
           sData = parseInt(parseInt($.trim(parts[0])) / parseInt($.trim(parts[1])) * 100);

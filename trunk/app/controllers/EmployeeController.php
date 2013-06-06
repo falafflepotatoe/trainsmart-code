@@ -35,6 +35,11 @@ class EmployeeController extends ReportFilterHelpers {
 	}
 
 	public function indexAction() {
+
+		$this->_redirect('employee/search');
+		exit();
+
+		## old dash function
 		if (! $this->hasACL ( 'edit_employee' )) {
 			$this->doNoAccessError ();
 		}
@@ -43,11 +48,12 @@ class EmployeeController extends ReportFilterHelpers {
 		$this->view->assign('title', $this->translation['Application Name'].space.t('Employee Tracking System'));
 
 		// restricted access?? does this user only have acl to view some trainings or people
-		$org_allowed_ids = allowed_org_access_full_list($this); // doesnt have acl 'training_organizer_option_all'?
-		$allowedWhereClause = $org_allowed_ids ? " partner.organizer_option_id in ($org_allowed_ids) " : "";
+		// they dont want this, removing 5/01/13
+##		$org_allowed_ids = allowed_org_access_full_list($this); // doesnt have acl 'training_organizer_option_all'?
+##		$allowedWhereClause = $org_allowed_ids ? " partner.organizer_option_id in ($org_allowed_ids) " : "";
 		// restricted access?? only show organizers that belong to this site if its a multi org site
-		$site_orgs = allowed_organizer_in_this_site($this); // for sites to host multiple training organizers on one domain
-		$allowedWhereClause .= $site_orgs ? " AND partner.organizer_option_id in ($site_orgs) " : "";
+##		$site_orgs = allowed_organizer_in_this_site($this); // for sites to host multiple training organizers on one domain
+##		$allowedWhereClause .= $site_orgs ? " AND partner.organizer_option_id in ($site_orgs) " : "";
 
 		$institute = new DashviewEmployee();
 		$details=$institute->fetchdetails($org_allowed_ids);
@@ -111,7 +117,7 @@ class EmployeeController extends ReportFilterHelpers {
 					$num_rows = $course_link_table->delete('id = ' . $params['id']);
 					if (! $num_rows )
 						$ret['msg'] = t('Error finding that record in the database.');
-					$ret['num_rows'] = $num_rows;				
+					$ret['num_rows'] = $num_rows;
 				} catch (Exception $e) {
 					$ret['errored'] = true;
 					$ret['msg']     = t('Error finding that record in the database.');
@@ -120,18 +126,17 @@ class EmployeeController extends ReportFilterHelpers {
 
 			if(strtolower($params['outputType']) == 'json'){
 				$this->sendData($ret); // probably always json no need to check for output
-			}					
+			}
 
 		}
 		catch (Exception $e) {
 			if($this->_getParam('outputType') == 'json') {
-					$this->sendData(array('errored' => true, 'msg'=>'Error: ' . $e->getMessage()));
-					return;
+				$this->sendData(array('errored' => true, 'msg'=>'Error: ' . $e->getMessage()));
+				return;
 			} else {
 				echo $e->getMessage();
 			}
 		}
-
 	}
 
 	private function getCourses($employee_id){
@@ -161,26 +166,52 @@ class EmployeeController extends ReportFilterHelpers {
 		$params = $this->getAllParams();
 		$id = $params['id'];
 
-		// restricted access?? only show partners by organizers that we have the ACL to view
-		$org_allowed_ids = allowed_org_access_full_list($this); 
-		if ($org_allowed_ids && $this->view->mode != 'add') { // doesnt have acl 'training_organizer_option_all'
-			$validID = $db->fetchCol("SELECT partner.id FROM partner WHERE partner.id = $id AND partner.organizer_option_id in ($org_allowed_ids)"); // check for both
-			if(empty($validID))
-				$this->doNoAccessError ();
-		}
+		#// restricted access?? only show partners by organizers that we have the ACL to view
+		#$org_allowed_ids = allowed_org_access_full_list($this);
+		#if ($org_allowed_ids && $this->view->mode != 'add') { // doesnt have acl 'training_organizer_option_all'
+		#	$validID = $db->fetchCol("SELECT partner.id FROM partner WHERE partner.id = $id AND partner.organizer_option_id in ($org_allowed_ids)"); // check for both
+		#	if(empty($validID))
+		#		$this->doNoAccessError ();
+		#}
 
 		if ( $this->getRequest()->isPost() )
 		{
 			//validate then save
 			$params['location_id'] = regionFiltersGetLastID( '', $params );
-			$params['agreement_end_date'] = $this->_date_to_sql( $params['agreement_end_date'] );
-			$params['site_id']            = $params['facilityInput'];
-			$params['full_time']          = ($params['full_time'] && $params['full_time'] !== 'off') ? 1 : 0; // checkbox
-			
+			$params['dob']                      = $this->_date_to_sql( $params['dob'] );
+			$params['agreement_end_date']       = $this->_date_to_sql( $params['agreement_end_date'] );
+			$params['transition_date']          = $this->_date_to_sql( $params['transition_date'] );
+			$params['transition_complete_date'] = $this->_date_to_sql( $params['transition_complete_date'] );
+			$params['site_id']                  = $params['facilityInput'];
+			$params['option_nationality_id']    = $params['lookup_nationalities_id'];
+			$params['facility_type_option_id']  = $params['employee_site_type_option_id'];
+
 			$status->checkRequired ( $this, 'first_name', t ( 'Frist Name' ) );
 			$status->checkRequired ( $this, 'last_name',  t ( 'Last Name' ) );
-			if ( $this->setting['display_employee_partner'] )
+			$status->checkRequired ( $this, 'last_name',  t ( 'Name' ) );
+			$status->checkRequired ( $this, 'dob',        t ( 'Name' ) );
+			if($this->setting('display_employee_nationality'))
+				$status->checkRequired ( $this, 'lookup_nationalities_id', t ( 'Employee Nationality' ) );
+			$status->checkRequired ( $this, 'employee_qualification_option_id', t ( 'Staff Cadre' ) );
+			if($this->setting('display_employee_salary'))
+				$status->checkRequired ( $this, 'salary', t('Salary') );
+			if($this->setting('display_employee_benefits'))
+				$status->checkRequired ( $this, 'benefits', t('Benefits') );
+			if($this->setting('display_employee_additional_expenses'))
+				$status->checkRequired ( $this, 'additional_expenses', t('Additional Expenses') );
+			if($this->setting('display_employee_stipend'))
+				$status->checkRequired ( $this, 'stipend', t('Stipend') );
+			if ( $this->setting('display_employee_partner') )
 				$status->checkRequired ( $this, 'partner_id', t ( 'Partner' ) );
+			if($this->setting('display_employee_sub_partner'))
+				$status->checkRequired ( $this, 'subpartner_id', t ( 'Sub Partner' ) );
+			if($this->setting('display_employee_intended_transition'))
+				$status->checkRequired ( $this, 'employee_transition_option_id', t ( 'Intended Transition' ) );
+			if(($this->setting('display_employee_base') && !$params['employee_base_option_id']) || !$this->setting('display_employee_base')) // either one is OK, javascript disables regions if base is on & has a value choice
+				$status->checkRequired ( $this, 'province_id', t ( 'Region A (Province)' ) );
+			if($this->setting('display_employee_base'))
+				$status->checkRequired ( $this, 'employee_base_option_id', t ( 'Employee Based at' ) );
+
 
 			if (! $status->hasError() ) {
 				$id = $this->_findOrCreateSaveGeneric('employee', $params);
@@ -188,7 +219,8 @@ class EmployeeController extends ReportFilterHelpers {
 					$status->setStatusMessage( t('That person could not be saved.') );
 				} else {
 
-					MultiOptionList::updateOptions ( 'employee_to_role', 'employee_role_option', 'employee_id', $id, 'employee_role_option_id', $params['employee_role_option_id'] );
+					# converted to optionlist, link table not needed TODO. marking for removal.
+					#MultiOptionList::updateOptions ( 'employee_to_role', 'employee_role_option', 'employee_id', $id, 'employee_role_option_id', $params['employee_role_option_id'] );
 					$status->setStatusMessage( t('The person was saved.') );
 					$this->_redirect("employee/edit/id/$id");
 				}
@@ -198,7 +230,7 @@ class EmployeeController extends ReportFilterHelpers {
 		}
 
 		if ( $id && !$status->hasError() ) { // read data from db
-			
+
 			$sql = 'SELECT * FROM employee WHERE employee.id = '.$id;
 			$row = $db->fetchRow( $sql );
 			if ($row)
@@ -209,18 +241,23 @@ class EmployeeController extends ReportFilterHelpers {
 			$region_ids = Location::getCityInfo($params['location_id'], $this->setting('num_location_tiers'));
 			$region_ids = Location::regionsToHash($region_ids);
 			$params = array_merge($params, $region_ids);
-			$params['roles'] = $db->fetchCol("SELECT employee_role_option_id FROM employee_to_role WHERE employee_id = $id");
+			#$params['roles'] = $db->fetchCol("SELECT employee_role_option_id FROM employee_to_role WHERE employee_id = $id");
 		}
 
 		// assign form drop downs
-		$params['agreement_end_date'] = formhelperdate($params['agreement_end_date']);
-		$params['courses'] = $this->getCourses($id);
+		$params['dob']                          = formhelperdate($params['dob']);
+		$params['agreement_end_date']           = formhelperdate($params['agreement_end_date']);
+		$params['transition_date']              = formhelperdate($params['transition_date']);
+		$params['transition_complete_date']     = formhelperdate($params['transition_complete_date']);
+		$params['courses']                      = $this->getCourses($id);
+		$params['lookup_nationalities_id']      = $params['option_nationality_id'];
+		$params['employee_site_type_option_id'] = $params['facility_type_option_id'];
 		$this->viewAssignEscaped ( 'employee', $params );
-		$validCHWids = $db->fetchCol("select id from person_qualification_option pqo
-										inner join (select id as success from person_qualification_option where qualification_phrase in ('Community Based Worker','Community')) parentIDs 
-										on (parentIDs.success = pqo.id or parentIDs.success = pqo.parent_id)");
+		$validCHWids = $db->fetchCol("select id from employee_qualification_option qual
+										inner join (select id as success from employee_qualification_option where qualification_phrase in ('Community Based Worker','Community Health Worker','NC02 -Community health workers')) parentIDs
+										on (parentIDs.success = qual.id)");
 		$this->view->assign('validCHWids', $validCHWids);
-		$this->view->assign('expandCHWFields', !(array_search($params['person_qualification_option_id'],$validCHWids) === false)); // i.e $validCHWids.contains($employee[qualification])
+		$this->view->assign('expandCHWFields', !(array_search($params['employee_qualification_option_id'],$validCHWids) === false)); // i.e $validCHWids.contains($employee[qualification])
 		$this->view->assign('status', $status);
 		$this->view->assign ( 'pageTitle', $this->view->mode == 'add' ? t ( 'Add Employee' ) : t( 'Edit Employee' ) );
 		$this->viewAssignEscaped ( 'locations', Location::getAll () );
@@ -228,10 +265,15 @@ class EmployeeController extends ReportFilterHelpers {
 		$this->view->assign ( 'titles',      DropDown::render('title_option_id', $this->translation['Title'], $titlesArray, 'title_phrase', 'id', $params['title_option_id'] ) );
 		$this->view->assign ( 'partners',    DropDown::generateHtml   ( 'partner', 'partner', $params['partner_id'], false, $this->view->viewonly, false ) );
 		$this->view->assign ( 'subpartners', DropDown::generateHtml   ( 'partner', 'partner', $params['subpartner_id'], false, $this->view->viewonly, false, false, array('name' => 'subpartner_id'), true ) );
-		$this->view->assign ( 'cadres',      DropDown::qualificationsDropDown('person_qualification_option_id', $params['person_qualification_option_id']) );
+		$this->view->assign ( 'bases',       DropDown::generateHtml   ( 'employee_base_option', 'base_phrase', $params['employee_base_option_id']) );
+		$this->view->assign ( 'site_types',  DropDown::generateHtml   ( 'employee_site_type_option', 'site_type_phrase', $params['facility_type_option_id']) );
+		$this->view->assign ( 'cadres',      DropDown::generateHtml   ( 'employee_qualification_option', 'qualification_phrase', $params['employee_qualification_option_id']) );
 		$this->view->assign ( 'categories',  DropDown::generateHtml   ( 'employee_category_option', 'category_phrase', $params['employee_category_option_id'], false, $this->view->viewonly, false ) );
-		$this->view->assign ( 'roles',       CheckBoxes::generateHtml ( 'employee_role_option', 'role_phrase', $this->view, $params['roles'] ) );
+		$this->view->assign ( 'fulltime',    DropDown::generateHtml   ( 'employee_fulltime_option', 'fulltime_phrase', $params['employee_fulltime_option_id'], false, $this->view->viewonly, false ) );
+		$this->view->assign ( 'roles',       DropDown::generateHtml   ( 'employee_role_option', 'role_phrase', $params['employee_role_option_id'], false, $this->view->viewonly, false ) );
+		#$this->view->assign ( 'roles',       CheckBoxes::generateHtml ( 'employee_role_option', 'role_phrase', $this->view, $params['roles'] ) );
 		$this->view->assign ( 'transitions', DropDown::generateHtml   ( 'employee_transition_option', 'transition_phrase', $params['employee_transition_option_id'], false, $this->view->viewonly, false ) );
+		$this->view->assign ( 'transitions_complete', DropDown::generateHtml ( 'employee_transition_option', 'transition_phrase', $params['employee_transition_complete_option_id'], false, $this->view->viewonly, false, false, array('name' => 'employee_transition_complete_option_id'), true ) );
 		$helper = new Helper();
 		$this->viewAssignEscaped ( 'facilities', $helper->getFacilities() );
 		$this->view->assign ( 'relationships', DropDown::generateHtml ( 'employee_relationship_option', 'relationship_phrase', $params['employee_relationship_option_id'], false, $this->view->viewonly, false ) );
@@ -239,6 +281,8 @@ class EmployeeController extends ReportFilterHelpers {
 		$this->view->assign ( 'provided',      DropDown::generateHtml ( 'employee_training_provided_option', 'training_provided_phrase', $params['employee_training_provided_option_id'], false, $this->view->viewonly, false ) );
 		$employees = OptionList::suggestionList ( 'employee', array ('first_name' ,'CONCAT(first_name, CONCAT(" ", last_name)) as name' ), false, 99999 );
 		$this->view->assign ( 'supervisors',   DropDown::render('supervisor_id', $this->translation['Supervisor'], $employees, 'name', 'id', $params['supervisor_id'] ) );
+		$this->view->assign ( 'nationality',   DropDown::generateHtml ( 'lookup_nationalities', 'nationality', $params['lookup_nationalities_id'], false, $this->view->viewonly, false ) );
+		$this->view->assign ( 'race',          DropDown::generateHtml ( 'person_race_option', 'race_phrase', $params['race_option_id'], false, $this->view->viewonly, false ) );
 	}
 
 	public function searchAction()
@@ -246,49 +290,49 @@ class EmployeeController extends ReportFilterHelpers {
 		if (! $this->hasACL ( 'edit_employee' )) {
 			$this->doNoAccessError ();
 		}
-		
+
 		$criteria = $this->getAllParams();
 
 		if ($criteria['go'])
 		{
 			// process search
 			$where = array();
-			
+
 			list($a, $location_tier, $location_id) = $this->getLocationCriteriaValues($criteria);
-			list($locationFlds, $locationsubquery) = Location::subquery($this->setting('num_location_tiers'), $location_tier, $location_id);
-			
+			list($locationFlds, $locationsubquery) = Location::subquery($this->setting('num_location_tiers'), $location_tier, $location_id, true);
+
 			$sql = "SELECT DISTINCT
-					employee.*,".implode(',',$locationFlds)." 
+					employee.*, ".implode(',',$locationFlds)."
 					,CONCAT(supervisor.first_name, CONCAT(' ', supervisor.last_name)) as supervisor,
-					pqo.qualification_phrase as staff_cadre,
+					qual.qualification_phrase as staff_cadre,
 					site.facility_name,
 					category.category_phrase as staff_category
-					FROM employee INNER JOIN ($locationsubquery) as l ON l.id = employee.location_id 
+					FROM employee LEFT JOIN ($locationsubquery) as l ON l.id = employee.location_id
 					LEFT JOIN employee supervisor ON supervisor.id = employee.supervisor_id
 					LEFT JOIN facility site ON site.id = employee.site_id
-					LEFT JOIN person_qualification_option pqo ON pqo.id = employee.person_qualification_option_id
+					LEFT JOIN employee_qualification_option qual ON qual.id = employee.employee_qualification_option_id
 					LEFT JOIN employee_category_option category on category.id = employee.employee_category_option_id
 					LEFT JOIN partner ON partner.id = employee.partner_id
 					";
 
-			#if ($criteria['partner_id']) $sql    .= ' INNER JOIN partner_to_subpartner subp ON partner.id = ' . $criteria['partner_id'];     
+			#if ($criteria['partner_id']) $sql    .= ' INNER JOIN partner_to_subpartner subp ON partner.id = ' . $criteria['partner_id'];
 
 			// restricted access?? only show partners by organizers that we have the ACL to view
-			$org_allowed_ids = allowed_org_access_full_list($this); // doesnt have acl 'training_organizer_option_all'
-			if($org_allowed_ids)
-				$where[] = " partner.organizer_option_id in ($org_allowed_ids) ";
+			#$org_allowed_ids = allowed_org_access_full_list($this); // doesnt have acl 'training_organizer_option_all'
+			#if($org_allowed_ids)
+			#	$where[] = " partner.organizer_option_id in ($org_allowed_ids) ";
 
 			$locationWhere = $this->getLocationCriteriaWhereClause($criteria, '', '');
 			if ($locationWhere) {
 				$where[] = $locationWhere;
 			}
 
-			if ($criteria['first_name'])                      $where[] = "employee.first_name   = '{$criteria['first_name']}'";
-			if ($criteria['last_name'])                       $where[] = "employee.last_name    = '{$criteria['last_name']}'";
-			if ($criteria['partner_id'])                      $where[] = 'employee.partner_id   = '.$criteria['partner_id']; //todo
-			if ($criteria['facilityInput'])                   $where[] = 'employee.site_id      = '.$criteria['facilityInput'];
-			if ($criteria['person_qualification_option_id'])  $where[] = 'employee.person_qualification_option_id    = '.$criteria['person_qualification_option_id'];
-			if ($criteria['category_option_id'])              $where[] = 'employee.staff_category_id = '.$criteria['category_option_id'];
+			if ($criteria['first_name'])                        $where[] = "employee.first_name   = '{$criteria['first_name']}'";
+			if ($criteria['last_name'])                         $where[] = "employee.last_name    = '{$criteria['last_name']}'";
+			if ($criteria['partner_id'])                        $where[] = 'employee.partner_id   = '.$criteria['partner_id']; //todo
+			if ($criteria['facilityInput'])                     $where[] = 'employee.site_id      = '.$criteria['facilityInput'];
+			if ($criteria['employee_qualification_option_id'])  $where[] = 'employee.employee_qualification_option_id    = '.$criteria['employee_qualification_option_id'];
+			if ($criteria['category_option_id'])                $where[] = 'employee.staff_category_id = '.$criteria['category_option_id'];
 
 			if ( count ($where) )
 				$sql .= ' WHERE ' . implode(' AND ', $where);
@@ -305,7 +349,7 @@ class EmployeeController extends ReportFilterHelpers {
 		$this->viewAssignEscaped ( 'locations', Location::getAll () );
 		$this->view->assign ( 'partners',    DropDown::generateHtml ( 'partner', 'partner', $criteria['partner_id'], false, $this->view->viewonly, false ) );
 		$this->view->assign ( 'subpartners', DropDown::generateHtml ( 'partner', 'partner', $criteria['partner_id'], false, $this->view->viewonly, false, false, array('name' => 'subpartner_id'), true ) );
-		$this->view->assign ( 'cadres',      DropDown::generateHtml ( 'person_qualification_option', 'qualification_phrase', $criteria['person_qualification_option_id'], false, $this->view->viewonly, false ) );
+		$this->view->assign ( 'cadres',      DropDown::generateHtml ( 'employee_qualification_option', 'qualification_phrase', $criteria['employee_qualification_option_id'], false, $this->view->viewonly, false ) );
 		$this->viewAssignEscaped ( 'sites', $helper->getFacilities() );
 		$this->view->assign ( 'categories',  DropDown::generateHtml ( 'employee_category_option', 'category_phrase', $criteria['employee_category_option_id'], false, $this->view->viewonly, false ) );
 	}
