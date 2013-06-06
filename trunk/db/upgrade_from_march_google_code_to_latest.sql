@@ -237,9 +237,6 @@ INSERT INTO  `translation` VALUES (NULL , NULL ,  'Sponsor Date',  'Sponsor Date
 INSERT INTO  `translation` VALUES (NULL , NULL ,  'Employee Nationality', 'Nationality', NULL , NULL ,  '0',  CURRENT_TIMESTAMP ,  '0000-00-00 00:00:00');
 
 # requested changes to evaluations 5/1
-ALTER TABLE `_system`
-    ADD COLUMN `display_facility_sponsor`  tinyint(1) NOT NULL DEFAULT 1;
-
 ALTER TABLE  `evaluation_response` ADD     `person_id` INT( 11 ) NULL DEFAULT NULL AFTER  `trainer_person_id`;
 
 DROP TABLE IF EXISTS `evaluation_custom_answers`;

@@ -6342,9 +6342,7 @@ END$$
 DELIMITER ;
 
 INSERT INTO  `translation` VALUES (NULL , NULL ,  'Award', 'Complete', NULL, NULL, '0', CURRENT_TIMESTAMP, '2012-10-22 00:00:00');
-INSERT INTO  `translation` VALUES (NULL , NULL ,  'Disability', 'Disability', NULL, NULL, '0', CURRENT_TIMESTAMP, '2012-10-22 00:00:00');
 INSERT INTO  `translation` VALUES (NULL , NULL ,  'Disability Comments', 'Disability Comments', NULL, NULL, '0', CURRENT_TIMESTAMP, '2012-10-22 00:00:00');
-INSERT INTO  `translation` VALUES (NULL , NULL ,  'Race', 'Race', NULL, NULL, '0', CURRENT_TIMESTAMP, '2012-10-22 00:00:00');
 INSERT INTO  `person_to_training_award_option` VALUES (NULL , NULL ,  'Complete', NULL, '1', '0', CURRENT_TIMESTAMP, '2012-10-22 00:00:00');
 INSERT INTO  `person_to_training_award_option` VALUES (NULL , NULL ,  'Certification', NULL, '1', '0', CURRENT_TIMESTAMP, '2012-10-22 00:00:00');
 
@@ -6484,8 +6482,6 @@ INSERT INTO  `translation` VALUES (NULL , NULL ,  'Sponsor Date',  'Sponsor Date
 INSERT INTO  `translation` VALUES (NULL , NULL ,  'Employee Nationality', 'Nationality', NULL , NULL ,  '0',  CURRENT_TIMESTAMP ,  '0000-00-00 00:00:00');
 
 # requested changes to evaluations 5/1
-ALTER TABLE `_system`
-    ADD COLUMN `display_facility_sponsor`  tinyint(1) NOT NULL DEFAULT 1;
 
 ALTER TABLE  `evaluation_response` ADD     `person_id` INT( 11 ) NULL DEFAULT NULL AFTER  `trainer_person_id`;
 
